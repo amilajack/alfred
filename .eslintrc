@@ -1,0 +1,4 @@
+{
+  "extends": "bliss",
+  "parser": "babel-eslint"
+}

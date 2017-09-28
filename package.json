@@ -1,0 +1,29 @@
+{
+  "name": "alfred",
+  "version": "0.0.1",
+  "description": "Code upgrader tool",
+  "main": "index.js",
+  "repository": "git@github.com:amilajack/alfred.git",
+  "author": "Amila Welihinda <amilajack@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^7.0.0-beta.2",
+    "babel-eslint": "^8.0.1",
+    "babel-preset-env": "^2.0.0-beta.2",
+    "babel-preset-stage-0": "^7.0.0-beta.2",
+    "babel-preset-typescript": "^7.0.0-beta.2",
+    "eslint": "^4.7.2",
+    "eslint-config-bliss": "^1.0.13",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.3"
+  },
+  "scripts": {
+    "ts": "tsc --noEmit --pretty",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "cjs-to-es6": "^1.0.1",
+    "lebab": "^2.7.7",
+    "prettier": "^1.7.2"
+  }
+}
