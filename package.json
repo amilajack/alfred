@@ -7,22 +7,29 @@
   "author": "Amila Welihinda <amilajack@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^8.0.31",
     "babel-core": "^7.0.0-beta.2",
     "babel-eslint": "^8.0.1",
     "babel-preset-env": "^2.0.0-beta.2",
     "babel-preset-stage-0": "^7.0.0-beta.2",
     "babel-preset-typescript": "^7.0.0-beta.2",
-    "eslint": "^4.7.2",
     "eslint-config-bliss": "^1.0.13",
     "tslint": "^5.7.0",
+    "tslint-config-airbnb": "^5.3.0",
+    "tslint-config-prettier": "^1.5.0",
+    "tsutils": "^2.10.0",
     "typescript": "^2.5.3"
   },
   "scripts": {
     "ts": "tsc --noEmit --pretty",
+    "lint": "tslint --project . --fix",
     "build": "tsc"
   },
   "dependencies": {
+    "@types/commander": "^2.9.2",
     "cjs-to-es6": "^1.0.1",
+    "commander": "^2.11.0",
+    "eslint": "^4.7.2",
     "lebab": "^2.7.7",
     "prettier": "^1.7.2"
   }
