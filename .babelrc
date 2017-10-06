@@ -4,6 +4,6 @@
       "targets": { "node": 8 }
     }],
     "stage-0",
-    "typescript"
-  ],
+    "flow"
+  ]
 }

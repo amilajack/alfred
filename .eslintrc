@@ -1,5 +1,4 @@
 {
   "extends": "bliss",
-  // "parser": "babel-eslint"
-  "parser": "typescript-eslint-parser"
+  "parser": "babel-eslint"
 }

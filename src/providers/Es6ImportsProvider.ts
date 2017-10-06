@@ -4,7 +4,7 @@ import colors from 'colors/safe';
 import denodeify from 'denodeify';
 import findit from 'findit';
 import fs from 'fs';
-import flatten from 'lodash.flatten';
+import flatten from 'lodash/flatten';
 import path from 'path';
 import uniq from 'uniq';
 
@@ -28,11 +28,11 @@ const verbose = yargs.argv.verbose;
 
 if (yargs.argv.h || !files.length) {
   console.log(
-    '\ncjs-to-es6 v' +
-      require('./package.json').version +
-      ': ' +
-      require('./package.json').description +
-      '\n'
+    `\ncjs-to-es6 v${
+      require('./package.json').version
+    }: ${
+      require('./package.json').description
+    }\n`
   );
   yargs.showHelp();
   process.exit(0);
@@ -57,13 +57,13 @@ function findJsFiles(dir: string) {
 
 function runCodeshift(transformName: string, files: string[]) {
   const cmd = require.resolve('jscodeshift/bin/jscodeshift.sh');
-  const transform = require.resolve('5to6-codemod/transforms/' + transformName);
+  const transform = require.resolve(`5to6-codemod/transforms/${transformName}`);
   const child = spawn(cmd, ['-t', transform].concat(files));
-  child.progress(function(childProcess) {
+  child.progress((childProcess) => {
     if (verbose) {
       childProcess.stdout.pipe(process.stdout);
     } else {
-      childProcess.stdout.on('data', function(data: Buffer) {
+      childProcess.stdout.on('data', (data: Buffer) => {
         if (/^Results: /.test(String(data))) {
           console.log(String(data).replace(/\n$/, ''));
         }
@@ -76,46 +76,44 @@ function runCodeshift(transformName: string, files: string[]) {
 
 function derequireify(files: string[]) {
   console.log(
-    '\nTransforming ' +
-      colors.yellow('require()') +
-      ' to ' +
-      colors.cyan('import') +
-      ' ...'
+    `\nTransforming ${
+      colors.yellow('require()')
+    } to ${
+      colors.cyan('import')
+    } ...`
   );
   return runCodeshift('cjs.js', files);
 }
 
 function deexportify(files: string[]) {
   console.log(
-    '\nTransforming ' +
-      colors.yellow('module.exports') +
-      '/' +
-      colors.red('exports') +
-      ' to ' +
-      colors.cyan('export') +
-      ' ...'
+    `\nTransforming ${
+      colors.yellow('module.exports')
+    }/${
+      colors.red('exports')
+    } to ${
+      colors.cyan('export')
+    } ...`
   );
   return runCodeshift('exports.js', files);
 }
 
 Promise.resolve()
-  .then(function() {
+  .then(() => {
     console.log(
-      colors.rainbow('\nAhoy!') + " ES6ifyin' your CommonJS for ya..."
+      `${colors.rainbow('\nAhoy!')} ES6ifyin' your CommonJS for ya...`
     );
     return Promise.all(
-      files.map(function(file: string) {
+      files.map((file: string) => {
         file = path.resolve(file);
         return existsAsync(file)
-          .catch(function(exists: boolean) {
+          .catch((exists: bool) => {
             if (!exists) {
-              throw new Error('file not found: ' + file);
+              throw new Error(`file not found: ${file}`);
             }
           })
-          .then(function() {
-            return statAsync(file);
-          })
-          .then(function(stat) {
+          .then(() => statAsync(file))
+          .then((stat) => {
             if (stat.isDirectory()) {
               return findJsFiles(file);
             }
@@ -126,28 +124,26 @@ Promise.resolve()
       .then(flatten)
       .then(uniq);
   })
-  .then(function(files: string[]) {
-    console.log('\nFound ' + colors.cyan(files.length.toString()) + ' files.');
-    return derequireify(files).then(function() {
-      return deexportify(files);
-    });
+  .then((files: string[]) => {
+    console.log(`\nFound ${colors.cyan(files.length.toString())} files.`);
+    return derequireify(files).then(() => deexportify(files));
   })
-  .catch(function(err: Error) {
+  .catch((err: Error) => {
     if (err.errno === 'E2BIG') {
       throw new Error('Sorry, too many files at once');
     }
     throw err;
   })
-  .then(function() {
+  .then(() => {
     console.log(colors.rainbow('\nES6ification complete!'));
     if (!verbose) {
       console.log(
-        'Re-run with ' + colors.cyan('--verbose') + ' to see full output.'
+        `Re-run with ${colors.cyan('--verbose')} to see full output.`
       );
     }
     console.log();
   })
-  .catch(function(err: Error) {
+  .catch((err: Error) => {
     console.log(err.stack);
     process.exit(1);
   });
