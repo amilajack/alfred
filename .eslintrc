@@ -2,6 +2,7 @@
   "parser": "babel-eslint",
   "extends": "bliss",
   "rules": {
+    "class-methods-use-this": "off",
     "fp/no-mutation": "off",
     "fp/no-rest-parameters": "off",
     "fp/no-this": "off",

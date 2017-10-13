@@ -16,6 +16,9 @@ function checkFileExists(filepath): Promise<bool> {
 }
 
 const copyFileAsync = util.promisify(fs.copyFile);
+const writeFileAsync = util.promisify(fs.writeFile);
+const readFileAsync = util.promisify(fs.readFile);
+// const unlinkAsync = util.promisify(fs.unlink);
 
 async function createBackupFiles(files: Array<string>): Promise<Map<string, string>> {
   const mappings: Map<string, string> = new Map();
@@ -40,12 +43,17 @@ export default async function Providers(input: ProviderInput) {
 
   // Validate files
   // Check if files exist
-  await Promise.all(input.files.map(checkFileExists))
-    .then(_files => _files.filter(exists => exists));
+  await Promise.all(input.files.map(file => checkFileExists(file).then((exists: bool) => {
+    if (!exists) {
+      throw new Error(`File "${file} does not exist"`);
+    }
+  })));
+
+  const mappings = await createBackupFiles(input.files);
 
   const inputWithBackups = {
     ...input,
-    files: await createBackupFiles(input.files)
+    files: Array.from(mappings.values())
   };
 
   // Invoke each provider
@@ -53,7 +61,7 @@ export default async function Providers(input: ProviderInput) {
     ((promise: Promise<ProviderInput>, provider) => (
       promise
         .then((_input: ProviderInput) =>
-          provider.provide(_input))).catch(console.log)
+          provider.provide(_input)))
     ),
     Promise.resolve(inputWithBackups)
   );
@@ -61,8 +69,14 @@ export default async function Providers(input: ProviderInput) {
   try {
     await transformations;
   } catch (e) {
-    console.log('the transformations failed');
+    console.log('the transformations failed', e);
   }
 
+  // Write the temporary files to the original files
+  mappings.forEach(async (tmpFile, originalFile) => {
+    await writeFileAsync(originalFile, await readFileAsync(tmpFile));
+  });
+
   // Clear the backups
+  await Promise.all(Array.from(mappings.values()).map(fs.unlinkSync));
 }

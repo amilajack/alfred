@@ -2,7 +2,8 @@
   "name": "alfred",
   "version": "0.0.1",
   "description": "Code upgrader tool",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "bin": "lib/index.js",
   "repository": "git@github.com:amilajack/alfred.git",
   "author": "Amila Welihinda <amilajack@gmail.com>",
   "license": "MIT",
@@ -20,7 +21,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib && cp ./src/alfred.js  ./lib/alfred",
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib",
     "flow": "flow",
     "package": "pkg ./lib/main.js --out-path release"
   },

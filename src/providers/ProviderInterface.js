@@ -23,11 +23,7 @@ export interface ProviderInterface {
 
   priority: number,
 
-  /**
-   * Take the code to transform as a string, transform it, and
-   * return a string
-   */
-  transform: (code: string) => string,
+  transform: (files: Array<string>) => Promise<void>,
 
   /**
    * This method allows providers to be used as monads

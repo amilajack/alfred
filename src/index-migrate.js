@@ -16,6 +16,8 @@ console.log(filesPattern);
 //        if the migration was successful and we want to write to the original
 //        files
 Providers({
-  files: filesPattern
+  files: filesPattern,
+  packageJsonPath: path.join(process.cwd(), 'package.json'),
+  verbose: false
 })
   .catch(console.log);
