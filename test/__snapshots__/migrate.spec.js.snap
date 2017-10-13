@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Migrate should migrate basic file 1`] = `
+Array [
+  "const fs = require('fs');
+const path = require('path');
+
+
+var foo = 'asdfa';
+console.log(foo)
+",
+]
+`;

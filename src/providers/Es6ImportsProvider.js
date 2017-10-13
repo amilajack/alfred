@@ -7,6 +7,8 @@ export default class Es6ImportsProvider implements ProviderInterface {
 
   priority = 0;
 
+  safe = true;
+
   /**
    * @private
    */

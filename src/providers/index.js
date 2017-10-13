@@ -5,6 +5,7 @@ import path from 'path';
 import os from 'os';
 import fs from 'fs';
 import Es6ImportsProvider from './Es6ImportsProvider';
+import LebabProvider from './LebabProvider';
 import type { ProviderInput } from './ProviderInterface';
 
 function checkFileExists(filepath): Promise<bool> {
@@ -15,9 +16,9 @@ function checkFileExists(filepath): Promise<bool> {
   });
 }
 
-const copyFileAsync = util.promisify(fs.copyFile);
-const writeFileAsync = util.promisify(fs.writeFile);
-const readFileAsync = util.promisify(fs.readFile);
+export const copyFileAsync = util.promisify(fs.copyFile);
+export const writeFileAsync = util.promisify(fs.writeFile);
+export const readFileAsync = util.promisify(fs.readFile);
 // const unlinkAsync = util.promisify(fs.unlink);
 
 async function createBackupFiles(files: Array<string>): Promise<Map<string, string>> {
@@ -33,7 +34,11 @@ async function createBackupFiles(files: Array<string>): Promise<Map<string, stri
 }
 
 export default async function Providers(input: ProviderInput) {
-  const providers = [Es6ImportsProvider].map(Provider => new Provider())
+  const providers = [
+    Es6ImportsProvider,
+    LebabProvider
+  ]
+    .map(Provider => new Provider())
     // Sort the providers by priority.
     // @TODO: Temporarily sort by priority number. Eventually we'll implement an listener patterh
     //        to hook into when each provider has finished. Providers will listen for when other
@@ -73,9 +78,16 @@ export default async function Providers(input: ProviderInput) {
   }
 
   // Write the temporary files to the original files
-  mappings.forEach(async (tmpFile, originalFile) => {
-    await writeFileAsync(originalFile, await readFileAsync(tmpFile));
-  });
+  if (input.write) {
+    mappings.forEach(async (tmpFile, originalFile) => {
+      await writeFileAsync(originalFile, await readFileAsync(tmpFile));
+    });
+  } else {
+    return Promise.all(Array
+      .from(mappings.keys())
+      .map(filename => readFileAsync(filename)))
+      .then(files => files.map(e => e.toString()));
+  }
 
   // Clear the backups
   await Promise.all(Array.from(mappings.values()).map(fs.unlinkSync));

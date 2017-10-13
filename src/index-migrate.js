@@ -4,12 +4,14 @@ import path from 'path';
 import program from 'commander';
 import Providers from './providers';
 
-program.parse(process.argv);
+program
+  .option('-u, --unsafe', 'allow unsafe transformations')
+  .option('-v, --verbose', 'show verbose output')
+  .option('-d, --debug', 'show debugging output')
+  .parse(process.argv);
 
 const filesPattern: Array<string> =
   program.args.map(arg => path.join(process.cwd(), arg));
-
-console.log(filesPattern);
 
 // @TODO: Create backups from the files and pass the paths to the backups
 //        instead of the actual filenames. Preserve the original filenames
@@ -18,6 +20,7 @@ console.log(filesPattern);
 Providers({
   files: filesPattern,
   packageJsonPath: path.join(process.cwd(), 'package.json'),
-  verbose: false
+  unsafe: program.unsafe || false,
+  verbose: program.verbose || false
 })
   .catch(console.log);

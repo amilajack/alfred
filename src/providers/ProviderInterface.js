@@ -1,27 +1,18 @@
 // @flow
-export interface ProviderResponse {
-  providerName: string;
-
-  /**
-   * Ideally we could return an AST from here but we can only
-   * do that if all the providers use the same AST. Can yield
-   * better performance if we do this
-   */
-  stdBuffer: Buffer;
-
-  text: string
-}
-
 export type ProviderInput = {
   packageJsonPath: string,
+  files: Array<string>,
+  unsafe: bool,
   verbose: bool,
-  files: Array<string>
+  write: bool
 };
 
 export interface ProviderInterface {
   providerName: string;
 
   priority: number,
+
+  safe: bool,
 
   /**
    * @private

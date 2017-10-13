@@ -1,37 +1,67 @@
 // @flow
 import lebab from 'lebab';
-import fs from 'fs';
-import util from 'util';
+import { readFileAsync, writeFileAsync } from './';
 import type { ProviderInput, ProviderInterface } from './ProviderInterface';
-
-const readFileAsync = util.promisify(fs.readFile);
 
 export default class LebabProvider implements ProviderInterface {
   /**
    * The list of transforms to apply
+   * @todo: Add more transforms
    * @private
    */
-  transforms: { [property: string]: bool } = {
-    arrow: true
+  transforms = {
+    safe: {
+      let: true
+    },
+    unsafe: {
+
+    }
   };
 
   providerName = 'lebab';
 
-  priority = 10;
+  /**
+   * Should run before EslintProvider and PrettierProvider. Does not follow code
+   * style convention. Only focuses on upgrading code. Not code style
+   */
+  priority = 1;
+
+  safe = true;
 
   /**
    * @private
    */
-  async transform(files: Array<string>) {
+  getTransforms() {
+    const transforms = this.safe
+      ? this.transforms.safe
+      : {
+        ...this.transforms.unsafe,
+        ...this.transforms.safe
+      };
+    return Object.keys(transforms).filter(transform => transforms[transform]);
+  }
+
+  /**
+   * @private
+   */
+  async transform(input: ProviderInput) {
+    const { files, verbose } = input;
     await Promise.all(files.map(file =>
-      readFileAsync(file).then(buffer => lebab.transform(
-        buffer.toString(),
-        Object.keys(this.transforms).filter(transform => transform in this.transforms)
-      ))));
+      readFileAsync(file)
+        .then(buffer => lebab.transform(
+          buffer.toString(),
+          this.getTransforms()
+        ))
+        .then((result) => {
+          if (verbose && result.warnings.length > 0) {
+            console.log(result.warnings);
+          }
+          return writeFileAsync(file, result.code);
+        })));
   }
 
   async provide(input: ProviderInput): Promise<ProviderInput> {
-    await this.transform(input.files);
+    await this.transform(input);
     return input;
   }
 }

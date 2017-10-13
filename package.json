@@ -14,20 +14,25 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-0": "^6.24.1",
     "cross-env": "^5.0.5",
-    "eslint-config-bliss": "^1.0.14",
     "flow-bin": "^0.56.0",
+    "jest-cli": "^21.2.1",
     "pkg": "^4.2.5"
   },
   "scripts": {
-    "lint": "eslint .",
     "build": "cross-env NODE_ENV=production babel src --out-dir lib",
     "flow": "flow",
-    "package": "pkg ./lib/index.js --out-path release"
+    "lint": "eslint .",
+    "package": "pkg ./lib/index.js --out-path release",
+    "spec": "jest",
+    "test": "yarn spec"
   },
   "dependencies": {
+    "5to6-codemod": "^1.7.1",
     "child-process-promise": "^2.2.1",
     "commander": "^2.11.0",
     "eslint": "^4.7.2",
+    "eslint-config-bliss": "^1.0.14",
+    "jscodeshift": "^0.3.32",
     "lebab": "^2.7.7",
     "prettier": "^1.7.2",
     "rndm": "^1.2.0"
@@ -36,5 +41,8 @@
     "node": ">=8",
     "npm": ">=5",
     "yarn": ">=1.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
