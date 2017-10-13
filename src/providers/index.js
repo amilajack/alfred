@@ -45,8 +45,12 @@ export default async function Providers(input: ProviderInput) {
     //        provider have finished
     .sort((a, b) => a.priority - b.priority);
 
-
   // Validate files
+  if (input.files.length < 1) {
+    console.log('No files passed');
+    return;
+  }
+
   // Check if files exist
   await Promise.all(input.files.map(file => checkFileExists(file).then((exists: bool) => {
     if (!exists) {

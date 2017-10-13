@@ -1,6 +1,5 @@
-// @flow
 import path from 'path';
-import Providers, { writeFileAsync, readFileAsync } from '../src/providers';
+import Providers from '../src/providers';
 
 describe('Migrate', () => {
   it('should migrate basic file', async () => {
@@ -14,4 +13,12 @@ describe('Migrate', () => {
     });
     expect(result).toMatchSnapshot();
   });
+
+  it.skip('should fail on non-existent files', async () => {});
+
+  it.skip('should not write files if one provider fails', async () => {});
+
+  it.skip('should fail on non-js extensions', async () => {});
+
+  it.skip('should fail on parsing coffeescript', async () => {});
 });

@@ -1,12 +1,22 @@
 {
-  "name": "alfred",
-  "version": "0.0.1",
+  "name": "alfred-cli",
+  "version": "0.0.0",
   "description": "Code upgrader tool",
-  "main": "lib/index.js",
-  "bin": "lib/index.js",
+  "bin": {
+    "alfred": "./lib/alfred.js"
+  },
+  "preferGlobal": true,
   "repository": "git@github.com:amilajack/alfred.git",
   "author": "Amila Welihinda <amilajack@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib",
+    "flow": "flow",
+    "lint": "eslint .",
+    "package": "pkg ./lib/index.js --out-path release",
+    "spec": "jest",
+    "test": "yarn spec"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
@@ -17,14 +27,6 @@
     "flow-bin": "^0.56.0",
     "jest-cli": "^21.2.1",
     "pkg": "^4.2.5"
-  },
-  "scripts": {
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib",
-    "flow": "flow",
-    "lint": "eslint .",
-    "package": "pkg ./lib/index.js --out-path release",
-    "spec": "jest",
-    "test": "yarn spec"
   },
   "dependencies": {
     "5to6-codemod": "^1.7.1",
