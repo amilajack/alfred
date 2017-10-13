@@ -15,7 +15,7 @@ export interface ProviderResponse {
 export type ProviderInput = {
   packageJsonPath: string,
   verbose: bool,
-  filePaths: Array<string>
+  files: Array<string>
 };
 
 export interface ProviderInterface {
@@ -29,5 +29,8 @@ export interface ProviderInterface {
    */
   transform: (code: string) => string,
 
-  provide: (input: ProviderInput) => ProviderResponse;
+  /**
+   * This method allows providers to be used as monads
+   */
+  provide: (input: ProviderInput) => Promise<ProviderInput>;
 }

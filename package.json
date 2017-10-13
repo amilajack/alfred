@@ -20,7 +20,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib && cp ./src/main.js  ./lib/alfred",
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib && cp ./src/alfred.js  ./lib/alfred",
     "flow": "flow",
     "package": "pkg ./lib/main.js --out-path release"
   },
@@ -30,9 +30,10 @@
     "cjs-to-es6": "^1.0.1",
     "commander": "^2.11.0",
     "eslint": "^4.7.2",
-    "glob": "^7.1.2",
     "lebab": "^2.7.7",
-    "prettier": "^1.7.2"
+    "prettier": "^1.7.2",
+    "rndm": "^1.2.0",
+    "util.promisify": "^1.0.0"
   },
   "@std/esm": {
     "esm": "js"

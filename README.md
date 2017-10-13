@@ -27,6 +27,7 @@ alfred migrate . --transforms imports lebab
 ## Spec
 * Check for `version` in `package.json` `"alfred"` config, update files as necessary
 * Allow for project specific configurations
+* Revert files if necessary. Create backups of every file created. Create global backup directory.
 * Bootstrap applications by adding boilerplate, allow user to select which files should be added
 * Determine standards for each project. Ex. what is the name of the build directory?
 
