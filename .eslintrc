@@ -1,4 +1,13 @@
 {
+  "parser": "babel-eslint",
   "extends": "bliss",
-  "parser": "babel-eslint"
+  "rules": {
+    "fp/no-mutation": "off",
+    "fp/no-rest-parameters": "off",
+    "fp/no-this": "off",
+    "fp/no-loops": "off",
+    "fp/no-let": "off",
+    "fp/no-throw": "off",
+    "fp/no-class": "off"
+  }
 }

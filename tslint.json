@@ -1,7 +1,0 @@
-{
-  "extends": [
-    "tslint:recommended",
-    "tslint-config-airbnb",
-    "tslint-config-prettier"
-  ]
-}
