@@ -8,7 +8,6 @@
   "author": "Amila Welihinda <amilajack@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^8.0.31",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-preset-env": "^1.6.0",
@@ -23,20 +22,19 @@
     "lint": "eslint .",
     "build": "cross-env NODE_ENV=production babel src --out-dir lib",
     "flow": "flow",
-    "package": "pkg ./lib/main.js --out-path release"
+    "package": "pkg ./lib/index.js --out-path release"
   },
   "dependencies": {
-    "@std/esm": "^0.11.3",
-    "@types/commander": "^2.9.2",
-    "cjs-to-es6": "^1.0.1",
+    "child-process-promise": "^2.2.1",
     "commander": "^2.11.0",
     "eslint": "^4.7.2",
     "lebab": "^2.7.7",
     "prettier": "^1.7.2",
-    "rndm": "^1.2.0",
-    "util.promisify": "^1.0.0"
+    "rndm": "^1.2.0"
   },
-  "@std/esm": {
-    "esm": "js"
+  "engines": {
+    "node": ">=8",
+    "npm": ">=5",
+    "yarn": ">=1.0.0"
   }
 }

@@ -22,6 +22,9 @@ export default class Es6ImportsProvider implements ProviderInterface {
     return child;
   }
 
+  /**
+   * @private
+   */
   async transform(files: Array<string>) {
     await this.runCodeshift('exports.js', files);
     await this.runCodeshift('cjs.js', files);

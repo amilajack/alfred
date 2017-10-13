@@ -24,6 +24,12 @@ alfred migrate .
 alfred migrate . --transforms imports lebab
 ```
 
+## Roadmap (ordered by priority)
+- [ ] `LebabProvider`
+- [ ] `EslintProvider`
+- [ ] `PrettierProvider`
+- [ ] `DecaffinateProvider`
+
 ## Spec
 * Check for `version` in `package.json` `"alfred"` config, update files as necessary
 * Allow for project specific configurations

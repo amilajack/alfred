@@ -23,6 +23,9 @@ export interface ProviderInterface {
 
   priority: number,
 
+  /**
+   * @private
+   */
   transform: (files: Array<string>) => Promise<void>,
 
   /**
