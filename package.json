@@ -8,25 +8,33 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^8.0.31",
-    "babel-core": "^7.0.0-beta.2",
+    "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
-    "babel-preset-env": "^2.0.0-beta.2",
+    "babel-preset-env": "^1.6.0",
     "babel-preset-flow": "^6.23.0",
-    "babel-preset-stage-0": "^7.0.0-beta.2",
+    "babel-preset-stage-0": "^6.24.1",
     "cross-env": "^5.0.5",
     "eslint-config-bliss": "^1.0.14",
-    "flow-bin": "^0.56.0"
+    "flow-bin": "^0.56.0",
+    "pkg": "^4.2.5"
   },
   "scripts": {
     "lint": "eslint .",
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib"
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib && cp ./src/main.js  ./lib/alfred",
+    "flow": "flow",
+    "package": "pkg ./lib/main.js --out-path release"
   },
   "dependencies": {
+    "@std/esm": "^0.11.3",
     "@types/commander": "^2.9.2",
     "cjs-to-es6": "^1.0.1",
     "commander": "^2.11.0",
     "eslint": "^4.7.2",
+    "glob": "^7.1.2",
     "lebab": "^2.7.7",
     "prettier": "^1.7.2"
+  },
+  "@std/esm": {
+    "esm": "js"
   }
 }

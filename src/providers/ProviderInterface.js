@@ -12,7 +12,7 @@ export interface ProviderResponse {
   text: string
 }
 
-type ProviderInput = {
+export type ProviderInput = {
   packageJsonPath: string,
   verbose: bool,
   filePaths: Array<string>
@@ -20,6 +20,8 @@ type ProviderInput = {
 
 export interface ProviderInterface {
   providerName: string;
+
+  priority: number,
 
   /**
    * Take the code to transform as a string, transform it, and

@@ -1,6 +1,6 @@
 // @flow
 import { spawn } from 'child-process-promise';
-import cjsToEs6 from 'cjs-to-es6';
+// import cjsToEs6 from 'cjs-to-es6';
 import colors from 'colors/safe';
 import denodeify from 'denodeify';
 import findit from 'findit';
@@ -8,36 +8,7 @@ import fs from 'fs';
 import flatten from 'lodash/flatten';
 import path from 'path';
 import uniq from 'uniq';
-import ProviderInterface from './ProviderInterface';
-
-export default class Es6ImportsProvider implements ProviderInterface {
-  providerName = 'es6-imports'
-
-  transform(code: string): string {
-
-  }
-
-  provide() {
-    return Promise.all(files.map((file: string) => {
-      file = path.resolve(file);
-      return existsAsync(file)
-        .catch((exists: bool) => {
-          if (!exists) {
-            throw new Error(`file not found: ${file}`);
-          }
-        })
-        .then(() => statAsync(file))
-        .then((stat) => {
-          if (stat.isDirectory()) {
-            return findJsFiles(file);
-          }
-          return [file];
-        });
-    }))
-      .then(flatten)
-      .then(uniq);
-  }
-}
+import type { ProviderInput } from './ProviderInterface';
 
 const statAsync = denodeify(fs.stat);
 const existsAsync = denodeify(fs.exists);
@@ -65,6 +36,7 @@ function runCodeshift(transformName: string, files: string[]) {
   const cmd = require.resolve('jscodeshift/bin/jscodeshift.sh');
   const transform = require.resolve(`5to6-codemod/transforms/${transformName}`);
   const child = spawn(cmd, ['-t', transform].concat(files));
+
   child.progress((childProcess) => {
     if (verbose) {
       childProcess.stdout.pipe(process.stdout);
@@ -77,6 +49,7 @@ function runCodeshift(transformName: string, files: string[]) {
     }
     childProcess.stderr.pipe(process.stderr);
   });
+
   return child;
 }
 
@@ -149,3 +122,34 @@ function deexportify(files: string[]) {
 //     console.log(err.stack);
 //     process.exit(1);
 //   });
+
+export default class Es6ImportsProvider implements ProviderInterface {
+  providerName = 'es6-imports'
+
+  transform(code: string): string {
+
+  }
+
+  provide(input: ProviderInput) {
+    const { files } = input;
+
+    return Promise.all(files.map((file: string) => {
+      file = path.resolve(file);
+      return existsAsync(file)
+        .catch((exists: bool) => {
+          if (!exists) {
+            throw new Error(`file not found: ${file}`);
+          }
+        })
+        .then(() => statAsync(file))
+        .then((stat) => {
+          if (stat.isDirectory()) {
+            return findJsFiles(file);
+          }
+          return [file];
+        });
+    }))
+      .then(flatten)
+      .then(uniq);
+  }
+}

@@ -13,6 +13,16 @@ yarn add --global alfred
 npm install --global alfred
 ```
 
+## Usage
+```bash
+# Add boilerplate files
+alfred bootstrap
+alfred bootstrap --include editorconfig .gitignore babel flow
+
+# Code migration
+alfred migrate .
+alfred migrate . --transforms imports lebab
+```
 
 ## Spec
 * Check for `version` in `package.json` `"alfred"` config, update files as necessary
@@ -25,7 +35,7 @@ In `package.json`
 ```json
 {
   "alfred": {
-    "version": "0.0.1
+    "version": "0.0.1"
   }
 }
 ```
