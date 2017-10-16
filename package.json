@@ -1,6 +1,6 @@
 {
   "name": "alfred-cli",
-  "version": "0.0.1-0",
+  "version": "0.0.1-1",
   "description": "Code upgrader tool",
   "bin": {
     "alfred": "./lib/alfred.js",
