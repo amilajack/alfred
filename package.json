@@ -3,7 +3,8 @@
   "version": "0.0.1-0",
   "description": "Code upgrader tool",
   "bin": {
-    "alfred": "./lib/alfred.js"
+    "alfred": "./lib/alfred.js",
+    "alfred-cli": "./lib/alfred.js"
   },
   "preferGlobal": true,
   "repository": "git@github.com:amilajack/alfred.git",
@@ -13,7 +14,7 @@
     "build": "cross-env NODE_ENV=production babel src --out-dir lib",
     "flow": "flow",
     "lint": "eslint .",
-    "package": "pkg ./lib/index.js --out-path release",
+    "package": "pkg ./lib/alfred.js --out-path release",
     "spec": "jest",
     "test": "yarn spec",
     "version": "yarn build"
@@ -50,5 +51,8 @@
   },
   "jest": {
     "testEnvironment": "node"
-  }
+  },
+  "files": [
+    "lib"
+  ]
 }
