@@ -11,14 +11,16 @@
   "author": "Amila Welihinda <amilajack@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build-babel": "cross-env NODE_ENV=production babel src --out-dir lib",
-    "build": "webpack -p --config webpack.config.js",
+    "build-babel": "cross-env NODE_ENV=production babel src --out-dir lib && cp -r src/providers/resources ./lib/providers",
+    "build-webpack": "webpack -p --config webpack.config.js",
+    "build": "yarn build-babel",
     "flow": "flow",
     "lint": "eslint .",
     "package": "pkg ./lib/alfred.js --out-path release",
     "spec": "jest",
     "test": "yarn spec",
-    "version": "rm -rf lib && yarn build"
+    "version": "rm -rf lib && yarn build",
+    "watch": "cross-env NODE_ENV=production babel src --out-dir lib --watch"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

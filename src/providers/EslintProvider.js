@@ -26,8 +26,12 @@ export default class EslintProvider implements ProviderInterface {
       configFile: path.join(__dirname, 'resources', 'alfred-eslintrc'),
       fix: true
     });
-    const report = cli.executeOnFiles(input.files);
-    CLIEngine.outputFixes(report);
+
+    // Sometimes it takes multiple passes for all the ESLint errors to be autofixed
+    for (let i = 0; i < 3; i++) {
+      const report = cli.executeOnFiles(input.files);
+      CLIEngine.outputFixes(report);
+    }
   }
 
   async provide(input: ProviderInput): Promise<ProviderInput> {

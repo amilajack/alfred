@@ -7,6 +7,14 @@ export type ProviderInput = {
   write: bool
 };
 
+export type UserProviderInput = {
+  packageJsonPath?: string,
+  files?: Array<string>,
+  unsafe?: bool,
+  verbose?: bool,
+  write?: bool
+};
+
 export interface ProviderInterface {
   providerName: string;
 

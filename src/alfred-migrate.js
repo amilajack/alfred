@@ -20,7 +20,7 @@ const filesPattern: Array<string> =
 Providers({
   files: filesPattern,
   packageJsonPath: path.join(process.cwd(), 'package.json'),
-  unsafe: program.unsafe || false,
-  verbose: program.verbose || false
+  unsafe: program.unsafe,
+  verbose: program.verbose
 })
   .catch(console.log);

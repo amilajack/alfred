@@ -9,7 +9,7 @@ import uniq from 'uniq';
 import Es6ImportsProvider from './Es6ImportsProvider';
 import LebabProvider from './LebabProvider';
 import EslintProvider from './EslintProvider';
-import type { ProviderInput } from './ProviderInterface';
+import type { UserProviderInput, ProviderInput } from './ProviderInterface';
 
 export const copyFileAsync = util.promisify(fs.copyFile);
 export const writeFileAsync = util.promisify(fs.writeFile);
@@ -61,7 +61,9 @@ function foo(files: Array<string>) {
     .then(flatten).then(uniq);
 }
 
-export default async function Providers(input: ProviderInput): Promise<Array<string> | void> {
+type ProvidersType = Promise<Array<string> | void>;
+
+export default async function Providers(userInput: UserProviderInput): ProvidersType {
   const providers = [
     Es6ImportsProvider,
     LebabProvider,
@@ -75,22 +77,27 @@ export default async function Providers(input: ProviderInput): Promise<Array<str
     .sort((a, b) => a.priority - b.priority);
 
   // Validate files
-  if (input.files.length < 1) {
+  if (!userInput.files || userInput.files.length < 1) {
     console.log('No files passed');
     return;
   }
 
   // Check if files exist
-  await Promise.all(input.files.map(file => checkFileExists(file).then((exists: bool) => {
+  await Promise.all(userInput.files.map(file => checkFileExists(file).then((exists: bool) => {
     if (!exists) {
       throw new Error(`File "${file}" does not exist`);
     }
   })));
 
-  const mappings = await createBackupFiles(input.files);
+  const mappings = await createBackupFiles(userInput.files);
 
-  const inputWithBackups = {
-    ...input,
+  const input = {
+    // Default config
+    unsafe: false,
+    verbose: false,
+    write: true,
+    // User provided config
+    ...userInput,
     files: Array.from(mappings.values())
   };
 
@@ -98,10 +105,10 @@ export default async function Providers(input: ProviderInput): Promise<Array<str
   const transformations = providers.reduce(
     ((promise: Promise<ProviderInput>, provider) => (
       promise
-        .then((_input: ProviderInput) =>
-          provider.provide(_input)))
+        .then((previousInput: ProviderInput) =>
+          provider.provide(previousInput)))
     ),
-    Promise.resolve(inputWithBackups)
+    Promise.resolve(input)
   );
 
   try {
