@@ -1,6 +1,6 @@
 // @flow
-import { Linter } from 'eslint';
-import { readFileAsync, writeFileAsync } from './';
+import { CLIEngine } from 'eslint';
+import path from 'path';
 import type { ProviderInput, ProviderInterface } from './ProviderInterface';
 
 export default class EslintProvider implements ProviderInterface {
@@ -19,36 +19,15 @@ export default class EslintProvider implements ProviderInterface {
       output: string,
       messages: Array<string>
     })
-  } = new Linter();
+  };
 
-  async transform(input: ProviderInput) {
-    await Promise.all(input.files.map(file => readFileAsync(file).then((result) => {
-      let transformedCode = result.toString();
-
-      // Multiple pass transformation. Sometimes it takes eslint multiple passes to autofix
-      // all the errors it can
-      for (let i = 0; i < 3; i++) {
-        transformedCode = this.linter.verifyAndFix(transformedCode, {
-          extends: 'bliss',
-          parser: 'babel-eslint',
-          ecmaFeatures: {
-            modules: true
-          },
-          parserOptions: {
-            ecmaVersion: 6,
-            sourceType: 'module',
-            ecmaFeatures: {
-              modules: true
-            }
-          },
-          rules: {
-            semi: 2
-          }
-        }).output;
-      }
-
-      return writeFileAsync(file, transformedCode);
-    })));
+  transform(input: ProviderInput) {
+    const cli = new CLIEngine({
+      configFile: path.join(__dirname, 'resources', 'alfred-eslintrc'),
+      fix: true
+    });
+    const report = cli.executeOnFiles(input.files);
+    CLIEngine.outputFixes(report);
   }
 
   async provide(input: ProviderInput): Promise<ProviderInput> {
