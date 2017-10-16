@@ -2,12 +2,20 @@
 
 exports[`Migrate should migrate basic file 1`] = `
 Array [
-  "const fs = require('fs');
-const path = require('path');
+  "import fs from 'fs';
+import path from 'path';
 
 
-var foo = 'asdfa';
-console.log(foo)
+const foo = 'asdfa';
+console.log(foo);
+",
+]
+`;
+
+exports[`Migrate should migrate basic file with EslintProvider 1`] = `
+Array [
+  "const some = 'foo';
+const bar = 'baz';
 ",
 ]
 `;

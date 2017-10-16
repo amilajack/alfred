@@ -34,10 +34,13 @@
     "commander": "^2.11.0",
     "eslint": "^4.7.2",
     "eslint-config-bliss": "^1.0.14",
+    "findit": "^2.0.0",
     "jscodeshift": "^0.3.32",
     "lebab": "^2.7.7",
+    "lodash.flatten": "^4.4.0",
     "prettier": "^1.7.2",
-    "rndm": "^1.2.0"
+    "rndm": "^1.2.0",
+    "uniq": "^1.0.1"
   },
   "engines": {
     "node": ">=8",

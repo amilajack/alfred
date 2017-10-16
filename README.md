@@ -25,9 +25,9 @@ alfred migrate . --transforms imports lebab
 ```
 
 ## Roadmap (ordered by priority)
-- [ ] `LebabProvider`
-- [ ] `EslintProvider`
-- [ ] `PrettierProvider`
+- [x] `LebabProvider`
+- [x] `EslintProvider`
+- [x] `PrettierProvider`
 - [ ] `DecaffinateProvider`
 
 ## Spec
