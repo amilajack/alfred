@@ -10,17 +10,6 @@ export default class EslintProvider implements ProviderInterface {
 
   safe = true;
 
-  /**
-   * @private
-   */
-  linter: {
-    verifyAndFix: (code: string, config: { extends: string }) => ({
-      fixed: bool,
-      output: string,
-      messages: Array<string>
-    })
-  };
-
   transform(input: ProviderInput) {
     const cli = new CLIEngine({
       configFile: path.join(__dirname, 'resources', 'alfred-eslintrc'),

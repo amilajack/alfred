@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+let fs = require("fs")
+let path = require("path")
 
 
 var foo = 'asdfa';

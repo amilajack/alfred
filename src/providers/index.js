@@ -102,14 +102,18 @@ export default async function Providers(userInput: UserProviderInput): Providers
   };
 
   // Invoke each provider
-  const transformations = providers.reduce(
-    ((promise: Promise<ProviderInput>, provider) => (
-      promise
-        .then((previousInput: ProviderInput) =>
-          provider.provide(previousInput)))
-    ),
-    Promise.resolve(input)
-  );
+  const transformations = providers
+    // Filter any unsafe plugins by default. Allow user override
+    .filter(provider => (input.unsafe === true ? true : provider.safe === true))
+    // Chain async transformations
+    .reduce(
+      ((promise: Promise<ProviderInput>, provider) => (
+        promise
+          .then((previousInput: ProviderInput) =>
+            provider.provide(previousInput)))
+      ),
+      Promise.resolve(input)
+    );
 
   try {
     await transformations;
