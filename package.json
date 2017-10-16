@@ -15,7 +15,8 @@
     "lint": "eslint .",
     "package": "pkg ./lib/index.js --out-path release",
     "spec": "jest",
-    "test": "yarn spec"
+    "test": "yarn spec",
+    "version": "yarn build"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
