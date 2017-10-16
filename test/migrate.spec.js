@@ -10,7 +10,7 @@ describe('Migrate', () => {
   };
 
   it('should migrate basic file', async () => {
-    const tmpFile = path.join(__dirname, 'moo.ts');
+    const tmpFile = path.join(__dirname, 'fixtures', 'basic-test.ts');
     const result = await Providers({
       files: [tmpFile],
       ...defaultConfig
@@ -19,7 +19,7 @@ describe('Migrate', () => {
   });
 
   it('should migrate basic file with EslintProvider', async () => {
-    const tmpFile = path.join(__dirname, 'comma-test.ts');
+    const tmpFile = path.join(__dirname, 'fixtures', 'comma-test.ts');
     const result = await Providers({
       files: [tmpFile],
       ...defaultConfig
