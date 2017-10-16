@@ -11,24 +11,29 @@
   "author": "Amila Welihinda <amilajack@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib",
+    "build-babel": "cross-env NODE_ENV=production babel src --out-dir lib",
+    "build": "webpack -p --config webpack.config.js",
     "flow": "flow",
     "lint": "eslint .",
     "package": "pkg ./lib/alfred.js --out-path release",
     "spec": "jest",
     "test": "yarn spec",
-    "version": "yarn build"
+    "version": "rm -rf lib && yarn build"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
+    "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-0": "^6.24.1",
     "cross-env": "^5.0.5",
     "flow-bin": "^0.56.0",
     "jest-cli": "^21.2.1",
-    "pkg": "^4.2.5"
+    "pkg": "^4.2.5",
+    "shebang-loader": "^0.0.1",
+    "webpack": "^3.7.1",
+    "webpack-bundle-analyzer": "^2.9.0"
   },
   "dependencies": {
     "5to6-codemod": "^1.7.1",
