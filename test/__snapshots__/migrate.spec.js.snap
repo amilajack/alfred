@@ -22,8 +22,24 @@ const bar = 'baz';
 
 exports[`Migrate should perform unsafe transformations 1`] = `
 Array [
+  "class MyClass {
+  method() {}
+}
+",
   "import foo from 'bar';
 import cow from 'boo';
+",
+]
+`;
+
+exports[`Migrate should perform unsafe transformations 2`] = `
+Array [
+  "import foo from 'bar';
+import cow from 'boo';
+",
+  "function MyClass() {}
+
+MyClass.prototype.method = () => {};
 ",
 ]
 `;

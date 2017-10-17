@@ -4,8 +4,6 @@ import Providers from '../src/providers';
 describe('Migrate', () => {
   const defaultConfig = {
     packageJsonPath: __dirname,
-    unsafe: false,
-    verbose: true,
     write: false
   };
 
@@ -28,16 +26,27 @@ describe('Migrate', () => {
   });
 
   it('should perform unsafe transformations', async () => {
-    const tmpFile = path.join(__dirname, 'fixtures', 'unsafe-transformation-test.ts');
-    const result = await Providers({
-      files: [tmpFile],
-      unsafe: true,
-      ...defaultConfig
-    });
-    expect(result).toMatchSnapshot();
+    expect(await Providers({
+      ...defaultConfig,
+      files: [
+        path.join(__dirname, 'fixtures', 'unsafe-transformation-test.ts'),
+        path.join(__dirname, 'fixtures', 'class-test.ts')
+      ],
+      unsafe: true
+    })).toMatchSnapshot();
+
+    expect(await Providers({
+      ...defaultConfig,
+      files: [
+        path.join(__dirname, 'fixtures', 'unsafe-transformation-test.ts'),
+        path.join(__dirname, 'fixtures', 'class-test.ts')
+      ]
+    })).toMatchSnapshot();
   });
 
   it.skip('should fail on non-existent files', async () => {});
+
+  it.skip('should allow selection of manual tests', () => {});
 
   it.skip('should not write files if one provider fails', async () => {});
 

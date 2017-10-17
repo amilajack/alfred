@@ -1,6 +1,6 @@
-let fs = require("fs")
-let path = require("path")
+import fs from 'fs';
+import path from 'path';
 
 
-var foo = 'asdfa';
-console.log(foo)
+const foo = 'asdfa';
+console.log(foo);

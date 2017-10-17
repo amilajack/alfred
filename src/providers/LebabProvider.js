@@ -10,12 +10,24 @@ export default class LebabProvider implements ProviderInterface {
    * @private
    */
   transforms = {
-    safe: {
-      let: true
-    },
-    unsafe: {
-
-    }
+    safe: [
+      'arrow',
+      'for-of',
+      'arg-spread',
+      'obj-method',
+      'obj-shorthand',
+      'no-strict',
+      'commonjs',
+      'exponent',
+      'multi-var'
+    ],
+    unsafe: [
+      'let',
+      'class',
+      'template',
+      'default-param',
+      'includes'
+    ]
   };
 
   providerName = 'lebab';
@@ -31,14 +43,13 @@ export default class LebabProvider implements ProviderInterface {
   /**
    * @private
    */
-  getTransforms() {
-    const transforms = this.safe
-      ? this.transforms.safe
-      : {
+  getTransforms(input: ProviderInput) {
+    return input.unsafe === true
+      ? [
         ...this.transforms.unsafe,
         ...this.transforms.safe
-      };
-    return Object.keys(transforms).filter(transform => transforms[transform]);
+      ]
+      : this.transforms.safe;
   }
 
   /**
@@ -48,11 +59,11 @@ export default class LebabProvider implements ProviderInterface {
     const { files, verbose } = input;
     await Promise.all(files.map(file =>
       readFileAsync(file)
-        .then(buffer => lebab.transform(
-          buffer.toString(),
-          this.getTransforms()
-        ))
-        .then((result) => {
+        .then((buffer) => {
+          const result = lebab.transform(
+            buffer.toString(),
+            this.getTransforms(input)
+          );
           if (verbose && result.warnings.length > 0) {
             console.log(result.warnings);
           }

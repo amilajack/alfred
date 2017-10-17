@@ -1,2 +1,2 @@
-const some = 'foo'
-const bar = 'baz'
+const some = 'foo';
+const bar = 'baz';
