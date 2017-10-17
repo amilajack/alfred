@@ -1,7 +1,7 @@
 {
   "name": "alfred-cli",
   "version": "0.0.1-3",
-  "description": "Code upgrader tool",
+  "description": "A framework for upgrading javascript codebases",
   "bin": {
     "alfred": "./lib/alfred.js",
     "alfred-cli": "./lib/alfred.js"
@@ -49,6 +49,7 @@
     "lodash.flatten": "^4.4.0",
     "prettier": "^1.7.2",
     "rndm": "^1.2.0",
+    "simple-git": "^1.80.1",
     "uniq": "^1.0.1"
   },
   "engines": {

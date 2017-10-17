@@ -22,6 +22,9 @@ alfred bootstrap --include editorconfig .gitignore babel flow
 # Code migration
 alfred migrate .
 alfred migrate . --transforms imports lebab
+
+# Migrate interactive
+alfred migrate-interactive .
 ```
 
 ## Roadmap (ordered by priority)

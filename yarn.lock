@@ -1716,7 +1716,7 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.npmjs.org/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
 
-debug@2.6.9, debug@^2.1.1, debug@^2.2.0, debug@^2.6.3, debug@^2.6.8:
+debug@2.6.9, debug@^2.1.1, debug@^2.2.0, debug@^2.6.3, debug@^2.6.7, debug@^2.6.8:
   version "2.6.9"
   resolved "https://registry.npmjs.org/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   dependencies:
@@ -4717,6 +4717,12 @@ simple-bufferstream@1.0.0:
 simple-fmt@~0.1.0:
   version "0.1.0"
   resolved "https://registry.npmjs.org/simple-fmt/-/simple-fmt-0.1.0.tgz#191bf566a59e6530482cb25ab53b4a8dc85c3a6b"
+
+simple-git@^1.80.1:
+  version "1.80.1"
+  resolved "https://registry.npmjs.org/simple-git/-/simple-git-1.80.1.tgz#48104cb4ac72576937853e1afd1eeffdc97acb29"
+  dependencies:
+    debug "^2.6.7"
 
 simple-is@~0.2.0:
   version "0.2.0"

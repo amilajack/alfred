@@ -1,4 +1,4 @@
-// flow-typed signature: a6719b1399ead6d4768a89c68e2250a2
+// flow-typed signature: 2c3e0e2e0bbef82a607517098a86bc36
 // flow-typed version: <<STUB>>/eslint_v^4.7.2/flow_v0.56.0
 
 /**
@@ -434,6 +434,10 @@ declare module 'eslint/lib/rules/lines-around-directive' {
   declare module.exports: any;
 }
 
+declare module 'eslint/lib/rules/lines-between-class-members' {
+  declare module.exports: any;
+}
+
 declare module 'eslint/lib/rules/max-depth' {
   declare module.exports: any;
 }
@@ -459,6 +463,10 @@ declare module 'eslint/lib/rules/max-statements-per-line' {
 }
 
 declare module 'eslint/lib/rules/max-statements' {
+  declare module.exports: any;
+}
+
+declare module 'eslint/lib/rules/multiline-comment-style' {
   declare module.exports: any;
 }
 
@@ -1684,6 +1692,9 @@ declare module 'eslint/lib/rules/lines-around-comment.js' {
 declare module 'eslint/lib/rules/lines-around-directive.js' {
   declare module.exports: $Exports<'eslint/lib/rules/lines-around-directive'>;
 }
+declare module 'eslint/lib/rules/lines-between-class-members.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/lines-between-class-members'>;
+}
 declare module 'eslint/lib/rules/max-depth.js' {
   declare module.exports: $Exports<'eslint/lib/rules/max-depth'>;
 }
@@ -1704,6 +1715,9 @@ declare module 'eslint/lib/rules/max-statements-per-line.js' {
 }
 declare module 'eslint/lib/rules/max-statements.js' {
   declare module.exports: $Exports<'eslint/lib/rules/max-statements'>;
+}
+declare module 'eslint/lib/rules/multiline-comment-style.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/multiline-comment-style'>;
 }
 declare module 'eslint/lib/rules/multiline-ternary.js' {
   declare module.exports: $Exports<'eslint/lib/rules/multiline-ternary'>;

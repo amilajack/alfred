@@ -1,5 +1,6 @@
 // @flow
 import random from 'rndm';
+import git from 'simple-git/promise';
 import util from 'util';
 import path from 'path';
 import os from 'os';
@@ -61,6 +62,23 @@ function foo(files: Array<string>) {
     .then(flatten).then(uniq);
 }
 
+async function assertGitWorktreeClean() {
+  const status = await git().status();
+  if (status.files.length > status.not_added.length) {
+    throw new Error(`\
+You have modifications to your git worktree.
+Please revert or commit them before running convert.`);
+  }
+
+  if (status.not_added.length > 0) {
+    console.log(`
+Warning: the following untracked files are present in your repository:
+${status.not_added.join('\n')}
+Proceeding anyway.
+`);
+  }
+}
+
 type ProvidersType = Promise<Array<string> | void>;
 
 export default async function Providers(userInput: UserProviderInput): ProvidersType {
@@ -75,6 +93,10 @@ export default async function Providers(userInput: UserProviderInput): Providers
     //        to hook into when each provider has finished. Providers will listen for when other
     //        provider have finished
     .sort((a, b) => a.priority - b.priority);
+
+  // Force the user to have a clean version control. Makes rollbacks
+  // easier
+  await assertGitWorktreeClean();
 
   // Validate files
   if (!userInput.files || userInput.files.length < 1) {
