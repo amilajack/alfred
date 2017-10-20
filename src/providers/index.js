@@ -96,7 +96,9 @@ export default async function Providers(userInput: UserProviderInput): Providers
 
   // Force the user to have a clean version control. Makes rollbacks
   // easier
-  await assertGitWorktreeClean();
+  if (process.env.NODE_ENV !== 'test') {
+    await assertGitWorktreeClean();
+  }
 
   // Validate files
   if (!userInput.files || userInput.files.length < 1) {
