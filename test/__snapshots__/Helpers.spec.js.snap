@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Helpers ParseInput should fail on non-js files 1`] = `
+Array [
+  "/Users/amila/Documents/Projects/alfred/test/fixtures/basic-test.ts",
+]
+`;
+
+exports[`Helpers ParseInput should parse directories and files 1`] = `
+Array [
+  "/Users/amila/Documents/Projects/alfred/test/fixtures/js-file-test.js",
+  "/Users/amila/Documents/Projects/alfred/test/fixtures/test-folder/test-js.js",
+]
+`;
+
+exports[`Helpers ParseInput should parse directories and files 2`] = `
+Array [
+  "/Users/amila/Documents/Projects/alfred/src/alfred.js",
+  "/Users/amila/Documents/Projects/alfred/test/Helpers.spec.js",
+  "/Users/amila/Documents/Projects/alfred/test/Migrate.spec.js",
+  "/Users/amila/Documents/Projects/alfred/test/fixtures/js-file-test.js",
+  "/Users/amila/Documents/Projects/alfred/test/fixtures/test-folder/test-js.js",
+]
+`;

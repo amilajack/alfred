@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Migrate should fail on non-existent files 1`] = `[Error: File "/Users/amila/Documents/Projects/alfred/test/fixtures/foo-test.ts" does not exist]`;
+
 exports[`Migrate should migrate basic file 1`] = `
 Array [
   "import fs from 'fs';
@@ -34,12 +36,12 @@ import cow from 'boo';
 
 exports[`Migrate should perform unsafe transformations 2`] = `
 Array [
-  "import foo from 'bar';
-import cow from 'boo';
-",
   "function MyClass() {}
 
 MyClass.prototype.method = () => {};
+",
+  "import foo from 'bar';
+import cow from 'boo';
 ",
 ]
 `;

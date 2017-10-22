@@ -5,8 +5,6 @@ import util from 'util';
 import path from 'path';
 import os from 'os';
 import fs from 'fs';
-import flatten from 'lodash.flatten';
-import uniq from 'uniq';
 import Es6ImportsProvider from './Es6ImportsProvider';
 import LebabProvider from './LebabProvider';
 import EslintProvider from './EslintProvider';
@@ -19,7 +17,7 @@ export const readFileAsync = util.promisify(fs.readFile);
 // const unlinkAsync = util.promisify(fs.unlink);
 
 function checkFileExists(filepath): Promise<bool> {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     fs.access(filepath, fs.F_OK, (error) => {
       resolve(!error);
     });
@@ -38,27 +36,6 @@ async function createBackupFiles(files: Array<string>): Promise<Map<string, stri
   return mappings;
 }
 
-function findJsFiles(dir: string) {
-  return new Promise(((resolve, reject) => {
-    const files = [];
-    findit(dir).on('file', (file) => {
-      // only return files ending in .js
-      if (/\.js$/.test(file)) {
-        files.push(file);
-      }
-    }).on('end', () => {
-      resolve(files);
-    }).on('error', reject);
-  }));
-}
-
-function recursivelyFindJsFilesAndFlatten(files: Array<string>) {
-  return Promise.all(files.map(file => statAsync(file).then(stat => (
-    stat.isDirectory()
-      ? findJsFiles(file)
-      : [file]))))
-    .then(flatten).then(uniq);
-}
 
 async function assertGitWorktreeClean() {
   const status = await git().status();

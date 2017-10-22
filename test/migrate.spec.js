@@ -1,5 +1,8 @@
+// @flow
 import path from 'path';
 import Providers from '../src/providers';
+
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
 
 describe('Migrate', () => {
   const defaultConfig = {
@@ -44,7 +47,19 @@ describe('Migrate', () => {
     })).toMatchSnapshot();
   });
 
-  it.skip('should fail on non-existent files', async () => {});
+  it('should fail on non-existent files', async () => {
+    try {
+      await Providers({
+        ...defaultConfig,
+        files: [
+          path.join(__dirname, 'fixtures', 'foo-test.ts'),
+          path.join(__dirname, 'fixtures', 'class-test.ts')
+        ]
+      });
+    } catch (e) {
+      expect(e).toMatchSnapshot();
+    }
+  });
 
   it.skip('should allow selection of manual tests', () => {});
 
