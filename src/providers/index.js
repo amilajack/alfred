@@ -8,6 +8,7 @@ import fs from 'fs';
 import Es6ImportsProvider from './Es6ImportsProvider';
 import LebabProvider from './LebabProvider';
 import EslintProvider from './EslintProvider';
+import ParseInput from '../helpers/ParseInput';
 import type { UserProviderInput, ProviderInput } from './ProviderInterface';
 
 export const copyFileAsync = util.promisify(fs.copyFile);
@@ -77,20 +78,30 @@ export default async function Providers(userInput: UserProviderInput): Providers
     await assertGitWorktreeClean();
   }
 
+  if (!userInput.files) {
+    throw new Error('Files not provided');
+  }
+
+  const parsedUserInput = {
+    ...userInput,
+    files: await ParseInput(userInput.files)
+  };
+
   // Validate files
-  if (!userInput.files || userInput.files.length < 1) {
+  if (!parsedUserInput.files || parsedUserInput.files.length < 1) {
     console.log('No files passed');
     return;
   }
 
   // Check if files exist
-  await Promise.all(userInput.files.map(file => checkFileExists(file).then((exists: bool) => {
+  await Promise.all(parsedUserInput.files.map(file => checkFileExists(file).then((exists: bool) => {
     if (!exists) {
       throw new Error(`File "${file}" does not exist`);
     }
+    return exists;
   })));
 
-  const mappings = await createBackupFiles(userInput.files);
+  const mappings = await createBackupFiles(parsedUserInput.files);
 
   const input = {
     // Default config
@@ -98,7 +109,7 @@ export default async function Providers(userInput: UserProviderInput): Providers
     verbose: false,
     write: true,
     // User provided config
-    ...userInput,
+    ...parsedUserInput,
     files: Array.from(mappings.values())
   };
 

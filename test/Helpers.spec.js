@@ -22,6 +22,16 @@ describe('Helpers', () => {
       expect(files).toMatchSnapshot();
     });
 
+    it('should filter duplicate files', async () => {
+      const files = await ParseInput([
+        path.join(testBasePath, 'basic-test.ts'),
+        path.join(testBasePath, 'basic-test.ts'),
+        path.join(testBasePath, 'class-test.ts'),
+        path.join(testBasePath, 'class-test.ts')
+      ]);
+      expect(files).toMatchSnapshot();
+    });
+
     it.skip('should fail on non-existent files', async () => {});
   });
 

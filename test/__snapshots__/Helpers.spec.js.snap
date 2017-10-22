@@ -6,6 +6,13 @@ Array [
 ]
 `;
 
+exports[`Helpers ParseInput should filter duplicate files 1`] = `
+Array [
+  "/Users/amila/Documents/Projects/alfred/test/fixtures/basic-test.ts",
+  "/Users/amila/Documents/Projects/alfred/test/fixtures/class-test.ts",
+]
+`;
+
 exports[`Helpers ParseInput should parse directories and files 1`] = `
 Array [
   "/Users/amila/Documents/Projects/alfred/test/fixtures/js-file-test.js",
