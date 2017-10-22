@@ -52,22 +52,22 @@ function findJsFiles(dir: string) {
   }));
 }
 
-function foo(files: Array<string>) {
-  return Promise.all(files.map(file => statAsync(file).then((stat) => {
-    if (stat.isDirectory()) {
-      return findJsFiles(file);
-    }
-    return [file];
-  })))
+function recursivelyFindJsFilesAndFlatten(files: Array<string>) {
+  return Promise.all(files.map(file => statAsync(file).then(stat => (
+    stat.isDirectory()
+      ? findJsFiles(file)
+      : [file]))))
     .then(flatten).then(uniq);
 }
 
 async function assertGitWorktreeClean() {
   const status = await git().status();
   if (status.files.length > status.not_added.length) {
-    throw new Error(`\
+    throw new Error(`
+
 You have modifications to your git worktree.
-Please revert or commit them before running convert.`);
+Please revert or commit them before running convert.
+    `);
   }
 
   if (status.not_added.length > 0) {
@@ -75,7 +75,7 @@ Please revert or commit them before running convert.`);
 Warning: the following untracked files are present in your repository:
 ${status.not_added.join('\n')}
 Proceeding anyway.
-`);
+    `);
   }
 }
 
