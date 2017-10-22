@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Migrate should fail on non-existent files 1`] = `[Error: File "/Users/amila/Documents/Projects/alfred/test/fixtures/foo-test.ts" does not exist]`;
+exports[`Migrate should fail on non-existent files 1`] = `[Error: ENOENT: no such file or directory, stat '/Users/amila/Documents/Projects/alfred/test/fixtures/foo-test.ts']`;
 
 exports[`Migrate should migrate basic file 1`] = `
 Array [
@@ -24,12 +24,12 @@ const bar = 'baz';
 
 exports[`Migrate should perform unsafe transformations 1`] = `
 Array [
+  "import foo from 'bar';
+import cow from 'boo';
+",
   "class MyClass {
   method() {}
 }
-",
-  "import foo from 'bar';
-import cow from 'boo';
 ",
 ]
 `;
