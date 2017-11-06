@@ -24,12 +24,12 @@ const bar = 'baz';
 
 exports[`Migrate should perform unsafe transformations 1`] = `
 Array [
-  "import foo from 'bar';
-import cow from 'boo';
-",
   "class MyClass {
   method() {}
 }
+",
+  "import foo from 'bar';
+import cow from 'boo';
 ",
 ]
 `;
