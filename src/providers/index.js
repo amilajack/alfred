@@ -95,8 +95,6 @@ export default async function Providers(userInput: UserProviderInput): Providers
     })()
     : await ParseInput(userInput.files);
 
-  console.log(files);
-
   const parsedUserInput = {
     ...userInput,
     files
