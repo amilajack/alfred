@@ -5,6 +5,7 @@ import util from 'util';
 import path from 'path';
 import os from 'os';
 import fs from 'fs';
+import parser from 'gitignore-parser';
 import Es6ImportsProvider from './Es6ImportsProvider';
 import LebabProvider from './LebabProvider';
 import EslintProvider from './EslintProvider';
@@ -78,13 +79,27 @@ export default async function Providers(userInput: UserProviderInput): Providers
     await assertGitWorktreeClean();
   }
 
-  if (!userInput.files) {
+  if (!userInput.files || !Array.isArray(userInput.files)) {
     throw new Error('Files not provided');
   }
 
+  const files = fs.existsSync(path.join(process.cwd(), '.gitignore'))
+    ? await (async () => {
+      // Remove gitignored files
+      const gitignoreFile = await readFileAsync(path.join(process.cwd(), '.gitignore'));
+      const gitignore = parser.compile(gitignoreFile.toString());
+      // Strip the process.cwd() from all filepaths. gitignore-parse only
+      // works with relative filepaths
+      return (await ParseInput(userInput.files))
+        .filter(file => gitignore.accepts(file.substring(process.cwd().length)));
+    })()
+    : await ParseInput(userInput.files);
+
+  console.log(files);
+
   const parsedUserInput = {
     ...userInput,
-    files: await ParseInput(userInput.files)
+    files
   };
 
   // Validate files
