@@ -69,7 +69,11 @@ export function handleInput(userInput: UserProviderInput) {
       // Strip the process.cwd() from all filepaths. gitignore-parse only
       // works with relative filepaths
       return (await ParseInput(userInput.files))
-        .filter(file => gitignore.accepts(file.substring(process.cwd().length)));
+        .filter(file => (
+          gitignore.accepts(file.substring(process.cwd().length)) &&
+          !file.includes('node_modules') &&
+          !file.includes('bower_components')
+        ));
     })()
     : ParseInput(userInput.files);
 }
