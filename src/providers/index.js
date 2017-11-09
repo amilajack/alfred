@@ -60,6 +60,20 @@ Proceeding anyway.
 
 type ProvidersType = Promise<Array<string> | void>;
 
+export function handleInput(userInput: UserProviderInput) {
+  return fs.existsSync(path.join(process.cwd(), '.gitignore'))
+    ? (async () => {
+      // Remove gitignored files
+      const gitignoreFile = await readFileAsync(path.join(process.cwd(), '.gitignore'));
+      const gitignore = parser.compile(gitignoreFile.toString());
+      // Strip the process.cwd() from all filepaths. gitignore-parse only
+      // works with relative filepaths
+      return (await ParseInput(userInput.files))
+        .filter(file => gitignore.accepts(file.substring(process.cwd().length)));
+    })()
+    : ParseInput(userInput.files);
+}
+
 export default async function Providers(userInput: UserProviderInput): ProvidersType {
   const providers = [
     Es6ImportsProvider,
@@ -83,21 +97,9 @@ export default async function Providers(userInput: UserProviderInput): Providers
     throw new Error('Files not provided');
   }
 
-  const files = fs.existsSync(path.join(process.cwd(), '.gitignore'))
-    ? await (async () => {
-      // Remove gitignored files
-      const gitignoreFile = await readFileAsync(path.join(process.cwd(), '.gitignore'));
-      const gitignore = parser.compile(gitignoreFile.toString());
-      // Strip the process.cwd() from all filepaths. gitignore-parse only
-      // works with relative filepaths
-      return (await ParseInput(userInput.files))
-        .filter(file => gitignore.accepts(file.substring(process.cwd().length)));
-    })()
-    : await ParseInput(userInput.files);
-
   const parsedUserInput = {
     ...userInput,
-    files
+    files: await handleInput(userInput)
   };
 
   // Validate files

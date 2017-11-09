@@ -1,6 +1,7 @@
 // @flow
 import path from 'path';
-import Providers from '../src/providers';
+import { expect as chaiExpect } from 'chai';
+import Providers, { handleInput } from '../src/providers';
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
 
@@ -58,6 +59,20 @@ describe('Migrate', () => {
       });
     } catch (e) {
       expect(e).toMatchSnapshot();
+    }
+  });
+
+  it.skip("should not parse .gitignore'd files", async () => {
+    const foo = await handleInput({
+      files: [
+        '.'
+      ]
+    });
+
+    console.log(foo);
+
+    for (const moo of foo) {
+      chaiExpect(moo).to.not.include('node_modules');
     }
   });
 
