@@ -3,7 +3,7 @@ import { spawn } from 'child-process-promise';
 import type { ProviderInput, ProviderInterface } from './ProviderInterface';
 
 export default class Es6ImportsProvider implements ProviderInterface {
-  providerName = 'es6-imports'
+  providerName = 'es6-imports';
 
   priority = 0;
 
