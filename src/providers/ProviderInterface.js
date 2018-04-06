@@ -2,30 +2,30 @@
 export type ProviderInput = {
   packageJsonPath: string,
   files: Array<string>,
-  unsafe: bool,
-  verbose: bool,
-  write: bool
+  unsafe: boolean,
+  verbose: boolean,
+  write: boolean
 };
 
 export type UserProviderInput = {
   packageJsonPath?: string,
   files?: Array<string>,
-  unsafe?: bool,
-  verbose?: bool,
-  write?: bool
+  unsafe?: boolean,
+  verbose?: boolean,
+  write?: boolean
 };
 
 export interface ProviderInterface {
   providerName: string;
 
-  priority: number,
+  priority: number;
 
-  safe: bool,
+  safe: boolean;
 
   /**
    * @private
    */
-  transform: (files: Array<string>) => Promise<void>,
+  transform: (files: Array<string>) => Promise<void>;
 
   /**
    * This method allows providers to be used as monads

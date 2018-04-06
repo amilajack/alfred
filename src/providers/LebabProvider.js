@@ -21,13 +21,7 @@ export default class LebabProvider implements ProviderInterface {
       'exponent',
       'multi-var'
     ],
-    unsafe: [
-      'let',
-      'class',
-      'template',
-      'default-param',
-      'includes'
-    ]
+    unsafe: ['let', 'class', 'template', 'default-param', 'includes']
   };
 
   providerName = 'lebab';
@@ -45,10 +39,7 @@ export default class LebabProvider implements ProviderInterface {
    */
   getTransforms(input: ProviderInput) {
     return input.unsafe === true
-      ? [
-        ...this.transforms.unsafe,
-        ...this.transforms.safe
-      ]
+      ? [...this.transforms.unsafe, ...this.transforms.safe]
       : this.transforms.safe;
   }
 
@@ -57,9 +48,9 @@ export default class LebabProvider implements ProviderInterface {
    */
   async transform(input: ProviderInput) {
     const { files, verbose } = input;
-    await Promise.all(files.map(file =>
-      readFileAsync(file)
-        .then((buffer) => {
+    await Promise.all(
+      files.map(file =>
+        readFileAsync(file).then(buffer => {
           const result = lebab.transform(
             buffer.toString(),
             this.getTransforms(input)
@@ -68,7 +59,9 @@ export default class LebabProvider implements ProviderInterface {
             console.log(result.warnings);
           }
           return writeFileAsync(file, result.code);
-        })));
+        })
+      )
+    );
   }
 
   async provide(input: ProviderInput): Promise<ProviderInput> {

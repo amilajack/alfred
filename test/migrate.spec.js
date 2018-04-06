@@ -30,22 +30,26 @@ describe('Migrate', () => {
   });
 
   it('should perform unsafe transformations', async () => {
-    expect(await Providers({
-      ...defaultConfig,
-      files: [
-        path.join(__dirname, 'fixtures', 'unsafe-transformation-test.ts'),
-        path.join(__dirname, 'fixtures', 'class-test.ts')
-      ],
-      unsafe: true
-    })).toMatchSnapshot();
+    expect(
+      await Providers({
+        ...defaultConfig,
+        files: [
+          path.join(__dirname, 'fixtures', 'unsafe-transformation-test.ts'),
+          path.join(__dirname, 'fixtures', 'class-test.ts')
+        ],
+        unsafe: true
+      })
+    ).toMatchSnapshot();
 
-    expect(await Providers({
-      ...defaultConfig,
-      files: [
-        path.join(__dirname, 'fixtures', 'unsafe-transformation-test.ts'),
-        path.join(__dirname, 'fixtures', 'class-test.ts')
-      ]
-    })).toMatchSnapshot();
+    expect(
+      await Providers({
+        ...defaultConfig,
+        files: [
+          path.join(__dirname, 'fixtures', 'unsafe-transformation-test.ts'),
+          path.join(__dirname, 'fixtures', 'class-test.ts')
+        ]
+      })
+    ).toMatchSnapshot();
   });
 
   it('should fail on non-existent files', async () => {
@@ -64,9 +68,7 @@ describe('Migrate', () => {
 
   it.skip("should not parse .gitignore'd files", async () => {
     const foo = await handleInput({
-      files: [
-        '.'
-      ]
+      files: ['.']
     });
 
     console.log(foo);

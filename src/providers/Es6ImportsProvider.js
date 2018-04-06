@@ -14,10 +14,12 @@ export default class Es6ImportsProvider implements ProviderInterface {
    */
   runCodeshift(transformName: string, files: string[]): Promise<void> {
     const cmd = require.resolve('jscodeshift/bin/jscodeshift.sh');
-    const transform = require.resolve(`5to6-codemod/transforms/${transformName}`);
+    const transform = require.resolve(
+      `5to6-codemod/transforms/${transformName}`
+    );
     const child = spawn(cmd, ['-t', transform].concat(files));
 
-    child.progress((childProcess) => {
+    child.progress(childProcess => {
       childProcess.stderr.pipe(process.stderr);
     });
 

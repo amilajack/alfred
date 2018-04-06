@@ -1,6 +1,10 @@
 {
   "parser": "babel-eslint",
-  "extends": "bliss",
+  "extends": [
+    "bliss",
+    "prettier",
+    "prettier/flowtype"
+  ],
   "rules": {
     "class-methods-use-this": "off",
     "fp/no-mutation": "off",

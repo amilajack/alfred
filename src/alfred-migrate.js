@@ -10,8 +10,9 @@ program
   .option('-d, --debug', 'show debugging output')
   .parse(process.argv);
 
-const filesPattern: Array<string> =
-  program.args.map(arg => path.join(process.cwd(), arg));
+const filesPattern: Array<string> = program.args.map(arg =>
+  path.join(process.cwd(), arg)
+);
 
 // @TODO: Create backups from the files and pass the paths to the backups
 //        instead of the actual filenames. Preserve the original filenames
@@ -22,5 +23,4 @@ Providers({
   packageJsonPath: path.join(process.cwd(), 'package.json'),
   unsafe: program.unsafe,
   verbose: program.verbose
-})
-  .catch(console.log);
+}).catch(console.log);

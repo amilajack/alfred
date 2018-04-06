@@ -15,23 +15,29 @@ module.exports = {
   },
 
   module: {
-    rules: [{
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      use: [{
-        loader: 'shebang-loader'
-      }, {
-        loader: 'babel-loader',
-        options: {
-          cacheDirectory: true
-        }
-      }]
-    }]
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'shebang-loader'
+          },
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true
+            }
+          }
+        ]
+      }
+    ]
   },
 
   plugins: [
     new BundleAnalyzerPlugin({
-      analyzerMode: process.env.OPEN_ANALYZER === 'true' ? 'server' : 'disabled',
+      analyzerMode:
+        process.env.OPEN_ANALYZER === 'true' ? 'server' : 'disabled',
       openAnalyzer: process.env.OPEN_ANALYZER === 'true'
     }),
     new webpack.BannerPlugin({

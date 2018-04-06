@@ -8,11 +8,13 @@ describe('Helpers', () => {
   describe('ParseInput', () => {
     it('should parse directories and files', async () => {
       expect(await ParseInput([testBasePath])).toMatchSnapshot();
-      expect(await ParseInput([
-        testBasePath,
-        path.join(__dirname, '..', 'test'),
-        path.join(__dirname, '..', 'src', 'alfred.js')
-      ])).toMatchSnapshot();
+      expect(
+        await ParseInput([
+          testBasePath,
+          path.join(__dirname, '..', 'test'),
+          path.join(__dirname, '..', 'src', 'alfred.js')
+        ])
+      ).toMatchSnapshot();
     });
 
     it('should fail on non-js files', async () => {

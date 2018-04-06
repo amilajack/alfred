@@ -18,26 +18,34 @@ export const statAsync = util.promisify(fs.stat);
 export const readFileAsync = util.promisify(fs.readFile);
 // const unlinkAsync = util.promisify(fs.unlink);
 
-function checkFileExists(filepath): Promise<bool> {
-  return new Promise((resolve) => {
-    fs.access(filepath, fs.F_OK, (error) => {
+function checkFileExists(filepath): Promise<boolean> {
+  return new Promise(resolve => {
+    fs.access(filepath, fs.F_OK, error => {
       resolve(!error);
     });
   });
 }
 
-async function createBackupFiles(files: Array<string>): Promise<Map<string, string>> {
+async function createBackupFiles(
+  files: Array<string>
+): Promise<Map<string, string>> {
   const mappings: Map<string, string> = new Map();
   const randomNumber = random();
 
-  await Promise.all(files.map((file) => {
-    const tmpFilePath = path.join(os.tmpdir(), `${path.parse(file).name}-${randomNumber}`);
-    return copyFileAsync(file, tmpFilePath).then(() => mappings.set(file, tmpFilePath));
-  }));
+  await Promise.all(
+    files.map(file => {
+      const tmpFilePath = path.join(
+        os.tmpdir(),
+        `${path.parse(file).name}-${randomNumber}`
+      );
+      return copyFileAsync(file, tmpFilePath).then(() =>
+        mappings.set(file, tmpFilePath)
+      );
+    })
+  );
 
   return mappings;
 }
-
 
 async function assertGitWorktreeClean() {
   const status = await git().status();
@@ -63,27 +71,27 @@ type ProvidersType = Promise<Array<string> | void>;
 export function handleInput(userInput: UserProviderInput) {
   return fs.existsSync(path.join(process.cwd(), '.gitignore'))
     ? (async () => {
-      // Remove gitignored files
-      const gitignoreFile = await readFileAsync(path.join(process.cwd(), '.gitignore'));
-      const gitignore = parser.compile(gitignoreFile.toString());
-      // Strip the process.cwd() from all filepaths. gitignore-parse only
-      // works with relative filepaths
-      return (await ParseInput(userInput.files))
-        .filter(file => (
-          gitignore.accepts(file.substring(process.cwd().length)) &&
-          !file.includes('node_modules') &&
-          !file.includes('bower_components')
-        ));
-    })()
+        // Remove gitignored files
+        const gitignoreFile = await readFileAsync(
+          path.join(process.cwd(), '.gitignore')
+        );
+        const gitignore = parser.compile(gitignoreFile.toString());
+        // Strip the process.cwd() from all filepaths. gitignore-parse only
+        // works with relative filepaths
+        return (await ParseInput(userInput.files)).filter(
+          file =>
+            gitignore.accepts(file.substring(process.cwd().length)) &&
+            !file.includes('node_modules') &&
+            !file.includes('bower_components')
+        );
+      })()
     : ParseInput(userInput.files);
 }
 
-export default async function Providers(userInput: UserProviderInput): ProvidersType {
-  const providers = [
-    Es6ImportsProvider,
-    LebabProvider,
-    EslintProvider
-  ]
+export default async function Providers(
+  userInput: UserProviderInput
+): ProvidersType {
+  const providers = [Es6ImportsProvider, LebabProvider, EslintProvider]
     .map(Provider => new Provider())
     // Sort the providers by priority.
     // @TODO: Temporarily sort by priority number. Eventually we'll implement an listener patterh
@@ -113,12 +121,16 @@ export default async function Providers(userInput: UserProviderInput): Providers
   }
 
   // Check if files exist
-  await Promise.all(parsedUserInput.files.map(file => checkFileExists(file).then((exists: bool) => {
-    if (!exists) {
-      throw new Error(`File "${file}" does not exist`);
-    }
-    return exists;
-  })));
+  await Promise.all(
+    parsedUserInput.files.map(file =>
+      checkFileExists(file).then((exists: boolean) => {
+        if (!exists) {
+          throw new Error(`File "${file}" does not exist`);
+        }
+        return exists;
+      })
+    )
+  );
 
   const mappings = await createBackupFiles(parsedUserInput.files);
 
@@ -138,11 +150,10 @@ export default async function Providers(userInput: UserProviderInput): Providers
     .filter(provider => (input.unsafe === true ? true : provider.safe === true))
     // Chain async transformations
     .reduce(
-      ((promise: Promise<ProviderInput>, provider) => (
-        promise
-          .then((previousInput: ProviderInput) =>
-            provider.provide(previousInput)))
-      ),
+      (promise: Promise<ProviderInput>, provider) =>
+        promise.then((previousInput: ProviderInput) =>
+          provider.provide(previousInput)
+        ),
       Promise.resolve(input)
     );
 
@@ -155,10 +166,9 @@ export default async function Providers(userInput: UserProviderInput): Providers
   // If we dont want to write to the original file, return the code in text form.
   // This is ideal for testing
   if (!input.write) {
-    return Promise.all(Array
-      .from(mappings.values())
-      .map(filename => readFileAsync(filename)))
-      .then(files => files.map(e => e.toString()));
+    return Promise.all(
+      Array.from(mappings.values()).map(filename => readFileAsync(filename))
+    ).then(files => files.map(e => e.toString()));
   }
 
   // Write the temporary files to the original files
