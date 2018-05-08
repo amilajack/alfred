@@ -1,6 +1,6 @@
 {
   "name": "alfred-cli",
-  "version": "0.0.1-6",
+  "version": "0.0.1-7",
   "description": "A framework for upgrading javascript codebases",
   "bin": {
     "alfred": "./lib/alfred.js",
