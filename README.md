@@ -7,7 +7,7 @@
 ## Installation
 ```bash
 # Yarn
-yarn add --global alfred
+yarn global add alfred
 
 # NPM
 npm install --global alfred
