@@ -20,7 +20,7 @@
     "package": "pkg ./lib/alfred.js --out-path release",
     "postlint-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.js'",
     "spec": "jest",
-    "test": "cross-env NODE_ENV=test yarn spec",
+    "test": "cross-env NODE_ENV=test yarn build-babel && yarn spec",
     "version": "rm -rf lib && yarn build",
     "watch": "cross-env NODE_ENV=production babel src --out-dir lib --watch"
   },
