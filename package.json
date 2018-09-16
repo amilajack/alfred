@@ -25,6 +25,7 @@
     "watch": "cross-env NODE_ENV=production babel src --out-dir lib --watch"
   },
   "devDependencies": {
+    "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.1",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/plugin-proposal-decorators": "^7.0.0",
