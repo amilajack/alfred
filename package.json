@@ -75,7 +75,8 @@
     "prettier": "^1.14.2",
     "rndm": "^1.2.0",
     "simple-git": "^1.96.0",
-    "uniq": "^1.0.1"
+    "uniq": "^1.0.1",
+    "update-notifier": "^2.5.0"
   },
   "engines": {
     "node": ">=8",
