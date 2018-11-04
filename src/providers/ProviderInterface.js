@@ -8,11 +8,11 @@ export type ProviderInput = {
 };
 
 export type UserProviderInput = {
-  packageJsonPath?: string,
-  files?: Array<string>,
-  unsafe?: boolean,
-  verbose?: boolean,
-  write?: boolean
+  packageJsonPath: string,
+  files: Array<string>,
+  unsafe: boolean,
+  verbose: boolean,
+  write: boolean
 };
 
 export interface ProviderInterface {
@@ -25,10 +25,10 @@ export interface ProviderInterface {
   /**
    * @private
    */
-  transform: (files: Array<string>) => Promise<void>;
+  +transform: (files: Array<string>, input: ProviderInput) => Promise<void>;
 
   /**
    * This method allows providers to be used as monads
    */
-  provide: (input: ProviderInput) => Promise<ProviderInput>;
+  +provide: (input: ProviderInput) => Promise<ProviderInput>;
 }

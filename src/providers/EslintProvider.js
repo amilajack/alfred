@@ -10,7 +10,7 @@ export default class EslintProvider implements ProviderInterface {
 
   safe = true;
 
-  transform(input: ProviderInput) {
+  transform(files: Array<string>, input: ProviderInput) {
     const cli = new CLIEngine({
       configFile: path.join(__dirname, 'resources', 'alfred-eslintrc'),
       fix: true
@@ -21,10 +21,12 @@ export default class EslintProvider implements ProviderInterface {
       const report = cli.executeOnFiles(input.files);
       CLIEngine.outputFixes(report);
     }
+
+    return Promise.resolve();
   }
 
   async provide(input: ProviderInput): Promise<ProviderInput> {
-    await this.transform(input);
+    await this.transform(input.files, input);
     return input;
   }
 }
