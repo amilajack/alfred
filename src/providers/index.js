@@ -78,7 +78,9 @@ export function handleInput(userInput: UserProviderInput) {
         const gitignore = parser.compile(gitignoreFile.toString());
         // Strip the process.cwd() from all filepaths. gitignore-parse only
         // works with relative filepaths
-        return (await ParseInput(userInput.files)).filter(
+        const files = await ParseInput(userInput.files);
+
+        return files.filter(
           file =>
             gitignore.accepts(file.substring(process.cwd().length)) &&
             !file.includes('node_modules') &&
@@ -166,9 +168,8 @@ export default async function Providers(
   // If we dont want to write to the original file, return the code in text form.
   // This is ideal for testing
   if (!input.write) {
-    return Promise.all(
-      Array.from(mappings.values()).map(filename => readFileAsync(filename))
-    ).then(files => files.map(e => e.toString()));
+    const files = Array.from(mappings.values()).map(filename => readFileAsync(filename));
+    return Promise.all(files).then(files => files.map(e => e.toString()));
   }
 
   // Write the temporary files to the original files

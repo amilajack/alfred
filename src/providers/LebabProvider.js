@@ -1,6 +1,6 @@
 // @flow
 import lebab from 'lebab';
-import { readFileAsync, writeFileAsync } from './';
+import { readFileAsync, writeFileAsync } from '.';
 import type { ProviderInput, ProviderInterface } from './ProviderInterface';
 
 export default class LebabProvider implements ProviderInterface {
@@ -46,8 +46,7 @@ export default class LebabProvider implements ProviderInterface {
   /**
    * @private
    */
-  async transform(input: ProviderInput) {
-    const { files, verbose } = input;
+  async transform(files: Array<string>, input: ProviderInput) {
     await Promise.all(
       files.map(file =>
         readFileAsync(file).then(buffer => {
@@ -55,7 +54,7 @@ export default class LebabProvider implements ProviderInterface {
             buffer.toString(),
             this.getTransforms(input)
           );
-          if (verbose && result.warnings.length > 0) {
+          if (input.verbose && result.warnings.length > 0) {
             console.log(result.warnings);
           }
           return writeFileAsync(file, result.code);
@@ -65,7 +64,7 @@ export default class LebabProvider implements ProviderInterface {
   }
 
   async provide(input: ProviderInput): Promise<ProviderInput> {
-    await this.transform(input);
+    await this.transform(input.files, input);
     return input;
   }
 }
