@@ -32,5 +32,6 @@ export default function ParseInput(
     )
   )
     .then(flatten)
-    .then(uniq);
+    .then(uniq)
+    .then(filteredFiles => filteredFiles.sort());
 }
