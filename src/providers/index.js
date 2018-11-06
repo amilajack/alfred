@@ -96,7 +96,7 @@ export default async function Providers(
   const providers = [Es6ImportsProvider, LebabProvider, EslintProvider]
     .map(Provider => new Provider())
     // Sort the providers by priority.
-    // @TODO: Temporarily sort by priority number. Eventually we'll implement an listener patterh
+    // @TODO: Temporarily sort by priority number. Eventually we'll implement an listener pattern
     //        to hook into when each provider has finished. Providers will listen for when other
     //        provider have finished
     .sort((a, b) => a.priority - b.priority);
@@ -117,7 +117,7 @@ export default async function Providers(
   };
 
   // Validate files
-  if (!parsedUserInput.files || parsedUserInput.files.length < 1) {
+  if (!parsedUserInput.files || !parsedUserInput.files.length) {
     console.log('No files passed');
     return;
   }
@@ -149,7 +149,7 @@ export default async function Providers(
   // Invoke each provider
   const transformations = providers
     // Filter any unsafe plugins by default. Allow user override
-    .filter(provider => (input.unsafe === true ? true : provider.safe === true))
+    .filter(provider => (input.unsafe ? true : provider.safe))
     // Chain async transformations
     .reduce(
       (promise: Promise<ProviderInput>, provider) =>
@@ -168,8 +168,9 @@ export default async function Providers(
   // If we dont want to write to the original file, return the code in text form.
   // This is ideal for testing
   if (!input.write) {
-    const files = Array.from(mappings.values()).map(filename => readFileAsync(filename));
-    return Promise.all(files).then(files => files.map(e => e.toString()));
+    const filePromises = Array.from(mappings.values()).map(filename => readFileAsync(filename));
+    const fileBuffers = await Promise.all(filePromises);
+    return fileBuffers.map(e => e.toString()).sort();
   }
 
   // Write the temporary files to the original files
@@ -178,8 +179,8 @@ export default async function Providers(
   });
 
   // Clear the backups
-  await Promise.all(Array.from(mappings.values()).map(e => {
-    fs.unlinkSync(e)
-    return e;
+  await Promise.all(Array.from(mappings.values()).map(file => {
+    fs.unlinkSync(file)
+    return file;
   }));
 }

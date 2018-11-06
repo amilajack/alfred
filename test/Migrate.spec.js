@@ -31,21 +31,22 @@ describe('Migrate', () => {
     expect(result).toMatchSnapshot();
   });
 
-  it('should perform unsafe transformations', async () => {
+  it.only('should perform unsafe transformations', async () => {
     expect(
       await Providers({
         ...defaultConfig,
+        unsafe: true,
         files: [
           path.join(__dirname, 'fixtures', 'unsafe-transformation-test.ts'),
           path.join(__dirname, 'fixtures', 'class-test.ts')
-        ],
-        unsafe: true
+        ]
       })
     ).toMatchSnapshot();
 
     expect(
       await Providers({
         ...defaultConfig,
+        unsafe: true,
         files: [
           path.join(__dirname, 'fixtures', 'unsafe-transformation-test.ts'),
           path.join(__dirname, 'fixtures', 'class-test.ts')

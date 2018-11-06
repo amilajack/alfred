@@ -36,9 +36,9 @@ import cow from 'boo';
 
 exports[`Migrate should perform unsafe transformations 2`] = `
 Array [
-  "function MyClass() {}
-
-MyClass.prototype.method = () => {};
+  "class MyClass {
+  method() {}
+}
 ",
   "import foo from 'bar';
 import cow from 'boo';
