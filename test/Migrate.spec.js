@@ -31,7 +31,7 @@ describe('Migrate', () => {
     expect(result).toMatchSnapshot();
   });
 
-  it.only('should perform unsafe transformations', async () => {
+  it('should perform unsafe transformations', async () => {
     expect(
       await Providers({
         ...defaultConfig,
