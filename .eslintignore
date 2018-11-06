@@ -3,3 +3,4 @@ build
 typings
 flow-typed
 lib
+fixtures

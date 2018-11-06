@@ -1,9 +1,20 @@
 // @flow
 import path from 'path';
+import espree from 'espree';
 import { expect as chaiExpect } from 'chai';
 import Providers, { handleInput } from '../src/providers';
 
 jest.setTimeout(20000);
+
+function parseCodeSnippets(codeSnippets: Array<string> | void) {
+  if (codeSnippets) {
+    codeSnippets.map(code =>
+      espree.parse(code, {
+        sourceType: 'module'
+      })
+    );
+  }
+}
 
 describe('Migrate', () => {
   const defaultConfig = {
@@ -20,6 +31,7 @@ describe('Migrate', () => {
       ...defaultConfig
     });
     expect(result).toMatchSnapshot();
+    parseCodeSnippets(result);
   });
 
   it('should migrate basic file with EslintProvider', async () => {
@@ -29,30 +41,31 @@ describe('Migrate', () => {
       ...defaultConfig
     });
     expect(result).toMatchSnapshot();
+    parseCodeSnippets(result);
   });
 
   it('should perform unsafe transformations', async () => {
-    expect(
-      await Providers({
-        ...defaultConfig,
-        unsafe: true,
-        files: [
-          path.join(__dirname, 'fixtures', 'unsafe-transformation-test.ts'),
-          path.join(__dirname, 'fixtures', 'class-test.ts')
-        ]
-      })
-    ).toMatchSnapshot();
+    const result1 = await Providers({
+      ...defaultConfig,
+      unsafe: true,
+      files: [
+        path.join(__dirname, 'fixtures', 'unsafe-transformation-test.ts'),
+        path.join(__dirname, 'fixtures', 'class-test.ts')
+      ]
+    });
+    expect(result1).toMatchSnapshot();
+    parseCodeSnippets(result1);
 
-    expect(
-      await Providers({
-        ...defaultConfig,
-        unsafe: true,
-        files: [
-          path.join(__dirname, 'fixtures', 'unsafe-transformation-test.ts'),
-          path.join(__dirname, 'fixtures', 'class-test.ts')
-        ]
-      })
-    ).toMatchSnapshot();
+    const result2 = await Providers({
+      ...defaultConfig,
+      unsafe: true,
+      files: [
+        path.join(__dirname, 'fixtures', 'unsafe-transformation-test.ts'),
+        path.join(__dirname, 'fixtures', 'class-test.ts')
+      ]
+    });
+    expect(result2).toMatchSnapshot();
+    parseCodeSnippets(result2);
   });
 
   it('should fail on non-existent files', async () => {
@@ -67,6 +80,18 @@ describe('Migrate', () => {
     } catch (e) {
       expect(e).toMatchSnapshot();
     }
+  });
+
+  it('should run against directories', async () => {
+    const result = await Providers({
+      ...defaultConfig,
+      files: [
+        path.join(__dirname, 'fixtures', 'express-hello-world', 'foobar.js'),
+        path.join(__dirname, 'fixtures', 'express-hello-world', 'index.js')
+      ]
+    });
+    expect(result).toMatchSnapshot();
+    parseCodeSnippets(result);
   });
 
   it.skip("should not parse .gitignore'd files", async () => {

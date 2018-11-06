@@ -2,30 +2,34 @@
 
 exports[`Helpers ParseInput should fail on non-js files 1`] = `
 Array [
-  "/Users/amila/Documents/Projects/alfred/test/fixtures/basic-test.ts",
+  "/test/fixtures/basic-test.ts",
 ]
 `;
 
 exports[`Helpers ParseInput should filter duplicate files 1`] = `
 Array [
-  "/Users/amila/Documents/Projects/alfred/test/fixtures/basic-test.ts",
-  "/Users/amila/Documents/Projects/alfred/test/fixtures/class-test.ts",
+  "/test/fixtures/basic-test.ts",
+  "/test/fixtures/class-test.ts",
 ]
 `;
 
 exports[`Helpers ParseInput should parse directories and files 1`] = `
 Array [
-  "/Users/amila/Documents/Projects/alfred/test/fixtures/js-file-test.js",
-  "/Users/amila/Documents/Projects/alfred/test/fixtures/test-folder/test-js.js",
+  "/test/fixtures/express-hello-world/foobar.js",
+  "/test/fixtures/express-hello-world/index.js",
+  "/test/fixtures/js-file-test.js",
+  "/test/fixtures/test-folder/test-js.js",
 ]
 `;
 
 exports[`Helpers ParseInput should parse directories and files 2`] = `
 Array [
-  "/Users/amila/Documents/Projects/alfred/src/alfred.js",
-  "/Users/amila/Documents/Projects/alfred/test/Helpers.spec.js",
-  "/Users/amila/Documents/Projects/alfred/test/Migrate.spec.js",
-  "/Users/amila/Documents/Projects/alfred/test/fixtures/js-file-test.js",
-  "/Users/amila/Documents/Projects/alfred/test/fixtures/test-folder/test-js.js",
+  "/src/alfred.js",
+  "/test/Helpers.spec.js",
+  "/test/Migrate.spec.js",
+  "/test/fixtures/express-hello-world/foobar.js",
+  "/test/fixtures/express-hello-world/index.js",
+  "/test/fixtures/js-file-test.js",
+  "/test/fixtures/test-folder/test-js.js",
 ]
 `;
