@@ -168,7 +168,9 @@ export default async function Providers(
   // If we dont want to write to the original file, return the code in text form.
   // This is ideal for testing
   if (!input.write) {
-    const filePromises = Array.from(mappings.values()).map(filename => readFileAsync(filename));
+    const filePromises = Array.from(mappings.values()).map(filename =>
+      readFileAsync(filename)
+    );
     const fileBuffers = await Promise.all(filePromises);
     return fileBuffers.map(e => e.toString()).sort();
   }
@@ -179,8 +181,10 @@ export default async function Providers(
   });
 
   // Clear the backups
-  await Promise.all(Array.from(mappings.values()).map(file => {
-    fs.unlinkSync(file)
-    return file;
-  }));
+  await Promise.all(
+    Array.from(mappings.values()).map(file => {
+      fs.unlinkSync(file);
+      return file;
+    })
+  );
 }
