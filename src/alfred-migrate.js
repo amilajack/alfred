@@ -22,5 +22,6 @@ Providers({
   files: filesPattern,
   packageJsonPath: path.join(process.cwd(), 'package.json'),
   unsafe: program.unsafe,
-  verbose: program.verbose
+  verbose: program.verbose,
+  write: program.write
 }).catch(console.log);

@@ -1,5 +1,5 @@
-// flow-typed signature: 9a1fb3feac221b50aab621209bf8ca9c
-// flow-typed version: 94e9f7e0a4/commander_v2.x.x/flow_>=v0.28.x
+// flow-typed signature: 74acf151cd7a43fec2bcefb6e965afee
+// flow-typed version: 98126aa3f7/commander_v2.x.x/flow_>=v0.28.x
 
 declare module "commander" {
   declare class Command extends events$EventEmitter {
@@ -162,7 +162,11 @@ declare module "commander" {
      * @return {Command} for chaining
      * @api public
      */
-    parse(argv: Array<string>): this;
+    parse(argv: Array<string>): this & {
+      args: Array<string>,
+      rawArgs: Array<string>,
+      [string]: any,
+    };
 
     /**
      * Parse options from `argv` returning `argv`
@@ -246,7 +250,7 @@ declare module "commander" {
      *
      * @api public
      */
-    outputHelp(): void;
+    outputHelp(cb?: ?(defaultHelp: string) => string): void;
 
     /**
      * Output help information and exit.
@@ -275,7 +279,7 @@ declare module "commander" {
   }
 
   declare module.exports: Command & {
-    Command: Command,
-    Option: Option
+    Command: (name?: string) => Command;
+    Options: (flags: string, description?: string) => Option;
   };
 }

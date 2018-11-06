@@ -3,12 +3,14 @@ import path from 'path';
 import { expect as chaiExpect } from 'chai';
 import Providers, { handleInput } from '../src/providers';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
+jest.setTimeout(20000);
 
 describe('Migrate', () => {
   const defaultConfig = {
     packageJsonPath: __dirname,
-    write: false
+    write: false,
+    unsafe: false,
+    verbose: false
   };
 
   it('should migrate basic file', async () => {
@@ -67,15 +69,17 @@ describe('Migrate', () => {
   });
 
   it.skip("should not parse .gitignore'd files", async () => {
-    const foo = await handleInput({
-      files: ['.']
+    const files = await handleInput({
+      files: ['.'],
+      packageJsonPath: path.join(__dirname, '..', 'package.json'),
+      ...defaultConfig
     });
 
-    console.log(foo);
+    console.log(files);
 
-    for (const moo of foo) {
-      chaiExpect(moo).to.not.include('node_modules');
-    }
+    files.forEach(file => {
+      chaiExpect(file).to.not.include('node_modules');
+    });
   });
 
   it.skip('should allow selection of manual tests', () => {});

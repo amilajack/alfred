@@ -178,5 +178,8 @@ export default async function Providers(
   });
 
   // Clear the backups
-  return Promise.all(Array.from(mappings.values()).map(fs.unlinkSync));
+  await Promise.all(Array.from(mappings.values()).map(e => {
+    fs.unlinkSync(e)
+    return e;
+  }));
 }
