@@ -13,7 +13,7 @@
   "devDependencies": {
     "assertit": "0.1.0",
     "express": "4.15.3",
-    "supertest": "3.0.0"
+    "supertest": "3.3.0"
   },
   "keywords": [
     "example",
