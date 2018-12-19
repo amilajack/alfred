@@ -70,7 +70,7 @@
     "eslint-plugin-flowtype-errors": "^3.6.0",
     "findit": "^2.0.0",
     "gitignore-parser": "^0.0.2",
-    "jscodeshift": "^0.5.1",
+    "jscodeshift": "^0.6.0",
     "lebab": "^3.0.3",
     "lodash.flatten": "^4.4.0",
     "prettier": "^1.14.3",
