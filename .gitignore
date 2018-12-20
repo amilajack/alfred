@@ -2,3 +2,4 @@ node_modules
 lib
 release
 .eslintcache
+flow-typed
