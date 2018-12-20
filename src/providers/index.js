@@ -92,7 +92,7 @@ export function handleInput(userInput: UserProviderInput) {
 
 export default async function Providers(
   userInput: UserProviderInput
-): ProvidersType {
+): ProvidersType | Array<string> {
   const providers = [Es6ImportsProvider, LebabProvider, EslintProvider]
     .map(Provider => new Provider())
     // Sort the providers by priority.
@@ -118,8 +118,8 @@ export default async function Providers(
 
   // Validate files
   if (!parsedUserInput.files || !parsedUserInput.files.length) {
-    console.log('No files passed');
-    return;
+    // console.log('No files passed');
+    throw new Error('No files passed');
   }
 
   // Check if files exist
@@ -168,8 +168,8 @@ export default async function Providers(
   // If we dont want to write to the original file, return the code in text form.
   // This is ideal for testing
   if (!input.write) {
-    const filePromises = Array.from(mappings.values()).map(filename =>
-      readFileAsync(filename)
+    const filePromises = Array.from(mappings.values()).map(file =>
+      readFileAsync(file)
     );
     const fileBuffers = await Promise.all(filePromises);
     return fileBuffers.map(e => e.toString()).sort();
@@ -181,7 +181,7 @@ export default async function Providers(
   });
 
   // Clear the backups
-  await Promise.all(
+  return Promise.all(
     Array.from(mappings.values()).map(file => {
       fs.unlinkSync(file);
       return file;

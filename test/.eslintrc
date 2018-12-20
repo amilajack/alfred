@@ -1,5 +1,8 @@
 {
   "env": {
-    "jasmine": true
+    "jest": true
+  },
+  "rules": {
+    "flowtype-errors/show-errors": "off"
   }
 }

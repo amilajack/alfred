@@ -17,7 +17,7 @@ export default class EslintProvider implements ProviderInterface {
     });
 
     // Sometimes it takes multiple passes for all the ESLint errors to be autofixed
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i += 1) {
       const report = cli.executeOnFiles(input.files);
       CLIEngine.outputFixes(report);
     }

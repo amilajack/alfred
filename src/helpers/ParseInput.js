@@ -26,8 +26,8 @@ export default function ParseInput(
 ): Promise<Array<string>> {
   return Promise.all(
     files.map(file =>
-      statAsync(file).then(
-        stat => (stat.isDirectory() ? findJsFiles(file) : [file])
+      statAsync(file).then(stat =>
+        stat.isDirectory() ? findJsFiles(file) : [file]
       )
     )
   )

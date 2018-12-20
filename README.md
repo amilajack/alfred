@@ -1,54 +1,31 @@
-## What is Alfred?
-* A project migrator
-* A configuration/boilerplate manager
-* Allows for extensibility
+alfred
+======
+[![Build Status](https://travis-ci.com/amilajack/alfred.svg?token=stGf151gAJ11ZUi8LyvG&branch=master)](https://travis-ci.com/amilajack/alfred)
 
+Alfred is an infrastructure framework that defines a standard workflow for JavaScript projects
 
 ## Installation
 ```bash
 # Yarn
 yarn global add alfred
-
 # NPM
 npm install --global alfred
 ```
 
 ## Usage
 ```bash
-# Add boilerplate files
-alfred bootstrap
-alfred bootstrap --include editorconfig .gitignore babel flow
-
-# Code migration
+# Creating a new project
+alfred new my-app
+cd my-app
+alfred start
+alfred build
+alfred build
+# Upgrading JS
 alfred migrate .
 alfred migrate . --transforms imports lebab
-
-# Migrate interactive
-alfred migrate-interactive .
 ```
 
 ## Roadmap (ordered by priority)
 - [x] `LebabProvider`
 - [x] `EslintProvider`
 - [x] `PrettierProvider`
-- [ ] `DecaffinateProvider`
-
-## Spec
-* Check for `version` in `package.json` `"alfred"` config, update files as necessary
-* Allow for project specific configurations
-* Revert files if necessary. Create backups of every file created. Create global backup directory.
-* Bootstrap applications by adding boilerplate, allow user to select which files should be added
-* Determine standards for each project. Ex. what is the name of the build directory?
-
-## Example configuration
-In `package.json`
-```json
-{
-  "alfred": {
-    "version": "0.0.1"
-  }
-}
-```
-
-## Inspiration
-* Swift Migrator
