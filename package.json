@@ -11,9 +11,7 @@
   "author": "Amila Welihinda <amilajack@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build-babel": "cross-env NODE_ENV=production babel src --out-dir lib && cp -r src/providers/resources ./lib/providers",
-    "build-webpack": "webpack -p --config webpack.config.js",
-    "build": "yarn build-babel",
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib && cp -r src/providers/resources ./lib/providers",
     "flow": "flow",
     "flow-typed": "flow-typed install",
     "lint": "eslint --cache --format=node_modules/eslint-formatter-pretty .",
@@ -21,7 +19,7 @@
     "package": "pkg ./lib/alfred.js --out-path release",
     "postinstall": "yarn flow-typed",
     "spec": "jest",
-    "test": "cross-env NODE_ENV=test yarn build-babel && yarn spec",
+    "test": "cross-env NODE_ENV=test yarn build && yarn spec",
     "version": "rm -rf lib && yarn build",
     "watch": "cross-env NODE_ENV=production babel src --out-dir lib --watch"
   },
@@ -58,16 +56,14 @@
     "flow-typed": "^2.5.1",
     "jest-cli": "^23.6.0",
     "pkg": "^4.3.5",
-    "shebang-loader": "^0.0.1",
-    "webpack": "^4.28.0",
-    "webpack-bundle-analyzer": "^3.0.3"
+    "shebang-loader": "^0.0.1"
   },
   "dependencies": {
     "5to6-codemod": "^1.7.1",
     "child-process-promise": "^2.2.1",
     "commander": "^2.19.0",
     "eslint": "^5.10.0",
-    "eslint-config-bliss": "^3.1.2-0",
+    "eslint-config-bliss": "^3.1.2",
     "eslint-plugin-flowtype-errors": "^3.6.0",
     "findit": "^2.0.0",
     "gitignore-parser": "^0.0.2",
