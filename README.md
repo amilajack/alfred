@@ -35,3 +35,20 @@ alfred skill remove lint-tslint
 alfred migrate .
 alfred migrate . --transforms imports lebab
 ```
+
+## CMF Example
+The following is an example of a Config Manipulator Function (CMF) for babel
+```js
+// index.js
+export default {
+  name: 'babel',
+  interface: ['alfred-interface-transpile'],
+  subcommand: 'transpile',
+  configs: [{
+    name: 'babelrc',
+    path: 'root/.babelrc.js'
+  }],
+  webpack: (configs: Array<CmfNode>) => {},
+  eslint: (configs: Array<CmfNode>) => {}
+};
+```
