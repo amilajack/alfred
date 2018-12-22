@@ -78,7 +78,7 @@ describe('Migrate', () => {
         ]
       });
     } catch (e) {
-      expect(e).toMatchSnapshot();
+      expect({ ...e, path: '' }).toMatchSnapshot();
     }
   });
 

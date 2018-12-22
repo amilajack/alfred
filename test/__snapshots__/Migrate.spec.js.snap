@@ -1,6 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Migrate should fail on non-existent files 1`] = `[Error: ENOENT: no such file or directory, stat '/Users/amila/Documents/Projects/alfred/test/fixtures/foo-test.ts']`;
+exports[`Migrate should fail on non-existent files 1`] = `
+Object {
+  "code": "ENOENT",
+  "errno": -2,
+  "path": "",
+  "syscall": "stat",
+}
+`;
 
 exports[`Migrate should migrate basic file 1`] = `
 Array [
