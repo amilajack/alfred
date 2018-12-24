@@ -23,6 +23,7 @@ cd my-app
 alfred start
 alfred build
 alfred format
+alfred search
 alfred doc
 alfred test
 alfred migrate
@@ -31,7 +32,7 @@ alfred migrate
 alfred skill add build-parcel
 alfred skill remove lint-tslint
 
-# Upgrading JS
+# Upgrading from ES5 to ESNext
 alfred migrate .
 alfred migrate . --transforms imports lebab
 ```
@@ -51,4 +52,13 @@ export default {
   webpack: (configs: Array<CmfNode>) => {},
   eslint: (configs: Array<CmfNode>) => {}
 };
+```
+
+## Alfred Config
+```json
+{
+  "targets": {
+    "node": 10
+  }
+}
 ```
