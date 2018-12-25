@@ -6,10 +6,10 @@ Alfred is an infrastructure framework that defines a standard workflow for JavaS
 
 ## Installation
 ```bash
-# Yarn
-yarn global add alfred
 # NPM
 npm install --global alfred
+# Yarn
+yarn global add alfred
 ```
 
 ## Usage
@@ -24,33 +24,47 @@ alfred start
 alfred build
 alfred format
 alfred search
-alfred doc
 alfred test
+alfred doc
 alfred migrate
 
 # Learning skills
-alfred skill add build-parcel
-alfred skill remove lint-tslint
+alfred learn alfred-skill-build-parcel
+# Build using the new subcommand
+alfred build
 
 # Upgrading from ES5 to ESNext
 alfred migrate .
 alfred migrate . --transforms imports lebab
 ```
 
-## CMF Example
+## Config Manipulator Function Example
 The following is an example of a Config Manipulator Function (CMF) for babel
 ```js
 // index.js
 export default {
   name: 'babel',
   interface: ['alfred-interface-transpile'],
-  subcommand: 'transpile',
+  description: 'Transpile JS from ESNext to the latest ES version',
   configs: [{
     name: 'babelrc',
-    path: 'root/.babelrc.js'
+    path: '.babelrc.js',
+    hidden: true
   }],
   webpack: (configs: Array<CmfNode>) => {},
   eslint: (configs: Array<CmfNode>) => {}
+};
+```
+
+## Schema Example
+```js
+// index.js
+export default {
+  subcommand: 'transpile',
+  flags: {
+    // Flag name and argument types
+    'environment': ['production', 'development', 'test']
+  }
 };
 ```
 
