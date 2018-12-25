@@ -3,6 +3,7 @@
   "version": "0.0.1-12",
   "description": "A framework for upgrading javascript codebases",
   "bin": {
+    "alf": "./lib/alfred.js",
     "alfred": "./lib/alfred.js",
     "alfred-cli": "./lib/alfred.js"
   },
