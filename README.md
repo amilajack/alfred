@@ -4,6 +4,13 @@ alfred
 
 Alfred is an infrastructure framework that defines a standard workflow for JavaScript projects
 
+## Goals
+* Standardizing and simplifying JS infra and conventions
+* Allow extensibility of Alfred-configured infra
+* Ease of integration and migration Alfred
+* Provide opinionated configuration out of the box that meets the needs of most users
+* Encourage JS best practices
+
 ## Installation
 ```bash
 # NPM
@@ -75,11 +82,14 @@ export default {
 };
 ```
 
-## Alfred Config
-```json
+## Alfred Config Example
+```jsonc
+// package.json
 {
-  "targets": {
-    "node": 10
+  "alfred": {
+    "targets": {
+      "node": 10
+    }
   }
 }
 ```
