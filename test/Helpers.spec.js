@@ -12,7 +12,7 @@ function stripNonProjectPaths(filePath) {
   return filePath.slice(testDir.length);
 }
 
-describe('Helpers', () => {
+describe.skip('Helpers', () => {
   const testBasePath = path.join(__dirname, '..', 'test', 'fixtures');
 
   describe('ParseInput', () => {

@@ -70,6 +70,7 @@
     "gitignore-parser": "^0.0.2",
     "jscodeshift": "^0.6.2",
     "lebab": "^3.0.3",
+    "lodash": "^4.17.11",
     "lodash.flatten": "^4.4.0",
     "rndm": "^1.2.0",
     "simple-git": "^1.107.0",

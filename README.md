@@ -4,6 +4,13 @@ alfred
 
 Alfred is an infrastructure framework that defines a standard workflow for JavaScript projects
 
+## Goals
+* Standardizing and simplifying JS infra and conventions
+* Allow extensibility of Alfred-configured infra
+* Ease of integration and migration Alfred
+* Provide opinionated configuration out of the box that meets the needs of most users
+* Encourage JS best practices
+
 ## Installation
 ```bash
 # NPM
@@ -45,12 +52,19 @@ The following is an example of a Config Manipulator Function (CMF) for babel
 export default {
   name: 'babel',
   interface: ['alfred-interface-transpile'],
+  dependencies: [
+    '@babel/cli@7.2.0',
+    '@babel/core@7.2.0',
+    '@babel/preset-env@7.2.0'
+  ],
   description: 'Transpile JS from ESNext to the latest ES version',
-  configs: [{
-    name: 'babelrc',
-    path: '.babelrc.js',
-    hidden: true
-  }],
+  configs: [
+    {
+      name: 'babelrc',
+      path: '.babelrc.js',
+      hidden: true
+    }
+  ],
   webpack: (configs: Array<CmfNode>) => {},
   eslint: (configs: Array<CmfNode>) => {}
 };
@@ -68,11 +82,14 @@ export default {
 };
 ```
 
-## Alfred Config
-```json
+## Alfred Config Example
+```jsonc
+// package.json
 {
-  "targets": {
-    "node": 10
+  "alfred": {
+    "targets": {
+      "node": 10
+    }
   }
 }
 ```
