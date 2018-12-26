@@ -16,7 +16,7 @@ function parseCodeSnippets(codeSnippets: Array<string> | void) {
   }
 }
 
-describe('Migrate', () => {
+describe.skip('Migrate', () => {
   const defaultConfig = {
     packageJsonPath: __dirname,
     write: false,

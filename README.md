@@ -45,12 +45,19 @@ The following is an example of a Config Manipulator Function (CMF) for babel
 export default {
   name: 'babel',
   interface: ['alfred-interface-transpile'],
+  dependencies: [
+    '@babel/cli@7.2.0',
+    '@babel/core@7.2.0',
+    '@babel/preset-env@7.2.0'
+  ],
   description: 'Transpile JS from ESNext to the latest ES version',
-  configs: [{
-    name: 'babelrc',
-    path: '.babelrc.js',
-    hidden: true
-  }],
+  configs: [
+    {
+      name: 'babelrc',
+      path: '.babelrc.js',
+      hidden: true
+    }
+  ],
   webpack: (configs: Array<CmfNode>) => {},
   eslint: (configs: Array<CmfNode>) => {}
 };

@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CMF should do basic cmf 1`] = `
+Array [
+  Object {
+    "extends": "@babel/preset-env",
+  },
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+  },
+  Object {
+    "module": Object {
+      "devtool": "source-map",
+      "entry": "./app/main.dev",
+      "mode": "production",
+      "output": Object {
+        "filename": "./app/main.prod.js",
+        "path": "app",
+      },
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+      "target": "electron-main",
+    },
+  },
+]
+`;
