@@ -9,6 +9,7 @@ Array [
     "extends": Array [
       "bliss",
     ],
+    "parser": "babel-eslint",
   },
   Object {
     "module": Object {

@@ -76,7 +76,9 @@ const babel: CmfNode = {
         file.name === 'eslint'
           ? {
               ...file,
-              parser: 'babel-eslint'
+              config: lodash.merge(file.config, {
+                parser: 'babel-eslint'
+              })
             }
           : file
       );
