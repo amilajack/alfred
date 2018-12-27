@@ -117,3 +117,30 @@ export default {
   }
 }
 ```
+
+## Alfred Libraries Suggesting Skills
+
+Assume there is a library on NPM called `foobar` with the following `package.json`:
+
+```jsonc
+{
+  "name": "foobar",
+  // ...
+  "alfred": {
+    // ...
+    "lib": {
+      "recommendSkills": ["alfred-skill-foobar"]
+    }
+  }
+}
+```
+
+When a author of the app installs `foobar`, Alfred will recommend the skills `recommendSkills` on `postinstall` of `foobar`. This translates to users of a library automatically having the infra they need to use an app 😲
+
+```
+$ yarn add foobar
+
+`foobar` recommends installing the Alfred skill `"alfred-skill-foobar"`.
+
+Would you like to do this? (Y/n)
+```
