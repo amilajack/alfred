@@ -18,7 +18,6 @@
     "flow-typed": "flow-typed install",
     "lint": "eslint --cache --format=node_modules/eslint-formatter-pretty .",
     "lint-fix": "yarn --silent lint --fix; exit 0",
-    "package": "pkg ./lib/alfred.js --out-path release",
     "postinstall": "yarn flow-typed",
     "spec": "jest",
     "test": "cross-env NODE_ENV=test yarn build && yarn lint && yarn flow && yarn spec",
@@ -56,7 +55,6 @@
     "flow-bin": "^0.89.0",
     "flow-typed": "^2.5.1",
     "jest-cli": "^23.6.0",
-    "pkg": "^4.3.5",
     "shebang-loader": "^0.0.1"
   },
   "dependencies": {
