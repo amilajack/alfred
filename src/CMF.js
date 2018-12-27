@@ -3,7 +3,7 @@ import lodash from 'lodash';
 // @flow
 type CmfNode = {
   name: string,
-  interface: Array<string>,
+  interfaces: Array<string> | string,
   dependencies: Array<string>,
   description: string,
   files: Array<{
@@ -15,19 +15,19 @@ type CmfNode = {
     }
   }>,
   cmfs: {
-    [x: string]: (CmfNode, Array<CmfNode>) => CmfNode
+    [x: string]: (CmfNode, Map<string, CmfNode>) => CmfNode
   }
 };
 
-const babel: CmfNode = {
+export const babel: CmfNode = {
   name: 'babel',
-  interface: ['alfred-interface-transpile'],
+  description: 'Transpile JS from ESNext to the latest ES version',
+  interfaces: 'alfred-interface-transpile',
   dependencies: [
     '@babel/cli@7.2.0',
     '@babel/core@7.2.0',
     '@babel/preset-env@7.2.0'
   ],
-  description: 'Transpile JS from ESNext to the latest ES version',
   files: [
     {
       name: 'babelrc',
@@ -42,7 +42,7 @@ const babel: CmfNode = {
     webpack(config) {
       const { files, dependencies } = config;
       const newFiles = files.map(file =>
-        file.name === 'webpack.prod'
+        file.name === 'webpack.base'
           ? {
               ...file,
               config: lodash.merge(file.config, {
@@ -91,11 +91,11 @@ const babel: CmfNode = {
   }
 };
 
-const eslint: CmfNode = {
+export const eslint: CmfNode = {
   name: 'eslint',
-  interface: ['alfred-interface-lint'],
-  dependencies: ['@eslint@5.0.0'],
   description: 'Lint all your JS files',
+  interfaces: 'alfred-interface-lint',
+  dependencies: ['@eslint@5.0.0'],
   files: [
     {
       name: 'eslint',
@@ -109,15 +109,15 @@ const eslint: CmfNode = {
   cmfs: {}
 };
 
-const webpack: CmfNode = {
+export const webpack: CmfNode = {
   name: 'webpack',
-  interface: ['alfred-interface-lint'],
+  description: 'Build, optimize, and bundle assets in your app',
+  interfaces: 'alfred-interface-build',
   dependencies: ['@eslint@5.0.0'],
-  description: 'Lint all your JS files',
   files: [
     {
-      name: 'webpack.prod',
-      path: 'webpack.prod.js',
+      name: 'webpack.base',
+      path: 'webpack.base.js',
       hidden: true,
       config: {
         module: {
@@ -136,9 +136,31 @@ const webpack: CmfNode = {
   cmfs: {}
 };
 
-const map: Map<string, CmfNode> = new Map();
-map.set('babel', babel);
-map.set('eslint', eslint);
-map.set('webpack', webpack);
+export default function CMF(cmfs: Array<CmfNode>): Map<string, CmfNode> {
+  const map: Map<string, CmfNode> = new Map();
 
-export default map;
+  cmfs.forEach(_cmf => {
+    map.set(_cmf.name, _cmf);
+  });
+
+  map.forEach(cmf => {
+    const cmfNames = Object.keys(cmf.cmfs);
+    cmfNames.forEach(cmfName => {
+      const correspondingCmfNode = map.get(cmfName);
+      if (correspondingCmfNode) {
+        map.set(cmfName, cmf.cmfs[cmfName](correspondingCmfNode, map));
+      }
+    });
+  });
+
+  return map;
+}
+
+// Intended to be used for testing purposes
+export function getConfigs(
+  cmf: Map<string, CmfNode>
+): Array<{ [x: string]: any }> {
+  return Array.from(cmf.values())
+    .map(_cmf => _cmf.files)
+    .map(([config]) => config.config);
+}

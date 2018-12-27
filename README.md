@@ -2,7 +2,7 @@ alfred
 ======
 [![Build Status](https://travis-ci.com/amilajack/alfred.svg?token=stGf151gAJ11ZUi8LyvG&branch=master)](https://travis-ci.com/amilajack/alfred)
 
-Alfred is an infrastructure framework that defines a standard workflow for JavaScript projects
+Alfred is a configuration manager that defines a standard workflow for JavaScript projects
 
 ## Goals
 * Standardizing and simplifying JS infra and conventions
@@ -51,26 +51,52 @@ The following is an example of a Config Manipulator Function (CMF) for babel
 // index.js
 export default {
   name: 'babel',
-  interface: ['alfred-interface-transpile'],
+  interfaces: 'alfred-interface-transpile',
   dependencies: [
     '@babel/cli@7.2.0',
     '@babel/core@7.2.0',
     '@babel/preset-env@7.2.0'
   ],
   description: 'Transpile JS from ESNext to the latest ES version',
-  configs: [
+  files: [
     {
       name: 'babelrc',
       path: '.babelrc.js',
       hidden: true
     }
   ],
-  webpack: (configs: Array<CmfNode>) => {},
-  eslint: (configs: Array<CmfNode>) => {}
+  webpack: (webpackCmf: CmfNode): CmfNode => {
+    return webpackCmf
+      .extendConfig('webpack.base', {
+        name: 'webpack.prod',
+        path: 'webpack.prod.js',
+        hidden: true,
+        config: {
+          module: {
+            devtool: 'source-map',
+            mode: 'production',
+            target: 'electron-main',
+            entry: './app/main.dev',
+            output: {
+              path: 'app',
+              filename: './app/main.prod.js'
+            }
+          }
+        }
+      })
+      .addDependencies(['babel-loader@10.0.0']);
+  },
+  eslint: (eslintCmf: CmfNode): CmfNode => {
+    return eslintCmf
+      .extendConfig({
+        'parser': 'babel-eslint'
+      })
+      .addDependencies(['babel-eslint@9.0.0']);
+  }
 };
 ```
 
-## Schema Example
+## Interface Example
 ```js
 // index.js
 export default {
@@ -87,6 +113,7 @@ export default {
 // package.json
 {
   "alfred": {
+    "npmClient": "yarn",
     "targets": {
       "node": 10
     }
