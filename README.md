@@ -68,19 +68,14 @@ export default {
   webpack: (webpackCmf: CmfNode): CmfNode => {
     return webpackCmf
       .extendConfig('webpack.base', {
-        name: 'webpack.prod',
-        path: 'webpack.prod.js',
-        hidden: true,
-        config: {
-          module: {
-            devtool: 'source-map',
-            mode: 'production',
-            target: 'electron-main',
-            entry: './app/main.dev',
-            output: {
-              path: 'app',
-              filename: './app/main.prod.js'
-            }
+        module: {
+          devtool: 'source-map',
+          mode: 'production',
+          target: 'electron-main',
+          entry: './app/main.dev',
+          output: {
+            path: 'app',
+            filename: './app/main.prod.js'
           }
         }
       })
@@ -88,7 +83,7 @@ export default {
   },
   eslint: (eslintCmf: CmfNode): CmfNode => {
     return eslintCmf
-      .extendConfig({
+      .extendConfig('eslint', {
         'parser': 'babel-eslint'
       })
       .addDependencies(['babel-eslint@9.0.0']);
