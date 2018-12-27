@@ -52,17 +52,19 @@ The following is an example of a Config Manipulator Function (CMF) for babel
 export default {
   name: 'babel',
   interfaces: 'alfred-interface-transpile',
-  dependencies: [
-    '@babel/cli@7.2.0',
-    '@babel/core@7.2.0',
-    '@babel/preset-env@7.2.0'
-  ],
+  dependencies: {
+    '@babel/cli': '7.2.0',
+    '@babel/core': '7.2.0',
+    '@babel/preset': 'env@7.2.0'
+  },
   description: 'Transpile JS from ESNext to the latest ES version',
   files: [
     {
       name: 'babelrc',
       path: '.babelrc.js',
-      hidden: true
+      config: {
+        presets: '@babel/preset-env'
+      }
     }
   ],
   webpack: (webpackCmf: CmfNode): CmfNode => {
@@ -79,14 +81,14 @@ export default {
           }
         }
       })
-      .addDependencies(['babel-loader@10.0.0']);
+      .addDependencies([{ 'babel-loader': '10.0.0' }]);
   },
   eslint: (eslintCmf: CmfNode): CmfNode => {
     return eslintCmf
       .extendConfig('eslint', {
         'parser': 'babel-eslint'
       })
-      .addDependencies(['babel-eslint@9.0.0']);
+      .addDependencies([{ 'babel-eslint': '10.0.0' }]);
   }
 };
 ```

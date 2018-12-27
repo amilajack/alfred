@@ -4,12 +4,13 @@ import lodash from 'lodash';
 type CmfNode = {
   name: string,
   interfaces: Array<string> | string,
-  dependencies: Array<string>,
+  dependencies: {
+    [x: string]: any
+  },
   description: string,
   files: Array<{
     name: string,
     path: string,
-    hidden: boolean,
     config: {
       [x: string]: any
     }
@@ -23,16 +24,15 @@ export const babel: CmfNode = {
   name: 'babel',
   description: 'Transpile JS from ESNext to the latest ES version',
   interfaces: 'alfred-interface-transpile',
-  dependencies: [
-    '@babel/cli@7.2.0',
-    '@babel/core@7.2.0',
-    '@babel/preset-env@7.2.0'
-  ],
+  dependencies: {
+    '@babel/cli': '7.2.0',
+    '@babel/core': '7.2.0',
+    '@babel/preset': 'env@7.2.0'
+  },
   files: [
     {
       name: 'babelrc',
       path: '.babelrc.js',
-      hidden: true,
       config: {
         extends: '@babel/preset-env'
       }
@@ -66,7 +66,10 @@ export const babel: CmfNode = {
       );
       return {
         ...config,
-        dependencies: [...dependencies, 'babel-loader@5.0.0'],
+        dependencies: {
+          ...dependencies,
+          'babel-loader': '5.0.0'
+        },
         files: newFiles
       };
     },
@@ -84,7 +87,10 @@ export const babel: CmfNode = {
       );
       return {
         ...config,
-        dependencies: [...dependencies, 'babel-eslint@5.0.0'],
+        dependencies: {
+          ...dependencies,
+          'babel-eslint': '5.0.0'
+        },
         files: newFiles
       };
     }
@@ -95,12 +101,11 @@ export const eslint: CmfNode = {
   name: 'eslint',
   description: 'Lint all your JS files',
   interfaces: 'alfred-interface-lint',
-  dependencies: ['@eslint@5.0.0'],
+  dependencies: { eslint: '5.0.0' },
   files: [
     {
       name: 'eslint',
       path: '.eslintrc.json',
-      hidden: true,
       config: {
         extends: ['bliss']
       }
@@ -113,12 +118,11 @@ export const webpack: CmfNode = {
   name: 'webpack',
   description: 'Build, optimize, and bundle assets in your app',
   interfaces: 'alfred-interface-build',
-  dependencies: ['@eslint@5.0.0'],
+  dependencies: { webpack: '5.0.0' },
   files: [
     {
       name: 'webpack.base',
       path: 'webpack.base.js',
-      hidden: true,
       config: {
         module: {
           devtool: 'source-map',
@@ -163,4 +167,13 @@ export function getConfigs(
   return Array.from(cmf.values())
     .map(_cmf => _cmf.files)
     .map(([config]) => config.config);
+}
+
+// Intended to be used for testing purposes
+export function getDependencies(
+  cmf: Map<string, CmfNode>
+): { [x: string]: string } {
+  return Array.from(cmf.values())
+    .map(_cmf => _cmf.dependencies)
+    .reduce((p, c) => ({ ...p, ...c }), {});
 }
