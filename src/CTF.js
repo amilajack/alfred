@@ -1,7 +1,7 @@
 import lodash from 'lodash';
 
 // @flow
-type CmfNode = {
+type CtfNode = {
   name: string,
   interfaces: Array<string> | string,
   dependencies: {
@@ -15,12 +15,12 @@ type CmfNode = {
       [x: string]: any
     }
   }>,
-  cmfs: {
-    [x: string]: (CmfNode, Map<string, CmfNode>) => CmfNode
+  ctfs: {
+    [x: string]: (CtfNode, Map<string, CtfNode>) => CtfNode
   }
 };
 
-export const babel: CmfNode = {
+export const babel: CtfNode = {
   name: 'babel',
   description: 'Transpile JS from ESNext to the latest ES version',
   interfaces: 'alfred-interface-transpile',
@@ -38,7 +38,7 @@ export const babel: CmfNode = {
       }
     }
   ],
-  cmfs: {
+  ctfs: {
     webpack(config) {
       const { files, dependencies } = config;
       const newFiles = files.map(file =>
@@ -97,7 +97,7 @@ export const babel: CmfNode = {
   }
 };
 
-export const eslint: CmfNode = {
+export const eslint: CtfNode = {
   name: 'eslint',
   description: 'Lint all your JS files',
   interfaces: 'alfred-interface-lint',
@@ -111,10 +111,10 @@ export const eslint: CmfNode = {
       }
     }
   ],
-  cmfs: {}
+  ctfs: {}
 };
 
-export const webpack: CmfNode = {
+export const webpack: CtfNode = {
   name: 'webpack',
   description: 'Build, optimize, and bundle assets in your app',
   interfaces: 'alfred-interface-build',
@@ -137,22 +137,22 @@ export const webpack: CmfNode = {
       }
     }
   ],
-  cmfs: {}
+  ctfs: {}
 };
 
-export default function CMF(cmfs: Array<CmfNode>): Map<string, CmfNode> {
-  const map: Map<string, CmfNode> = new Map();
+export default function CTF(ctfs: Array<CtfNode>): Map<string, CtfNode> {
+  const map: Map<string, CtfNode> = new Map();
 
-  cmfs.forEach(_cmf => {
-    map.set(_cmf.name, _cmf);
+  ctfs.forEach(_ctf => {
+    map.set(_ctf.name, _ctf);
   });
 
-  map.forEach(cmf => {
-    const cmfNames = Object.keys(cmf.cmfs);
-    cmfNames.forEach(cmfName => {
-      const correspondingCmfNode = map.get(cmfName);
-      if (correspondingCmfNode) {
-        map.set(cmfName, cmf.cmfs[cmfName](correspondingCmfNode, map));
+  map.forEach(ctf => {
+    const ctfNames = Object.keys(ctf.ctfs);
+    ctfNames.forEach(ctfName => {
+      const correspondingCtfNode = map.get(ctfName);
+      if (correspondingCtfNode) {
+        map.set(ctfName, ctf.ctfs[ctfName](correspondingCtfNode, map));
       }
     });
   });
@@ -162,18 +162,18 @@ export default function CMF(cmfs: Array<CmfNode>): Map<string, CmfNode> {
 
 // Intended to be used for testing purposes
 export function getConfigs(
-  cmf: Map<string, CmfNode>
+  ctf: Map<string, CtfNode>
 ): Array<{ [x: string]: any }> {
-  return Array.from(cmf.values())
-    .map(_cmf => _cmf.files)
+  return Array.from(ctf.values())
+    .map(_ctf => _ctf.files)
     .map(([config]) => config.config);
 }
 
 // Intended to be used for testing purposes
 export function getDependencies(
-  cmf: Map<string, CmfNode>
+  ctf: Map<string, CtfNode>
 ): { [x: string]: string } {
-  return Array.from(cmf.values())
-    .map(_cmf => _cmf.dependencies)
+  return Array.from(ctf.values())
+    .map(_ctf => _ctf.dependencies)
     .reduce((p, c) => ({ ...p, ...c }), {});
 }

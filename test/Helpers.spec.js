@@ -1,4 +1,3 @@
-// @flow
 import path from 'path';
 import ParseInput from '../src/helpers/ParseInput';
 

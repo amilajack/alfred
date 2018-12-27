@@ -1,4 +1,3 @@
-// @flow
 import path from 'path';
 import espree from 'espree';
 import { expect as chaiExpect } from 'chai';

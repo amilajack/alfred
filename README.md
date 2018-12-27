@@ -45,8 +45,8 @@ alfred migrate .
 alfred migrate . --transforms imports lebab
 ```
 
-## Config Manipulator Function Example
-The following is an example of a Config Manipulator Function (CMF) for babel
+## Config Transformer Function Example
+The following is an example of a Config Transformer Function (CTF) for babel
 ```js
 // index.js
 export default {
@@ -67,28 +67,30 @@ export default {
       }
     }
   ],
-  webpack: (webpackCmf: CmfNode): CmfNode => {
-    return webpackCmf
-      .extendConfig('webpack.base', {
-        module: {
-          devtool: 'source-map',
-          mode: 'production',
-          target: 'electron-main',
-          entry: './app/main.dev',
-          output: {
-            path: 'app',
-            filename: './app/main.prod.js'
+  ctfs: {
+    webpack: (webpackCtf: CtfNode): CtfNode => {
+      return webpackCtf
+        .extendConfig('webpack.base', {
+          module: {
+            devtool: 'source-map',
+            mode: 'production',
+            target: 'electron-main',
+            entry: './app/main.dev',
+            output: {
+              path: 'app',
+              filename: './app/main.prod.js'
+            }
           }
-        }
-      })
-      .addDependencies([{ 'babel-loader': '10.0.0' }]);
-  },
-  eslint: (eslintCmf: CmfNode): CmfNode => {
-    return eslintCmf
-      .extendConfig('eslint', {
-        'parser': 'babel-eslint'
-      })
-      .addDependencies([{ 'babel-eslint': '10.0.0' }]);
+        })
+        .addDependencies([{ 'babel-loader': '10.0.0' }]);
+    },
+    eslint: (eslintCtf: CtfNode): CtfNode => {
+      return eslintCtf
+        .extendConfig('eslint', {
+          'parser': 'babel-eslint'
+        })
+        .addDependencies([{ 'babel-eslint': '10.0.0' }]);
+    }
   }
 };
 ```

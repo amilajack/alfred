@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CMF should do basic cmf 1`] = `
+exports[`CTF should do basic ctf 1`] = `
 Array [
   Object {
     "extends": "@babel/preset-env",
@@ -38,7 +38,7 @@ Array [
 ]
 `;
 
-exports[`CMF should do basic cmf 2`] = `
+exports[`CTF should do basic ctf 2`] = `
 Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
