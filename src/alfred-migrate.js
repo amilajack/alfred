@@ -4,13 +4,13 @@ import path from 'path';
 import program from 'commander';
 import Providers from './providers';
 
-program
+const parsedArguments = program
   .option('-u, --unsafe', 'allow unsafe transformations')
   .option('-v, --verbose', 'show verbose output')
   .option('-d, --debug', 'show debugging output')
   .parse(process.argv);
 
-const filesPattern: Array<string> = program.args.map(arg =>
+const filesPattern: Array<string> = parsedArguments.args.map(arg =>
   path.join(process.cwd(), arg)
 );
 
@@ -21,7 +21,7 @@ const filesPattern: Array<string> = program.args.map(arg =>
 Providers({
   files: filesPattern,
   packageJsonPath: path.join(process.cwd(), 'package.json'),
-  unsafe: program.unsafe,
-  verbose: program.verbose,
-  write: program.write
-}).catch(console.log);
+  unsafe: parsedArguments.unsafe,
+  verbose: parsedArguments.verbose,
+  write: parsedArguments.write
+});

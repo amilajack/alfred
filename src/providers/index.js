@@ -80,12 +80,12 @@ export function handleInput(userInput: UserProviderInput) {
         // works with relative filepaths
         const files = await ParseInput(userInput.files);
 
-        return files.filter(
+        return (files.filter(
           file =>
             gitignore.accepts(file.substring(process.cwd().length)) &&
             !file.includes('node_modules') &&
             !file.includes('bower_components')
-        );
+        ): Array<string>);
       })()
     : ParseInput(userInput.files);
 }
