@@ -3,7 +3,7 @@ import lodash from 'lodash';
 // @flow
 type CtfNode = {
   name: string,
-  interfaces: Array<string> | string,
+  interfaces?: Array<string> | string,
   dependencies: {
     [x: string]: any
   },
@@ -11,9 +11,11 @@ type CtfNode = {
   configFiles: Array<{
     name: string,
     path: string,
-    config: {
-      [x: string]: any
-    }
+    config:
+      | string
+      | {
+          [x: string]: any
+        }
   }>,
   ctfs: {
     [x: string]: (CtfNode, Map<string, CtfNode>) => CtfNode
@@ -118,7 +120,85 @@ export const webpack: CtfNode = {
       }
     }
   ],
-  ctfs: {}
+  ctfs: {
+    eslint: config =>
+      config.extendConfig('eslint', {
+        settings: {
+          'import/resolver': {
+            webpack: {
+              config: 'configs/webpack.config.js'
+            }
+          }
+        }
+      })
+  }
+};
+
+export const react: CtfNode = {
+  name: 'react',
+  description:
+    'A declarative, efficient, and flexible JavaScript library for building user interfaces',
+  dependencies: { react: '0.16.0' },
+  configFiles: [
+    {
+      name: 'root',
+      path: 'containers/Root.js',
+      config: `
+        import React, { Component } from 'react';
+
+        export default class Root extends Component {
+          render() {
+            const { store, history } = this.props;
+            return (
+              <Provider store={store}>
+                <ConnectedRouter history={history}>
+                  <Routes />
+                </ConnectedRouter>
+              </Provider>
+            );
+          }
+        }
+      `
+    },
+    {
+      name: 'app',
+      path: 'containers/App.js',
+      config: `
+        import * as React from 'react';
+
+        export default class App extends React.Component {
+          render() {
+            const { children } = this.props;
+            return <React.Fragment>{children}</React.Fragment>;
+          }
+        }
+      `
+    }
+  ],
+  ctfs: {
+    eslint: config =>
+      config
+        .extendConfig('eslint', {
+          plugins: ['eslint-plugin-react']
+        })
+        .addDependencies({
+          'eslint-plugin-react': '7.0.0'
+        }),
+    babel: config =>
+      config
+        .extendConfig('eslint', {
+          plugins: ['@babel/preset-react']
+        })
+        .addDependencies({
+          '@babel/preset-react': '7.0.0'
+        }),
+    webpack: config =>
+      config.extendConfig('webpack', {
+        resolve: {
+          extensions: ['.jsx']
+        }
+      })
+  }
 };
 
 type CtfHelpers = {
