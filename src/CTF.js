@@ -8,7 +8,7 @@ type CtfNode = {
     [x: string]: any
   },
   description: string,
-  files: Array<{
+  configFiles: Array<{
     name: string,
     path: string,
     config: {
@@ -29,7 +29,7 @@ export const babel: CtfNode = {
     '@babel/core': '7.2.0',
     '@babel/preset': 'env@7.2.0'
   },
-  files: [
+  configFiles: [
     {
       name: 'babelrc',
       path: '.babelrc.js',
@@ -40,59 +40,27 @@ export const babel: CtfNode = {
   ],
   ctfs: {
     webpack(config) {
-      const { files, dependencies } = config;
-      const newFiles = files.map(file =>
-        file.name === 'webpack.base'
-          ? {
-              ...file,
-              config: lodash.merge(file.config, {
-                module: {
-                  rules: [
-                    {
-                      test: /\.jsx?$/,
-                      exclude: /node_modules/,
-                      use: {
-                        loader: 'babel-loader',
-                        options: {
-                          cacheDirectory: true
-                        }
-                      }
-                    }
-                  ]
-                }
-              })
+      return config
+        .extendConfig('webpack.base', {
+          module: {
+            devtool: 'source-map',
+            mode: 'production',
+            target: 'electron-main',
+            entry: './app/main.dev',
+            output: {
+              path: 'app',
+              filename: './app/main.prod.js'
             }
-          : file
-      );
-      return {
-        ...config,
-        dependencies: {
-          ...dependencies,
-          'babel-loader': '5.0.0'
-        },
-        files: newFiles
-      };
+          }
+        })
+        .addDependencies({ 'babel-loader': '5.0.0' });
     },
     eslint(config) {
-      const { files, dependencies } = config;
-      const newFiles = files.map(file =>
-        file.name === 'eslint'
-          ? {
-              ...file,
-              config: lodash.merge(file.config, {
-                parser: 'babel-eslint'
-              })
-            }
-          : file
-      );
-      return {
-        ...config,
-        dependencies: {
-          ...dependencies,
-          'babel-eslint': '5.0.0'
-        },
-        files: newFiles
-      };
+      return config
+        .extendConfig('eslint', {
+          parser: 'babel-eslint'
+        })
+        .addDependencies({ 'babel-eslint': '5.0.0' });
     }
   }
 };
@@ -102,7 +70,7 @@ export const eslint: CtfNode = {
   description: 'Lint all your JS files',
   interfaces: 'alfred-interface-lint',
   dependencies: { eslint: '5.0.0' },
-  files: [
+  configFiles: [
     {
       name: 'eslint',
       path: '.eslintrc.json',
@@ -119,40 +87,91 @@ export const webpack: CtfNode = {
   description: 'Build, optimize, and bundle assets in your app',
   interfaces: 'alfred-interface-build',
   dependencies: { webpack: '5.0.0' },
-  files: [
+  configFiles: [
     {
       name: 'webpack.base',
       path: 'webpack.base.js',
       config: {
         module: {
-          devtool: 'source-map',
-          mode: 'production',
-          target: 'electron-main',
-          entry: './app/main.dev',
-          output: {
-            path: 'app',
-            filename: './app/main.prod.js'
-          }
-        }
+          rules: [
+            {
+              test: /\.jsx?$/,
+              exclude: /node_modules/,
+              use: {
+                loader: 'babel-loader',
+                options: {
+                  cacheDirectory: true
+                }
+              }
+            }
+          ]
+        },
+        output: {
+          path: "path.join(__dirname, '..', 'app')",
+          // https://github.com/webpack/webpack/issues/1114
+          libraryTarget: 'commonjs2'
+        },
+        resolve: {
+          extensions: ['.js', '.jsx', '.json']
+        },
+        plugins: []
       }
     }
   ],
   ctfs: {}
 };
 
+type CtfHelpers = {
+  findConfig: (configName: string) => { [x: string]: string },
+  addDependencies: ({ [x: string]: string }) => { [x: string]: string },
+  extendConfig: (x: string) => CtfNode
+};
+
+const AddCtfHelpers: CtfHelpers = {
+  findConfig(configName: string) {
+    return this.configFiles.find(configFile => configFile.name === configName);
+  },
+  extendConfig(
+    configName: string,
+    configExtension: { [x: string]: string } = {}
+  ): CtfNode {
+    const foundConfig = this.findConfig(configName);
+    if (!foundConfig) {
+      return this;
+    }
+    const mergedConfigFile = lodash.merge(foundConfig, {
+      config: configExtension
+    });
+    const configFiles = this.configFiles.map(configFile =>
+      configFile.name === configName ? mergedConfigFile : configFile
+    );
+    return lodash.merge(this, {
+      configFiles
+    });
+  },
+  addDependencies(dependencies) {
+    return lodash.merge(this, {
+      dependencies
+    });
+  }
+};
+
 export default function CTF(ctfs: Array<CtfNode>): Map<string, CtfNode> {
   const map: Map<string, CtfNode> = new Map();
 
   ctfs.forEach(_ctf => {
-    map.set(_ctf.name, _ctf);
+    const ctfWithHelpers = {
+      ..._ctf,
+      ...AddCtfHelpers
+    };
+    map.set(_ctf.name, ctfWithHelpers);
   });
 
   map.forEach(ctf => {
-    const ctfNames = Object.keys(ctf.ctfs);
-    ctfNames.forEach(ctfName => {
+    Object.entries(ctf.ctfs || {}).forEach(([ctfName, ctfFn]) => {
       const correspondingCtfNode = map.get(ctfName);
       if (correspondingCtfNode) {
-        map.set(ctfName, ctf.ctfs[ctfName](correspondingCtfNode, map));
+        map.set(ctfName, ctfFn(correspondingCtfNode, map));
       }
     });
   });
@@ -165,7 +184,7 @@ export function getConfigs(
   ctf: Map<string, CtfNode>
 ): Array<{ [x: string]: any }> {
   return Array.from(ctf.values())
-    .map(_ctf => _ctf.files)
+    .map(_ctf => _ctf.configFiles)
     .map(([config]) => config.config);
 }
 
