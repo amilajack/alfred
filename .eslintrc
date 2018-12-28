@@ -1,6 +1,0 @@
-{
-  "extends": "bliss",
-  "rules": {
-    "class-methods-use-this": "off"
-  }
-}
