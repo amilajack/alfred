@@ -58,7 +58,7 @@ export default {
     '@babel/preset': 'env@7.2.0'
   },
   description: 'Transpile JS from ESNext to the latest ES version',
-  files: [
+  configFiles: [
     {
       name: 'babelrc',
       path: '.babelrc.js',
@@ -82,14 +82,14 @@ export default {
             }
           }
         })
-        .addDependencies([{ 'babel-loader': '10.0.0' }]);
+        .addDependencies({ 'babel-loader': '10.0.0' });
     },
     eslint: (eslintCtf: CtfNode): CtfNode => {
       return eslintCtf
         .extendConfig('eslint', {
           'parser': 'babel-eslint'
         })
-        .addDependencies([{ 'babel-eslint': '10.0.0' }]);
+        .addDependencies({ 'babel-eslint': '10.0.0' });
     }
   }
 };
@@ -103,6 +103,13 @@ export default {
   flags: {
     // Flag name and argument types
     'environment': ['production', 'development', 'test']
+  }
+};
+
+type AlfredInterface = {
+  subcommand: string,
+  flags: {
+    [x: string]: Array<string>
   }
 };
 ```
