@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CTF should test babel ctf combination 1`] = `
+exports[`CTF combination babel 1`] = `
 Array [
   "babel",
 ]
 `;
 
-exports[`CTF should test babel ctf combination 2`] = `
+exports[`CTF combination babel 2`] = `
 Array [
   Object {
     "extends": "@babel/preset-env",
@@ -14,7 +14,7 @@ Array [
 ]
 `;
 
-exports[`CTF should test babel ctf combination 3`] = `
+exports[`CTF combination babel 3`] = `
 Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
@@ -22,14 +22,14 @@ Object {
 }
 `;
 
-exports[`CTF should test babel,eslint ctf combination 1`] = `
+exports[`CTF combination babel,eslint 1`] = `
 Array [
   "babel",
   "eslint",
 ]
 `;
 
-exports[`CTF should test babel,eslint ctf combination 2`] = `
+exports[`CTF combination babel,eslint 2`] = `
 Array [
   Object {
     "extends": "@babel/preset-env",
@@ -43,7 +43,7 @@ Array [
 ]
 `;
 
-exports[`CTF should test babel,eslint ctf combination 3`] = `
+exports[`CTF combination babel,eslint 3`] = `
 Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
@@ -53,7 +53,7 @@ Object {
 }
 `;
 
-exports[`CTF should test babel,eslint,react ctf combination 1`] = `
+exports[`CTF combination babel,eslint,react 1`] = `
 Array [
   "babel",
   "eslint",
@@ -61,7 +61,7 @@ Array [
 ]
 `;
 
-exports[`CTF should test babel,eslint,react ctf combination 2`] = `
+exports[`CTF combination babel,eslint,react 2`] = `
 Array [
   Object {
     "extends": "@babel/preset-env",
@@ -107,7 +107,7 @@ Array [
 ]
 `;
 
-exports[`CTF should test babel,eslint,react ctf combination 3`] = `
+exports[`CTF combination babel,eslint,react 3`] = `
 Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
@@ -120,7 +120,7 @@ Object {
 }
 `;
 
-exports[`CTF should test babel,eslint,webpack ctf combination 1`] = `
+exports[`CTF combination babel,eslint,webpack 1`] = `
 Array [
   "babel",
   "eslint",
@@ -128,7 +128,7 @@ Array [
 ]
 `;
 
-exports[`CTF should test babel,eslint,webpack ctf combination 2`] = `
+exports[`CTF combination babel,eslint,webpack 2`] = `
 Array [
   Object {
     "extends": "@babel/preset-env",
@@ -184,7 +184,7 @@ Array [
 ]
 `;
 
-exports[`CTF should test babel,eslint,webpack ctf combination 3`] = `
+exports[`CTF combination babel,eslint,webpack 3`] = `
 Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
@@ -196,7 +196,7 @@ Object {
 }
 `;
 
-exports[`CTF should test babel,eslint,webpack,react ctf combination 1`] = `
+exports[`CTF combination babel,eslint,webpack,react 1`] = `
 Array [
   "babel",
   "eslint",
@@ -205,7 +205,7 @@ Array [
 ]
 `;
 
-exports[`CTF should test babel,eslint,webpack,react ctf combination 2`] = `
+exports[`CTF combination babel,eslint,webpack,react 2`] = `
 Array [
   Object {
     "extends": "@babel/preset-env",
@@ -293,7 +293,7 @@ Array [
 ]
 `;
 
-exports[`CTF should test babel,eslint,webpack,react ctf combination 3`] = `
+exports[`CTF combination babel,eslint,webpack,react 3`] = `
 Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
@@ -308,14 +308,14 @@ Object {
 }
 `;
 
-exports[`CTF should test babel,react ctf combination 1`] = `
+exports[`CTF combination babel,react 1`] = `
 Array [
   "babel",
   "react",
 ]
 `;
 
-exports[`CTF should test babel,react ctf combination 2`] = `
+exports[`CTF combination babel,react 2`] = `
 Array [
   Object {
     "extends": "@babel/preset-env",
@@ -352,7 +352,7 @@ Array [
 ]
 `;
 
-exports[`CTF should test babel,react ctf combination 3`] = `
+exports[`CTF combination babel,react 3`] = `
 Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
@@ -362,14 +362,14 @@ Object {
 }
 `;
 
-exports[`CTF should test babel,webpack ctf combination 1`] = `
+exports[`CTF combination babel,webpack 1`] = `
 Array [
   "babel",
   "webpack",
 ]
 `;
 
-exports[`CTF should test babel,webpack ctf combination 2`] = `
+exports[`CTF combination babel,webpack 2`] = `
 Array [
   Object {
     "extends": "@babel/preset-env",
@@ -412,7 +412,7 @@ Array [
 ]
 `;
 
-exports[`CTF should test babel,webpack ctf combination 3`] = `
+exports[`CTF combination babel,webpack 3`] = `
 Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
@@ -422,7 +422,7 @@ Object {
 }
 `;
 
-exports[`CTF should test babel,webpack,react ctf combination 1`] = `
+exports[`CTF combination babel,webpack,react 1`] = `
 Array [
   "babel",
   "webpack",
@@ -430,7 +430,7 @@ Array [
 ]
 `;
 
-exports[`CTF should test babel,webpack,react ctf combination 2`] = `
+exports[`CTF combination babel,webpack,react 2`] = `
 Array [
   Object {
     "extends": "@babel/preset-env",
@@ -502,7 +502,7 @@ Array [
 ]
 `;
 
-exports[`CTF should test babel,webpack,react ctf combination 3`] = `
+exports[`CTF combination babel,webpack,react 3`] = `
 Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
@@ -514,13 +514,13 @@ Object {
 }
 `;
 
-exports[`CTF should test eslint ctf combination 1`] = `
+exports[`CTF combination eslint 1`] = `
 Array [
   "eslint",
 ]
 `;
 
-exports[`CTF should test eslint ctf combination 2`] = `
+exports[`CTF combination eslint 2`] = `
 Array [
   Object {
     "extends": Array [
@@ -530,20 +530,20 @@ Array [
 ]
 `;
 
-exports[`CTF should test eslint ctf combination 3`] = `
+exports[`CTF combination eslint 3`] = `
 Object {
   "eslint": "5.0.0",
 }
 `;
 
-exports[`CTF should test eslint,react ctf combination 1`] = `
+exports[`CTF combination eslint,react 1`] = `
 Array [
   "eslint",
   "react",
 ]
 `;
 
-exports[`CTF should test eslint,react ctf combination 2`] = `
+exports[`CTF combination eslint,react 2`] = `
 Array [
   Object {
     "extends": Array [
@@ -582,7 +582,7 @@ Array [
 ]
 `;
 
-exports[`CTF should test eslint,react ctf combination 3`] = `
+exports[`CTF combination eslint,react 3`] = `
 Object {
   "eslint": "5.0.0",
   "eslint-plugin-react": "7.0.0",
@@ -590,14 +590,14 @@ Object {
 }
 `;
 
-exports[`CTF should test eslint,webpack ctf combination 1`] = `
+exports[`CTF combination eslint,webpack 1`] = `
 Array [
   "eslint",
   "webpack",
 ]
 `;
 
-exports[`CTF should test eslint,webpack ctf combination 2`] = `
+exports[`CTF combination eslint,webpack 2`] = `
 Array [
   Object {
     "extends": Array [
@@ -641,14 +641,14 @@ Array [
 ]
 `;
 
-exports[`CTF should test eslint,webpack ctf combination 3`] = `
+exports[`CTF combination eslint,webpack 3`] = `
 Object {
   "eslint": "5.0.0",
   "webpack": "5.0.0",
 }
 `;
 
-exports[`CTF should test eslint,webpack,react ctf combination 1`] = `
+exports[`CTF combination eslint,webpack,react 1`] = `
 Array [
   "eslint",
   "webpack",
@@ -656,7 +656,7 @@ Array [
 ]
 `;
 
-exports[`CTF should test eslint,webpack,react ctf combination 2`] = `
+exports[`CTF combination eslint,webpack,react 2`] = `
 Array [
   Object {
     "extends": Array [
@@ -729,7 +729,7 @@ Array [
 ]
 `;
 
-exports[`CTF should test eslint,webpack,react ctf combination 3`] = `
+exports[`CTF combination eslint,webpack,react 3`] = `
 Object {
   "eslint": "5.0.0",
   "eslint-plugin-react": "7.0.0",
@@ -738,13 +738,13 @@ Object {
 }
 `;
 
-exports[`CTF should test react ctf combination 1`] = `
+exports[`CTF combination react 1`] = `
 Array [
   "react",
 ]
 `;
 
-exports[`CTF should test react ctf combination 2`] = `
+exports[`CTF combination react 2`] = `
 Array [
   "
         import React, { Component } from 'react';
@@ -775,19 +775,19 @@ Array [
 ]
 `;
 
-exports[`CTF should test react ctf combination 3`] = `
+exports[`CTF combination react 3`] = `
 Object {
   "react": "0.16.0",
 }
 `;
 
-exports[`CTF should test webpack ctf combination 1`] = `
+exports[`CTF combination webpack 1`] = `
 Array [
   "webpack",
 ]
 `;
 
-exports[`CTF should test webpack ctf combination 2`] = `
+exports[`CTF combination webpack 2`] = `
 Array [
   Object {
     "module": Object {
@@ -819,20 +819,20 @@ Array [
 ]
 `;
 
-exports[`CTF should test webpack ctf combination 3`] = `
+exports[`CTF combination webpack 3`] = `
 Object {
   "webpack": "5.0.0",
 }
 `;
 
-exports[`CTF should test webpack,react ctf combination 1`] = `
+exports[`CTF combination webpack,react 1`] = `
 Array [
   "webpack",
   "react",
 ]
 `;
 
-exports[`CTF should test webpack,react ctf combination 2`] = `
+exports[`CTF combination webpack,react 2`] = `
 Array [
   Object {
     "module": Object {
@@ -890,7 +890,7 @@ Array [
 ]
 `;
 
-exports[`CTF should test webpack,react ctf combination 3`] = `
+exports[`CTF combination webpack,react 3`] = `
 Object {
   "react": "0.16.0",
   "webpack": "5.0.0",

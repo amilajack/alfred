@@ -5,10 +5,10 @@ import * as CtfNodes from '../src/CTF';
 
 describe('CTF', () => {
   const { getConfigs, default: CTF, getDependencies, ...ctfs } = CtfNodes;
-  const ctfNamesCombinations = powerset(Object.keys(ctfs));
+  const ctfNamesCombinations = powerset(Object.keys(ctfs)).sort();
 
   for (const ctfCombination of ctfNamesCombinations) {
-    it(`should test ${ctfCombination.join(',')} ctf combination`, () => {
+    it(`combination ${ctfCombination.join(',')}`, () => {
       expect(ctfCombination).toMatchSnapshot();
       // Get the CTFs for each combination
       const filteredCmfs = ctfCombination.map(ctfName => ctfs[ctfName]);
