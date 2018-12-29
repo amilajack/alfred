@@ -1,6 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CTF should do basic ctf 1`] = `
+exports[`CTF should test babel ctf combination 1`] = `
+Array [
+  "babel",
+]
+`;
+
+exports[`CTF should test babel ctf combination 2`] = `
+Array [
+  Object {
+    "extends": "@babel/preset-env",
+  },
+]
+`;
+
+exports[`CTF should test babel ctf combination 3`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset": "env@7.2.0",
+  "@babel/preset-react": "7.0.0",
+}
+`;
+
+exports[`CTF should test babel,eslint ctf combination 1`] = `
+Array [
+  "babel",
+  "eslint",
+]
+`;
+
+exports[`CTF should test babel,eslint ctf combination 2`] = `
 Array [
   Object {
     "extends": "@babel/preset-env",
@@ -10,6 +40,121 @@ Array [
       "bliss",
     ],
     "parser": "babel-eslint",
+    "plugins": Array [
+      "eslint-plugin-react",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+]
+`;
+
+exports[`CTF should test babel,eslint ctf combination 3`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset": "env@7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "eslint": "5.0.0",
+  "eslint-plugin-react": "7.0.0",
+}
+`;
+
+exports[`CTF should test babel,eslint,react ctf combination 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "react",
+]
+`;
+
+exports[`CTF should test babel,eslint,react ctf combination 2`] = `
+Array [
+  Object {
+    "extends": "@babel/preset-env",
+  },
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "eslint-plugin-react",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+  "
+        import React, { Component } from 'react';
+
+        export default class Root extends Component {
+          render() {
+            const { store, history } = this.props;
+            return (
+              <Provider store={store}>
+                <ConnectedRouter history={history}>
+                  <Routes />
+                </ConnectedRouter>
+              </Provider>
+            );
+          }
+        }
+      ",
+]
+`;
+
+exports[`CTF should test babel,eslint,react ctf combination 3`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset": "env@7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "eslint": "5.0.0",
+  "eslint-plugin-react": "7.0.0",
+  "react": "0.16.0",
+}
+`;
+
+exports[`CTF should test babel,eslint,webpack ctf combination 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "webpack",
+]
+`;
+
+exports[`CTF should test babel,eslint,webpack ctf combination 2`] = `
+Array [
+  Object {
+    "extends": "@babel/preset-env",
+  },
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "eslint-plugin-react",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
   },
   Object {
     "module": Object {
@@ -42,7 +187,6 @@ Array [
     "resolve": Object {
       "extensions": Array [
         ".js",
-        ".jsx",
         ".json",
       ],
     },
@@ -50,14 +194,705 @@ Array [
 ]
 `;
 
-exports[`CTF should do basic ctf 2`] = `
+exports[`CTF should test babel,eslint,webpack ctf combination 3`] = `
 Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
   "@babel/preset": "env@7.2.0",
+  "@babel/preset-react": "7.0.0",
   "babel-eslint": "5.0.0",
   "babel-loader": "5.0.0",
   "eslint": "5.0.0",
+  "eslint-plugin-react": "7.0.0",
+  "webpack": "5.0.0",
+}
+`;
+
+exports[`CTF should test babel,eslint,webpack,react ctf combination 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "webpack",
+  "react",
+]
+`;
+
+exports[`CTF should test babel,eslint,webpack,react ctf combination 2`] = `
+Array [
+  Object {
+    "extends": "@babel/preset-env",
+  },
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "eslint-plugin-react",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+  Object {
+    "module": Object {
+      "devtool": "source-map",
+      "entry": "./app/main.dev",
+      "mode": "production",
+      "output": Object {
+        "filename": "./app/main.prod.js",
+        "path": "app",
+      },
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+      "target": "electron-main",
+    },
+    "output": Object {
+      "libraryTarget": "commonjs2",
+      "path": "path.join(__dirname, '..', 'app')",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  "
+        import React, { Component } from 'react';
+
+        export default class Root extends Component {
+          render() {
+            const { store, history } = this.props;
+            return (
+              <Provider store={store}>
+                <ConnectedRouter history={history}>
+                  <Routes />
+                </ConnectedRouter>
+              </Provider>
+            );
+          }
+        }
+      ",
+]
+`;
+
+exports[`CTF should test babel,eslint,webpack,react ctf combination 3`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset": "env@7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "babel-loader": "5.0.0",
+  "eslint": "5.0.0",
+  "eslint-plugin-react": "7.0.0",
+  "react": "0.16.0",
+  "webpack": "5.0.0",
+}
+`;
+
+exports[`CTF should test babel,react ctf combination 1`] = `
+Array [
+  "babel",
+  "react",
+]
+`;
+
+exports[`CTF should test babel,react ctf combination 2`] = `
+Array [
+  Object {
+    "extends": "@babel/preset-env",
+  },
+  "
+        import React, { Component } from 'react';
+
+        export default class Root extends Component {
+          render() {
+            const { store, history } = this.props;
+            return (
+              <Provider store={store}>
+                <ConnectedRouter history={history}>
+                  <Routes />
+                </ConnectedRouter>
+              </Provider>
+            );
+          }
+        }
+      ",
+]
+`;
+
+exports[`CTF should test babel,react ctf combination 3`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset": "env@7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "react": "0.16.0",
+}
+`;
+
+exports[`CTF should test babel,webpack ctf combination 1`] = `
+Array [
+  "babel",
+  "webpack",
+]
+`;
+
+exports[`CTF should test babel,webpack ctf combination 2`] = `
+Array [
+  Object {
+    "extends": "@babel/preset-env",
+  },
+  Object {
+    "module": Object {
+      "devtool": "source-map",
+      "entry": "./app/main.dev",
+      "mode": "production",
+      "output": Object {
+        "filename": "./app/main.prod.js",
+        "path": "app",
+      },
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+      "target": "electron-main",
+    },
+    "output": Object {
+      "libraryTarget": "commonjs2",
+      "path": "path.join(__dirname, '..', 'app')",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+]
+`;
+
+exports[`CTF should test babel,webpack ctf combination 3`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset": "env@7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-loader": "5.0.0",
+  "webpack": "5.0.0",
+}
+`;
+
+exports[`CTF should test babel,webpack,react ctf combination 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "react",
+]
+`;
+
+exports[`CTF should test babel,webpack,react ctf combination 2`] = `
+Array [
+  Object {
+    "extends": "@babel/preset-env",
+  },
+  Object {
+    "module": Object {
+      "devtool": "source-map",
+      "entry": "./app/main.dev",
+      "mode": "production",
+      "output": Object {
+        "filename": "./app/main.prod.js",
+        "path": "app",
+      },
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+      "target": "electron-main",
+    },
+    "output": Object {
+      "libraryTarget": "commonjs2",
+      "path": "path.join(__dirname, '..', 'app')",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  "
+        import React, { Component } from 'react';
+
+        export default class Root extends Component {
+          render() {
+            const { store, history } = this.props;
+            return (
+              <Provider store={store}>
+                <ConnectedRouter history={history}>
+                  <Routes />
+                </ConnectedRouter>
+              </Provider>
+            );
+          }
+        }
+      ",
+]
+`;
+
+exports[`CTF should test babel,webpack,react ctf combination 3`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset": "env@7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-loader": "5.0.0",
+  "react": "0.16.0",
+  "webpack": "5.0.0",
+}
+`;
+
+exports[`CTF should test eslint ctf combination 1`] = `
+Array [
+  "eslint",
+]
+`;
+
+exports[`CTF should test eslint ctf combination 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "eslint-plugin-react",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+]
+`;
+
+exports[`CTF should test eslint ctf combination 3`] = `
+Object {
+  "babel-eslint": "5.0.0",
+  "eslint": "5.0.0",
+  "eslint-plugin-react": "7.0.0",
+}
+`;
+
+exports[`CTF should test eslint,react ctf combination 1`] = `
+Array [
+  "eslint",
+  "react",
+]
+`;
+
+exports[`CTF should test eslint,react ctf combination 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "eslint-plugin-react",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+  "
+        import React, { Component } from 'react';
+
+        export default class Root extends Component {
+          render() {
+            const { store, history } = this.props;
+            return (
+              <Provider store={store}>
+                <ConnectedRouter history={history}>
+                  <Routes />
+                </ConnectedRouter>
+              </Provider>
+            );
+          }
+        }
+      ",
+]
+`;
+
+exports[`CTF should test eslint,react ctf combination 3`] = `
+Object {
+  "babel-eslint": "5.0.0",
+  "eslint": "5.0.0",
+  "eslint-plugin-react": "7.0.0",
+  "react": "0.16.0",
+}
+`;
+
+exports[`CTF should test eslint,webpack ctf combination 1`] = `
+Array [
+  "eslint",
+  "webpack",
+]
+`;
+
+exports[`CTF should test eslint,webpack ctf combination 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "eslint-plugin-react",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+  Object {
+    "module": Object {
+      "devtool": "source-map",
+      "entry": "./app/main.dev",
+      "mode": "production",
+      "output": Object {
+        "filename": "./app/main.prod.js",
+        "path": "app",
+      },
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+      "target": "electron-main",
+    },
+    "output": Object {
+      "libraryTarget": "commonjs2",
+      "path": "path.join(__dirname, '..', 'app')",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+]
+`;
+
+exports[`CTF should test eslint,webpack ctf combination 3`] = `
+Object {
+  "babel-eslint": "5.0.0",
+  "babel-loader": "5.0.0",
+  "eslint": "5.0.0",
+  "eslint-plugin-react": "7.0.0",
+  "webpack": "5.0.0",
+}
+`;
+
+exports[`CTF should test eslint,webpack,react ctf combination 1`] = `
+Array [
+  "eslint",
+  "webpack",
+  "react",
+]
+`;
+
+exports[`CTF should test eslint,webpack,react ctf combination 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "eslint-plugin-react",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+  Object {
+    "module": Object {
+      "devtool": "source-map",
+      "entry": "./app/main.dev",
+      "mode": "production",
+      "output": Object {
+        "filename": "./app/main.prod.js",
+        "path": "app",
+      },
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+      "target": "electron-main",
+    },
+    "output": Object {
+      "libraryTarget": "commonjs2",
+      "path": "path.join(__dirname, '..', 'app')",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  "
+        import React, { Component } from 'react';
+
+        export default class Root extends Component {
+          render() {
+            const { store, history } = this.props;
+            return (
+              <Provider store={store}>
+                <ConnectedRouter history={history}>
+                  <Routes />
+                </ConnectedRouter>
+              </Provider>
+            );
+          }
+        }
+      ",
+]
+`;
+
+exports[`CTF should test eslint,webpack,react ctf combination 3`] = `
+Object {
+  "babel-eslint": "5.0.0",
+  "babel-loader": "5.0.0",
+  "eslint": "5.0.0",
+  "eslint-plugin-react": "7.0.0",
+  "react": "0.16.0",
+  "webpack": "5.0.0",
+}
+`;
+
+exports[`CTF should test react ctf combination 1`] = `
+Array [
+  "react",
+]
+`;
+
+exports[`CTF should test react ctf combination 2`] = `
+Array [
+  "
+        import React, { Component } from 'react';
+
+        export default class Root extends Component {
+          render() {
+            const { store, history } = this.props;
+            return (
+              <Provider store={store}>
+                <ConnectedRouter history={history}>
+                  <Routes />
+                </ConnectedRouter>
+              </Provider>
+            );
+          }
+        }
+      ",
+]
+`;
+
+exports[`CTF should test react ctf combination 3`] = `
+Object {
+  "react": "0.16.0",
+}
+`;
+
+exports[`CTF should test webpack ctf combination 1`] = `
+Array [
+  "webpack",
+]
+`;
+
+exports[`CTF should test webpack ctf combination 2`] = `
+Array [
+  Object {
+    "module": Object {
+      "devtool": "source-map",
+      "entry": "./app/main.dev",
+      "mode": "production",
+      "output": Object {
+        "filename": "./app/main.prod.js",
+        "path": "app",
+      },
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+      "target": "electron-main",
+    },
+    "output": Object {
+      "libraryTarget": "commonjs2",
+      "path": "path.join(__dirname, '..', 'app')",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+]
+`;
+
+exports[`CTF should test webpack ctf combination 3`] = `
+Object {
+  "babel-loader": "5.0.0",
+  "webpack": "5.0.0",
+}
+`;
+
+exports[`CTF should test webpack,react ctf combination 1`] = `
+Array [
+  "webpack",
+  "react",
+]
+`;
+
+exports[`CTF should test webpack,react ctf combination 2`] = `
+Array [
+  Object {
+    "module": Object {
+      "devtool": "source-map",
+      "entry": "./app/main.dev",
+      "mode": "production",
+      "output": Object {
+        "filename": "./app/main.prod.js",
+        "path": "app",
+      },
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+      "target": "electron-main",
+    },
+    "output": Object {
+      "libraryTarget": "commonjs2",
+      "path": "path.join(__dirname, '..', 'app')",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  "
+        import React, { Component } from 'react';
+
+        export default class Root extends Component {
+          render() {
+            const { store, history } = this.props;
+            return (
+              <Provider store={store}>
+                <ConnectedRouter history={history}>
+                  <Routes />
+                </ConnectedRouter>
+              </Provider>
+            );
+          }
+        }
+      ",
+]
+`;
+
+exports[`CTF should test webpack,react ctf combination 3`] = `
+Object {
+  "babel-loader": "5.0.0",
+  "react": "0.16.0",
   "webpack": "5.0.0",
 }
 `;

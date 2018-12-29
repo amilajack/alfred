@@ -11,6 +11,11 @@
     lodash "^4.17.4"
     recast "^0.12.1"
 
+"@amilajack/powerset@^0.0.0":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@amilajack/powerset/-/powerset-0.0.0.tgz#3322c7642ddad8d5ebccb43b05520c29e83699d5"
+  integrity sha512-7l2qD/fBrGROYDGqPMFYn+xKKwWadKSpGkvYQ7Q7TESnw6ffQkKqe6o6knk5+yqzCNPlUgmAvLUaPH507UfJdQ==
+
 "@babel/cli@^7.2.3":
   version "7.2.3"
   resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.2.3.tgz#1b262e42a3e959d28ab3d205ba2718e1923cfee6"

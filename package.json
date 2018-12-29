@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "5to6-codemod": "^1.7.1",
+    "@amilajack/powerset": "^0.0.0",
     "child-process-promise": "^2.2.1",
     "commander": "^2.19.0",
     "eslint": "^5.11.1",

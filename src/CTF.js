@@ -114,7 +114,7 @@ export const webpack: CtfNode = {
           libraryTarget: 'commonjs2'
         },
         resolve: {
-          extensions: ['.js', '.jsx', '.json']
+          extensions: ['.js', '.json']
         },
         plugins: []
       }
