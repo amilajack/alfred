@@ -1,6 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CTF should do basic ctf 1`] = `
+exports[`CTF combination babel 1`] = `
+Array [
+  "babel",
+]
+`;
+
+exports[`CTF combination babel 2`] = `
+Array [
+  Object {
+    "extends": "@babel/preset-env",
+  },
+]
+`;
+
+exports[`CTF combination babel 3`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+}
+`;
+
+exports[`CTF combination babel,eslint 1`] = `
+Array [
+  "babel",
+  "eslint",
+]
+`;
+
+exports[`CTF combination babel,eslint 2`] = `
 Array [
   Object {
     "extends": "@babel/preset-env",
@@ -10,6 +39,112 @@ Array [
       "bliss",
     ],
     "parser": "babel-eslint",
+  },
+]
+`;
+
+exports[`CTF combination babel,eslint 3`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-eslint": "5.0.0",
+  "eslint": "5.0.0",
+}
+`;
+
+exports[`CTF combination babel,eslint,react 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,eslint,react 2`] = `
+Array [
+  Object {
+    "extends": "@babel/preset-env",
+    "plugins": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "eslint-plugin-react",
+    ],
+  },
+  "
+        import React, { Component } from 'react';
+
+        export default class Root extends Component {
+          render() {
+            const { store, history } = this.props;
+            return (
+              <Provider store={store}>
+                <ConnectedRouter history={history}>
+                  <Routes />
+                </ConnectedRouter>
+              </Provider>
+            );
+          }
+        }
+      ",
+  "
+        import * as React from 'react';
+
+        export default class App extends React.Component {
+          render() {
+            const { children } = this.props;
+            return <React.Fragment>{children}</React.Fragment>;
+          }
+        }
+      ",
+]
+`;
+
+exports[`CTF combination babel,eslint,react 3`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "eslint": "5.0.0",
+  "eslint-plugin-react": "7.0.0",
+  "react": "0.16.0",
+}
+`;
+
+exports[`CTF combination babel,eslint,webpack 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "webpack",
+]
+`;
+
+exports[`CTF combination babel,eslint,webpack 2`] = `
+Array [
+  Object {
+    "extends": "@babel/preset-env",
+  },
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "parser": "babel-eslint",
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
   },
   Object {
     "module": Object {
@@ -42,7 +177,6 @@ Array [
     "resolve": Object {
       "extensions": Array [
         ".js",
-        ".jsx",
         ".json",
       ],
     },
@@ -50,14 +184,715 @@ Array [
 ]
 `;
 
-exports[`CTF should do basic ctf 2`] = `
+exports[`CTF combination babel,eslint,webpack 3`] = `
 Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
-  "@babel/preset": "env@7.2.0",
+  "@babel/preset-env": "7.2.0",
   "babel-eslint": "5.0.0",
   "babel-loader": "5.0.0",
   "eslint": "5.0.0",
+  "webpack": "5.0.0",
+}
+`;
+
+exports[`CTF combination babel,eslint,webpack,react 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "webpack",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,eslint,webpack,react 2`] = `
+Array [
+  Object {
+    "extends": "@babel/preset-env",
+    "plugins": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "eslint-plugin-react",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+  Object {
+    "module": Object {
+      "devtool": "source-map",
+      "entry": "./app/main.dev",
+      "mode": "production",
+      "output": Object {
+        "filename": "./app/main.prod.js",
+        "path": "app",
+      },
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+      "target": "electron-main",
+    },
+    "output": Object {
+      "libraryTarget": "commonjs2",
+      "path": "path.join(__dirname, '..', 'app')",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  "
+        import React, { Component } from 'react';
+
+        export default class Root extends Component {
+          render() {
+            const { store, history } = this.props;
+            return (
+              <Provider store={store}>
+                <ConnectedRouter history={history}>
+                  <Routes />
+                </ConnectedRouter>
+              </Provider>
+            );
+          }
+        }
+      ",
+  "
+        import * as React from 'react';
+
+        export default class App extends React.Component {
+          render() {
+            const { children } = this.props;
+            return <React.Fragment>{children}</React.Fragment>;
+          }
+        }
+      ",
+]
+`;
+
+exports[`CTF combination babel,eslint,webpack,react 3`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "babel-loader": "5.0.0",
+  "eslint": "5.0.0",
+  "eslint-plugin-react": "7.0.0",
+  "react": "0.16.0",
+  "webpack": "5.0.0",
+}
+`;
+
+exports[`CTF combination babel,react 1`] = `
+Array [
+  "babel",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,react 2`] = `
+Array [
+  Object {
+    "extends": "@babel/preset-env",
+    "plugins": Array [
+      "@babel/preset-react",
+    ],
+  },
+  "
+        import React, { Component } from 'react';
+
+        export default class Root extends Component {
+          render() {
+            const { store, history } = this.props;
+            return (
+              <Provider store={store}>
+                <ConnectedRouter history={history}>
+                  <Routes />
+                </ConnectedRouter>
+              </Provider>
+            );
+          }
+        }
+      ",
+  "
+        import * as React from 'react';
+
+        export default class App extends React.Component {
+          render() {
+            const { children } = this.props;
+            return <React.Fragment>{children}</React.Fragment>;
+          }
+        }
+      ",
+]
+`;
+
+exports[`CTF combination babel,react 3`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "react": "0.16.0",
+}
+`;
+
+exports[`CTF combination babel,webpack 1`] = `
+Array [
+  "babel",
+  "webpack",
+]
+`;
+
+exports[`CTF combination babel,webpack 2`] = `
+Array [
+  Object {
+    "extends": "@babel/preset-env",
+  },
+  Object {
+    "module": Object {
+      "devtool": "source-map",
+      "entry": "./app/main.dev",
+      "mode": "production",
+      "output": Object {
+        "filename": "./app/main.prod.js",
+        "path": "app",
+      },
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+      "target": "electron-main",
+    },
+    "output": Object {
+      "libraryTarget": "commonjs2",
+      "path": "path.join(__dirname, '..', 'app')",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack 3`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-loader": "5.0.0",
+  "webpack": "5.0.0",
+}
+`;
+
+exports[`CTF combination babel,webpack,react 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,webpack,react 2`] = `
+Array [
+  Object {
+    "extends": "@babel/preset-env",
+    "plugins": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "module": Object {
+      "devtool": "source-map",
+      "entry": "./app/main.dev",
+      "mode": "production",
+      "output": Object {
+        "filename": "./app/main.prod.js",
+        "path": "app",
+      },
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+      "target": "electron-main",
+    },
+    "output": Object {
+      "libraryTarget": "commonjs2",
+      "path": "path.join(__dirname, '..', 'app')",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  "
+        import React, { Component } from 'react';
+
+        export default class Root extends Component {
+          render() {
+            const { store, history } = this.props;
+            return (
+              <Provider store={store}>
+                <ConnectedRouter history={history}>
+                  <Routes />
+                </ConnectedRouter>
+              </Provider>
+            );
+          }
+        }
+      ",
+  "
+        import * as React from 'react';
+
+        export default class App extends React.Component {
+          render() {
+            const { children } = this.props;
+            return <React.Fragment>{children}</React.Fragment>;
+          }
+        }
+      ",
+]
+`;
+
+exports[`CTF combination babel,webpack,react 3`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-loader": "5.0.0",
+  "react": "0.16.0",
+  "webpack": "5.0.0",
+}
+`;
+
+exports[`CTF combination eslint 1`] = `
+Array [
+  "eslint",
+]
+`;
+
+exports[`CTF combination eslint 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+  },
+]
+`;
+
+exports[`CTF combination eslint 3`] = `
+Object {
+  "eslint": "5.0.0",
+}
+`;
+
+exports[`CTF combination eslint,react 1`] = `
+Array [
+  "eslint",
+  "react",
+]
+`;
+
+exports[`CTF combination eslint,react 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "plugins": Array [
+      "eslint-plugin-react",
+    ],
+  },
+  "
+        import React, { Component } from 'react';
+
+        export default class Root extends Component {
+          render() {
+            const { store, history } = this.props;
+            return (
+              <Provider store={store}>
+                <ConnectedRouter history={history}>
+                  <Routes />
+                </ConnectedRouter>
+              </Provider>
+            );
+          }
+        }
+      ",
+  "
+        import * as React from 'react';
+
+        export default class App extends React.Component {
+          render() {
+            const { children } = this.props;
+            return <React.Fragment>{children}</React.Fragment>;
+          }
+        }
+      ",
+]
+`;
+
+exports[`CTF combination eslint,react 3`] = `
+Object {
+  "eslint": "5.0.0",
+  "eslint-plugin-react": "7.0.0",
+  "react": "0.16.0",
+}
+`;
+
+exports[`CTF combination eslint,webpack 1`] = `
+Array [
+  "eslint",
+  "webpack",
+]
+`;
+
+exports[`CTF combination eslint,webpack 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+  Object {
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "libraryTarget": "commonjs2",
+      "path": "path.join(__dirname, '..', 'app')",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+]
+`;
+
+exports[`CTF combination eslint,webpack 3`] = `
+Object {
+  "eslint": "5.0.0",
+  "webpack": "5.0.0",
+}
+`;
+
+exports[`CTF combination eslint,webpack,react 1`] = `
+Array [
+  "eslint",
+  "webpack",
+  "react",
+]
+`;
+
+exports[`CTF combination eslint,webpack,react 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "plugins": Array [
+      "eslint-plugin-react",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+  Object {
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "libraryTarget": "commonjs2",
+      "path": "path.join(__dirname, '..', 'app')",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  "
+        import React, { Component } from 'react';
+
+        export default class Root extends Component {
+          render() {
+            const { store, history } = this.props;
+            return (
+              <Provider store={store}>
+                <ConnectedRouter history={history}>
+                  <Routes />
+                </ConnectedRouter>
+              </Provider>
+            );
+          }
+        }
+      ",
+  "
+        import * as React from 'react';
+
+        export default class App extends React.Component {
+          render() {
+            const { children } = this.props;
+            return <React.Fragment>{children}</React.Fragment>;
+          }
+        }
+      ",
+]
+`;
+
+exports[`CTF combination eslint,webpack,react 3`] = `
+Object {
+  "eslint": "5.0.0",
+  "eslint-plugin-react": "7.0.0",
+  "react": "0.16.0",
+  "webpack": "5.0.0",
+}
+`;
+
+exports[`CTF combination react 1`] = `
+Array [
+  "react",
+]
+`;
+
+exports[`CTF combination react 2`] = `
+Array [
+  "
+        import React, { Component } from 'react';
+
+        export default class Root extends Component {
+          render() {
+            const { store, history } = this.props;
+            return (
+              <Provider store={store}>
+                <ConnectedRouter history={history}>
+                  <Routes />
+                </ConnectedRouter>
+              </Provider>
+            );
+          }
+        }
+      ",
+  "
+        import * as React from 'react';
+
+        export default class App extends React.Component {
+          render() {
+            const { children } = this.props;
+            return <React.Fragment>{children}</React.Fragment>;
+          }
+        }
+      ",
+]
+`;
+
+exports[`CTF combination react 3`] = `
+Object {
+  "react": "0.16.0",
+}
+`;
+
+exports[`CTF combination webpack 1`] = `
+Array [
+  "webpack",
+]
+`;
+
+exports[`CTF combination webpack 2`] = `
+Array [
+  Object {
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "libraryTarget": "commonjs2",
+      "path": "path.join(__dirname, '..', 'app')",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+]
+`;
+
+exports[`CTF combination webpack 3`] = `
+Object {
+  "webpack": "5.0.0",
+}
+`;
+
+exports[`CTF combination webpack,react 1`] = `
+Array [
+  "webpack",
+  "react",
+]
+`;
+
+exports[`CTF combination webpack,react 2`] = `
+Array [
+  Object {
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "libraryTarget": "commonjs2",
+      "path": "path.join(__dirname, '..', 'app')",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  "
+        import React, { Component } from 'react';
+
+        export default class Root extends Component {
+          render() {
+            const { store, history } = this.props;
+            return (
+              <Provider store={store}>
+                <ConnectedRouter history={history}>
+                  <Routes />
+                </ConnectedRouter>
+              </Provider>
+            );
+          }
+        }
+      ",
+  "
+        import * as React from 'react';
+
+        export default class App extends React.Component {
+          render() {
+            const { children } = this.props;
+            return <React.Fragment>{children}</React.Fragment>;
+          }
+        }
+      ",
+]
+`;
+
+exports[`CTF combination webpack,react 3`] = `
+Object {
+  "react": "0.16.0",
   "webpack": "5.0.0",
 }
 `;

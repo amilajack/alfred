@@ -3,7 +3,7 @@ import lodash from 'lodash';
 // @flow
 type CtfNode = {
   name: string,
-  interfaces: Array<string> | string,
+  interfaces?: Array<string> | string,
   dependencies: {
     [x: string]: any
   },
@@ -11,9 +11,11 @@ type CtfNode = {
   configFiles: Array<{
     name: string,
     path: string,
-    config: {
-      [x: string]: any
-    }
+    config:
+      | string
+      | {
+          [x: string]: any
+        }
   }>,
   ctfs: {
     [x: string]: (CtfNode, Map<string, CtfNode>) => CtfNode
@@ -27,11 +29,11 @@ export const babel: CtfNode = {
   dependencies: {
     '@babel/cli': '7.2.0',
     '@babel/core': '7.2.0',
-    '@babel/preset': 'env@7.2.0'
+    '@babel/preset-env': '7.2.0'
   },
   configFiles: [
     {
-      name: 'babelrc',
+      name: 'babel',
       path: '.babelrc.js',
       config: {
         extends: '@babel/preset-env'
@@ -112,13 +114,91 @@ export const webpack: CtfNode = {
           libraryTarget: 'commonjs2'
         },
         resolve: {
-          extensions: ['.js', '.jsx', '.json']
+          extensions: ['.js', '.json']
         },
         plugins: []
       }
     }
   ],
-  ctfs: {}
+  ctfs: {
+    eslint: config =>
+      config.extendConfig('eslint', {
+        settings: {
+          'import/resolver': {
+            webpack: {
+              config: 'configs/webpack.config.js'
+            }
+          }
+        }
+      })
+  }
+};
+
+export const react: CtfNode = {
+  name: 'react',
+  description:
+    'A declarative, efficient, and flexible JavaScript library for building user interfaces',
+  dependencies: { react: '0.16.0' },
+  configFiles: [
+    {
+      name: 'root',
+      path: 'containers/Root.js',
+      config: `
+        import React, { Component } from 'react';
+
+        export default class Root extends Component {
+          render() {
+            const { store, history } = this.props;
+            return (
+              <Provider store={store}>
+                <ConnectedRouter history={history}>
+                  <Routes />
+                </ConnectedRouter>
+              </Provider>
+            );
+          }
+        }
+      `
+    },
+    {
+      name: 'app',
+      path: 'containers/App.js',
+      config: `
+        import * as React from 'react';
+
+        export default class App extends React.Component {
+          render() {
+            const { children } = this.props;
+            return <React.Fragment>{children}</React.Fragment>;
+          }
+        }
+      `
+    }
+  ],
+  ctfs: {
+    eslint: config =>
+      config
+        .extendConfig('eslint', {
+          plugins: ['eslint-plugin-react']
+        })
+        .addDependencies({
+          'eslint-plugin-react': '7.0.0'
+        }),
+    babel: config =>
+      config
+        .extendConfig('babel', {
+          plugins: ['@babel/preset-react']
+        })
+        .addDependencies({
+          '@babel/preset-react': '7.0.0'
+        }),
+    webpack: config =>
+      config.extendConfig('webpack.base', {
+        resolve: {
+          extensions: ['.jsx']
+        }
+      })
+  }
 };
 
 type CtfHelpers = {
@@ -129,28 +209,31 @@ type CtfHelpers = {
 
 const AddCtfHelpers: CtfHelpers = {
   findConfig(configName: string) {
-    return this.configFiles.find(configFile => configFile.name === configName);
+    const config = this.configFiles.find(
+      configFile => configFile.name === configName
+    );
+    if (!config) {
+      throw new Error(`Cannot find config with name "${configName}"`);
+    }
+    return config;
   },
   extendConfig(
     configName: string,
     configExtension: { [x: string]: string } = {}
   ): CtfNode {
     const foundConfig = this.findConfig(configName);
-    if (!foundConfig) {
-      return this;
-    }
-    const mergedConfigFile = lodash.merge(foundConfig, {
+    const mergedConfigFile = lodash.merge({}, foundConfig, {
       config: configExtension
     });
     const configFiles = this.configFiles.map(configFile =>
       configFile.name === configName ? mergedConfigFile : configFile
     );
-    return lodash.merge(this, {
+    return lodash.merge({}, this, {
       configFiles
     });
   },
   addDependencies(dependencies) {
-    return lodash.merge(this, {
+    return lodash.merge({}, this, {
       dependencies
     });
   }
@@ -185,7 +268,8 @@ export function getConfigs(
 ): Array<{ [x: string]: any }> {
   return Array.from(ctf.values())
     .map(_ctf => _ctf.configFiles)
-    .map(([config]) => config.config);
+    .reduce((p, c) => [...p, ...c], [])
+    .map(e => e.config);
 }
 
 // Intended to be used for testing purposes

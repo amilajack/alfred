@@ -1,11 +1,19 @@
+/* eslint no-restricted-syntax: off */
+import powerset from '@amilajack/powerset';
 import * as CtfNodes from '../src/CTF';
 
-const { getConfigs, default: CTF, getDependencies } = CtfNodes;
-
 describe('CTF', () => {
-  it('should do basic ctf', () => {
-    const { babel, eslint, webpack } = CtfNodes;
-    expect(getConfigs(CTF([babel, eslint, webpack]))).toMatchSnapshot();
-    expect(getDependencies(CTF([babel, eslint, webpack]))).toMatchSnapshot();
-  });
+  const { getConfigs, default: CTF, getDependencies, ...ctfs } = CtfNodes;
+  const ctfNamesCombinations = powerset(Object.keys(ctfs)).sort();
+
+  for (const ctfCombination of ctfNamesCombinations) {
+    it(`combination ${ctfCombination.join(',')}`, () => {
+      expect(ctfCombination).toMatchSnapshot();
+      // Get the CTFs for each combination
+      const filteredCmfs = ctfCombination.map(ctfName => ctfs[ctfName]);
+      const result = CTF(filteredCmfs);
+      expect(getConfigs(result)).toMatchSnapshot();
+      expect(getDependencies(result)).toMatchSnapshot();
+    });
+  }
 });
