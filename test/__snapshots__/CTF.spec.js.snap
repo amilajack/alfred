@@ -9,7 +9,9 @@ Array [
 exports[`CTF combination babel 2`] = `
 Array [
   Object {
-    "extends": "@babel/preset-env",
+    "extends": Array [
+      "@babel/preset-env",
+    ],
   },
 ]
 `;
@@ -32,7 +34,9 @@ Array [
 exports[`CTF combination babel,eslint 2`] = `
 Array [
   Object {
-    "extends": "@babel/preset-env",
+    "extends": Array [
+      "@babel/preset-env",
+    ],
   },
   Object {
     "extends": Array [
@@ -64,7 +68,9 @@ Array [
 exports[`CTF combination babel,eslint,react 2`] = `
 Array [
   Object {
-    "extends": "@babel/preset-env",
+    "extends": Array [
+      "@babel/preset-env",
+    ],
     "plugins": Array [
       "@babel/preset-react",
     ],
@@ -131,7 +137,9 @@ Array [
 exports[`CTF combination babel,eslint,webpack 2`] = `
 Array [
   Object {
-    "extends": "@babel/preset-env",
+    "extends": Array [
+      "@babel/preset-env",
+    ],
   },
   Object {
     "extends": Array [
@@ -208,7 +216,9 @@ Array [
 exports[`CTF combination babel,eslint,webpack,react 2`] = `
 Array [
   Object {
-    "extends": "@babel/preset-env",
+    "extends": Array [
+      "@babel/preset-env",
+    ],
     "plugins": Array [
       "@babel/preset-react",
     ],
@@ -259,8 +269,9 @@ Array [
     "plugins": Array [],
     "resolve": Object {
       "extensions": Array [
-        ".jsx",
+        ".js",
         ".json",
+        ".jsx",
       ],
     },
   },
@@ -318,7 +329,9 @@ Array [
 exports[`CTF combination babel,react 2`] = `
 Array [
   Object {
-    "extends": "@babel/preset-env",
+    "extends": Array [
+      "@babel/preset-env",
+    ],
     "plugins": Array [
       "@babel/preset-react",
     ],
@@ -372,7 +385,9 @@ Array [
 exports[`CTF combination babel,webpack 2`] = `
 Array [
   Object {
-    "extends": "@babel/preset-env",
+    "extends": Array [
+      "@babel/preset-env",
+    ],
   },
   Object {
     "module": Object {
@@ -433,7 +448,9 @@ Array [
 exports[`CTF combination babel,webpack,react 2`] = `
 Array [
   Object {
-    "extends": "@babel/preset-env",
+    "extends": Array [
+      "@babel/preset-env",
+    ],
     "plugins": Array [
       "@babel/preset-react",
     ],
@@ -468,8 +485,9 @@ Array [
     "plugins": Array [],
     "resolve": Object {
       "extensions": Array [
-        ".jsx",
+        ".js",
         ".json",
+        ".jsx",
       ],
     },
   },
@@ -695,8 +713,9 @@ Array [
     "plugins": Array [],
     "resolve": Object {
       "extensions": Array [
-        ".jsx",
+        ".js",
         ".json",
+        ".jsx",
       ],
     },
   },
@@ -856,8 +875,9 @@ Array [
     "plugins": Array [],
     "resolve": Object {
       "extensions": Array [
-        ".jsx",
+        ".js",
         ".json",
+        ".jsx",
       ],
     },
   },
