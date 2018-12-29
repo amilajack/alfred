@@ -1,4 +1,3 @@
-// @flow
 /* eslint no-restricted-syntax: off */
 import powerset from '@amilajack/powerset';
 import * as CtfNodes from '../src/CTF';
