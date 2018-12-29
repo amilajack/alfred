@@ -1,4 +1,5 @@
 import lodash from 'lodash';
+import webpackMerge from 'webpack-merge';
 
 // @flow
 type CtfNode = {
@@ -36,7 +37,7 @@ export const babel: CtfNode = {
       name: 'babel',
       path: '.babelrc.js',
       config: {
-        extends: '@babel/preset-env'
+        extends: ['@babel/preset-env']
       }
     }
   ],
@@ -192,19 +193,28 @@ export const react: CtfNode = {
         .addDependencies({
           '@babel/preset-react': '7.0.0'
         }),
-    webpack: config =>
-      config.extendConfig('webpack.base', {
-        resolve: {
-          extensions: ['.jsx']
+    webpack: config => {
+      const newConfig = webpackMerge.smart(
+        config.findConfig('webpack.base').config,
+        {
+          resolve: {
+            extensions: ['.jsx']
+          }
         }
-      })
+      );
+      return config.replaceConfig('webpack.base', {
+        ...config.findConfig('webpack.base'),
+        config: newConfig
+      });
+    }
   }
 };
 
 type CtfHelpers = {
   findConfig: (configName: string) => { [x: string]: string },
   addDependencies: ({ [x: string]: string }) => { [x: string]: string },
-  extendConfig: (x: string) => CtfNode
+  extendConfig: (x: string) => CtfNode,
+  replaceConfig: (x: string) => CtfNode
 };
 
 const AddCtfHelpers: CtfHelpers = {
@@ -231,6 +241,18 @@ const AddCtfHelpers: CtfHelpers = {
     return lodash.merge({}, this, {
       configFiles
     });
+  },
+  replaceConfig(
+    configName: string,
+    configReplacement: { [x: string]: string } = {}
+  ) {
+    const configFiles = this.configFiles.map(configFile =>
+      configFile.name === configName ? configReplacement : configFile
+    );
+    return {
+      ...this,
+      configFiles
+    };
   },
   addDependencies(dependencies) {
     return lodash.merge({}, this, {
