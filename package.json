@@ -68,7 +68,7 @@
   "engines": {
     "node": ">=8",
     "npm": ">=6.5.0",
-    "yarn": ">=1.0.0"
+    "yarn": ">=1.12.3"
   },
   "jest": {
     "testEnvironment": "node"
