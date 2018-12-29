@@ -3,9 +3,8 @@
 import powerset from '@amilajack/powerset';
 import * as CtfNodes from '../src/CTF';
 
-const { getConfigs, default: CTF, getDependencies, ...ctfs } = CtfNodes;
-
 describe('CTF', () => {
+  const { getConfigs, default: CTF, getDependencies, ...ctfs } = CtfNodes;
   const ctfNamesCombinations = powerset(Object.keys(ctfs));
 
   for (const ctfCombination of ctfNamesCombinations) {
@@ -13,8 +12,9 @@ describe('CTF', () => {
       expect(ctfCombination).toMatchSnapshot();
       // Get the CTFs for each combination
       const filteredCmfs = ctfCombination.map(ctfName => ctfs[ctfName]);
-      expect(getConfigs(CTF(filteredCmfs))).toMatchSnapshot();
-      expect(getDependencies(CTF(filteredCmfs))).toMatchSnapshot();
+      const result = CTF(filteredCmfs);
+      expect(getConfigs(result)).toMatchSnapshot();
+      expect(getDependencies(result)).toMatchSnapshot();
     });
   }
 });

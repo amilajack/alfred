@@ -18,8 +18,7 @@ exports[`CTF should test babel ctf combination 3`] = `
 Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
-  "@babel/preset": "env@7.2.0",
-  "@babel/preset-react": "7.0.0",
+  "@babel/preset-env": "7.2.0",
 }
 `;
 
@@ -40,16 +39,6 @@ Array [
       "bliss",
     ],
     "parser": "babel-eslint",
-    "plugins": Array [
-      "eslint-plugin-react",
-    ],
-    "settings": Object {
-      "import/resolver": Object {
-        "webpack": Object {
-          "config": "configs/webpack.config.js",
-        },
-      },
-    },
   },
 ]
 `;
@@ -58,11 +47,9 @@ exports[`CTF should test babel,eslint ctf combination 3`] = `
 Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
-  "@babel/preset": "env@7.2.0",
-  "@babel/preset-react": "7.0.0",
+  "@babel/preset-env": "7.2.0",
   "babel-eslint": "5.0.0",
   "eslint": "5.0.0",
-  "eslint-plugin-react": "7.0.0",
 }
 `;
 
@@ -78,6 +65,9 @@ exports[`CTF should test babel,eslint,react ctf combination 2`] = `
 Array [
   Object {
     "extends": "@babel/preset-env",
+    "plugins": Array [
+      "@babel/preset-react",
+    ],
   },
   Object {
     "extends": Array [
@@ -87,13 +77,6 @@ Array [
     "plugins": Array [
       "eslint-plugin-react",
     ],
-    "settings": Object {
-      "import/resolver": Object {
-        "webpack": Object {
-          "config": "configs/webpack.config.js",
-        },
-      },
-    },
   },
   "
         import React, { Component } from 'react';
@@ -111,6 +94,16 @@ Array [
           }
         }
       ",
+  "
+        import * as React from 'react';
+
+        export default class App extends React.Component {
+          render() {
+            const { children } = this.props;
+            return <React.Fragment>{children}</React.Fragment>;
+          }
+        }
+      ",
 ]
 `;
 
@@ -118,7 +111,7 @@ exports[`CTF should test babel,eslint,react ctf combination 3`] = `
 Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
-  "@babel/preset": "env@7.2.0",
+  "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
   "babel-eslint": "5.0.0",
   "eslint": "5.0.0",
@@ -145,9 +138,6 @@ Array [
       "bliss",
     ],
     "parser": "babel-eslint",
-    "plugins": Array [
-      "eslint-plugin-react",
-    ],
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
@@ -198,12 +188,10 @@ exports[`CTF should test babel,eslint,webpack ctf combination 3`] = `
 Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
-  "@babel/preset": "env@7.2.0",
-  "@babel/preset-react": "7.0.0",
+  "@babel/preset-env": "7.2.0",
   "babel-eslint": "5.0.0",
   "babel-loader": "5.0.0",
   "eslint": "5.0.0",
-  "eslint-plugin-react": "7.0.0",
   "webpack": "5.0.0",
 }
 `;
@@ -221,6 +209,9 @@ exports[`CTF should test babel,eslint,webpack,react ctf combination 2`] = `
 Array [
   Object {
     "extends": "@babel/preset-env",
+    "plugins": Array [
+      "@babel/preset-react",
+    ],
   },
   Object {
     "extends": Array [
@@ -268,7 +259,7 @@ Array [
     "plugins": Array [],
     "resolve": Object {
       "extensions": Array [
-        ".js",
+        ".jsx",
         ".json",
       ],
     },
@@ -289,6 +280,16 @@ Array [
           }
         }
       ",
+  "
+        import * as React from 'react';
+
+        export default class App extends React.Component {
+          render() {
+            const { children } = this.props;
+            return <React.Fragment>{children}</React.Fragment>;
+          }
+        }
+      ",
 ]
 `;
 
@@ -296,7 +297,7 @@ exports[`CTF should test babel,eslint,webpack,react ctf combination 3`] = `
 Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
-  "@babel/preset": "env@7.2.0",
+  "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
   "babel-eslint": "5.0.0",
   "babel-loader": "5.0.0",
@@ -318,6 +319,9 @@ exports[`CTF should test babel,react ctf combination 2`] = `
 Array [
   Object {
     "extends": "@babel/preset-env",
+    "plugins": Array [
+      "@babel/preset-react",
+    ],
   },
   "
         import React, { Component } from 'react';
@@ -335,6 +339,16 @@ Array [
           }
         }
       ",
+  "
+        import * as React from 'react';
+
+        export default class App extends React.Component {
+          render() {
+            const { children } = this.props;
+            return <React.Fragment>{children}</React.Fragment>;
+          }
+        }
+      ",
 ]
 `;
 
@@ -342,7 +356,7 @@ exports[`CTF should test babel,react ctf combination 3`] = `
 Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
-  "@babel/preset": "env@7.2.0",
+  "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
   "react": "0.16.0",
 }
@@ -402,8 +416,7 @@ exports[`CTF should test babel,webpack ctf combination 3`] = `
 Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
-  "@babel/preset": "env@7.2.0",
-  "@babel/preset-react": "7.0.0",
+  "@babel/preset-env": "7.2.0",
   "babel-loader": "5.0.0",
   "webpack": "5.0.0",
 }
@@ -421,6 +434,9 @@ exports[`CTF should test babel,webpack,react ctf combination 2`] = `
 Array [
   Object {
     "extends": "@babel/preset-env",
+    "plugins": Array [
+      "@babel/preset-react",
+    ],
   },
   Object {
     "module": Object {
@@ -452,7 +468,7 @@ Array [
     "plugins": Array [],
     "resolve": Object {
       "extensions": Array [
-        ".js",
+        ".jsx",
         ".json",
       ],
     },
@@ -473,6 +489,16 @@ Array [
           }
         }
       ",
+  "
+        import * as React from 'react';
+
+        export default class App extends React.Component {
+          render() {
+            const { children } = this.props;
+            return <React.Fragment>{children}</React.Fragment>;
+          }
+        }
+      ",
 ]
 `;
 
@@ -480,7 +506,7 @@ exports[`CTF should test babel,webpack,react ctf combination 3`] = `
 Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
-  "@babel/preset": "env@7.2.0",
+  "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
   "babel-loader": "5.0.0",
   "react": "0.16.0",
@@ -500,26 +526,13 @@ Array [
     "extends": Array [
       "bliss",
     ],
-    "parser": "babel-eslint",
-    "plugins": Array [
-      "eslint-plugin-react",
-    ],
-    "settings": Object {
-      "import/resolver": Object {
-        "webpack": Object {
-          "config": "configs/webpack.config.js",
-        },
-      },
-    },
   },
 ]
 `;
 
 exports[`CTF should test eslint ctf combination 3`] = `
 Object {
-  "babel-eslint": "5.0.0",
   "eslint": "5.0.0",
-  "eslint-plugin-react": "7.0.0",
 }
 `;
 
@@ -536,17 +549,9 @@ Array [
     "extends": Array [
       "bliss",
     ],
-    "parser": "babel-eslint",
     "plugins": Array [
       "eslint-plugin-react",
     ],
-    "settings": Object {
-      "import/resolver": Object {
-        "webpack": Object {
-          "config": "configs/webpack.config.js",
-        },
-      },
-    },
   },
   "
         import React, { Component } from 'react';
@@ -564,12 +569,21 @@ Array [
           }
         }
       ",
+  "
+        import * as React from 'react';
+
+        export default class App extends React.Component {
+          render() {
+            const { children } = this.props;
+            return <React.Fragment>{children}</React.Fragment>;
+          }
+        }
+      ",
 ]
 `;
 
 exports[`CTF should test eslint,react ctf combination 3`] = `
 Object {
-  "babel-eslint": "5.0.0",
   "eslint": "5.0.0",
   "eslint-plugin-react": "7.0.0",
   "react": "0.16.0",
@@ -589,10 +603,6 @@ Array [
     "extends": Array [
       "bliss",
     ],
-    "parser": "babel-eslint",
-    "plugins": Array [
-      "eslint-plugin-react",
-    ],
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
@@ -603,13 +613,6 @@ Array [
   },
   Object {
     "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
       "rules": Array [
         Object {
           "exclude": /node_modules/,
@@ -622,7 +625,6 @@ Array [
           },
         },
       ],
-      "target": "electron-main",
     },
     "output": Object {
       "libraryTarget": "commonjs2",
@@ -641,10 +643,7 @@ Array [
 
 exports[`CTF should test eslint,webpack ctf combination 3`] = `
 Object {
-  "babel-eslint": "5.0.0",
-  "babel-loader": "5.0.0",
   "eslint": "5.0.0",
-  "eslint-plugin-react": "7.0.0",
   "webpack": "5.0.0",
 }
 `;
@@ -663,7 +662,6 @@ Array [
     "extends": Array [
       "bliss",
     ],
-    "parser": "babel-eslint",
     "plugins": Array [
       "eslint-plugin-react",
     ],
@@ -677,13 +675,6 @@ Array [
   },
   Object {
     "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
       "rules": Array [
         Object {
           "exclude": /node_modules/,
@@ -696,7 +687,6 @@ Array [
           },
         },
       ],
-      "target": "electron-main",
     },
     "output": Object {
       "libraryTarget": "commonjs2",
@@ -705,7 +695,7 @@ Array [
     "plugins": Array [],
     "resolve": Object {
       "extensions": Array [
-        ".js",
+        ".jsx",
         ".json",
       ],
     },
@@ -726,13 +716,21 @@ Array [
           }
         }
       ",
+  "
+        import * as React from 'react';
+
+        export default class App extends React.Component {
+          render() {
+            const { children } = this.props;
+            return <React.Fragment>{children}</React.Fragment>;
+          }
+        }
+      ",
 ]
 `;
 
 exports[`CTF should test eslint,webpack,react ctf combination 3`] = `
 Object {
-  "babel-eslint": "5.0.0",
-  "babel-loader": "5.0.0",
   "eslint": "5.0.0",
   "eslint-plugin-react": "7.0.0",
   "react": "0.16.0",
@@ -764,6 +762,16 @@ Array [
           }
         }
       ",
+  "
+        import * as React from 'react';
+
+        export default class App extends React.Component {
+          render() {
+            const { children } = this.props;
+            return <React.Fragment>{children}</React.Fragment>;
+          }
+        }
+      ",
 ]
 `;
 
@@ -783,13 +791,6 @@ exports[`CTF should test webpack ctf combination 2`] = `
 Array [
   Object {
     "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
       "rules": Array [
         Object {
           "exclude": /node_modules/,
@@ -802,7 +803,6 @@ Array [
           },
         },
       ],
-      "target": "electron-main",
     },
     "output": Object {
       "libraryTarget": "commonjs2",
@@ -821,7 +821,6 @@ Array [
 
 exports[`CTF should test webpack ctf combination 3`] = `
 Object {
-  "babel-loader": "5.0.0",
   "webpack": "5.0.0",
 }
 `;
@@ -837,13 +836,6 @@ exports[`CTF should test webpack,react ctf combination 2`] = `
 Array [
   Object {
     "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
       "rules": Array [
         Object {
           "exclude": /node_modules/,
@@ -856,7 +848,6 @@ Array [
           },
         },
       ],
-      "target": "electron-main",
     },
     "output": Object {
       "libraryTarget": "commonjs2",
@@ -865,7 +856,7 @@ Array [
     "plugins": Array [],
     "resolve": Object {
       "extensions": Array [
-        ".js",
+        ".jsx",
         ".json",
       ],
     },
@@ -886,12 +877,21 @@ Array [
           }
         }
       ",
+  "
+        import * as React from 'react';
+
+        export default class App extends React.Component {
+          render() {
+            const { children } = this.props;
+            return <React.Fragment>{children}</React.Fragment>;
+          }
+        }
+      ",
 ]
 `;
 
 exports[`CTF should test webpack,react ctf combination 3`] = `
 Object {
-  "babel-loader": "5.0.0",
   "react": "0.16.0",
   "webpack": "5.0.0",
 }

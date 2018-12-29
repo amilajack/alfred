@@ -29,11 +29,11 @@ export const babel: CtfNode = {
   dependencies: {
     '@babel/cli': '7.2.0',
     '@babel/core': '7.2.0',
-    '@babel/preset': 'env@7.2.0'
+    '@babel/preset-env': '7.2.0'
   },
   configFiles: [
     {
-      name: 'babelrc',
+      name: 'babel',
       path: '.babelrc.js',
       config: {
         extends: '@babel/preset-env'
@@ -186,14 +186,14 @@ export const react: CtfNode = {
         }),
     babel: config =>
       config
-        .extendConfig('eslint', {
+        .extendConfig('babel', {
           plugins: ['@babel/preset-react']
         })
         .addDependencies({
           '@babel/preset-react': '7.0.0'
         }),
     webpack: config =>
-      config.extendConfig('webpack', {
+      config.extendConfig('webpack.base', {
         resolve: {
           extensions: ['.jsx']
         }
@@ -209,28 +209,31 @@ type CtfHelpers = {
 
 const AddCtfHelpers: CtfHelpers = {
   findConfig(configName: string) {
-    return this.configFiles.find(configFile => configFile.name === configName);
+    const config = this.configFiles.find(
+      configFile => configFile.name === configName
+    );
+    if (!config) {
+      throw new Error(`Cannot find config with name "${configName}"`);
+    }
+    return config;
   },
   extendConfig(
     configName: string,
     configExtension: { [x: string]: string } = {}
   ): CtfNode {
     const foundConfig = this.findConfig(configName);
-    if (!foundConfig) {
-      return this;
-    }
-    const mergedConfigFile = lodash.merge(foundConfig, {
+    const mergedConfigFile = lodash.merge({}, foundConfig, {
       config: configExtension
     });
     const configFiles = this.configFiles.map(configFile =>
       configFile.name === configName ? mergedConfigFile : configFile
     );
-    return lodash.merge(this, {
+    return lodash.merge({}, this, {
       configFiles
     });
   },
   addDependencies(dependencies) {
-    return lodash.merge(this, {
+    return lodash.merge({}, this, {
       dependencies
     });
   }
@@ -265,7 +268,8 @@ export function getConfigs(
 ): Array<{ [x: string]: any }> {
   return Array.from(ctf.values())
     .map(_ctf => _ctf.configFiles)
-    .map(([config]) => config.config);
+    .reduce((p, c) => [...p, ...c], [])
+    .map(e => e.config);
 }
 
 // Intended to be used for testing purposes
