@@ -23,7 +23,7 @@ type CtfNode = {
   }
 };
 
-export const babel: CtfNode = {
+const babel: CtfNode = {
   name: 'babel',
   description: 'Transpile JS from ESNext to the latest ES version',
   interfaces: 'alfred-interface-transpile',
@@ -68,7 +68,7 @@ export const babel: CtfNode = {
   }
 };
 
-export const eslint: CtfNode = {
+const eslint: CtfNode = {
   name: 'eslint',
   description: 'Lint all your JS files',
   interfaces: 'alfred-interface-lint',
@@ -85,7 +85,7 @@ export const eslint: CtfNode = {
   ctfs: {}
 };
 
-export const webpack: CtfNode = {
+const webpack: CtfNode = {
   name: 'webpack',
   description: 'Build, optimize, and bundle assets in your app',
   interfaces: 'alfred-interface-build',
@@ -131,11 +131,19 @@ export const webpack: CtfNode = {
             }
           }
         }
+      }),
+    jest: config =>
+      config.extendConfig('jest', {
+        moduleNameMapper: {
+          '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+            '<rootDir>/mocks/fileMock.js',
+          '\\.(css|less|sass|scss)$': 'identity-obj-proxy'
+        }
       })
   }
 };
 
-export const react: CtfNode = {
+const react: CtfNode = {
   name: 'react',
   description:
     'A declarative, efficient, and flexible JavaScript library for building user interfaces',
@@ -179,12 +187,16 @@ export const react: CtfNode = {
   ctfs: {
     eslint: config =>
       config
-        .extendConfig('eslint', {
-          plugins: ['eslint-plugin-react']
-        })
         .addDependencies({
           'eslint-plugin-react': '7.0.0'
+        })
+        .extendConfig('eslint', {
+          plugins: ['react']
         }),
+    jest: config =>
+      config.extendConfig('jest', {
+        moduleFileExtensions: ['js', 'jsx', 'json']
+      }),
     babel: config =>
       config
         .extendConfig('babel', {
@@ -209,6 +221,36 @@ export const react: CtfNode = {
     }
   }
 };
+
+const jestCtf: CtfNode = {
+  name: 'jest',
+  description: 'Test your JS files',
+  interfaces: 'alfred-interface-test',
+  dependencies: { jest: '5.0.0' },
+  configFiles: [
+    {
+      name: 'jest',
+      path: 'jest.config.js',
+      config: {}
+    }
+  ],
+  ctfs: {
+    babel: config =>
+      config.addDependencies({
+        'babel-jest': '8.0.0'
+      }),
+    eslint: config =>
+      config
+        .addDependencies({
+          'eslint-plugin-jest': '8.0.0'
+        })
+        .extendConfig('eslint', {
+          plugins: ['jest']
+        })
+  }
+};
+
+export const CTFS = { jest: jestCtf, react, webpack, eslint, babel };
 
 type CtfHelpers = {
   findConfig: (configName: string) => { [x: string]: string },
