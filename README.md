@@ -39,6 +39,8 @@ alfred migrate
 alfred learn alfred-skill-build-parcel
 # Build using the new subcommand
 alfred build
+# Learning multiple skills
+alfred learn alfred-skill-build-angular alfred-skill-build-redux
 
 # Upgrading from ES5 to ESNext
 alfred migrate .
@@ -51,7 +53,7 @@ The following is an example of a Config Transformer Function (CTF) for babel
 // index.js
 export default {
   name: 'babel',
-  interfaces: 'alfred-interface-transpile',
+  interface: 'alfred-interface-transpile',
   dependencies: {
     '@babel/cli': '7.2.0',
     '@babel/core': '7.2.0',
@@ -120,6 +122,7 @@ type AlfredInterface = {
 {
   "alfred": {
     "npmClient": "yarn",
+    "showConfigs" true,
     "targets": {
       "node": 10
     }
@@ -153,3 +156,14 @@ $ yarn add foobar
 
 Would you like to do this? (Y/n)
 ```
+
+## Required Files and Folders
+
+* `./src/main.js` or `./src/lib.js`
+* `.editorconfig`
+* `.gitignore`
+* `.travis.yml`
+* `LICENSE`
+* `package.json`
+* `package-lock.json` or `yarn.lock`
+* `README.md`
