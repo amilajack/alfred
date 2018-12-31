@@ -1,6 +1,7 @@
 /* eslint prettier/prettier: off */
 import lodash from 'lodash';
 import path from 'path';
+import rimraf from 'rimraf';
 import fs from 'fs';
 import childProcess from 'child_process';
 import webpackMerge from 'webpack-merge';
@@ -74,7 +75,7 @@ const babel: CtfNode = {
   hooks: {
     call(configFiles: Array<configFileType>) {
       const configPath = getConfigPathByConfigName('babel', configFiles);
-      return `babel --configFile ${configPath}`;
+      return `./node_modules/.bin/babel --configFile ${configPath}`;
     }
   },
   ctfs: {
@@ -121,7 +122,7 @@ const eslint: CtfNode = {
   hooks: {
     call(configFiles: Array<configFileType>) {
       const configPath = getConfigPathByConfigName('eslint', configFiles);
-      return `eslint --config ${configPath}`;
+      return `./node_modules/.bin/eslint --config ${configPath}`;
     }
   },
   ctfs: {}
@@ -166,7 +167,7 @@ const webpack: CtfNode = {
   hooks: {
     call(configFiles: Array<configFileType>) {
       const configPath = getConfigPathByConfigName('webpack.base', configFiles);
-      return `eslint --config ${configPath}`;
+      return `./node_modules/.bin/webpack --config ${configPath}`;
     }
   },
   ctfs: {
@@ -287,7 +288,7 @@ const jestCtf: CtfNode = {
   hooks: {
     call(configFiles: Array<configFileType>) {
       const configPath = getConfigPathByConfigName('jest', configFiles);
-      return `jest --config ${configPath}`;
+      return `./node_modules/.bin/jest --config ${configPath}`;
     }
   },
   ctfs: {
@@ -393,17 +394,19 @@ export function getConfigs(
 /**
  * Write configs to a './.configs' directory
  */
-export function writeConfigsFromCtf(ctf: Map<string, CtfNode>) {
+export async function writeConfigsFromCtf(ctf: Map<string, CtfNode>) {
   const configs = Array.from(ctf.values())
     .map(ctfNode => ctfNode.configFiles)
     .reduce((p, c) => [...p, ...c], []);
   const configsBasePath = path.join(process.cwd(), '.configs');
-  configs.forEach(config => {
+  rimraf.sync(configsBasePath);
+  await fs.promises.mkdir(configsBasePath);
+  return Promise.all(configs.map(config => {
     const filePath = path.join(configsBasePath, config.path);
     const convertedConfig =
       typeof config === 'string' ? config : JSON.stringify(config.config);
-    fs.writeFileSync(filePath, convertedConfig);
-  });
+    return fs.promises.writeFile(filePath, convertedConfig);
+  }));
 }
 
 export function getExecuteWrittenConfigsMethods(ctf: Map<string, CtfNode>) {
@@ -417,8 +420,13 @@ export function getExecuteWrittenConfigsMethods(ctf: Map<string, CtfNode>) {
         path: path.join(configsBasePath, configFile.path)
       }))
       return {
-        fn: () => childProcess.execSync(ctfNode.hooks.call(configFiles)),
-        name: ctfNode.interfaces
+        fn: () => childProcess.execSync(ctfNode.hooks.call(configFiles), {
+          stdio: 'inherit'
+        }),
+        // @HACK: If interfaces were defined, we could import the alfred-interface-*
+        //        and use the `subcommand` property. This should be done after we have
+        //        some interfaces to work with
+        name: ctfNode.interface.substring('alfred-interface-'.length)
       };
     })
     .reduce(
@@ -428,10 +436,6 @@ export function getExecuteWrittenConfigsMethods(ctf: Map<string, CtfNode>) {
       }),
       {}
     );
-}
-
-export function build(cmfs) {
-  getExecuteWrittenConfigsMethods(cmfs).build();
 }
 
 // Intended to be used for testing purposes

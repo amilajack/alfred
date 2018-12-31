@@ -59,6 +59,7 @@
     "lebab": "^3.0.3",
     "lodash": "^4.17.11",
     "lodash.flatten": "^4.4.0",
+    "rimraf": "^2.6.2",
     "rndm": "^1.2.0",
     "simple-git": "^1.107.0",
     "uniq": "^1.0.1",
@@ -71,7 +72,11 @@
     "yarn": ">=1.12.3"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.jsx$": "babel-jest"
+    }
   },
   "files": [
     "lib"
@@ -79,7 +84,8 @@
   "eslintConfig": {
     "extends": "bliss",
     "rules": {
-      "class-methods-use-this": "off"
+      "class-methods-use-this": "off",
+      "flowtype-errors/show-errors": "off"
     }
   },
   "renovate": {

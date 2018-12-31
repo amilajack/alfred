@@ -2008,3 +2008,15 @@ Object {
   "webpack": "5.0.0",
 }
 `;
+
+exports[`CTF executors should create simple executor 1`] = `
+Object {
+  "build": [Function],
+}
+`;
+
+exports[`CTF executors should run simple executor 1`] = `
+Object {
+  "build": [Function],
+}
+`;
