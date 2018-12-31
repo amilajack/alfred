@@ -1,4 +1,3 @@
-/* eslint prettier/prettier: off */
 import lodash from 'lodash';
 import path from 'path';
 import rimraf from 'rimraf';
@@ -48,7 +47,10 @@ type CtfNode =
   | RequiredCtfNodeParams
   | {| ...UsingInterface, ...RequiredCtfNodeParams |};
 
-export function getConfigPathByConfigName(configName, configFiles: Array<configFileType>) {
+export function getConfigPathByConfigName(
+  configName,
+  configFiles: Array<configFileType>
+) {
   const config = configFiles.find(e => e.name === configName);
   if (!config) throw new Error(`Cannot find config by name "${configName}"`);
   return config.path;
@@ -306,7 +308,6 @@ const jestCtf: CtfNode = {
         })
   }
 };
-
 export const CTFS = { jest: jestCtf, react, webpack, eslint, babel };
 
 type CtfHelpers = {
@@ -380,8 +381,9 @@ export default function CTF(ctfs: Array<CtfNode>): Map<string, CtfNode> {
 
   return map;
 }
-
-// Intended to be used for testing purposes
+/*
+ * Intended to be used for testing purposes
+ */
 export function getConfigs(
   ctf: Map<string, CtfNode>
 ): Array<{ [x: string]: any }> {
@@ -390,7 +392,6 @@ export function getConfigs(
     .reduce((p, c) => [...p, ...c], [])
     .map(e => e.config);
 }
-
 /**
  * Write configs to a './.configs' directory
  */
@@ -401,28 +402,50 @@ export async function writeConfigsFromCtf(ctf: Map<string, CtfNode>) {
   const configsBasePath = path.join(process.cwd(), '.configs');
   rimraf.sync(configsBasePath);
   await fs.promises.mkdir(configsBasePath);
-  return Promise.all(configs.map(config => {
-    const filePath = path.join(configsBasePath, config.path);
-    const convertedConfig =
-      typeof config === 'string' ? config : JSON.stringify(config.config);
-    return fs.promises.writeFile(filePath, convertedConfig);
-  }));
+  return Promise.all(
+    configs.map(config => {
+      const filePath = path.join(configsBasePath, config.path);
+      const convertedConfig =
+        typeof config === 'string' ? config : JSON.stringify(config.config);
+      return fs.promises.writeFile(filePath, convertedConfig);
+    })
+  );
 }
-
-export function getExecuteWrittenConfigsMethods(ctf: Map<string, CtfNode>) {
+/**
+ * Intended to be used for testing purposes
+ */
+export function getDependencies(
+  ctf: Map<string, CtfNode>
+): { [x: string]: string } {
+  return Array.from(ctf.values())
+    .map(ctfNode => ctfNode.dependencies)
+    .reduce((p, c) => ({ ...p, ...c }), {});
+}
+export function installCtfDependencies(ctf: Map<string, CtfNode>) {
+  return Object.entries(getDependencies(ctf))
+    // @HACK: This only works with NPM. Use Alfred config to conditionally
+    //        use an NPM client
+    .reduce((p, [name, prop]) => [...p, `${name}@${prop}`], ['npm install'])
+    .join(' ');
+}
+export function getExecuteWrittenConfigsMethods(
+  ctf: Map<string, CtfNode>,
+  opts: Object = {}
+) {
   const configsBasePath = path.join(process.cwd(), '.configs');
-
   return Array.from(ctf.values())
     .filter(ctfNode => ctfNode.hooks && ctfNode.configFiles.length)
     .map(ctfNode => {
       const configFiles = ctfNode.configFiles.map(configFile => ({
         ...configFile,
         path: path.join(configsBasePath, configFile.path)
-      }))
+      }));
       return {
-        fn: () => childProcess.execSync(ctfNode.hooks.call(configFiles), {
-          stdio: 'inherit'
-        }),
+        fn: () =>
+          childProcess.execSync(ctfNode.hooks.call(configFiles), {
+            stdio: 'inherit',
+            ...opts
+          }),
         // @HACK: If interfaces were defined, we could import the alfred-interface-*
         //        and use the `subcommand` property. This should be done after we have
         //        some interfaces to work with
@@ -436,13 +459,4 @@ export function getExecuteWrittenConfigsMethods(ctf: Map<string, CtfNode>) {
       }),
       {}
     );
-}
-
-// Intended to be used for testing purposes
-export function getDependencies(
-  ctf: Map<string, CtfNode>
-): { [x: string]: string } {
-  return Array.from(ctf.values())
-    .map(ctfNode => ctfNode.dependencies)
-    .reduce((p, c) => ({ ...p, ...c }), {});
 }

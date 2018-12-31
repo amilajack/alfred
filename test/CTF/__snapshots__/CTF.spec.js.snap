@@ -2015,8 +2015,4 @@ Object {
 }
 `;
 
-exports[`CTF executors should run simple executor 1`] = `
-Object {
-  "build": [Function],
-}
-`;
+exports[`CTF executors should run simple executor 1`] = `"npm install webpack@5.0.0"`;

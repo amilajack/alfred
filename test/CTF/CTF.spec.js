@@ -1,10 +1,12 @@
 /* eslint no-restricted-syntax: off */
+import path from 'path';
 import powerset from '@amilajack/powerset';
 import CTF, {
   CTFS,
   getConfigs,
   getDependencies,
   writeConfigsFromCtf,
+  installCtfDependencies,
   getExecuteWrittenConfigsMethods
 } from '../../src/CTF';
 
@@ -23,7 +25,11 @@ describe('CTF', () => {
 
     it('should run simple executor', async () => {
       await writeConfigsFromCtf(ctf);
-      expect(getExecuteWrittenConfigsMethods(ctf).build()).toMatchSnapshot();
+      const fixturePath = path.join(__dirname, 'fixtures', 'test-alfred-app');
+      expect(
+        installCtfDependencies(ctf, { cwd: fixturePath })
+      ).toMatchSnapshot();
+      getExecuteWrittenConfigsMethods(ctf, { cwd: fixturePath }).build();
     });
   });
 
