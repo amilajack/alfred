@@ -6,9 +6,8 @@ import CTF, {
   getConfigs,
   getDependencies,
   writeConfigsFromCtf,
-  installCtfDependencies,
-  getExecuteWrittenConfigsMethods
-} from '../../src/CTF';
+  getDepsInstallCommand
+} from '@alfredpkg/core';
 
 describe('CTF', () => {
   describe('executors', () => {
@@ -16,20 +15,17 @@ describe('CTF', () => {
 
     beforeAll(() => {
       ctf = new Map();
-      ctf.set('build', CTFS.webpack);
-    });
-
-    it('should create simple executor', () => {
-      expect(getExecuteWrittenConfigsMethods(ctf)).toMatchSnapshot();
+      ctf.set('webpack', CTFS.webpack);
     });
 
     it('should run simple executor', async () => {
       await writeConfigsFromCtf(ctf);
       const fixturePath = path.join(__dirname, 'fixtures', 'test-alfred-app');
-      expect(
-        installCtfDependencies(ctf, { cwd: fixturePath })
-      ).toMatchSnapshot();
-      getExecuteWrittenConfigsMethods(ctf, { cwd: fixturePath }).build();
+      const execDepsScript = getDepsInstallCommand(
+        ['alfred-skill-webpack'],
+        fixturePath
+      );
+      expect(execDepsScript).toMatchSnapshot();
     });
   });
 

@@ -1,0 +1,9 @@
+{
+  "name": "@alfred/skill-webpack",
+  "devDependencies": {
+    "@alfredpkg/core": "0.0.0"
+  },
+  "peerDependencies": {
+    "@alfredpkg/core": "0.0.0"
+  }
+}

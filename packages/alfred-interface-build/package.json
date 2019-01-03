@@ -1,0 +1,9 @@
+{
+  "name": "@alfredpkg/interface-build",
+  "devDependencies": {
+    "@alfredpkg/core": "0.0.0"
+  },
+  "peerDependencies": {
+    "@alfredpkg/core": "0.0.0"
+  }
+}

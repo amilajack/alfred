@@ -8,12 +8,16 @@
     "alfred-cli": "./lib/alfred.js"
   },
   "preferGlobal": true,
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "repository": "git@github.com:amilajack/alfred.git",
   "author": "Amila Welihinda <amilajack@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib && cp -r src/providers/resources ./lib/providers",
-    "build-watch": "cross-env NODE_ENV=production babel src --out-dir lib --watch",
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps && cp -r src/providers/resources ./lib/providers",
+    "build-watch": "cross-env NODE_ENV=production babel src --out-dir lib --watch --source-maps",
     "flow": "flow",
     "flow-typed": "flow-typed install",
     "lint": "eslint --cache --format=node_modules/eslint-formatter-pretty .",
@@ -42,29 +46,9 @@
     "flow-typed": "^2.5.1",
     "husky": "^1.3.1",
     "jest-cli": "^23.6.0",
+    "lerna": "^3.4.3",
     "lint-staged": "^8.1.0",
     "shebang-loader": "^0.0.1"
-  },
-  "dependencies": {
-    "5to6-codemod": "^1.7.1",
-    "@amilajack/powerset": "^0.0.0",
-    "child-process-promise": "^2.2.1",
-    "commander": "^2.19.0",
-    "eslint": "^5.11.1",
-    "eslint-config-bliss": "^3.1.2",
-    "eslint-plugin-flowtype-errors": "^3.6.0",
-    "findit": "^2.0.0",
-    "gitignore-parser": "^0.0.2",
-    "jscodeshift": "^0.6.2",
-    "lebab": "^3.0.3",
-    "lodash": "^4.17.11",
-    "lodash.flatten": "^4.4.0",
-    "rimraf": "^2.6.2",
-    "rndm": "^1.2.0",
-    "simple-git": "^1.107.0",
-    "uniq": "^1.0.1",
-    "update-notifier": "^2.5.0",
-    "webpack-merge": "^4.1.5"
   },
   "engines": {
     "node": ">=8",

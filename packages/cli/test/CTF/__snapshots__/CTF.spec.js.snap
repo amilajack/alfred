@@ -539,7 +539,7 @@ exports[`CTF combination jest,react,webpack 3`] = `
 Object {
   "jest": "5.0.0",
   "react": "0.16.0",
-  "webpack": "5.0.0",
+  "webpack": "4.28.3",
 }
 `;
 
@@ -648,7 +648,7 @@ Object {
   "babel-loader": "5.0.0",
   "jest": "5.0.0",
   "react": "0.16.0",
-  "webpack": "5.0.0",
+  "webpack": "4.28.3",
 }
 `;
 
@@ -753,7 +753,7 @@ Object {
   "eslint-plugin-react": "7.0.0",
   "jest": "5.0.0",
   "react": "0.16.0",
-  "webpack": "5.0.0",
+  "webpack": "4.28.3",
 }
 `;
 
@@ -883,7 +883,7 @@ Object {
   "eslint-plugin-react": "7.0.0",
   "jest": "5.0.0",
   "react": "0.16.0",
-  "webpack": "5.0.0",
+  "webpack": "4.28.3",
 }
 `;
 
@@ -935,7 +935,7 @@ Array [
 exports[`CTF combination jest,webpack 3`] = `
 Object {
   "jest": "5.0.0",
-  "webpack": "5.0.0",
+  "webpack": "4.28.3",
 }
 `;
 
@@ -1006,7 +1006,7 @@ Object {
   "babel-jest": "8.0.0",
   "babel-loader": "5.0.0",
   "jest": "5.0.0",
-  "webpack": "5.0.0",
+  "webpack": "4.28.3",
 }
 `;
 
@@ -1076,7 +1076,7 @@ Object {
   "eslint": "5.0.0",
   "eslint-plugin-jest": "8.0.0",
   "jest": "5.0.0",
-  "webpack": "5.0.0",
+  "webpack": "4.28.3",
 }
 `;
 
@@ -1167,7 +1167,7 @@ Object {
   "eslint": "5.0.0",
   "eslint-plugin-jest": "8.0.0",
   "jest": "5.0.0",
-  "webpack": "5.0.0",
+  "webpack": "4.28.3",
 }
 `;
 
@@ -1462,7 +1462,7 @@ Array [
 exports[`CTF combination react,webpack 3`] = `
 Object {
   "react": "0.16.0",
-  "webpack": "5.0.0",
+  "webpack": "4.28.3",
 }
 `;
 
@@ -1557,7 +1557,7 @@ Object {
   "@babel/preset-react": "7.0.0",
   "babel-loader": "5.0.0",
   "react": "0.16.0",
-  "webpack": "5.0.0",
+  "webpack": "4.28.3",
 }
 `;
 
@@ -1648,7 +1648,7 @@ Object {
   "eslint": "5.0.0",
   "eslint-plugin-react": "7.0.0",
   "react": "0.16.0",
-  "webpack": "5.0.0",
+  "webpack": "4.28.3",
 }
 `;
 
@@ -1763,7 +1763,7 @@ Object {
   "eslint": "5.0.0",
   "eslint-plugin-react": "7.0.0",
   "react": "0.16.0",
-  "webpack": "5.0.0",
+  "webpack": "4.28.3",
 }
 `;
 
@@ -1807,7 +1807,7 @@ Array [
 
 exports[`CTF combination webpack 3`] = `
 Object {
-  "webpack": "5.0.0",
+  "webpack": "4.28.3",
 }
 `;
 
@@ -1869,7 +1869,7 @@ Object {
   "@babel/core": "7.2.0",
   "@babel/preset-env": "7.2.0",
   "babel-loader": "5.0.0",
-  "webpack": "5.0.0",
+  "webpack": "4.28.3",
 }
 `;
 
@@ -1927,7 +1927,7 @@ Array [
 exports[`CTF combination webpack,eslint 3`] = `
 Object {
   "eslint": "5.0.0",
-  "webpack": "5.0.0",
+  "webpack": "4.28.3",
 }
 `;
 
@@ -2005,14 +2005,8 @@ Object {
   "babel-eslint": "5.0.0",
   "babel-loader": "5.0.0",
   "eslint": "5.0.0",
-  "webpack": "5.0.0",
+  "webpack": "4.28.3",
 }
 `;
 
-exports[`CTF executors should create simple executor 1`] = `
-Object {
-  "build": [Function],
-}
-`;
-
-exports[`CTF executors should run simple executor 1`] = `"npm install webpack@5.0.0"`;
+exports[`CTF executors should run simple executor 1`] = `"npm install --prefix /Users/amila/Documents/Projects/alfred/test/CTF/fixtures/test-alfred-app alfred-skill-webpack"`;

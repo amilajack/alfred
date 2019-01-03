@@ -5,7 +5,7 @@ import fs from 'fs';
 import childProcess from 'child_process';
 import webpackMerge from 'webpack-merge';
 
-type configFileType = {
+export type configFileType = {
   // The "friendly name" of a file. This is the name that
   // other CTFs will refer to config file by.
   name: string,
@@ -43,9 +43,11 @@ type RequiredCtfNodeParams = {|
   }
 |};
 
-type CtfNode =
+export type CtfNode =
   | RequiredCtfNodeParams
   | {| ...UsingInterface, ...RequiredCtfNodeParams |};
+
+export type CtfMap = Map<string, CtfNode>;
 
 export function getConfigPathByConfigName(
   configName,
@@ -134,7 +136,7 @@ const webpack: CtfNode = {
   name: 'webpack',
   description: 'Build, optimize, and bundle assets in your app',
   interface: 'alfred-interface-build',
-  dependencies: { webpack: '5.0.0' },
+  dependencies: { webpack: '4.28.3' },
   configFiles: [
     {
       name: 'webpack.base',
@@ -360,8 +362,8 @@ const AddCtfHelpers: CtfHelpers = {
     });
   }
 };
-export default function CTF(ctfs: Array<CtfNode>): Map<string, CtfNode> {
-  const map: Map<string, CtfNode> = new Map();
+export default function CTF(ctfs: Array<CtfNode>): CtfMap {
+  const map: CtfMap = new Map();
   ctfs.forEach(ctfNode => {
     const ctfWithHelpers = {
       ...ctfNode,
@@ -384,9 +386,7 @@ export default function CTF(ctfs: Array<CtfNode>): Map<string, CtfNode> {
 /*
  * Intended to be used for testing purposes
  */
-export function getConfigs(
-  ctf: Map<string, CtfNode>
-): Array<{ [x: string]: any }> {
+export function getConfigs(ctf: CtfMap): Array<{ [x: string]: any }> {
   return Array.from(ctf.values())
     .map(ctfNode => ctfNode.configFiles)
     .reduce((p, c) => [...p, ...c], [])
@@ -395,7 +395,7 @@ export function getConfigs(
 /**
  * Write configs to a './.configs' directory
  */
-export async function writeConfigsFromCtf(ctf: Map<string, CtfNode>) {
+export async function writeConfigsFromCtf(ctf: CtfMap) {
   const configs = Array.from(ctf.values())
     .map(ctfNode => ctfNode.configFiles)
     .reduce((p, c) => [...p, ...c], []);
@@ -414,22 +414,26 @@ export async function writeConfigsFromCtf(ctf: Map<string, CtfNode>) {
 /**
  * Intended to be used for testing purposes
  */
-export function getDependencies(
-  ctf: Map<string, CtfNode>
-): { [x: string]: string } {
+export function getDependencies(ctf: CtfMap): { [x: string]: string } {
   return Array.from(ctf.values())
     .map(ctfNode => ctfNode.dependencies)
     .reduce((p, c) => ({ ...p, ...c }), {});
 }
-export function installCtfDependencies(ctf: Map<string, CtfNode>) {
-  return Object.entries(getDependencies(ctf))
+export function execCommand(installScript: string) {
+  childProcess.execSync(installScript, { stdio: [0, 1, 2] });
+}
+export function getDepsInstallCommand(
+  dependencies: Array<string>,
+  prefix: string
+) {
+  return dependencies
     // @HACK: This only works with NPM. Use Alfred config to conditionally
     //        use an NPM client
-    .reduce((p, [name, prop]) => [...p, `${name}@${prop}`], ['npm install'])
+    .reduce((p, dep) => [...p, dep], [`npm install --prefix ${prefix}`])
     .join(' ');
 }
 export function getExecuteWrittenConfigsMethods(
-  ctf: Map<string, CtfNode>,
+  ctf: CtfMap,
   opts: Object = {}
 ) {
   const configsBasePath = path.join(process.cwd(), '.configs');
@@ -443,7 +447,7 @@ export function getExecuteWrittenConfigsMethods(
       return {
         fn: () =>
           childProcess.execSync(ctfNode.hooks.call(configFiles), {
-            stdio: 'inherit',
+            stdio: [0, 1, 2],
             ...opts
           }),
         // @HACK: If interfaces were defined, we could import the alfred-interface-*

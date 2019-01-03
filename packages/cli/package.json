@@ -1,0 +1,61 @@
+{
+  "name": "alfred-cli",
+  "version": "0.0.1-12",
+  "description": "A framework for upgrading javascript codebases",
+  "bin": {
+    "alf": "./lib/alfred.js",
+    "alfred": "./lib/alfred.js",
+    "alfred-cli": "./lib/alfred.js"
+  },
+  "preferGlobal": true,
+  "repository": "git@github.com:amilajack/alfred.git",
+  "author": "Amila Welihinda <amilajack@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps && cp -r src/providers/resources ./lib/providers",
+    "build-watch": "cross-env NODE_ENV=production babel src --out-dir lib --watch --source-maps",
+    "flow": "flow",
+    "flow-typed": "flow-typed install",
+    "lint": "eslint --cache --format=node_modules/eslint-formatter-pretty .",
+    "lint-fix": "yarn --silent lint --fix; exit 0",
+    "postinstall": "yarn flow-typed",
+    "spec": "jest",
+    "test": "cross-env NODE_ENV=test yarn build && yarn lint && yarn flow && yarn spec",
+    "version": "rm -rf lib && yarn build"
+  },
+  "devDependencies": {
+    "@alfredpkg/core": "0.0.0"
+  },
+  "peerDependencies": {
+    "@alfredpkg/core": "0.0.0"
+  },
+  "dependencies": {
+    "5to6-codemod": "^1.7.1",
+    "@amilajack/powerset": "^0.0.0",
+    "child-process-promise": "^2.2.1",
+    "commander": "^2.19.0",
+    "eslint": "^5.11.1",
+    "eslint-config-bliss": "^3.1.2",
+    "eslint-plugin-flowtype-errors": "^3.6.0",
+    "findit": "^2.0.0",
+    "gitignore-parser": "^0.0.2",
+    "jscodeshift": "^0.6.2",
+    "lebab": "^3.0.3",
+    "lodash": "^4.17.11",
+    "lodash.flatten": "^4.4.0",
+    "rimraf": "^2.6.2",
+    "rndm": "^1.2.0",
+    "simple-git": "^1.107.0",
+    "uniq": "^1.0.1",
+    "update-notifier": "^2.5.0",
+    "webpack-merge": "^4.1.5"
+  },
+  "engines": {
+    "node": ">=8",
+    "npm": ">=6.5.0",
+    "yarn": ">=1.12.3"
+  },
+  "files": [
+    "lib"
+  ]
+}

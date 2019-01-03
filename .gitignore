@@ -38,3 +38,4 @@ flow-typed/npm/*
 npm-debug.log.*
 
 lib
+package-lock.json
