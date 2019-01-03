@@ -52,7 +52,6 @@ alfred migrate . --transforms imports lebab
 git clone https://github.com/amilajack/alfred
 cd alfred
 lerna bootstrap # If you don't have it, run `npm i -g lerna`
-lerna link
 lerna run build
 ```
 

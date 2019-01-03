@@ -13,16 +13,15 @@ import type { CtfMap } from '@alfredpkg/core';
 
 (async () => {
   const parsedArguments = program.parse(process.argv);
-  const { args: skills }: Array<string> = parsedArguments;
+  const { args: skills } = parsedArguments;
 
   const pkgJsonPath = path.join(process.cwd(), 'package.json');
   if (!fs.existsSync(pkgJsonPath)) {
     throw new Error('Project does not have "package.json"');
   }
 
-  console.log(pkgJsonPath);
   const pkg = await fs.promises.readFile(pkgJsonPath);
-  const { dependencies = [] } = JSON.parse(pkg);
+  const { dependencies = {} } = JSON.parse(pkg.toString());
 
   // Check if a skill with the same interface is already being used.
   // If so, uninstall it

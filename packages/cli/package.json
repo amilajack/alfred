@@ -1,5 +1,5 @@
 {
-  "name": "alfred-cli",
+  "name": "@alfredpkg/cli",
   "version": "0.0.1-12",
   "description": "A framework for upgrading javascript codebases",
   "bin": {
@@ -16,15 +16,13 @@
     "build-watch": "cross-env NODE_ENV=production babel src --out-dir lib --watch --source-maps",
     "flow": "flow",
     "flow-typed": "flow-typed install",
-    "lint": "eslint --cache --format=node_modules/eslint-formatter-pretty .",
-    "lint-fix": "yarn --silent lint --fix; exit 0",
-    "postinstall": "yarn flow-typed",
     "spec": "jest",
-    "test": "cross-env NODE_ENV=test yarn build && yarn lint && yarn flow && yarn spec",
     "version": "rm -rf lib && yarn build"
   },
   "devDependencies": {
-    "@alfredpkg/core": "0.0.0"
+    "@alfredpkg/core": "0.0.0",
+    "flow-bin": "^0.89.0",
+    "flow-typed": "^2.5.1"
   },
   "peerDependencies": {
     "@alfredpkg/core": "0.0.0"

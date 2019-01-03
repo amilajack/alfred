@@ -12,14 +12,15 @@ import type { CtfMap } from '@alfredpkg/core';
 
 (async () => {
   const parsedArguments = program.parse(process.argv);
-  const { args: skill }: Array<string> = parsedArguments;
+  const { args: skill } = parsedArguments;
 
   const pkgJsonPath = path.join(process.cwd(), 'package.json');
   if (!fs.existsSync(pkgJsonPath)) {
     throw new Error('Project does not have "package.json"');
   }
 
-  const { dependencies } = await import(pkgJsonPath);
+  const pkg = await fs.promises.readFile(pkgJsonPath);
+  const { dependencies = {} } = JSON.parse(pkg.toString());
 
   // Generate the CTF
   const ctf: CtfMap = new Map();
