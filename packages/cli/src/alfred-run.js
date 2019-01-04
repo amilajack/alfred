@@ -5,7 +5,6 @@ import path from 'path';
 import fs from 'fs';
 import {
   writeConfigsFromCtf,
-  CTFS,
   getExecuteWrittenConfigsMethods
 } from '@alfredpkg/core';
 import type { CtfMap } from '@alfredpkg/core';
@@ -20,22 +19,27 @@ import type { CtfMap } from '@alfredpkg/core';
   }
 
   const pkg = await fs.promises.readFile(pkgJsonPath);
-  const { dependencies = {} } = JSON.parse(pkg.toString());
+  const config = JSON.parse(pkg.toString());
+  if (!('alfred' in config)) {
+    throw new Error('No configs in "package.json"');
+  }
+
+  const { skills = [] } = config.alfred;
 
   // Generate the CTF
   const ctf: CtfMap = new Map();
-  Object.keys(dependencies || {})
-    .filter(dep => dep.includes('alfred-skill-'))
-    .map(dep => dep.substring('alfred-skill-'.length))
-    .forEach(dep => {
-      if (!(dep in CTFS)) {
-        throw new Error(`CTF "${dep}" does not exist`);
-      }
-      ctf.set(dep, CTFS[dep]);
-    });
+  // $FlowFixMe
+  module.paths.push(path.join(process.cwd(), 'node_modules'));
+  skills.forEach(dep => {
+    // $FlowFixMe
+    const ctfSkill = require(dep);
+    ctf.set(dep, ctfSkill);
+  });
 
   writeConfigsFromCtf(ctf);
   const commands = getExecuteWrittenConfigsMethods(ctf, {});
+
+  console.log(commands);
 
   commands[skill]();
 })();

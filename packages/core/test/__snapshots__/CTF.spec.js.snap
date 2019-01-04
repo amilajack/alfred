@@ -2009,4 +2009,10 @@ Object {
 }
 `;
 
+exports[`CTF executors should generate functions for scripts 1`] = `
+Object {
+  "build": [Function],
+}
+`;
+
 exports[`CTF executors should run simple executor 1`] = `"npm install --prefix /fixtures/test-alfred-app alfred-skill-webpack"`;

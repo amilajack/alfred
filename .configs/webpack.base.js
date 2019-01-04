@@ -1,1 +1,0 @@
-{"module":{"rules":[{"test":{},"exclude":{},"use":{"loader":"babel-loader","options":{"cacheDirectory":true}}}]},"output":{"path":"path.join(__dirname, '..', 'app')","libraryTarget":"commonjs2"},"resolve":{"extensions":[".js",".json"]},"plugins":[]}

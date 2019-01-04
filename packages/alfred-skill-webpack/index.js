@@ -1,7 +1,6 @@
-import { getConfigPathByConfigName } from '@alfredpkg/core';
-import type { CtfNode, configFileType } from '@alfredpkg/core';
+const { getConfigPathByConfigName } = require('@alfredpkg/core');
 
-const webpack: CtfNode = {
+module.exports = {
   name: 'webpack',
   description: 'Build, optimize, and bundle assets in your app',
   interface: 'alfred-interface-build',
@@ -26,7 +25,7 @@ const webpack: CtfNode = {
           ]
         },
         output: {
-          path: "path.join(__dirname, '..', 'app')",
+          path: '/',
           // https://github.com/webpack/webpack/issues/1114
           libraryTarget: 'commonjs2'
         },
@@ -38,7 +37,7 @@ const webpack: CtfNode = {
     }
   ],
   hooks: {
-    call(configFiles: Array<configFileType>) {
+    call(configFiles) {
       const configPath = getConfigPathByConfigName('webpack.base', configFiles);
       return `./node_modules/.bin/webpack --config ${configPath}`;
     }
@@ -64,5 +63,3 @@ const webpack: CtfNode = {
       })
   }
 };
-
-export default webpack;

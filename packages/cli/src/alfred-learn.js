@@ -21,7 +21,8 @@ import type { CtfMap } from '@alfredpkg/core';
   }
 
   const pkg = await fs.promises.readFile(pkgJsonPath);
-  const { dependencies = {} } = JSON.parse(pkg.toString());
+  const parsedPkg = JSON.parse(pkg.toString());
+  const { dependencies = {} } = parsedPkg;
 
   // Check if a skill with the same interface is already being used.
   // If so, uninstall it
@@ -52,6 +53,20 @@ import type { CtfMap } from '@alfredpkg/core';
   const configsPath = path.join(process.cwd(), '.configs');
   const installScript = getDepsInstallCommand(ctf, configsPath);
   childProcess.execSync(installScript, { stdio: [0, 1, 2] });
+
+  if (!('alfred' in parsedPkg)) {
+    throw new Error('No configs in "package.json"');
+  }
+
+  const { skills: configSkills = [] } = parsedPkg.alfred;
+  const dedupedSkills = Array.from(new Set([...configSkills, ...skills]));
+  await fs.promises.writeFile(pkgJsonPath, {
+    ...parsedPkg,
+    alfred: {
+      ...parsedPkg.alfred,
+      skills: dedupedSkills
+    }
+  });
 
   // Then update the Alfred config by adding the skill to `skills` array
   writeConfigsFromCtf(ctf);

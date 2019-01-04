@@ -6,7 +6,8 @@ import CTF, {
   getConfigs,
   getDependencies,
   writeConfigsFromCtf,
-  getDepsInstallCommand
+  getDepsInstallCommand,
+  getExecuteWrittenConfigsMethods
 } from '@alfredpkg/core';
 
 describe('CTF', () => {
@@ -26,6 +27,10 @@ describe('CTF', () => {
         fixturePath
       );
       expect(execDepsScript).toMatchSnapshot();
+    });
+
+    it('should generate functions for scripts', () => {
+      expect(getExecuteWrittenConfigsMethods(ctf)).toMatchSnapshot();
     });
   });
 
