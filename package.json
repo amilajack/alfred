@@ -2,11 +2,6 @@
   "name": "alfred-cli",
   "version": "0.0.1-12",
   "description": "A framework for upgrading javascript codebases",
-  "bin": {
-    "alf": "./lib/alfred.js",
-    "alfred": "./lib/alfred.js",
-    "alfred-cli": "./lib/alfred.js"
-  },
   "preferGlobal": true,
   "private": true,
   "workspaces": [
@@ -18,7 +13,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production lerna run build",
     "flow-typed": "lerna run flow-typed",
-    "test": "cross-env NODE_ENV=test lerna run build && lerna run lint && lerna run flow && lerna run spec",
+    "test": "cross-env NODE_ENV=test lerna run build && lerna run lint && lerna run test",
     "version": "lerna run build:clean && lerna run build"
   },
   "devDependencies": {
@@ -43,21 +38,6 @@
     "lint-staged": "^8.1.0",
     "shebang-loader": "^0.0.1"
   },
-  "engines": {
-    "node": ">=8",
-    "npm": ">=6.5.0",
-    "yarn": ">=1.12.3"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "transform": {
-      "^.+\\.js$": "babel-jest",
-      "^.+\\.jsx$": "babel-jest"
-    }
-  },
-  "files": [
-    "lib"
-  ],
   "eslintConfig": {
     "extends": "bliss",
     "rules": {
@@ -78,5 +58,10 @@
       "eslint --fix",
       "git add"
     ]
+  },
+  "engines": {
+    "node": ">=8",
+    "npm": ">=6.5.0",
+    "yarn": ">=1.12.3"
   }
 }

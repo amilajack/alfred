@@ -16,7 +16,7 @@
     "build-watch": "cross-env NODE_ENV=production babel src --out-dir lib --watch --source-maps",
     "flow": "flow",
     "flow-typed": "flow-typed install",
-    "spec": "jest",
+    "test": "jest",
     "version": "rm -rf lib && yarn build"
   },
   "devDependencies": {

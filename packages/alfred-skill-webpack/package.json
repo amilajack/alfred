@@ -1,5 +1,5 @@
 {
-  "name": "@alfred/skill-webpack",
+  "name": "@alfredpkg/skill-webpack",
   "devDependencies": {
     "@alfredpkg/core": "0.0.0"
   },

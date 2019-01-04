@@ -20,7 +20,7 @@ describe('CTF', () => {
 
     it('should run simple executor', async () => {
       await writeConfigsFromCtf(ctf);
-      const fixturePath = path.join(__dirname, 'fixtures', 'test-alfred-app');
+      const fixturePath = path.join('/', 'fixtures', 'test-alfred-app');
       const execDepsScript = getDepsInstallCommand(
         ['alfred-skill-webpack'],
         fixturePath

@@ -1,4 +1,13 @@
 {
   "name": "@alfredpkg/core",
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "files": [
+    "lib"
+  ]
 }
