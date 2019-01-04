@@ -4,6 +4,7 @@ import program from 'commander';
 import path from 'path';
 import fs from 'fs';
 import childProcess from 'child_process';
+import npm from 'npm';
 import {
   getDepsInstallCommand,
   writeConfigsFromCtf,
@@ -29,13 +30,21 @@ import type { CtfMap } from '@alfredpkg/core';
   // skills.forEach(skill => {
   // });
 
-  // Install skills
-  childProcess.execSync(
-    `npm install ${skills.join(' ')} --prefix ${process.cwd()}`,
-    {
-      stdio: [0, 1, 2]
-    }
-  );
+  // Install skills using NPM's API
+  await new Promise((resolve, reject) => {
+    npm.load(err => {
+      if (err) reject(err);
+
+      npm.commands.install(skills, (_err, data) => {
+        if (_err) reject(_err);
+        resolve(data);
+      });
+
+      npm.on('log', message => {
+        console.log(message);
+      });
+    });
+  });
 
   // Generate the CTF
   const ctf: CtfMap = new Map();

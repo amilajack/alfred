@@ -21,8 +21,11 @@
   },
   "devDependencies": {
     "@alfredpkg/core": "0.0.0",
+    "chai": "^4.2.0",
+    "espree": "^5.0.0",
     "flow-bin": "^0.89.0",
-    "flow-typed": "^2.5.1"
+    "flow-typed": "^2.5.1",
+    "lodash.flatten": "^4.4.0"
   },
   "peerDependencies": {
     "@alfredpkg/core": "0.0.0"
@@ -41,6 +44,7 @@
     "lebab": "^3.0.3",
     "lodash": "^4.17.11",
     "lodash.flatten": "^4.4.0",
+    "npm": "^6.5.0",
     "rimraf": "^2.6.3",
     "rndm": "^1.2.0",
     "simple-git": "^1.107.0",

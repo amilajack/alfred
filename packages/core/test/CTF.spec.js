@@ -1,4 +1,4 @@
-/* eslint no-restricted-syntax: off */
+/* eslint no-restricted-syntax: off, import/no-extraneous-dependencies: off */
 import path from 'path';
 import powerset from '@amilajack/powerset';
 import CTF, {
