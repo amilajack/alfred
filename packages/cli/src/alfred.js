@@ -9,7 +9,7 @@ updateNotifier({ pkg }).notify();
 program
   .version('0.0.1')
   .description('Alfred')
-  .command('new [project-name]', 'Create a new Alfred project')
+  .command('new <project-name>', 'Create a new Alfred project')
   .command('learn <skill>', 'Add an Alfred skill to your project')
   .command('run <skill>', 'Run an Alfred skill')
   .command(

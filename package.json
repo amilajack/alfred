@@ -13,7 +13,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production lerna run build",
     "flow-typed": "lerna run flow-typed",
-    "test": "cross-env NODE_ENV=test lerna run build && lerna run lint && lerna run test",
+    "test": "cross-env NODE_ENV=test lerna run build && lerna run lint && lerna run flow && lerna run test",
     "version": "lerna run build:clean && lerna run build"
   },
   "devDependencies": {
