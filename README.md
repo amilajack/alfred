@@ -39,10 +39,20 @@ alfred migrate
 alfred learn alfred-skill-build-parcel
 # Build using the new subcommand
 alfred build
+# Learning multiple skills
+alfred learn alfred-skill-build-angular alfred-skill-build-redux
 
 # Upgrading from ES5 to ESNext
 alfred migrate .
 alfred migrate . --transforms imports lebab
+```
+
+## Local Setup
+```bash
+git clone https://github.com/amilajack/alfred
+cd alfred
+lerna bootstrap # If you don't have it, run `npm i -g lerna`
+lerna run build
 ```
 
 ## Config Transformer Function Example
@@ -51,7 +61,7 @@ The following is an example of a Config Transformer Function (CTF) for babel
 // index.js
 export default {
   name: 'babel',
-  interfaces: 'alfred-interface-transpile',
+  interface: 'alfred-interface-transpile',
   dependencies: {
     '@babel/cli': '7.2.0',
     '@babel/core': '7.2.0',
@@ -120,6 +130,7 @@ type AlfredInterface = {
 {
   "alfred": {
     "npmClient": "yarn",
+    "showConfigs" true,
     "targets": {
       "node": 10
     }
@@ -127,29 +138,55 @@ type AlfredInterface = {
 }
 ```
 
+## Alfred Skill Example
+
+`peerDependencies` are specified in the `package.json` of a skill. They are not `dependencies` because by determining dependencies in CTFs, they can be extended. Users can write their own CTFs to customize which dependencies they want installed. Customizing dependencies, however, should be considered an antipattern because they use versions of a dependency that may not be supported by a skill.
+
+```jsonc
+// package.json
+{
+  "name": "alfred-skill-parcel",
+  "interface": "alfred-interface-build",
+  "peerDependencies": {
+    "react": "0.15.0"
+  }
+}
+```
+
 ## Alfred Libraries Suggesting Skills
 
-Assume there is a library on NPM called `foobar` with the following `package.json`:
+Assume `react` has the following `package.json`:
 
 ```jsonc
 {
-  "name": "foobar",
+  "name": "react",
   // ...
   "alfred": {
     // ...
     "lib": {
-      "recommendSkills": ["alfred-skill-foobar"]
+      "recommendSkills": ["alfred-skill-react"]
     }
   }
 }
 ```
 
-When a author of the app installs `foobar`, Alfred will recommend the skills `recommendSkills` on `postinstall` of `foobar`. This translates to users of a library automatically having the infra they need to use an app 😲
+When a author of the app installs `react`, Alfred will recommend the skills `recommendSkills` on `postinstall` of `react`. This translates to users of a library automatically having the infra they need to use an app 😲
 
 ```
-$ yarn add foobar
+$ yarn add react
 
-`foobar` recommends installing the Alfred skill `"alfred-skill-foobar"`.
+`react` recommends installing the Alfred skill `"alfred-skill-react"`.
 
-Would you like to do this? (Y/n)
+Would you like to install it? (Y/n)
 ```
+
+## Required Files and Folders
+
+* `./src/main.js` or `./src/lib.js`
+* `.editorconfig`
+* `.gitignore`
+* `.travis.yml`
+* `LICENSE`
+* `package.json`
+* `package-lock.json` or `yarn.lock`
+* `README.md`

@@ -3,6 +3,10 @@ language: node_js
 node_js:
   - node
 
-before_install: npm install --global yarn@latest
+before_install: npm install --global yarn@latest lerna@latest
 
 cache: yarn
+
+script:
+  - lerna bootstrap
+  - yarn test

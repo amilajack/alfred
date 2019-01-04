@@ -1,0 +1,16 @@
+{
+  "name": "@alfredpkg/core",
+  "version": "0.0.0",
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
+    "build-watch": "cross-env NODE_ENV=production babel src --out-dir lib --watch --source-maps",
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "files": [
+    "lib"
+  ]
+}

@@ -1,5 +1,5 @@
 import path from 'path';
-import ParseInput from '../src/helpers/ParseInput';
+import ParseInput from '../../src/helpers/ParseInput';
 
 const testDir = path.join(__dirname, '..');
 
