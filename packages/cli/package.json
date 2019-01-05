@@ -46,7 +46,7 @@
     "simple-git": "^1.107.0",
     "uniq": "^1.0.1",
     "update-notifier": "^2.5.0",
-    "webpack-merge": "^4.1.5"
+    "webpack-merge": "^4.2.1"
   },
   "engines": {
     "node": ">=8",
