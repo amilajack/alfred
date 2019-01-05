@@ -2014,5 +2014,3 @@ Object {
   "build": [Function],
 }
 `;
-
-exports[`CTF executors should run simple executor 1`] = `"npm install --prefix /fixtures/test-alfred-app alfred-skill-webpack"`;

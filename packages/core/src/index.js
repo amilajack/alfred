@@ -3,6 +3,7 @@ import path from 'path';
 import rimraf from 'rimraf';
 import fs from 'fs';
 import childProcess from 'child_process';
+import npm from 'npm';
 import webpackMerge from 'webpack-merge';
 
 export type configFileType = {
@@ -431,15 +432,21 @@ export function getDependencies(ctf: CtfMap): { [x: string]: string } {
 export function execCommand(installScript: string) {
   childProcess.execSync(installScript, { stdio: [0, 1, 2] });
 }
-export function getDepsInstallCommand(
-  dependencies: Array<string>,
-  prefix: string
-) {
-  return dependencies
-    // @HACK: This only works with NPM. Use Alfred config to conditionally
-    //        use an NPM client
-    .reduce((p, dep) => [...p, dep], [`npm install --prefix ${prefix}`])
-    .join(' ');
+export function installDeps(dependencies: Array<string> = []) {
+  return new Promise((resolve, reject) => {
+    npm.load(err => {
+      if (err) reject(err);
+
+      npm.commands.install(dependencies, (_err, data) => {
+        if (_err) reject(_err);
+        resolve(data);
+      });
+
+      npm.on('log', message => {
+        console.log(message);
+      });
+    });
+  });
 }
 export function getExecuteWrittenConfigsMethods(ctf: CtfMap) {
   const configsBasePath = path.join(process.cwd(), '.configs');
