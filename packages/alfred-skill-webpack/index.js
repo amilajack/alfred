@@ -6,7 +6,7 @@ module.exports = {
   name: 'webpack',
   description: 'Build, optimize, and bundle assets in your app',
   interface: 'alfred-interface-build',
-  dependencies: { webpack: '4.28.3' },
+  devDependencies: { webpack: '4.28.3' },
   configFiles: [
     {
       name: 'webpack.base',

@@ -4,8 +4,9 @@ import CTF, {
   CTFS,
   getConfigs,
   getDependencies,
+  getDevDependencies,
   getExecuteWrittenConfigsMethods
-} from '@alfredpkg/core';
+} from '../src';
 
 describe('CTF', () => {
   describe('executors', () => {
@@ -31,6 +32,16 @@ describe('CTF', () => {
       const result = CTF(filteredCtfs);
       expect(getConfigs(result)).toMatchSnapshot();
       expect(getDependencies(result)).toMatchSnapshot();
+      expect(getDevDependencies(result)).toMatchSnapshot();
     });
   }
+
+  it('should add devDepencencies', () => {
+    const { devDependencies } = CTF([CTFS.webpack])
+      .get('webpack')
+      .addDevDependencies({
+        foobar: '0.0.0'
+      });
+    expect(devDependencies).toMatchSnapshot();
+  });
 });

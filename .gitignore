@@ -38,5 +38,6 @@ flow-typed/npm/*
 npm-debug.log.*
 
 lib
+dist
 package-lock.json
 .configs

@@ -1,0 +1,19 @@
+{
+  "name": "foobar",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@alfredpkg/skill-eslint": "file:../../../../alfred-skill-eslint",
+    "@alfredpkg/skill-webpack": "file:../../../../alfred-skill-webpack",
+    "eslint": "^5.10.0",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.2.0"
+  },
+  "alfred": {
+    "skills": [
+      "@alfredpkg/skill-eslint",
+      "@alfredpkg/skill-webpack"
+    ]
+  }
+}

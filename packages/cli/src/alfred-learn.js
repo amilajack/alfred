@@ -17,7 +17,7 @@ import type { CtfMap } from '@alfredpkg/core';
 
   const pkg = await fs.promises.readFile(pkgJsonPath);
   const parsedPkg = JSON.parse(pkg.toString());
-  const { dependencies = {} } = parsedPkg;
+  const { dependencies = {}, devDependencies = {} } = parsedPkg;
 
   // Check if a skill with the same interface is already being used.
   // If so, uninstall it
@@ -29,7 +29,7 @@ import type { CtfMap } from '@alfredpkg/core';
 
   // Generate the CTF
   const ctf: CtfMap = new Map();
-  Object.keys(dependencies || {})
+  Object.keys({ ...dependencies, ...devDependencies })
     .filter(dep => dep.includes('alfred-skill-'))
     .map(dep => dep.substring('alfred-skill-'.length))
     .forEach(dep => {
@@ -54,6 +54,6 @@ import type { CtfMap } from '@alfredpkg/core';
   });
 
   // Then update the Alfred config by adding the skill to `skills` array
-  writeConfigsFromCtf(ctf);
+  await writeConfigsFromCtf(ctf);
   // Then persist the resulting configs of the CTFs to ./node_modules/.configs or ./configs
 })();

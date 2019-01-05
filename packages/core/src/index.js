@@ -34,6 +34,9 @@ type RequiredCtfNodeParams = {|
   dependencies: {
     [x: string]: any
   },
+  devDependencies: {
+    [x: string]: any
+  },
   description: string,
   configFiles: Array<configFileType>,
   ctfs: {
@@ -72,7 +75,7 @@ const babel: CtfNode = {
   name: 'babel',
   description: 'Transpile JS from ESNext to the latest ES version',
   interface: 'alfred-interface-transpile',
-  dependencies: {
+  devDependencies: {
     '@babel/cli': '7.2.0',
     '@babel/core': '7.2.0',
     '@babel/preset-env': '7.2.0'
@@ -107,14 +110,14 @@ const babel: CtfNode = {
             }
           }
         })
-        .addDependencies({ 'babel-loader': '5.0.0' });
+        .addDevDependencies({ 'babel-loader': '5.0.0' });
     },
     eslint(config) {
       return config
         .extendConfig('eslint', {
           parser: 'babel-eslint'
         })
-        .addDependencies({ 'babel-eslint': '5.0.0' });
+        .addDevDependencies({ 'babel-eslint': '5.0.0' });
     }
   }
 };
@@ -123,7 +126,7 @@ const eslint: CtfNode = {
   name: 'eslint',
   description: 'Lint all your JS files',
   interface: 'alfred-interface-lint',
-  dependencies: { eslint: '5.0.0' },
+  devDependencies: { eslint: '5.0.0' },
   configFiles: [
     {
       name: 'eslint',
@@ -146,7 +149,7 @@ const webpack: CtfNode = {
   name: 'webpack',
   description: 'Build, optimize, and bundle assets in your app',
   interface: 'alfred-interface-build',
-  dependencies: { webpack: '4.28.3' },
+  devDependencies: { webpack: '4.28.3' },
   configFiles: [
     {
       name: 'webpack.base',
@@ -210,7 +213,7 @@ const react: CtfNode = {
   name: 'react',
   description:
     'A declarative, efficient, and flexible JavaScript library for building user interfaces',
-  dependencies: { react: '0.16.0' },
+  devDependencies: { react: '0.16.0' },
   configFiles: [
     {
       name: 'root',
@@ -250,7 +253,7 @@ const react: CtfNode = {
   ctfs: {
     eslint: config =>
       config
-        .addDependencies({
+        .addDevDependencies({
           'eslint-plugin-react': '7.0.0'
         })
         .extendConfig('eslint', {
@@ -265,7 +268,7 @@ const react: CtfNode = {
         .extendConfig('babel', {
           plugins: ['@babel/preset-react']
         })
-        .addDependencies({
+        .addDevDependencies({
           '@babel/preset-react': '7.0.0'
         }),
     webpack: config => {
@@ -291,7 +294,7 @@ const jestCtf: CtfNode = {
   name: 'jest',
   description: 'Test your JS files',
   interface: 'alfred-interface-test',
-  dependencies: { jest: '5.0.0' },
+  devDependencies: { jest: '5.0.0' },
   configFiles: [
     {
       name: 'jest',
@@ -307,12 +310,12 @@ const jestCtf: CtfNode = {
   },
   ctfs: {
     babel: config =>
-      config.addDependencies({
+      config.addDevDependencies({
         'babel-jest': '8.0.0'
       }),
     eslint: config =>
       config
-        .addDependencies({
+        .addDevDependencies({
           'eslint-plugin-jest': '8.0.0'
         })
         .extendConfig('eslint', {
@@ -325,6 +328,7 @@ export const CTFS = { jest: jestCtf, react, webpack, eslint, babel };
 type CtfHelpers = {
   findConfig: (configName: string) => { [x: string]: string },
   addDependencies: ({ [x: string]: string }) => { [x: string]: string },
+  addDevDependencies: ({ [x: string]: string }) => { [x: string]: string },
   extendConfig: (x: string) => CtfNode,
   replaceConfig: (x: string) => CtfNode
 };
@@ -370,6 +374,11 @@ const AddCtfHelpers: CtfHelpers = {
     return lodash.merge({}, this, {
       dependencies
     });
+  },
+  addDevDependencies(devDependencies) {
+    return lodash.merge({}, this, {
+      devDependencies
+    });
   }
 };
 export default function CTF(ctfs: Array<CtfNode>): CtfMap {
@@ -406,13 +415,19 @@ export function getConfigs(ctf: CtfMap): Array<{ [x: string]: any }> {
  * Write configs to a './.configs' directory
  */
 export async function writeConfigsFromCtf(ctf: CtfMap) {
+  const configsBasePath = path.join(process.cwd(), '.configs');
+  // Delete .configs dir
+  await new Promise(resolve => {
+    rimraf(configsBasePath, () => {
+      resolve();
+    });
+  });
+  // Create a new .configs dir and write the configs
   const configs = Array.from(ctf.values())
     .map(ctfNode => ctfNode.configFiles)
     .reduce((p, c) => [...p, ...c], []);
-  const configsBasePath = path.join(process.cwd(), '.configs');
-  rimraf.sync(configsBasePath);
   await fs.promises.mkdir(configsBasePath);
-  return Promise.all(
+  await Promise.all(
     configs.map(config => {
       const filePath = path.join(configsBasePath, config.path);
       const convertedConfig =
@@ -426,7 +441,12 @@ export async function writeConfigsFromCtf(ctf: CtfMap) {
  */
 export function getDependencies(ctf: CtfMap): { [x: string]: string } {
   return Array.from(ctf.values())
-    .map(ctfNode => ctfNode.dependencies)
+    .map(ctfNode => ctfNode.dependencies || {})
+    .reduce((p, c) => ({ ...p, ...c }), {});
+}
+export function getDevDependencies(ctf: CtfMap): { [x: string]: string } {
+  return Array.from(ctf.values())
+    .map(ctfNode => ctfNode.devDependencies || {})
     .reduce((p, c) => ({ ...p, ...c }), {});
 }
 export function execCommand(installScript: string) {
@@ -458,7 +478,11 @@ export function getExecuteWrittenConfigsMethods(ctf: CtfMap) {
         path: path.join(configsBasePath, configFile.path)
       }));
       return {
-        fn: () => ctfNode.hooks.call(configFiles),
+        fn: () => {
+          try {
+            ctfNode.hooks.call(configFiles);
+          } catch (e) {} // eslint-disable-line
+        },
         // @HACK: If interfaces were defined, we could import the alfred-interface-*
         //        and use the `subcommand` property. This should be done after we have
         //        some interfaces to work with
