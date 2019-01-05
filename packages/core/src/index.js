@@ -49,6 +49,15 @@ export type CtfNode =
 
 export type CtfMap = Map<string, CtfNode>;
 
+export function getConfigByConfigName(
+  configName,
+  configFiles: Array<configFileType>
+) {
+  const config = configFiles.find(e => e.name === configName);
+  if (!config) throw new Error(`Cannot find config by name "${configName}"`);
+  return config;
+}
+
 export function getConfigPathByConfigName(
   configName,
   configFiles: Array<configFileType>
@@ -432,10 +441,7 @@ export function getDepsInstallCommand(
     .reduce((p, dep) => [...p, dep], [`npm install --prefix ${prefix}`])
     .join(' ');
 }
-export function getExecuteWrittenConfigsMethods(
-  ctf: CtfMap,
-  opts: Object = {}
-) {
+export function getExecuteWrittenConfigsMethods(ctf: CtfMap) {
   const configsBasePath = path.join(process.cwd(), '.configs');
   return Array.from(ctf.values())
     .filter(ctfNode => ctfNode.hooks && ctfNode.configFiles.length)
@@ -445,11 +451,7 @@ export function getExecuteWrittenConfigsMethods(
         path: path.join(configsBasePath, configFile.path)
       }));
       return {
-        fn: () =>
-          childProcess.execSync(ctfNode.hooks.call(configFiles), {
-            stdio: [0, 1, 2],
-            ...opts
-          }),
+        fn: () => ctfNode.hooks.call(configFiles),
         // @HACK: If interfaces were defined, we could import the alfred-interface-*
         //        and use the `subcommand` property. This should be done after we have
         //        some interfaces to work with

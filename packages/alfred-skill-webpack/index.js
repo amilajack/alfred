@@ -1,4 +1,6 @@
-const { getConfigPathByConfigName } = require('@alfredpkg/core');
+const webpack = require('webpack');
+const path = require('path');
+const { getConfigByConfigName } = require('@alfredpkg/core');
 
 module.exports = {
   name: 'webpack',
@@ -10,6 +12,13 @@ module.exports = {
       name: 'webpack.base',
       path: 'webpack.base.js',
       config: {
+        entry: path.join(process.cwd(), 'src', 'index.js'),
+        output: {
+          path: path.join(process.cwd(), 'dist'),
+          publicPath: './dist/',
+          filename: 'index.js'
+        },
+        mode: 'development',
         module: {
           rules: [
             {
@@ -24,11 +33,6 @@ module.exports = {
             }
           ]
         },
-        output: {
-          path: '/',
-          // https://github.com/webpack/webpack/issues/1114
-          libraryTarget: 'commonjs2'
-        },
         resolve: {
           extensions: ['.js', '.json']
         },
@@ -38,8 +42,26 @@ module.exports = {
   ],
   hooks: {
     call(configFiles) {
-      const configPath = getConfigPathByConfigName('webpack.base', configFiles);
-      return `./node_modules/.bin/webpack --config ${configPath}`;
+      const { config } = getConfigByConfigName('webpack.base', configFiles);
+      webpack(config, (err, stats) => {
+        if (err) {
+          console.error(err.stack || err);
+          if (err.details) {
+            console.error(err.details);
+          }
+          return;
+        }
+
+        const info = stats.toJson();
+
+        if (stats.hasErrors()) {
+          console.error(info.errors.toString());
+        }
+
+        if (stats.hasWarnings()) {
+          console.warn(info.warnings.toString());
+        }
+      });
     }
   },
   ctfs: {

@@ -4,7 +4,7 @@ import uniq from 'uniq';
 import findit from 'findit';
 import { statAsync } from '../providers';
 
-function findJsFiles(dir: string) {
+export function findJsFiles(dir: string): Promise<Array<string>> {
   return new Promise((resolve, reject) => {
     const files = [];
     findit(dir)

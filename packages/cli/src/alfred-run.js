@@ -39,7 +39,5 @@ import type { CtfMap } from '@alfredpkg/core';
   writeConfigsFromCtf(ctf);
   const commands = getExecuteWrittenConfigsMethods(ctf, {});
 
-  console.log(commands);
-
   commands[skill]();
 })();

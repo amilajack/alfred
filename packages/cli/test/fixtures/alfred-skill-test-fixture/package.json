@@ -1,0 +1,18 @@
+{
+  "name": "foobar",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@alfredpkg/skill-webpack": "file:../../../alfred-skill-webpack",
+    "webpack": "^4.28.3"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.2.0"
+  },
+  "alfred": {
+    "skills": [
+      "@alfredpkg/skill-webpack"
+    ]
+  }
+}
