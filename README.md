@@ -55,23 +55,35 @@ lerna bootstrap # If you don't have it, run `npm i -g lerna`
 lerna run build
 ```
 
-## Config Transformer Function Example
-The following is an example of a Config Transformer Function (CTF) for babel
+## Alfred Skill Example
+The following is an example of an Alfred skill (Config Transformer Function) for babel
 ```js
 // index.js
 export default {
+  // The name that other skills will refer to this skill by
   name: 'babel',
+  // The (optional) interface that this skill will implement. A skill uses an interface
+  // when it is able to replace an existing subcommand. For example, both the
+  // alfred-skill-parcel and alfred-skill-webpack skills, which both register a 'build'
+  // subcommand, will both implement alfred-interface-build. Implementing it will require
+  // them to adhere to a shared set of calling conventions such as flags, subcommands, etc
   interface: 'alfred-interface-transpile',
+  // ⚠️  Deprecated ️️⚠️
   dependencies: {
     '@babel/cli': '7.2.0',
     '@babel/core': '7.2.0',
     '@babel/preset': 'env@7.2.0'
   },
   description: 'Transpile JS from ESNext to the latest ES version',
+  // An array of the configs introduced by the skill
   configFiles: [
     {
+      // The name of the config. This should never include a filename extension because skills
+      // have the ability to change extensions (ex. .js -> .ts) so this should not be fixed
       name: 'babelrc',
+      // The filename and the path which the config should be written to
       path: '.babelrc.js',
+      // The value of the config. Can be an object or a string
       config: {
         presets: '@babel/preset-env'
       }
@@ -92,6 +104,7 @@ export default {
             }
           }
         })
+        // ⚠️  Deprecated ️️⚠️
         .addDependencies({ 'babel-loader': '10.0.0' });
     },
     eslint: (eslintCtf: CtfNode): CtfNode => {
@@ -99,6 +112,7 @@ export default {
         .extendConfig('eslint', {
           'parser': 'babel-eslint'
         })
+        // ⚠️  Deprecated ️️⚠️
         .addDependencies({ 'babel-eslint': '10.0.0' });
     }
   }
