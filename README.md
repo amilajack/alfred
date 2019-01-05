@@ -104,16 +104,14 @@ export default {
             }
           }
         })
-        // ⚠️  Deprecated ️️⚠️
-        .addDependencies({ 'babel-loader': '10.0.0' });
+        .addDevDependencies({ 'babel-loader': '10.0.0' });
     },
     eslint: (eslintCtf: CtfNode): CtfNode => {
       return eslintCtf
         .extendConfig('eslint', {
           'parser': 'babel-eslint'
         })
-        // ⚠️  Deprecated ️️⚠️
-        .addDependencies({ 'babel-eslint': '10.0.0' });
+        .addDevDependencies({ 'babel-eslint': '10.0.0' });
     }
   }
 };
@@ -126,7 +124,7 @@ export default {
   subcommand: 'transpile',
   flags: {
     // Flag name and argument types
-    'environment': ['production', 'development', 'test']
+    environment: ['production', 'development', 'test']
   }
 };
 
@@ -143,6 +141,10 @@ type AlfredInterface = {
 // package.json
 {
   "alfred": {
+    "skills": [
+      "@alfredpkg/skill-parcel",
+      "@alfredpkg/skill-testcafe"
+    ],
     "npmClient": "yarn",
     "showConfigs" true,
     "targets": {

@@ -1,5 +1,5 @@
 {
-  "name": "@alfredpkg/interface-build",
+  "name": "@alfredpkg/interface-lint",
   "version": "0.0.0",
   "devDependencies": {
     "@alfredpkg/core": "0.0.0"

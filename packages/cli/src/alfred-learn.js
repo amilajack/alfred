@@ -54,6 +54,6 @@ import type { CtfMap } from '@alfredpkg/core';
   });
 
   // Then update the Alfred config by adding the skill to `skills` array
-  writeConfigsFromCtf(ctf);
+  await writeConfigsFromCtf(ctf);
   // Then persist the resulting configs of the CTFs to ./node_modules/.configs or ./configs
 })();
