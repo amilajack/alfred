@@ -41,7 +41,7 @@
     "lebab": "^3.0.3",
     "lodash": "^4.17.11",
     "lodash.flatten": "^4.4.0",
-    "rimraf": "^2.6.2",
+    "rimraf": "^2.6.3",
     "rndm": "^1.2.0",
     "simple-git": "^1.107.0",
     "uniq": "^1.0.1",
