@@ -5,7 +5,7 @@ module.exports = {
   name: 'eslint',
   description: 'Lint all your JS files',
   interface: 'alfred-interface-lint',
-  dependencies: { eslint: '5.10.0' },
+  devDependencies: { eslint: '5.10.0' },
   configFiles: [
     {
       name: 'eslint',

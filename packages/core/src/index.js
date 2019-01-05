@@ -34,6 +34,9 @@ type RequiredCtfNodeParams = {|
   dependencies: {
     [x: string]: any
   },
+  devDependencies: {
+    [x: string]: any
+  },
   description: string,
   configFiles: Array<configFileType>,
   ctfs: {
@@ -72,7 +75,7 @@ const babel: CtfNode = {
   name: 'babel',
   description: 'Transpile JS from ESNext to the latest ES version',
   interface: 'alfred-interface-transpile',
-  dependencies: {
+  devDependencies: {
     '@babel/cli': '7.2.0',
     '@babel/core': '7.2.0',
     '@babel/preset-env': '7.2.0'
@@ -123,7 +126,7 @@ const eslint: CtfNode = {
   name: 'eslint',
   description: 'Lint all your JS files',
   interface: 'alfred-interface-lint',
-  dependencies: { eslint: '5.0.0' },
+  devDependencies: { eslint: '5.0.0' },
   configFiles: [
     {
       name: 'eslint',
@@ -146,7 +149,7 @@ const webpack: CtfNode = {
   name: 'webpack',
   description: 'Build, optimize, and bundle assets in your app',
   interface: 'alfred-interface-build',
-  dependencies: { webpack: '4.28.3' },
+  devDependencies: { webpack: '4.28.3' },
   configFiles: [
     {
       name: 'webpack.base',
@@ -210,7 +213,7 @@ const react: CtfNode = {
   name: 'react',
   description:
     'A declarative, efficient, and flexible JavaScript library for building user interfaces',
-  dependencies: { react: '0.16.0' },
+  devDependencies: { react: '0.16.0' },
   configFiles: [
     {
       name: 'root',
@@ -291,7 +294,7 @@ const jestCtf: CtfNode = {
   name: 'jest',
   description: 'Test your JS files',
   interface: 'alfred-interface-test',
-  dependencies: { jest: '5.0.0' },
+  devDependencies: { jest: '5.0.0' },
   configFiles: [
     {
       name: 'jest',
@@ -438,7 +441,12 @@ export async function writeConfigsFromCtf(ctf: CtfMap) {
  */
 export function getDependencies(ctf: CtfMap): { [x: string]: string } {
   return Array.from(ctf.values())
-    .map(ctfNode => ctfNode.dependencies)
+    .map(ctfNode => ctfNode.dependencies || {})
+    .reduce((p, c) => ({ ...p, ...c }), {});
+}
+export function getDevDependencies(ctf: CtfMap): { [x: string]: string } {
+  return Array.from(ctf.values())
+    .map(ctfNode => ctfNode.devDependencies || {})
     .reduce((p, c) => ({ ...p, ...c }), {});
 }
 export function execCommand(installScript: string) {

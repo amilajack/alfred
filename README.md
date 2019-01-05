@@ -69,7 +69,7 @@ export default {
   // them to adhere to a shared set of calling conventions such as flags, subcommands, etc
   interface: 'alfred-interface-transpile',
   // ⚠️  Deprecated ️️⚠️
-  dependencies: {
+  devDependencies: {
     '@babel/cli': '7.2.0',
     '@babel/core': '7.2.0',
     '@babel/preset': 'env@7.2.0'
