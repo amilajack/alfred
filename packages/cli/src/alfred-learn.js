@@ -3,12 +3,7 @@
 import program from 'commander';
 import path from 'path';
 import fs from 'fs';
-import childProcess from 'child_process';
-import {
-  getDepsInstallCommand,
-  writeConfigsFromCtf,
-  CTFS
-} from '@alfredpkg/core';
+import { writeConfigsFromCtf, CTFS, installDeps } from '@alfredpkg/core';
 import type { CtfMap } from '@alfredpkg/core';
 
 (async () => {
@@ -29,13 +24,8 @@ import type { CtfMap } from '@alfredpkg/core';
   // skills.forEach(skill => {
   // });
 
-  // Install skills
-  childProcess.execSync(
-    `npm install ${skills.join(' ')} --prefix ${process.cwd()}`,
-    {
-      stdio: [0, 1, 2]
-    }
-  );
+  // Install skills using NPM's API
+  await installDeps(skills);
 
   // Generate the CTF
   const ctf: CtfMap = new Map();
@@ -48,11 +38,6 @@ import type { CtfMap } from '@alfredpkg/core';
       }
       ctf.set(dep, CTFS[dep]);
     });
-
-  // Then install the skill/s
-  const configsPath = path.join(process.cwd(), '.configs');
-  const installScript = getDepsInstallCommand(ctf, configsPath);
-  childProcess.execSync(installScript, { stdio: [0, 1, 2] });
 
   if (!('alfred' in parsedPkg)) {
     throw new Error('No configs in "package.json"');

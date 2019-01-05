@@ -1,12 +1,9 @@
-/* eslint no-restricted-syntax: off */
-import path from 'path';
+/* eslint no-restricted-syntax: off, import/no-extraneous-dependencies: off */
 import powerset from '@amilajack/powerset';
 import CTF, {
   CTFS,
   getConfigs,
   getDependencies,
-  writeConfigsFromCtf,
-  getDepsInstallCommand,
   getExecuteWrittenConfigsMethods
 } from '@alfredpkg/core';
 
@@ -17,16 +14,6 @@ describe('CTF', () => {
     beforeAll(() => {
       ctf = new Map();
       ctf.set('webpack', CTFS.webpack);
-    });
-
-    it('should run simple executor', async () => {
-      await writeConfigsFromCtf(ctf);
-      const fixturePath = path.join('/', 'fixtures', 'test-alfred-app');
-      const execDepsScript = getDepsInstallCommand(
-        ['alfred-skill-webpack'],
-        fixturePath
-      );
-      expect(execDepsScript).toMatchSnapshot();
     });
 
     it('should generate functions for scripts', () => {

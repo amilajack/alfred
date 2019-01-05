@@ -1,4 +1,5 @@
 // @flow
+/* eslint import/no-extraneous-dependencies: off */
 import flatten from 'lodash.flatten';
 import uniq from 'uniq';
 import findit from 'findit';

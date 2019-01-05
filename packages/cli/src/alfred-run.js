@@ -32,7 +32,7 @@ import type { CtfMap } from '@alfredpkg/core';
   module.paths.push(path.join(process.cwd(), 'node_modules'));
   skills.forEach(dep => {
     // $FlowFixMe
-    const ctfSkill = require(dep);
+    const ctfSkill = require(dep); // eslint-disable-line
     ctf.set(dep, ctfSkill);
   });
 
