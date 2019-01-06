@@ -79,7 +79,7 @@ export function getConfigPathByConfigName(
 const babel: CtfNode = {
   name: 'babel',
   description: 'Transpile JS from ESNext to the latest ES version',
-  interface: 'alfred-interface-transpile',
+  interface: '@alfredpkg/interface-transpile',
   devDependencies: {
     '@babel/cli': '7.2.0',
     '@babel/core': '7.2.0',
@@ -130,7 +130,7 @@ const babel: CtfNode = {
 const eslint: CtfNode = {
   name: 'eslint',
   description: 'Lint all your JS files',
-  interface: 'alfred-interface-lint',
+  interface: '@alfredpkg/interface-lint',
   devDependencies: { eslint: '5.0.0' },
   configFiles: [
     {
@@ -153,7 +153,7 @@ const eslint: CtfNode = {
 const webpack: CtfNode = {
   name: 'webpack',
   description: 'Build, optimize, and bundle assets in your app',
-  interface: 'alfred-interface-build',
+  interface: '@alfredpkg/interface-build',
   devDependencies: { webpack: '4.28.3' },
   configFiles: [
     {
@@ -298,7 +298,7 @@ const react: CtfNode = {
 const jestCtf: CtfNode = {
   name: 'jest',
   description: 'Test your JS files',
-  interface: 'alfred-interface-test',
+  interface: '@alfredpkg/interface-test',
   devDependencies: { jest: '5.0.0' },
   configFiles: [
     {
@@ -476,28 +476,32 @@ export function installDeps(dependencies: Array<string> = []) {
 export function getExecuteWrittenConfigsMethods(ctf: CtfMap) {
   const configsBasePath = path.join(process.cwd(), '.configs');
   return Array.from(ctf.values())
-    .filter(ctfNode => ctfNode.hooks && ctfNode.configFiles.length)
+    .filter(
+      ctfNode =>
+        ctfNode.hooks && ctfNode.configFiles.length && ctfNode.interface
+    )
     .map(ctfNode => {
       const configFiles = ctfNode.configFiles.map(configFile => ({
         ...configFile,
         path: path.join(configsBasePath, configFile.path)
       }));
+      const { subcommand } = require(ctfNode.interface); // eslint-disable-line
       return {
         fn: () => {
           try {
             ctfNode.hooks.call(configFiles);
           } catch (e) {} // eslint-disable-line
         },
-        // @HACK: If interfaces were defined, we could import the alfred-interface-*
+        // @HACK: If interfaces were defined, we could import the @alfredpkg/interface-*
         //        and use the `subcommand` property. This should be done after we have
         //        some interfaces to work with
-        name: ctfNode.interface.substring('alfred-interface-'.length)
+        subcommand
       };
     })
     .reduce(
       (p, c) => ({
         ...p,
-        [c.name]: c.fn
+        [c.subcommand]: c.fn
       }),
       {}
     );

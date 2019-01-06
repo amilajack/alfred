@@ -65,9 +65,9 @@ export default {
   // The (optional) interface that this skill will implement. A skill uses an interface
   // when it is able to replace an existing subcommand. For example, both the
   // alfred-skill-parcel and alfred-skill-webpack skills, which both register a 'build'
-  // subcommand, will both implement alfred-interface-build. Implementing it will require
+  // subcommand, will both implement @alfredpkg/interface-build. Implementing it will require
   // them to adhere to a shared set of calling conventions such as flags, subcommands, etc
-  interface: 'alfred-interface-transpile',
+  interface: '@alfredpkg/interface-transpile',
   // ⚠️  Deprecated ️️⚠️
   devDependencies: {
     '@babel/cli': '7.2.0',
@@ -117,6 +117,18 @@ export default {
 };
 ```
 
+`peerDependencies` are specified in the `package.json` of a skill. They are not `dependencies` because by determining dependencies in CTFs, they can be extended. Users can write their own CTFs to customize which dependencies they want installed. Customizing dependencies, however, should be considered an antipattern because they use versions of a dependency that may not be supported by a skill.
+
+```jsonc
+// package.json
+{
+  "name": "alfred-skill-parcel",
+  "peerDependencies": {
+    "react": "0.15.0"
+  }
+}
+```
+
 ## Interface Example
 ```js
 // index.js
@@ -150,21 +162,6 @@ type AlfredInterface = {
     "targets": {
       "node": 10
     }
-  }
-}
-```
-
-## Alfred Skill Example
-
-`peerDependencies` are specified in the `package.json` of a skill. They are not `dependencies` because by determining dependencies in CTFs, they can be extended. Users can write their own CTFs to customize which dependencies they want installed. Customizing dependencies, however, should be considered an antipattern because they use versions of a dependency that may not be supported by a skill.
-
-```jsonc
-// package.json
-{
-  "name": "alfred-skill-parcel",
-  "interface": "alfred-interface-build",
-  "peerDependencies": {
-    "react": "0.15.0"
   }
 }
 ```

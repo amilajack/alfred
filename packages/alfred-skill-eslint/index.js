@@ -4,7 +4,7 @@ const childProcess = require('child_process');
 module.exports = {
   name: 'eslint',
   description: 'Lint all your JS files',
-  interface: 'alfred-interface-lint',
+  interface: '@alfredpkg/interface-lint',
   devDependencies: { eslint: '5.10.0' },
   configFiles: [
     {

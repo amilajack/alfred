@@ -5,7 +5,7 @@ const { getConfigByConfigName } = require('@alfredpkg/core');
 module.exports = {
   name: 'webpack',
   description: 'Build, optimize, and bundle assets in your app',
-  interface: 'alfred-interface-build',
+  interface: '@alfredpkg/interface-build',
   devDependencies: { webpack: '4.28.3' },
   configFiles: [
     {
