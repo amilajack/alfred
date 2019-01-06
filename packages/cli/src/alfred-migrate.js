@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 // @flow
 import path from 'path';
 import program from 'commander';

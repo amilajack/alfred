@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 // @flow
 import program from 'commander';
 import { getExecuteWrittenConfigsMethods } from '@alfredpkg/core';

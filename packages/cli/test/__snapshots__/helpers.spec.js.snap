@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`alfred learn should install new deps after learning new skill 1`] = `
+Array [
+  "babel-loader@5.0.0",
+  "@babel/cli@7.2.0",
+  "@babel/core@7.2.0",
+  "@babel/preset-env@7.2.0",
+]
+`;
