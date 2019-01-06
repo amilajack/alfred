@@ -6,6 +6,11 @@ import childProcess from 'child_process';
 import npm from 'npm';
 import webpackMerge from 'webpack-merge';
 
+// @TODO: send the information to a crash reporting service (like sentry.io)
+process.on('unhandledRejection', err => {
+  throw new Error(err);
+});
+
 export type configFileType = {
   // The "friendly name" of a file. This is the name that
   // other CTFs will refer to config file by.

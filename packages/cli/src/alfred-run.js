@@ -1,42 +1,34 @@
 #!/usr/bin/env node
 // @flow
 import program from 'commander';
-import path from 'path';
-import fs from 'fs';
-import {
-  writeConfigsFromCtf,
-  getExecuteWrittenConfigsMethods
-} from '@alfredpkg/core';
-import type { CtfMap } from '@alfredpkg/core';
+import { getExecuteWrittenConfigsMethods } from '@alfredpkg/core';
+import generateCtfFromConfig from './helpers/CTF';
 
 (async () => {
-  const parsedArguments = program.parse(process.argv);
-  const { args: skill } = parsedArguments;
+  const args = program.parse(process.argv);
+  const { args: skills = [] } = args;
 
-  const pkgJsonPath = path.join(process.cwd(), 'package.json');
-  if (!fs.existsSync(pkgJsonPath)) {
-    throw new Error('Project does not have "package.json"');
+  switch (skills.length) {
+    case 0: {
+      throw new Error('One subcommand must be passed');
+    }
+    case 1: {
+      break;
+    }
+    default: {
+      throw new Error('Only one subcommand can be passed');
+    }
   }
 
-  const pkg = await fs.promises.readFile(pkgJsonPath);
-  const config = JSON.parse(pkg.toString());
-  if (!('alfred' in config)) {
-    throw new Error('No configs in "package.json"');
-  }
-
-  const { skills = [] } = config.alfred;
-
-  // Generate the CTF
-  const ctf: CtfMap = new Map();
-  // $FlowFixMe
-  module.paths.push(path.join(process.cwd(), 'node_modules'));
-  skills.forEach(dep => {
-    // $FlowFixMe
-    const ctfSkill = require(dep); // eslint-disable-line
-    ctf.set(dep, ctfSkill);
-  });
-
-  await writeConfigsFromCtf(ctf);
+  const [skill] = skills;
+  const { ctf } = await generateCtfFromConfig();
   const commands = getExecuteWrittenConfigsMethods(ctf, {});
+
+  if (!Object.keys(commands).includes(skill)) {
+    throw new Error(
+      `Subcommand "${skill}" is not supported by the skills you have`
+    );
+  }
+
   commands[skill]();
 })();
