@@ -1,0 +1,12 @@
+{
+  "name": "foobar",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "index.js",
+  "alfred": {
+    "skills": [
+      "file:../../../../alfred-skill-eslint"
+    ]
+  },
+  "devDependencies": {}
+}

@@ -96,7 +96,7 @@ export default async function Providers(
   const providers = [Es6ImportsProvider, LebabProvider, EslintProvider]
     .map(Provider => new Provider())
     // Sort the providers by priority.
-    // @TODO: Temporarily sort by priority number. Eventually we'll implement an listener pattern
+    // @TODO Temporarily sort by priority number. Eventually we'll implement an listener pattern
     //        to hook into when each provider has finished. Providers will listen for when other
     //        provider have finished
     .sort((a, b) => a.priority - b.priority);

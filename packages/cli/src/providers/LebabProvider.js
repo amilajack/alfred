@@ -6,7 +6,7 @@ import type { ProviderInput, ProviderInterface } from './ProviderInterface';
 export default class LebabProvider implements ProviderInterface {
   /**
    * The list of transforms to apply
-   * @todo: Add more transforms
+   * @TODO Add more transforms
    * @private
    */
   transforms = {

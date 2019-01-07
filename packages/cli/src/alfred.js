@@ -4,7 +4,7 @@ const program = require('commander');
 const updateNotifier = require('update-notifier');
 const pkg = require('../package.json');
 
-// @TODO: send the information to a crash reporting service (like sentry.io)
+// @TODO send the information to a crash reporting service (like sentry.io)
 process.on('unhandledRejection', err => {
   throw err;
 });

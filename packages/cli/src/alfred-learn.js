@@ -1,6 +1,7 @@
 import program from 'commander';
 import fs from 'fs';
 import { installDeps, getDevDependencies } from '@alfredpkg/core';
+import formatPkg from 'format-package';
 import type { CtfMap } from '@alfredpkg/core';
 import generateCtfFromConfig from './helpers/CTF';
 
@@ -38,22 +39,24 @@ export default function diffCtfDeps(
   const { pkg, pkgPath, ctf: oldCtf } = await generateCtfFromConfig();
 
   // Install skills using NPM's API
-  await installDeps(skills);
+  const { skills: configSkills = [], npmClient = 'npm' } = pkg.alfred;
+  await installDeps(skills, npmClient);
 
   // Check if a skill with the same interface is already being used.
   // If so, uninstall it
 
   // Update the skills in the Alfred config in the package.json
   const { ctf: newCtf } = await generateCtfFromConfig();
-  const { skills: configSkills = [] } = pkg.alfred;
   const dedupedSkills = Array.from(new Set([...configSkills, ...skills]));
-  await fs.promises.writeFile(pkgPath, {
+  // @TODO Use a more standard approach for formatting the package.json
+  const formattedPkg = await formatPkg({
     ...pkg,
     alfred: {
       ...pkg.alfred,
       skills: dedupedSkills
     }
   });
+  await fs.promises.writeFile(pkgPath, formattedPkg);
 
   const newSkills = diffCtfDeps(oldCtf, newCtf);
 

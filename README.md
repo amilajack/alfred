@@ -153,14 +153,32 @@ type AlfredInterface = {
 // package.json
 {
   "alfred": {
+    // Skills that override the default skills
     "skills": [
       "@alfredpkg/skill-parcel",
       "@alfredpkg/skill-testcafe"
     ],
+    // Determine to install with NPM or Yarn (defaults to NPM)
     "npmClient": "yarn",
+    // Write the configs to a './.configs' directory
     "showConfigs" true,
-    "targets": {
-      "node": 10
+    // Config for all app targets
+    "app": {
+      // Each target will have it's own build
+      "targets": {
+        "chrome": 50,
+        "node": 10
+      }
+    },
+    // Config for all lib targets
+    "lib": {
+      "recommendSkills": ["alfred-skill-react"]
+    },
+    // Config only applied to browser libs
+    "browser": {
+      "lib": {
+        // ...
+      }
     }
   }
 }

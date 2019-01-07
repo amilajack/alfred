@@ -9,13 +9,24 @@ export default async function generateCtfFromConfig() {
     throw new Error('Current working directory does not have "package.json"');
   }
 
+  // Check config exists
   const pkg = JSON.parse((await fs.promises.readFile(pkgPath)).toString());
   if (!('alfred' in pkg)) {
     throw new Error('No Alfred config in "package.json"');
   }
+  // Validate Config
   const { alfred } = pkg;
   if (!alfred.skills) {
     throw new Error('Alfred config does not have `skills` section');
+  }
+  // Check necessary files exist
+  const appPath = path.join(process.cwd(), 'src', 'main.js');
+  const libPath = path.join(process.cwd(), 'src', 'lib.js');
+  // @TODO Factor into account multiple targets
+  if (!(fs.existsSync(appPath) || fs.existsSync(libPath))) {
+    throw new Error(
+      'Alfred config does not have a `./src/main.js` or a `./src/lib.js`'
+    );
   }
 
   // Generate the CTF

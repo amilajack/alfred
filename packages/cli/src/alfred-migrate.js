@@ -13,7 +13,7 @@ const filesPattern: Array<string> = parsedArguments.args.map(arg =>
   path.join(process.cwd(), arg)
 );
 
-// @TODO: Create backups from the files and pass the paths to the backups
+// @TODO Create backups from the files and pass the paths to the backups
 //        instead of the actual filenames. Preserve the original filenames
 //        if the migration was successful and we want to write to the original
 //        files
