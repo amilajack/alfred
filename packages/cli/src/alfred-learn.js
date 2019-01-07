@@ -1,9 +1,9 @@
 import program from 'commander';
 import fs from 'fs';
-import { installDeps, getDevDependencies } from '@alfredpkg/core';
+import { getDevDependencies } from '@alfredpkg/core';
 import formatPkg from 'format-package';
 import type { CtfMap } from '@alfredpkg/core';
-import generateCtfFromConfig from './helpers/CTF';
+import generateCtfFromConfig, { installDeps } from './helpers/CTF';
 
 /**
  * Find all the dependencies that are different between two CTF's.
@@ -46,13 +46,12 @@ export default function diffCtfDeps(
   // If so, uninstall it
 
   // Update the skills in the Alfred config in the package.json
-  const { ctf: newCtf } = await generateCtfFromConfig();
+  const { ctf: newCtf, pkg: newPkg } = await generateCtfFromConfig();
   const dedupedSkills = Array.from(new Set([...configSkills, ...skills]));
-  // @TODO Use a more standard approach for formatting the package.json
   const formattedPkg = await formatPkg({
-    ...pkg,
+    ...newPkg,
     alfred: {
-      ...pkg.alfred,
+      ...newPkg.alfred,
       skills: dedupedSkills
     }
   });

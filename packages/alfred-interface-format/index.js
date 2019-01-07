@@ -1,0 +1,3 @@
+module.exports = {
+  subcommand: 'format'
+};

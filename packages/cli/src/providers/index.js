@@ -118,7 +118,6 @@ export default async function Providers(
 
   // Validate files
   if (!parsedUserInput.files || !parsedUserInput.files.length) {
-    // console.log('No files passed');
     throw new Error('No files passed');
   }
 

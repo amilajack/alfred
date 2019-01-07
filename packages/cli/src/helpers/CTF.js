@@ -1,7 +1,49 @@
 import path from 'path';
 import fs from 'fs';
+import npm from 'npm';
+import yarn from 'yarn-api';
 import { writeConfigsFromCtf } from '@alfredpkg/core';
 import type { CtfMap } from '@alfredpkg/core';
+
+/**
+ * @TODO Account for `devDependencies` and `dependencies`
+ */
+export function installDeps(
+  dependencies: Array<string> = [],
+  npmClient: 'npm' | 'yarn' = 'npm'
+) {
+  if (!dependencies.length) return Promise.resolve();
+
+  switch (npmClient) {
+    case 'npm': {
+      return new Promise((resolve, reject) => {
+        npm.load({ save: true }, err => {
+          if (err) reject(err);
+
+          npm.commands.install(dependencies, (_err, data) => {
+            if (_err) reject(_err);
+            resolve(data);
+          });
+
+          npm.on('log', message => {
+            console.log(message);
+          });
+        });
+      });
+    }
+    case 'yarn': {
+      return new Promise((resolve, reject) => {
+        yarn(['why', 'isobject'], err => {
+          if (err) reject(err);
+          resolve();
+        });
+      });
+    }
+    default: {
+      throw new Error('Unsupported npm client. Can only be "npm" or "yarn"');
+    }
+  }
+}
 
 export default async function generateCtfFromConfig() {
   const pkgPath = path.join(process.cwd(), 'package.json');

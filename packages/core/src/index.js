@@ -3,13 +3,11 @@ import path from 'path';
 import rimraf from 'rimraf';
 import fs from 'fs';
 import childProcess from 'child_process';
-import npm from 'npm';
-import yarn from 'yarn-api';
 import webpackMerge from 'webpack-merge';
 
 // @TODO send the information to a crash reporting service (like sentry.io)
 process.on('unhandledRejection', err => {
-  throw new Error(err);
+  throw err;
 });
 
 export type configFileType = {
@@ -458,43 +456,6 @@ export function getDevDependencies(ctf: CtfMap): { [x: string]: string } {
 export function execCommand(installScript: string) {
   childProcess.execSync(installScript, { stdio: [0, 1, 2] });
 }
-/**
- * @TODO Account for `devDependencies` and `dependencies`
- */
-export function installDeps(
-  dependencies: Array<string> = [],
-  npmClient: 'npm' | 'yarn' = 'npm'
-) {
-  switch (npmClient) {
-    case 'npm': {
-      return new Promise((resolve, reject) => {
-        npm.load(err => {
-          if (err) reject(err);
-
-          npm.commands.install(dependencies, (_err, data) => {
-            if (_err) reject(_err);
-            resolve(data);
-          });
-
-          npm.on('log', message => {
-            console.log(message);
-          });
-        });
-      });
-    }
-    case 'yarn': {
-      return new Promise((resolve, reject) => {
-        yarn(['why', 'isobject'], err => {
-          if (err) reject(err);
-          resolve();
-        });
-      });
-    }
-    default: {
-      throw new Error('Unsupported npm client. Can only be "npm" or "yarn"');
-    }
-  }
-}
 export function getExecuteWrittenConfigsMethods(ctf: CtfMap) {
   const configsBasePath = path.join(process.cwd(), '.configs');
   return Array.from(ctf.values())
@@ -511,7 +472,7 @@ export function getExecuteWrittenConfigsMethods(ctf: CtfMap) {
       return {
         fn: () => {
           try {
-            ctfNode.hooks.call(configFiles);
+            ctfNode.hooks.call(configFiles, ctf);
           } catch (e) {} // eslint-disable-line
         },
         // @HACK: If interfaces were defined, we could import the @alfredpkg/interface-*

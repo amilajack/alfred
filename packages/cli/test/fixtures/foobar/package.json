@@ -5,8 +5,14 @@
   "main": "index.js",
   "alfred": {
     "skills": [
+      "file:../../../../alfred-skill-prettier",
       "file:../../../../alfred-skill-eslint"
     ]
+  },
+  "dependencies": {
+    "@alfredpkg/skill-eslint": "file:../../../../alfred-skill-eslint",
+    "@alfredpkg/skill-prettier": "file:../../../../alfred-skill-prettier",
+    "prettier": "^1.15.3"
   },
   "devDependencies": {}
 }
