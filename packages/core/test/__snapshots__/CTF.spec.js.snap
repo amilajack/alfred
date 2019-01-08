@@ -26,6 +26,942 @@ Object {
 }
 `;
 
+exports[`CTF combination babel,eslint 1`] = `
+Array [
+  "babel",
+  "eslint",
+]
+`;
+
+exports[`CTF combination babel,eslint 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "parser": "babel-eslint",
+  },
+]
+`;
+
+exports[`CTF combination babel,eslint 3`] = `Object {}`;
+
+exports[`CTF combination babel,eslint 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-eslint": "5.0.0",
+  "eslint": "5.10.0",
+}
+`;
+
+exports[`CTF combination babel,eslint,jest 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "jest",
+]
+`;
+
+exports[`CTF combination babel,eslint,jest 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "jest",
+    ],
+  },
+  Object {},
+]
+`;
+
+exports[`CTF combination babel,eslint,jest 3`] = `Object {}`;
+
+exports[`CTF combination babel,eslint,jest 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-eslint": "5.0.0",
+  "babel-jest": "8.0.0",
+  "eslint": "5.10.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+}
+`;
+
+exports[`CTF combination babel,eslint,prettier 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "prettier",
+]
+`;
+
+exports[`CTF combination babel,eslint,prettier 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "extends": Array [
+      "prettier",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "prettier",
+    ],
+  },
+  Object {},
+]
+`;
+
+exports[`CTF combination babel,eslint,prettier 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination babel,eslint,prettier 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-eslint": "5.0.0",
+  "eslint": "5.10.0",
+  "prettier": "1.15.3",
+}
+`;
+
+exports[`CTF combination babel,eslint,prettier,jest 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "prettier",
+  "jest",
+]
+`;
+
+exports[`CTF combination babel,eslint,prettier,jest 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "extends": Array [
+      "prettier",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "jest",
+    ],
+  },
+  Object {},
+  Object {},
+]
+`;
+
+exports[`CTF combination babel,eslint,prettier,jest 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination babel,eslint,prettier,jest 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-eslint": "5.0.0",
+  "babel-jest": "8.0.0",
+  "eslint": "5.10.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+}
+`;
+
+exports[`CTF combination babel,jest 1`] = `
+Array [
+  "babel",
+  "jest",
+]
+`;
+
+exports[`CTF combination babel,jest 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {},
+]
+`;
+
+exports[`CTF combination babel,jest 3`] = `Object {}`;
+
+exports[`CTF combination babel,jest 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-jest": "8.0.0",
+  "jest": "5.0.0",
+}
+`;
+
+exports[`CTF combination babel,prettier 1`] = `
+Array [
+  "babel",
+  "prettier",
+]
+`;
+
+exports[`CTF combination babel,prettier 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {},
+]
+`;
+
+exports[`CTF combination babel,prettier 3`] = `Object {}`;
+
+exports[`CTF combination babel,prettier 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "prettier": "1.15.3",
+}
+`;
+
+exports[`CTF combination babel,prettier,jest 1`] = `
+Array [
+  "babel",
+  "prettier",
+  "jest",
+]
+`;
+
+exports[`CTF combination babel,prettier,jest 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {},
+  Object {},
+]
+`;
+
+exports[`CTF combination babel,prettier,jest 3`] = `Object {}`;
+
+exports[`CTF combination babel,prettier,jest 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-jest": "8.0.0",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+}
+`;
+
+exports[`CTF combination babel,webpack 1`] = `
+Array [
+  "babel",
+  "webpack",
+]
+`;
+
+exports[`CTF combination babel,webpack 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "devtool": "source-map",
+      "entry": "./app/main.dev",
+      "mode": "production",
+      "output": Object {
+        "filename": "./app/main.prod.js",
+        "path": "app",
+      },
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+      "target": "electron-main",
+    },
+    "output": Object {
+      "filename": "index.js",
+      "path": "/",
+      "publicPath": "./dist/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-loader": "5.0.0",
+  "webpack": "4.28.3",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "eslint",
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "devtool": "source-map",
+      "entry": "./app/main.dev",
+      "mode": "production",
+      "output": Object {
+        "filename": "./app/main.prod.js",
+        "path": "app",
+      },
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+      "target": "electron-main",
+    },
+    "output": Object {
+      "filename": "index.js",
+      "path": "/",
+      "publicPath": "./dist/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "parser": "babel-eslint",
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,eslint 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-eslint": "5.0.0",
+  "babel-loader": "5.0.0",
+  "eslint": "5.10.0",
+  "webpack": "4.28.3",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint,jest 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "eslint",
+  "jest",
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,jest 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "devtool": "source-map",
+      "entry": "./app/main.dev",
+      "mode": "production",
+      "output": Object {
+        "filename": "./app/main.prod.js",
+        "path": "app",
+      },
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+      "target": "electron-main",
+    },
+    "output": Object {
+      "filename": "index.js",
+      "path": "/",
+      "publicPath": "./dist/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "jest",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+    },
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,jest 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,eslint,jest 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-eslint": "5.0.0",
+  "babel-jest": "8.0.0",
+  "babel-loader": "5.0.0",
+  "eslint": "5.10.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "webpack": "4.28.3",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "eslint",
+  "prettier",
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "devtool": "source-map",
+      "entry": "./app/main.dev",
+      "mode": "production",
+      "output": Object {
+        "filename": "./app/main.prod.js",
+        "path": "app",
+      },
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+      "target": "electron-main",
+    },
+    "output": Object {
+      "filename": "index.js",
+      "path": "/",
+      "publicPath": "./dist/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "prettier",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "prettier",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+  Object {},
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-eslint": "5.0.0",
+  "babel-loader": "5.0.0",
+  "eslint": "5.10.0",
+  "prettier": "1.15.3",
+  "webpack": "4.28.3",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,jest 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "eslint",
+  "prettier",
+  "jest",
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,jest 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "devtool": "source-map",
+      "entry": "./app/main.dev",
+      "mode": "production",
+      "output": Object {
+        "filename": "./app/main.prod.js",
+        "path": "app",
+      },
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+      "target": "electron-main",
+    },
+    "output": Object {
+      "filename": "index.js",
+      "path": "/",
+      "publicPath": "./dist/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "prettier",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "jest",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+  Object {},
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+    },
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,jest 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,jest 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-eslint": "5.0.0",
+  "babel-jest": "8.0.0",
+  "babel-loader": "5.0.0",
+  "eslint": "5.10.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "webpack": "4.28.3",
+}
+`;
+
+exports[`CTF combination babel,webpack,jest 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "jest",
+]
+`;
+
+exports[`CTF combination babel,webpack,jest 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "devtool": "source-map",
+      "entry": "./app/main.dev",
+      "mode": "production",
+      "output": Object {
+        "filename": "./app/main.prod.js",
+        "path": "app",
+      },
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+      "target": "electron-main",
+    },
+    "output": Object {
+      "filename": "index.js",
+      "path": "/",
+      "publicPath": "./dist/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+    },
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,jest 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,jest 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-jest": "8.0.0",
+  "babel-loader": "5.0.0",
+  "jest": "5.0.0",
+  "webpack": "4.28.3",
+}
+`;
+
+exports[`CTF combination babel,webpack,prettier 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "prettier",
+]
+`;
+
+exports[`CTF combination babel,webpack,prettier 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "devtool": "source-map",
+      "entry": "./app/main.dev",
+      "mode": "production",
+      "output": Object {
+        "filename": "./app/main.prod.js",
+        "path": "app",
+      },
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+      "target": "electron-main",
+    },
+    "output": Object {
+      "filename": "index.js",
+      "path": "/",
+      "publicPath": "./dist/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {},
+]
+`;
+
+exports[`CTF combination babel,webpack,prettier 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,prettier 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-loader": "5.0.0",
+  "prettier": "1.15.3",
+  "webpack": "4.28.3",
+}
+`;
+
+exports[`CTF combination babel,webpack,prettier,jest 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "prettier",
+  "jest",
+]
+`;
+
+exports[`CTF combination babel,webpack,prettier,jest 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "devtool": "source-map",
+      "entry": "./app/main.dev",
+      "mode": "production",
+      "output": Object {
+        "filename": "./app/main.prod.js",
+        "path": "app",
+      },
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+      "target": "electron-main",
+    },
+    "output": Object {
+      "filename": "index.js",
+      "path": "/",
+      "publicPath": "./dist/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {},
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+    },
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,prettier,jest 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,prettier,jest 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-jest": "8.0.0",
+  "babel-loader": "5.0.0",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "webpack": "4.28.3",
+}
+`;
+
 exports[`CTF combination eslint 1`] = `
 Array [
   "eslint",
@@ -46,42 +982,112 @@ exports[`CTF combination eslint 3`] = `Object {}`;
 
 exports[`CTF combination eslint 4`] = `
 Object {
-  "eslint": "5.0.0",
+  "eslint": "5.10.0",
 }
 `;
 
-exports[`CTF combination eslint,babel 1`] = `
+exports[`CTF combination eslint,jest 1`] = `
 Array [
   "eslint",
-  "babel",
+  "jest",
 ]
 `;
 
-exports[`CTF combination eslint,babel 2`] = `
+exports[`CTF combination eslint,jest 2`] = `
 Array [
   Object {
     "extends": Array [
       "bliss",
     ],
-    "parser": "babel-eslint",
-  },
-  Object {
-    "extends": Array [
-      "@babel/preset-env",
+    "plugins": Array [
+      "jest",
     ],
   },
+  Object {},
 ]
 `;
 
-exports[`CTF combination eslint,babel 3`] = `Object {}`;
+exports[`CTF combination eslint,jest 3`] = `Object {}`;
 
-exports[`CTF combination eslint,babel 4`] = `
+exports[`CTF combination eslint,jest 4`] = `
 Object {
-  "@babel/cli": "7.2.0",
-  "@babel/core": "7.2.0",
-  "@babel/preset-env": "7.2.0",
-  "babel-eslint": "5.0.0",
-  "eslint": "5.0.0",
+  "eslint": "5.10.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+}
+`;
+
+exports[`CTF combination eslint,prettier 1`] = `
+Array [
+  "eslint",
+  "prettier",
+]
+`;
+
+exports[`CTF combination eslint,prettier 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "prettier",
+    ],
+    "plugins": Array [
+      "prettier",
+    ],
+  },
+  Object {},
+]
+`;
+
+exports[`CTF combination eslint,prettier 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination eslint,prettier 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "prettier": "1.15.3",
+}
+`;
+
+exports[`CTF combination eslint,prettier,jest 1`] = `
+Array [
+  "eslint",
+  "prettier",
+  "jest",
+]
+`;
+
+exports[`CTF combination eslint,prettier,jest 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "prettier",
+    ],
+    "plugins": Array [
+      "jest",
+    ],
+  },
+  Object {},
+  Object {},
+]
+`;
+
+exports[`CTF combination eslint,prettier,jest 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination eslint,prettier,jest 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
 }
 `;
 
@@ -105,1719 +1111,46 @@ Object {
 }
 `;
 
-exports[`CTF combination jest,babel 1`] = `
+exports[`CTF combination prettier 1`] = `
 Array [
-  "jest",
-  "babel",
+  "prettier",
 ]
 `;
 
-exports[`CTF combination jest,babel 2`] = `
-Array [
-  Object {},
-  Object {
-    "extends": Array [
-      "@babel/preset-env",
-    ],
-  },
-]
-`;
-
-exports[`CTF combination jest,babel 3`] = `Object {}`;
-
-exports[`CTF combination jest,babel 4`] = `
-Object {
-  "@babel/cli": "7.2.0",
-  "@babel/core": "7.2.0",
-  "@babel/preset-env": "7.2.0",
-  "babel-jest": "8.0.0",
-  "jest": "5.0.0",
-}
-`;
-
-exports[`CTF combination jest,eslint 1`] = `
-Array [
-  "jest",
-  "eslint",
-]
-`;
-
-exports[`CTF combination jest,eslint 2`] = `
+exports[`CTF combination prettier 2`] = `
 Array [
   Object {},
-  Object {
-    "extends": Array [
-      "bliss",
-    ],
-    "plugins": Array [
-      "jest",
-    ],
-  },
 ]
 `;
 
-exports[`CTF combination jest,eslint 3`] = `Object {}`;
+exports[`CTF combination prettier 3`] = `Object {}`;
 
-exports[`CTF combination jest,eslint 4`] = `
+exports[`CTF combination prettier 4`] = `
 Object {
-  "eslint": "5.0.0",
-  "eslint-plugin-jest": "8.0.0",
-  "jest": "5.0.0",
+  "prettier": "1.15.3",
 }
 `;
 
-exports[`CTF combination jest,eslint,babel 1`] = `
+exports[`CTF combination prettier,jest 1`] = `
 Array [
+  "prettier",
   "jest",
-  "eslint",
-  "babel",
 ]
 `;
 
-exports[`CTF combination jest,eslint,babel 2`] = `
+exports[`CTF combination prettier,jest 2`] = `
 Array [
   Object {},
-  Object {
-    "extends": Array [
-      "bliss",
-    ],
-    "parser": "babel-eslint",
-    "plugins": Array [
-      "jest",
-    ],
-  },
-  Object {
-    "extends": Array [
-      "@babel/preset-env",
-    ],
-  },
+  Object {},
 ]
 `;
 
-exports[`CTF combination jest,eslint,babel 3`] = `Object {}`;
+exports[`CTF combination prettier,jest 3`] = `Object {}`;
 
-exports[`CTF combination jest,eslint,babel 4`] = `
-Object {
-  "@babel/cli": "7.2.0",
-  "@babel/core": "7.2.0",
-  "@babel/preset-env": "7.2.0",
-  "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
-  "eslint": "5.0.0",
-  "eslint-plugin-jest": "8.0.0",
-  "jest": "5.0.0",
-}
-`;
-
-exports[`CTF combination jest,react 1`] = `
-Array [
-  "jest",
-  "react",
-]
-`;
-
-exports[`CTF combination jest,react 2`] = `
-Array [
-  Object {
-    "moduleFileExtensions": Array [
-      "js",
-      "jsx",
-      "json",
-    ],
-  },
-  "
-        import React, { Component } from 'react';
-
-        export default class Root extends Component {
-          render() {
-            const { store, history } = this.props;
-            return (
-              <Provider store={store}>
-                <ConnectedRouter history={history}>
-                  <Routes />
-                </ConnectedRouter>
-              </Provider>
-            );
-          }
-        }
-      ",
-  "
-        import * as React from 'react';
-
-        export default class App extends React.Component {
-          render() {
-            const { children } = this.props;
-            return <React.Fragment>{children}</React.Fragment>;
-          }
-        }
-      ",
-]
-`;
-
-exports[`CTF combination jest,react 3`] = `Object {}`;
-
-exports[`CTF combination jest,react 4`] = `
+exports[`CTF combination prettier,jest 4`] = `
 Object {
   "jest": "5.0.0",
-  "react": "0.16.0",
-}
-`;
-
-exports[`CTF combination jest,react,babel 1`] = `
-Array [
-  "jest",
-  "react",
-  "babel",
-]
-`;
-
-exports[`CTF combination jest,react,babel 2`] = `
-Array [
-  Object {
-    "moduleFileExtensions": Array [
-      "js",
-      "jsx",
-      "json",
-    ],
-  },
-  "
-        import React, { Component } from 'react';
-
-        export default class Root extends Component {
-          render() {
-            const { store, history } = this.props;
-            return (
-              <Provider store={store}>
-                <ConnectedRouter history={history}>
-                  <Routes />
-                </ConnectedRouter>
-              </Provider>
-            );
-          }
-        }
-      ",
-  "
-        import * as React from 'react';
-
-        export default class App extends React.Component {
-          render() {
-            const { children } = this.props;
-            return <React.Fragment>{children}</React.Fragment>;
-          }
-        }
-      ",
-  Object {
-    "extends": Array [
-      "@babel/preset-env",
-    ],
-    "plugins": Array [
-      "@babel/preset-react",
-    ],
-  },
-]
-`;
-
-exports[`CTF combination jest,react,babel 3`] = `Object {}`;
-
-exports[`CTF combination jest,react,babel 4`] = `
-Object {
-  "@babel/cli": "7.2.0",
-  "@babel/core": "7.2.0",
-  "@babel/preset-env": "7.2.0",
-  "@babel/preset-react": "7.0.0",
-  "babel-jest": "8.0.0",
-  "jest": "5.0.0",
-  "react": "0.16.0",
-}
-`;
-
-exports[`CTF combination jest,react,eslint 1`] = `
-Array [
-  "jest",
-  "react",
-  "eslint",
-]
-`;
-
-exports[`CTF combination jest,react,eslint 2`] = `
-Array [
-  Object {
-    "moduleFileExtensions": Array [
-      "js",
-      "jsx",
-      "json",
-    ],
-  },
-  "
-        import React, { Component } from 'react';
-
-        export default class Root extends Component {
-          render() {
-            const { store, history } = this.props;
-            return (
-              <Provider store={store}>
-                <ConnectedRouter history={history}>
-                  <Routes />
-                </ConnectedRouter>
-              </Provider>
-            );
-          }
-        }
-      ",
-  "
-        import * as React from 'react';
-
-        export default class App extends React.Component {
-          render() {
-            const { children } = this.props;
-            return <React.Fragment>{children}</React.Fragment>;
-          }
-        }
-      ",
-  Object {
-    "extends": Array [
-      "bliss",
-    ],
-    "plugins": Array [
-      "react",
-    ],
-  },
-]
-`;
-
-exports[`CTF combination jest,react,eslint 3`] = `Object {}`;
-
-exports[`CTF combination jest,react,eslint 4`] = `
-Object {
-  "eslint": "5.0.0",
-  "eslint-plugin-jest": "8.0.0",
-  "eslint-plugin-react": "7.0.0",
-  "jest": "5.0.0",
-  "react": "0.16.0",
-}
-`;
-
-exports[`CTF combination jest,react,eslint,babel 1`] = `
-Array [
-  "jest",
-  "react",
-  "eslint",
-  "babel",
-]
-`;
-
-exports[`CTF combination jest,react,eslint,babel 2`] = `
-Array [
-  Object {
-    "moduleFileExtensions": Array [
-      "js",
-      "jsx",
-      "json",
-    ],
-  },
-  "
-        import React, { Component } from 'react';
-
-        export default class Root extends Component {
-          render() {
-            const { store, history } = this.props;
-            return (
-              <Provider store={store}>
-                <ConnectedRouter history={history}>
-                  <Routes />
-                </ConnectedRouter>
-              </Provider>
-            );
-          }
-        }
-      ",
-  "
-        import * as React from 'react';
-
-        export default class App extends React.Component {
-          render() {
-            const { children } = this.props;
-            return <React.Fragment>{children}</React.Fragment>;
-          }
-        }
-      ",
-  Object {
-    "extends": Array [
-      "bliss",
-    ],
-    "parser": "babel-eslint",
-    "plugins": Array [
-      "react",
-    ],
-  },
-  Object {
-    "extends": Array [
-      "@babel/preset-env",
-    ],
-    "plugins": Array [
-      "@babel/preset-react",
-    ],
-  },
-]
-`;
-
-exports[`CTF combination jest,react,eslint,babel 3`] = `Object {}`;
-
-exports[`CTF combination jest,react,eslint,babel 4`] = `
-Object {
-  "@babel/cli": "7.2.0",
-  "@babel/core": "7.2.0",
-  "@babel/preset-env": "7.2.0",
-  "@babel/preset-react": "7.0.0",
-  "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
-  "eslint": "5.0.0",
-  "eslint-plugin-jest": "8.0.0",
-  "eslint-plugin-react": "7.0.0",
-  "jest": "5.0.0",
-  "react": "0.16.0",
-}
-`;
-
-exports[`CTF combination jest,react,webpack 1`] = `
-Array [
-  "jest",
-  "react",
-  "webpack",
-]
-`;
-
-exports[`CTF combination jest,react,webpack 2`] = `
-Array [
-  Object {
-    "moduleFileExtensions": Array [
-      "js",
-      "jsx",
-      "json",
-    ],
-    "moduleNameMapper": Object {
-      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
-    },
-  },
-  "
-        import React, { Component } from 'react';
-
-        export default class Root extends Component {
-          render() {
-            const { store, history } = this.props;
-            return (
-              <Provider store={store}>
-                <ConnectedRouter history={history}>
-                  <Routes />
-                </ConnectedRouter>
-              </Provider>
-            );
-          }
-        }
-      ",
-  "
-        import * as React from 'react';
-
-        export default class App extends React.Component {
-          render() {
-            const { children } = this.props;
-            return <React.Fragment>{children}</React.Fragment>;
-          }
-        }
-      ",
-  Object {
-    "module": Object {
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-    },
-    "output": Object {
-      "libraryTarget": "commonjs2",
-      "path": "path.join(__dirname, '..', 'app')",
-    },
-    "plugins": Array [],
-    "resolve": Object {
-      "extensions": Array [
-        ".js",
-        ".json",
-        ".jsx",
-      ],
-    },
-  },
-]
-`;
-
-exports[`CTF combination jest,react,webpack 3`] = `Object {}`;
-
-exports[`CTF combination jest,react,webpack 4`] = `
-Object {
-  "jest": "5.0.0",
-  "react": "0.16.0",
-  "webpack": "4.28.3",
-}
-`;
-
-exports[`CTF combination jest,react,webpack,babel 1`] = `
-Array [
-  "jest",
-  "react",
-  "webpack",
-  "babel",
-]
-`;
-
-exports[`CTF combination jest,react,webpack,babel 2`] = `
-Array [
-  Object {
-    "moduleFileExtensions": Array [
-      "js",
-      "jsx",
-      "json",
-    ],
-    "moduleNameMapper": Object {
-      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
-    },
-  },
-  "
-        import React, { Component } from 'react';
-
-        export default class Root extends Component {
-          render() {
-            const { store, history } = this.props;
-            return (
-              <Provider store={store}>
-                <ConnectedRouter history={history}>
-                  <Routes />
-                </ConnectedRouter>
-              </Provider>
-            );
-          }
-        }
-      ",
-  "
-        import * as React from 'react';
-
-        export default class App extends React.Component {
-          render() {
-            const { children } = this.props;
-            return <React.Fragment>{children}</React.Fragment>;
-          }
-        }
-      ",
-  Object {
-    "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-      "target": "electron-main",
-    },
-    "output": Object {
-      "libraryTarget": "commonjs2",
-      "path": "path.join(__dirname, '..', 'app')",
-    },
-    "plugins": Array [],
-    "resolve": Object {
-      "extensions": Array [
-        ".js",
-        ".json",
-        ".jsx",
-      ],
-    },
-  },
-  Object {
-    "extends": Array [
-      "@babel/preset-env",
-    ],
-    "plugins": Array [
-      "@babel/preset-react",
-    ],
-  },
-]
-`;
-
-exports[`CTF combination jest,react,webpack,babel 3`] = `Object {}`;
-
-exports[`CTF combination jest,react,webpack,babel 4`] = `
-Object {
-  "@babel/cli": "7.2.0",
-  "@babel/core": "7.2.0",
-  "@babel/preset-env": "7.2.0",
-  "@babel/preset-react": "7.0.0",
-  "babel-jest": "8.0.0",
-  "babel-loader": "5.0.0",
-  "jest": "5.0.0",
-  "react": "0.16.0",
-  "webpack": "4.28.3",
-}
-`;
-
-exports[`CTF combination jest,react,webpack,eslint 1`] = `
-Array [
-  "jest",
-  "react",
-  "webpack",
-  "eslint",
-]
-`;
-
-exports[`CTF combination jest,react,webpack,eslint 2`] = `
-Array [
-  Object {
-    "moduleFileExtensions": Array [
-      "js",
-      "jsx",
-      "json",
-    ],
-    "moduleNameMapper": Object {
-      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
-    },
-  },
-  "
-        import React, { Component } from 'react';
-
-        export default class Root extends Component {
-          render() {
-            const { store, history } = this.props;
-            return (
-              <Provider store={store}>
-                <ConnectedRouter history={history}>
-                  <Routes />
-                </ConnectedRouter>
-              </Provider>
-            );
-          }
-        }
-      ",
-  "
-        import * as React from 'react';
-
-        export default class App extends React.Component {
-          render() {
-            const { children } = this.props;
-            return <React.Fragment>{children}</React.Fragment>;
-          }
-        }
-      ",
-  Object {
-    "module": Object {
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-    },
-    "output": Object {
-      "libraryTarget": "commonjs2",
-      "path": "path.join(__dirname, '..', 'app')",
-    },
-    "plugins": Array [],
-    "resolve": Object {
-      "extensions": Array [
-        ".js",
-        ".json",
-        ".jsx",
-      ],
-    },
-  },
-  Object {
-    "extends": Array [
-      "bliss",
-    ],
-    "plugins": Array [
-      "react",
-    ],
-    "settings": Object {
-      "import/resolver": Object {
-        "webpack": Object {
-          "config": "configs/webpack.config.js",
-        },
-      },
-    },
-  },
-]
-`;
-
-exports[`CTF combination jest,react,webpack,eslint 3`] = `Object {}`;
-
-exports[`CTF combination jest,react,webpack,eslint 4`] = `
-Object {
-  "eslint": "5.0.0",
-  "eslint-plugin-jest": "8.0.0",
-  "eslint-plugin-react": "7.0.0",
-  "jest": "5.0.0",
-  "react": "0.16.0",
-  "webpack": "4.28.3",
-}
-`;
-
-exports[`CTF combination jest,react,webpack,eslint,babel 1`] = `
-Array [
-  "jest",
-  "react",
-  "webpack",
-  "eslint",
-  "babel",
-]
-`;
-
-exports[`CTF combination jest,react,webpack,eslint,babel 2`] = `
-Array [
-  Object {
-    "moduleFileExtensions": Array [
-      "js",
-      "jsx",
-      "json",
-    ],
-    "moduleNameMapper": Object {
-      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
-    },
-  },
-  "
-        import React, { Component } from 'react';
-
-        export default class Root extends Component {
-          render() {
-            const { store, history } = this.props;
-            return (
-              <Provider store={store}>
-                <ConnectedRouter history={history}>
-                  <Routes />
-                </ConnectedRouter>
-              </Provider>
-            );
-          }
-        }
-      ",
-  "
-        import * as React from 'react';
-
-        export default class App extends React.Component {
-          render() {
-            const { children } = this.props;
-            return <React.Fragment>{children}</React.Fragment>;
-          }
-        }
-      ",
-  Object {
-    "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-      "target": "electron-main",
-    },
-    "output": Object {
-      "libraryTarget": "commonjs2",
-      "path": "path.join(__dirname, '..', 'app')",
-    },
-    "plugins": Array [],
-    "resolve": Object {
-      "extensions": Array [
-        ".js",
-        ".json",
-        ".jsx",
-      ],
-    },
-  },
-  Object {
-    "extends": Array [
-      "bliss",
-    ],
-    "parser": "babel-eslint",
-    "plugins": Array [
-      "react",
-    ],
-    "settings": Object {
-      "import/resolver": Object {
-        "webpack": Object {
-          "config": "configs/webpack.config.js",
-        },
-      },
-    },
-  },
-  Object {
-    "extends": Array [
-      "@babel/preset-env",
-    ],
-    "plugins": Array [
-      "@babel/preset-react",
-    ],
-  },
-]
-`;
-
-exports[`CTF combination jest,react,webpack,eslint,babel 3`] = `Object {}`;
-
-exports[`CTF combination jest,react,webpack,eslint,babel 4`] = `
-Object {
-  "@babel/cli": "7.2.0",
-  "@babel/core": "7.2.0",
-  "@babel/preset-env": "7.2.0",
-  "@babel/preset-react": "7.0.0",
-  "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
-  "babel-loader": "5.0.0",
-  "eslint": "5.0.0",
-  "eslint-plugin-jest": "8.0.0",
-  "eslint-plugin-react": "7.0.0",
-  "jest": "5.0.0",
-  "react": "0.16.0",
-  "webpack": "4.28.3",
-}
-`;
-
-exports[`CTF combination jest,webpack 1`] = `
-Array [
-  "jest",
-  "webpack",
-]
-`;
-
-exports[`CTF combination jest,webpack 2`] = `
-Array [
-  Object {
-    "moduleNameMapper": Object {
-      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
-    },
-  },
-  Object {
-    "module": Object {
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-    },
-    "output": Object {
-      "libraryTarget": "commonjs2",
-      "path": "path.join(__dirname, '..', 'app')",
-    },
-    "plugins": Array [],
-    "resolve": Object {
-      "extensions": Array [
-        ".js",
-        ".json",
-      ],
-    },
-  },
-]
-`;
-
-exports[`CTF combination jest,webpack 3`] = `Object {}`;
-
-exports[`CTF combination jest,webpack 4`] = `
-Object {
-  "jest": "5.0.0",
-  "webpack": "4.28.3",
-}
-`;
-
-exports[`CTF combination jest,webpack,babel 1`] = `
-Array [
-  "jest",
-  "webpack",
-  "babel",
-]
-`;
-
-exports[`CTF combination jest,webpack,babel 2`] = `
-Array [
-  Object {
-    "moduleNameMapper": Object {
-      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
-    },
-  },
-  Object {
-    "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-      "target": "electron-main",
-    },
-    "output": Object {
-      "libraryTarget": "commonjs2",
-      "path": "path.join(__dirname, '..', 'app')",
-    },
-    "plugins": Array [],
-    "resolve": Object {
-      "extensions": Array [
-        ".js",
-        ".json",
-      ],
-    },
-  },
-  Object {
-    "extends": Array [
-      "@babel/preset-env",
-    ],
-  },
-]
-`;
-
-exports[`CTF combination jest,webpack,babel 3`] = `Object {}`;
-
-exports[`CTF combination jest,webpack,babel 4`] = `
-Object {
-  "@babel/cli": "7.2.0",
-  "@babel/core": "7.2.0",
-  "@babel/preset-env": "7.2.0",
-  "babel-jest": "8.0.0",
-  "babel-loader": "5.0.0",
-  "jest": "5.0.0",
-  "webpack": "4.28.3",
-}
-`;
-
-exports[`CTF combination jest,webpack,eslint 1`] = `
-Array [
-  "jest",
-  "webpack",
-  "eslint",
-]
-`;
-
-exports[`CTF combination jest,webpack,eslint 2`] = `
-Array [
-  Object {
-    "moduleNameMapper": Object {
-      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
-    },
-  },
-  Object {
-    "module": Object {
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-    },
-    "output": Object {
-      "libraryTarget": "commonjs2",
-      "path": "path.join(__dirname, '..', 'app')",
-    },
-    "plugins": Array [],
-    "resolve": Object {
-      "extensions": Array [
-        ".js",
-        ".json",
-      ],
-    },
-  },
-  Object {
-    "extends": Array [
-      "bliss",
-    ],
-    "plugins": Array [
-      "jest",
-    ],
-    "settings": Object {
-      "import/resolver": Object {
-        "webpack": Object {
-          "config": "configs/webpack.config.js",
-        },
-      },
-    },
-  },
-]
-`;
-
-exports[`CTF combination jest,webpack,eslint 3`] = `Object {}`;
-
-exports[`CTF combination jest,webpack,eslint 4`] = `
-Object {
-  "eslint": "5.0.0",
-  "eslint-plugin-jest": "8.0.0",
-  "jest": "5.0.0",
-  "webpack": "4.28.3",
-}
-`;
-
-exports[`CTF combination jest,webpack,eslint,babel 1`] = `
-Array [
-  "jest",
-  "webpack",
-  "eslint",
-  "babel",
-]
-`;
-
-exports[`CTF combination jest,webpack,eslint,babel 2`] = `
-Array [
-  Object {
-    "moduleNameMapper": Object {
-      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
-    },
-  },
-  Object {
-    "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-      "target": "electron-main",
-    },
-    "output": Object {
-      "libraryTarget": "commonjs2",
-      "path": "path.join(__dirname, '..', 'app')",
-    },
-    "plugins": Array [],
-    "resolve": Object {
-      "extensions": Array [
-        ".js",
-        ".json",
-      ],
-    },
-  },
-  Object {
-    "extends": Array [
-      "bliss",
-    ],
-    "parser": "babel-eslint",
-    "plugins": Array [
-      "jest",
-    ],
-    "settings": Object {
-      "import/resolver": Object {
-        "webpack": Object {
-          "config": "configs/webpack.config.js",
-        },
-      },
-    },
-  },
-  Object {
-    "extends": Array [
-      "@babel/preset-env",
-    ],
-  },
-]
-`;
-
-exports[`CTF combination jest,webpack,eslint,babel 3`] = `Object {}`;
-
-exports[`CTF combination jest,webpack,eslint,babel 4`] = `
-Object {
-  "@babel/cli": "7.2.0",
-  "@babel/core": "7.2.0",
-  "@babel/preset-env": "7.2.0",
-  "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
-  "babel-loader": "5.0.0",
-  "eslint": "5.0.0",
-  "eslint-plugin-jest": "8.0.0",
-  "jest": "5.0.0",
-  "webpack": "4.28.3",
-}
-`;
-
-exports[`CTF combination react 1`] = `
-Array [
-  "react",
-]
-`;
-
-exports[`CTF combination react 2`] = `
-Array [
-  "
-        import React, { Component } from 'react';
-
-        export default class Root extends Component {
-          render() {
-            const { store, history } = this.props;
-            return (
-              <Provider store={store}>
-                <ConnectedRouter history={history}>
-                  <Routes />
-                </ConnectedRouter>
-              </Provider>
-            );
-          }
-        }
-      ",
-  "
-        import * as React from 'react';
-
-        export default class App extends React.Component {
-          render() {
-            const { children } = this.props;
-            return <React.Fragment>{children}</React.Fragment>;
-          }
-        }
-      ",
-]
-`;
-
-exports[`CTF combination react 3`] = `Object {}`;
-
-exports[`CTF combination react 4`] = `
-Object {
-  "react": "0.16.0",
-}
-`;
-
-exports[`CTF combination react,babel 1`] = `
-Array [
-  "react",
-  "babel",
-]
-`;
-
-exports[`CTF combination react,babel 2`] = `
-Array [
-  "
-        import React, { Component } from 'react';
-
-        export default class Root extends Component {
-          render() {
-            const { store, history } = this.props;
-            return (
-              <Provider store={store}>
-                <ConnectedRouter history={history}>
-                  <Routes />
-                </ConnectedRouter>
-              </Provider>
-            );
-          }
-        }
-      ",
-  "
-        import * as React from 'react';
-
-        export default class App extends React.Component {
-          render() {
-            const { children } = this.props;
-            return <React.Fragment>{children}</React.Fragment>;
-          }
-        }
-      ",
-  Object {
-    "extends": Array [
-      "@babel/preset-env",
-    ],
-    "plugins": Array [
-      "@babel/preset-react",
-    ],
-  },
-]
-`;
-
-exports[`CTF combination react,babel 3`] = `Object {}`;
-
-exports[`CTF combination react,babel 4`] = `
-Object {
-  "@babel/cli": "7.2.0",
-  "@babel/core": "7.2.0",
-  "@babel/preset-env": "7.2.0",
-  "@babel/preset-react": "7.0.0",
-  "react": "0.16.0",
-}
-`;
-
-exports[`CTF combination react,eslint 1`] = `
-Array [
-  "react",
-  "eslint",
-]
-`;
-
-exports[`CTF combination react,eslint 2`] = `
-Array [
-  "
-        import React, { Component } from 'react';
-
-        export default class Root extends Component {
-          render() {
-            const { store, history } = this.props;
-            return (
-              <Provider store={store}>
-                <ConnectedRouter history={history}>
-                  <Routes />
-                </ConnectedRouter>
-              </Provider>
-            );
-          }
-        }
-      ",
-  "
-        import * as React from 'react';
-
-        export default class App extends React.Component {
-          render() {
-            const { children } = this.props;
-            return <React.Fragment>{children}</React.Fragment>;
-          }
-        }
-      ",
-  Object {
-    "extends": Array [
-      "bliss",
-    ],
-    "plugins": Array [
-      "react",
-    ],
-  },
-]
-`;
-
-exports[`CTF combination react,eslint 3`] = `Object {}`;
-
-exports[`CTF combination react,eslint 4`] = `
-Object {
-  "eslint": "5.0.0",
-  "eslint-plugin-react": "7.0.0",
-  "react": "0.16.0",
-}
-`;
-
-exports[`CTF combination react,eslint,babel 1`] = `
-Array [
-  "react",
-  "eslint",
-  "babel",
-]
-`;
-
-exports[`CTF combination react,eslint,babel 2`] = `
-Array [
-  "
-        import React, { Component } from 'react';
-
-        export default class Root extends Component {
-          render() {
-            const { store, history } = this.props;
-            return (
-              <Provider store={store}>
-                <ConnectedRouter history={history}>
-                  <Routes />
-                </ConnectedRouter>
-              </Provider>
-            );
-          }
-        }
-      ",
-  "
-        import * as React from 'react';
-
-        export default class App extends React.Component {
-          render() {
-            const { children } = this.props;
-            return <React.Fragment>{children}</React.Fragment>;
-          }
-        }
-      ",
-  Object {
-    "extends": Array [
-      "bliss",
-    ],
-    "parser": "babel-eslint",
-    "plugins": Array [
-      "react",
-    ],
-  },
-  Object {
-    "extends": Array [
-      "@babel/preset-env",
-    ],
-    "plugins": Array [
-      "@babel/preset-react",
-    ],
-  },
-]
-`;
-
-exports[`CTF combination react,eslint,babel 3`] = `Object {}`;
-
-exports[`CTF combination react,eslint,babel 4`] = `
-Object {
-  "@babel/cli": "7.2.0",
-  "@babel/core": "7.2.0",
-  "@babel/preset-env": "7.2.0",
-  "@babel/preset-react": "7.0.0",
-  "babel-eslint": "5.0.0",
-  "eslint": "5.0.0",
-  "eslint-plugin-react": "7.0.0",
-  "react": "0.16.0",
-}
-`;
-
-exports[`CTF combination react,webpack 1`] = `
-Array [
-  "react",
-  "webpack",
-]
-`;
-
-exports[`CTF combination react,webpack 2`] = `
-Array [
-  "
-        import React, { Component } from 'react';
-
-        export default class Root extends Component {
-          render() {
-            const { store, history } = this.props;
-            return (
-              <Provider store={store}>
-                <ConnectedRouter history={history}>
-                  <Routes />
-                </ConnectedRouter>
-              </Provider>
-            );
-          }
-        }
-      ",
-  "
-        import * as React from 'react';
-
-        export default class App extends React.Component {
-          render() {
-            const { children } = this.props;
-            return <React.Fragment>{children}</React.Fragment>;
-          }
-        }
-      ",
-  Object {
-    "module": Object {
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-    },
-    "output": Object {
-      "libraryTarget": "commonjs2",
-      "path": "path.join(__dirname, '..', 'app')",
-    },
-    "plugins": Array [],
-    "resolve": Object {
-      "extensions": Array [
-        ".js",
-        ".json",
-        ".jsx",
-      ],
-    },
-  },
-]
-`;
-
-exports[`CTF combination react,webpack 3`] = `Object {}`;
-
-exports[`CTF combination react,webpack 4`] = `
-Object {
-  "react": "0.16.0",
-  "webpack": "4.28.3",
-}
-`;
-
-exports[`CTF combination react,webpack,babel 1`] = `
-Array [
-  "react",
-  "webpack",
-  "babel",
-]
-`;
-
-exports[`CTF combination react,webpack,babel 2`] = `
-Array [
-  "
-        import React, { Component } from 'react';
-
-        export default class Root extends Component {
-          render() {
-            const { store, history } = this.props;
-            return (
-              <Provider store={store}>
-                <ConnectedRouter history={history}>
-                  <Routes />
-                </ConnectedRouter>
-              </Provider>
-            );
-          }
-        }
-      ",
-  "
-        import * as React from 'react';
-
-        export default class App extends React.Component {
-          render() {
-            const { children } = this.props;
-            return <React.Fragment>{children}</React.Fragment>;
-          }
-        }
-      ",
-  Object {
-    "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-      "target": "electron-main",
-    },
-    "output": Object {
-      "libraryTarget": "commonjs2",
-      "path": "path.join(__dirname, '..', 'app')",
-    },
-    "plugins": Array [],
-    "resolve": Object {
-      "extensions": Array [
-        ".js",
-        ".json",
-        ".jsx",
-      ],
-    },
-  },
-  Object {
-    "extends": Array [
-      "@babel/preset-env",
-    ],
-    "plugins": Array [
-      "@babel/preset-react",
-    ],
-  },
-]
-`;
-
-exports[`CTF combination react,webpack,babel 3`] = `Object {}`;
-
-exports[`CTF combination react,webpack,babel 4`] = `
-Object {
-  "@babel/cli": "7.2.0",
-  "@babel/core": "7.2.0",
-  "@babel/preset-env": "7.2.0",
-  "@babel/preset-react": "7.0.0",
-  "babel-loader": "5.0.0",
-  "react": "0.16.0",
-  "webpack": "4.28.3",
-}
-`;
-
-exports[`CTF combination react,webpack,eslint 1`] = `
-Array [
-  "react",
-  "webpack",
-  "eslint",
-]
-`;
-
-exports[`CTF combination react,webpack,eslint 2`] = `
-Array [
-  "
-        import React, { Component } from 'react';
-
-        export default class Root extends Component {
-          render() {
-            const { store, history } = this.props;
-            return (
-              <Provider store={store}>
-                <ConnectedRouter history={history}>
-                  <Routes />
-                </ConnectedRouter>
-              </Provider>
-            );
-          }
-        }
-      ",
-  "
-        import * as React from 'react';
-
-        export default class App extends React.Component {
-          render() {
-            const { children } = this.props;
-            return <React.Fragment>{children}</React.Fragment>;
-          }
-        }
-      ",
-  Object {
-    "module": Object {
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-    },
-    "output": Object {
-      "libraryTarget": "commonjs2",
-      "path": "path.join(__dirname, '..', 'app')",
-    },
-    "plugins": Array [],
-    "resolve": Object {
-      "extensions": Array [
-        ".js",
-        ".json",
-        ".jsx",
-      ],
-    },
-  },
-  Object {
-    "extends": Array [
-      "bliss",
-    ],
-    "plugins": Array [
-      "react",
-    ],
-    "settings": Object {
-      "import/resolver": Object {
-        "webpack": Object {
-          "config": "configs/webpack.config.js",
-        },
-      },
-    },
-  },
-]
-`;
-
-exports[`CTF combination react,webpack,eslint 3`] = `Object {}`;
-
-exports[`CTF combination react,webpack,eslint 4`] = `
-Object {
-  "eslint": "5.0.0",
-  "eslint-plugin-react": "7.0.0",
-  "react": "0.16.0",
-  "webpack": "4.28.3",
-}
-`;
-
-exports[`CTF combination react,webpack,eslint,babel 1`] = `
-Array [
-  "react",
-  "webpack",
-  "eslint",
-  "babel",
-]
-`;
-
-exports[`CTF combination react,webpack,eslint,babel 2`] = `
-Array [
-  "
-        import React, { Component } from 'react';
-
-        export default class Root extends Component {
-          render() {
-            const { store, history } = this.props;
-            return (
-              <Provider store={store}>
-                <ConnectedRouter history={history}>
-                  <Routes />
-                </ConnectedRouter>
-              </Provider>
-            );
-          }
-        }
-      ",
-  "
-        import * as React from 'react';
-
-        export default class App extends React.Component {
-          render() {
-            const { children } = this.props;
-            return <React.Fragment>{children}</React.Fragment>;
-          }
-        }
-      ",
-  Object {
-    "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-      "target": "electron-main",
-    },
-    "output": Object {
-      "libraryTarget": "commonjs2",
-      "path": "path.join(__dirname, '..', 'app')",
-    },
-    "plugins": Array [],
-    "resolve": Object {
-      "extensions": Array [
-        ".js",
-        ".json",
-        ".jsx",
-      ],
-    },
-  },
-  Object {
-    "extends": Array [
-      "bliss",
-    ],
-    "parser": "babel-eslint",
-    "plugins": Array [
-      "react",
-    ],
-    "settings": Object {
-      "import/resolver": Object {
-        "webpack": Object {
-          "config": "configs/webpack.config.js",
-        },
-      },
-    },
-  },
-  Object {
-    "extends": Array [
-      "@babel/preset-env",
-    ],
-    "plugins": Array [
-      "@babel/preset-react",
-    ],
-  },
-]
-`;
-
-exports[`CTF combination react,webpack,eslint,babel 3`] = `Object {}`;
-
-exports[`CTF combination react,webpack,eslint,babel 4`] = `
-Object {
-  "@babel/cli": "7.2.0",
-  "@babel/core": "7.2.0",
-  "@babel/preset-env": "7.2.0",
-  "@babel/preset-react": "7.0.0",
-  "babel-eslint": "5.0.0",
-  "babel-loader": "5.0.0",
-  "eslint": "5.0.0",
-  "eslint-plugin-react": "7.0.0",
-  "react": "0.16.0",
-  "webpack": "4.28.3",
+  "prettier": "1.15.3",
 }
 `;
 
@@ -1830,6 +1163,8 @@ Array [
 exports[`CTF combination webpack 2`] = `
 Array [
   Object {
+    "entry": "/",
+    "mode": "development",
     "module": Object {
       "rules": Array [
         Object {
@@ -1845,8 +1180,9 @@ Array [
       ],
     },
     "output": Object {
-      "libraryTarget": "commonjs2",
-      "path": "path.join(__dirname, '..', 'app')",
+      "filename": "index.js",
+      "path": "/",
+      "publicPath": "./dist/",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -1867,70 +1203,6 @@ Object {
 }
 `;
 
-exports[`CTF combination webpack,babel 1`] = `
-Array [
-  "webpack",
-  "babel",
-]
-`;
-
-exports[`CTF combination webpack,babel 2`] = `
-Array [
-  Object {
-    "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-      "target": "electron-main",
-    },
-    "output": Object {
-      "libraryTarget": "commonjs2",
-      "path": "path.join(__dirname, '..', 'app')",
-    },
-    "plugins": Array [],
-    "resolve": Object {
-      "extensions": Array [
-        ".js",
-        ".json",
-      ],
-    },
-  },
-  Object {
-    "extends": Array [
-      "@babel/preset-env",
-    ],
-  },
-]
-`;
-
-exports[`CTF combination webpack,babel 3`] = `Object {}`;
-
-exports[`CTF combination webpack,babel 4`] = `
-Object {
-  "@babel/cli": "7.2.0",
-  "@babel/core": "7.2.0",
-  "@babel/preset-env": "7.2.0",
-  "babel-loader": "5.0.0",
-  "webpack": "4.28.3",
-}
-`;
-
 exports[`CTF combination webpack,eslint 1`] = `
 Array [
   "webpack",
@@ -1941,6 +1213,8 @@ Array [
 exports[`CTF combination webpack,eslint 2`] = `
 Array [
   Object {
+    "entry": "/",
+    "mode": "development",
     "module": Object {
       "rules": Array [
         Object {
@@ -1956,8 +1230,9 @@ Array [
       ],
     },
     "output": Object {
-      "libraryTarget": "commonjs2",
-      "path": "path.join(__dirname, '..', 'app')",
+      "filename": "index.js",
+      "path": "/",
+      "publicPath": "./dist/",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -1986,30 +1261,25 @@ exports[`CTF combination webpack,eslint 3`] = `Object {}`;
 
 exports[`CTF combination webpack,eslint 4`] = `
 Object {
-  "eslint": "5.0.0",
+  "eslint": "5.10.0",
   "webpack": "4.28.3",
 }
 `;
 
-exports[`CTF combination webpack,eslint,babel 1`] = `
+exports[`CTF combination webpack,eslint,jest 1`] = `
 Array [
   "webpack",
   "eslint",
-  "babel",
+  "jest",
 ]
 `;
 
-exports[`CTF combination webpack,eslint,babel 2`] = `
+exports[`CTF combination webpack,eslint,jest 2`] = `
 Array [
   Object {
+    "entry": "/",
+    "mode": "development",
     "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
       "rules": Array [
         Object {
           "exclude": /node_modules/,
@@ -2022,11 +1292,11 @@ Array [
           },
         },
       ],
-      "target": "electron-main",
     },
     "output": Object {
-      "libraryTarget": "commonjs2",
-      "path": "path.join(__dirname, '..', 'app')",
+      "filename": "index.js",
+      "path": "/",
+      "publicPath": "./dist/",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -2040,7 +1310,9 @@ Array [
     "extends": Array [
       "bliss",
     ],
-    "parser": "babel-eslint",
+    "plugins": Array [
+      "jest",
+    ],
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
@@ -2050,23 +1322,347 @@ Array [
     },
   },
   Object {
-    "extends": Array [
-      "@babel/preset-env",
-    ],
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+    },
   },
 ]
 `;
 
-exports[`CTF combination webpack,eslint,babel 3`] = `Object {}`;
+exports[`CTF combination webpack,eslint,jest 3`] = `Object {}`;
 
-exports[`CTF combination webpack,eslint,babel 4`] = `
+exports[`CTF combination webpack,eslint,jest 4`] = `
 Object {
-  "@babel/cli": "7.2.0",
-  "@babel/core": "7.2.0",
-  "@babel/preset-env": "7.2.0",
-  "babel-eslint": "5.0.0",
-  "babel-loader": "5.0.0",
-  "eslint": "5.0.0",
+  "eslint": "5.10.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "webpack": "4.28.3",
+}
+`;
+
+exports[`CTF combination webpack,eslint,prettier 1`] = `
+Array [
+  "webpack",
+  "eslint",
+  "prettier",
+]
+`;
+
+exports[`CTF combination webpack,eslint,prettier 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "index.js",
+      "path": "/",
+      "publicPath": "./dist/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "prettier",
+    ],
+    "plugins": Array [
+      "prettier",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+  Object {},
+]
+`;
+
+exports[`CTF combination webpack,eslint,prettier 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination webpack,eslint,prettier 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "prettier": "1.15.3",
+  "webpack": "4.28.3",
+}
+`;
+
+exports[`CTF combination webpack,eslint,prettier,jest 1`] = `
+Array [
+  "webpack",
+  "eslint",
+  "prettier",
+  "jest",
+]
+`;
+
+exports[`CTF combination webpack,eslint,prettier,jest 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "index.js",
+      "path": "/",
+      "publicPath": "./dist/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "prettier",
+    ],
+    "plugins": Array [
+      "jest",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+  Object {},
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+    },
+  },
+]
+`;
+
+exports[`CTF combination webpack,eslint,prettier,jest 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination webpack,eslint,prettier,jest 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "webpack": "4.28.3",
+}
+`;
+
+exports[`CTF combination webpack,jest 1`] = `
+Array [
+  "webpack",
+  "jest",
+]
+`;
+
+exports[`CTF combination webpack,jest 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "index.js",
+      "path": "/",
+      "publicPath": "./dist/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+    },
+  },
+]
+`;
+
+exports[`CTF combination webpack,jest 3`] = `Object {}`;
+
+exports[`CTF combination webpack,jest 4`] = `
+Object {
+  "jest": "5.0.0",
+  "webpack": "4.28.3",
+}
+`;
+
+exports[`CTF combination webpack,prettier 1`] = `
+Array [
+  "webpack",
+  "prettier",
+]
+`;
+
+exports[`CTF combination webpack,prettier 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "index.js",
+      "path": "/",
+      "publicPath": "./dist/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {},
+]
+`;
+
+exports[`CTF combination webpack,prettier 3`] = `Object {}`;
+
+exports[`CTF combination webpack,prettier 4`] = `
+Object {
+  "prettier": "1.15.3",
+  "webpack": "4.28.3",
+}
+`;
+
+exports[`CTF combination webpack,prettier,jest 1`] = `
+Array [
+  "webpack",
+  "prettier",
+  "jest",
+]
+`;
+
+exports[`CTF combination webpack,prettier,jest 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "index.js",
+      "path": "/",
+      "publicPath": "./dist/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {},
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+    },
+  },
+]
+`;
+
+exports[`CTF combination webpack,prettier,jest 3`] = `Object {}`;
+
+exports[`CTF combination webpack,prettier,jest 4`] = `
+Object {
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
   "webpack": "4.28.3",
 }
 `;
