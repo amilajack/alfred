@@ -3,7 +3,7 @@ import espree from 'espree';
 import { expect as chaiExpect } from 'chai';
 import Providers, { handleInput } from '../../src/providers';
 
-jest.setTimeout(20000);
+jest.setTimeout(2000);
 
 function parseCodeSnippets(codeSnippets: Array<string> | void) {
   if (codeSnippets) {

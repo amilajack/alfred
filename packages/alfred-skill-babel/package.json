@@ -1,0 +1,17 @@
+{
+  "name": "@alfredpkg/skill-babel",
+  "version": "0.0.0",
+  "dependencies": {
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0"
+  },
+  "devDependencies": {
+    "@alfredpkg/core": "0.0.0",
+    "@alfredpkg/interface-test": "^0.0.0"
+  },
+  "peerDependencies": {
+    "@alfredpkg/core": "0.0.0",
+    "@alfredpkg/interface-test": "^0.0.0"
+  }
+}

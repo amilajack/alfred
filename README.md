@@ -30,8 +30,8 @@ cd my-app
 alfred start
 alfred build
 alfred format
-alfred search
 alfred test
+alfred search
 alfred doc
 alfred migrate
 

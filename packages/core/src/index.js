@@ -3,7 +3,13 @@ import path from 'path';
 import rimraf from 'rimraf';
 import fs from 'fs';
 import childProcess from 'child_process';
-import webpackMerge from 'webpack-merge';
+import jestCtf from '@alfredpkg/skill-jest';
+import babel from '@alfredpkg/skill-babel';
+import webpack from '@alfredpkg/skill-webpack';
+import eslint from '@alfredpkg/skill-eslint';
+import prettier from '@alfredpkg/skill-prettier';
+
+export const CORE_CTFS = { babel, webpack, eslint, prettier, jest: jestCtf };
 
 // @TODO send the information to a crash reporting service (like sentry.io)
 process.on('unhandledRejection', err => {
@@ -75,260 +81,6 @@ export function getConfigPathByConfigName(
   return config.path;
 }
 
-const babel: CtfNode = {
-  name: 'babel',
-  description: 'Transpile JS from ESNext to the latest ES version',
-  interface: '@alfredpkg/interface-transpile',
-  devDependencies: {
-    '@babel/cli': '7.2.0',
-    '@babel/core': '7.2.0',
-    '@babel/preset-env': '7.2.0'
-  },
-  configFiles: [
-    {
-      name: 'babel',
-      path: '.babelrc.js',
-      config: {
-        extends: ['@babel/preset-env']
-      }
-    }
-  ],
-  hooks: {
-    call(configFiles: Array<configFileType>) {
-      const configPath = getConfigPathByConfigName('babel', configFiles);
-      return `./node_modules/.bin/babel --configFile ${configPath}`;
-    }
-  },
-  ctfs: {
-    webpack(config) {
-      return config
-        .extendConfig('webpack.base', {
-          module: {
-            devtool: 'source-map',
-            mode: 'production',
-            target: 'electron-main',
-            entry: './app/main.dev',
-            output: {
-              path: 'app',
-              filename: './app/main.prod.js'
-            }
-          }
-        })
-        .addDevDependencies({ 'babel-loader': '5.0.0' });
-    },
-    eslint(config) {
-      return config
-        .extendConfig('eslint', {
-          parser: 'babel-eslint'
-        })
-        .addDevDependencies({ 'babel-eslint': '5.0.0' });
-    }
-  }
-};
-
-const eslint: CtfNode = {
-  name: 'eslint',
-  description: 'Lint all your JS files',
-  interface: '@alfredpkg/interface-lint',
-  devDependencies: { eslint: '5.0.0' },
-  configFiles: [
-    {
-      name: 'eslint',
-      path: '.eslintrc.json',
-      config: {
-        extends: ['bliss']
-      }
-    }
-  ],
-  hooks: {
-    call(configFiles: Array<configFileType>) {
-      const configPath = getConfigPathByConfigName('eslint', configFiles);
-      return `./node_modules/.bin/eslint --config ${configPath}`;
-    }
-  },
-  ctfs: {}
-};
-
-const webpack: CtfNode = {
-  name: 'webpack',
-  description: 'Build, optimize, and bundle assets in your app',
-  interface: '@alfredpkg/interface-build',
-  devDependencies: { webpack: '4.28.3' },
-  configFiles: [
-    {
-      name: 'webpack.base',
-      path: 'webpack.base.js',
-      config: {
-        module: {
-          rules: [
-            {
-              test: /\.jsx?$/,
-              exclude: /node_modules/,
-              use: {
-                loader: 'babel-loader',
-                options: {
-                  cacheDirectory: true
-                }
-              }
-            }
-          ]
-        },
-        output: {
-          path: "path.join(__dirname, '..', 'app')",
-          // https://github.com/webpack/webpack/issues/1114
-          libraryTarget: 'commonjs2'
-        },
-        resolve: {
-          extensions: ['.js', '.json']
-        },
-        plugins: []
-      }
-    }
-  ],
-  hooks: {
-    call(configFiles: Array<configFileType>) {
-      const configPath = getConfigPathByConfigName('webpack.base', configFiles);
-      return `./node_modules/.bin/webpack --config ${configPath}`;
-    }
-  },
-  ctfs: {
-    eslint: config =>
-      config.extendConfig('eslint', {
-        settings: {
-          'import/resolver': {
-            webpack: {
-              config: 'configs/webpack.config.js'
-            }
-          }
-        }
-      }),
-    jest: config =>
-      config.extendConfig('jest', {
-        moduleNameMapper: {
-          '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-            '<rootDir>/mocks/fileMock.js',
-          '\\.(css|less|sass|scss)$': 'identity-obj-proxy'
-        }
-      })
-  }
-};
-
-const react: CtfNode = {
-  name: 'react',
-  description:
-    'A declarative, efficient, and flexible JavaScript library for building user interfaces',
-  devDependencies: { react: '0.16.0' },
-  configFiles: [
-    {
-      name: 'root',
-      path: 'containers/Root.js',
-      config: `
-        import React, { Component } from 'react';
-
-        export default class Root extends Component {
-          render() {
-            const { store, history } = this.props;
-            return (
-              <Provider store={store}>
-                <ConnectedRouter history={history}>
-                  <Routes />
-                </ConnectedRouter>
-              </Provider>
-            );
-          }
-        }
-      `
-    },
-    {
-      name: 'app',
-      path: 'containers/App.js',
-      config: `
-        import * as React from 'react';
-
-        export default class App extends React.Component {
-          render() {
-            const { children } = this.props;
-            return <React.Fragment>{children}</React.Fragment>;
-          }
-        }
-      `
-    }
-  ],
-  ctfs: {
-    eslint: config =>
-      config
-        .addDevDependencies({
-          'eslint-plugin-react': '7.0.0'
-        })
-        .extendConfig('eslint', {
-          plugins: ['react']
-        }),
-    jest: config =>
-      config.extendConfig('jest', {
-        moduleFileExtensions: ['js', 'jsx', 'json']
-      }),
-    babel: config =>
-      config
-        .extendConfig('babel', {
-          plugins: ['@babel/preset-react']
-        })
-        .addDevDependencies({
-          '@babel/preset-react': '7.0.0'
-        }),
-    webpack: config => {
-      const newConfig = webpackMerge.smart(
-        config.findConfig('webpack.base').config,
-        {
-          resolve: {
-            extensions: ['.jsx']
-          }
-        }
-      );
-      return config.replaceConfig('webpack.base', {
-        ...config.findConfig('webpack.base'),
-        config: newConfig
-      });
-    }
-  }
-};
-
-// Can't use the identifier `jest` because collides with `jest` global when running
-// tests 😢
-const jestCtf: CtfNode = {
-  name: 'jest',
-  description: 'Test your JS files',
-  interface: '@alfredpkg/interface-test',
-  devDependencies: { jest: '5.0.0' },
-  configFiles: [
-    {
-      name: 'jest',
-      path: 'jest.config.js',
-      config: {}
-    }
-  ],
-  hooks: {
-    call(configFiles: Array<configFileType>) {
-      const configPath = getConfigPathByConfigName('jest', configFiles);
-      return `./node_modules/.bin/jest --config ${configPath}`;
-    }
-  },
-  ctfs: {
-    babel: config =>
-      config.addDevDependencies({
-        'babel-jest': '8.0.0'
-      }),
-    eslint: config =>
-      config
-        .addDevDependencies({
-          'eslint-plugin-jest': '8.0.0'
-        })
-        .extendConfig('eslint', {
-          plugins: ['jest']
-        })
-  }
-};
-export const CTFS = { jest: jestCtf, react, webpack, eslint, babel };
-
 type CtfHelpers = {
   findConfig: (configName: string) => { [x: string]: string },
   addDependencies: ({ [x: string]: string }) => { [x: string]: string },
@@ -387,6 +139,7 @@ const AddCtfHelpers: CtfHelpers = {
 };
 export default function CTF(ctfs: Array<CtfNode>): CtfMap {
   const map: CtfMap = new Map();
+
   ctfs.forEach(ctfNode => {
     const ctfWithHelpers = {
       ...ctfNode,

@@ -45,8 +45,9 @@ export function installDeps(
   }
 }
 
-export default async function generateCtfFromConfig() {
-  const pkgPath = path.join(process.cwd(), 'package.json');
+export default async function generateCtfFromConfig(
+  pkgPath = path.join(process.cwd(), 'package.json')
+) {
   if (!fs.existsSync(pkgPath)) {
     throw new Error('Current working directory does not have "package.json"');
   }
