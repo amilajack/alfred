@@ -308,7 +308,7 @@ Array [
     ],
   },
   Object {
-    "entry": "/Users/amila/Documents/Projects/alfred/packages/core/src/index.js",
+    "entry": "/",
     "mode": "development",
     "module": Object {
       "devtool": "source-map",
@@ -334,7 +334,7 @@ Array [
     },
     "output": Object {
       "filename": "index.js",
-      "path": "/Users/amila/Documents/Projects/alfred/packages/core/dist",
+      "path": "/",
       "publicPath": "./dist/",
     },
     "plugins": Array [],
@@ -376,7 +376,7 @@ Array [
     ],
   },
   Object {
-    "entry": "/Users/amila/Documents/Projects/alfred/packages/core/src/index.js",
+    "entry": "/",
     "mode": "development",
     "module": Object {
       "devtool": "source-map",
@@ -402,7 +402,7 @@ Array [
     },
     "output": Object {
       "filename": "index.js",
-      "path": "/Users/amila/Documents/Projects/alfred/packages/core/dist",
+      "path": "/",
       "publicPath": "./dist/",
     },
     "plugins": Array [],
@@ -460,7 +460,7 @@ Array [
     ],
   },
   Object {
-    "entry": "/Users/amila/Documents/Projects/alfred/packages/core/src/index.js",
+    "entry": "/",
     "mode": "development",
     "module": Object {
       "devtool": "source-map",
@@ -486,7 +486,7 @@ Array [
     },
     "output": Object {
       "filename": "index.js",
-      "path": "/Users/amila/Documents/Projects/alfred/packages/core/dist",
+      "path": "/",
       "publicPath": "./dist/",
     },
     "plugins": Array [],
@@ -556,7 +556,7 @@ Array [
     ],
   },
   Object {
-    "entry": "/Users/amila/Documents/Projects/alfred/packages/core/src/index.js",
+    "entry": "/",
     "mode": "development",
     "module": Object {
       "devtool": "source-map",
@@ -582,7 +582,7 @@ Array [
     },
     "output": Object {
       "filename": "index.js",
-      "path": "/Users/amila/Documents/Projects/alfred/packages/core/dist",
+      "path": "/",
       "publicPath": "./dist/",
     },
     "plugins": Array [],
@@ -651,7 +651,7 @@ Array [
     ],
   },
   Object {
-    "entry": "/Users/amila/Documents/Projects/alfred/packages/core/src/index.js",
+    "entry": "/",
     "mode": "development",
     "module": Object {
       "devtool": "source-map",
@@ -677,7 +677,7 @@ Array [
     },
     "output": Object {
       "filename": "index.js",
-      "path": "/Users/amila/Documents/Projects/alfred/packages/core/dist",
+      "path": "/",
       "publicPath": "./dist/",
     },
     "plugins": Array [],
@@ -753,7 +753,7 @@ Array [
     ],
   },
   Object {
-    "entry": "/Users/amila/Documents/Projects/alfred/packages/core/src/index.js",
+    "entry": "/",
     "mode": "development",
     "module": Object {
       "devtool": "source-map",
@@ -779,7 +779,7 @@ Array [
     },
     "output": Object {
       "filename": "index.js",
-      "path": "/Users/amila/Documents/Projects/alfred/packages/core/dist",
+      "path": "/",
       "publicPath": "./dist/",
     },
     "plugins": Array [],
@@ -829,7 +829,7 @@ Array [
     ],
   },
   Object {
-    "entry": "/Users/amila/Documents/Projects/alfred/packages/core/src/index.js",
+    "entry": "/",
     "mode": "development",
     "module": Object {
       "devtool": "source-map",
@@ -855,7 +855,7 @@ Array [
     },
     "output": Object {
       "filename": "index.js",
-      "path": "/Users/amila/Documents/Projects/alfred/packages/core/dist",
+      "path": "/",
       "publicPath": "./dist/",
     },
     "plugins": Array [],
@@ -900,7 +900,7 @@ Array [
     ],
   },
   Object {
-    "entry": "/Users/amila/Documents/Projects/alfred/packages/core/src/index.js",
+    "entry": "/",
     "mode": "development",
     "module": Object {
       "devtool": "source-map",
@@ -926,7 +926,7 @@ Array [
     },
     "output": Object {
       "filename": "index.js",
-      "path": "/Users/amila/Documents/Projects/alfred/packages/core/dist",
+      "path": "/",
       "publicPath": "./dist/",
     },
     "plugins": Array [],
@@ -1163,7 +1163,7 @@ Array [
 exports[`CTF combination webpack 2`] = `
 Array [
   Object {
-    "entry": "/Users/amila/Documents/Projects/alfred/packages/core/src/index.js",
+    "entry": "/",
     "mode": "development",
     "module": Object {
       "rules": Array [
@@ -1181,7 +1181,7 @@ Array [
     },
     "output": Object {
       "filename": "index.js",
-      "path": "/Users/amila/Documents/Projects/alfred/packages/core/dist",
+      "path": "/",
       "publicPath": "./dist/",
     },
     "plugins": Array [],
@@ -1213,7 +1213,7 @@ Array [
 exports[`CTF combination webpack,eslint 2`] = `
 Array [
   Object {
-    "entry": "/Users/amila/Documents/Projects/alfred/packages/core/src/index.js",
+    "entry": "/",
     "mode": "development",
     "module": Object {
       "rules": Array [
@@ -1231,7 +1231,7 @@ Array [
     },
     "output": Object {
       "filename": "index.js",
-      "path": "/Users/amila/Documents/Projects/alfred/packages/core/dist",
+      "path": "/",
       "publicPath": "./dist/",
     },
     "plugins": Array [],
@@ -1277,7 +1277,7 @@ Array [
 exports[`CTF combination webpack,eslint,jest 2`] = `
 Array [
   Object {
-    "entry": "/Users/amila/Documents/Projects/alfred/packages/core/src/index.js",
+    "entry": "/",
     "mode": "development",
     "module": Object {
       "rules": Array [
@@ -1295,7 +1295,7 @@ Array [
     },
     "output": Object {
       "filename": "index.js",
-      "path": "/Users/amila/Documents/Projects/alfred/packages/core/dist",
+      "path": "/",
       "publicPath": "./dist/",
     },
     "plugins": Array [],
@@ -1352,7 +1352,7 @@ Array [
 exports[`CTF combination webpack,eslint,prettier 2`] = `
 Array [
   Object {
-    "entry": "/Users/amila/Documents/Projects/alfred/packages/core/src/index.js",
+    "entry": "/",
     "mode": "development",
     "module": Object {
       "rules": Array [
@@ -1370,7 +1370,7 @@ Array [
     },
     "output": Object {
       "filename": "index.js",
-      "path": "/Users/amila/Documents/Projects/alfred/packages/core/dist",
+      "path": "/",
       "publicPath": "./dist/",
     },
     "plugins": Array [],
@@ -1427,7 +1427,7 @@ Array [
 exports[`CTF combination webpack,eslint,prettier,jest 2`] = `
 Array [
   Object {
-    "entry": "/Users/amila/Documents/Projects/alfred/packages/core/src/index.js",
+    "entry": "/",
     "mode": "development",
     "module": Object {
       "rules": Array [
@@ -1445,7 +1445,7 @@ Array [
     },
     "output": Object {
       "filename": "index.js",
-      "path": "/Users/amila/Documents/Projects/alfred/packages/core/dist",
+      "path": "/",
       "publicPath": "./dist/",
     },
     "plugins": Array [],
@@ -1508,7 +1508,7 @@ Array [
 exports[`CTF combination webpack,jest 2`] = `
 Array [
   Object {
-    "entry": "/Users/amila/Documents/Projects/alfred/packages/core/src/index.js",
+    "entry": "/",
     "mode": "development",
     "module": Object {
       "rules": Array [
@@ -1526,7 +1526,7 @@ Array [
     },
     "output": Object {
       "filename": "index.js",
-      "path": "/Users/amila/Documents/Projects/alfred/packages/core/dist",
+      "path": "/",
       "publicPath": "./dist/",
     },
     "plugins": Array [],
@@ -1565,7 +1565,7 @@ Array [
 exports[`CTF combination webpack,prettier 2`] = `
 Array [
   Object {
-    "entry": "/Users/amila/Documents/Projects/alfred/packages/core/src/index.js",
+    "entry": "/",
     "mode": "development",
     "module": Object {
       "rules": Array [
@@ -1583,7 +1583,7 @@ Array [
     },
     "output": Object {
       "filename": "index.js",
-      "path": "/Users/amila/Documents/Projects/alfred/packages/core/dist",
+      "path": "/",
       "publicPath": "./dist/",
     },
     "plugins": Array [],
@@ -1618,7 +1618,7 @@ Array [
 exports[`CTF combination webpack,prettier,jest 2`] = `
 Array [
   Object {
-    "entry": "/Users/amila/Documents/Projects/alfred/packages/core/src/index.js",
+    "entry": "/",
     "mode": "development",
     "module": Object {
       "rules": Array [
@@ -1636,7 +1636,7 @@ Array [
     },
     "output": Object {
       "filename": "index.js",
-      "path": "/Users/amila/Documents/Projects/alfred/packages/core/dist",
+      "path": "/",
       "publicPath": "./dist/",
     },
     "plugins": Array [],

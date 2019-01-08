@@ -1,4 +1,5 @@
-/* eslint no-restricted-syntax: off, import/no-extraneous-dependencies: off */
+/* eslint no-restricted-syntax: off, import/no-extraneous-dependencies: off, guard-for-in: off, no-param-reassign: off */
+import os from 'os';
 import powerset from '@amilajack/powerset';
 
 import CTF, {
@@ -8,6 +9,21 @@ import CTF, {
   getDevDependencies,
   getExecuteWrittenConfigsMethods
 } from '../src';
+
+function removePathsPropertiesFromObject(obj) {
+  for (const key in obj) {
+    const value = obj[key];
+
+    if (typeof value === 'object') {
+      removePathsPropertiesFromObject(value);
+    }
+
+    if (typeof value === 'string' && value.includes(os.homedir())) {
+      obj[key] = '/';
+    }
+  }
+  return obj;
+}
 
 describe('CTF', () => {
   describe('executors', () => {
@@ -31,7 +47,9 @@ describe('CTF', () => {
       // Get the CTFs for each combination
       const filteredCtfs = ctfCombination.map(ctfName => CORE_CTFS[ctfName]);
       const result = CTF(filteredCtfs);
-      expect(getConfigs(result)).toMatchSnapshot();
+      expect(
+        removePathsPropertiesFromObject(getConfigs(result))
+      ).toMatchSnapshot();
       expect(getDependencies(result)).toMatchSnapshot();
       expect(getDevDependencies(result)).toMatchSnapshot();
     });
