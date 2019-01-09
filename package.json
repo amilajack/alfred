@@ -1,11 +1,12 @@
 {
   "name": "alfred-cli",
   "version": "0.0.1-12",
-  "description": "A framework for upgrading javascript codebases",
+  "description": "A framework for upgrading JavaScript codebases",
   "preferGlobal": true,
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "website"
   ],
   "repository": "git@github.com:amilajack/alfred.git",
   "author": "Amila Welihinda <amilajack@gmail.com>",
@@ -15,6 +16,10 @@
     "flow-typed": "lerna run flow-typed",
     "lint": "eslint .",
     "test": "cross-env NODE_ENV=test lerna run build && yarn lint && lerna run flow && lerna run test",
+    "website:build": "yarn workspace @alfredpkg/site build",
+    "website:start": "yarn workspace @alfredpkg/site start",
+    "website:test": "yarn website:build",
+    "website:version": "yarn workspace @alfredpkg/site version",
     "version": "lerna run build:clean && lerna run build"
   },
   "devDependencies": {
