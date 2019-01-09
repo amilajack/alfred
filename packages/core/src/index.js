@@ -7,9 +7,17 @@ import jestCtf from '@alfredpkg/skill-jest';
 import babel from '@alfredpkg/skill-babel';
 import webpack from '@alfredpkg/skill-webpack';
 import eslint from '@alfredpkg/skill-eslint';
+import react from '@alfredpkg/skill-react';
 import prettier from '@alfredpkg/skill-prettier';
 
-export const CORE_CTFS = { babel, webpack, eslint, prettier, jest: jestCtf };
+export const CORE_CTFS = {
+  babel,
+  webpack,
+  eslint,
+  prettier,
+  jest: jestCtf,
+  react
+};
 
 // @TODO send the information to a crash reporting service (like sentry.io)
 process.on('unhandledRejection', err => {
@@ -164,7 +172,7 @@ export default function CTF(ctfs: Array<CtfNode>): CtfMap {
  */
 export function getConfigs(ctf: CtfMap): Array<{ [x: string]: any }> {
   return Array.from(ctf.values())
-    .map(ctfNode => ctfNode.configFiles)
+    .map(ctfNode => ctfNode.configFiles || [])
     .reduce((p, c) => [...p, ...c], [])
     .map(e => e.config);
 }
@@ -181,7 +189,7 @@ export async function writeConfigsFromCtf(ctf: CtfMap) {
   });
   // Create a new .configs dir and write the configs
   const configs = Array.from(ctf.values())
-    .map(ctfNode => ctfNode.configFiles)
+    .map(ctfNode => ctfNode.configFiles || [])
     .reduce((p, c) => [...p, ...c], []);
   await fs.promises.mkdir(configsBasePath);
   await Promise.all(

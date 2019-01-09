@@ -104,6 +104,76 @@ Object {
 }
 `;
 
+exports[`CTF combination babel,eslint,jest,react 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "jest",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,eslint,jest,react 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "jest",
+    ],
+  },
+  Object {},
+]
+`;
+
+exports[`CTF combination babel,eslint,jest,react 3`] = `Object {}`;
+
+exports[`CTF combination babel,eslint,jest,react 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "babel-jest": "8.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+}
+`;
+
 exports[`CTF combination babel,eslint,prettier 1`] = `
 Array [
   "babel",
@@ -201,6 +271,219 @@ Object {
 }
 `;
 
+exports[`CTF combination babel,eslint,prettier,jest,react 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "prettier",
+  "jest",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,eslint,prettier,jest,react 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "jest",
+    ],
+  },
+  Object {},
+  Object {},
+]
+`;
+
+exports[`CTF combination babel,eslint,prettier,jest,react 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination babel,eslint,prettier,jest,react 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "babel-jest": "8.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+}
+`;
+
+exports[`CTF combination babel,eslint,prettier,react 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "prettier",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,eslint,prettier,react 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "prettier",
+    ],
+  },
+  Object {},
+]
+`;
+
+exports[`CTF combination babel,eslint,prettier,react 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination babel,eslint,prettier,react 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+}
+`;
+
+exports[`CTF combination babel,eslint,react 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,eslint,react 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "parser": "babel-eslint",
+  },
+]
+`;
+
+exports[`CTF combination babel,eslint,react 3`] = `Object {}`;
+
+exports[`CTF combination babel,eslint,react 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+}
+`;
+
 exports[`CTF combination babel,jest 1`] = `
 Array [
   "babel",
@@ -228,6 +511,62 @@ Object {
   "@babel/preset-env": "7.2.0",
   "babel-jest": "8.0.0",
   "jest": "5.0.0",
+}
+`;
+
+exports[`CTF combination babel,jest,react 1`] = `
+Array [
+  "babel",
+  "jest",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,jest,react 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {},
+]
+`;
+
+exports[`CTF combination babel,jest,react 3`] = `Object {}`;
+
+exports[`CTF combination babel,jest,react 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-jest": "8.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "jest": "5.0.0",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
 }
 `;
 
@@ -290,6 +629,172 @@ Object {
   "babel-jest": "8.0.0",
   "jest": "5.0.0",
   "prettier": "1.15.3",
+}
+`;
+
+exports[`CTF combination babel,prettier,jest,react 1`] = `
+Array [
+  "babel",
+  "prettier",
+  "jest",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,prettier,jest,react 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {},
+  Object {},
+]
+`;
+
+exports[`CTF combination babel,prettier,jest,react 3`] = `Object {}`;
+
+exports[`CTF combination babel,prettier,jest,react 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-jest": "8.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+}
+`;
+
+exports[`CTF combination babel,prettier,react 1`] = `
+Array [
+  "babel",
+  "prettier",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,prettier,react 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {},
+]
+`;
+
+exports[`CTF combination babel,prettier,react 3`] = `Object {}`;
+
+exports[`CTF combination babel,prettier,react 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+}
+`;
+
+exports[`CTF combination babel,react 1`] = `
+Array [
+  "babel",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,react 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,react 3`] = `Object {}`;
+
+exports[`CTF combination babel,react 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
 }
 `;
 
@@ -518,6 +1023,122 @@ Object {
 }
 `;
 
+exports[`CTF combination babel,webpack,eslint,jest,react 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "eslint",
+  "jest",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,jest,react 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "jest",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+    },
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,jest,react 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,eslint,jest,react 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "babel-jest": "8.0.0",
+  "babel-loader": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
 exports[`CTF combination babel,webpack,eslint,prettier 1`] = `
 Array [
   "babel",
@@ -702,6 +1323,347 @@ Object {
 }
 `;
 
+exports[`CTF combination babel,webpack,eslint,prettier,jest,react 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "eslint",
+  "prettier",
+  "jest",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,jest,react 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "jest",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+  Object {},
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+    },
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,jest,react 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,jest,react 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "babel-jest": "8.0.0",
+  "babel-loader": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,react 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "eslint",
+  "prettier",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,react 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "prettier",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+  Object {},
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,react 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,react 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "babel-loader": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint,react 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "eslint",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,react 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "parser": "babel-eslint",
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,react 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,eslint,react 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "babel-loader": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
 exports[`CTF combination babel,webpack,jest 1`] = `
 Array [
   "babel",
@@ -766,6 +1728,101 @@ Object {
   "babel-jest": "8.0.0",
   "babel-loader": "5.0.0",
   "jest": "5.0.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,jest,react 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "jest",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,webpack,jest,react 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+    },
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,jest,react 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,jest,react 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-jest": "8.0.0",
+  "babel-loader": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "jest": "5.0.0",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
 }
@@ -906,6 +1963,279 @@ Object {
 }
 `;
 
+exports[`CTF combination babel,webpack,prettier,jest,react 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "prettier",
+  "jest",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,webpack,prettier,jest,react 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {},
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+    },
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,prettier,jest,react 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,prettier,jest,react 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-jest": "8.0.0",
+  "babel-loader": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,prettier,react 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "prettier",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,webpack,prettier,react 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {},
+]
+`;
+
+exports[`CTF combination babel,webpack,prettier,react 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,prettier,react 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-loader": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,react 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,webpack,react 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,react 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,react 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-loader": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
 exports[`CTF combination eslint 1`] = `
 Array [
   "eslint",
@@ -958,6 +2288,40 @@ Object {
   "eslint": "5.10.0",
   "eslint-plugin-jest": "8.0.0",
   "jest": "5.0.0",
+}
+`;
+
+exports[`CTF combination eslint,jest,react 1`] = `
+Array [
+  "eslint",
+  "jest",
+  "react",
+]
+`;
+
+exports[`CTF combination eslint,jest,react 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "plugins": Array [
+      "jest",
+    ],
+  },
+  Object {},
+]
+`;
+
+exports[`CTF combination eslint,jest,react 3`] = `Object {}`;
+
+exports[`CTF combination eslint,jest,react 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "react": "0.16.0",
 }
 `;
 
@@ -1035,6 +2399,113 @@ Object {
 }
 `;
 
+exports[`CTF combination eslint,prettier,jest,react 1`] = `
+Array [
+  "eslint",
+  "prettier",
+  "jest",
+  "react",
+]
+`;
+
+exports[`CTF combination eslint,prettier,jest,react 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "plugins": Array [
+      "jest",
+    ],
+  },
+  Object {},
+  Object {},
+]
+`;
+
+exports[`CTF combination eslint,prettier,jest,react 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination eslint,prettier,jest,react 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+}
+`;
+
+exports[`CTF combination eslint,prettier,react 1`] = `
+Array [
+  "eslint",
+  "prettier",
+  "react",
+]
+`;
+
+exports[`CTF combination eslint,prettier,react 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "plugins": Array [
+      "prettier",
+    ],
+  },
+  Object {},
+]
+`;
+
+exports[`CTF combination eslint,prettier,react 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination eslint,prettier,react 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+}
+`;
+
+exports[`CTF combination eslint,react 1`] = `
+Array [
+  "eslint",
+  "react",
+]
+`;
+
+exports[`CTF combination eslint,react 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+  },
+]
+`;
+
+exports[`CTF combination eslint,react 3`] = `Object {}`;
+
+exports[`CTF combination eslint,react 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "react": "0.16.0",
+}
+`;
+
 exports[`CTF combination jest 1`] = `
 Array [
   "jest",
@@ -1052,6 +2523,28 @@ exports[`CTF combination jest 3`] = `Object {}`;
 exports[`CTF combination jest 4`] = `
 Object {
   "jest": "5.0.0",
+}
+`;
+
+exports[`CTF combination jest,react 1`] = `
+Array [
+  "jest",
+  "react",
+]
+`;
+
+exports[`CTF combination jest,react 2`] = `
+Array [
+  Object {},
+]
+`;
+
+exports[`CTF combination jest,react 3`] = `Object {}`;
+
+exports[`CTF combination jest,react 4`] = `
+Object {
+  "jest": "5.0.0",
+  "react": "0.16.0",
 }
 `;
 
@@ -1095,6 +2588,69 @@ exports[`CTF combination prettier,jest 4`] = `
 Object {
   "jest": "5.0.0",
   "prettier": "1.15.3",
+}
+`;
+
+exports[`CTF combination prettier,jest,react 1`] = `
+Array [
+  "prettier",
+  "jest",
+  "react",
+]
+`;
+
+exports[`CTF combination prettier,jest,react 2`] = `
+Array [
+  Object {},
+  Object {},
+]
+`;
+
+exports[`CTF combination prettier,jest,react 3`] = `Object {}`;
+
+exports[`CTF combination prettier,jest,react 4`] = `
+Object {
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+}
+`;
+
+exports[`CTF combination prettier,react 1`] = `
+Array [
+  "prettier",
+  "react",
+]
+`;
+
+exports[`CTF combination prettier,react 2`] = `
+Array [
+  Object {},
+]
+`;
+
+exports[`CTF combination prettier,react 3`] = `Object {}`;
+
+exports[`CTF combination prettier,react 4`] = `
+Object {
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+}
+`;
+
+exports[`CTF combination react 1`] = `
+Array [
+  "react",
+]
+`;
+
+exports[`CTF combination react 2`] = `Array []`;
+
+exports[`CTF combination react 3`] = `Object {}`;
+
+exports[`CTF combination react 4`] = `
+Object {
+  "react": "0.16.0",
 }
 `;
 
@@ -1246,6 +2802,71 @@ Object {
 }
 `;
 
+exports[`CTF combination webpack,eslint,jest,react 1`] = `
+Array [
+  "webpack",
+  "eslint",
+  "jest",
+  "react",
+]
+`;
+
+exports[`CTF combination webpack,eslint,jest,react 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "plugins": Array [
+      "jest",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+    },
+  },
+]
+`;
+
+exports[`CTF combination webpack,eslint,jest,react 3`] = `Object {}`;
+
+exports[`CTF combination webpack,eslint,jest,react 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "react": "0.16.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
 exports[`CTF combination webpack,eslint,prettier 1`] = `
 Array [
   "webpack",
@@ -1377,6 +2998,196 @@ Object {
 }
 `;
 
+exports[`CTF combination webpack,eslint,prettier,jest,react 1`] = `
+Array [
+  "webpack",
+  "eslint",
+  "prettier",
+  "jest",
+  "react",
+]
+`;
+
+exports[`CTF combination webpack,eslint,prettier,jest,react 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "plugins": Array [
+      "jest",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+  Object {},
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+    },
+  },
+]
+`;
+
+exports[`CTF combination webpack,eslint,prettier,jest,react 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination webpack,eslint,prettier,jest,react 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination webpack,eslint,prettier,react 1`] = `
+Array [
+  "webpack",
+  "eslint",
+  "prettier",
+  "react",
+]
+`;
+
+exports[`CTF combination webpack,eslint,prettier,react 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "plugins": Array [
+      "prettier",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+  Object {},
+]
+`;
+
+exports[`CTF combination webpack,eslint,prettier,react 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination webpack,eslint,prettier,react 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination webpack,eslint,react 1`] = `
+Array [
+  "webpack",
+  "eslint",
+  "react",
+]
+`;
+
+exports[`CTF combination webpack,eslint,react 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "configs/webpack.config.js",
+        },
+      },
+    },
+  },
+]
+`;
+
+exports[`CTF combination webpack,eslint,react 3`] = `Object {}`;
+
+exports[`CTF combination webpack,eslint,react 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "react": "0.16.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
 exports[`CTF combination webpack,jest 1`] = `
 Array [
   "webpack",
@@ -1416,6 +3227,52 @@ exports[`CTF combination webpack,jest 3`] = `Object {}`;
 exports[`CTF combination webpack,jest 4`] = `
 Object {
   "jest": "5.0.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination webpack,jest,react 1`] = `
+Array [
+  "webpack",
+  "jest",
+  "react",
+]
+`;
+
+exports[`CTF combination webpack,jest,react 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+    },
+  },
+]
+`;
+
+exports[`CTF combination webpack,jest,react 3`] = `Object {}`;
+
+exports[`CTF combination webpack,jest,react 4`] = `
+Object {
+  "jest": "5.0.0",
+  "react": "0.16.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
 }
@@ -1502,6 +3359,134 @@ exports[`CTF combination webpack,prettier,jest 4`] = `
 Object {
   "jest": "5.0.0",
   "prettier": "1.15.3",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination webpack,prettier,jest,react 1`] = `
+Array [
+  "webpack",
+  "prettier",
+  "jest",
+  "react",
+]
+`;
+
+exports[`CTF combination webpack,prettier,jest,react 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {},
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+    },
+  },
+]
+`;
+
+exports[`CTF combination webpack,prettier,jest,react 3`] = `Object {}`;
+
+exports[`CTF combination webpack,prettier,jest,react 4`] = `
+Object {
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination webpack,prettier,react 1`] = `
+Array [
+  "webpack",
+  "prettier",
+  "react",
+]
+`;
+
+exports[`CTF combination webpack,prettier,react 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {},
+]
+`;
+
+exports[`CTF combination webpack,prettier,react 3`] = `Object {}`;
+
+exports[`CTF combination webpack,prettier,react 4`] = `
+Object {
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination webpack,react 1`] = `
+Array [
+  "webpack",
+  "react",
+]
+`;
+
+exports[`CTF combination webpack,react 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+]
+`;
+
+exports[`CTF combination webpack,react 3`] = `Object {}`;
+
+exports[`CTF combination webpack,react 4`] = `
+Object {
+  "react": "0.16.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
 }
