@@ -335,7 +335,7 @@ Array [
     "output": Object {
       "filename": "index.js",
       "path": "/",
-      "publicPath": "./dist/",
+      "publicPath": "./targets/",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -403,7 +403,7 @@ Array [
     "output": Object {
       "filename": "index.js",
       "path": "/",
-      "publicPath": "./dist/",
+      "publicPath": "./targets/",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -487,7 +487,7 @@ Array [
     "output": Object {
       "filename": "index.js",
       "path": "/",
-      "publicPath": "./dist/",
+      "publicPath": "./targets/",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -583,7 +583,7 @@ Array [
     "output": Object {
       "filename": "index.js",
       "path": "/",
-      "publicPath": "./dist/",
+      "publicPath": "./targets/",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -678,7 +678,7 @@ Array [
     "output": Object {
       "filename": "index.js",
       "path": "/",
-      "publicPath": "./dist/",
+      "publicPath": "./targets/",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -780,7 +780,7 @@ Array [
     "output": Object {
       "filename": "index.js",
       "path": "/",
-      "publicPath": "./dist/",
+      "publicPath": "./targets/",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -856,7 +856,7 @@ Array [
     "output": Object {
       "filename": "index.js",
       "path": "/",
-      "publicPath": "./dist/",
+      "publicPath": "./targets/",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -927,7 +927,7 @@ Array [
     "output": Object {
       "filename": "index.js",
       "path": "/",
-      "publicPath": "./dist/",
+      "publicPath": "./targets/",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -1182,7 +1182,7 @@ Array [
     "output": Object {
       "filename": "index.js",
       "path": "/",
-      "publicPath": "./dist/",
+      "publicPath": "./targets/",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -1232,7 +1232,7 @@ Array [
     "output": Object {
       "filename": "index.js",
       "path": "/",
-      "publicPath": "./dist/",
+      "publicPath": "./targets/",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -1296,7 +1296,7 @@ Array [
     "output": Object {
       "filename": "index.js",
       "path": "/",
-      "publicPath": "./dist/",
+      "publicPath": "./targets/",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -1371,7 +1371,7 @@ Array [
     "output": Object {
       "filename": "index.js",
       "path": "/",
-      "publicPath": "./dist/",
+      "publicPath": "./targets/",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -1446,7 +1446,7 @@ Array [
     "output": Object {
       "filename": "index.js",
       "path": "/",
-      "publicPath": "./dist/",
+      "publicPath": "./targets/",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -1527,7 +1527,7 @@ Array [
     "output": Object {
       "filename": "index.js",
       "path": "/",
-      "publicPath": "./dist/",
+      "publicPath": "./targets/",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -1584,7 +1584,7 @@ Array [
     "output": Object {
       "filename": "index.js",
       "path": "/",
-      "publicPath": "./dist/",
+      "publicPath": "./targets/",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -1637,7 +1637,7 @@ Array [
     "output": Object {
       "filename": "index.js",
       "path": "/",
-      "publicPath": "./dist/",
+      "publicPath": "./targets/",
     },
     "plugins": Array [],
     "resolve": Object {

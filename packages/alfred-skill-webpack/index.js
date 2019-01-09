@@ -14,8 +14,8 @@ module.exports = {
       config: {
         entry: path.join(process.cwd(), 'src', 'index.js'),
         output: {
-          path: path.join(process.cwd(), 'dist'),
-          publicPath: './dist/',
+          path: path.join(process.cwd(), 'targets'),
+          publicPath: './targets/',
           filename: 'index.js'
         },
         mode: 'development',
