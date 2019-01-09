@@ -3,7 +3,6 @@ const { getConfigPathByConfigName } = require('@alfredpkg/core');
 module.exports = {
   name: 'babel',
   description: 'Transpile JS from ESNext to the latest ES version',
-  interface: '@alfredpkg/interface-transpile',
   devDependencies: {
     '@babel/cli': '7.2.0',
     '@babel/core': '7.2.0',

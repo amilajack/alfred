@@ -86,7 +86,9 @@ export default async function generateCtfFromConfig(
   module.paths.pop();
 
   // Persist the resulting configs of the CTFs to ./node_modules/.configs or ./configs
-  await writeConfigsFromCtf(ctf);
+  if (alfred.showConfigs) {
+    await writeConfigsFromCtf(ctf);
+  }
 
   return { pkg, ctf, pkgPath };
 }
