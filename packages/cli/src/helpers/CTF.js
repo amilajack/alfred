@@ -4,6 +4,7 @@ import npm from 'npm';
 import yarn from 'yarn-api';
 import { writeConfigsFromCtf } from '@alfredpkg/core';
 import type { CtfMap } from '@alfredpkg/core';
+import ValidateConfig from './Validation';
 
 /**
  * @TODO Account for `devDependencies` and `dependencies`
@@ -25,9 +26,7 @@ export function installDeps(
             resolve(data);
           });
 
-          npm.on('log', message => {
-            console.log(message);
-          });
+          npm.on('log', console.log);
         });
       });
     }
@@ -62,6 +61,8 @@ export default async function generateCtfFromConfig(
   if (!alfred.skills) {
     throw new Error('Alfred config does not have `skills` section');
   }
+  ValidateConfig(alfred);
+
   // Check necessary files exist
   const appPath = path.join(process.cwd(), 'src', 'main.js');
   const libPath = path.join(process.cwd(), 'src', 'lib.js');

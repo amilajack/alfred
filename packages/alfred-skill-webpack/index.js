@@ -6,33 +6,19 @@ module.exports = {
   name: 'webpack',
   description: 'Build, optimize, and bundle assets in your app',
   interface: '@alfredpkg/interface-build',
-  devDependencies: { webpack: '4.28.3' },
+  devDependencies: { webpack: '4.28.3', 'webpack-cli': '3.2.1' },
   configFiles: [
     {
       name: 'webpack.base',
       path: 'webpack.base.js',
       config: {
-        entry: path.join(process.cwd(), 'src', 'index.js'),
+        entry: path.join(process.cwd(), 'src', 'main.js'),
         output: {
           path: path.join(process.cwd(), 'targets'),
           publicPath: './targets/',
-          filename: 'index.js'
+          filename: 'main.js'
         },
         mode: 'development',
-        module: {
-          rules: [
-            {
-              test: /\.jsx?$/,
-              exclude: /node_modules/,
-              use: {
-                loader: 'babel-loader',
-                options: {
-                  cacheDirectory: true
-                }
-              }
-            }
-          ]
-        },
         resolve: {
           extensions: ['.js', '.json']
         },

@@ -29,14 +29,18 @@ module.exports = {
       return config
         .extendConfig('webpack.base', {
           module: {
-            devtool: 'source-map',
-            mode: 'production',
-            target: 'electron-main',
-            entry: './app/main.dev',
-            output: {
-              path: 'app',
-              filename: './app/main.prod.js'
-            }
+            rules: [
+              {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                use: {
+                  loader: 'babel-loader',
+                  options: {
+                    cacheDirectory: true
+                  }
+                }
+              }
+            ]
           }
         })
         .addDevDependencies({ 'babel-loader': '5.0.0' });

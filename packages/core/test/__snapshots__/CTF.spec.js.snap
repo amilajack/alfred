@@ -311,13 +311,6 @@ Array [
     "entry": "/",
     "mode": "development",
     "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
       "rules": Array [
         Object {
           "exclude": /node_modules/,
@@ -330,10 +323,9 @@ Array [
           },
         },
       ],
-      "target": "electron-main",
     },
     "output": Object {
-      "filename": "index.js",
+      "filename": "main.js",
       "path": "/",
       "publicPath": "./targets/",
     },
@@ -357,6 +349,7 @@ Object {
   "@babel/preset-env": "7.2.0",
   "babel-loader": "5.0.0",
   "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
 }
 `;
 
@@ -379,13 +372,6 @@ Array [
     "entry": "/",
     "mode": "development",
     "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
       "rules": Array [
         Object {
           "exclude": /node_modules/,
@@ -398,10 +384,9 @@ Array [
           },
         },
       ],
-      "target": "electron-main",
     },
     "output": Object {
-      "filename": "index.js",
+      "filename": "main.js",
       "path": "/",
       "publicPath": "./targets/",
     },
@@ -440,6 +425,7 @@ Object {
   "babel-loader": "5.0.0",
   "eslint": "5.10.0",
   "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
 }
 `;
 
@@ -463,13 +449,6 @@ Array [
     "entry": "/",
     "mode": "development",
     "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
       "rules": Array [
         Object {
           "exclude": /node_modules/,
@@ -482,10 +461,9 @@ Array [
           },
         },
       ],
-      "target": "electron-main",
     },
     "output": Object {
-      "filename": "index.js",
+      "filename": "main.js",
       "path": "/",
       "publicPath": "./targets/",
     },
@@ -536,6 +514,7 @@ Object {
   "eslint-plugin-jest": "8.0.0",
   "jest": "5.0.0",
   "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
 }
 `;
 
@@ -559,13 +538,6 @@ Array [
     "entry": "/",
     "mode": "development",
     "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
       "rules": Array [
         Object {
           "exclude": /node_modules/,
@@ -578,10 +550,9 @@ Array [
           },
         },
       ],
-      "target": "electron-main",
     },
     "output": Object {
-      "filename": "index.js",
+      "filename": "main.js",
       "path": "/",
       "publicPath": "./targets/",
     },
@@ -630,6 +601,7 @@ Object {
   "eslint": "5.10.0",
   "prettier": "1.15.3",
   "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
 }
 `;
 
@@ -654,13 +626,6 @@ Array [
     "entry": "/",
     "mode": "development",
     "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
       "rules": Array [
         Object {
           "exclude": /node_modules/,
@@ -673,10 +638,9 @@ Array [
           },
         },
       ],
-      "target": "electron-main",
     },
     "output": Object {
-      "filename": "index.js",
+      "filename": "main.js",
       "path": "/",
       "publicPath": "./targets/",
     },
@@ -734,6 +698,7 @@ Object {
   "jest": "5.0.0",
   "prettier": "1.15.3",
   "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
 }
 `;
 
@@ -756,13 +721,6 @@ Array [
     "entry": "/",
     "mode": "development",
     "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
       "rules": Array [
         Object {
           "exclude": /node_modules/,
@@ -775,10 +733,9 @@ Array [
           },
         },
       ],
-      "target": "electron-main",
     },
     "output": Object {
-      "filename": "index.js",
+      "filename": "main.js",
       "path": "/",
       "publicPath": "./targets/",
     },
@@ -810,6 +767,7 @@ Object {
   "babel-loader": "5.0.0",
   "jest": "5.0.0",
   "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
 }
 `;
 
@@ -832,13 +790,6 @@ Array [
     "entry": "/",
     "mode": "development",
     "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
       "rules": Array [
         Object {
           "exclude": /node_modules/,
@@ -851,10 +802,9 @@ Array [
           },
         },
       ],
-      "target": "electron-main",
     },
     "output": Object {
-      "filename": "index.js",
+      "filename": "main.js",
       "path": "/",
       "publicPath": "./targets/",
     },
@@ -880,6 +830,7 @@ Object {
   "babel-loader": "5.0.0",
   "prettier": "1.15.3",
   "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
 }
 `;
 
@@ -903,13 +854,6 @@ Array [
     "entry": "/",
     "mode": "development",
     "module": Object {
-      "devtool": "source-map",
-      "entry": "./app/main.dev",
-      "mode": "production",
-      "output": Object {
-        "filename": "./app/main.prod.js",
-        "path": "app",
-      },
       "rules": Array [
         Object {
           "exclude": /node_modules/,
@@ -922,10 +866,9 @@ Array [
           },
         },
       ],
-      "target": "electron-main",
     },
     "output": Object {
-      "filename": "index.js",
+      "filename": "main.js",
       "path": "/",
       "publicPath": "./targets/",
     },
@@ -959,6 +902,7 @@ Object {
   "jest": "5.0.0",
   "prettier": "1.15.3",
   "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
 }
 `;
 
@@ -1165,22 +1109,8 @@ Array [
   Object {
     "entry": "/",
     "mode": "development",
-    "module": Object {
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-    },
     "output": Object {
-      "filename": "index.js",
+      "filename": "main.js",
       "path": "/",
       "publicPath": "./targets/",
     },
@@ -1200,6 +1130,7 @@ exports[`CTF combination webpack 3`] = `Object {}`;
 exports[`CTF combination webpack 4`] = `
 Object {
   "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
 }
 `;
 
@@ -1215,22 +1146,8 @@ Array [
   Object {
     "entry": "/",
     "mode": "development",
-    "module": Object {
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-    },
     "output": Object {
-      "filename": "index.js",
+      "filename": "main.js",
       "path": "/",
       "publicPath": "./targets/",
     },
@@ -1263,6 +1180,7 @@ exports[`CTF combination webpack,eslint 4`] = `
 Object {
   "eslint": "5.10.0",
   "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
 }
 `;
 
@@ -1279,22 +1197,8 @@ Array [
   Object {
     "entry": "/",
     "mode": "development",
-    "module": Object {
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-    },
     "output": Object {
-      "filename": "index.js",
+      "filename": "main.js",
       "path": "/",
       "publicPath": "./targets/",
     },
@@ -1338,6 +1242,7 @@ Object {
   "eslint-plugin-jest": "8.0.0",
   "jest": "5.0.0",
   "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
 }
 `;
 
@@ -1354,22 +1259,8 @@ Array [
   Object {
     "entry": "/",
     "mode": "development",
-    "module": Object {
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-    },
     "output": Object {
-      "filename": "index.js",
+      "filename": "main.js",
       "path": "/",
       "publicPath": "./targets/",
     },
@@ -1412,6 +1303,7 @@ Object {
   "eslint": "5.10.0",
   "prettier": "1.15.3",
   "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
 }
 `;
 
@@ -1429,22 +1321,8 @@ Array [
   Object {
     "entry": "/",
     "mode": "development",
-    "module": Object {
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-    },
     "output": Object {
-      "filename": "index.js",
+      "filename": "main.js",
       "path": "/",
       "publicPath": "./targets/",
     },
@@ -1495,6 +1373,7 @@ Object {
   "jest": "5.0.0",
   "prettier": "1.15.3",
   "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
 }
 `;
 
@@ -1510,22 +1389,8 @@ Array [
   Object {
     "entry": "/",
     "mode": "development",
-    "module": Object {
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-    },
     "output": Object {
-      "filename": "index.js",
+      "filename": "main.js",
       "path": "/",
       "publicPath": "./targets/",
     },
@@ -1552,6 +1417,7 @@ exports[`CTF combination webpack,jest 4`] = `
 Object {
   "jest": "5.0.0",
   "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
 }
 `;
 
@@ -1567,22 +1433,8 @@ Array [
   Object {
     "entry": "/",
     "mode": "development",
-    "module": Object {
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-    },
     "output": Object {
-      "filename": "index.js",
+      "filename": "main.js",
       "path": "/",
       "publicPath": "./targets/",
     },
@@ -1604,6 +1456,7 @@ exports[`CTF combination webpack,prettier 4`] = `
 Object {
   "prettier": "1.15.3",
   "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
 }
 `;
 
@@ -1620,22 +1473,8 @@ Array [
   Object {
     "entry": "/",
     "mode": "development",
-    "module": Object {
-      "rules": Array [
-        Object {
-          "exclude": /node_modules/,
-          "test": /\\\\\\.jsx\\?\\$/,
-          "use": Object {
-            "loader": "babel-loader",
-            "options": Object {
-              "cacheDirectory": true,
-            },
-          },
-        },
-      ],
-    },
     "output": Object {
-      "filename": "index.js",
+      "filename": "main.js",
       "path": "/",
       "publicPath": "./targets/",
     },
@@ -1664,6 +1503,7 @@ Object {
   "jest": "5.0.0",
   "prettier": "1.15.3",
   "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
 }
 `;
 
@@ -1677,5 +1517,6 @@ exports[`CTF should add devDepencencies 1`] = `
 Object {
   "foobar": "0.0.0",
   "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
 }
 `;
