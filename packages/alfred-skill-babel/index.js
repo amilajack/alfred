@@ -44,6 +44,17 @@ module.exports = {
         })
         .addDevDependencies({ 'babel-loader': '5.0.0' });
     },
+    rollup(config) {
+      // eslint-disable-next-line import/no-unresolved, global-require
+      const babel = require('rollup-plugin-babel');
+      return config
+        .extendsConfig('rollup.base', {
+          plugins: [babel]
+        })
+        .addDevDependencies({
+          'rollup-plugin-babel': '4.2.0'
+        });
+    },
     eslint(config) {
       return config
         .extendConfig('eslint', {

@@ -47,7 +47,8 @@
     "extends": "bliss",
     "rules": {
       "class-methods-use-this": "off",
-      "flowtype-errors/show-errors": "off"
+      "flowtype-errors/show-errors": "off",
+      "global-require": "off"
     }
   },
   "renovate": {
