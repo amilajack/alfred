@@ -15,12 +15,12 @@
     "build": "cross-env NODE_ENV=production lerna run build",
     "flow-typed": "lerna run flow-typed",
     "lint": "eslint .",
-    "test": "cross-env NODE_ENV=test lerna run build && yarn lint && lerna run flow && lerna run test",
+    "test": "cross-env NODE_ENV=test yarn lint && lerna run flow && yarn build && lerna run test",
     "website:build": "yarn workspace @alfredpkg/site build",
     "website:start": "yarn workspace @alfredpkg/site start",
     "website:test": "yarn website:build",
     "website:version": "yarn workspace @alfredpkg/site version",
-    "version": "lerna run build:clean && lerna run build"
+    "version": "lerna run build:clean && yarn build"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

@@ -9,6 +9,7 @@ import webpack from '@alfredpkg/skill-webpack';
 import eslint from '@alfredpkg/skill-eslint';
 import react from '@alfredpkg/skill-react';
 import prettier from '@alfredpkg/skill-prettier';
+import rollup from '@alfredpkg/skill-rollup';
 
 export const CORE_CTFS = {
   babel,
@@ -16,7 +17,8 @@ export const CORE_CTFS = {
   eslint,
   prettier,
   jest: jestCtf,
-  react
+  react,
+  rollup
 };
 
 // @TODO send the information to a crash reporting service (like sentry.io)
@@ -213,6 +215,17 @@ export async function writeConfigsFromCtf(ctf: CtfMap) {
     })
   );
 }
+
+export function getInterfacesForCtfNodes(ctf: CtfMap): CtfMap {
+  ctf.forEach(ctfNode => {
+    if (ctfNode.interface) {
+      const { subcommand } = require(ctfNode.interface); // eslint-disable-line
+      ctfNode.subcommand = subcommand; // eslint-disable-line
+    }
+  });
+  return ctf;
+}
+
 /**
  * Intended to be used for testing purposes
  */

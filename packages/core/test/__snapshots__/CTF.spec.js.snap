@@ -174,6 +174,149 @@ Object {
 }
 `;
 
+exports[`CTF combination babel,eslint,jest,react,rollup 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "jest",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,eslint,jest,react,rollup 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "jest",
+    ],
+  },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,eslint,jest,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,eslint,jest,react,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "babel-jest": "8.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
+exports[`CTF combination babel,eslint,jest,rollup 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "jest",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,eslint,jest,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "jest",
+    ],
+  },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,eslint,jest,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,eslint,jest,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-eslint": "5.0.0",
+  "babel-jest": "8.0.0",
+  "eslint": "5.10.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
 exports[`CTF combination babel,eslint,prettier 1`] = `
 Array [
   "babel",
@@ -349,6 +492,165 @@ Object {
 }
 `;
 
+exports[`CTF combination babel,eslint,prettier,jest,react,rollup 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "prettier",
+  "jest",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,eslint,prettier,jest,react,rollup 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "jest",
+    ],
+  },
+  Object {},
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,eslint,prettier,jest,react,rollup 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination babel,eslint,prettier,jest,react,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "babel-jest": "8.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
+exports[`CTF combination babel,eslint,prettier,jest,rollup 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "prettier",
+  "jest",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,eslint,prettier,jest,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "extends": Array [
+      "prettier",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "jest",
+    ],
+  },
+  Object {},
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,eslint,prettier,jest,rollup 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination babel,eslint,prettier,jest,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-eslint": "5.0.0",
+  "babel-jest": "8.0.0",
+  "eslint": "5.10.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
 exports[`CTF combination babel,eslint,prettier,react 1`] = `
 Array [
   "babel",
@@ -422,6 +724,155 @@ Object {
 }
 `;
 
+exports[`CTF combination babel,eslint,prettier,react,rollup 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "prettier",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,eslint,prettier,react,rollup 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "prettier",
+    ],
+  },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,eslint,prettier,react,rollup 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination babel,eslint,prettier,react,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
+exports[`CTF combination babel,eslint,prettier,rollup 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "prettier",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,eslint,prettier,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "extends": Array [
+      "prettier",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "prettier",
+    ],
+  },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,eslint,prettier,rollup 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination babel,eslint,prettier,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-eslint": "5.0.0",
+  "eslint": "5.10.0",
+  "prettier": "1.15.3",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
 exports[`CTF combination babel,eslint,react 1`] = `
 Array [
   "babel",
@@ -481,6 +932,133 @@ Object {
   "eslint-config-airbnb": "17.1.0",
   "react": "0.16.0",
   "react-hot-loader": "^4.3.12",
+}
+`;
+
+exports[`CTF combination babel,eslint,react,rollup 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,eslint,react,rollup 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "parser": "babel-eslint",
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,eslint,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,eslint,react,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
+exports[`CTF combination babel,eslint,rollup 1`] = `
+Array [
+  "babel",
+  "eslint",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,eslint,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "parser": "babel-eslint",
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,eslint,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,eslint,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-eslint": "5.0.0",
+  "eslint": "5.10.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
 }
 `;
 
@@ -567,6 +1145,122 @@ Object {
   "jest": "5.0.0",
   "react": "0.16.0",
   "react-hot-loader": "^4.3.12",
+}
+`;
+
+exports[`CTF combination babel,jest,react,rollup 1`] = `
+Array [
+  "babel",
+  "jest",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,jest,react,rollup 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,jest,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,jest,react,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-jest": "8.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "jest": "5.0.0",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
+exports[`CTF combination babel,jest,rollup 1`] = `
+Array [
+  "babel",
+  "jest",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,jest,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,jest,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,jest,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-jest": "8.0.0",
+  "jest": "5.0.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
 }
 `;
 
@@ -691,6 +1385,128 @@ Object {
 }
 `;
 
+exports[`CTF combination babel,prettier,jest,react,rollup 1`] = `
+Array [
+  "babel",
+  "prettier",
+  "jest",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,prettier,jest,react,rollup 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {},
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,prettier,jest,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,prettier,jest,react,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-jest": "8.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
+exports[`CTF combination babel,prettier,jest,rollup 1`] = `
+Array [
+  "babel",
+  "prettier",
+  "jest",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,prettier,jest,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {},
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,prettier,jest,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,prettier,jest,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-jest": "8.0.0",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
 exports[`CTF combination babel,prettier,react 1`] = `
 Array [
   "babel",
@@ -746,6 +1562,120 @@ Object {
 }
 `;
 
+exports[`CTF combination babel,prettier,react,rollup 1`] = `
+Array [
+  "babel",
+  "prettier",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,prettier,react,rollup 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,prettier,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,prettier,react,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
+exports[`CTF combination babel,prettier,rollup 1`] = `
+Array [
+  "babel",
+  "prettier",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,prettier,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,prettier,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,prettier,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "prettier": "1.15.3",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
 exports[`CTF combination babel,react 1`] = `
 Array [
   "babel",
@@ -795,6 +1725,114 @@ Object {
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
   "react": "0.16.0",
   "react-hot-loader": "^4.3.12",
+}
+`;
+
+exports[`CTF combination babel,react,rollup 1`] = `
+Array [
+  "babel",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,react,rollup 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,react,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
+exports[`CTF combination babel,rollup 1`] = `
+Array [
+  "babel",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
 }
 `;
 
@@ -1181,6 +2219,7 @@ Array [
     "resolve": Object {
       "extensions": Array [
         ".js",
+        ".jsx",
         ".json",
       ],
     },
@@ -1264,6 +2303,308 @@ Object {
   "jest": "5.0.0",
   "react": "0.16.0",
   "react-hot-loader": "^4.3.12",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint,jest,react,rollup 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "eslint",
+  "jest",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,jest,react,rollup 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "jest",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "/",
+        },
+      },
+    },
+  },
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,jest,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,eslint,jest,react,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "babel-jest": "8.0.0",
+  "babel-loader": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "eslint-plugin-jest": "8.0.0",
+  "identity-obj-proxy": "*",
+  "jest": "5.0.0",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint,jest,rollup 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "eslint",
+  "jest",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,jest,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "jest",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "/",
+        },
+      },
+    },
+  },
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,jest,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,eslint,jest,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-eslint": "5.0.0",
+  "babel-jest": "8.0.0",
+  "babel-loader": "5.0.0",
+  "eslint": "5.10.0",
+  "eslint-plugin-jest": "8.0.0",
+  "identity-obj-proxy": "*",
+  "jest": "5.0.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
 }
@@ -1580,6 +2921,7 @@ Array [
     "resolve": Object {
       "extensions": Array [
         ".js",
+        ".jsx",
         ".json",
       ],
     },
@@ -1675,6 +3017,324 @@ Object {
 }
 `;
 
+exports[`CTF combination babel,webpack,eslint,prettier,jest,react,rollup 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "eslint",
+  "prettier",
+  "jest",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,jest,react,rollup 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "jest",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "/",
+        },
+      },
+    },
+  },
+  Object {},
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,jest,react,rollup 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,jest,react,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "babel-jest": "8.0.0",
+  "babel-loader": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "eslint-plugin-jest": "8.0.0",
+  "identity-obj-proxy": "*",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,jest,rollup 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "eslint",
+  "prettier",
+  "jest",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,jest,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "prettier",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "jest",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "/",
+        },
+      },
+    },
+  },
+  Object {},
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,jest,rollup 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,jest,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-eslint": "5.0.0",
+  "babel-jest": "8.0.0",
+  "babel-loader": "5.0.0",
+  "eslint": "5.10.0",
+  "eslint-plugin-jest": "8.0.0",
+  "identity-obj-proxy": "*",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
 exports[`CTF combination babel,webpack,eslint,prettier,react 1`] = `
 Array [
   "babel",
@@ -1736,6 +3396,7 @@ Array [
     "resolve": Object {
       "extensions": Array [
         ".js",
+        ".jsx",
         ".json",
       ],
     },
@@ -1821,6 +3482,302 @@ Object {
 }
 `;
 
+exports[`CTF combination babel,webpack,eslint,prettier,react,rollup 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "eslint",
+  "prettier",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,react,rollup 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "prettier",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "/",
+        },
+      },
+    },
+  },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,react,rollup 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,react,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "babel-loader": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,rollup 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "eslint",
+  "prettier",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "prettier",
+    ],
+    "parser": "babel-eslint",
+    "plugins": Array [
+      "prettier",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "/",
+        },
+      },
+    },
+  },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,rollup 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint,prettier,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-eslint": "5.0.0",
+  "babel-loader": "5.0.0",
+  "eslint": "5.10.0",
+  "prettier": "1.15.3",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
 exports[`CTF combination babel,webpack,eslint,react 1`] = `
 Array [
   "babel",
@@ -1881,6 +3838,7 @@ Array [
     "resolve": Object {
       "extensions": Array [
         ".js",
+        ".jsx",
         ".json",
       ],
     },
@@ -1951,6 +3909,280 @@ Object {
   "eslint-config-airbnb": "17.1.0",
   "react": "0.16.0",
   "react-hot-loader": "^4.3.12",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint,react,rollup 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "eslint",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,react,rollup 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "parser": "babel-eslint",
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "/",
+        },
+      },
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,eslint,react,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-eslint": "5.0.0",
+  "babel-loader": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,eslint,rollup 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "eslint",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "parser": "babel-eslint",
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "/",
+        },
+      },
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,eslint,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,eslint,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-eslint": "5.0.0",
+  "babel-loader": "5.0.0",
+  "eslint": "5.10.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
 }
@@ -2118,6 +4350,7 @@ Array [
     "resolve": Object {
       "extensions": Array [
         ".js",
+        ".jsx",
         ".json",
       ],
     },
@@ -2181,6 +4414,267 @@ Object {
   "jest": "5.0.0",
   "react": "0.16.0",
   "react-hot-loader": "^4.3.12",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,jest,react,rollup 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "jest",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,webpack,jest,react,rollup 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,jest,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,jest,react,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-jest": "8.0.0",
+  "babel-loader": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "identity-obj-proxy": "*",
+  "jest": "5.0.0",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,jest,rollup 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "jest",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,webpack,jest,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,jest,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,jest,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-jest": "8.0.0",
+  "babel-loader": "5.0.0",
+  "identity-obj-proxy": "*",
+  "jest": "5.0.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
 }
@@ -2447,6 +4941,7 @@ Array [
     "resolve": Object {
       "extensions": Array [
         ".js",
+        ".jsx",
         ".json",
       ],
     },
@@ -2517,16 +5012,18 @@ Object {
 }
 `;
 
-exports[`CTF combination babel,webpack,prettier,react 1`] = `
+exports[`CTF combination babel,webpack,prettier,jest,react,rollup 1`] = `
 Array [
   "babel",
   "webpack",
   "prettier",
+  "jest",
   "react",
+  "rollup",
 ]
 `;
 
-exports[`CTF combination babel,webpack,prettier,react 2`] = `
+exports[`CTF combination babel,webpack,prettier,jest,react,rollup 2`] = `
 Array [
   Object {
     "env": Object {
@@ -2549,6 +5046,134 @@ Array [
     ],
     "presets": Array [
       "@babel/preset-react",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {},
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,prettier,jest,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,prettier,jest,react,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-jest": "8.0.0",
+  "babel-loader": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "identity-obj-proxy": "*",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,prettier,jest,rollup 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "prettier",
+  "jest",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,webpack,prettier,jest,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
     ],
   },
   Object {
@@ -2614,6 +5239,144 @@ Array [
     },
   },
   Object {},
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,prettier,jest,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,prettier,jest,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-jest": "8.0.0",
+  "babel-loader": "5.0.0",
+  "identity-obj-proxy": "*",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,prettier,react 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "prettier",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,webpack,prettier,react 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {},
 ]
 `;
 
@@ -2638,15 +5401,17 @@ Object {
 }
 `;
 
-exports[`CTF combination babel,webpack,react 1`] = `
+exports[`CTF combination babel,webpack,prettier,react,rollup 1`] = `
 Array [
   "babel",
   "webpack",
+  "prettier",
   "react",
+  "rollup",
 ]
 `;
 
-exports[`CTF combination babel,webpack,react 2`] = `
+exports[`CTF combination babel,webpack,prettier,react,rollup 2`] = `
 Array [
   Object {
     "env": Object {
@@ -2669,6 +5434,124 @@ Array [
     ],
     "presets": Array [
       "@babel/preset-react",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,prettier,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,prettier,react,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-loader": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,prettier,rollup 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "prettier",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,webpack,prettier,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
     ],
   },
   Object {
@@ -2733,6 +5616,134 @@ Array [
       ],
     },
   },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,prettier,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,prettier,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-loader": "5.0.0",
+  "prettier": "1.15.3",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,react 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "react",
+]
+`;
+
+exports[`CTF combination babel,webpack,react 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
 ]
 `;
 
@@ -2751,6 +5762,247 @@ Object {
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
   "react": "0.16.0",
   "react-hot-loader": "^4.3.12",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,react,rollup 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,webpack,react,rollup 2`] = `
+Array [
+  Object {
+    "env": Object {
+      "development": Object {
+        "plugins": Array [
+          "react-hot-loader/babel",
+        ],
+      },
+      "production": Object {
+        "plugins": Array [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types",
+        ],
+      },
+    },
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+    "presets": Array [
+      "@babel/preset-react",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,react,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+  "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+  "@babel/preset-env": "7.2.0",
+  "@babel/preset-react": "7.0.0",
+  "babel-loader": "5.0.0",
+  "babel-plugin-dev-expression": "^0.2.1",
+  "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "react": "0.16.0",
+  "react-hot-loader": "^4.3.12",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination babel,webpack,rollup 1`] = `
+Array [
+  "babel",
+  "webpack",
+  "rollup",
+]
+`;
+
+exports[`CTF combination babel,webpack,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "@babel/preset-env",
+    ],
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "test": /\\\\\\.jsx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "cacheDirectory": true,
+            },
+          },
+        },
+      ],
+    },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      [Function],
+    ],
+  },
+]
+`;
+
+exports[`CTF combination babel,webpack,rollup 3`] = `Object {}`;
+
+exports[`CTF combination babel,webpack,rollup 4`] = `
+Object {
+  "@babel/cli": "7.2.0",
+  "@babel/core": "7.2.0",
+  "@babel/preset-env": "7.2.0",
+  "babel-loader": "5.0.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-babel": "4.2.0",
+  "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
 }
@@ -2842,6 +6094,105 @@ Object {
   "eslint-plugin-jest": "8.0.0",
   "jest": "5.0.0",
   "react": "0.16.0",
+}
+`;
+
+exports[`CTF combination eslint,jest,react,rollup 1`] = `
+Array [
+  "eslint",
+  "jest",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination eslint,jest,react,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "plugins": Array [
+      "jest",
+    ],
+  },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination eslint,jest,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination eslint,jest,react,rollup 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "react": "0.16.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
+exports[`CTF combination eslint,jest,rollup 1`] = `
+Array [
+  "eslint",
+  "jest",
+  "rollup",
+]
+`;
+
+exports[`CTF combination eslint,jest,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "plugins": Array [
+      "jest",
+    ],
+  },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination eslint,jest,rollup 3`] = `Object {}`;
+
+exports[`CTF combination eslint,jest,rollup 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
 }
 `;
 
@@ -2961,6 +6312,121 @@ Object {
 }
 `;
 
+exports[`CTF combination eslint,prettier,jest,react,rollup 1`] = `
+Array [
+  "eslint",
+  "prettier",
+  "jest",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination eslint,prettier,jest,react,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "plugins": Array [
+      "jest",
+    ],
+  },
+  Object {},
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination eslint,prettier,jest,react,rollup 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination eslint,prettier,jest,react,rollup 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
+exports[`CTF combination eslint,prettier,jest,rollup 1`] = `
+Array [
+  "eslint",
+  "prettier",
+  "jest",
+  "rollup",
+]
+`;
+
+exports[`CTF combination eslint,prettier,jest,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "prettier",
+    ],
+    "plugins": Array [
+      "jest",
+    ],
+  },
+  Object {},
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination eslint,prettier,jest,rollup 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination eslint,prettier,jest,rollup 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-plugin-jest": "8.0.0",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
 exports[`CTF combination eslint,prettier,react 1`] = `
 Array [
   "eslint",
@@ -2999,6 +6465,113 @@ Object {
 }
 `;
 
+exports[`CTF combination eslint,prettier,react,rollup 1`] = `
+Array [
+  "eslint",
+  "prettier",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination eslint,prettier,react,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "plugins": Array [
+      "prettier",
+    ],
+  },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination eslint,prettier,react,rollup 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination eslint,prettier,react,rollup 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
+exports[`CTF combination eslint,prettier,rollup 1`] = `
+Array [
+  "eslint",
+  "prettier",
+  "rollup",
+]
+`;
+
+exports[`CTF combination eslint,prettier,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "prettier",
+    ],
+    "plugins": Array [
+      "prettier",
+    ],
+  },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination eslint,prettier,rollup 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination eslint,prettier,rollup 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "prettier": "1.15.3",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
 exports[`CTF combination eslint,react 1`] = `
 Array [
   "eslint",
@@ -3023,6 +6596,91 @@ Object {
   "eslint": "5.10.0",
   "eslint-config-airbnb": "17.1.0",
   "react": "0.16.0",
+}
+`;
+
+exports[`CTF combination eslint,react,rollup 1`] = `
+Array [
+  "eslint",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination eslint,react,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination eslint,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination eslint,react,rollup 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "react": "0.16.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
+exports[`CTF combination eslint,rollup 1`] = `
+Array [
+  "eslint",
+  "rollup",
+]
+`;
+
+exports[`CTF combination eslint,rollup 2`] = `
+Array [
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination eslint,rollup 3`] = `Object {}`;
+
+exports[`CTF combination eslint,rollup 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
 }
 `;
 
@@ -3065,6 +6723,82 @@ exports[`CTF combination jest,react 4`] = `
 Object {
   "jest": "5.0.0",
   "react": "0.16.0",
+}
+`;
+
+exports[`CTF combination jest,react,rollup 1`] = `
+Array [
+  "jest",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination jest,react,rollup 2`] = `
+Array [
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination jest,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination jest,react,rollup 4`] = `
+Object {
+  "jest": "5.0.0",
+  "react": "0.16.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
+exports[`CTF combination jest,rollup 1`] = `
+Array [
+  "jest",
+  "rollup",
+]
+`;
+
+exports[`CTF combination jest,rollup 2`] = `
+Array [
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination jest,rollup 3`] = `Object {}`;
+
+exports[`CTF combination jest,rollup 4`] = `
+Object {
+  "jest": "5.0.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
 }
 `;
 
@@ -3136,6 +6870,88 @@ Object {
 }
 `;
 
+exports[`CTF combination prettier,jest,react,rollup 1`] = `
+Array [
+  "prettier",
+  "jest",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination prettier,jest,react,rollup 2`] = `
+Array [
+  Object {},
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination prettier,jest,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination prettier,jest,react,rollup 4`] = `
+Object {
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
+exports[`CTF combination prettier,jest,rollup 1`] = `
+Array [
+  "prettier",
+  "jest",
+  "rollup",
+]
+`;
+
+exports[`CTF combination prettier,jest,rollup 2`] = `
+Array [
+  Object {},
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination prettier,jest,rollup 3`] = `Object {}`;
+
+exports[`CTF combination prettier,jest,rollup 4`] = `
+Object {
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
 exports[`CTF combination prettier,react 1`] = `
 Array [
   "prettier",
@@ -3158,6 +6974,82 @@ Object {
 }
 `;
 
+exports[`CTF combination prettier,react,rollup 1`] = `
+Array [
+  "prettier",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination prettier,react,rollup 2`] = `
+Array [
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination prettier,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination prettier,react,rollup 4`] = `
+Object {
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
+exports[`CTF combination prettier,rollup 1`] = `
+Array [
+  "prettier",
+  "rollup",
+]
+`;
+
+exports[`CTF combination prettier,rollup 2`] = `
+Array [
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination prettier,rollup 3`] = `Object {}`;
+
+exports[`CTF combination prettier,rollup 4`] = `
+Object {
+  "prettier": "1.15.3",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
 exports[`CTF combination react 1`] = `
 Array [
   "react",
@@ -3171,6 +7063,76 @@ exports[`CTF combination react 3`] = `Object {}`;
 exports[`CTF combination react 4`] = `
 Object {
   "react": "0.16.0",
+}
+`;
+
+exports[`CTF combination react,rollup 1`] = `
+Array [
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination react,rollup 2`] = `
+Array [
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination react,rollup 4`] = `
+Object {
+  "react": "0.16.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+}
+`;
+
+exports[`CTF combination rollup 1`] = `
+Array [
+  "rollup",
+]
+`;
+
+exports[`CTF combination rollup 2`] = `
+Array [
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination rollup 3`] = `Object {}`;
+
+exports[`CTF combination rollup 4`] = `
+Object {
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
 }
 `;
 
@@ -3442,6 +7404,7 @@ Array [
     "resolve": Object {
       "extensions": Array [
         ".js",
+        ".jsx",
         ".json",
       ],
     },
@@ -3512,6 +7475,234 @@ Object {
   "identity-obj-proxy": "*",
   "jest": "5.0.0",
   "react": "0.16.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination webpack,eslint,jest,react,rollup 1`] = `
+Array [
+  "webpack",
+  "eslint",
+  "jest",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination webpack,eslint,jest,react,rollup 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "plugins": Array [
+      "jest",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "/",
+        },
+      },
+    },
+  },
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination webpack,eslint,jest,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination webpack,eslint,jest,react,rollup 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "eslint-plugin-jest": "8.0.0",
+  "identity-obj-proxy": "*",
+  "jest": "5.0.0",
+  "react": "0.16.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination webpack,eslint,jest,rollup 1`] = `
+Array [
+  "webpack",
+  "eslint",
+  "jest",
+  "rollup",
+]
+`;
+
+exports[`CTF combination webpack,eslint,jest,rollup 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "plugins": Array [
+      "jest",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "/",
+        },
+      },
+    },
+  },
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination webpack,eslint,jest,rollup 3`] = `Object {}`;
+
+exports[`CTF combination webpack,eslint,jest,rollup 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-plugin-jest": "8.0.0",
+  "identity-obj-proxy": "*",
+  "jest": "5.0.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
 }
@@ -3737,6 +7928,7 @@ Array [
     "resolve": Object {
       "extensions": Array [
         ".js",
+        ".jsx",
         ".json",
       ],
     },
@@ -3819,6 +8011,250 @@ Object {
 }
 `;
 
+exports[`CTF combination webpack,eslint,prettier,jest,react,rollup 1`] = `
+Array [
+  "webpack",
+  "eslint",
+  "prettier",
+  "jest",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination webpack,eslint,prettier,jest,react,rollup 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "plugins": Array [
+      "jest",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "/",
+        },
+      },
+    },
+  },
+  Object {},
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination webpack,eslint,prettier,jest,react,rollup 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination webpack,eslint,prettier,jest,react,rollup 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "eslint-plugin-jest": "8.0.0",
+  "identity-obj-proxy": "*",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination webpack,eslint,prettier,jest,rollup 1`] = `
+Array [
+  "webpack",
+  "eslint",
+  "prettier",
+  "jest",
+  "rollup",
+]
+`;
+
+exports[`CTF combination webpack,eslint,prettier,jest,rollup 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "prettier",
+    ],
+    "plugins": Array [
+      "jest",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "/",
+        },
+      },
+    },
+  },
+  Object {},
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination webpack,eslint,prettier,jest,rollup 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination webpack,eslint,prettier,jest,rollup 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-plugin-jest": "8.0.0",
+  "identity-obj-proxy": "*",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
 exports[`CTF combination webpack,eslint,prettier,react 1`] = `
 Array [
   "webpack",
@@ -3842,6 +8278,7 @@ Array [
     "resolve": Object {
       "extensions": Array [
         ".js",
+        ".jsx",
         ".json",
       ],
     },
@@ -3915,6 +8352,230 @@ Object {
 }
 `;
 
+exports[`CTF combination webpack,eslint,prettier,react,rollup 1`] = `
+Array [
+  "webpack",
+  "eslint",
+  "prettier",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination webpack,eslint,prettier,react,rollup 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "plugins": Array [
+      "prettier",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "/",
+        },
+      },
+    },
+  },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination webpack,eslint,prettier,react,rollup 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination webpack,eslint,prettier,react,rollup 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination webpack,eslint,prettier,rollup 1`] = `
+Array [
+  "webpack",
+  "eslint",
+  "prettier",
+  "rollup",
+]
+`;
+
+exports[`CTF combination webpack,eslint,prettier,rollup 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "prettier",
+    ],
+    "plugins": Array [
+      "prettier",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "/",
+        },
+      },
+    },
+  },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination webpack,eslint,prettier,rollup 3`] = `
+Object {
+  "eslint-config-prettier": "3.3.0",
+  "eslint-plugin-prettier": "3.0.1",
+}
+`;
+
+exports[`CTF combination webpack,eslint,prettier,rollup 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "prettier": "1.15.3",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
 exports[`CTF combination webpack,eslint,react 1`] = `
 Array [
   "webpack",
@@ -3937,6 +8598,7 @@ Array [
     "resolve": Object {
       "extensions": Array [
         ".js",
+        ".jsx",
         ".json",
       ],
     },
@@ -3995,6 +8657,208 @@ Object {
   "eslint": "5.10.0",
   "eslint-config-airbnb": "17.1.0",
   "react": "0.16.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination webpack,eslint,react,rollup 1`] = `
+Array [
+  "webpack",
+  "eslint",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination webpack,eslint,react,rollup 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "eslint-config-airbnb",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "/",
+        },
+      },
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination webpack,eslint,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination webpack,eslint,react,rollup 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "eslint-config-airbnb": "17.1.0",
+  "react": "0.16.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination webpack,eslint,rollup 1`] = `
+Array [
+  "webpack",
+  "eslint",
+  "rollup",
+]
+`;
+
+exports[`CTF combination webpack,eslint,rollup 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "extends": Array [
+      "bliss",
+    ],
+    "settings": Object {
+      "import/resolver": Object {
+        "webpack": Object {
+          "config": "/",
+        },
+      },
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination webpack,eslint,rollup 3`] = `Object {}`;
+
+exports[`CTF combination webpack,eslint,rollup 4`] = `
+Object {
+  "eslint": "5.10.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
 }
@@ -4099,6 +8963,7 @@ Array [
     "resolve": Object {
       "extensions": Array [
         ".js",
+        ".jsx",
         ".json",
       ],
     },
@@ -4151,6 +9016,197 @@ Object {
   "identity-obj-proxy": "*",
   "jest": "5.0.0",
   "react": "0.16.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination webpack,jest,react,rollup 1`] = `
+Array [
+  "webpack",
+  "jest",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination webpack,jest,react,rollup 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination webpack,jest,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination webpack,jest,react,rollup 4`] = `
+Object {
+  "identity-obj-proxy": "*",
+  "jest": "5.0.0",
+  "react": "0.16.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination webpack,jest,rollup 1`] = `
+Array [
+  "webpack",
+  "jest",
+  "rollup",
+]
+`;
+
+exports[`CTF combination webpack,jest,rollup 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination webpack,jest,rollup 3`] = `Object {}`;
+
+exports[`CTF combination webpack,jest,rollup 4`] = `
+Object {
+  "identity-obj-proxy": "*",
+  "jest": "5.0.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
 }
@@ -4330,6 +9386,7 @@ Array [
     "resolve": Object {
       "extensions": Array [
         ".js",
+        ".jsx",
         ".json",
       ],
     },
@@ -4389,6 +9446,203 @@ Object {
 }
 `;
 
+exports[`CTF combination webpack,prettier,jest,react,rollup 1`] = `
+Array [
+  "webpack",
+  "prettier",
+  "jest",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination webpack,prettier,jest,react,rollup 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {},
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination webpack,prettier,jest,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination webpack,prettier,jest,react,rollup 4`] = `
+Object {
+  "identity-obj-proxy": "*",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination webpack,prettier,jest,rollup 1`] = `
+Array [
+  "webpack",
+  "prettier",
+  "jest",
+  "rollup",
+]
+`;
+
+exports[`CTF combination webpack,prettier,jest,rollup 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {},
+  Object {
+    "moduleNameMapper": Object {
+      "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination webpack,prettier,jest,rollup 3`] = `Object {}`;
+
+exports[`CTF combination webpack,prettier,jest,rollup 4`] = `
+Object {
+  "identity-obj-proxy": "*",
+  "jest": "5.0.0",
+  "prettier": "1.15.3",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
 exports[`CTF combination webpack,prettier,react 1`] = `
 Array [
   "webpack",
@@ -4411,6 +9665,7 @@ Array [
     "resolve": Object {
       "extensions": Array [
         ".js",
+        ".jsx",
         ".json",
       ],
     },
@@ -4462,14 +9717,106 @@ Object {
 }
 `;
 
-exports[`CTF combination webpack,react 1`] = `
+exports[`CTF combination webpack,prettier,react,rollup 1`] = `
 Array [
   "webpack",
+  "prettier",
   "react",
+  "rollup",
 ]
 `;
 
-exports[`CTF combination webpack,react 2`] = `
+exports[`CTF combination webpack,prettier,react,rollup 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination webpack,prettier,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination webpack,prettier,react,rollup 4`] = `
+Object {
+  "prettier": "1.15.3",
+  "react": "0.16.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination webpack,prettier,rollup 1`] = `
+Array [
+  "webpack",
+  "prettier",
+  "rollup",
+]
+`;
+
+exports[`CTF combination webpack,prettier,rollup 2`] = `
 Array [
   Object {
     "entry": "/",
@@ -4519,6 +9866,94 @@ Array [
       ],
     },
   },
+  Object {},
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination webpack,prettier,rollup 3`] = `Object {}`;
+
+exports[`CTF combination webpack,prettier,rollup 4`] = `
+Object {
+  "prettier": "1.15.3",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination webpack,react 1`] = `
+Array [
+  "webpack",
+  "react",
+]
+`;
+
+exports[`CTF combination webpack,react 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
 ]
 `;
 
@@ -4527,6 +9962,179 @@ exports[`CTF combination webpack,react 3`] = `Object {}`;
 exports[`CTF combination webpack,react 4`] = `
 Object {
   "react": "0.16.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination webpack,react,rollup 1`] = `
+Array [
+  "webpack",
+  "react",
+  "rollup",
+]
+`;
+
+exports[`CTF combination webpack,react,rollup 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination webpack,react,rollup 3`] = `Object {}`;
+
+exports[`CTF combination webpack,react,rollup 4`] = `
+Object {
+  "react": "0.16.0",
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
+  "webpack": "4.28.3",
+  "webpack-cli": "3.2.1",
+}
+`;
+
+exports[`CTF combination webpack,rollup 1`] = `
+Array [
+  "webpack",
+  "rollup",
+]
+`;
+
+exports[`CTF combination webpack,rollup 2`] = `
+Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "dest": "targets/lib.js",
+    "entry": "./src/graph/viz-worker.worker.js",
+    "external": [Function],
+    "output": Object {
+      "format": "es",
+    },
+    "plugins": Array [
+      Object {
+        "name": "replace",
+        "transform": [Function],
+      },
+    ],
+  },
+]
+`;
+
+exports[`CTF combination webpack,rollup 3`] = `Object {}`;
+
+exports[`CTF combination webpack,rollup 4`] = `
+Object {
+  "rollup": "4.28.3",
+  "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
 }

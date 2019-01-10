@@ -17,6 +17,14 @@ module.exports = {
         // Project type
         types: ['app']
       }
+    },
+    // Dispatch all lib builds to rollup
+    dispatch: {
+      flags: {
+        types: {
+          lib: 'alfred-skill-rollup'
+        }
+      }
     }
   },
   devDependencies: { webpack: '4.28.3', 'webpack-cli': '3.2.1' },

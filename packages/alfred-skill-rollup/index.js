@@ -6,6 +6,26 @@ module.exports = {
   name: 'rollup',
   description: 'Build, optimize, and bundle assets in your app',
   interface: '@alfredpkg/interface-build',
+  interfaceConfig: {
+    supports: {
+      flags: {
+        // Flag name and argument types
+        env: ['production', 'development', 'test'],
+        // All the supported targets a `build` skill should build
+        targets: ['browser', 'node'],
+        // Project type
+        types: ['lib']
+      }
+    },
+    // Dispatch all lib builds to rollup
+    dispatch: {
+      flags: {
+        types: {
+          app: 'alfred-skill-webpack'
+        }
+      }
+    }
+  },
   devDependencies: { rollup: '4.28.3', 'rollup-plugin-replace': '2.1.0' },
   configFiles: [
     {
@@ -35,7 +55,7 @@ module.exports = {
   hooks: {
     call(configFiles) {
       const { config } = getConfigByConfigName('rollup.base', configFiles);
-      rollup(config, (err, stats) => {});
+      rollup(config, () => {});
     }
   }
 };

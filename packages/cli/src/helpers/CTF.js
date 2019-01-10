@@ -5,7 +5,8 @@ import yarn from 'yarn-api';
 import {
   writeConfigsFromCtf,
   deleteConfigs,
-  getDevDependencies
+  getDevDependencies,
+  CORE_CTFS
 } from '@alfredpkg/core';
 import type { CtfMap } from '@alfredpkg/core';
 import ValidateConfig from './Validation';
@@ -73,6 +74,39 @@ export function installDeps(
   }
 }
 
+/**
+ * Add skills to a given list of skills to ensure that the list has a complete set
+ * of standard ctfs
+ */
+export function addMissingStdSkillsToCtf(ctf: CtfMap): CtfMap {
+  const stdCtf = new Map(
+    Object.entries({
+      lint: CORE_CTFS.eslint,
+      format: CORE_CTFS.prettier,
+      build: CORE_CTFS.webpack,
+      test: CORE_CTFS.jest
+    })
+  );
+  const stdSubommands = new Set(stdCtf.keys());
+  // Create a set of subcommands that the given CTF has
+  const ctfSubcommands = Array.from(ctf.values()).reduce((prev, ctfNode) => {
+    if (ctfNode.interface) {
+      const { subcommand } = require(ctfNode.interface); // eslint-disable-line
+      prev.add(subcommand);
+    }
+    return prev;
+  }, new Set());
+
+  stdSubommands.forEach(command => {
+    if (!ctfSubcommands.has(command)) {
+      const ctfSkillToAdd = stdCtf.get(command);
+      ctf.set(ctfSkillToAdd.name, ctfSkillToAdd);
+    }
+  });
+
+  return ctf;
+}
+
 export default async function generateCtfFromConfig(
   pkgPath = path.join(process.cwd(), 'package.json')
 ) {
@@ -80,17 +114,16 @@ export default async function generateCtfFromConfig(
     throw new Error('Current working directory does not have "package.json"');
   }
 
-  // Check config exists
+  // Read the package.json and validate the Alfred config
   const pkg = JSON.parse((await fs.promises.readFile(pkgPath)).toString());
-  if (!('alfred' in pkg)) {
-    throw new Error('No Alfred config in "package.json"');
-  }
-  // Validate Config
-  const { alfred } = pkg;
-  if (!alfred.skills) {
-    throw new Error('Alfred config does not have `skills` section');
-  }
-  ValidateConfig(alfred);
+  const tmpAlfredConfig = pkg.alfred || {};
+  ValidateConfig(tmpAlfredConfig || {});
+
+  const defaultOpts = {
+    npmClient: 'npm',
+    skills: []
+  };
+  const alfred = Object.assign({}, defaultOpts, tmpAlfredConfig);
 
   // Check necessary files exist
   const appPath = path.join(process.cwd(), 'src', 'main.js');

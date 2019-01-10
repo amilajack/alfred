@@ -37,7 +37,7 @@ module.exports = {
     webpack(config) {
       return config.extendConfig('webpack.base', {
         resolve: {
-          extensions: ['.jsx']
+          extensions: ['.js', '.jsx', '.json']
         }
       });
     },
