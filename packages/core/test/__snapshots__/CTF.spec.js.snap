@@ -842,6 +842,38 @@ Array [
       ],
     },
   },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
 ]
 `;
 
@@ -904,6 +936,38 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "extends": Array [
       "bliss",
     ],
@@ -911,7 +975,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "configs/webpack.config.js",
+          "config": "/",
         },
       },
     },
@@ -981,6 +1045,38 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "extends": Array [
       "bliss",
     ],
@@ -991,7 +1087,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "configs/webpack.config.js",
+          "config": "/",
         },
       },
     },
@@ -999,7 +1095,7 @@ Array [
   Object {
     "moduleNameMapper": Object {
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
   },
 ]
@@ -1017,6 +1113,7 @@ Object {
   "babel-loader": "5.0.0",
   "eslint": "5.10.0",
   "eslint-plugin-jest": "8.0.0",
+  "identity-obj-proxy": "*",
   "jest": "5.0.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
@@ -1089,6 +1186,38 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -1099,7 +1228,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "configs/webpack.config.js",
+          "config": "/",
         },
       },
     },
@@ -1107,7 +1236,7 @@ Array [
   Object {
     "moduleNameMapper": Object {
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
   },
 ]
@@ -1131,6 +1260,7 @@ Object {
   "eslint": "5.10.0",
   "eslint-config-airbnb": "17.1.0",
   "eslint-plugin-jest": "8.0.0",
+  "identity-obj-proxy": "*",
   "jest": "5.0.0",
   "react": "0.16.0",
   "react-hot-loader": "^4.3.12",
@@ -1186,6 +1316,38 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "extends": Array [
       "prettier",
     ],
@@ -1196,7 +1358,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "configs/webpack.config.js",
+          "config": "/",
         },
       },
     },
@@ -1274,6 +1436,38 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "extends": Array [
       "prettier",
     ],
@@ -1284,7 +1478,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "configs/webpack.config.js",
+          "config": "/",
         },
       },
     },
@@ -1293,7 +1487,7 @@ Array [
   Object {
     "moduleNameMapper": Object {
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
   },
 ]
@@ -1316,6 +1510,7 @@ Object {
   "babel-loader": "5.0.0",
   "eslint": "5.10.0",
   "eslint-plugin-jest": "8.0.0",
+  "identity-obj-proxy": "*",
   "jest": "5.0.0",
   "prettier": "1.15.3",
   "webpack": "4.28.3",
@@ -1390,6 +1585,38 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -1400,7 +1627,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "configs/webpack.config.js",
+          "config": "/",
         },
       },
     },
@@ -1409,7 +1636,7 @@ Array [
   Object {
     "moduleNameMapper": Object {
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
   },
 ]
@@ -1438,6 +1665,7 @@ Object {
   "eslint": "5.10.0",
   "eslint-config-airbnb": "17.1.0",
   "eslint-plugin-jest": "8.0.0",
+  "identity-obj-proxy": "*",
   "jest": "5.0.0",
   "prettier": "1.15.3",
   "react": "0.16.0",
@@ -1513,6 +1741,38 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -1523,7 +1783,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "configs/webpack.config.js",
+          "config": "/",
         },
       },
     },
@@ -1626,6 +1886,38 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -1633,7 +1925,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "configs/webpack.config.js",
+          "config": "/",
         },
       },
     },
@@ -1710,9 +2002,41 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "moduleNameMapper": Object {
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
   },
 ]
@@ -1727,6 +2051,7 @@ Object {
   "@babel/preset-env": "7.2.0",
   "babel-jest": "8.0.0",
   "babel-loader": "5.0.0",
+  "identity-obj-proxy": "*",
   "jest": "5.0.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
@@ -1798,9 +2123,41 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "moduleNameMapper": Object {
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
   },
 ]
@@ -1820,6 +2177,7 @@ Object {
   "babel-loader": "5.0.0",
   "babel-plugin-dev-expression": "^0.2.1",
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "identity-obj-proxy": "*",
   "jest": "5.0.0",
   "react": "0.16.0",
   "react-hot-loader": "^4.3.12",
@@ -1860,6 +2218,38 @@ Array [
         },
       ],
     },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
     "output": Object {
       "filename": "main.js",
       "path": "/",
@@ -1937,11 +2327,43 @@ Array [
       ],
     },
   },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
   Object {},
   Object {
     "moduleNameMapper": Object {
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
   },
 ]
@@ -1956,6 +2378,7 @@ Object {
   "@babel/preset-env": "7.2.0",
   "babel-jest": "8.0.0",
   "babel-loader": "5.0.0",
+  "identity-obj-proxy": "*",
   "jest": "5.0.0",
   "prettier": "1.15.3",
   "webpack": "4.28.3",
@@ -2028,11 +2451,43 @@ Array [
       ],
     },
   },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
   Object {},
   Object {
     "moduleNameMapper": Object {
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
   },
 ]
@@ -2052,6 +2507,7 @@ Object {
   "babel-loader": "5.0.0",
   "babel-plugin-dev-expression": "^0.2.1",
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+  "identity-obj-proxy": "*",
   "jest": "5.0.0",
   "prettier": "1.15.3",
   "react": "0.16.0",
@@ -2112,6 +2568,38 @@ Array [
         },
       ],
     },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
     "output": Object {
       "filename": "main.js",
       "path": "/",
@@ -2200,6 +2688,38 @@ Array [
         },
       ],
     },
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
     "output": Object {
       "filename": "main.js",
       "path": "/",
@@ -2678,6 +3198,38 @@ Array [
       ],
     },
   },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
 ]
 `;
 
@@ -2716,13 +3268,45 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "extends": Array [
       "bliss",
     ],
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "configs/webpack.config.js",
+          "config": "/",
         },
       },
     },
@@ -2767,6 +3351,38 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "extends": Array [
       "bliss",
     ],
@@ -2776,7 +3392,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "configs/webpack.config.js",
+          "config": "/",
         },
       },
     },
@@ -2784,7 +3400,7 @@ Array [
   Object {
     "moduleNameMapper": Object {
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
   },
 ]
@@ -2796,6 +3412,7 @@ exports[`CTF combination webpack,eslint,jest 4`] = `
 Object {
   "eslint": "5.10.0",
   "eslint-plugin-jest": "8.0.0",
+  "identity-obj-proxy": "*",
   "jest": "5.0.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
@@ -2830,6 +3447,38 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -2839,7 +3488,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "configs/webpack.config.js",
+          "config": "/",
         },
       },
     },
@@ -2847,7 +3496,7 @@ Array [
   Object {
     "moduleNameMapper": Object {
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
   },
 ]
@@ -2860,6 +3509,7 @@ Object {
   "eslint": "5.10.0",
   "eslint-config-airbnb": "17.1.0",
   "eslint-plugin-jest": "8.0.0",
+  "identity-obj-proxy": "*",
   "jest": "5.0.0",
   "react": "0.16.0",
   "webpack": "4.28.3",
@@ -2894,6 +3544,38 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "extends": Array [
       "prettier",
     ],
@@ -2903,7 +3585,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "configs/webpack.config.js",
+          "config": "/",
         },
       },
     },
@@ -2956,6 +3638,38 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "extends": Array [
       "prettier",
     ],
@@ -2965,7 +3679,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "configs/webpack.config.js",
+          "config": "/",
         },
       },
     },
@@ -2974,7 +3688,7 @@ Array [
   Object {
     "moduleNameMapper": Object {
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
   },
 ]
@@ -2991,6 +3705,7 @@ exports[`CTF combination webpack,eslint,prettier,jest 4`] = `
 Object {
   "eslint": "5.10.0",
   "eslint-plugin-jest": "8.0.0",
+  "identity-obj-proxy": "*",
   "jest": "5.0.0",
   "prettier": "1.15.3",
   "webpack": "4.28.3",
@@ -3027,6 +3742,38 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -3036,7 +3783,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "configs/webpack.config.js",
+          "config": "/",
         },
       },
     },
@@ -3045,7 +3792,7 @@ Array [
   Object {
     "moduleNameMapper": Object {
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
   },
 ]
@@ -3063,6 +3810,7 @@ Object {
   "eslint": "5.10.0",
   "eslint-config-airbnb": "17.1.0",
   "eslint-plugin-jest": "8.0.0",
+  "identity-obj-proxy": "*",
   "jest": "5.0.0",
   "prettier": "1.15.3",
   "react": "0.16.0",
@@ -3099,6 +3847,38 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -3108,7 +3888,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "configs/webpack.config.js",
+          "config": "/",
         },
       },
     },
@@ -3162,13 +3942,45 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "extends": Array [
       "eslint-config-airbnb",
     ],
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "configs/webpack.config.js",
+          "config": "/",
         },
       },
     },
@@ -3214,9 +4026,41 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "moduleNameMapper": Object {
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
   },
 ]
@@ -3226,6 +4070,7 @@ exports[`CTF combination webpack,jest 3`] = `Object {}`;
 
 exports[`CTF combination webpack,jest 4`] = `
 Object {
+  "identity-obj-proxy": "*",
   "jest": "5.0.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
@@ -3259,9 +4104,41 @@ Array [
     },
   },
   Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
     "moduleNameMapper": Object {
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
   },
 ]
@@ -3271,6 +4148,7 @@ exports[`CTF combination webpack,jest,react 3`] = `Object {}`;
 
 exports[`CTF combination webpack,jest,react 4`] = `
 Object {
+  "identity-obj-proxy": "*",
   "jest": "5.0.0",
   "react": "0.16.0",
   "webpack": "4.28.3",
@@ -3287,6 +4165,38 @@ Array [
 
 exports[`CTF combination webpack,prettier 2`] = `
 Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
   Object {
     "entry": "/",
     "mode": "development",
@@ -3343,11 +4253,43 @@ Array [
       ],
     },
   },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
   Object {},
   Object {
     "moduleNameMapper": Object {
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
   },
 ]
@@ -3357,6 +4299,7 @@ exports[`CTF combination webpack,prettier,jest 3`] = `Object {}`;
 
 exports[`CTF combination webpack,prettier,jest 4`] = `
 Object {
+  "identity-obj-proxy": "*",
   "jest": "5.0.0",
   "prettier": "1.15.3",
   "webpack": "4.28.3",
@@ -3391,11 +4334,43 @@ Array [
       ],
     },
   },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
   Object {},
   Object {
     "moduleNameMapper": Object {
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+      "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
   },
 ]
@@ -3405,6 +4380,7 @@ exports[`CTF combination webpack,prettier,jest,react 3`] = `Object {}`;
 
 exports[`CTF combination webpack,prettier,jest,react 4`] = `
 Object {
+  "identity-obj-proxy": "*",
   "jest": "5.0.0",
   "prettier": "1.15.3",
   "react": "0.16.0",
@@ -3423,6 +4399,38 @@ Array [
 
 exports[`CTF combination webpack,prettier,react 2`] = `
 Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
   Object {
     "entry": "/",
     "mode": "development",
@@ -3463,6 +4471,38 @@ Array [
 
 exports[`CTF combination webpack,react 2`] = `
 Array [
+  Object {
+    "entry": "/",
+    "mode": "development",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
+  Object {
+    "entry": "/",
+    "mode": "production",
+    "output": Object {
+      "filename": "main.js",
+      "path": "/",
+      "publicPath": "./targets/",
+    },
+    "plugins": Array [],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".json",
+      ],
+    },
+  },
   Object {
     "entry": "/",
     "mode": "development",

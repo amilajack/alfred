@@ -1,8 +1,8 @@
-import CTF, { CORE_CTFS } from '../../core';
-import diffCtfDeps from '../src/alfred-learn';
+import CTF, { CORE_CTFS } from '@alfredpkg/core';
+import { diffCtfDeps } from '../src/helpers/CTF';
 
 describe('alfred learn', () => {
-  it.skip('should install new deps after learning new skill', () => {
+  it('should install new deps after learning new skill', () => {
     const { webpack, babel } = CORE_CTFS;
     const oldCtf = CTF([webpack]);
     const newCtf = CTF([webpack, babel]);

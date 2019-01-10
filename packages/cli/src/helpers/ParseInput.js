@@ -23,7 +23,7 @@ export function findJsFiles(dir: string): Promise<Array<string>> {
 }
 
 export default function ParseInput(
-  files: Array<string>
+  files: Array<string> = []
 ): Promise<Array<string>> {
   return Promise.all(
     files.map(file =>

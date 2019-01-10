@@ -2,9 +2,38 @@ import path from 'path';
 import fs from 'fs';
 import npm from 'npm';
 import yarn from 'yarn-api';
-import { writeConfigsFromCtf } from '@alfredpkg/core';
+import {
+  writeConfigsFromCtf,
+  deleteConfigs,
+  getDevDependencies
+} from '@alfredpkg/core';
 import type { CtfMap } from '@alfredpkg/core';
 import ValidateConfig from './Validation';
+
+/**
+ * Find all the dependencies that are different between two CTF's.
+ * This is used to figure out which deps need to be installed
+ */
+export function diffCtfDeps(oldCtf: CtfMap, newCtf: CtfMap): Array<string> {
+  // Find the dependencies that have changed and install them
+  const t: Map<string, string> = new Map();
+  const s: Map<string, string> = new Map();
+
+  Object.entries(getDevDependencies(oldCtf)).forEach(([key, val]) => {
+    t.set(key, val);
+  });
+  Object.entries(getDevDependencies(newCtf)).forEach(([key, val]) => {
+    if (t.has(key)) {
+      if (t.get(key) !== val) {
+        throw new Error('Cannot resolve diff deps ');
+      }
+    } else {
+      s.set(key, val);
+    }
+  });
+
+  return Array.from(s.entries()).map(([key, val]) => `${key}@${val}`);
+}
 
 /**
  * @TODO Account for `devDependencies` and `dependencies`
@@ -85,9 +114,10 @@ export default async function generateCtfFromConfig(
   });
   module.paths.pop();
 
-  // Persist the resulting configs of the CTFs to ./node_modules/.configs or ./configs
   if (alfred.showConfigs) {
     await writeConfigsFromCtf(ctf);
+  } else {
+    await deleteConfigs();
   }
 
   return { pkg, ctf, pkgPath };

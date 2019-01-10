@@ -80,6 +80,8 @@ export function getConfigByConfigName(
   return config;
 }
 
+const configsBasePath = path.join(process.cwd(), '.configs');
+
 export function getConfigPathByConfigName(
   configName,
   configFiles: Array<configFileType>
@@ -176,17 +178,27 @@ export function getConfigs(ctf: CtfMap): Array<{ [x: string]: any }> {
     .reduce((p, c) => [...p, ...c], [])
     .map(e => e.config);
 }
+
+/**
+ * Delete .configs dir
+ */
+export function deleteConfigs(): Promise<void> {
+  if (fs.existsSync(configsBasePath)) {
+    return new Promise(resolve => {
+      rimraf(configsBasePath, () => {
+        resolve();
+      });
+    });
+  }
+  return Promise.resolve();
+}
+
 /**
  * Write configs to a './.configs' directory
  */
 export async function writeConfigsFromCtf(ctf: CtfMap) {
-  const configsBasePath = path.join(process.cwd(), '.configs');
-  // Delete .configs dir
-  await new Promise(resolve => {
-    rimraf(configsBasePath, () => {
-      resolve();
-    });
-  });
+  await deleteConfigs();
+
   // Create a new .configs dir and write the configs
   const configs = Array.from(ctf.values())
     .map(ctfNode => ctfNode.configFiles || [])
@@ -218,7 +230,6 @@ export function execCommand(installScript: string) {
   childProcess.execSync(installScript, { stdio: [0, 1, 2] });
 }
 export function getExecuteWrittenConfigsMethods(ctf: CtfMap) {
-  const configsBasePath = path.join(process.cwd(), '.configs');
   return Array.from(ctf.values())
     .filter(
       ctfNode =>

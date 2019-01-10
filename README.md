@@ -136,7 +136,7 @@ export default {
   subcommand: 'transpile',
   flags: {
     // Flag name and argument types
-    environment: ['production', 'development', 'test']
+    env: ['production', 'development', 'test']
   }
 };
 
