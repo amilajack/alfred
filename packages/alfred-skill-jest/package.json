@@ -1,6 +1,9 @@
 {
   "name": "@alfredpkg/skill-jest",
   "version": "0.0.0",
+  "dependencies": {
+    "jest": "^23.6.0"
+  },
   "peerDependencies": {
     "@alfredpkg/core": "0.0.0",
     "@alfredpkg/interface-test": "^0.0.0",

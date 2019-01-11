@@ -1,15 +1,15 @@
 import program from 'commander';
 import fs from 'fs';
 import formatPkg from 'format-package';
-import generateCtfFromConfig, { installDeps, diffCtfDeps } from './helpers/CTF';
+import { loadConfigs, installDeps, diffCtfDeps } from './helpers/CTF';
 
 (async () => {
   const args = program.parse(process.argv);
   const { args: skills } = args;
-  const { pkg, pkgPath, ctf: oldCtf } = await generateCtfFromConfig();
+  const { pkgPath, ctf: oldCtf, alfredConfig } = await loadConfigs();
 
   // Install skills using NPM's API
-  const { skills: configSkills = [], npmClient = 'npm' } = pkg.alfred;
+  const { skills: configSkills = [], npmClient = 'npm' } = alfredConfig;
   configSkills.forEach(skill => {
     if (typeof skill !== 'string') {
       throw new Error(`Type of skill "${skill}" must be a string`);
@@ -22,7 +22,7 @@ import generateCtfFromConfig, { installDeps, diffCtfDeps } from './helpers/CTF';
 
   // Find the name of the packages that were installed and add the package names to
   // the alfred skills array
-  const { ctf: newCtf, pkg: newPkg } = await generateCtfFromConfig();
+  const { ctf: newCtf, pkg: newPkg } = await loadConfigs();
   const deps = Object.entries({
     ...newPkg.devDependencies,
     ...newPkg.dependencies

@@ -1,0 +1,13 @@
+{
+  "name": "@alfredpkg/skill-rollup",
+  "version": "0.0.0",
+  "dependencies": {
+    "rollup": "1.1.0",
+    "rollup-plugin-babel": "^4.3.0",
+    "rollup-plugin-replace": "2.1.0"
+  },
+  "peerDependencies": {
+    "@alfredpkg/core": "0.0.0",
+    "@alfredpkg/interface-build": "^0.0.0"
+  }
+}

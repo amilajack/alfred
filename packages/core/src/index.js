@@ -9,6 +9,8 @@ import webpack from '@alfredpkg/skill-webpack';
 import eslint from '@alfredpkg/skill-eslint';
 import react from '@alfredpkg/skill-react';
 import prettier from '@alfredpkg/skill-prettier';
+import rollup from '@alfredpkg/skill-rollup';
+import pkgUp from 'pkg-up';
 
 export const CORE_CTFS = {
   babel,
@@ -16,13 +18,23 @@ export const CORE_CTFS = {
   eslint,
   prettier,
   jest: jestCtf,
-  react
+  react,
+  rollup
 };
 
 // @TODO send the information to a crash reporting service (like sentry.io)
 process.on('unhandledRejection', err => {
   throw err;
 });
+
+export type InterfaceState = {
+  // Flag name and argument types
+  env: 'production' | 'development' | 'test',
+  // All the supported targets a `build` skill should build
+  target: 'browser' | 'node' | 'electron' | 'react-native',
+  // Project type
+  projectType: 'lib' | 'app'
+};
 
 export type configFileType = {
   // The "friendly name" of a file. This is the name that
@@ -78,6 +90,28 @@ export function getConfigByConfigName(
   const config = configFiles.find(e => e.name === configName);
   if (!config) throw new Error(`Cannot find config by name "${configName}"`);
   return config;
+}
+
+/**
+ * Get the name of the package JSON
+ * @param {string} pkgName The name of the package
+ * @param {string} binName The property of the bin object that we want
+ */
+export async function getPkgBinPath(pkgName: string, binName: string) {
+  const pkgPath = require.resolve(pkgName);
+  const pkgJsonPath = await pkgUp(pkgPath);
+
+  const { bin } = require(pkgJsonPath); // eslint-disable-line
+  if (!bin) {
+    throw new Error(
+      `Module "${pkgName}" does not have a binary because it does not have a "bin" property in it's package.json`
+    );
+  }
+
+  return path.join(
+    path.dirname(pkgJsonPath),
+    typeof bin === 'string' ? bin : bin[binName]
+  );
 }
 
 const configsBasePath = path.join(process.cwd(), '.configs');
@@ -169,6 +203,7 @@ export default function CTF(ctfs: Array<CtfNode>): CtfMap {
 
   return map;
 }
+
 /*
  * Intended to be used for testing purposes
  */
@@ -213,6 +248,17 @@ export async function writeConfigsFromCtf(ctf: CtfMap) {
     })
   );
 }
+
+export function getInterfacesForCtfNodes(ctf: CtfMap): CtfMap {
+  ctf.forEach(ctfNode => {
+    if (ctfNode.interface) {
+      const { subcommand } = require(ctfNode.interface); // eslint-disable-line
+      ctfNode.subcommand = subcommand; // eslint-disable-line
+    }
+  });
+  return ctf;
+}
+
 /**
  * Intended to be used for testing purposes
  */
@@ -226,10 +272,13 @@ export function getDevDependencies(ctf: CtfMap): { [x: string]: string } {
     .map(ctfNode => ctfNode.devDependencies || {})
     .reduce((p, c) => ({ ...p, ...c }), {});
 }
-export function execCommand(installScript: string) {
-  childProcess.execSync(installScript, { stdio: [0, 1, 2] });
+export function execCommand(cmd: string) {
+  return childProcess.execSync(cmd, { stdio: [0, 1, 2] });
 }
-export function getExecuteWrittenConfigsMethods(ctf: CtfMap) {
+export function getExecuteWrittenConfigsMethods(
+  ctf: CtfMap,
+  state: InterfaceState
+) {
   return Array.from(ctf.values())
     .filter(
       ctfNode =>
@@ -242,11 +291,9 @@ export function getExecuteWrittenConfigsMethods(ctf: CtfMap) {
       }));
       const { subcommand } = require(ctfNode.interface); // eslint-disable-line
       return {
-        fn: () => {
-          try {
-            ctfNode.hooks.call(configFiles, ctf);
-          } catch (e) {} // eslint-disable-line
-        },
+        fn: alfredConfig =>
+          // @TODO: Pass configFiles, ctf, alfredConfig, and state as an object to .call()
+          ctfNode.hooks.call(configFiles, ctf, alfredConfig, state),
         // @HACK: If interfaces were defined, we could import the @alfredpkg/interface-*
         //        and use the `subcommand` property. This should be done after we have
         //        some interfaces to work with

@@ -1,5 +1,8 @@
-const { getConfigPathByConfigName } = require('@alfredpkg/core');
-const childProcess = require('child_process');
+const {
+  getConfigPathByConfigName,
+  getPkgBinPath,
+  execCommand
+} = require('@alfredpkg/core');
 
 module.exports = {
   name: 'prettier',
@@ -14,20 +17,20 @@ module.exports = {
     }
   ],
   hooks: {
-    call(configFiles) {
+    async call(configFiles, ctf, alfredConfig) {
+      const binPath = await getPkgBinPath('prettier');
       const configPath = getConfigPathByConfigName('prettier', configFiles);
-      const cmd = [
-        './node_modules/.bin/prettier',
-        '--ignore-path',
-        '.eslintignore',
-        '--single-quote',
-        '--write',
-        '**/*.{*{js,jsx,json},babelrc,eslintrc,prettierrc,stylelintrc}',
-        `--config ${configPath}`
-      ].join(' ');
-      childProcess.execSync(cmd, {
-        stdio: [0, 1, 2]
-      });
+      return execCommand(
+        [
+          binPath,
+          '--ignore-path',
+          '.gitignore',
+          '--single-quote',
+          '--write',
+          '**/*.{*{js,jsx,json},babelrc,eslintrc,prettierrc,stylelintrc}',
+          alfredConfig.showConfigs ? `--config ${configPath} .` : ''
+        ].join(' ')
+      );
     }
   },
   ctfs: {

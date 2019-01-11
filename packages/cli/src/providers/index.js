@@ -158,11 +158,7 @@ export default async function Providers(
       Promise.resolve(input)
     );
 
-  try {
-    await transformations;
-  } catch (e) {
-    console.log('the transformations failed', e);
-  }
+  await transformations;
 
   // If we dont want to write to the original file, return the code in text form.
   // This is ideal for testing

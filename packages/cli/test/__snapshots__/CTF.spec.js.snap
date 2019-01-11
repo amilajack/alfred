@@ -1,6 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`alfred learn should install new deps after learning new skill 1`] = `
+exports[`alfred cli helpers should add missing std skills to ctf 1`] = `
+Array [
+  "webpack",
+]
+`;
+
+exports[`alfred cli helpers should add missing std skills to ctf 2`] = `
+Array [
+  "webpack",
+  "eslint",
+  "prettier",
+  "jest",
+]
+`;
+
+exports[`alfred cli helpers should install new deps after learning new skill 1`] = `
 Array [
   "babel-loader@5.0.0",
   "@babel/cli@7.2.0",

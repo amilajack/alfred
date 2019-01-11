@@ -34,6 +34,13 @@ module.exports = {
           'react-hot-loader': '^4.3.12'
         });
     },
+    webpack(config) {
+      return config.extendConfig('webpack.base', {
+        resolve: {
+          extensions: ['.js', '.jsx', '.json']
+        }
+      });
+    },
     eslint(config) {
       return config
         .extendConfig('eslint', {

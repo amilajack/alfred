@@ -1,4 +1,8 @@
-const { getConfigPathByConfigName } = require('@alfredpkg/core');
+const {
+  getConfigPathByConfigName,
+  execCommand,
+  getPkgBinPath
+} = require('@alfredpkg/core');
 
 module.exports = {
   name: 'babel',
@@ -18,9 +22,15 @@ module.exports = {
     }
   ],
   hooks: {
-    call(configFiles) {
+    async call(configFiles, ctf, alfredConfig) {
       const configPath = getConfigPathByConfigName('babel', configFiles);
-      return `./node_modules/.bin/babel --configFile ${configPath}`;
+      const binPath = await getPkgBinPath('@babel/cli', 'babel');
+      return execCommand(
+        [
+          binPath,
+          alfredConfig.showConfigs ? `--configFile ${configPath} .` : ''
+        ].join(' ')
+      );
     }
   },
   ctfs: {
@@ -43,6 +53,17 @@ module.exports = {
           }
         })
         .addDevDependencies({ 'babel-loader': '5.0.0' });
+    },
+    rollup(config) {
+      // eslint-disable-next-line
+      const babel = require('rollup-plugin-babel');
+      return config
+        .extendConfig('rollup.base', {
+          plugins: [babel]
+        })
+        .addDevDependencies({
+          'rollup-plugin-babel': '4.2.0'
+        });
     },
     eslint(config) {
       return config
