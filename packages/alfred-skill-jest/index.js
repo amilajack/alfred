@@ -1,4 +1,8 @@
-const { getConfigPathByConfigName } = require('@alfredpkg/core');
+const {
+  getConfigPathByConfigName,
+  getPkgBinPath,
+  execCommand
+} = require('@alfredpkg/core');
 
 module.exports = {
   name: 'jest',
@@ -13,9 +17,15 @@ module.exports = {
     }
   ],
   hooks: {
-    call(configFiles) {
+    async call(configFiles, ctf, alfredConfig) {
       const configPath = getConfigPathByConfigName('jest', configFiles);
-      return `./node_modules/.bin/jest --config ${configPath}`;
+      const binPath = await getPkgBinPath('jest-cli', 'jest');
+      return execCommand(
+        [
+          binPath,
+          alfredConfig.showConfigs ? `--config ${configPath} .` : ''
+        ].join(' ')
+      );
     }
   },
   ctfs: {

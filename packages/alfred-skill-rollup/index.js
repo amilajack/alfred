@@ -55,7 +55,7 @@ module.exports = {
   hooks: {
     call(configFiles) {
       const { config } = getConfigByConfigName('rollup.base', configFiles);
-      rollup(config, () => {});
+      return rollup(config, () => {});
     }
   }
 };

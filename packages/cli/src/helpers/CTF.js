@@ -123,7 +123,7 @@ export default async function generateCtfFromConfig(
     npmClient: 'npm',
     skills: []
   };
-  const alfred = Object.assign({}, defaultOpts, tmpAlfredConfig);
+  const alfredConfig = Object.assign({}, defaultOpts, tmpAlfredConfig);
 
   // Check necessary files exist
   const appPath = path.join(process.cwd(), 'src', 'main.js');
@@ -137,7 +137,7 @@ export default async function generateCtfFromConfig(
 
   // Generate the CTF
   const ctf: CtfMap = new Map();
-  const { skills = [] } = alfred;
+  const { skills = [] } = alfredConfig;
   module.paths.push(`${process.cwd()}/node_modules`);
   skills.forEach(skill => {
     /* eslint-disable */
@@ -145,13 +145,14 @@ export default async function generateCtfFromConfig(
     /* eslint-enable */
     ctf.set(c.name, c);
   });
+  addMissingStdSkillsToCtf(ctf);
   module.paths.pop();
 
-  if (alfred.showConfigs) {
+  if (alfredConfig.showConfigs) {
     await writeConfigsFromCtf(ctf);
   } else {
     await deleteConfigs();
   }
 
-  return { pkg, ctf, pkgPath };
+  return { pkg, ctf, pkgPath, alfredConfig };
 }

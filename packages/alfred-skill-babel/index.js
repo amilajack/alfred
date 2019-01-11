@@ -1,4 +1,4 @@
-const { getConfigPathByConfigName } = require('@alfredpkg/core');
+const { getConfigPathByConfigName, execCommand } = require('@alfredpkg/core');
 
 module.exports = {
   name: 'babel',
@@ -18,9 +18,15 @@ module.exports = {
     }
   ],
   hooks: {
-    call(configFiles) {
+    call(configFiles, ctf, alfredConfig) {
       const configPath = getConfigPathByConfigName('babel', configFiles);
-      return `./node_modules/.bin/babel --configFile ${configPath}`;
+      const binPath = require.resolve('@babel/cli');
+      return execCommand(
+        [
+          binPath,
+          alfredConfig.showConfigs ? `--configFile ${configPath} .` : ''
+        ].join(' ')
+      );
     }
   },
   ctfs: {

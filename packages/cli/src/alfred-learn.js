@@ -6,10 +6,10 @@ import generateCtfFromConfig, { installDeps, diffCtfDeps } from './helpers/CTF';
 (async () => {
   const args = program.parse(process.argv);
   const { args: skills } = args;
-  const { pkg, pkgPath, ctf: oldCtf } = await generateCtfFromConfig();
+  const { pkgPath, ctf: oldCtf, alfredConfig } = await generateCtfFromConfig();
 
   // Install skills using NPM's API
-  const { skills: configSkills = [], npmClient = 'npm' } = pkg.alfred;
+  const { skills: configSkills = [], npmClient = 'npm' } = alfredConfig;
   configSkills.forEach(skill => {
     if (typeof skill !== 'string') {
       throw new Error(`Type of skill "${skill}" must be a string`);

@@ -20,7 +20,7 @@ import generateCtfFromConfig from './helpers/CTF';
   }
 
   const [skill] = skills;
-  const { ctf } = await generateCtfFromConfig();
+  const { ctf, alfredConfig } = await generateCtfFromConfig();
   const commands = getExecuteWrittenConfigsMethods(ctf, {});
 
   if (!Object.keys(commands).includes(skill)) {
@@ -29,5 +29,5 @@ import generateCtfFromConfig from './helpers/CTF';
     );
   }
 
-  commands[skill]();
+  await commands[skill](alfredConfig);
 })();

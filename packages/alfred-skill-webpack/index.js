@@ -94,7 +94,7 @@ module.exports = {
       // );
       const mergedProdConfig = webpackMerge(baseConfig, prodConfig);
       // const mergedDevConfig = webpackMerge(baseConfig, prodConfig);
-      webpack(mergedProdConfig, (err, stats) => {
+      return webpack(mergedProdConfig, (err, stats) => {
         if (err) {
           console.error(err.stack || err);
           if (err.details) {
