@@ -25,7 +25,7 @@ import generateCtfFromConfig from './helpers/CTF';
 
   if (!Object.keys(commands).includes(skill)) {
     throw new Error(
-      `Subcommand "${skill}" is not supported by the skills you have`
+      `Subcommand "${skill}" is not supported by the skills you have installed`
     );
   }
 

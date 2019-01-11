@@ -1,4 +1,8 @@
-const { getPkgBinPath, execCommand } = require('@alfredpkg/core');
+const {
+  getConfigPathByConfigName,
+  getPkgBinPath,
+  execCommand
+} = require('@alfredpkg/core');
 
 module.exports = {
   name: 'prettier',
@@ -13,8 +17,9 @@ module.exports = {
     }
   ],
   hooks: {
-    async call() {
+    async call(configFiles, ctf, alfredConfig) {
       const binPath = await getPkgBinPath('prettier');
+      const configPath = getConfigPathByConfigName('prettier', configFiles);
       return execCommand(
         [
           binPath,
@@ -22,7 +27,8 @@ module.exports = {
           '.gitignore',
           '--single-quote',
           '--write',
-          '**/*.{*{js,jsx,json},babelrc,eslintrc,prettierrc,stylelintrc}'
+          '**/*.{*{js,jsx,json},babelrc,eslintrc,prettierrc,stylelintrc}',
+          alfredConfig.showConfigs ? `--config ${configPath} .` : ''
         ].join(' ')
       );
     }
