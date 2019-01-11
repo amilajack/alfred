@@ -29,6 +29,7 @@ cd my-app
 # Standard scripts
 alfred start
 alfred build
+alfred clean
 alfred format
 alfred test
 alfred search

@@ -9,22 +9,12 @@ module.exports = {
   interface: '@alfredpkg/interface-build',
   interfaceConfig: {
     supports: {
-      flags: {
-        // Flag name and argument types
-        env: ['production', 'development', 'test'],
-        // All the supported targets a `build` skill should build
-        targets: ['browser', 'node'],
-        // Project type
-        types: ['app']
-      }
-    },
-    // Dispatch all lib builds to rollup
-    dispatch: {
-      flags: {
-        types: {
-          lib: 'alfred-skill-rollup'
-        }
-      }
+      // Flag name and argument types
+      env: ['production', 'development', 'test'],
+      // All the supported targets a `build` skill should build
+      targets: ['browser', 'node'],
+      // Project type
+      projectTypes: ['app']
     }
   },
   devDependencies: { webpack: '4.28.3', 'webpack-cli': '3.2.1' },
@@ -33,12 +23,6 @@ module.exports = {
       name: 'webpack.base',
       path: 'webpack.base.js',
       config: {
-        entry: path.join(process.cwd(), 'src', 'main.js'),
-        output: {
-          path: path.join(process.cwd(), 'targets'),
-          publicPath: './targets/',
-          filename: 'main.js'
-        },
         mode: 'development',
         resolve: {
           extensions: ['.js', '.json']
@@ -50,51 +34,73 @@ module.exports = {
       name: 'webpack.prod',
       path: 'webpack.prod.js',
       config: {
-        entry: path.join(process.cwd(), 'src', 'main.js'),
-        output: {
-          path: path.join(process.cwd(), 'targets'),
-          publicPath: './targets/',
-          filename: 'main.js'
-        },
-        mode: 'production',
-        resolve: {
-          extensions: ['.js', '.json']
-        },
-        plugins: []
+        // @TODO: optimizations, etc
+        mode: 'production'
       }
     },
     {
       name: 'webpack.dev',
       path: 'webpack.dev.js',
       config: {
-        entry: path.join(process.cwd(), 'src', 'main.js'),
+        // @TODO: wepack-dev-server, HMR, sass, css, etc
+        mode: 'development'
+      }
+    },
+    {
+      name: 'webpack.node',
+      path: 'webpack.node.js',
+      config: {
+        entry: path.join(process.cwd(), 'src', 'app.node.js'),
         output: {
           path: path.join(process.cwd(), 'targets'),
           publicPath: './targets/',
-          filename: 'main.js'
+          filename: 'app.node.js'
         },
-        mode: 'development',
-        resolve: {
-          extensions: ['.js', '.json']
+        target: 'node'
+      }
+    },
+    {
+      name: 'webpack.browser',
+      path: 'webpack.browser.js',
+      config: {
+        entry: path.join(process.cwd(), 'src', 'app.browser.js'),
+        output: {
+          path: path.join(process.cwd(), 'targets'),
+          publicPath: './targets/',
+          filename: 'app.browser.js'
         },
-        plugins: []
+        target: 'web'
       }
     }
   ],
   hooks: {
-    call(configFiles) {
-      const { baseConfig } = getConfigByConfigName('webpack.base', configFiles);
+    call(configFiles, ctf, alfredConfig, state) {
+      const { config: baseConfig } = getConfigByConfigName(
+        'webpack.base',
+        configFiles
+      );
       const { config: prodConfig } = getConfigByConfigName(
         'webpack.prod',
         configFiles
       );
-      // const { config: devConfig } = getConfigByConfigName(
-      //   'webpack.dev',
-      //   configFiles
-      // );
-      const mergedProdConfig = webpackMerge(baseConfig, prodConfig);
-      // const mergedDevConfig = webpackMerge(baseConfig, prodConfig);
-      return webpack(mergedProdConfig, (err, stats) => {
+      const { config: devConfig } = getConfigByConfigName(
+        'webpack.dev',
+        configFiles
+      );
+      const { config: nodeConfig } = getConfigByConfigName(
+        'webpack.node',
+        configFiles
+      );
+      const { config: browserConfig } = getConfigByConfigName(
+        'webpack.browser',
+        configFiles
+      );
+      const mergedConfig = webpackMerge(
+        baseConfig,
+        state.env === 'production' ? prodConfig : devConfig,
+        state.target === 'browser' ? browserConfig : nodeConfig
+      );
+      return webpack(mergedConfig, (err, stats) => {
         if (err) {
           console.error(err.stack || err);
           if (err.details) {

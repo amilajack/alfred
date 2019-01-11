@@ -1,4 +1,9 @@
-const { getConfigPathByConfigName, execCommand } = require('@alfredpkg/core');
+const {
+  getConfigPathByConfigName,
+  getConfigByConfigName,
+  execCommand,
+  getPkgBinPath
+} = require('@alfredpkg/core');
 
 module.exports = {
   name: 'eslint',
@@ -15,15 +20,22 @@ module.exports = {
     }
   ],
   hooks: {
-    call(configFiles, ctf, alfredConfig) {
+    async call(configFiles, ctf, alfredConfig) {
       const configPath = getConfigPathByConfigName('eslint', configFiles);
-      const binPath = require.resolve('eslint');
-      return execCommand(
-        [
-          binPath,
-          alfredConfig.showConfigs ? `--config ${configPath} .` : ''
-        ].join(' ')
-      );
+      const binPath = await getPkgBinPath('eslint', 'eslint');
+      if (alfredConfig.showConfigs) {
+        return execCommand([binPath, `--config ${configPath} .`].join(' '));
+      }
+      const { config } = getConfigByConfigName('eslint', configFiles);
+      const { CLIEngine } = require('eslint');
+      const cli = new CLIEngine({ ...config, useEslintrc: false });
+      const report = cli.executeOnFiles([process.cwd()]);
+      const formatter = cli.getFormatter();
+      console.log(formatter(report.results));
+      if (report.results.length) {
+        process.exit(1);
+      }
+      return true;
     }
   },
   ctfs: {}

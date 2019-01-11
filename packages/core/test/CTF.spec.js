@@ -35,7 +35,13 @@ describe('CTF', () => {
     });
 
     it('should generate functions for scripts', () => {
-      expect(getExecuteWrittenConfigsMethods(ctf)).toMatchSnapshot();
+      expect(
+        getExecuteWrittenConfigsMethods(ctf, {
+          target: 'app',
+          env: 'production',
+          projectType: 'lib'
+        })
+      ).toMatchSnapshot();
     });
   });
 

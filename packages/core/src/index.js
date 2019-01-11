@@ -27,6 +27,15 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
+export type InterfaceState = {
+  // Flag name and argument types
+  env: 'production' | 'development' | 'test',
+  // All the supported targets a `build` skill should build
+  target: 'browser' | 'node' | 'electron' | 'react-native',
+  // Project type
+  projectType: 'lib' | 'app'
+};
+
 export type configFileType = {
   // The "friendly name" of a file. This is the name that
   // other CTFs will refer to config file by.
@@ -266,7 +275,10 @@ export function getDevDependencies(ctf: CtfMap): { [x: string]: string } {
 export function execCommand(cmd: string) {
   return childProcess.execSync(cmd, { stdio: [0, 1, 2] });
 }
-export function getExecuteWrittenConfigsMethods(ctf: CtfMap) {
+export function getExecuteWrittenConfigsMethods(
+  ctf: CtfMap,
+  state: InterfaceState
+) {
   return Array.from(ctf.values())
     .filter(
       ctfNode =>
@@ -279,7 +291,9 @@ export function getExecuteWrittenConfigsMethods(ctf: CtfMap) {
       }));
       const { subcommand } = require(ctfNode.interface); // eslint-disable-line
       return {
-        fn: alfredConfig => ctfNode.hooks.call(configFiles, ctf, alfredConfig),
+        fn: alfredConfig =>
+          // @TODO: Pass configFiles, ctf, alfredConfig, and state as an object to .call()
+          ctfNode.hooks.call(configFiles, ctf, alfredConfig, state),
         // @HACK: If interfaces were defined, we could import the @alfredpkg/interface-*
         //        and use the `subcommand` property. This should be done after we have
         //        some interfaces to work with

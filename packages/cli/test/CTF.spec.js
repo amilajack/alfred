@@ -14,6 +14,14 @@ describe('alfred cli helpers', () => {
     const { webpack } = CORE_CTFS;
     const ctf = CTF([webpack]);
     expect(Array.from(ctf.keys())).toMatchSnapshot();
-    expect(Array.from(addMissingStdSkillsToCtf(ctf).keys())).toMatchSnapshot();
+    expect(
+      Array.from(
+        addMissingStdSkillsToCtf(ctf, {
+          env: 'production',
+          projectType: 'app',
+          target: 'browser'
+        }).keys()
+      )
+    ).toMatchSnapshot();
   });
 });

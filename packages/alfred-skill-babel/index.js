@@ -1,4 +1,8 @@
-const { getConfigPathByConfigName, execCommand } = require('@alfredpkg/core');
+const {
+  getConfigPathByConfigName,
+  execCommand,
+  getPkgBinPath
+} = require('@alfredpkg/core');
 
 module.exports = {
   name: 'babel',
@@ -18,9 +22,9 @@ module.exports = {
     }
   ],
   hooks: {
-    call(configFiles, ctf, alfredConfig) {
+    async call(configFiles, ctf, alfredConfig) {
       const configPath = getConfigPathByConfigName('babel', configFiles);
-      const binPath = require.resolve('@babel/cli');
+      const binPath = await getPkgBinPath('@babel/cli', 'babel');
       return execCommand(
         [
           binPath,
