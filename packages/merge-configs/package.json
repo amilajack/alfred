@@ -16,6 +16,6 @@
   "devDependencies": {
     "copy-webpack-plugin": "^4.6.0",
     "mocha": "^5.2.0",
-    "webpack": "^1.15.0"
+    "webpack": "^4.28.4"
   }
 }
