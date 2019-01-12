@@ -1,0 +1,35 @@
+{
+  "name": "@alfredpkg/merge-configs",
+  "description": "Variant of merge that's useful for webpack configuration",
+  "author": "Juho Vepsalainen <bebraw@gmail.com>",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps inline",
+    "test": "mocha tests/test-*"
+  },
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "lodash": "^4.17.5"
+  },
+  "devDependencies": {
+    "mocha": "^3.5.3",
+    "webpack": "^1.15.0",
+    "copy-webpack-plugin": "^4.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/survivejs/webpack-merge.git"
+  },
+  "homepage": "https://github.com/survivejs/webpack-merge",
+  "bugs": {
+    "url": "https://github.com/survivejs/webpack-merge/issues"
+  },
+  "keywords": [
+    "webpack",
+    "merge"
+  ],
+  "license": "MIT"
+}
