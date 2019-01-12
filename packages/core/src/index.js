@@ -92,6 +92,30 @@ export function getConfigByConfigName(
   return config;
 }
 
+// export const mergeConfigs = webpackMerge.default;
+
+/**
+ * Map the environment name to a short name, which is one of ['dev', 'prod', 'test']
+ * @TODO: Should be moved to CLI
+ */
+
+export function mapEnvToShortName(envName: string): string {
+  switch (envName) {
+    case 'production': {
+      return 'prod';
+    }
+    case 'development': {
+      return 'dev';
+    }
+    case 'test': {
+      return 'test';
+    }
+    default: {
+      throw new Error(`Unsupported environment name "${envName}"`);
+    }
+  }
+}
+
 /**
  * Get the name of the package JSON
  * @param {string} pkgName The name of the package

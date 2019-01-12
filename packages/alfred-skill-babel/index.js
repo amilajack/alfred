@@ -65,6 +65,17 @@ module.exports = {
           'rollup-plugin-babel': '4.2.0'
         });
     },
+    jest(config) {
+      return config
+        .extendConfig('jest', {
+          transform: {
+            '^.+\\.jsx?$': 'babel-jest'
+          }
+        })
+        .addDevDependencies({
+          'babel-jest': '23.6.0'
+        });
+    },
     eslint(config) {
       return config
         .extendConfig('eslint', {

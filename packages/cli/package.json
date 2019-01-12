@@ -51,7 +51,6 @@
     "simple-git": "^1.107.0",
     "uniq": "^1.0.1",
     "update-notifier": "^2.5.0",
-    "webpack-merge": "^4.2.1",
     "yarn-api": "^1.1.0"
   },
   "engines": {

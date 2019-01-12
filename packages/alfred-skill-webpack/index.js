@@ -1,7 +1,7 @@
 const webpack = require('webpack');
-const webpackMerge = require('webpack-merge');
 const path = require('path');
 const { getConfigByConfigName } = require('@alfredpkg/core');
+const { default: mergeConfigs } = require('@alfredpkg/merge-configs');
 
 module.exports = {
   name: 'webpack',
@@ -24,6 +24,10 @@ module.exports = {
       path: 'webpack.base.js',
       config: {
         mode: 'development',
+        output: {
+          path: path.join(process.cwd(), 'targets', 'dev'),
+          publicPath: './targets/dev'
+        },
         resolve: {
           extensions: ['.js', '.json']
         },
@@ -34,6 +38,10 @@ module.exports = {
       name: 'webpack.prod',
       path: 'webpack.prod.js',
       config: {
+        output: {
+          path: path.join(process.cwd(), 'targets', 'prod'),
+          publicPath: './targets/prod'
+        },
         // @TODO: optimizations, etc
         mode: 'production'
       }
@@ -52,8 +60,6 @@ module.exports = {
       config: {
         entry: path.join(process.cwd(), 'src', 'app.node.js'),
         output: {
-          path: path.join(process.cwd(), 'targets'),
-          publicPath: './targets/',
           filename: 'app.node.js'
         },
         target: 'node'
@@ -65,8 +71,6 @@ module.exports = {
       config: {
         entry: path.join(process.cwd(), 'src', 'app.browser.js'),
         output: {
-          path: path.join(process.cwd(), 'targets'),
-          publicPath: './targets/',
           filename: 'app.browser.js'
         },
         target: 'web'
@@ -95,7 +99,7 @@ module.exports = {
         'webpack.browser',
         configFiles
       );
-      const mergedConfig = webpackMerge(
+      const mergedConfig = mergeConfigs(
         baseConfig,
         state.env === 'production' ? prodConfig : devConfig,
         state.target === 'browser' ? browserConfig : nodeConfig

@@ -29,10 +29,6 @@ module.exports = {
     }
   },
   ctfs: {
-    babel: config =>
-      config.addDevDependencies({
-        'babel-jest': '8.0.0'
-      }),
     eslint: config =>
       config
         .addDevDependencies({

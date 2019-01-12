@@ -48,6 +48,16 @@ alfred migrate .
 alfred migrate . --transforms imports lebab
 ```
 
+## Docs
+* **[website](https://alfred.js.org)** ([alfred.js.org](https://alfred.js.org))
+* **[docs](https://alfred.js.org/docs)** ([alfred.js.org/docs](https://alfred.js.org/docs))
+
+## Examples
+
+|  | Example | Descrption |
+| --- | --- | --- |
+| 1.|  [hello world](https://github.com/amilajack/alfred/tree/master/examples/hello-world) | A simple hello work app in node |
+
 ## Local Setup
 ```bash
 git clone https://github.com/amilajack/alfred
@@ -214,7 +224,7 @@ Would you like to install it? (Y/n)
 
 ## Required Files and Folders
 
-* `./src/main.js` or `./src/lib.js`
+* `./src/{projectType}.{env}.js`, e.g.: `./src/lib.node.js`
 * `.editorconfig`
 * `.gitignore`
 * `.travis.yml`

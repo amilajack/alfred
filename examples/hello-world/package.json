@@ -1,0 +1,17 @@
+{
+  "name": "@examples/hello-world",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "./targets/lib.node.js",
+  "module": "./targets/lib.node.js",
+  "scripts": {
+    "build": "alfred run build",
+    "format": "alfred run format",
+    "lint": "alfred run lint",
+    "test": "alfred run test"
+  },
+  "devDependencies": {
+    "@alfredpkg/cli": "^0.0.1-12",
+    "@alfredpkg/core": "^0.0.0"
+  }
+}

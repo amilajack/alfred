@@ -2,8 +2,11 @@ const replace = require('rollup-plugin-replace');
 const {
   getConfigPathByConfigName,
   getPkgBinPath,
-  execCommand
+  execCommand,
+  getConfigByConfigName,
+  mapEnvToShortName
 } = require('@alfredpkg/core');
+const { default: mergeConfigs } = require('@alfredpkg/merge-configs');
 
 module.exports = {
   name: 'rollup',
@@ -23,25 +26,38 @@ module.exports = {
   configFiles: [
     {
       name: 'rollup.base',
-      path: 'rollup.config.js',
+      path: 'rollup.base.js',
       config: {
-        entry:
-          process.env.NODE_ENV === 'production'
-            ? './src/index.tsx'
-            : './src/graph/viz-worker.worker.js',
         output: {
           format: 'es'
         },
-        dest: 'targets/lib.js',
+        external(id) {
+          return id.includes('node_modules');
+        }
+      }
+    },
+    {
+      name: 'rollup.prod',
+      path: 'rollup.prod.js',
+      config: {
         plugins: [
           replace({
             DEBUG: false,
             'process.env.NODE_ENV': JSON.stringify('production')
           })
-        ],
-        external(id) {
-          return id.includes('node_modules');
-        }
+        ]
+      }
+    },
+    {
+      name: 'rollup.dev',
+      path: 'rollup.dev.js',
+      config: {
+        plugins: [
+          replace({
+            DEBUG: true,
+            'process.env.NODE_ENV': JSON.stringify('development')
+          })
+        ]
       }
     }
   ],
@@ -52,15 +68,47 @@ module.exports = {
       const filename = [state.projectType, state.target, 'js'].join('.');
       const cmd =
         state.env === 'production'
-          ? `./src/${filename} --format esm --file ./targets/${filename}`
-          : `./src/${filename} --format umd --name "myBundle" --file ./targets/${filename}`;
-      return execCommand(
-        [
-          binPath,
-          cmd,
-          alfredConfig.showConfigs ? `--config ${configPath} .` : ''
-        ].join(' ')
+          ? `./src/${filename} --format esm --file ./targets/prod/${filename}`
+          : `./src/${filename} --format umd --name "myBundle" --file ./targets/dev/${filename}`;
+      if (alfredConfig.showConfigs) {
+        return execCommand(
+          [
+            binPath,
+            cmd,
+            alfredConfig.showConfigs ? `--config ${configPath} .` : ''
+          ].join(' ')
+        );
+      }
+
+      const [baseConfig, prodConfig, devConfig] = [
+        'rollup.base',
+        'rollup.prod',
+        'rollup.dev'
+      ].map(e => getConfigByConfigName(e, configFiles).config);
+      const inputAndOutputConfigs = {
+        input: `./src/lib.${state.target}.js`,
+        output: {
+          file: `./targets/${mapEnvToShortName(state.env)}/${state.target}.js`
+        }
+      };
+      const prod = mergeConfigs(
+        {},
+        baseConfig,
+        prodConfig,
+        inputAndOutputConfigs
       );
+      const dev = mergeConfigs(
+        {},
+        baseConfig,
+        devConfig,
+        inputAndOutputConfigs
+      );
+      const rollup = require('rollup');
+      const bundle = await rollup.rollup(
+        state.env === 'production' ? prod : dev
+      );
+
+      return bundle.write((state.env === 'production' ? prod : dev).output);
     }
   }
 };
