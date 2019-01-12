@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import npm from 'npm';
 import yarn from 'yarn-api';
-import {
+import CTF, {
   writeConfigsFromCtf,
   deleteConfigs,
   getDevDependencies,
@@ -139,6 +139,12 @@ export function addMissingStdSkillsToCtf(ctf: CtfMap, state): CtfMap {
     }
   });
 
+  // Add all the CORE_CTF's without subcommands
+  ctf.set('babel', CORE_CTFS.babel);
+  // @TODO
+  // ctf.set('react', CORE_CTFS.react);
+  // ctf.set('lodash', CORE_CTFS.lodash);
+
   return ctf;
 }
 
@@ -178,17 +184,19 @@ export default async function generateCtfFromConfig(
   }
 
   // Generate the CTF
-  const ctf: CtfMap = new Map();
+  const tmpCtf: CtfMap = new Map();
   const { skills = [] } = alfredConfig;
   module.paths.push(`${process.cwd()}/node_modules`);
   skills.forEach(skill => {
     /* eslint-disable */
     const c = require(skill);
     /* eslint-enable */
-    ctf.set(c.name, c);
+    tmpCtf.set(c.name, c);
   });
-  addMissingStdSkillsToCtf(ctf, interfaceState);
+  addMissingStdSkillsToCtf(tmpCtf, interfaceState);
   module.paths.pop();
+
+  const ctf = CTF(Array.from(tmpCtf.values()));
 
   if (alfredConfig.showConfigs) {
     await writeConfigsFromCtf(ctf);

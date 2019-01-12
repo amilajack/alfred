@@ -382,7 +382,6 @@ function customizeMergeTests(merge) {
 
 describe('Merge', () => {
   const merge = webpackMerge;
-  console.log(merge);
 
   normalMergeTests(merge);
   mergeTests(merge);

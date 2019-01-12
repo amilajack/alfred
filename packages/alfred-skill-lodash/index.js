@@ -9,7 +9,7 @@ module.exports = {
         .addDevDependencies({
           'lodash-webpack-plugin': '0.11.5'
         })
-        .extendConfig('webpack.base', {
+        .extendConfig('webpack.prod', {
           plugins: ['lodash-webpack-plugin']
         });
     },
@@ -21,7 +21,7 @@ module.exports = {
         .addDevDependencies({
           'babel-plugin-lodash': '3.3.4'
         })
-        .extendConfig('webpack.base', {
+        .extendConfig('babel', {
           env: {
             production: {
               plugins: ['babel-plugin-lodash']

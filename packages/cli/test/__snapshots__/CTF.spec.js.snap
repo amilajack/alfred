@@ -12,6 +12,7 @@ Array [
   "eslint",
   "prettier",
   "jest",
+  "babel",
 ]
 `;
 

@@ -10,6 +10,7 @@ import eslint from '@alfredpkg/skill-eslint';
 import react from '@alfredpkg/skill-react';
 import prettier from '@alfredpkg/skill-prettier';
 import rollup from '@alfredpkg/skill-rollup';
+import lodashCtf from '@alfredpkg/skill-lodash';
 import pkgUp from 'pkg-up';
 
 export const CORE_CTFS = {
@@ -19,7 +20,8 @@ export const CORE_CTFS = {
   prettier,
   jest: jestCtf,
   react,
-  rollup
+  rollup,
+  lodash: lodashCtf
 };
 
 // @TODO send the information to a crash reporting service (like sentry.io)

@@ -1,3 +1,4 @@
+const path = require('path');
 const {
   getConfigPathByConfigName,
   execCommand,
@@ -17,7 +18,7 @@ module.exports = {
       name: 'babel',
       path: '.babelrc.js',
       config: {
-        extends: ['@babel/preset-env']
+        presets: ['@babel/preset-env']
       }
     }
   ],
@@ -28,7 +29,9 @@ module.exports = {
       return execCommand(
         [
           binPath,
-          alfredConfig.showConfigs ? `--configFile ${configPath} .` : ''
+          alfredConfig.showConfigs
+            ? `--configFile ${configPath} .`
+            : path.join(process.cwd(), 'node_modules', 'jest.config.js')
         ].join(' ')
       );
     }
@@ -69,7 +72,7 @@ module.exports = {
       return config
         .extendConfig('jest', {
           transform: {
-            '^.+\\.jsx?$': 'babel-jest'
+            '^.+\\.jsx?$': './node_modules/jest-transformer.js'
           }
         })
         .addDevDependencies({
