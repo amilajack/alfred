@@ -2,14 +2,14 @@
   "name": "@alfredpkg/skill-webpack",
   "version": "0.0.0",
   "dependencies": {
-    "webpack": "^4.28.3",
+    "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
     "webpack-merge": "^4.1.5"
   },
   "peerDependencies": {
     "@alfredpkg/core": "0.0.0",
     "@alfredpkg/interface-build": "^0.0.0",
-    "webpack": "^4.28.3",
+    "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1"
   }
 }
