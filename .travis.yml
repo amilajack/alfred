@@ -5,8 +5,6 @@ node_js:
 
 before_install: npm install --global yarn@latest lerna@latest
 
-cache: yarn
-
-before_script: lerna bootstrap
+install: lerna bootstrap
 
 script: yarn test
