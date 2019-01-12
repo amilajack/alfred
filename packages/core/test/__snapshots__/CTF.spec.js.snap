@@ -85,7 +85,11 @@ Array [
       "jest",
     ],
   },
-  Object {},
+  Object {
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
+  },
 ]
 `;
 
@@ -97,7 +101,7 @@ Object {
   "@babel/core": "7.2.0",
   "@babel/preset-env": "7.2.0",
   "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "eslint": "5.10.0",
   "eslint-plugin-jest": "8.0.0",
   "jest": "5.0.0",
@@ -147,7 +151,11 @@ Array [
       "jest",
     ],
   },
-  Object {},
+  Object {
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
+  },
 ]
 `;
 
@@ -162,7 +170,7 @@ Object {
   "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
   "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-plugin-dev-expression": "^0.2.1",
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
   "eslint": "5.10.0",
@@ -218,7 +226,11 @@ Array [
       "jest",
     ],
   },
-  Object {},
+  Object {
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
+  },
   Object {
     "external": [Function],
     "output": Object {
@@ -258,7 +270,7 @@ Object {
   "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
   "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-plugin-dev-expression": "^0.2.1",
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
   "eslint": "5.10.0",
@@ -298,7 +310,11 @@ Array [
       "jest",
     ],
   },
-  Object {},
+  Object {
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
+  },
   Object {
     "external": [Function],
     "output": Object {
@@ -335,7 +351,7 @@ Object {
   "@babel/core": "7.2.0",
   "@babel/preset-env": "7.2.0",
   "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "eslint": "5.10.0",
   "eslint-plugin-jest": "8.0.0",
   "jest": "5.0.0",
@@ -417,7 +433,11 @@ Array [
     ],
   },
   Object {},
-  Object {},
+  Object {
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
+  },
 ]
 `;
 
@@ -434,7 +454,7 @@ Object {
   "@babel/core": "7.2.0",
   "@babel/preset-env": "7.2.0",
   "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "eslint": "5.10.0",
   "eslint-plugin-jest": "8.0.0",
   "jest": "5.0.0",
@@ -487,7 +507,11 @@ Array [
     ],
   },
   Object {},
-  Object {},
+  Object {
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
+  },
 ]
 `;
 
@@ -507,7 +531,7 @@ Object {
   "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
   "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-plugin-dev-expression": "^0.2.1",
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
   "eslint": "5.10.0",
@@ -566,7 +590,11 @@ Array [
     ],
   },
   Object {},
-  Object {},
+  Object {
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
+  },
   Object {
     "external": [Function],
     "output": Object {
@@ -611,7 +639,7 @@ Object {
   "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
   "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-plugin-dev-expression": "^0.2.1",
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
   "eslint": "5.10.0",
@@ -654,7 +682,11 @@ Array [
     ],
   },
   Object {},
-  Object {},
+  Object {
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
+  },
   Object {
     "external": [Function],
     "output": Object {
@@ -696,7 +728,7 @@ Object {
   "@babel/core": "7.2.0",
   "@babel/preset-env": "7.2.0",
   "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "eslint": "5.10.0",
   "eslint-plugin-jest": "8.0.0",
   "jest": "5.0.0",
@@ -1188,7 +1220,11 @@ Array [
       "@babel/preset-env",
     ],
   },
-  Object {},
+  Object {
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
+  },
 ]
 `;
 
@@ -1199,7 +1235,7 @@ Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
   "@babel/preset-env": "7.2.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "jest": "5.0.0",
 }
 `;
@@ -1237,7 +1273,11 @@ Array [
       "@babel/preset-react",
     ],
   },
-  Object {},
+  Object {
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
+  },
 ]
 `;
 
@@ -1251,7 +1291,7 @@ Object {
   "@babel/plugin-transform-react-inline-elements": "^7.0.0",
   "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-plugin-dev-expression": "^0.2.1",
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
   "jest": "5.0.0",
@@ -1294,7 +1334,11 @@ Array [
       "@babel/preset-react",
     ],
   },
-  Object {},
+  Object {
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
+  },
   Object {
     "external": [Function],
     "output": Object {
@@ -1333,7 +1377,7 @@ Object {
   "@babel/plugin-transform-react-inline-elements": "^7.0.0",
   "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-plugin-dev-expression": "^0.2.1",
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
   "jest": "5.0.0",
@@ -1360,7 +1404,11 @@ Array [
       "@babel/preset-env",
     ],
   },
-  Object {},
+  Object {
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
+  },
   Object {
     "external": [Function],
     "output": Object {
@@ -1396,7 +1444,7 @@ Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
   "@babel/preset-env": "7.2.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "jest": "5.0.0",
   "rollup": "4.28.3",
   "rollup-plugin-babel": "4.2.0",
@@ -1449,7 +1497,11 @@ Array [
     ],
   },
   Object {},
-  Object {},
+  Object {
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
+  },
 ]
 `;
 
@@ -1460,7 +1512,7 @@ Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
   "@babel/preset-env": "7.2.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "jest": "5.0.0",
   "prettier": "1.15.3",
 }
@@ -1501,7 +1553,11 @@ Array [
     ],
   },
   Object {},
-  Object {},
+  Object {
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
+  },
 ]
 `;
 
@@ -1515,7 +1571,7 @@ Object {
   "@babel/plugin-transform-react-inline-elements": "^7.0.0",
   "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-plugin-dev-expression": "^0.2.1",
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
   "jest": "5.0.0",
@@ -1561,7 +1617,11 @@ Array [
     ],
   },
   Object {},
-  Object {},
+  Object {
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
+  },
   Object {
     "external": [Function],
     "output": Object {
@@ -1600,7 +1660,7 @@ Object {
   "@babel/plugin-transform-react-inline-elements": "^7.0.0",
   "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-plugin-dev-expression": "^0.2.1",
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
   "jest": "5.0.0",
@@ -1630,7 +1690,11 @@ Array [
     ],
   },
   Object {},
-  Object {},
+  Object {
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
+  },
   Object {
     "external": [Function],
     "output": Object {
@@ -1666,7 +1730,7 @@ Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
   "@babel/preset-env": "7.2.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "jest": "5.0.0",
   "prettier": "1.15.3",
   "rollup": "4.28.3",
@@ -2329,6 +2393,9 @@ Array [
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
       "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
   },
 ]
 `;
@@ -2341,7 +2408,7 @@ Object {
   "@babel/core": "7.2.0",
   "@babel/preset-env": "7.2.0",
   "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-loader": "5.0.0",
   "eslint": "5.10.0",
   "eslint-plugin-jest": "8.0.0",
@@ -2461,6 +2528,9 @@ Array [
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
       "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
   },
 ]
 `;
@@ -2476,7 +2546,7 @@ Object {
   "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
   "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-loader": "5.0.0",
   "babel-plugin-dev-expression": "^0.2.1",
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
@@ -2602,6 +2672,9 @@ Array [
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
       "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
   },
   Object {
     "external": [Function],
@@ -2642,7 +2715,7 @@ Object {
   "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
   "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-loader": "5.0.0",
   "babel-plugin-dev-expression": "^0.2.1",
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
@@ -2751,6 +2824,9 @@ Array [
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
       "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
   },
   Object {
     "external": [Function],
@@ -2788,7 +2864,7 @@ Object {
   "@babel/core": "7.2.0",
   "@babel/preset-env": "7.2.0",
   "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-loader": "5.0.0",
   "eslint": "5.10.0",
   "eslint-plugin-jest": "8.0.0",
@@ -3002,6 +3078,9 @@ Array [
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
       "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
   },
 ]
 `;
@@ -3019,7 +3098,7 @@ Object {
   "@babel/core": "7.2.0",
   "@babel/preset-env": "7.2.0",
   "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-loader": "5.0.0",
   "eslint": "5.10.0",
   "eslint-plugin-jest": "8.0.0",
@@ -3142,6 +3221,9 @@ Array [
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
       "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
   },
 ]
 `;
@@ -3162,7 +3244,7 @@ Object {
   "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
   "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-loader": "5.0.0",
   "babel-plugin-dev-expression": "^0.2.1",
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
@@ -3291,6 +3373,9 @@ Array [
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
       "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
   },
   Object {
     "external": [Function],
@@ -3336,7 +3421,7 @@ Object {
   "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
   "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-loader": "5.0.0",
   "babel-plugin-dev-expression": "^0.2.1",
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
@@ -3448,6 +3533,9 @@ Array [
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
       "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
   },
   Object {
     "external": [Function],
@@ -3490,7 +3578,7 @@ Object {
   "@babel/core": "7.2.0",
   "@babel/preset-env": "7.2.0",
   "babel-eslint": "5.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-loader": "5.0.0",
   "eslint": "5.10.0",
   "eslint-plugin-jest": "8.0.0",
@@ -4426,6 +4514,9 @@ Array [
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
       "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
   },
 ]
 `;
@@ -4437,7 +4528,7 @@ Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
   "@babel/preset-env": "7.2.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-loader": "5.0.0",
   "identity-obj-proxy": "*",
   "jest": "5.0.0",
@@ -4538,6 +4629,9 @@ Array [
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
       "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
   },
 ]
 `;
@@ -4552,7 +4646,7 @@ Object {
   "@babel/plugin-transform-react-inline-elements": "^7.0.0",
   "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-loader": "5.0.0",
   "babel-plugin-dev-expression": "^0.2.1",
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
@@ -4658,6 +4752,9 @@ Array [
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
       "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
   },
   Object {
     "external": [Function],
@@ -4697,7 +4794,7 @@ Object {
   "@babel/plugin-transform-react-inline-elements": "^7.0.0",
   "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-loader": "5.0.0",
   "babel-plugin-dev-expression": "^0.2.1",
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
@@ -4786,6 +4883,9 @@ Array [
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
       "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
   },
   Object {
     "external": [Function],
@@ -4822,7 +4922,7 @@ Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
   "@babel/preset-env": "7.2.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-loader": "5.0.0",
   "identity-obj-proxy": "*",
   "jest": "5.0.0",
@@ -4993,6 +5093,9 @@ Array [
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
       "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
   },
 ]
 `;
@@ -5004,7 +5107,7 @@ Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
   "@babel/preset-env": "7.2.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-loader": "5.0.0",
   "identity-obj-proxy": "*",
   "jest": "5.0.0",
@@ -5108,6 +5211,9 @@ Array [
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
       "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
   },
 ]
 `;
@@ -5122,7 +5228,7 @@ Object {
   "@babel/plugin-transform-react-inline-elements": "^7.0.0",
   "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-loader": "5.0.0",
   "babel-plugin-dev-expression": "^0.2.1",
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
@@ -5231,6 +5337,9 @@ Array [
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
       "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
   },
   Object {
     "external": [Function],
@@ -5270,7 +5379,7 @@ Object {
   "@babel/plugin-transform-react-inline-elements": "^7.0.0",
   "@babel/preset-env": "7.2.0",
   "@babel/preset-react": "7.0.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-loader": "5.0.0",
   "babel-plugin-dev-expression": "^0.2.1",
   "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
@@ -5362,6 +5471,9 @@ Array [
       "\\\\.(css|less|sass|scss)$": "identity-obj-proxy",
       "\\\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.configs/mocks/fileMock.js",
     },
+    "transform": Object {
+      "^.+\\\\.jsx?$": "babel-jest",
+    },
   },
   Object {
     "external": [Function],
@@ -5398,7 +5510,7 @@ Object {
   "@babel/cli": "7.2.0",
   "@babel/core": "7.2.0",
   "@babel/preset-env": "7.2.0",
-  "babel-jest": "8.0.0",
+  "babel-jest": "23.6.0",
   "babel-loader": "5.0.0",
   "identity-obj-proxy": "*",
   "jest": "5.0.0",
