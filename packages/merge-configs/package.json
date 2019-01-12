@@ -1,0 +1,21 @@
+{
+  "name": "@alfredpkg/merge-configs",
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps inline",
+    "test": "mocha tests/test-*",
+    "watch": "npm-watch"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^4.6.0",
+    "mocha": "^5.2.0",
+    "webpack": "^1.15.0"
+  }
+}

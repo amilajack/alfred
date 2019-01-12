@@ -13,6 +13,8 @@
 module.exports = {
   subcommand: 'build',
 
+  runForAllTargets: true,
+
   /**
    * Given an array of CTF nodes, return the CTF which should be used based
    * on the current environment and current target
