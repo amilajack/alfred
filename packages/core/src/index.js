@@ -38,6 +38,12 @@ export type InterfaceState = {
   projectType: 'lib' | 'app'
 };
 
+export type configType =
+  | string
+  | {
+      [x: string]: any
+    };
+
 export type configFileType = {
   // The "friendly name" of a file. This is the name that
   // other CTFs will refer to config file by.
@@ -45,20 +51,22 @@ export type configFileType = {
   // The relative path of the file the config should be written to
   path: string,
   // The value of the config
-  config:
-    | string
-    | {
-        [x: string]: any
-      }
+  config: configType
 };
 
-type UsingInterface = {
+type UsingInterface = {|
   interface: string,
+  subcommand: string,
   hooks: {
-    call: (fileConfigPath: string, config: configFileType) => string,
+    call: (
+      fileConfigPath: string,
+      config: configFileType,
+      alfredConfig: Object,
+      state: InterfaceState
+    ) => string,
     install?: () => void
   }
-};
+|};
 
 // @flow
 type RequiredCtfNodeParams = {|
@@ -86,7 +94,7 @@ export type CtfNode =
 export type CtfMap = Map<string, CtfNode>;
 
 export function getConfigByConfigName(
-  configName,
+  configName: string,
   configFiles: Array<configFileType>
 ) {
   const config = configFiles.find(e => e.name === configName);
@@ -143,7 +151,7 @@ export async function getPkgBinPath(pkgName: string, binName: string) {
 const configsBasePath = path.join(process.cwd(), '.configs');
 
 export function getConfigPathByConfigName(
-  configName,
+  configName: string,
   configFiles: Array<configFileType>
 ) {
   const config = configFiles.find(e => e.name === configName);
@@ -152,11 +160,11 @@ export function getConfigPathByConfigName(
 }
 
 type CtfHelpers = {
-  findConfig: (configName: string) => { [x: string]: string },
+  findConfig: (configName: string) => configType,
   addDependencies: ({ [x: string]: string }) => { [x: string]: string },
   addDevDependencies: ({ [x: string]: string }) => { [x: string]: string },
   extendConfig: (x: string) => CtfNode,
-  replaceConfig: (x: string) => CtfNode
+  replaceConfig: (x: string, configReplacement: configType) => CtfNode
 };
 
 const AddCtfHelpers: CtfHelpers = {
@@ -184,10 +192,7 @@ const AddCtfHelpers: CtfHelpers = {
       configFiles
     });
   },
-  replaceConfig(
-    configName: string,
-    configReplacement: { [x: string]: string } = {}
-  ) {
+  replaceConfig(configName: string, configReplacement: configType) {
     const configFiles = this.configFiles.map(configFile =>
       configFile.name === configName ? configReplacement : configFile
     );
@@ -233,7 +238,7 @@ export default function CTF(ctfs: Array<CtfNode>): CtfMap {
 /*
  * Intended to be used for testing purposes
  */
-export function getConfigs(ctf: CtfMap): Array<{ [x: string]: any }> {
+export function getConfigs(ctf: CtfMap): Array<configType> {
   return Array.from(ctf.values())
     .map(ctfNode => ctfNode.configFiles || [])
     .reduce((p, c) => [...p, ...c], [])
@@ -301,6 +306,25 @@ export function getDevDependencies(ctf: CtfMap): { [x: string]: string } {
 export function execCommand(cmd: string) {
   return childProcess.execSync(cmd, { stdio: [0, 1, 2] });
 }
+
+export function getInterfaceForSubcommand(ctf: CtfMap, subcommand: string) {
+  const interfaceForSubcommand = Array.from(ctf.values())
+    .filter(
+      ctfNode =>
+        ctfNode.hooks && ctfNode.configFiles.length && ctfNode.interface
+    )
+    .map(ctfNode => require(ctfNode.interface)) // eslint-disable-line
+    .find(ctfInterface => ctfInterface.subcommand === subcommand);
+
+  if (!interfaceForSubcommand) {
+    throw new Error(
+      `The subcommand "${subcommand}" does not have an interface or the subcommand does not exist`
+    );
+  }
+
+  return interfaceForSubcommand;
+}
+
 export function getExecuteWrittenConfigsMethods(
   ctf: CtfMap,
   state: InterfaceState

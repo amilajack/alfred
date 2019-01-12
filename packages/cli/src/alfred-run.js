@@ -2,7 +2,10 @@
 import fs from 'fs';
 import path from 'path';
 import program from 'commander';
-import { getExecuteWrittenConfigsMethods } from '@alfredpkg/core';
+import {
+  getExecuteWrittenConfigsMethods,
+  getInterfaceForSubcommand
+} from '@alfredpkg/core';
 import rimraf from 'rimraf';
 import generateCtfFromConfig, {
   generateInterfaceStatesFromProject,
@@ -29,6 +32,10 @@ import generateCtfFromConfig, {
   const { alfredConfig } = await loadConfigs();
 
   switch (skill) {
+    case 'new': {
+      // @TODO Generate the boilerplate for an Alfred project
+      break;
+    }
     case 'start': {
       // @TODO Start the dev server
       break;
@@ -49,10 +56,23 @@ import generateCtfFromConfig, {
     }
   }
 
+  // @HACK This is not a very elegant solution.
+  // @HACK @REFACTOR Certain subcommands do not rely on state (lint, test, etc). These
+  //                 subcommands are run only once
+  let commandWasExceuted = false;
+
   return Promise.all(
     generateInterfaceStatesFromProject().map(state =>
       generateCtfFromConfig(alfredConfig, state).then(ctf => {
         const commands = getExecuteWrittenConfigsMethods(ctf, state);
+        const skillInterface = getInterfaceForSubcommand(ctf, skill);
+
+        if (!skillInterface.runForAllTargets) {
+          if (commandWasExceuted) {
+            return true;
+          }
+          commandWasExceuted = true;
+        }
 
         if (!Object.keys(commands).includes(skill)) {
           throw new Error(
