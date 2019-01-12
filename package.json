@@ -27,8 +27,8 @@
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
     "@babel/plugin-proposal-class-properties": "^7.2.3",
-    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-flow": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
@@ -43,7 +43,8 @@
     "jest-cli": "^23.6.0",
     "lerna": "^3.10.5",
     "lint-staged": "^8.1.0",
-    "shebang-loader": "^0.0.1"
+    "shebang-loader": "^0.0.1",
+    "yarn": "^1.13.0"
   },
   "eslintConfig": {
     "extends": "bliss",
