@@ -22,7 +22,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "espree": "^5.0.0",
-    "flow-bin": "^0.89.0",
+    "flow-bin": "^0.90.0",
     "flow-typed": "^2.5.1",
     "lodash.flatten": "^4.4.0"
   },
