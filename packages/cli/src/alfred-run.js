@@ -32,10 +32,6 @@ import generateCtfFromConfig, {
   const { alfredConfig } = await loadConfigs();
 
   switch (skill) {
-    case 'new': {
-      // @TODO Generate the boilerplate for an Alfred project
-      break;
-    }
     case 'start': {
       // @TODO Start the dev server
       break;
