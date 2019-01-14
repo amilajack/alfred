@@ -4657,7 +4657,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -4759,7 +4759,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -4889,7 +4889,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -5028,7 +5028,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -5176,7 +5176,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -5324,7 +5324,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -5501,7 +5501,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -5660,7 +5660,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -5819,7 +5819,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -5976,7 +5976,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -6084,7 +6084,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -6194,7 +6194,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -6329,7 +6329,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -6473,7 +6473,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -6626,7 +6626,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -6779,7 +6779,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -6961,7 +6961,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -7125,7 +7125,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -7289,7 +7289,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -7454,7 +7454,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -7583,7 +7583,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -7721,7 +7721,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -7859,7 +7859,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -8026,7 +8026,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -8175,7 +8175,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -8324,7 +8324,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -8477,7 +8477,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -8604,7 +8604,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -8734,7 +8734,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -8890,7 +8890,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -9031,7 +9031,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -9169,7 +9169,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -15899,7 +15899,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -15975,7 +15975,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -16064,7 +16064,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -16156,7 +16156,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -16249,7 +16249,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -16344,7 +16344,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -16462,7 +16462,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -16579,7 +16579,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -16693,7 +16693,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -16807,7 +16807,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -16888,7 +16888,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -16972,7 +16972,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -17069,7 +17069,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -17166,7 +17166,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -17267,7 +17267,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -17367,7 +17367,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -17493,7 +17493,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -17615,7 +17615,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -17737,7 +17737,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -17859,7 +17859,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -17946,7 +17946,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -18037,7 +18037,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -18127,7 +18127,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -18243,7 +18243,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -18355,7 +18355,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -18467,7 +18467,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -18574,7 +18574,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -18654,7 +18654,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -18736,7 +18736,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -18841,7 +18841,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -18945,7 +18945,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },
@@ -19046,7 +19046,7 @@ Array [
     "settings": Object {
       "import/resolver": Object {
         "webpack": Object {
-          "config": "/",
+          "config": "/.configs/webpack.config.js",
         },
       },
     },

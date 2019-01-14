@@ -1,7 +1,6 @@
 /* eslint no-restricted-syntax: off, import/no-extraneous-dependencies: off, guard-for-in: off, no-param-reassign: off */
 import os from 'os';
 import powerset from '@amilajack/powerset';
-
 import CTF, {
   CORE_CTFS,
   getConfigs,
@@ -9,6 +8,18 @@ import CTF, {
   getDevDependencies,
   getExecuteWrittenConfigsMethods
 } from '../src';
+
+const defaultInterfaceState = {
+  projectType: 'app',
+  target: 'browser',
+  env: 'production'
+};
+
+const defaultAlfredConfig = {
+  root: '/',
+  skills: [],
+  npmClient: 'npm'
+};
 
 function removePathsPropertiesFromObject(obj) {
   for (const key in obj) {
@@ -52,7 +63,11 @@ describe('CTF', () => {
       expect(ctfCombination).toMatchSnapshot();
       // Get the CTFs for each combination
       const filteredCtfs = ctfCombination.map(ctfName => CORE_CTFS[ctfName]);
-      const result = CTF(filteredCtfs);
+      const result = CTF(
+        filteredCtfs,
+        defaultAlfredConfig,
+        defaultInterfaceState
+      );
       expect(
         removePathsPropertiesFromObject(getConfigs(result))
       ).toMatchSnapshot();
@@ -62,7 +77,11 @@ describe('CTF', () => {
   }
 
   it('should add devDepencencies', () => {
-    const { devDependencies } = CTF([CORE_CTFS.webpack])
+    const { devDependencies } = CTF(
+      [CORE_CTFS.webpack],
+      defaultAlfredConfig,
+      defaultInterfaceState
+    )
       .get('webpack')
       .addDevDependencies({
         foobar: '0.0.0'

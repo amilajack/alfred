@@ -5,8 +5,11 @@ import pkgUp from 'pkg-up';
 /**
  * Get the root of a project from the current working directory
  */
-export async function getProjectRoot() {
-  const pkgPath = await pkgUp();
+export function getProjectRoot() {
+  const pkgPath = pkgUp.sync();
+  if (!pkgPath) {
+    throw new Error(`Project root could not be found from "${process.cwd()}"`);
+  }
   return path.dirname(pkgPath);
 }
 

@@ -31,13 +31,16 @@ import generateCtfFromConfig, {
   const [skill] = skills;
   const { alfredConfig } = await loadConfigs();
 
+  // $FlowFixMe
+  module.paths.push(`${alfredConfig.root}/node_modules`);
+
   switch (skill) {
     case 'start': {
       // @TODO Start the dev server
       break;
     }
     case 'clean': {
-      const targetsPath = path.join(process.cwd(), 'targets');
+      const targetsPath = path.join(alfredConfig.root, 'targets');
       if (fs.existsSync(targetsPath)) {
         await new Promise(resolve => {
           rimraf(targetsPath, () => {

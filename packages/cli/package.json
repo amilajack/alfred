@@ -2,6 +2,7 @@
   "name": "@alfredpkg/cli",
   "version": "0.0.0",
   "description": "A framework for upgrading JavaScript codebases",
+  "main": "./lib/helpers",
   "bin": {
     "alf": "./lib/alfred.js",
     "alfred": "./lib/alfred.js",

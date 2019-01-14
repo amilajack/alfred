@@ -2,6 +2,10 @@ const webpack = require('webpack');
 const path = require('path');
 const { getConfigByConfigName } = require('@alfredpkg/core');
 const { default: mergeConfigs } = require('@alfredpkg/merge-configs');
+const { getProjectRoot } = require('@alfredpkg/cli');
+
+// @HACK project root should be passed as argument to configFiles, which could be a function
+const projectRoot = getProjectRoot();
 
 module.exports = {
   name: 'webpack',
@@ -25,7 +29,7 @@ module.exports = {
       config: {
         mode: 'development',
         output: {
-          path: path.join(process.cwd(), 'targets', 'dev'),
+          path: path.join(projectRoot, 'targets', 'dev'),
           publicPath: './targets/dev'
         },
         resolve: {
@@ -39,7 +43,7 @@ module.exports = {
       path: 'webpack.prod.js',
       config: {
         output: {
-          path: path.join(process.cwd(), 'targets', 'prod'),
+          path: path.join(projectRoot, 'targets', 'prod'),
           publicPath: './targets/prod'
         },
         // @TODO: optimizations, etc
@@ -58,7 +62,7 @@ module.exports = {
       name: 'webpack.node',
       path: 'webpack.node.js',
       config: {
-        entry: path.join(process.cwd(), 'src', 'app.node.js'),
+        entry: path.join(projectRoot, 'src', 'app.node.js'),
         output: {
           filename: 'app.node.js'
         },
@@ -69,7 +73,7 @@ module.exports = {
       name: 'webpack.browser',
       path: 'webpack.browser.js',
       config: {
-        entry: path.join(process.cwd(), 'src', 'app.browser.js'),
+        entry: path.join(projectRoot, 'src', 'app.browser.js'),
         output: {
           filename: 'app.browser.js'
         },
@@ -126,12 +130,16 @@ module.exports = {
     }
   },
   ctfs: {
-    eslint: config =>
+    eslint: (config, ctfs, { alfredConfig }) =>
       config.extendConfig('eslint', {
         settings: {
           'import/resolver': {
             webpack: {
-              config: path.join(process.cwd(), '.configs', 'webpack.config.js')
+              config: path.join(
+                alfredConfig.root,
+                '.configs',
+                'webpack.config.js'
+              )
             }
           }
         }
