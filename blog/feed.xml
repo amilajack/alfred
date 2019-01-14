@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Alfred Blog</title>
+        <link>https://alfred-js.github.io/blog</link>
+        <description>The best place to stay up-to-date with the latest Alfred news and events.</description>
+        <lastBuildDate>Tue, 24 Oct 2017 06:00:00 GMT</lastBuildDate>
+        <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+        <generator>Feed for Node.js</generator>
+        <image>
+            <title>Alfred Blog</title>
+            <url>https://alfred-js.github.io/img/docusaurus.svg</url>
+            <link>https://alfred-js.github.io/blog</link>
+        </image>
+        <copyright>Copyright © 2019 Alfred</copyright>
+        <item>
+            <title><![CDATA[Hello World]]></title>
+            <link>https://alfred-js.github.io/blog/2017/10/24/new-version-1.0.0.html</link>
+            <guid>https://alfred-js.github.io/blog/2017/10/24/new-version-1.0.0.html</guid>
+            <pubDate>Tue, 24 Oct 2017 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p>Hello World!</p> ]]></description>
+        </item>
+    </channel>
+</rss>
