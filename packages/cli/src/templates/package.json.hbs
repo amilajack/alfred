@@ -1,0 +1,30 @@
+{
+  "name": "{{project.name.npm.full}}",
+  "version": "0.0.0",
+  "description": "{{project.description}}",
+  "main": "./targets/lib.node.js",
+  "module": "./targets/lib.node.js",
+{{#if project.author}}
+  "author": "{{project.author}}{{#if project.email}} <{{project.email}}>{{/if}}",
+{{/if}}
+{{#if project.license}}
+  "license": "{{project.license}}",
+{{/if}}
+{{#if project.git}}
+  "repository": {
+    "type": "git",
+    "url": "{{project.git}}"
+  }
+{{/if}}
+  "devDependencies": {
+    "@alfredpkg/cli": "{{alfred-cli.semver}}",
+    "@alfredpkg/core": "{{alfred-core.semver}}"
+  },
+  "scripts": {
+    "build": "alfred run build",
+    "format": "alfred run format",
+    "lint": "alfred run lint",
+    "start": "alfred run start",
+    "test": "alfred run test"
+  }
+}

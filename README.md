@@ -35,6 +35,7 @@ alfred test
 alfred search
 alfred doc
 alfred migrate
+alfred types
 
 # Learning skills
 alfred learn alfred-skill-build-parcel
@@ -57,13 +58,14 @@ alfred migrate . --transforms imports lebab
 |  | Example | Descrption |
 | --- | --- | --- |
 | 1.|  [hello world](https://github.com/amilajack/alfred/tree/master/examples/hello-world) | A simple hello work app in node |
+| 2.|  [typescript](https://github.com/amilajack/alfred/tree/master/examples/typescript) | **HELP WANTED** |
+| 3.|  [react](https://github.com/amilajack/alfred/tree/master/examples/react) | **HELP WANTED** |
 
 ## Local Setup
 ```bash
 git clone https://github.com/amilajack/alfred
 cd alfred
-lerna bootstrap # If you don't have it, run `npm i -g lerna`
-lerna run build
+yarn
 ```
 
 ## Alfred Skill Example
