@@ -5,10 +5,10 @@
   "main": "./targets/lib.node.js",
   "module": "./targets/lib.node.js",
   "scripts": {
-    "build": "alfred run build",
-    "format": "alfred run format",
-    "lint": "alfred run lint",
-    "test": "alfred run test"
+    "build": "../../packages/cli/lib/alfred.js run build",
+    "format": "../../packages/cli/lib/alfred.js run format",
+    "lint": "../../packages/cli/lib/alfred.js run lint",
+    "test": "../../packages/cli/lib/alfred.js run test"
   },
   "devDependencies": {
     "@alfredpkg/cli": "^0.0.0",

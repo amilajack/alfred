@@ -16,7 +16,7 @@
     "build": "cross-env NODE_ENV=production lerna run build",
     "flow-typed": "lerna run flow-typed",
     "lint": "eslint .",
-    "test": "yarn build --ignore @examples/* && yarn build --scope @examples/* && yarn lint && lerna run flow && lerna run test",
+    "test": "yarn build && yarn lint && lerna run flow && lerna run test",
     "website:build": "yarn workspace @alfredpkg/site build",
     "website:start": "yarn workspace @alfredpkg/site start",
     "website:test": "yarn website:build",
