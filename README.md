@@ -5,6 +5,7 @@ alfred
 Alfred is a configuration manager that defines a standard workflow for JavaScript projects
 
 ## Goals
+
 * Standardizing and simplifying JS infra and conventions
 * Allow extensibility of Alfred-configured infra
 * Ease of integration and migration Alfred
@@ -12,14 +13,16 @@ Alfred is a configuration manager that defines a standard workflow for JavaScrip
 * Encourage JS best practices
 
 ## Installation
+
 ```bash
 # NPM
-npm install --global alfred
+npm install --global @alfredpkg/cli
 # Yarn
-yarn global add alfred
+yarn global add @alfredpkg/cli
 ```
 
 ## Usage
+
 ```bash
 # Creating a new project
 alfred new my-lib --lib
@@ -50,6 +53,7 @@ alfred migrate . --transforms imports lebab
 ```
 
 ## Docs
+
 * **[website](https://alfred.js.org)** ([alfred.js.org](https://alfred.js.org))
 * **[docs](https://alfred.js.org/docs)** ([alfred.js.org/docs](https://alfred.js.org/docs))
 
@@ -62,6 +66,7 @@ alfred migrate . --transforms imports lebab
 | 3.|  [react](https://github.com/amilajack/alfred/tree/master/examples/react) | **HELP WANTED** |
 
 ## Local Setup
+
 ```bash
 git clone https://github.com/amilajack/alfred
 cd alfred
@@ -69,7 +74,9 @@ yarn
 ```
 
 ## Alfred Skill Example
+
 The following is an example of an Alfred skill (Config Transformer Function) for babel
+
 ```js
 // index.js
 export default {
@@ -143,6 +150,7 @@ export default {
 ```
 
 ## Interface Example
+
 ```js
 // index.js
 export default {
@@ -162,6 +170,7 @@ type AlfredInterface = {
 ```
 
 ## Alfred Config Example
+
 ```jsonc
 // package.json
 {
@@ -226,7 +235,7 @@ Would you like to install it? (Y/n)
 
 ## Required Files and Folders
 
-* `./src/{projectType}.{env}.js`, e.g.: `./src/lib.node.js`
+* `./src/{projectType}.{target}.js`, e.g.: `./src/lib.node.js`
 * `.editorconfig`
 * `.gitignore`
 * `.travis.yml`
