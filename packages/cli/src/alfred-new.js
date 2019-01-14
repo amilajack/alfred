@@ -39,6 +39,7 @@ const GITIGNORE_TEMPLATE = compile('.gitignore.hbs');
 const NPM_TEMPLATE = compile('package.json.hbs');
 const LIB_BROWSER_TEMPLATE = compile('lib.browser.js.hbs');
 const README_TEMPLATE = compile('README.md.hbs');
+const EDITORCONFIG_TEMPLATE = compile('.editorconfig.hbs');
 
 async function guessAuthor() {
   const author = {
@@ -142,7 +143,7 @@ async function createNewProject(cwd: string, name: string) {
     },
     {
       name: 'npmClient',
-      type: 'choice',
+      type: 'list',
       choices: ['NPM', 'Yarn'],
       message: 'npm client',
       default: 'NPM'
@@ -210,6 +211,10 @@ async function createNewProject(cwd: string, name: string) {
       {
         file: '.gitignore',
         content: (await GITIGNORE_TEMPLATE)(templateData)
+      },
+      {
+        file: '.editorconfig',
+        content: (await EDITORCONFIG_TEMPLATE)(templateData)
       },
       {
         file: 'package.json',
