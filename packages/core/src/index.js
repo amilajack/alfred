@@ -3,6 +3,7 @@ import path from 'path';
 import rimraf from 'rimraf';
 import fs from 'fs';
 import childProcess from 'child_process';
+import { getProjectRoot } from '@alfredpkg/cli/lib/helpers/CLI';
 import jestCtf from '@alfredpkg/skill-jest';
 import babel from '@alfredpkg/skill-babel';
 import webpack from '@alfredpkg/skill-webpack';
@@ -148,7 +149,7 @@ export async function getPkgBinPath(pkgName: string, binName: string) {
   );
 }
 
-const configsBasePath = path.join(process.cwd(), '.configs');
+const configsBasePath = path.join(getProjectRoot(), '.configs');
 
 export function getConfigPathByConfigName(
   configName: string,

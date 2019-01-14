@@ -29,7 +29,7 @@ module.exports = {
       const { config } = getConfigByConfigName('eslint', configFiles);
       const { CLIEngine } = require('eslint');
       const cli = new CLIEngine({ ...config, useEslintrc: false });
-      const report = cli.executeOnFiles([process.cwd()]);
+      const report = cli.executeOnFiles([alfredConfig.root]);
       const formatter = cli.getFormatter();
       console.log(formatter(report.results));
       if (report.results.length) {

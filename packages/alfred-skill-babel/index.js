@@ -31,7 +31,7 @@ module.exports = {
           binPath,
           alfredConfig.showConfigs
             ? `--configFile ${configPath} .`
-            : path.join(process.cwd(), 'node_modules', 'jest.config.js')
+            : path.join(alfredConfig.root, 'node_modules', 'jest.config.js')
         ].join(' ')
       );
     }

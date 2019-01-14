@@ -188,6 +188,8 @@ async function createNewProject(cwd: string, name: string) {
   const alfredCliFilePath = path.join(__dirname, '../../cli');
   const isApp = answers.projectType === 'app';
   const isBrowser = answers.target === 'browser';
+  answers.isApp = isApp;
+  answers.isBrowser = isBrowser;
 
   const templateData = {
     project: answers,

@@ -10,6 +10,7 @@ import Es6ImportsProvider from './Es6ImportsProvider';
 import LebabProvider from './LebabProvider';
 import EslintProvider from './EslintProvider';
 import ParseInput from '../helpers/ParseInput';
+import { getProjectRoot } from '../helpers';
 import type { UserProviderInput, ProviderInput } from './ProviderInterface';
 
 export const copyFileAsync = util.promisify(fs.copyFile);
@@ -68,21 +69,23 @@ Proceeding anyway.
 
 type ProvidersType = Promise<Array<string> | void>;
 
+const projectRoot = getProjectRoot();
+
 export function handleInput(userInput: UserProviderInput) {
-  return fs.existsSync(path.join(process.cwd(), '.gitignore'))
+  return fs.existsSync(path.join(projectRoot, '.gitignore'))
     ? (async () => {
         // Remove gitignored files
         const gitignoreFile = await readFileAsync(
-          path.join(process.cwd(), '.gitignore')
+          path.join(projectRoot, '.gitignore')
         );
         const gitignore = parser.compile(gitignoreFile.toString());
-        // Strip the process.cwd() from all filepaths. gitignore-parse only
+        // Strip the projectRoot from all filepaths. gitignore-parse only
         // works with relative filepaths
         const files = await ParseInput(userInput.files);
 
         return (files.filter(
           file =>
-            gitignore.accepts(file.substring(process.cwd().length)) &&
+            gitignore.accepts(file.substring(projectRoot.length)) &&
             !file.includes('node_modules') &&
             !file.includes('bower_components')
         ): Array<string>);

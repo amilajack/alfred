@@ -25,7 +25,7 @@ module.exports = {
       const binPath = await getPkgBinPath('jest-cli', 'jest');
       // @TODO Create a hidden `./node_modules/.alfred` directory to put configs in
       const jestTransformerPath = path.join(
-        process.cwd(),
+        alfredConfig.root,
         'node_modules',
         'jest-transformer.js'
       );
@@ -34,7 +34,7 @@ module.exports = {
           .config.presets
       });
       const hiddenTmpConfigPath = path.join(
-        process.cwd(),
+        alfredConfig.root,
         'node_modules',
         'jest.config.js'
       );
@@ -59,8 +59,8 @@ module.exports = {
         [
           binPath,
           alfredConfig.showConfigs
-            ? `--config ${configPath} ${process.cwd()}`
-            : `--config ${hiddenTmpConfigPath} ${process.cwd()}`
+            ? `--config ${configPath} ${alfredConfig.root}`
+            : `--config ${hiddenTmpConfigPath} ${alfredConfig.root}`
         ].join(' ')
       );
     }

@@ -10,8 +10,9 @@ import CTF, {
 } from '@alfredpkg/core';
 import type { CtfMap, InterfaceState } from '@alfredpkg/core';
 import ValidateConfig from './Validation';
+import { getProjectRoot } from './CLI';
 
-const ENTRYPOINTS = [
+export const ENTRYPOINTS = [
   'lib.node.js',
   'app.node.js',
   'app.browser.js',
@@ -22,6 +23,8 @@ const ENTRYPOINTS = [
   'app.electron.renderer.js'
 ];
 
+const projectRoot = getProjectRoot();
+
 export function generateInterfaceStatesFromProject(): Array<InterfaceState> {
   const envs = ['production', 'development', 'test'];
   // Default to development env if no config given
@@ -30,7 +33,7 @@ export function generateInterfaceStatesFromProject(): Array<InterfaceState> {
     : 'development';
 
   return ENTRYPOINTS.filter(e =>
-    fs.existsSync(path.join(process.cwd(), 'src', e))
+    fs.existsSync(path.join(projectRoot, 'src', e))
   ).map(e => {
     const [projectType, target] = e.split('.');
     return {
@@ -149,7 +152,7 @@ export function addMissingStdSkillsToCtf(ctf: CtfMap, state): CtfMap {
 }
 
 export async function loadConfigs(
-  pkgPath: string = path.join(process.cwd(), 'package.json')
+  pkgPath: string = path.join(projectRoot, 'package.json')
 ) {
   if (!fs.existsSync(pkgPath)) {
     throw new Error('Current working directory does not have "package.json"');
@@ -162,7 +165,8 @@ export async function loadConfigs(
 
   const defaultOpts = {
     npmClient: 'npm',
-    skills: []
+    skills: [],
+    root: projectRoot
   };
   const alfredConfig = Object.assign({}, defaultOpts, tmpAlfredConfig);
 
@@ -186,7 +190,7 @@ export default async function generateCtfFromConfig(
   // Generate the CTF
   const tmpCtf: CtfMap = new Map();
   const { skills = [] } = alfredConfig;
-  module.paths.push(`${process.cwd()}/node_modules`);
+  module.paths.push(`${projectRoot}/node_modules`);
   skills.forEach(skill => {
     /* eslint-disable */
     const c = require(skill);

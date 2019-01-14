@@ -2,6 +2,7 @@
 import path from 'path';
 import program from 'commander';
 import Providers from './providers';
+import { getProjectRoot } from './helpers';
 
 const parsedArguments = program
   .option('-u, --unsafe', 'allow unsafe transformations')
@@ -9,8 +10,10 @@ const parsedArguments = program
   .option('-d, --debug', 'show debugging output')
   .parse(process.argv);
 
+const projectRoot = getProjectRoot();
+
 const filesPattern: Array<string> = parsedArguments.args.map(arg =>
-  path.join(process.cwd(), arg)
+  path.join(projectRoot, arg)
 );
 
 // @TODO Create backups from the files and pass the paths to the backups
@@ -19,7 +22,7 @@ const filesPattern: Array<string> = parsedArguments.args.map(arg =>
 //        files
 Providers({
   files: filesPattern,
-  packageJsonPath: path.join(process.cwd(), 'package.json'),
+  packageJsonPath: path.join(projectRoot, 'package.json'),
   unsafe: parsedArguments.unsafe,
   verbose: parsedArguments.verbose,
   write: parsedArguments.write

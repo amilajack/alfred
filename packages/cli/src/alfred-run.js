@@ -37,7 +37,7 @@ import generateCtfFromConfig, {
       break;
     }
     case 'clean': {
-      const targetsPath = path.join(process.cwd(), 'targets');
+      const targetsPath = path.join(alfredConfig.root, 'targets');
       if (fs.existsSync(targetsPath)) {
         await new Promise(resolve => {
           rimraf(targetsPath, () => {
