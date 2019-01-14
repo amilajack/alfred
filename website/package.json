@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "build": "docusaurus-build",
+    "clean": "rm -rf build",
     "examples": "docusaurus-examples",
     "publish-gh-pages": "docusaurus-publish",
     "rename-version": "docusaurus-rename-version",

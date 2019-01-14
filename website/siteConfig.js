@@ -15,7 +15,7 @@ const siteConfig = {
   title: 'Alfred',
   tagline: 'A toolchin manager for JavaScript projects',
   url: 'https://alfred-js.github.io',
-  baseUrl: '/alfred',
+  baseUrl: '/alfred/',
 
   projectName: 'alfred',
   organizationName: 'amilajack',
