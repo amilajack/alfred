@@ -8,6 +8,7 @@
   },
   "peerDependencies": {
     "@alfredpkg/core": "0.0.0",
+    "@alfredpkg/cli": "0.0.0",
     "@alfredpkg/interface-build": "^0.0.0",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1"

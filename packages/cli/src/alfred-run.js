@@ -31,6 +31,9 @@ import generateCtfFromConfig, {
   const [skill] = skills;
   const { alfredConfig } = await loadConfigs();
 
+  // $FlowFixMe
+  module.paths.push(`${alfredConfig.root}/node_modules`);
+
   switch (skill) {
     case 'start': {
       // @TODO Start the dev server

@@ -213,7 +213,11 @@ const AddCtfHelpers: CtfHelpers = {
     });
   }
 };
-export default function CTF(ctfs: Array<CtfNode>): CtfMap {
+export default function CTF(
+  ctfs: Array<CtfNode>,
+  alfredConfig: Object,
+  interfaceState: InterfaceState
+): CtfMap {
   const map: CtfMap = new Map();
 
   ctfs.forEach(ctfNode => {
@@ -228,7 +232,10 @@ export default function CTF(ctfs: Array<CtfNode>): CtfMap {
     Object.entries(ctf.ctfs || {}).forEach(([ctfName, ctfFn]) => {
       const correspondingCtfNode = map.get(ctfName);
       if (correspondingCtfNode) {
-        map.set(ctfName, ctfFn(correspondingCtfNode, map));
+        map.set(
+          ctfName,
+          ctfFn(correspondingCtfNode, map, { alfredConfig, ...interfaceState })
+        );
       }
     });
   });
