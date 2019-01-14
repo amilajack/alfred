@@ -109,18 +109,6 @@ async function createNewProject(cwd: string, name: string) {
   const target = 'targets/prod/lib.browser.js';
 
   const answers = await prompt([
-    {
-      type: 'input',
-      name: 'version',
-      message: 'version',
-      default: '0.0.0',
-      validate(input) {
-        if (semver.valid(input)) {
-          return true;
-        }
-        return `Invalid version: ${input}`;
-      }
-    },
     { type: 'input', name: 'description', message: 'description' },
     { type: 'input', name: 'git', message: 'git repository' },
     {
