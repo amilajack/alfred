@@ -1,9 +1,9 @@
 // @flow
 import path from 'path';
 import fs from 'fs';
+import childProcess from 'child_process';
 import { prompt } from 'inquirer';
 import handlebars from 'handlebars';
-import semver from 'semver';
 import validateLicense from 'validate-npm-package-license';
 import validateName from 'validate-npm-package-name';
 import program from 'commander';
@@ -64,6 +64,18 @@ function renderLines(lines: Array<string>) {
 }
 
 async function createNewProject(cwd: string, name: string) {
+  const dirBasename = path.basename(cwd);
+  const dirnameEqualsName = dirBasename === name;
+  const root = dirnameEqualsName ? cwd : path.resolve(cwd, name);
+  // Check if the directory name already exists before creating the project
+  if (fs.existsSync(root)) {
+    return console.log(
+      `${chalk.bgBlack.cyan('Alfred')} ${chalk.bgBlack.red(
+        'ERR!'
+      )} Directory ${name} already exists`
+    );
+  }
+
   const style = {
     project: chalk.cyan.bold,
     command: chalk.green.bold,
@@ -91,18 +103,11 @@ async function createNewProject(cwd: string, name: string) {
   const [, scope, local] = scoped || [undefined, null, name];
 
   renderLines([
-    `I'm your assistant Alfred. I'll walk you through creating an Alfred project ${style.project(
+    `I'm your assistant Alfred. I'll walk you through creating your new Alfred project "${style.project(
       name
-    )} Alfred project.`,
+    )}"`,
     'Press ^C at any time to quit.'
   ]);
-
-  const dirBasename = path.basename(cwd);
-  const dirnameEqualsName = dirBasename === name;
-  const root = dirnameEqualsName ? cwd : path.resolve(cwd, name);
-  if (!dirnameEqualsName) {
-    await fs.promises.mkdir(name);
-  }
 
   const guess = await guessAuthor();
   const entry = 'src/lib.browser.js';
@@ -112,20 +117,20 @@ async function createNewProject(cwd: string, name: string) {
     { type: 'input', name: 'description', message: 'description' },
     { type: 'input', name: 'git', message: 'git repository' },
     {
-      type: 'input',
       name: 'author',
+      type: 'input',
       message: 'author',
       default: guess.name
     },
     {
-      type: 'input',
       name: 'email',
+      type: 'input',
       message: 'email',
       default: guess.email
     },
     {
-      type: 'input',
       name: 'license',
+      type: 'input',
       message: 'license',
       default: 'MIT',
       validate(input) {
@@ -136,6 +141,27 @@ async function createNewProject(cwd: string, name: string) {
         const errors = self.warnings || [];
         return `Sorry, ${errors.join(' and ')}.`;
       }
+    },
+    {
+      name: 'npmClient',
+      type: 'choice',
+      choices: ['NPM', 'Yarn'],
+      message: 'npm client',
+      default: 'NPM'
+    },
+    {
+      name: 'projectType',
+      type: 'list',
+      choices: ['app', 'lib'],
+      message: 'project type',
+      default: 'app'
+    },
+    {
+      name: 'target',
+      type: 'list',
+      choices: ['browser', 'node'],
+      message: 'project type',
+      default: 'browser'
     }
   ]);
 
@@ -146,25 +172,35 @@ async function createNewProject(cwd: string, name: string) {
       local
     }
   };
+  answers.npmClient = escapeQuotes(answers.npmClient);
+  answers.projectType = escapeQuotes(answers.projectType);
   answers.description = escapeQuotes(answers.description);
   answers.git = encodeURI(answers.git);
   answers.author = escapeQuotes(answers.author);
   answers.main = target;
 
+  const alfredCoreFilePath = path.join(__dirname, '../../core');
+  const alfredCliFilePath = path.join(__dirname, '../../cli');
+
   const templateData = {
     project: answers,
     'alfred-core': {
-      major: semver.major(ALFRED_CORE_VERSION),
-      minor: semver.minor(ALFRED_CORE_VERSION),
-      patch: semver.patch(ALFRED_CORE_VERSION)
+      semver:
+        process.env.NODE_ENV === 'test'
+          ? `file:${alfredCoreFilePath}`
+          : `^${ALFRED_CORE_VERSION}`
     },
     'alfred-cli': {
-      major: semver.major(ALFRED_CLI_VERSION),
-      minor: semver.minor(ALFRED_CLI_VERSION),
-      patch: semver.patch(ALFRED_CLI_VERSION)
+      semver:
+        process.env.NODE_ENV === 'test'
+          ? `file:${alfredCliFilePath}`
+          : `^${ALFRED_CLI_VERSION}`
     }
   };
 
+  if (!dirnameEqualsName) {
+    await fs.promises.mkdir(name);
+  }
   const src = path.resolve(root, 'src');
   await fs.promises.mkdir(src);
 
@@ -194,13 +230,23 @@ async function createNewProject(cwd: string, name: string) {
   const relativeRoot = path.relative(cwd, root);
   const relativeEntryPoint = path.relative(cwd, path.resolve(root, entry));
 
-  renderLines([
+  renderLines(['I am now installing the dependencies for your app']);
+  const installCommand = answers.npmClient === 'NPM' ? 'npm install' : 'yarn';
+  const buildCommand =
+    answers.npmClient === 'NPM' ? 'npm run build' : 'yarn build';
+  // @TODO Install the deps. This curre
+  childProcess.execSync(installCommand, {
+    cwd: root
+  });
+
+  return renderLines([
     `Awesome! Your Alfred project has been created in: ${style.filePath(
       relativeRoot
     )}`,
     `The main Node entry point is at: ${style.filePath(relativeEntryPoint)}`,
+    // `First install your project with ${style.command(installCommand)}`,
     `To build your project, just run ${style.command(
-      'npm install'
+      buildCommand
     )} from within the ${style.filePath(relativeRoot)} directory.`,
     'Happy hacking!'
   ]);

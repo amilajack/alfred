@@ -10,21 +10,21 @@
 {{#if project.license}}
   "license": "{{project.license}}",
 {{/if}}
-  "devDependencies": {
-    "@alfredpkg/cli": "^{{alfred-cli.major}}.{{alfred-cli.minor}}.{{alfred-cli.patch}}",
-    "@alfredpkg/core": "^{{alfred-core.major}}.{{alfred-core.minor}}.{{alfred-core.patch}}"
+{{#if project.git}}
+  "repository": {
+    "type": "git",
+    "url": "{{project.git}}"
   }
+{{/if}}
+  "devDependencies": {
+    "@alfredpkg/cli": "{{alfred-cli.semver}}",
+    "@alfredpkg/core": "{{alfred-core.semver}}"
+  },
   "scripts": {
     "build": "alfred run build",
     "format": "alfred run format",
     "lint": "alfred run lint",
     "start": "alfred run start",
     "test": "alfred run test"
-  },
-  {{#if project.git}}
-  "repository": {
-    "type": "git",
-    "url": "{{project.git}}"
   }
-  {{/if}}
 }
