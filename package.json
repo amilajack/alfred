@@ -9,16 +9,16 @@
     "packages/*",
     "website"
   ],
-  "repository": "git@github.com:amilajack/alfred.git",
+  "repository": "https://github.com/amilajack/alfred.git",
   "author": "Amila Welihinda <amilajack@gmail.com>",
   "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_ENV=production lerna run build",
     "flow-typed": "lerna run flow-typed",
     "lint": "eslint .",
-    "publish-gh-pages": "yarn workspace @alfredpkg/website publish-gh-pages",
     "test": "yarn build && yarn lint && lerna run flow && lerna run test",
     "website:build": "yarn workspace @alfredpkg/website build",
+    "website:publish-gh-pages": "yarn workspace @alfredpkg/website publish-gh-pages",
     "website:start": "yarn workspace @alfredpkg/website start",
     "website:test": "yarn website:build",
     "website:version": "yarn workspace @alfredpkg/website version",
