@@ -16,11 +16,12 @@
     "build": "cross-env NODE_ENV=production lerna run build",
     "flow-typed": "lerna run flow-typed",
     "lint": "eslint .",
+    "publish-gh-pages": "yarn workspace @alfredpkg/website publish-gh-pages",
     "test": "yarn build && yarn lint && lerna run flow && lerna run test",
-    "website:build": "yarn workspace @alfredpkg/site build",
-    "website:start": "yarn workspace @alfredpkg/site start",
+    "website:build": "yarn workspace @alfredpkg/website build",
+    "website:start": "yarn workspace @alfredpkg/website start",
     "website:test": "yarn website:build",
-    "website:version": "yarn workspace @alfredpkg/site version",
+    "website:version": "yarn workspace @alfredpkg/website version",
     "version": "lerna run build:clean && yarn build"
   },
   "devDependencies": {

@@ -46,10 +46,6 @@ alfred learn alfred-skill-build-parcel
 alfred build
 # Learning multiple skills
 alfred learn alfred-skill-build-angular alfred-skill-build-redux
-
-# Upgrading from ES5 to ESNext
-alfred migrate .
-alfred migrate . --transforms imports lebab
 ```
 
 ## Docs
