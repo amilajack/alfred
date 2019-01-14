@@ -68,7 +68,7 @@ async function createNewProject(cwd: string, name: string) {
   const dirnameEqualsName = dirBasename === name;
   const root = dirnameEqualsName ? cwd : path.resolve(cwd, name);
   // Check if the directory name already exists before creating the project
-  if (fs.existsSync(root)) {
+  if (!dirnameEqualsName && fs.existsSync(root)) {
     return console.log(
       `${chalk.bgBlack.cyan('Alfred')} ${chalk.bgBlack.red(
         'ERR!'
@@ -110,8 +110,6 @@ async function createNewProject(cwd: string, name: string) {
   ]);
 
   const guess = await guessAuthor();
-  const entry = 'src/lib.browser.js';
-  const target = 'targets/prod/lib.browser.js';
 
   const answers = await prompt([
     { type: 'input', name: 'description', message: 'description' },
@@ -164,6 +162,9 @@ async function createNewProject(cwd: string, name: string) {
       default: 'browser'
     }
   ]);
+
+  const entry = `./src/${answers.projectType}.${answers.target}.js`;
+  const target = `./targets/prod/${answers.projectType}.${answers.target}.js`;
 
   answers.name = {
     npm: {
@@ -219,7 +220,7 @@ async function createNewProject(cwd: string, name: string) {
         content: (await README_TEMPLATE)(templateData)
       },
       {
-        file: 'src/lib.browser.js',
+        file: entry,
         content: (await LIB_BROWSER_TEMPLATE)(templateData)
       }
     ].map(({ file, content }) =>
@@ -234,10 +235,13 @@ async function createNewProject(cwd: string, name: string) {
   const installCommand = answers.npmClient === 'NPM' ? 'npm install' : 'yarn';
   const buildCommand =
     answers.npmClient === 'NPM' ? 'npm run build' : 'yarn build';
-  // @TODO Install the deps. This curre
-  childProcess.execSync(installCommand, {
-    cwd: root
-  });
+  // @TODO Install the deps
+  if (!process.env.IGNORE_INSTALL) {
+    childProcess.execSync(installCommand, {
+      cwd: root,
+      stdio: [0, 1, 2]
+    });
+  }
 
   return renderLines([
     `Awesome! Your Alfred project has been created in: ${style.filePath(
