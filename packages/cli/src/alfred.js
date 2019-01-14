@@ -12,7 +12,7 @@ process.on('unhandledRejection', err => {
 updateNotifier({ pkg }).notify();
 
 program
-  .version('0.0.1')
+  .version('0.0.1', '-v, --version')
   .description('Alfred')
   .command('new <project-name>', 'Create a new Alfred project')
   .command('learn <skill>', 'Add an Alfred skill to your project')

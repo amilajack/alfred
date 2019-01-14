@@ -37,7 +37,9 @@ async function compile(filename: string) {
 
 const GITIGNORE_TEMPLATE = compile('.gitignore.hbs');
 const NPM_TEMPLATE = compile('package.json.hbs');
-const LIB_BROWSER_TEMPLATE = compile('lib.browser.js.hbs');
+const APP_TEMPLATE = compile('app.js.hbs');
+const LIB_TEMPLATE = compile('lib.js.hbs');
+const APP_BROWSER_HTML_TEMPLATE = compile('index.html.hbs');
 const README_TEMPLATE = compile('README.md.hbs');
 const EDITORCONFIG_TEMPLATE = compile('.editorconfig.hbs');
 
@@ -158,6 +160,7 @@ async function createNewProject(cwd: string, name: string) {
     {
       name: 'target',
       type: 'list',
+      // @TODO @HARDCODE Dynamically get the targets
       choices: ['browser', 'node'],
       message: 'project type',
       default: 'browser'
@@ -183,6 +186,8 @@ async function createNewProject(cwd: string, name: string) {
 
   const alfredCoreFilePath = path.join(__dirname, '../../core');
   const alfredCliFilePath = path.join(__dirname, '../../cli');
+  const isApp = answers.projectType === 'app';
+  const isBrowser = answers.target === 'browser';
 
   const templateData = {
     project: answers,
@@ -226,12 +231,20 @@ async function createNewProject(cwd: string, name: string) {
       },
       {
         file: entry,
-        content: (await LIB_BROWSER_TEMPLATE)(templateData)
+        content: (await (isApp ? APP_TEMPLATE : LIB_TEMPLATE))(templateData)
       }
     ].map(({ file, content }) =>
       fs.promises.writeFile(path.join(root, file), content)
     )
   );
+
+  if (isApp && isBrowser) {
+    const content = (await APP_BROWSER_HTML_TEMPLATE)(templateData);
+    await await fs.promises.writeFile(
+      path.join(root, './src/index.html'),
+      content
+    );
+  }
 
   const relativeRoot = path.relative(cwd, root);
   const relativeEntryPoint = path.relative(cwd, path.resolve(root, entry));
@@ -252,7 +265,7 @@ async function createNewProject(cwd: string, name: string) {
     `Awesome! Your Alfred project has been created in: ${style.filePath(
       relativeRoot
     )}`,
-    `The main Node entry point is at: ${style.filePath(relativeEntryPoint)}`,
+    `The Node entry point is at: ${style.filePath(relativeEntryPoint)}`,
     // `First install your project with ${style.command(installCommand)}`,
     `To build your project, just run ${style.command(
       buildCommand
