@@ -33,7 +33,7 @@ module.exports = {
           publicPath: './targets/dev'
         },
         resolve: {
-          extensions: ['.js', '.json']
+          extensions: ['.mjs', '.js', '.json']
         },
         plugins: []
       }
