@@ -13,7 +13,7 @@ const users = [];
 
 const siteConfig = {
   title: 'Alfred',
-  tagline: 'A toolchin manager for JavaScript projects',
+  tagline: 'A standard workflow for JavaScript projects',
   url: 'https://alfred-js.github.io',
   baseUrl: '/alfred/',
 

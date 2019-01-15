@@ -16,22 +16,17 @@ alfred new my-new-project
 cd my-new-project
 ```
 
-## Running Subcommands
+## Skills
 
 ```bash
 alfred start
 alfred build
-alfred clean
 alfred format
 alfred test
-alfred search
-alfred doc
-alfred migrate
-alfred types
 alfred migrate
 ```
 
-## Learning New Skills
+## Learning Skills
 
 ```bash
 # Learning skills

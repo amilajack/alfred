@@ -2,7 +2,7 @@ alfred
 ======
 [![Build Status](https://travis-ci.com/amilajack/alfred.svg?token=stGf151gAJ11ZUi8LyvG&branch=master)](https://travis-ci.com/amilajack/alfred)
 
-Alfred is a configuration manager that defines a standard workflow for JavaScript projects
+A standard workflow for JavaScript projects
 
 ## Goals
 
@@ -26,6 +26,7 @@ yarn global add @alfredpkg/cli
 ```bash
 # Creating a new project
 alfred new my-lib --lib
+alfred new my-lib --lib --browser
 alfred new my-app
 cd my-app
 
