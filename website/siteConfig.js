@@ -15,6 +15,7 @@ const siteConfig = {
   title: 'Alfred',
   tagline: 'A standard workflow for JavaScript projects',
   url: 'https://alfred-js.github.io',
+  cname: 'alfred.js.org',
   baseUrl: '/alfred/',
 
   projectName: 'alfred',
