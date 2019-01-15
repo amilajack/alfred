@@ -14,9 +14,9 @@ const users = [];
 const siteConfig = {
   title: 'Alfred',
   tagline: 'A standard workflow for JavaScript projects',
-  url: 'https://alfred-js.github.io',
+  url: 'https://alfred.js.org',
   cname: 'alfred.js.org',
-  baseUrl: '/alfred/',
+  baseUrl: '/',
 
   projectName: 'alfred',
   organizationName: 'amilajack',
