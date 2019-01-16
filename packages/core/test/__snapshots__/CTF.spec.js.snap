@@ -4873,6 +4873,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -4884,6 +4885,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -4891,17 +4895,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -4978,6 +5004,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -4989,6 +5016,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -4996,17 +5026,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -5099,6 +5151,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -5110,6 +5163,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -5117,17 +5173,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -5251,6 +5329,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -5262,6 +5341,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -5269,17 +5351,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -5411,6 +5515,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -5422,6 +5527,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -5429,17 +5537,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -5580,6 +5710,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -5591,6 +5722,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -5598,17 +5732,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -5749,6 +5905,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -5760,6 +5917,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -5767,17 +5927,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -5957,6 +6139,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -5968,6 +6151,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -5975,17 +6161,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -6148,6 +6356,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -6159,6 +6368,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -6166,17 +6378,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -6339,6 +6573,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -6350,6 +6585,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -6357,17 +6595,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -6531,6 +6791,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -6542,6 +6803,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -6549,17 +6813,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -6658,6 +6944,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -6669,6 +6956,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -6676,17 +6966,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -6790,6 +7102,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -6801,6 +7114,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -6808,17 +7124,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -6947,6 +7285,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -6958,6 +7297,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -6965,17 +7307,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -7112,6 +7476,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -7123,6 +7488,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -7130,17 +7498,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -7286,6 +7676,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -7297,6 +7688,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -7304,17 +7698,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -7460,6 +7876,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -7471,6 +7888,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -7478,17 +7898,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -7673,6 +8115,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -7684,6 +8127,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -7691,17 +8137,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -7869,6 +8337,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -7880,6 +8349,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -7887,17 +8359,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -8065,6 +8559,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -8076,6 +8571,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -8083,17 +8581,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -8262,6 +8782,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -8273,6 +8794,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -8280,17 +8804,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -8412,6 +8958,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -8423,6 +8970,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -8430,17 +8980,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -8571,6 +9143,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -8582,6 +9155,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -8589,17 +9165,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -8730,6 +9328,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -8741,6 +9340,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -8748,17 +9350,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -8928,6 +9552,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -8939,6 +9564,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -8946,17 +9574,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -9109,6 +9759,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -9120,6 +9771,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -9127,17 +9781,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -9290,6 +9966,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -9301,6 +9978,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -9308,17 +9988,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -9477,6 +10179,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -9488,6 +10191,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -9495,17 +10201,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -9625,6 +10353,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -9636,6 +10365,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -9643,17 +10375,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -9776,6 +10530,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -9787,6 +10542,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -9794,17 +10552,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -9963,6 +10743,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -9974,6 +10755,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -9981,17 +10765,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -10136,6 +10942,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -10147,6 +10954,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -10154,17 +10964,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -10306,6 +11138,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -10317,6 +11150,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -10324,17 +11160,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -10470,6 +11328,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -10481,6 +11340,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -10488,17 +11350,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -10602,6 +11486,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -10613,6 +11498,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -10620,17 +11508,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -10742,6 +11652,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -10753,6 +11664,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -10760,17 +11674,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -10890,6 +11826,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -10901,6 +11838,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -10908,17 +11848,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -11038,6 +12000,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -11049,6 +12012,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -11056,17 +12022,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -11225,6 +12213,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -11236,6 +12225,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -11243,17 +12235,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -11395,6 +12409,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -11406,6 +12421,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -11413,17 +12431,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -11566,6 +12606,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -11577,6 +12618,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -11584,17 +12628,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -11738,6 +12804,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -11749,6 +12816,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -11756,17 +12826,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -11849,6 +12941,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -11860,6 +12953,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -11867,17 +12963,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -11957,6 +13075,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -11968,6 +13087,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -11975,17 +13097,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -12092,6 +13236,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -12103,6 +13248,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -12110,17 +13258,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -12235,6 +13405,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -12246,6 +13417,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -12253,17 +13427,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -12386,6 +13582,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -12397,6 +13594,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -12404,17 +13604,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -12537,6 +13759,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -12548,6 +13771,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -12555,17 +13781,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -12727,6 +13975,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -12738,6 +13987,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -12745,17 +13997,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -12900,6 +14174,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -12911,6 +14186,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -12918,17 +14196,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -13074,6 +14374,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -13085,6 +14386,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -13092,17 +14396,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -13249,6 +14575,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -13260,6 +14587,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -13267,17 +14597,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -13378,6 +14730,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -13389,6 +14742,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -13396,17 +14752,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -13512,6 +14890,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -13523,6 +14902,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -13530,17 +14912,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -13649,6 +15053,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -13660,6 +15065,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -13667,17 +15075,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -13822,6 +15252,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -13833,6 +15264,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -13840,17 +15274,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -13981,6 +15437,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -13992,6 +15449,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -13999,17 +15459,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -14138,6 +15620,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -14149,6 +15632,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -14156,17 +15642,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -14304,6 +15812,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -14315,6 +15824,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -14322,17 +15834,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -14435,6 +15969,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -14446,6 +15981,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -14453,17 +15991,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -14569,6 +16129,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -14580,6 +16141,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -14587,17 +16151,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -14739,6 +16325,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -14750,6 +16337,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -14757,17 +16347,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -14895,6 +16507,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -14906,6 +16519,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -14913,17 +16529,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -15049,6 +16687,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -15060,6 +16699,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -15067,17 +16709,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -18156,6 +19820,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -18167,6 +19832,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -18174,17 +19842,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -18237,6 +19927,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -18248,6 +19939,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -18255,17 +19949,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -18332,6 +20048,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -18343,6 +20060,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -18350,17 +20070,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -18443,6 +20185,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -18454,6 +20197,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -18461,17 +20207,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -18556,6 +20324,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -18567,6 +20336,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -18574,17 +20346,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -18670,6 +20464,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -18681,6 +20476,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -18688,17 +20486,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -18786,6 +20606,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -18797,6 +20618,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -18804,17 +20628,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -18935,6 +20781,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -18946,6 +20793,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -18953,17 +20803,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -19084,6 +20956,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -19095,6 +20968,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -19102,17 +20978,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -19230,6 +21128,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -19241,6 +21140,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -19248,17 +21150,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -19379,6 +21303,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -19390,6 +21315,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -19397,17 +21325,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -19479,6 +21429,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -19490,6 +21441,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -19497,17 +21451,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -19585,6 +21561,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -19596,6 +21573,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -19603,17 +21583,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -19704,6 +21706,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -19715,6 +21718,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -19722,17 +21728,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -19822,6 +21850,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -19833,6 +21862,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -19840,17 +21872,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -19944,6 +21998,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -19955,6 +22010,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -19962,17 +22020,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -20065,6 +22145,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -20076,6 +22157,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -20083,17 +22167,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -20222,6 +22328,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -20233,6 +22340,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -20240,17 +22350,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -20376,6 +22508,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -20387,6 +22520,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -20394,17 +22530,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -20530,6 +22688,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -20541,6 +22700,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -20548,17 +22710,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -20684,6 +22868,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -20695,6 +22880,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -20702,17 +22890,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -20792,6 +23002,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -20803,6 +23014,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -20810,17 +23024,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -20904,6 +23140,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -20915,6 +23152,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -20922,17 +23162,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -21015,6 +23277,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -21026,6 +23289,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -21033,17 +23299,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -21162,6 +23450,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -21173,6 +23462,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -21180,17 +23472,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -21306,6 +23620,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -21317,6 +23632,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -21324,17 +23642,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -21450,6 +23790,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -21461,6 +23802,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -21468,17 +23812,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -21591,6 +23957,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -21602,6 +23969,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -21609,17 +23979,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -21692,6 +24084,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -21703,6 +24096,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -21710,17 +24106,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -21795,6 +24213,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -21806,6 +24225,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -21813,17 +24235,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -21931,6 +24375,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -21942,6 +24387,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -21949,17 +24397,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -22067,6 +24537,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -22078,6 +24549,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -22085,17 +24559,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -22200,6 +24696,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -22211,6 +24708,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -22218,17 +24718,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -22333,6 +24855,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -22344,6 +24867,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -22351,17 +24877,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -22426,6 +24974,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -22437,6 +24986,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -22444,17 +24996,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -22521,6 +25095,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -22532,6 +25107,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -22539,17 +25117,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -22616,6 +25216,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -22627,6 +25228,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -22634,17 +25238,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -22713,6 +25339,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -22724,6 +25351,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -22731,17 +25361,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -22843,6 +25495,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -22854,6 +25507,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -22861,17 +25517,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -22973,6 +25651,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -22984,6 +25663,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -22991,17 +25673,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -23101,6 +25805,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -23112,6 +25817,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -23119,17 +25827,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -23232,6 +25962,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -23243,6 +25974,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -23250,17 +25984,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -23318,6 +26074,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -23329,6 +26086,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -23336,17 +26096,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -23402,6 +26184,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -23413,6 +26196,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -23420,17 +26206,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -23498,6 +26306,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -23509,6 +26318,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -23516,17 +26328,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -23596,6 +26430,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -23607,6 +26442,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -23614,17 +26452,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -23694,6 +26554,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -23705,6 +26566,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -23712,17 +26576,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -23794,6 +26680,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -23805,6 +26692,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -23812,17 +26702,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -23927,6 +26839,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -23938,6 +26851,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -23945,17 +26861,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -24060,6 +26998,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -24071,6 +27010,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -24078,17 +27020,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -24191,6 +27155,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -24202,6 +27167,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -24209,17 +27177,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -24325,6 +27315,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -24336,6 +27327,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -24343,17 +27337,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -24414,6 +27430,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -24425,6 +27442,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -24432,17 +27452,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -24503,6 +27545,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -24514,6 +27557,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -24521,17 +27567,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -24594,6 +27662,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -24605,6 +27674,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -24612,17 +27684,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -24718,6 +27812,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -24729,6 +27824,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -24736,17 +27834,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -24842,6 +27962,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -24853,6 +27974,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -24860,17 +27984,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -24964,6 +28110,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -24975,6 +28122,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -24982,17 +28132,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -25086,6 +28258,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -25097,6 +28270,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -25104,17 +28280,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -25172,6 +28370,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -25183,6 +28382,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -25190,17 +28392,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -25260,6 +28484,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -25271,6 +28496,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -25278,17 +28506,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -25381,6 +28631,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -25392,6 +28643,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -25399,17 +28653,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -25502,6 +28778,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -25513,6 +28790,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -25520,17 +28800,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },
@@ -25621,6 +28923,7 @@ Array [
   Object {
     "devServer": Object {
       "compress": true,
+      "contentBase": "/",
       "headers": Object {
         "Access-Control-Allow-Origin": "*",
       },
@@ -25632,6 +28935,9 @@ Array [
       "inline": true,
       "lazy": false,
       "noInfo": true,
+      "open": true,
+      "port": 8080,
+      "publicPath": "http://localhost:8080",
       "stats": "errors-only",
       "watchOptions": Object {
         "aggregateTimeout": 300,
@@ -25639,17 +28945,39 @@ Array [
         "poll": 100,
       },
     },
+    "entry": Array [
+      "webpack-dev-server/client?http://localhost:8080/",
+      "webpack/hot/only-dev-server",
+    ],
     "mode": "development",
+    "output": Object {
+      "path": "/",
+      "publicPath": "http://localhost:8080/",
+    },
+    "plugins": Array [
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": true,
+        "options": Object {
+          "multiStep": true,
+        },
+        "requestTimeout": 10000,
+      },
+    ],
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.node.js",
     },
     "target": "node",
   },
   Object {
-    "entry": "/",
+    "entry": Array [
+      "/",
+    ],
     "output": Object {
       "filename": "app.browser.js",
     },

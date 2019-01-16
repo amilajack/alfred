@@ -29,7 +29,7 @@ module.exports = {
         'node_modules',
         'jest-transformer.js'
       );
-      const config = JSON.stringify({
+      const babelConfig = JSON.stringify({
         presets: getConfigByConfigName('babel', ctf.get('babel').configFiles)
           .config.presets
       });
@@ -40,19 +40,19 @@ module.exports = {
       );
       await fs.promises.writeFile(
         // @TODO Write to ./node_modules/.alfred
-        hiddenTmpConfigPath,
+        alfredConfig.showConfigs ? configPath : hiddenTmpConfigPath,
         `module.exports = {
           transform: {
-            '^.+.jsx?$': './node_modules/jest-transformer.js'
+            '^.+.jsx?$': '${jestTransformerPath}'
           },
-          rootDir: '..'
+          rootDir: '${alfredConfig.root}'
         };
         `
       );
       await fs.promises.writeFile(
         jestTransformerPath,
-        `const foo = require('babel-jest');
-        module.exports = foo.createTransformer(${config});`
+        `const babelJestTransform = require('babel-jest');
+        module.exports = babelJestTransform.createTransformer(${babelConfig});`
       );
 
       return execCommand(

@@ -330,7 +330,9 @@ export async function writeConfigsFromCtf(ctf: CtfMap) {
     configs.map(config => {
       const filePath = path.join(configsBasePath, config.path);
       const convertedConfig =
-        typeof config === 'string' ? config : JSON.stringify(config.config);
+        typeof config.config === 'string'
+          ? config.config
+          : JSON.stringify(config.config);
       return fs.promises.writeFile(filePath, convertedConfig);
     })
   );

@@ -121,19 +121,24 @@ module.exports = {
 
       const rollup = require('rollup');
 
-      if (subcommand === 'start') {
-        const watchConf = state.env === 'production' ? prod : dev;
-        return rollup.watch({
-          ...watchConf.input,
-          ...watchConf
-        });
+      switch (subcommand) {
+        case 'start': {
+          const watchConf = state.env === 'production' ? prod : dev;
+          return rollup.watch({
+            ...watchConf.input,
+            ...watchConf
+          });
+        }
+        case 'build': {
+          const bundle = await rollup.rollup(
+            state.env === 'production' ? prod : dev
+          );
+
+          return bundle.write((state.env === 'production' ? prod : dev).output);
+        }
+        default:
+          throw new Error(`Invalid subcommand: "${subcommand}"`);
       }
-
-      const bundle = await rollup.rollup(
-        state.env === 'production' ? prod : dev
-      );
-
-      return bundle.write((state.env === 'production' ? prod : dev).output);
     }
   }
 };

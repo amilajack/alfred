@@ -1,0 +1,20 @@
+{
+  "name": "@fixtures/show-configs",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "../../../packages/cli/lib/alfred.js run build",
+    "clean": "../../../packages/cli/lib/alfred.js run clean",
+    "format": "../../../packages/cli/lib/alfred.js run format",
+    "lint": "../../../packages/cli/lib/alfred.js run lint",
+    "start": "../../../packages/cli/lib/alfred.js run start",
+    "test": "../../../packages/cli/lib/alfred.js run test"
+  },
+  "devDependencies": {
+    "@alfredpkg/cli": "^0.0.0",
+    "@alfredpkg/core": "^0.0.0"
+  },
+  "alfred": {
+    "showConfigs": true
+  }
+}

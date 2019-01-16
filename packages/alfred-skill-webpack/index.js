@@ -65,9 +65,20 @@ module.exports = {
       config: {
         // @TODO: wepack-dev-server, HMR, sass, css, etc
         mode: 'development',
+        entry: [
+          // @TODO
+          // 'react-hot-loader/patch',
+          'webpack-dev-server/client?http://localhost:8080/',
+          'webpack/hot/only-dev-server'
+        ],
+        output: {
+          path: path.join(projectRoot, 'targets', 'dev'),
+          publicPath: 'http://localhost:8080/'
+        },
         devServer: {
-          // port: 8080,
-          // publicPath,
+          open: true,
+          port: 8080,
+          publicPath: 'http://localhost:8080',
           compress: true,
           noInfo: true,
           stats: 'errors-only',
@@ -75,7 +86,7 @@ module.exports = {
           lazy: false,
           hot: true,
           headers: { 'Access-Control-Allow-Origin': '*' },
-          // contentBase: path.join(__dirname, 'dist'),
+          contentBase: path.join(projectRoot, 'src'),
           watchOptions: {
             aggregateTimeout: 300,
             ignored: /node_modules/,
@@ -85,14 +96,19 @@ module.exports = {
             verbose: true,
             disableDotRule: false
           }
-        }
+        },
+        plugins: [
+          new webpack.HotModuleReplacementPlugin({
+            multiStep: true
+          })
+        ]
       }
     },
     {
       name: 'webpack.node',
       path: 'webpack.node.js',
       config: {
-        entry: path.join(projectRoot, 'src', 'app.node.js'),
+        entry: [path.join(projectRoot, 'src', 'app.node.js')],
         output: {
           filename: 'app.node.js'
         },
@@ -103,7 +119,7 @@ module.exports = {
       name: 'webpack.browser',
       path: 'webpack.browser.js',
       config: {
-        entry: path.join(projectRoot, 'src', 'app.browser.js'),
+        entry: [path.join(projectRoot, 'src', 'app.browser.js')],
         output: {
           filename: 'app.browser.js'
         },
@@ -138,35 +154,40 @@ module.exports = {
         state.env === 'production' ? prodConfig : devConfig,
         state.target === 'browser' ? browserConfig : nodeConfig
       );
-      if (subcommand === 'start') {
-        const Webpack = require('webpack');
-        const WebpackDevServer = require('webpack-dev-server');
-        const compiler = Webpack(mergedConfig);
-        const { devServer } = mergedConfig;
-        const server = new WebpackDevServer(compiler, devServer);
-        server.listen(await getPort(), '127.0.0.1', () => {
-          console.log('Starting server on http://localhost:8080');
-        });
+
+      switch (subcommand) {
+        case 'start': {
+          const Webpack = require('webpack');
+          const WebpackDevServer = require('webpack-dev-server');
+          const compiler = Webpack(mergedConfig);
+          const { devServer } = mergedConfig;
+          const server = new WebpackDevServer(compiler, devServer);
+          const port = await getPort({ port: 8080 });
+          return server.listen(port, '127.0.0.1', () => {
+            console.log(`Starting server on http://localhost:${port}`);
+          });
+        }
+        case 'build': {
+          return webpack(mergedConfig, (err, stats) => {
+            if (err) {
+              console.error(err.stack || err);
+              if (err.details) {
+                console.error(err.details);
+              }
+              return;
+            }
+            const info = stats.toJson();
+            if (stats.hasErrors()) {
+              console.error(info.errors.toString());
+            }
+            if (stats.hasWarnings()) {
+              console.warn(info.warnings.toString());
+            }
+          });
+        }
+        default:
+          throw new Error(`Invalid subcommand: "${subcommand}"`);
       }
-      return webpack(mergedConfig, (err, stats) => {
-        if (err) {
-          console.error(err.stack || err);
-          if (err.details) {
-            console.error(err.details);
-          }
-          return;
-        }
-
-        const info = stats.toJson();
-
-        if (stats.hasErrors()) {
-          console.error(info.errors.toString());
-        }
-
-        if (stats.hasWarnings()) {
-          console.warn(info.warnings.toString());
-        }
-      });
     }
   },
   ctfs: {
