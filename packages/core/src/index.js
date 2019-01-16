@@ -110,7 +110,8 @@ type UsingInterface = {|
       fileConfigPath: string,
       config: configFileType,
       alfredConfig: Object,
-      state: InterfaceState
+      state: InterfaceState,
+      subcommand: string
     ) => string,
     install?: () => void
   }
@@ -398,7 +399,13 @@ export function getExecuteWrittenConfigsMethods(
         return {
           fn: alfredConfig =>
             // @TODO: Pass configFiles, ctf, alfredConfig, and state as an object to .call()
-            ctfNode.hooks.call(configFiles, ctf, alfredConfig, state),
+            ctfNode.hooks.call(
+              configFiles,
+              ctf,
+              alfredConfig,
+              state,
+              subcommand
+            ),
           // @HACK: If interfaces were defined, we could import the @alfredpkg/interface-*
           //        and use the `subcommand` property. This should be done after we have
           //        some interfaces to work with
