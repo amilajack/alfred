@@ -20,7 +20,7 @@ module.exports = {
       .find(sk => {
         const { supports } = sk.interfaces.find(
           e => e.module.subcommand === 'start'
-        );
+        ).config;
         if (!supports) {
           throw new Error(
             `Skill "${

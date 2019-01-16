@@ -8,6 +8,7 @@
     "build": "../../packages/cli/lib/alfred.js run build",
     "format": "../../packages/cli/lib/alfred.js run format",
     "lint": "../../packages/cli/lib/alfred.js run lint",
+    "start": "../../packages/cli/lib/alfred.js run start",
     "test": "../../packages/cli/lib/alfred.js run test"
   },
   "devDependencies": {

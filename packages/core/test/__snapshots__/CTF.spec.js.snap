@@ -21780,29 +21780,6 @@ Array [
 ]
 `;
 
-exports[`CTF interfaces should allow object input 1`] = `
-Array [
-  Object {
-    "module": Object {
-      "resolveSkill": [Function],
-      "runForAllTargets": true,
-      "subcommand": "build",
-    },
-    "name": "@alfredpkg/interface-build",
-    "supports": Object {},
-  },
-  Object {
-    "module": Object {
-      "resolveSkill": [Function],
-      "runForAllTargets": true,
-      "subcommand": "start",
-    },
-    "name": "@alfredpkg/interface-start",
-    "supports": Object {},
-  },
-]
-`;
-
 exports[`CTF interfaces subcommand should get corresponding interface 1`] = `
 Object {
   "resolveSkill": [Function],

@@ -57,16 +57,14 @@ describe('CTF', () => {
       ).toMatchSnapshot();
     });
 
-    it('should allow object input', () => {
-      const skillInterface = {
-        '@alfredpkg/interface-build': {
-          supports: {}
-        },
-        '@alfredpkg/interface-start': {
-          supports: {}
-        }
-      };
-      expect(normalizeInterfacesOfSkill(skillInterface)).toMatchSnapshot();
+    it('should not allow non-array or string inputs', () => {
+      expect(() =>
+        normalizeInterfacesOfSkill({
+          '@alfredpkg/interface-build': {},
+          '@alfredpkg/interface-start': {}
+        })
+      ).toThrow();
+      expect(() => normalizeInterfacesOfSkill('incorrect-input')).toThrow();
     });
 
     describe('subcommand', () => {

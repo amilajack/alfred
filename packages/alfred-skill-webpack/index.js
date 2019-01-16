@@ -21,10 +21,10 @@ const interfaceConfig = {
 module.exports = {
   name: 'webpack',
   description: 'Build, optimize, and bundle assets in your app',
-  interfaces: {
-    '@alfredpkg/interface-build': interfaceConfig,
-    '@alfredpkg/interface-start': interfaceConfig
-  },
+  interfaces: [
+    ['@alfredpkg/interface-build', interfaceConfig],
+    ['@alfredpkg/interface-start', interfaceConfig]
+  ],
   devDependencies: { webpack: '4.28.3', 'webpack-cli': '3.2.1' },
   configFiles: [
     {

@@ -22,10 +22,10 @@ const interfaceConfig = {
 module.exports = {
   name: 'rollup',
   description: 'Build, optimize, and bundle assets in your app',
-  interfaces: {
-    '@alfredpkg/interface-build': interfaceConfig,
-    '@alfredpkg/interface-start': interfaceConfig
-  },
+  interfaces: [
+    ['@alfredpkg/interface-build', interfaceConfig],
+    ['@alfredpkg/interface-start', interfaceConfig]
+  ],
   devDependencies: { rollup: '4.28.3', 'rollup-plugin-replace': '2.1.0' },
   configFiles: [
     {

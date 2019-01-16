@@ -39,8 +39,13 @@ export type InterfaceState = {
   projectType: 'lib' | 'app'
 };
 
-export type InterfaceInputType = Array<string> | { [x: string]: string };
-export type InterfaceType = Array<{ name: string, [x: string]: string }>;
+export type InterfaceInputType = Array<
+  string | [string, { [x: string]: string }]
+>;
+export type InterfaceType = Array<{
+  name: string,
+  module: Object
+}>;
 
 export function normalizeInterfacesOfSkill(
   interfaces: InterfaceState
@@ -53,20 +58,31 @@ export function normalizeInterfacesOfSkill(
     if (interfaces[0].name) {
       return interfaces;
     }
-    return interfaces.map(e => ({
-      name: e,
-      module: require(e), // eslint-disable-line
-    }));
-  }
-  if (typeof interfaces === 'object') {
-    return Object.entries(interfaces).map(([name, properties]) => ({
-      name,
-      module: require(name), // eslint-disable-line
-      ...properties
-    }));
+    return interfaces.map(e => {
+      if (typeof e === 'string') {
+        return {
+          name: e,
+          module: require(e), // eslint-disable-line
+        };
+      }
+      if (Array.isArray(e)) {
+        if (e.length !== 2) {
+          throw new Error(
+            'Interface tuple config must have exactly two elements'
+          );
+        }
+        const [name, config] = e;
+        return {
+          name,
+          module: require(name), // eslint-disable-line
+          config
+        };
+      }
+      throw new Error('Interface config must be either an array or a string');
+    });
   }
   throw new Error(
-    `".interfaces" property must be an array or an object. Received "${interfaces}"`
+    `".interfaces" property must be an array of strings or an array of arrays. Received "${interfaces}"`
   );
 }
 
