@@ -7,19 +7,23 @@ const { getProjectRoot } = require('@alfredpkg/cli');
 // @HACK project root should be passed as argument to configFiles, which could be a function
 const projectRoot = getProjectRoot();
 
+const interfaceConfig = {
+  supports: {
+    // Flag name and argument types
+    env: ['production', 'development', 'test'],
+    // All the supported targets a `build` skill should build
+    targets: ['browser', 'node'],
+    // Project type
+    projectTypes: ['app']
+  }
+};
+
 module.exports = {
   name: 'webpack',
   description: 'Build, optimize, and bundle assets in your app',
-  interface: '@alfredpkg/interface-build',
-  interfaceConfig: {
-    supports: {
-      // Flag name and argument types
-      env: ['production', 'development', 'test'],
-      // All the supported targets a `build` skill should build
-      targets: ['browser', 'node'],
-      // Project type
-      projectTypes: ['app']
-    }
+  interfaces: {
+    '@alfredpkg/interface-build': interfaceConfig,
+    '@alfredpkg/interface-start': interfaceConfig
   },
   devDependencies: { webpack: '4.28.3', 'webpack-cli': '3.2.1' },
   configFiles: [

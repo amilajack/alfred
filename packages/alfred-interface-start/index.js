@@ -1,4 +1,48 @@
+const { normalizeInterfacesOfSkill } = require('@alfredpkg/core');
+
 module.exports = {
   subcommand: 'start',
-  runForAllTargets: true
+
+  runForAllTargets: true,
+  /**
+   * Given an array of CTF nodes, return the CTF which should be used based
+   * on the current environment and current target
+   */
+  resolveSkill(skills = [], interfaceState) {
+    const resolvedSkill = skills
+      .map(skill => ({
+        ...skill,
+        interfaces: normalizeInterfacesOfSkill(skill.interfaces)
+      }))
+      .filter(skill =>
+        skill.interfaces.find(e => e.module.subcommand === 'start')
+      )
+      .find(sk => {
+        const { supports } = sk.interfaces.find(
+          e => e.module.subcommand === 'start'
+        );
+        if (!supports) {
+          throw new Error(
+            `Skill "${
+              sk.name
+            }" requires the "support" property, which is required by "@alfredpkg/interface-start".`
+          );
+        }
+        return (
+          supports.env.includes(interfaceState.env) &&
+          supports.targets.includes(interfaceState.target) &&
+          supports.projectTypes.includes(interfaceState.projectType)
+        );
+      });
+
+    if (!resolvedSkill) {
+      throw new Error(
+        `No installed skill for the "start" subcommand could be found that works for the given development environment and target: ${JSON.stringify(
+          interfaceState
+        )}.`
+      );
+    }
+
+    return resolvedSkill;
+  }
 };

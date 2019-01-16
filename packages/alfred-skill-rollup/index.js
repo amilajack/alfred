@@ -8,19 +8,23 @@ const {
 } = require('@alfredpkg/core');
 const { default: mergeConfigs } = require('@alfredpkg/merge-configs');
 
+const interfaceConfig = {
+  supports: {
+    // Flag name and argument types
+    env: ['production', 'development', 'test'],
+    // All the supported targets a `build` skill should build
+    targets: ['browser', 'node'],
+    // Project type
+    projectTypes: ['lib']
+  }
+};
+
 module.exports = {
   name: 'rollup',
   description: 'Build, optimize, and bundle assets in your app',
-  interface: '@alfredpkg/interface-build',
-  interfaceConfig: {
-    supports: {
-      // Flag name and argument types
-      env: ['production', 'development', 'test'],
-      // All the supported targets a `build` skill should build
-      targets: ['browser', 'node'],
-      // Project type
-      projectTypes: ['lib']
-    }
+  interfaces: {
+    '@alfredpkg/interface-build': interfaceConfig,
+    '@alfredpkg/interface-start': interfaceConfig
   },
   devDependencies: { rollup: '4.28.3', 'rollup-plugin-replace': '2.1.0' },
   configFiles: [

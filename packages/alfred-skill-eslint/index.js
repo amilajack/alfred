@@ -8,7 +8,7 @@ const {
 module.exports = {
   name: 'eslint',
   description: 'Lint all your JS files',
-  interface: '@alfredpkg/interface-lint',
+  interfaces: ['@alfredpkg/interface-lint'],
   devDependencies: { eslint: '5.10.0' },
   configFiles: [
     {

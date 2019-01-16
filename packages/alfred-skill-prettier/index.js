@@ -7,7 +7,7 @@ const {
 module.exports = {
   name: 'prettier',
   description: 'Format the source files in your project',
-  interface: '@alfredpkg/interface-format',
+  interfaces: ['@alfredpkg/interface-format'],
   devDependencies: { prettier: '1.15.3' },
   configFiles: [
     {

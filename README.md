@@ -83,8 +83,10 @@ export default {
   // when it is able to replace an existing subcommand. For example, both the
   // alfred-skill-parcel and alfred-skill-webpack skills, which both register a 'build'
   // subcommand, will both implement @alfredpkg/interface-build. Implementing it will require
-  // them to adhere to a shared set of calling conventions such as flags, subcommands, etc
-  interface: '@alfredpkg/interface-transpile',
+  // them to adhere to a shared set of calling conventions such as flags, subcommands, etc. In
+  // the case of babel, no interface will be implemented because babel will not be invoked directly
+  // as a subcommand. A bundler will always call babel.
+  interfaces: [],
   // ⚠️  Deprecated ️️⚠️
   devDependencies: {
     '@babel/cli': '7.2.0',
@@ -151,7 +153,7 @@ export default {
 ```js
 // index.js
 export default {
-  subcommand: 'transpile',
+  subcommand: 'build',
   flags: {
     // Flag name and argument types
     env: ['production', 'development', 'test']

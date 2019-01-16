@@ -6,7 +6,9 @@ import CTF, {
   getConfigs,
   getDependencies,
   getDevDependencies,
-  getExecuteWrittenConfigsMethods
+  getExecuteWrittenConfigsMethods,
+  normalizeInterfacesOfSkill,
+  getInterfaceForSubcommand
 } from '../src';
 
 const defaultInterfaceState = {
@@ -37,12 +39,59 @@ function removePathsPropertiesFromObject(obj) {
 }
 
 describe('CTF', () => {
+  describe('interfaces', () => {
+    it('should allow falsy inputs', () => {
+      expect(normalizeInterfacesOfSkill(undefined)).toEqual([]);
+      expect(normalizeInterfacesOfSkill(undefined)).toEqual([]);
+    });
+
+    it('should allow array of strings input', () => {
+      expect(
+        normalizeInterfacesOfSkill(['@alfredpkg/interface-build'])
+      ).toMatchSnapshot();
+      expect(
+        normalizeInterfacesOfSkill([
+          '@alfredpkg/interface-build',
+          '@alfredpkg/interface-start'
+        ])
+      ).toMatchSnapshot();
+    });
+
+    it('should allow object input', () => {
+      const skillInterface = {
+        '@alfredpkg/interface-build': {
+          supports: {}
+        },
+        '@alfredpkg/interface-start': {
+          supports: {}
+        }
+      };
+      expect(normalizeInterfacesOfSkill(skillInterface)).toMatchSnapshot();
+    });
+
+    describe('subcommand', () => {
+      it('should get corresponding interface', () => {
+        expect(
+          getInterfaceForSubcommand(
+            CTF(Object.values(CORE_CTFS), defaultAlfredConfig),
+            'build'
+          )
+        ).toMatchSnapshot();
+      });
+
+      it('should error if subcommand does not exist', () => {
+        expect(() =>
+          getInterfaceForSubcommand(CTF([CORE_CTFS.babel]), 'build')
+        ).toThrow();
+      });
+    });
+  });
+
   describe('executors', () => {
     let ctf;
 
     beforeAll(() => {
-      ctf = new Map();
-      ctf.set('webpack', CORE_CTFS.webpack);
+      ctf = CTF([CORE_CTFS.webpack]);
     });
 
     it('should generate functions for scripts', () => {

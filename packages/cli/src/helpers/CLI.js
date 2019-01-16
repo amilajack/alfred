@@ -13,7 +13,9 @@ export function getProjectRoot() {
   return path.dirname(pkgPath);
 }
 
-export default function expectOneSubcommand(args: Array<string>): string {
+export default function getSingleSubcommandFromArgs(
+  args: Array<string>
+): string {
   switch (args.length) {
     case 0: {
       throw new Error('One subcommand must be passed');

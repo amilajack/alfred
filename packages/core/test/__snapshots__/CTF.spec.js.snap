@@ -21742,6 +21742,72 @@ Object {
 exports[`CTF executors should generate functions for scripts 1`] = `
 Object {
   "build": [Function],
+  "start": [Function],
+}
+`;
+
+exports[`CTF interfaces should allow array of strings input 1`] = `
+Array [
+  Object {
+    "module": Object {
+      "resolveSkill": [Function],
+      "runForAllTargets": true,
+      "subcommand": "build",
+    },
+    "name": "@alfredpkg/interface-build",
+  },
+]
+`;
+
+exports[`CTF interfaces should allow array of strings input 2`] = `
+Array [
+  Object {
+    "module": Object {
+      "resolveSkill": [Function],
+      "runForAllTargets": true,
+      "subcommand": "build",
+    },
+    "name": "@alfredpkg/interface-build",
+  },
+  Object {
+    "module": Object {
+      "resolveSkill": [Function],
+      "runForAllTargets": true,
+      "subcommand": "start",
+    },
+    "name": "@alfredpkg/interface-start",
+  },
+]
+`;
+
+exports[`CTF interfaces should allow object input 1`] = `
+Array [
+  Object {
+    "module": Object {
+      "resolveSkill": [Function],
+      "runForAllTargets": true,
+      "subcommand": "build",
+    },
+    "name": "@alfredpkg/interface-build",
+    "supports": Object {},
+  },
+  Object {
+    "module": Object {
+      "resolveSkill": [Function],
+      "runForAllTargets": true,
+      "subcommand": "start",
+    },
+    "name": "@alfredpkg/interface-start",
+    "supports": Object {},
+  },
+]
+`;
+
+exports[`CTF interfaces subcommand should get corresponding interface 1`] = `
+Object {
+  "resolveSkill": [Function],
+  "runForAllTargets": true,
+  "subcommand": "build",
 }
 `;
 

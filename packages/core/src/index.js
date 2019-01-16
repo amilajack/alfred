@@ -39,6 +39,37 @@ export type InterfaceState = {
   projectType: 'lib' | 'app'
 };
 
+export type InterfaceInputType = Array<string> | { [x: string]: string };
+export type InterfaceType = Array<{ name: string, [x: string]: string }>;
+
+export function normalizeInterfacesOfSkill(
+  interfaces: InterfaceState
+): InterfaceType {
+  if (!interfaces) return [];
+  // `interfaces` is an array
+  if (Array.isArray(interfaces)) {
+    // @HACK Check if the array is alread formatted with this function by
+    //       checking if name property exists
+    if (interfaces[0].name) {
+      return interfaces;
+    }
+    return interfaces.map(e => ({
+      name: e,
+      module: require(e), // eslint-disable-line
+    }));
+  }
+  if (typeof interfaces === 'object') {
+    return Object.entries(interfaces).map(([name, properties]) => ({
+      name,
+      module: require(name), // eslint-disable-line
+      ...properties
+    }));
+  }
+  throw new Error(
+    `".interfaces" property must be an array or an object. Received "${interfaces}"`
+  );
+}
+
 export type configType =
   | string
   | {
@@ -56,7 +87,7 @@ export type configFileType = {
 };
 
 type UsingInterface = {|
-  interface: string,
+  interfaces: InterfaceInputType,
   subcommand: string,
   hooks: {
     call: (
@@ -102,8 +133,6 @@ export function getConfigByConfigName(
   if (!config) throw new Error(`Cannot find config by name "${configName}"`);
   return config;
 }
-
-// export const mergeConfigs = webpackMerge.default;
 
 /**
  * Map the environment name to a short name, which is one of ['dev', 'prod', 'test']
@@ -238,6 +267,8 @@ export default function CTF(
         );
       }
     });
+    // eslint-disable-next-line
+    ctf.interfaces = normalizeInterfacesOfSkill(ctf.interfaces);
   });
 
   return map;
@@ -288,12 +319,10 @@ export async function writeConfigsFromCtf(ctf: CtfMap) {
   );
 }
 
-export function getInterfacesForCtfNodes(ctf: CtfMap): CtfMap {
+export function addSubCommandsToCtfNodes(ctf: CtfMap): CtfMap {
   ctf.forEach(ctfNode => {
-    if (ctfNode.interface) {
-      const { subcommand } = require(ctfNode.interface); // eslint-disable-line
-      ctfNode.subcommand = subcommand; // eslint-disable-line
-    }
+    const subcommands = ctfNode.interfaces.map(e => require(e.name).subcommand); // eslint-disable-line
+    ctfNode.subcommands = subcommands; // eslint-disable-line
   });
   return ctf;
 }
@@ -319,9 +348,9 @@ export function getInterfaceForSubcommand(ctf: CtfMap, subcommand: string) {
   const interfaceForSubcommand = Array.from(ctf.values())
     .filter(
       ctfNode =>
-        ctfNode.hooks && ctfNode.configFiles.length && ctfNode.interface
+        ctfNode.hooks && ctfNode.interfaces && ctfNode.interfaces.length
     )
-    .map(ctfNode => require(ctfNode.interface)) // eslint-disable-line
+    .reduce((arr, ctfNode) => arr.concat(ctfNode.interfaces.map(e => require(e.name))), []) // eslint-disable-line
     .find(ctfInterface => ctfInterface.subcommand === subcommand);
 
   if (!interfaceForSubcommand) {
@@ -340,24 +369,28 @@ export function getExecuteWrittenConfigsMethods(
   return Array.from(ctf.values())
     .filter(
       ctfNode =>
-        ctfNode.hooks && ctfNode.configFiles.length && ctfNode.interface
+        ctfNode.hooks && ctfNode.interfaces && ctfNode.interfaces.length
     )
+    .reduce((prev, curr) => prev.concat(curr), [])
     .map(ctfNode => {
       const configFiles = ctfNode.configFiles.map(configFile => ({
         ...configFile,
         path: path.join(configsBasePath, configFile.path)
       }));
-      const { subcommand } = require(ctfNode.interface); // eslint-disable-line
-      return {
-        fn: alfredConfig =>
-          // @TODO: Pass configFiles, ctf, alfredConfig, and state as an object to .call()
-          ctfNode.hooks.call(configFiles, ctf, alfredConfig, state),
-        // @HACK: If interfaces were defined, we could import the @alfredpkg/interface-*
-        //        and use the `subcommand` property. This should be done after we have
-        //        some interfaces to work with
-        subcommand
-      };
+      return ctfNode.interfaces.map(e => {
+        const { subcommand } = require(e.name); // eslint-disable-line
+        return {
+          fn: alfredConfig =>
+            // @TODO: Pass configFiles, ctf, alfredConfig, and state as an object to .call()
+            ctfNode.hooks.call(configFiles, ctf, alfredConfig, state),
+          // @HACK: If interfaces were defined, we could import the @alfredpkg/interface-*
+          //        and use the `subcommand` property. This should be done after we have
+          //        some interfaces to work with
+          subcommand
+        };
+      });
     })
+    .reduce((p, c) => p.concat(c), [])
     .reduce(
       (p, c) => ({
         ...p,

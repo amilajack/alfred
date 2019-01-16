@@ -9,6 +9,7 @@
 //   // Project type
 //   projectType: 'lib'
 // },
+const { normalizeInterfacesOfSkill } = require('@alfredpkg/core');
 
 module.exports = {
   subcommand: 'build',
@@ -19,33 +20,41 @@ module.exports = {
    * Given an array of CTF nodes, return the CTF which should be used based
    * on the current environment and current target
    */
-  resolveSkill(skills = [], state) {
-    const skill = skills
-      .filter(sk => sk.interface === '@alfredpkg/interface-build')
+  resolveSkill(skills = [], interfaceState) {
+    const resolvedSkill = skills
+      .map(skill => ({
+        ...skill,
+        interfaces: normalizeInterfacesOfSkill(skill.interfaces)
+      }))
+      .filter(skill =>
+        skill.interfaces.find(e => e.module.subcommand === 'build')
+      )
       .find(sk => {
-        if (!sk.interfaceConfig) {
+        const { supports } = sk.interfaces.find(
+          e => e.module.subcommand === 'build'
+        );
+        if (!supports) {
           throw new Error(
             `Skill "${
               sk.name
-            }" does not have an interface config, which is required by alfred-interface-build`
+            }" requires the "support" property, which is required by "@alfredpkg/interface-build"`
           );
         }
-        const { supports } = sk.interfaceConfig;
         return (
-          supports.env.includes(state.env) &&
-          supports.targets.includes(state.target) &&
-          supports.projectTypes.includes(state.projectType)
+          supports.env.includes(interfaceState.env) &&
+          supports.targets.includes(interfaceState.target) &&
+          supports.projectTypes.includes(interfaceState.projectType)
         );
       });
 
-    if (!skill) {
+    if (!resolvedSkill) {
       throw new Error(
-        `No installed skill could be found that works for the given state: ${JSON.stringify(
-          state
+        `No installed skill for the "build" subcommand could be found that works for the given development environment and target: ${JSON.stringify(
+          interfaceState
         )}`
       );
     }
 
-    return skill;
+    return resolvedSkill;
   }
 };
