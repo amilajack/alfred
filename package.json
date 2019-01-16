@@ -7,6 +7,7 @@
   "workspaces": [
     "examples/*",
     "packages/*",
+    "tests/fixtures/*",
     "website"
   ],
   "repository": "https://github.com/amilajack/alfred.git",

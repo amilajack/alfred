@@ -9,7 +9,7 @@ import validateName from 'validate-npm-package-name';
 import program from 'commander';
 import git from 'git-config';
 import chalk from 'chalk';
-import expectOneSubcommand from './helpers/CLI';
+import getSingleSubcommandFromArgs from './helpers/CLI';
 
 const TEMPLATES_DIR = path.resolve(__dirname, 'templates');
 // @TODO @HARDCODE Remove hardcoding of versions
@@ -278,6 +278,6 @@ async function createNewProject(cwd: string, name: string) {
 
 (async () => {
   const { args } = program.parse(process.argv);
-  const name = expectOneSubcommand(args);
+  const name = getSingleSubcommandFromArgs(args);
   createNewProject(process.cwd(), name);
 })();

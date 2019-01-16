@@ -10,7 +10,7 @@ const {
 module.exports = {
   name: 'jest',
   description: 'Test your JS files',
-  interface: '@alfredpkg/interface-test',
+  interfaces: ['@alfredpkg/interface-test'],
   devDependencies: { jest: '5.0.0' },
   configFiles: [
     {

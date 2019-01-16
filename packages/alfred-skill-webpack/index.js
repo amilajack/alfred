@@ -3,25 +3,34 @@ const path = require('path');
 const { getConfigByConfigName } = require('@alfredpkg/core');
 const { default: mergeConfigs } = require('@alfredpkg/merge-configs');
 const { getProjectRoot } = require('@alfredpkg/cli');
+const getPort = require('get-port');
 
 // @HACK project root should be passed as argument to configFiles, which could be a function
 const projectRoot = getProjectRoot();
 
+const interfaceConfig = {
+  supports: {
+    // Flag name and argument types
+    env: ['production', 'development', 'test'],
+    // All the supported targets a `build` skill should build
+    targets: ['browser', 'node'],
+    // Project type
+    projectTypes: ['app']
+  }
+};
+
 module.exports = {
   name: 'webpack',
   description: 'Build, optimize, and bundle assets in your app',
-  interface: '@alfredpkg/interface-build',
-  interfaceConfig: {
-    supports: {
-      // Flag name and argument types
-      env: ['production', 'development', 'test'],
-      // All the supported targets a `build` skill should build
-      targets: ['browser', 'node'],
-      // Project type
-      projectTypes: ['app']
-    }
+  interfaces: [
+    ['@alfredpkg/interface-build', interfaceConfig],
+    ['@alfredpkg/interface-start', interfaceConfig]
+  ],
+  devDependencies: {
+    webpack: '4.28.3',
+    'webpack-cli': '3.2.1',
+    'webpack-dev-server': '3.1.14'
   },
-  devDependencies: { webpack: '4.28.3', 'webpack-cli': '3.2.1' },
   configFiles: [
     {
       name: 'webpack.base',
@@ -55,7 +64,28 @@ module.exports = {
       path: 'webpack.dev.js',
       config: {
         // @TODO: wepack-dev-server, HMR, sass, css, etc
-        mode: 'development'
+        mode: 'development',
+        devServer: {
+          // port: 8080,
+          // publicPath,
+          compress: true,
+          noInfo: true,
+          stats: 'errors-only',
+          inline: true,
+          lazy: false,
+          hot: true,
+          headers: { 'Access-Control-Allow-Origin': '*' },
+          // contentBase: path.join(__dirname, 'dist'),
+          watchOptions: {
+            aggregateTimeout: 300,
+            ignored: /node_modules/,
+            poll: 100
+          },
+          historyApiFallback: {
+            verbose: true,
+            disableDotRule: false
+          }
+        }
       }
     },
     {
@@ -82,7 +112,7 @@ module.exports = {
     }
   ],
   hooks: {
-    call(configFiles, ctf, alfredConfig, state) {
+    async call(configFiles, ctf, alfredConfig, state, subcommand) {
       const { config: baseConfig } = getConfigByConfigName(
         'webpack.base',
         configFiles
@@ -108,6 +138,16 @@ module.exports = {
         state.env === 'production' ? prodConfig : devConfig,
         state.target === 'browser' ? browserConfig : nodeConfig
       );
+      if (subcommand === 'start') {
+        const Webpack = require('webpack');
+        const WebpackDevServer = require('webpack-dev-server');
+        const compiler = Webpack(mergedConfig);
+        const { devServer } = mergedConfig;
+        const server = new WebpackDevServer(compiler, devServer);
+        server.listen(await getPort(), '127.0.0.1', () => {
+          console.log('Starting server on http://localhost:8080');
+        });
+      }
       return webpack(mergedConfig, (err, stats) => {
         if (err) {
           console.error(err.stack || err);

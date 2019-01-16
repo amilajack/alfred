@@ -374,14 +374,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -390,9 +390,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -479,14 +489,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -495,9 +505,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -569,14 +589,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -585,9 +605,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -657,14 +687,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -673,9 +703,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -1136,14 +1176,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -1152,9 +1192,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -1246,14 +1296,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -1262,9 +1312,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -1341,14 +1401,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -1357,9 +1417,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -1434,14 +1504,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -1450,9 +1520,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -1730,14 +1810,14 @@ Array [
   Object {},
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -1746,9 +1826,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -1830,14 +1920,14 @@ Array [
   Object {},
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -1846,9 +1936,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -1915,14 +2015,14 @@ Array [
   Object {},
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -1931,9 +2031,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -1998,14 +2108,14 @@ Array [
   Object {},
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -2014,9 +2124,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -2210,14 +2330,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -2226,9 +2346,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -2299,14 +2429,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -2315,9 +2445,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -2376,14 +2516,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -2392,9 +2532,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -2448,14 +2598,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -2464,9 +2614,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -2743,14 +2903,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -2759,9 +2919,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -2834,14 +3004,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -2850,9 +3020,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -2910,14 +3090,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -2926,9 +3106,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -2985,14 +3175,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -3001,9 +3191,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -3363,14 +3563,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -3379,9 +3579,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -3457,14 +3667,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -3473,9 +3683,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -3536,14 +3756,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -3552,9 +3772,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -3614,14 +3844,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -3630,9 +3860,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -3848,14 +4088,14 @@ Array [
   Object {},
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -3864,9 +4104,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -3930,14 +4180,14 @@ Array [
   Object {},
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -3946,9 +4196,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -4000,14 +4260,14 @@ Array [
   Object {},
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -4016,9 +4276,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -4066,14 +4336,14 @@ Array [
   Object {},
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -4082,9 +4352,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -4247,14 +4527,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -4263,9 +4543,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -4326,14 +4616,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -4342,9 +4632,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -4393,14 +4693,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -4409,9 +4709,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -4456,14 +4766,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -4472,9 +4782,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -4551,6 +4871,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -4580,6 +4920,7 @@ Object {
   "babel-loader": "5.0.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -4635,6 +4976,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -4679,6 +5040,7 @@ Object {
   "eslint": "5.10.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -4735,6 +5097,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -4799,6 +5181,7 @@ Object {
   "jest": "5.0.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -4866,6 +5249,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -4933,6 +5336,7 @@ Object {
   "lodash-webpack-plugin": "0.11.5",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -5005,6 +5409,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -5077,6 +5501,7 @@ Object {
   "react-hot-loader": "^4.3.12",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -5153,6 +5578,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -5228,6 +5673,7 @@ Object {
   "react-hot-loader": "^4.3.12",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -5301,6 +5747,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -5344,14 +5810,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -5360,9 +5826,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -5401,6 +5877,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -5478,6 +5955,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -5521,14 +6018,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -5537,9 +6034,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -5581,6 +6088,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -5638,6 +6146,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -5681,14 +6209,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -5697,9 +6225,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -5730,6 +6268,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -5798,6 +6337,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -5841,14 +6400,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -5857,9 +6416,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -5893,6 +6462,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -5959,6 +6529,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -6009,6 +6599,7 @@ Object {
   "lodash-webpack-plugin": "0.11.5",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -6065,6 +6656,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -6119,6 +6730,7 @@ Object {
   "prettier": "1.15.3",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -6176,6 +6788,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -6244,6 +6876,7 @@ Object {
   "prettier": "1.15.3",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -6312,6 +6945,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -6383,6 +7036,7 @@ Object {
   "prettier": "1.15.3",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -6456,6 +7110,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -6532,6 +7206,7 @@ Object {
   "react-hot-loader": "^4.3.12",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -6609,6 +7284,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -6688,6 +7383,7 @@ Object {
   "react-hot-loader": "^4.3.12",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -6762,6 +7458,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -6806,14 +7522,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -6822,9 +7538,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -6866,6 +7592,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -6944,6 +7671,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -6988,14 +7735,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -7004,9 +7751,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -7051,6 +7808,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -7109,6 +7867,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -7153,14 +7931,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -7169,9 +7947,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -7205,6 +7993,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -7274,6 +8063,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -7318,14 +8127,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -7334,9 +8143,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -7373,6 +8192,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -7440,6 +8260,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -7497,6 +8337,7 @@ Object {
   "prettier": "1.15.3",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -7569,6 +8410,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -7631,6 +8492,7 @@ Object {
   "react-hot-loader": "^4.3.12",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -7707,6 +8569,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -7772,6 +8654,7 @@ Object {
   "react-hot-loader": "^4.3.12",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -7845,6 +8728,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -7880,14 +8783,14 @@ Array [
   Object {},
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -7896,9 +8799,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -7935,6 +8848,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -8012,6 +8926,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -8047,14 +8981,14 @@ Array [
   Object {},
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -8063,9 +8997,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -8105,6 +9049,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -8162,6 +9107,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -8197,14 +9162,14 @@ Array [
   Object {},
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -8213,9 +9178,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -8244,6 +9219,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -8312,6 +9288,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -8347,14 +9343,14 @@ Array [
   Object {},
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -8363,9 +9359,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -8397,6 +9403,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -8468,6 +9475,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -8520,6 +9547,7 @@ Object {
   "react-hot-loader": "^4.3.12",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -8595,6 +9623,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -8653,6 +9701,7 @@ Object {
   "react-hot-loader": "^4.3.12",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -8725,6 +9774,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -8756,14 +9825,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -8772,9 +9841,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -8805,6 +9884,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -8881,6 +9961,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -8912,14 +10012,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -8928,9 +10028,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -8967,6 +10077,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -9023,6 +10134,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -9054,14 +10185,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -9070,9 +10201,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -9095,6 +10236,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -9162,6 +10304,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -9193,14 +10355,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -9209,9 +10371,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -9240,6 +10412,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -9295,6 +10468,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -9340,6 +10533,7 @@ Object {
   "jest": "5.0.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -9406,6 +10600,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -9454,6 +10668,7 @@ Object {
   "lodash-webpack-plugin": "0.11.5",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -9525,6 +10740,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -9577,6 +10812,7 @@ Object {
   "react-hot-loader": "^4.3.12",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -9652,6 +10888,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -9707,6 +10963,7 @@ Object {
   "react-hot-loader": "^4.3.12",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -9779,6 +11036,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -9806,14 +11083,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -9822,9 +11099,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -9859,6 +11146,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -9935,6 +11223,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -9962,14 +11270,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -9978,9 +11286,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -10018,6 +11336,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -10074,6 +11393,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -10101,14 +11440,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -10117,9 +11456,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -10147,6 +11496,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -10214,6 +11564,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -10241,14 +11611,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -10257,9 +11627,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -10290,6 +11670,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -10355,6 +11736,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -10390,6 +11791,7 @@ Object {
   "lodash-webpack-plugin": "0.11.5",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -10445,6 +11847,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -10476,6 +11898,7 @@ Object {
   "prettier": "1.15.3",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -10532,6 +11955,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -10579,6 +12022,7 @@ Object {
   "prettier": "1.15.3",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -10646,6 +12090,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -10696,6 +12160,7 @@ Object {
   "prettier": "1.15.3",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -10768,6 +12233,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -10822,6 +12307,7 @@ Object {
   "react-hot-loader": "^4.3.12",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -10898,6 +12384,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -10955,6 +12461,7 @@ Object {
   "react-hot-loader": "^4.3.12",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -11028,6 +12535,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -11056,14 +12583,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -11072,9 +12599,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -11110,6 +12647,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -11187,6 +12725,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -11215,14 +12773,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -11231,9 +12789,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -11272,6 +12840,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -11329,6 +12898,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -11357,14 +12946,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -11373,9 +12962,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -11404,6 +13003,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -11472,6 +13072,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -11500,14 +13120,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -11516,9 +13136,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -11550,6 +13180,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -11616,6 +13247,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -11653,6 +13304,7 @@ Object {
   "prettier": "1.15.3",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -11724,6 +13376,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -11762,6 +13434,7 @@ Object {
   "react-hot-loader": "^4.3.12",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -11837,6 +13510,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -11881,6 +13574,7 @@ Object {
   "react-hot-loader": "^4.3.12",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -11953,6 +13647,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -11972,14 +13686,14 @@ Array [
   Object {},
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -11988,9 +13702,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -12019,6 +13743,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -12095,6 +13820,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -12114,14 +13859,14 @@ Array [
   Object {},
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -12130,9 +13875,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -12167,6 +13922,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -12223,6 +13979,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -12242,14 +14018,14 @@ Array [
   Object {},
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -12258,9 +14034,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -12282,6 +14068,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -12349,6 +14136,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -12368,14 +14175,14 @@ Array [
   Object {},
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -12384,9 +14191,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -12414,6 +14231,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -12484,6 +14302,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -12520,6 +14358,7 @@ Object {
   "react-hot-loader": "^4.3.12",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -12594,6 +14433,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -12636,6 +14495,7 @@ Object {
   "react-hot-loader": "^4.3.12",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -12707,6 +14567,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -12725,14 +14605,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -12741,9 +14621,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -12771,6 +14661,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -12846,6 +14737,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -12864,14 +14775,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -12880,9 +14791,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -12916,6 +14837,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -12971,6 +14893,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -12989,14 +14931,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -13005,9 +14947,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -13028,6 +14980,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -13094,6 +15047,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -13112,14 +15085,14 @@ Array [
   },
   Object {
     "external": [Function],
-    "output": Object {
-      "format": "es",
-    },
     "plugins": Array [
       [Function],
     ],
   },
   Object {
+    "output": Object {
+      "format": "es",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
@@ -13128,9 +15101,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -13157,6 +15140,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -13346,11 +15330,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -13359,9 +15343,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -13406,11 +15400,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -13419,9 +15413,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -13468,11 +15472,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -13481,9 +15485,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -13525,11 +15539,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -13538,9 +15552,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -13818,11 +15842,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -13831,9 +15855,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -13886,11 +15920,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -13899,9 +15933,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -13953,11 +15997,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -13966,9 +16010,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -14018,11 +16072,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -14031,9 +16085,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -14197,11 +16261,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -14210,9 +16274,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -14261,11 +16335,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -14274,9 +16348,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -14324,11 +16408,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -14337,9 +16421,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -14385,11 +16479,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -14398,9 +16492,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -14501,11 +16605,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -14514,9 +16618,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -14554,11 +16668,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -14567,9 +16681,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -14609,11 +16733,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -14622,9 +16746,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -14659,11 +16793,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -14672,9 +16806,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -14803,11 +16947,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -14816,9 +16960,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -14851,11 +17005,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -14864,9 +17018,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -14901,11 +17065,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -14914,9 +17078,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -14947,11 +17121,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -14960,9 +17134,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -15141,11 +17325,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -15154,9 +17338,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -15192,11 +17386,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -15205,9 +17399,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -15245,11 +17449,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -15258,9 +17462,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -15294,11 +17508,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -15307,9 +17521,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -15419,11 +17643,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -15432,9 +17656,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -15467,11 +17701,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -15480,9 +17714,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -15517,11 +17761,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -15530,9 +17774,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -15563,11 +17817,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -15576,9 +17830,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -15648,11 +17912,11 @@ exports[`CTF combination react,rollup 2`] = `
 Array [
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -15661,9 +17925,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -15693,11 +17967,11 @@ exports[`CTF combination react,rollup,lodash 2`] = `
 Array [
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -15706,9 +17980,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -15740,11 +18024,11 @@ exports[`CTF combination rollup 2`] = `
 Array [
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -15753,9 +18037,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -15783,11 +18077,11 @@ exports[`CTF combination rollup,lodash 2`] = `
 Array [
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -15796,9 +18090,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -15850,6 +18154,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -15875,6 +18199,7 @@ exports[`CTF combination webpack 4`] = `
 Object {
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -15910,6 +18235,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -15948,6 +18293,7 @@ Object {
   "eslint": "5.10.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -15984,6 +18330,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -16034,6 +18400,7 @@ Object {
   "jest": "5.0.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -16074,6 +18441,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -16129,6 +18516,7 @@ Object {
   "lodash-webpack-plugin": "0.11.5",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -16166,6 +18554,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -16218,6 +18626,7 @@ Object {
   "react": "0.16.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -16259,6 +18668,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -16316,6 +18745,7 @@ Object {
   "react": "0.16.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -16354,6 +18784,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -16393,11 +18843,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -16406,9 +18856,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -16430,6 +18890,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -16472,6 +18933,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -16511,11 +18992,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -16524,9 +19005,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -16553,6 +19044,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -16590,6 +19082,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -16629,11 +19141,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -16642,9 +19154,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -16664,6 +19186,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -16705,6 +19228,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -16744,11 +19287,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -16757,9 +19300,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -16784,6 +19337,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -16823,6 +19377,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -16866,6 +19440,7 @@ Object {
   "lodash-webpack-plugin": "0.11.5",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -16902,6 +19477,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -16950,6 +19545,7 @@ Object {
   "prettier": "1.15.3",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -16987,6 +19583,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -17044,6 +19660,7 @@ Object {
   "prettier": "1.15.3",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -17085,6 +19702,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -17144,6 +19781,7 @@ Object {
   "prettier": "1.15.3",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -17182,6 +19820,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -17241,6 +19899,7 @@ Object {
   "react": "0.16.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -17283,6 +19942,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -17344,6 +20023,7 @@ Object {
   "react": "0.16.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -17383,6 +20063,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -17423,11 +20123,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -17436,9 +20136,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -17466,6 +20176,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -17509,6 +20220,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -17549,11 +20280,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -17562,9 +20293,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -17594,6 +20335,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -17632,6 +20374,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -17672,11 +20434,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -17685,9 +20447,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -17713,6 +20485,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -17755,6 +20528,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -17795,11 +20588,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -17808,9 +20601,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -17838,6 +20641,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -17878,6 +20682,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -17928,6 +20752,7 @@ Object {
   "prettier": "1.15.3",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -17965,6 +20790,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -18015,6 +20860,7 @@ Object {
   "react": "0.16.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -18056,6 +20902,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -18108,6 +20974,7 @@ Object {
   "react": "0.16.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -18146,6 +21013,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -18180,11 +21067,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -18193,9 +21080,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -18220,6 +21117,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -18262,6 +21160,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -18296,11 +21214,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -18309,9 +21227,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -18338,6 +21266,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -18375,6 +21304,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -18409,11 +21358,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -18422,9 +21371,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -18447,6 +21406,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -18488,6 +21448,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -18522,11 +21502,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -18535,9 +21515,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -18562,6 +21552,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -18598,6 +21589,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -18638,6 +21649,7 @@ Object {
   "react": "0.16.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -18678,6 +21690,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -18723,6 +21755,7 @@ Object {
   "react": "0.16.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -18760,6 +21793,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -18790,11 +21843,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -18803,9 +21856,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -18824,6 +21887,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -18865,6 +21929,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -18895,11 +21979,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -18908,9 +21992,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -18934,6 +22028,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -18970,6 +22065,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -19000,11 +22115,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -19013,9 +22128,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -19032,6 +22157,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -19072,6 +22198,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -19102,11 +22248,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -19115,9 +22261,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -19139,6 +22295,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -19174,6 +22331,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -19207,6 +22384,7 @@ Object {
   "jest": "5.0.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -19246,6 +22424,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -19284,6 +22482,7 @@ Object {
   "lodash-webpack-plugin": "0.11.5",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -19320,6 +22519,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -19354,6 +22573,7 @@ Object {
   "react": "0.16.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -19394,6 +22614,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -19433,6 +22673,7 @@ Object {
   "react": "0.16.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -19470,6 +22711,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -19494,11 +22755,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -19507,9 +22768,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -19528,6 +22799,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -19569,6 +22841,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -19593,11 +22885,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -19606,9 +22898,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -19632,6 +22934,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -19668,6 +22971,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -19692,11 +23015,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -19705,9 +23028,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -19725,6 +23058,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -19765,6 +23099,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -19789,11 +23143,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -19802,9 +23156,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -19827,6 +23191,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -19865,6 +23230,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -19895,6 +23280,7 @@ Object {
   "lodash-webpack-plugin": "0.11.5",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -19930,6 +23316,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -19957,6 +23363,7 @@ Object {
   "prettier": "1.15.3",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -19993,6 +23400,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -20028,6 +23455,7 @@ Object {
   "prettier": "1.15.3",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -20068,6 +23496,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -20108,6 +23556,7 @@ Object {
   "prettier": "1.15.3",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -20145,6 +23594,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -20181,6 +23650,7 @@ Object {
   "react": "0.16.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -20222,6 +23692,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -20263,6 +23753,7 @@ Object {
   "react": "0.16.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -20301,6 +23792,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -20326,11 +23837,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -20339,9 +23850,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -20361,6 +23882,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -20403,6 +23925,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -20428,11 +23970,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -20441,9 +23983,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -20468,6 +24020,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -20505,6 +24058,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -20530,11 +24103,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -20543,9 +24116,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -20564,6 +24147,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -20605,6 +24189,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -20630,11 +24234,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -20643,9 +24247,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -20669,6 +24283,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -20708,6 +24323,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -20740,6 +24375,7 @@ Object {
   "prettier": "1.15.3",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -20776,6 +24412,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -20804,6 +24460,7 @@ Object {
   "react": "0.16.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -20844,6 +24501,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -20877,6 +24554,7 @@ Object {
   "react": "0.16.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -20914,6 +24592,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -20933,11 +24631,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -20946,9 +24644,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -20966,6 +24674,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -21007,6 +24716,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -21026,11 +24755,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -21039,9 +24768,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -21064,6 +24803,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -21100,6 +24840,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -21119,11 +24879,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -21132,9 +24892,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -21151,6 +24921,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -21191,6 +24962,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -21210,11 +25001,11 @@ Array [
   Object {},
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -21223,9 +25014,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -21247,6 +25048,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -21282,6 +25084,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -21308,6 +25130,7 @@ Object {
   "react": "0.16.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -21347,6 +25170,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -21378,6 +25221,7 @@ Object {
   "react": "0.16.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -21414,6 +25258,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -21432,11 +25296,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -21445,9 +25309,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -21464,6 +25338,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -21504,6 +25379,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -21522,11 +25417,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -21535,9 +25430,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -21559,6 +25464,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -21594,6 +25500,26 @@ Array [
     },
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -21612,11 +25538,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -21625,9 +25551,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -21643,6 +25579,7 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
@@ -21682,6 +25619,26 @@ Array [
     ],
   },
   Object {
+    "devServer": Object {
+      "compress": true,
+      "headers": Object {
+        "Access-Control-Allow-Origin": "*",
+      },
+      "historyApiFallback": Object {
+        "disableDotRule": false,
+        "verbose": true,
+      },
+      "hot": true,
+      "inline": true,
+      "lazy": false,
+      "noInfo": true,
+      "stats": "errors-only",
+      "watchOptions": Object {
+        "aggregateTimeout": 300,
+        "ignored": /node_modules/,
+        "poll": 100,
+      },
+    },
     "mode": "development",
   },
   Object {
@@ -21700,11 +25657,11 @@ Array [
   },
   Object {
     "external": [Function],
+  },
+  Object {
     "output": Object {
       "format": "es",
     },
-  },
-  Object {
     "plugins": Array [
       Object {
         "name": "replace",
@@ -21713,9 +25670,19 @@ Array [
     ],
   },
   Object {
+    "output": Object {
+      "format": "cjs",
+    },
     "plugins": Array [
       Object {
         "name": "replace",
+        "transform": [Function],
+      },
+      Object {
+        "load": [Function],
+        "name": "commonjs",
+        "options": [Function],
+        "resolveId": [Function],
         "transform": [Function],
       },
     ],
@@ -21736,12 +25703,56 @@ Object {
   "rollup-plugin-replace": "2.1.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;
 
 exports[`CTF executors should generate functions for scripts 1`] = `
 Object {
   "build": [Function],
+  "start": [Function],
+}
+`;
+
+exports[`CTF interfaces should allow array of strings input 1`] = `
+Array [
+  Object {
+    "module": Object {
+      "resolveSkill": [Function],
+      "runForAllTargets": true,
+      "subcommand": "build",
+    },
+    "name": "@alfredpkg/interface-build",
+  },
+]
+`;
+
+exports[`CTF interfaces should allow array of strings input 2`] = `
+Array [
+  Object {
+    "module": Object {
+      "resolveSkill": [Function],
+      "runForAllTargets": true,
+      "subcommand": "build",
+    },
+    "name": "@alfredpkg/interface-build",
+  },
+  Object {
+    "module": Object {
+      "resolveSkill": [Function],
+      "runForAllTargets": true,
+      "subcommand": "start",
+    },
+    "name": "@alfredpkg/interface-start",
+  },
+]
+`;
+
+exports[`CTF interfaces subcommand should get corresponding interface 1`] = `
+Object {
+  "resolveSkill": [Function],
+  "runForAllTargets": true,
+  "subcommand": "build",
 }
 `;
 
@@ -21750,5 +25761,6 @@ Object {
   "foobar": "0.0.0",
   "webpack": "4.28.3",
   "webpack-cli": "3.2.1",
+  "webpack-dev-server": "3.1.14",
 }
 `;

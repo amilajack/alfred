@@ -118,28 +118,36 @@ export function addMissingStdSkillsToCtf(ctf: CtfMap, state): CtfMap {
     Object.entries({
       lint: CORE_CTFS.eslint,
       format: CORE_CTFS.prettier,
-      // eslint-disable-next-line
       build: require('@alfredpkg/interface-build').resolveSkill(
+        Object.values(CORE_CTFS),
+        state
+      ),
+      start: require('@alfredpkg/interface-start').resolveSkill(
         Object.values(CORE_CTFS),
         state
       ),
       test: CORE_CTFS.jest
     })
   );
-  const stdSubommands = new Set(stdCtf.keys());
+  const stdSubCommands: Set<string> = new Set(stdCtf.keys());
   // Create a set of subcommands that the given CTF has
-  const ctfSubcommands = Array.from(ctf.values()).reduce((prev, ctfNode) => {
-    if (ctfNode.interface) {
-      // eslint-disable-next-line
-      const { subcommand } = require(ctfNode.interface);
-      prev.add(subcommand);
-    }
-    return prev;
-  }, new Set());
+  const ctfSubcommands: Set<string> = Array.from(ctf.values()).reduce(
+    (prev, ctfNode) => {
+      if (ctfNode.interfaces && ctfNode.interfaces.length) {
+        ctfNode.interfaces.forEach(_interface => {
+          // eslint-disable-next-line
+        const { subcommand } = require(_interface.name);
+          prev.add(subcommand);
+        });
+      }
+      return prev;
+    },
+    new Set()
+  );
 
-  stdSubommands.forEach(command => {
-    if (!ctfSubcommands.has(command)) {
-      const ctfSkillToAdd = stdCtf.get(command);
+  stdSubCommands.forEach(stdSubCommand => {
+    if (!ctfSubcommands.has(stdSubCommand)) {
+      const ctfSkillToAdd = stdCtf.get(stdSubCommand);
       ctf.set(ctfSkillToAdd.name, ctfSkillToAdd);
     }
   });
@@ -147,7 +155,6 @@ export function addMissingStdSkillsToCtf(ctf: CtfMap, state): CtfMap {
   // Add all the CORE_CTF's without subcommands
   ctf.set('babel', CORE_CTFS.babel);
   // @TODO
-  // ctf.set('react', CORE_CTFS.react);
   // ctf.set('lodash', CORE_CTFS.lodash);
 
   return ctf;
