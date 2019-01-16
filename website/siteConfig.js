@@ -25,6 +25,10 @@ const siteConfig = {
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
     { doc: 'getting-started', label: 'Docs' },
+    {
+      href: 'http://github.com/alfred-js/alfred',
+      label: 'GitHub'
+    },
     { blog: true, label: 'Blog' }
   ],
 
