@@ -35,10 +35,6 @@ import generateCtfFromConfig, {
   module.paths.push(`${alfredConfig.root}/node_modules`);
 
   switch (skill) {
-    case 'start': {
-      // @TODO Start the dev server
-      break;
-    }
     case 'clean': {
       const targetsPath = path.join(alfredConfig.root, 'targets');
       if (fs.existsSync(targetsPath)) {

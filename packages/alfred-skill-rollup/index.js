@@ -124,12 +124,23 @@ module.exports = {
       switch (subcommand) {
         case 'start': {
           const watchConf = state.env === 'production' ? prod : dev;
+          // @TODO: Mention which port and host the server is running (see webpack skill)
+          console.log(
+            `Starting ${
+              state.env !== 'production' ? 'unoptimized' : 'optimized'
+            } build...`
+          );
           return rollup.watch({
             ...watchConf.input,
             ...watchConf
           });
         }
         case 'build': {
+          console.log(
+            `Building ${
+              state.env !== 'production' ? 'unoptimized' : 'optimized'
+            } build...`
+          );
           const bundle = await rollup.rollup(
             state.env === 'production' ? prod : dev
           );

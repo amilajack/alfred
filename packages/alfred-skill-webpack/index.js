@@ -164,10 +164,19 @@ module.exports = {
           const server = new WebpackDevServer(compiler, devServer);
           const port = await getPort({ port: 8080 });
           return server.listen(port, '127.0.0.1', () => {
-            console.log(`Starting server on http://localhost:${port}`);
+            console.log(
+              `Starting ${
+                state.env !== 'production' ? 'unoptimized' : 'optimized'
+              } build on http://localhost:${port}...`
+            );
           });
         }
         case 'build': {
+          console.log(
+            `Building ${
+              state.env !== 'production' ? 'unoptimized' : 'optimized'
+            } build...`
+          );
           return webpack(mergedConfig, (err, stats) => {
             if (err) {
               console.error(err.stack || err);

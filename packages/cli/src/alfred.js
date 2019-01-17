@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // @flow
-const program = require('commander');
-const updateNotifier = require('update-notifier');
-const pkg = require('../package.json');
+import program from 'commander';
+import updateNotifier from 'update-notifier';
+import pkg from '../package.json';
 
 // @TODO send the information to a crash reporting service (like sentry.io)
 process.on('unhandledRejection', err => {
