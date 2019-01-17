@@ -2,8 +2,10 @@
   "name": "{{project.name.npm.full}}",
   "version": "0.0.0",
   "description": "{{project.description}}",
-  "main": "./targets/lib.node.js",
-  "module": "./targets/lib.node.js",
+{{#if project.isLib}}
+  "main": "{{project.module}}",
+  "module": "{{project.module}}",
+{{/if}}
 {{#if project.author}}
   "author": "{{project.author}}{{#if project.email}} <{{project.email}}>{{/if}}",
 {{/if}}

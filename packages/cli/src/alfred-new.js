@@ -101,10 +101,6 @@ async function createNewProject(cwd: string, name: string) {
     throw new Error(`Sorry, ${errors.join(' and ')}.`);
   }
 
-  // check for a scoped name
-  const scoped = name.match(/@([^/]+)\/(.*)/);
-  const [, scope, local] = scoped || [undefined, null, name];
-
   renderLines([
     `I'm your assistant Alfred. I'll walk you through creating your new Alfred project "${style.project(
       name
@@ -167,14 +163,13 @@ async function createNewProject(cwd: string, name: string) {
     }
   ]);
 
-  const entry = `./src/${answers.projectType}.${answers.target}.js`;
-  const target = `./targets/prod/${answers.projectType}.${answers.target}.js`;
+  const filename = `${answers.projectType}.${answers.target}.js`;
+  const entry = `./src/${filename}`;
+  const target = `./targets/prod/${filename}`;
 
   answers.name = {
     npm: {
-      full: name,
-      scope,
-      local
+      full: name
     }
   };
   answers.npmClient = escapeQuotes(answers.npmClient);
@@ -183,12 +178,15 @@ async function createNewProject(cwd: string, name: string) {
   answers.git = encodeURI(answers.git);
   answers.author = escapeQuotes(answers.author);
   answers.main = target;
+  answers.target = target;
+  answers.module = target;
 
   const alfredCoreFilePath = path.join(__dirname, '../../core');
   const alfredCliFilePath = path.join(__dirname, '../../cli');
   const isApp = answers.projectType === 'app';
   const isBrowser = answers.target === 'browser';
   answers.isApp = isApp;
+  answers.isLib = !isApp;
   answers.isBrowser = isBrowser;
 
   const templateData = {
