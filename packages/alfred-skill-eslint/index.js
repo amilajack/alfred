@@ -14,6 +14,7 @@ module.exports = {
     {
       name: 'eslint',
       path: '.eslintrc.json',
+      write: true,
       config: {
         extends: ['bliss']
       }

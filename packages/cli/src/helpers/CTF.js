@@ -133,10 +133,13 @@ export function addMissingStdSkillsToCtf(ctf: CtfMap, state): CtfMap {
   // Create a set of subcommands that the given CTF has
   const ctfSubcommands: Set<string> = Array.from(ctf.values()).reduce(
     (prev, ctfNode) => {
+      console.log(ctfNode.interfaces);
       if (ctfNode.interfaces && ctfNode.interfaces.length) {
         ctfNode.interfaces.forEach(_interface => {
+          const interfaceName =
+            typeof _interface === 'string' ? _interface : _interface.name;
           // eslint-disable-next-line
-        const { subcommand } = require(_interface.name);
+          const { subcommand } = require(interfaceName);
           prev.add(subcommand);
         });
       }

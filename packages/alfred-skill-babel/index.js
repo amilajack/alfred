@@ -17,6 +17,7 @@ module.exports = {
     {
       name: 'babel',
       path: '.babelrc.js',
+      write: true,
       config: {
         presets: ['@babel/preset-env']
       }

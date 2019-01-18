@@ -1,12 +1,6 @@
 const replace = require('rollup-plugin-replace');
 const commonjs = require('rollup-plugin-commonjs');
-const {
-  getConfigPathByConfigName,
-  getPkgBinPath,
-  execCommand,
-  getConfigByConfigName,
-  mapEnvToShortName
-} = require('@alfredpkg/core');
+const { getConfigByConfigName, mapEnvToShortName } = require('@alfredpkg/core');
 const { default: mergeConfigs } = require('@alfredpkg/merge-configs');
 
 const interfaceConfig = {
@@ -72,26 +66,26 @@ module.exports = {
   ],
   hooks: {
     async call(configFiles, ctf, alfredConfig, state, subcommand) {
-      if (alfredConfig.showConfigs) {
-        const configPath = getConfigPathByConfigName(
-          'rollup.base',
-          configFiles
-        );
-        const binPath = await getPkgBinPath('rollup', 'rollup');
-        const filename = [state.projectType, state.target, 'js'].join('.');
-        const watchFlag = subcommand === 'start' ? '--watch' : '';
-        const cmd =
-          state.env === 'production'
-            ? `./src/${filename} ${watchFlag} --format esm --file ./targets/prod/${filename}`
-            : `./src/${filename} ${watchFlag} --format cjs --file ./targets/dev/${filename}`;
-        return execCommand(
-          [
-            binPath,
-            cmd,
-            alfredConfig.showConfigs ? `--config ${configPath} .` : ''
-          ].join(' ')
-        );
-      }
+      // if (alfredConfig.showConfigs) {
+      //   const configPath = getConfigPathByConfigName(
+      //     'rollup.base',
+      //     configFiles
+      //   );
+      //   const binPath = await getPkgBinPath('rollup', 'rollup');
+      //   const filename = [state.projectType, state.target, 'js'].join('.');
+      //   const watchFlag = subcommand === 'start' ? '--watch' : '';
+      //   const cmd =
+      //     state.env === 'production'
+      //       ? `./src/${filename} ${watchFlag} --format esm --file ./targets/prod/${filename}`
+      //       : `./src/${filename} ${watchFlag} --format cjs --file ./targets/dev/${filename}`;
+      //   return execCommand(
+      //     [
+      //       binPath,
+      //       cmd,
+      //       alfredConfig.showConfigs ? `--config ${configPath} .` : ''
+      //     ].join(' ')
+      //   );
+      // }
 
       const [baseConfig, prodConfig, devConfig] = [
         'rollup.base',

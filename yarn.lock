@@ -11,6 +11,11 @@
     lodash "^4.17.4"
     recast "^0.12.1"
 
+"@alfredpkg/skill-mocha@file:packages/alfred-skill-mocha":
+  version "0.0.0"
+  dependencies:
+    mocha "^5.2.0"
+
 "@amilajack/powerset@^0.0.0":
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/@amilajack/powerset/-/powerset-0.0.0.tgz#3322c7642ddad8d5ebccb43b05520c29e83699d5"

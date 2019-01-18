@@ -35,6 +35,7 @@ module.exports = {
     {
       name: 'webpack.base',
       path: 'webpack.base.js',
+      write: true,
       config: {
         mode: 'development',
         output: {

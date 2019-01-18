@@ -27,6 +27,7 @@ export const CORE_CTFS = {
 
 // @TODO send the information to a crash reporting service (like sentry.io)
 process.on('unhandledRejection', err => {
+  console.log(err);
   throw err;
 });
 
@@ -99,7 +100,11 @@ export type configFileType = {
   // The relative path of the file the config should be written to
   path: string,
   // The value of the config
-  config: configType
+  config: configType,
+  // The type of the config file. Defaults to 'json'
+  fileType: 'module' | 'string' | 'json',
+  // Allow the config to be written to user's `./configs` directory
+  write: boolean
 };
 
 type UsingInterface = {|
@@ -325,16 +330,23 @@ export async function writeConfigsFromCtf(ctf: CtfMap) {
   const configs = Array.from(ctf.values())
     .map(ctfNode => ctfNode.configFiles || [])
     .reduce((p, c) => [...p, ...c], []);
-  await fs.promises.mkdir(configsBasePath);
+
+  if (!fs.existsSync(configsBasePath)) {
+    fs.mkdirSync(configsBasePath);
+  }
+
   await Promise.all(
-    configs.map(config => {
-      const filePath = path.join(configsBasePath, config.path);
-      const convertedConfig =
-        typeof config.config === 'string'
-          ? config.config
-          : JSON.stringify(config.config);
-      return fs.promises.writeFile(filePath, convertedConfig);
-    })
+    configs
+      .filter(config => config.write === true)
+      .map(config => {
+        const filePath = path.join(configsBasePath, config.path);
+        const convertedConfig =
+          typeof config.config === 'string'
+            ? config.config
+            : JSON.stringify(config.config);
+
+        return fs.promises.writeFile(filePath, convertedConfig);
+      })
   );
 }
 

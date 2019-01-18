@@ -13,6 +13,7 @@ module.exports = {
     {
       name: 'prettier',
       path: '.prettierrc',
+      write: true,
       config: {}
     }
   ],

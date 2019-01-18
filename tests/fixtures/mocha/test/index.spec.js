@@ -1,7 +1,8 @@
 import app from '../src/lib.browser';
+import assert from 'assert';
 
 describe('app', () => {
   it('should be truthy', () => {
-    expect(app).toBeTruthy();
+    assert.equal(app(), undefined);
   });
 });
