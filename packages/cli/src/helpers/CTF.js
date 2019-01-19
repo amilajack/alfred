@@ -63,7 +63,7 @@ export function diffCtfDeps(oldCtf: CtfMap, newCtf: CtfMap): Array<string> {
   Object.entries(getDevDependencies(newCtf)).forEach(([key, val]) => {
     if (t.has(key)) {
       if (t.get(key) !== val) {
-        throw new Error('Cannot resolve diff deps ');
+        throw new Error('Cannot resolve diff deps');
       }
     } else {
       s.set(key, val);
@@ -208,7 +208,7 @@ export async function loadConfigs(
 export default async function generateCtfFromConfig(
   alfredConfig: AlfredConfig,
   interfaceState: InterfaceState
-) {
+): Promise<CtfMap> {
   // Check if any valid entrypoints exist
   const states = generateInterfaceStatesFromProject();
   if (!states.length) {
@@ -241,14 +241,24 @@ export default async function generateCtfFromConfig(
   return ctf;
 }
 
-export function diffCtfDepsOfAllInterfaceStates(
+export async function diffCtfDepsOfAllInterfaceStates(
   prevAlfredConfig: AlfredConfig,
   currAlfredConfig: AlfredConfig
 ): Set<string> {
-  const stateWithDuplicateDeps = INTERFACE_STATES.map(state => {
-    const oldCtf = generateCtfFromConfig(prevAlfredConfig, state);
-    const newCtf = generateCtfFromConfig(currAlfredConfig, state);
-    return diffCtfDeps(oldCtf, newCtf);
-  }).reduce((prev, curr) => prev.concat(curr), []);
-  return Array.from(new Set(stateWithDuplicateDeps));
+  const stateWithDuplicateDeps = await Promise.all(
+    INTERFACE_STATES.map(state =>
+      Promise.all([
+        generateCtfFromConfig(prevAlfredConfig, state),
+        generateCtfFromConfig(currAlfredConfig, state)
+      ])
+    )
+  );
+
+  return Array.from(
+    new Set(
+      stateWithDuplicateDeps
+        .map(([a, b]) => diffCtfDeps(a, b))
+        .reduce((prev, curr) => prev.concat(curr), [])
+    )
+  );
 }

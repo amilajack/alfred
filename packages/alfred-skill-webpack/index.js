@@ -4,6 +4,7 @@ const { getConfigByConfigName } = require('@alfredpkg/core');
 const { default: mergeConfigs } = require('@alfredpkg/merge-configs');
 const { getProjectRoot } = require('@alfredpkg/cli');
 const getPort = require('get-port');
+const { openInBrowser } = require('@alfredpkg/helpers');
 
 // @HACK project root should be passed as argument to configFiles, which could be a function
 const projectRoot = getProjectRoot();
@@ -164,12 +165,14 @@ module.exports = {
           const { devServer } = mergedConfig;
           const server = new WebpackDevServer(compiler, devServer);
           const port = await getPort({ port: 8080 });
-          return server.listen(port, '127.0.0.1', () => {
+          return server.listen(port, '127.0.0.1', async () => {
+            const url = `http://localhost:${port}`;
             console.log(
               `Starting ${
                 state.env !== 'production' ? 'unoptimized' : 'optimized'
-              } build on http://localhost:${port}...`
+              } build on ${url}...`
             );
+            await openInBrowser(url);
           });
         }
         case 'build': {

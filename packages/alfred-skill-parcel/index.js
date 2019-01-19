@@ -1,4 +1,5 @@
 const path = require('path');
+const { openInBrowser } = require('@alfredpkg/helpers');
 
 const interfaceConfig = {
   supports: {
@@ -44,15 +45,18 @@ module.exports = {
 
       switch (subcommand) {
         case 'start': {
-          console.log(
-            `Starting ${
-              interfaceState.env !== 'production' ? 'unoptimized' : 'optimized'
-            } build...`
-          );
-          return new Bundler(entryFiles, {
+          const server = await new Bundler(entryFiles, {
             ...baseOptions,
             watch: true
           }).serve();
+          const url = `http://localhost:${server.address().port}`;
+          console.log(
+            `Starting ${
+              interfaceState.env !== 'production' ? 'unoptimized' : 'optimized'
+            } build on ${url}...`
+          );
+          await openInBrowser(url);
+          return server;
         }
         case 'build': {
           console.log(

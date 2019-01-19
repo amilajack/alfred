@@ -16,11 +16,6 @@
   dependencies:
     mocha "^5.2.0"
 
-"@alfredpkg/skill-parcel@file:packages/alfred-skill-parcel":
-  version "0.0.0"
-  dependencies:
-    parcel "^1.11.0"
-
 "@amilajack/powerset@^0.0.0":
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/@amilajack/powerset/-/powerset-0.0.0.tgz#3322c7642ddad8d5ebccb43b05520c29e83699d5"
@@ -11504,7 +11499,7 @@ opn@5.2.0:
   dependencies:
     is-wsl "^1.1.0"
 
-opn@^5.1.0:
+opn@^5.1.0, opn@^5.4.0:
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/opn/-/opn-5.4.0.tgz#cb545e7aab78562beb11aa3bfabc7042e1761035"
   integrity sha512-YF9MNdVy/0qvJvDtunAOzFw9iasOQHpVthTCvGzxt61Il64AYSGdK+rYwld7NAfk9qJ7dt+hymBNSc9LNYS+Sw==

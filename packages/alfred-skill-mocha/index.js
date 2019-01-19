@@ -17,7 +17,7 @@ module.exports = {
       const binPath = await getPkgBinPath('mocha', 'mocha');
       const mochaBabelRegisterPath = path.join(
         alfredConfig.root,
-        '.configs',
+        alfredConfig.showConfigs ? '.configs' : 'node_modules',
         'mocha.js'
       );
       const { config: babelConfig } = getConfigByConfigName(

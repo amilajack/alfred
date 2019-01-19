@@ -12,12 +12,15 @@
     "start": "../../../packages/cli/lib/alfred.js run start",
     "test": "../../../packages/cli/lib/alfred.js run test"
   },
+  "alfred": {
+    "skills": [
+      "@alfredpkg/skill-parcel"
+    ]
+  },
   "devDependencies": {
     "@alfredpkg/cli": "^0.0.0",
     "@alfredpkg/core": "^0.0.0",
-    "@alfredpkg/skill-parcel": "file:../../../packages/alfred-skill-parcel"
-  },
-  "alfred": {
-    "skills": ["@alfredpkg/skill-parcel"]
+    "@alfredpkg/skill-parcel": "0.0.0",
+    "@babel/core": "^7.2.2"
   }
 }

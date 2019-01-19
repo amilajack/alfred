@@ -51,7 +51,7 @@ import {
   await fs.promises.writeFile(pkgPath, formattedPkg);
 
   // Find if any new deps need to be installed and install them
-  const newSkills = diffCtfDepsOfAllInterfaceStates(
+  const newSkills = await diffCtfDepsOfAllInterfaceStates(
     alfredConfig,
     newAlfredConfig
   );

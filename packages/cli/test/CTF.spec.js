@@ -108,12 +108,12 @@ describe('alfred cli helpers', () => {
     expect(ctfSkillNames).not.toContain('webpack');
   });
 
-  it.skip('should diff ctfs for all interface states', () => {
+  it.skip('should diff ctfs for all interface states', async () => {
     const currentAlfredConfig = {
       ...defaultAlfredConfig,
       skills: [...defaultAlfredConfig.skills, '@alfredpkg/skill-parcel']
     };
-    const result = diffCtfDepsOfAllInterfaceStates(
+    const result = await diffCtfDepsOfAllInterfaceStates(
       defaultAlfredConfig,
       currentAlfredConfig
     );

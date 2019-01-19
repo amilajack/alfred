@@ -1,0 +1,14 @@
+{
+  "name": "@alfredpkg/helpers",
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps inline"
+  },
+  "dependencies": {
+    "opn": "^5.4.0"
+  }
+}
