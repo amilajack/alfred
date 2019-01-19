@@ -16,7 +16,7 @@
     "docusaurus": "^1.6.2",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-react": "^7.12.3"
+    "eslint-plugin-react": "^7.12.4"
   },
   "eslintConfig": {
     "extends": [
