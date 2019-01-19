@@ -57,9 +57,9 @@ import generateCtfFromConfig, {
   let commandWasExceuted = false;
 
   return Promise.all(
-    generateInterfaceStatesFromProject().map(state =>
-      generateCtfFromConfig(alfredConfig, state).then(ctf => {
-        const commands = getExecuteWrittenConfigsMethods(ctf, state);
+    generateInterfaceStatesFromProject().map(interfaceState =>
+      generateCtfFromConfig(alfredConfig, interfaceState).then(ctf => {
+        const commands = getExecuteWrittenConfigsMethods(ctf, interfaceState);
         const skillInterface = getInterfaceForSubcommand(ctf, skill);
 
         if (!skillInterface.runForAllTargets) {

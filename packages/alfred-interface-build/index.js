@@ -10,6 +10,7 @@
 //   projectType: 'lib'
 // },
 const { normalizeInterfacesOfSkill } = require('@alfredpkg/core');
+const debug = require('debug')('@alfredpkg/interface-build');
 
 module.exports = {
   subcommand: 'build',
@@ -48,11 +49,12 @@ module.exports = {
       });
 
     if (!resolvedSkill) {
-      throw new Error(
+      debug(
         `No installed skill for the "build" subcommand could be found that works for the given development environment and target: ${JSON.stringify(
           interfaceState
-        )}`
+        )}. Defaulting to core Alfred skills`
       );
+      return false;
     }
 
     return resolvedSkill;

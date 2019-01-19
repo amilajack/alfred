@@ -6,7 +6,9 @@ import CTF, {
   writeConfigsFromCtf,
   deleteConfigs,
   getDevDependencies,
-  CORE_CTFS
+  CORE_CTFS,
+  INTERFACE_STATES,
+  normalizeInterfacesOfSkill
 } from '@alfredpkg/core';
 import type { CtfMap, InterfaceState } from '@alfredpkg/core';
 import ValidateConfig from './Validation';
@@ -113,33 +115,35 @@ export function installDeps(
  * Add skills to a given list of skills to ensure that the list has a complete set
  * of standard ctfs
  */
-export function addMissingStdSkillsToCtf(ctf: CtfMap, state): CtfMap {
+export function addMissingStdSkillsToCtf(ctf: CtfMap, interfaceState): CtfMap {
   const stdCtf = new Map(
     Object.entries({
       lint: CORE_CTFS.eslint,
       format: CORE_CTFS.prettier,
       build: require('@alfredpkg/interface-build').resolveSkill(
         Object.values(CORE_CTFS),
-        state
+        interfaceState
       ),
       start: require('@alfredpkg/interface-start').resolveSkill(
         Object.values(CORE_CTFS),
-        state
+        interfaceState
       ),
       test: CORE_CTFS.jest
     })
   );
+
+  ctf.forEach(ctfNode => {
+    /* eslint no-param-reassign: off */
+    ctfNode.interfaces = normalizeInterfacesOfSkill(ctfNode.interfaces);
+  });
+
   const stdSubCommands: Set<string> = new Set(stdCtf.keys());
   // Create a set of subcommands that the given CTF has
   const ctfSubcommands: Set<string> = Array.from(ctf.values()).reduce(
     (prev, ctfNode) => {
-      console.log(ctfNode.interfaces);
       if (ctfNode.interfaces && ctfNode.interfaces.length) {
         ctfNode.interfaces.forEach(_interface => {
-          const interfaceName =
-            typeof _interface === 'string' ? _interface : _interface.name;
-          // eslint-disable-next-line
-          const { subcommand } = require(interfaceName);
+          const { subcommand } = _interface.module;
           prev.add(subcommand);
         });
       }
@@ -150,8 +154,17 @@ export function addMissingStdSkillsToCtf(ctf: CtfMap, state): CtfMap {
 
   stdSubCommands.forEach(stdSubCommand => {
     if (!ctfSubcommands.has(stdSubCommand)) {
-      const ctfSkillToAdd = stdCtf.get(stdSubCommand);
-      ctf.set(ctfSkillToAdd.name, ctfSkillToAdd);
+      const stdCtfSkillToAdd = stdCtf.get(stdSubCommand);
+      if (
+        stdCtfSkillToAdd &&
+        stdCtfSkillToAdd.interfaces &&
+        stdCtfSkillToAdd.interfaces.length
+      ) {
+        stdCtfSkillToAdd.interfaces = normalizeInterfacesOfSkill(
+          stdCtfSkillToAdd.interfaces
+        );
+      }
+      ctf.set(stdCtfSkillToAdd.name, stdCtfSkillToAdd);
     }
   });
 
@@ -166,12 +179,13 @@ export function addMissingStdSkillsToCtf(ctf: CtfMap, state): CtfMap {
 export type AlfredConfig = {
   npmClient: 'npm' | 'yarn',
   skills: Array<string>,
-  root: string
+  root: string,
+  showConfigs: boolean
 };
 
 export async function loadConfigs(
   pkgPath: string = path.join(projectRoot, 'package.json')
-): { pkg: Object, pkgPath: string, alfredConfig: AlfredConfig } {
+): Promise<{ pkg: Object, pkgPath: string, alfredConfig: AlfredConfig }> {
   if (!fs.existsSync(pkgPath)) {
     throw new Error('Current working directory does not have "package.json"');
   }
@@ -192,8 +206,8 @@ export async function loadConfigs(
 }
 
 export default async function generateCtfFromConfig(
-  alfredConfig,
-  interfaceState
+  alfredConfig: AlfredConfig,
+  interfaceState: InterfaceState
 ) {
   // Check if any valid entrypoints exist
   const states = generateInterfaceStatesFromProject();
@@ -214,9 +228,9 @@ export default async function generateCtfFromConfig(
     /* eslint-enable */
     tmpCtf.set(c.name, c);
   });
-  addMissingStdSkillsToCtf(tmpCtf, interfaceState);
 
   const ctf = CTF(Array.from(tmpCtf.values()), alfredConfig, interfaceState);
+  addMissingStdSkillsToCtf(ctf, interfaceState);
 
   if (alfredConfig.showConfigs) {
     await writeConfigsFromCtf(ctf);
@@ -225,4 +239,16 @@ export default async function generateCtfFromConfig(
   }
 
   return ctf;
+}
+
+export function diffCtfDepsOfAllInterfaceStates(
+  prevAlfredConfig: AlfredConfig,
+  currAlfredConfig: AlfredConfig
+): Set<string> {
+  const stateWithDuplicateDeps = INTERFACE_STATES.map(state => {
+    const oldCtf = generateCtfFromConfig(prevAlfredConfig, state);
+    const newCtf = generateCtfFromConfig(currAlfredConfig, state);
+    return diffCtfDeps(oldCtf, newCtf);
+  }).reduce((prev, curr) => prev.concat(curr), []);
+  return Array.from(new Set(stateWithDuplicateDeps));
 }

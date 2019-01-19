@@ -1,4 +1,11 @@
 const { normalizeInterfacesOfSkill } = require('@alfredpkg/core');
+const debug = require('debug')('@alfredpkg/interface-start');
+
+const name = 'My App';
+
+// fake app
+
+debug('booting %o', name);
 
 module.exports = {
   subcommand: 'start',
@@ -36,11 +43,12 @@ module.exports = {
       });
 
     if (!resolvedSkill) {
-      throw new Error(
+      debug(
         `No installed skill for the "start" subcommand could be found that works for the given development environment and target: ${JSON.stringify(
           interfaceState
-        )}.`
+        )}. Defaulting to core Alfred skills`
       );
+      return false;
     }
 
     return resolvedSkill;

@@ -11,11 +11,28 @@ import CTF, {
   getInterfaceForSubcommand
 } from '../src';
 
-const defaultInterfaceState = {
-  projectType: 'app',
-  target: 'browser',
-  env: 'production'
-};
+const interfaceStates = [
+  {
+    projectType: 'app',
+    target: 'browser',
+    env: 'production'
+  },
+  {
+    projectType: 'lib',
+    target: 'browser',
+    env: 'production'
+  },
+  {
+    projectType: 'app',
+    target: 'node',
+    env: 'production'
+  },
+  {
+    projectType: 'lib',
+    target: 'node',
+    env: 'production'
+  }
+];
 
 const defaultAlfredConfig = {
   root: '/',
@@ -68,71 +85,91 @@ describe('CTF', () => {
     });
 
     describe('subcommand', () => {
-      it('should get corresponding interface', () => {
-        expect(
-          getInterfaceForSubcommand(
-            CTF(Object.values(CORE_CTFS), defaultAlfredConfig),
-            'build'
-          )
-        ).toMatchSnapshot();
+      interfaceStates.forEach(defaultInterfaceState => {
+        it('should get corresponding interface', () => {
+          expect(
+            getInterfaceForSubcommand(
+              CTF(
+                Object.values(CORE_CTFS),
+                defaultAlfredConfig,
+                defaultInterfaceState
+              ),
+              'build'
+            )
+          ).toMatchSnapshot();
+        });
       });
 
       it('should error if subcommand does not exist', () => {
-        expect(() =>
-          getInterfaceForSubcommand(CTF([CORE_CTFS.babel]), 'build')
-        ).toThrow();
+        interfaceStates.forEach(defaultInterfaceState => {
+          expect(() =>
+            getInterfaceForSubcommand(
+              CTF(
+                [CORE_CTFS.babel],
+                defaultAlfredConfig,
+                defaultInterfaceState
+              ),
+              'build'
+            )
+          ).toThrow();
+        });
       });
     });
   });
 
   describe('executors', () => {
-    let ctf;
-
-    beforeAll(() => {
-      ctf = CTF([CORE_CTFS.webpack]);
-    });
-
     it('should generate functions for scripts', () => {
-      expect(
-        getExecuteWrittenConfigsMethods(ctf, {
-          target: 'app',
-          env: 'production',
-          projectType: 'lib'
-        })
-      ).toMatchSnapshot();
+      interfaceStates.forEach(defaultInterfaceState => {
+        const ctf = CTF(
+          [CORE_CTFS.webpack],
+          defaultAlfredConfig,
+          defaultInterfaceState
+        );
+        expect(
+          getExecuteWrittenConfigsMethods(ctf, defaultInterfaceState)
+        ).toMatchSnapshot();
+      });
     });
   });
 
   // Generate tests for CTF combinations
   const ctfNamesCombinations = powerset(Object.keys(CORE_CTFS)).sort();
   for (const ctfCombination of ctfNamesCombinations) {
-    it(`combination ${ctfCombination.join(',')}`, () => {
-      expect(ctfCombination).toMatchSnapshot();
-      // Get the CTFs for each combination
-      const filteredCtfs = ctfCombination.map(ctfName => CORE_CTFS[ctfName]);
-      const result = CTF(
-        filteredCtfs,
-        defaultAlfredConfig,
-        defaultInterfaceState
-      );
-      expect(
-        removePathsPropertiesFromObject(getConfigs(result))
-      ).toMatchSnapshot();
-      expect(getDependencies(result)).toMatchSnapshot();
-      expect(getDevDependencies(result)).toMatchSnapshot();
+    interfaceStates.forEach(defaultInterfaceState => {
+      it(`combination ${ctfCombination.join(
+        ','
+      )} interface state ${JSON.stringify(defaultInterfaceState)}`, () => {
+        expect(ctfCombination).toMatchSnapshot();
+        // Get the CTFs for each combination
+        const filteredCtfs = ctfCombination.map(ctfName => CORE_CTFS[ctfName]);
+        const result = CTF(
+          filteredCtfs,
+          defaultAlfredConfig,
+          defaultInterfaceState
+        );
+        expect(
+          removePathsPropertiesFromObject(getConfigs(result))
+        ).toMatchSnapshot();
+        expect(getDependencies(result)).toMatchSnapshot();
+        expect(getDevDependencies(result)).toMatchSnapshot();
+      });
     });
   }
 
-  it('should add devDepencencies', () => {
-    const { devDependencies } = CTF(
-      [CORE_CTFS.webpack],
-      defaultAlfredConfig,
+  interfaceStates.forEach(defaultInterfaceState => {
+    it(`should add devDepencencies with interface state ${JSON.stringify(
       defaultInterfaceState
-    )
-      .get('webpack')
-      .addDevDependencies({
-        foobar: '0.0.0'
-      });
-    expect(devDependencies).toMatchSnapshot();
+    )}`, () => {
+      const { devDependencies } = CTF(
+        Object.values(CORE_CTFS),
+        defaultAlfredConfig,
+        defaultInterfaceState
+      )
+        .get('webpack')
+        .addDevDependencies({
+          foobar: '0.0.0'
+        });
+      expect(devDependencies).toMatchSnapshot();
+    });
   });
 });
