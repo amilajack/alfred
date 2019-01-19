@@ -7,6 +7,7 @@ import CTF, {
   deleteConfigs,
   getDevDependencies,
   CORE_CTFS,
+  INTERFACE_STATES,
   normalizeInterfacesOfSkill
 } from '@alfredpkg/core';
 import type { CtfMap, InterfaceState } from '@alfredpkg/core';
@@ -153,8 +154,17 @@ export function addMissingStdSkillsToCtf(ctf: CtfMap, interfaceState): CtfMap {
 
   stdSubCommands.forEach(stdSubCommand => {
     if (!ctfSubcommands.has(stdSubCommand)) {
-      const ctfSkillToAdd = stdCtf.get(stdSubCommand);
-      ctf.set(ctfSkillToAdd.name, ctfSkillToAdd);
+      const stdCtfSkillToAdd = stdCtf.get(stdSubCommand);
+      if (
+        stdCtfSkillToAdd &&
+        stdCtfSkillToAdd.interfaces &&
+        stdCtfSkillToAdd.interfaces.length
+      ) {
+        stdCtfSkillToAdd.interfaces = normalizeInterfacesOfSkill(
+          stdCtfSkillToAdd.interfaces
+        );
+      }
+      ctf.set(stdCtfSkillToAdd.name, stdCtfSkillToAdd);
     }
   });
 
@@ -169,12 +179,13 @@ export function addMissingStdSkillsToCtf(ctf: CtfMap, interfaceState): CtfMap {
 export type AlfredConfig = {
   npmClient: 'npm' | 'yarn',
   skills: Array<string>,
-  root: string
+  root: string,
+  showConfigs: boolean
 };
 
 export async function loadConfigs(
   pkgPath: string = path.join(projectRoot, 'package.json')
-): { pkg: Object, pkgPath: string, alfredConfig: AlfredConfig } {
+): Promise<{ pkg: Object, pkgPath: string, alfredConfig: AlfredConfig }> {
   if (!fs.existsSync(pkgPath)) {
     throw new Error('Current working directory does not have "package.json"');
   }
@@ -195,8 +206,8 @@ export async function loadConfigs(
 }
 
 export default async function generateCtfFromConfig(
-  alfredConfig,
-  interfaceState
+  alfredConfig: AlfredConfig,
+  interfaceState: InterfaceState
 ) {
   // Check if any valid entrypoints exist
   const states = generateInterfaceStatesFromProject();
@@ -217,9 +228,9 @@ export default async function generateCtfFromConfig(
     /* eslint-enable */
     tmpCtf.set(c.name, c);
   });
-  addMissingStdSkillsToCtf(tmpCtf, interfaceState);
 
   const ctf = CTF(Array.from(tmpCtf.values()), alfredConfig, interfaceState);
+  addMissingStdSkillsToCtf(ctf, interfaceState);
 
   if (alfredConfig.showConfigs) {
     await writeConfigsFromCtf(ctf);
@@ -228,4 +239,16 @@ export default async function generateCtfFromConfig(
   }
 
   return ctf;
+}
+
+export function diffCtfDepsOfAllInterfaceStates(
+  prevAlfredConfig: AlfredConfig,
+  currAlfredConfig: AlfredConfig
+): Set<string> {
+  const stateWithDuplicateDeps = INTERFACE_STATES.map(state => {
+    const oldCtf = generateCtfFromConfig(prevAlfredConfig, state);
+    const newCtf = generateCtfFromConfig(currAlfredConfig, state);
+    return diffCtfDeps(oldCtf, newCtf);
+  }).reduce((prev, curr) => prev.concat(curr), []);
+  return Array.from(new Set(stateWithDuplicateDeps));
 }

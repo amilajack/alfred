@@ -14,6 +14,50 @@ import rollup from '@alfredpkg/skill-rollup';
 import lodashCtf from '@alfredpkg/skill-lodash';
 import pkgUp from 'pkg-up';
 
+// All the possible interface states
+export const INTERFACE_STATES = [
+  {
+    projectType: 'app',
+    target: 'browser',
+    env: 'production'
+  },
+  {
+    projectType: 'app',
+    target: 'lib',
+    env: 'production'
+  },
+  {
+    projectType: 'lib',
+    target: 'browser',
+    env: 'production'
+  },
+  {
+    projectType: 'app',
+    target: 'node',
+    env: 'production'
+  },
+  {
+    projectType: 'app',
+    target: 'browser',
+    env: 'development'
+  },
+  {
+    projectType: 'app',
+    target: 'lib',
+    env: 'development'
+  },
+  {
+    projectType: 'lib',
+    target: 'browser',
+    env: 'development'
+  },
+  {
+    projectType: 'app',
+    target: 'node',
+    env: 'development'
+  }
+];
+
 export const CORE_CTFS = {
   babel,
   webpack,
@@ -43,14 +87,14 @@ export type InterfaceState = {
 export type InterfaceInputType = Array<
   string | [string, { [x: string]: string }]
 >;
-export type InterfaceType = Array<{
+export type NormalizedInterfacesType = Array<{
   name: string,
   module: Object
 }>;
 
 export function normalizeInterfacesOfSkill(
   interfaces: InterfaceState
-): InterfaceType {
+): NormalizedInterfacesType {
   if (!interfaces) return [];
   // `interfaces` is an array
   if (Array.isArray(interfaces)) {
@@ -276,7 +320,21 @@ export default function CTF(
       ...ctfNode,
       ...AddCtfHelpers
     };
-    map.set(ctfNode.name, ctfWithHelpers);
+    // eslint-disable-next-line
+    ctfWithHelpers.interfaces = normalizeInterfacesOfSkill(ctfWithHelpers.interfaces);
+    if (ctfWithHelpers.interfaces.length) {
+      ctfWithHelpers.interfaces.forEach(e => {
+        if (e.module.resolveSkill) {
+          if (e.module.resolveSkill(ctfs, interfaceState) !== false) {
+            map.set(ctfNode.name, ctfWithHelpers);
+          }
+        } else {
+          map.set(ctfNode.name, ctfWithHelpers);
+        }
+      });
+    } else {
+      map.set(ctfNode.name, ctfWithHelpers);
+    }
   });
 
   map.forEach(ctf => {
@@ -289,8 +347,6 @@ export default function CTF(
         );
       }
     });
-    // eslint-disable-next-line
-    ctf.interfaces = normalizeInterfacesOfSkill(ctf.interfaces);
   });
 
   return map;
@@ -366,11 +422,13 @@ export function getDependencies(ctf: CtfMap): { [x: string]: string } {
     .map(ctfNode => ctfNode.dependencies || {})
     .reduce((p, c) => ({ ...p, ...c }), {});
 }
+
 export function getDevDependencies(ctf: CtfMap): { [x: string]: string } {
   return Array.from(ctf.values())
     .map(ctfNode => ctfNode.devDependencies || {})
     .reduce((p, c) => ({ ...p, ...c }), {});
 }
+
 export function execCommand(cmd: string) {
   return childProcess.execSync(cmd, { stdio: [0, 1, 2] });
 }

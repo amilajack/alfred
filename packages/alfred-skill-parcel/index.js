@@ -44,12 +44,22 @@ module.exports = {
 
       switch (subcommand) {
         case 'start': {
+          console.log(
+            `Starting ${
+              interfaceState.env !== 'production' ? 'unoptimized' : 'optimized'
+            } build...`
+          );
           return new Bundler(entryFiles, {
             ...baseOptions,
             watch: true
-          }).bundle();
+          }).serve();
         }
         case 'build': {
+          console.log(
+            `Building ${
+              interfaceState.env !== 'production' ? 'unoptimized' : 'optimized'
+            } build...`
+          );
           return new Bundler(entryFiles, {
             ...baseOptions,
             watch: false

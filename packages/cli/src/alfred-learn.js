@@ -1,12 +1,16 @@
 import program from 'commander';
 import fs from 'fs';
 import formatPkg from 'format-package';
-import { loadConfigs, installDeps, diffCtfDeps } from './helpers/CTF';
+import {
+  loadConfigs,
+  installDeps,
+  diffCtfDepsOfAllInterfaceStates
+} from './helpers/CTF';
 
 (async () => {
   const args = program.parse(process.argv);
   const { args: skills } = args;
-  const { pkgPath, ctf: oldCtf, alfredConfig } = await loadConfigs();
+  const { pkgPath, alfredConfig } = await loadConfigs();
 
   // Install skills using NPM's API
   const { skills: configSkills = [], npmClient = 'npm' } = alfredConfig;
@@ -22,7 +26,7 @@ import { loadConfigs, installDeps, diffCtfDeps } from './helpers/CTF';
 
   // Find the name of the packages that were installed and add the package names to
   // the alfred skills array
-  const { ctf: newCtf, pkg: newPkg } = await loadConfigs();
+  const { pkg: newPkg, alfredConfig: newAlfredConfig } = await loadConfigs();
   const deps = Object.entries({
     ...newPkg.devDependencies,
     ...newPkg.dependencies
@@ -47,7 +51,10 @@ import { loadConfigs, installDeps, diffCtfDeps } from './helpers/CTF';
   await fs.promises.writeFile(pkgPath, formattedPkg);
 
   // Find if any new deps need to be installed and install them
-  const newSkills = diffCtfDeps(oldCtf, newCtf);
+  const newSkills = diffCtfDepsOfAllInterfaceStates(
+    alfredConfig,
+    newAlfredConfig
+  );
   if (newSkills.length) {
     await installDeps(newSkills);
   }

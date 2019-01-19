@@ -16,11 +16,65 @@ Array [
 ]
 `;
 
+exports[`alfred cli helpers should add missing std skills to ctf 3`] = `
+Array [
+  "parcel",
+]
+`;
+
+exports[`alfred cli helpers should add missing std skills to ctf 4`] = `
+Array [
+  "parcel",
+  "eslint",
+  "prettier",
+  "jest",
+  "babel",
+]
+`;
+
+exports[`alfred cli helpers should add missing std skills to ctf 5`] = `Array []`;
+
+exports[`alfred cli helpers should add missing std skills to ctf 6`] = `
+Array [
+  "eslint",
+  "prettier",
+  "rollup",
+  "jest",
+  "babel",
+]
+`;
+
 exports[`alfred cli helpers should install new deps after learning new skill 1`] = `
 Array [
   "babel-loader@5.0.0",
   "@babel/cli@7.2.0",
   "@babel/core@7.2.0",
   "@babel/preset-env@7.2.0",
+]
+`;
+
+exports[`alfred cli helpers should not use CTF skills that do not support current interface state 1`] = `
+Array [
+  "eslint",
+  "prettier",
+  "rollup",
+  "jest",
+  "babel",
+]
+`;
+
+exports[`alfred cli helpers should override core ctf skills that support same interface states 1`] = `
+Array [
+  "parcel",
+]
+`;
+
+exports[`alfred cli helpers should override core ctf skills that support same interface states 2`] = `
+Array [
+  "parcel",
+  "eslint",
+  "prettier",
+  "jest",
+  "babel",
 ]
 `;
