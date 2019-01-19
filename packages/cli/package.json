@@ -38,7 +38,7 @@
     "chalk": "^2.4.2",
     "child-process-promise": "^2.2.1",
     "commander": "^2.19.0",
-    "eslint": "^5.12.0",
+    "eslint": "^5.12.1",
     "eslint-config-bliss": "^3.2.0",
     "eslint-plugin-flowtype-errors": "^3.6.0",
     "findit": "^2.0.0",
