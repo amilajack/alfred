@@ -12,6 +12,7 @@
     "@alfredpkg/cli": "0.0.0",
     "@alfredpkg/core": "0.0.0",
     "@alfredpkg/interface-build": "^0.0.0",
+    "@alfredpkg/interface-start": "^0.0.0",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14"

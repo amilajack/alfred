@@ -6,7 +6,8 @@ import CTF, {
   writeConfigsFromCtf,
   deleteConfigs,
   getDevDependencies,
-  CORE_CTFS
+  CORE_CTFS,
+  normalizeInterfacesOfSkill
 } from '@alfredpkg/core';
 import type { CtfMap, InterfaceState } from '@alfredpkg/core';
 import ValidateConfig from './Validation';
@@ -113,33 +114,35 @@ export function installDeps(
  * Add skills to a given list of skills to ensure that the list has a complete set
  * of standard ctfs
  */
-export function addMissingStdSkillsToCtf(ctf: CtfMap, state): CtfMap {
+export function addMissingStdSkillsToCtf(ctf: CtfMap, interfaceState): CtfMap {
   const stdCtf = new Map(
     Object.entries({
       lint: CORE_CTFS.eslint,
       format: CORE_CTFS.prettier,
       build: require('@alfredpkg/interface-build').resolveSkill(
         Object.values(CORE_CTFS),
-        state
+        interfaceState
       ),
       start: require('@alfredpkg/interface-start').resolveSkill(
         Object.values(CORE_CTFS),
-        state
+        interfaceState
       ),
       test: CORE_CTFS.jest
     })
   );
+
+  ctf.forEach(ctfNode => {
+    /* eslint no-param-reassign: off */
+    ctfNode.interfaces = normalizeInterfacesOfSkill(ctfNode.interfaces);
+  });
+
   const stdSubCommands: Set<string> = new Set(stdCtf.keys());
   // Create a set of subcommands that the given CTF has
   const ctfSubcommands: Set<string> = Array.from(ctf.values()).reduce(
     (prev, ctfNode) => {
-      console.log(ctfNode.interfaces);
       if (ctfNode.interfaces && ctfNode.interfaces.length) {
         ctfNode.interfaces.forEach(_interface => {
-          const interfaceName =
-            typeof _interface === 'string' ? _interface : _interface.name;
-          // eslint-disable-next-line
-          const { subcommand } = require(interfaceName);
+          const { subcommand } = _interface.module;
           prev.add(subcommand);
         });
       }
