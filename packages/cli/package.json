@@ -48,7 +48,7 @@
     "handlebars": "^4.0.12",
     "inquirer": "^6.2.1",
     "joi": "^14.3.1",
-    "jscodeshift": "^0.6.2",
+    "jscodeshift": "^0.6.3",
     "lebab": "^3.0.3",
     "lodash": "^4.17.11",
     "lodash.flatten": "^4.4.0",
