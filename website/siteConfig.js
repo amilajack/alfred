@@ -65,12 +65,17 @@ const siteConfig = {
   // Open Graph and Twitter card images.
   ogImage: 'img/docusaurus.png',
   twitterImage: 'img/docusaurus.png',
+  twitter: true,
+  twitterUsername: 'alfredpkg',
 
   // Show documentation's last contributor's name.
   enableUpdateBy: true,
 
   // Show documentation's last update time.
-  enableUpdateTime: true
+  enableUpdateTime: true,
+
+  // Google analytics
+  gaTrackingId: 'UA-132764504-1'
 };
 
 module.exports = siteConfig;
