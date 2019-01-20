@@ -263,7 +263,7 @@ type CtfHelpers = {
   replaceConfig: (x: string, configReplacement: configType) => CtfNode
 };
 
-const AddCtfHelpers: CtfHelpers = {
+export const AddCtfHelpers: CtfHelpers = {
   findConfig(configName: string) {
     const config = this.configFiles.find(
       configFile => configFile.name === configName

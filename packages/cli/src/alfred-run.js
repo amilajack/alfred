@@ -14,9 +14,9 @@ import generateCtfFromConfig, {
 
 (async () => {
   const args = program.parse(process.argv);
-  const { args: skills = [] } = args;
+  const { args: subcommands = [] } = args;
 
-  switch (skills.length) {
+  switch (subcommands.length) {
     case 0: {
       throw new Error('One subcommand must be passed');
     }
@@ -28,13 +28,14 @@ import generateCtfFromConfig, {
     }
   }
 
-  const [skill] = skills;
+  const [subcommand] = subcommands;
   const { alfredConfig } = await loadConfigs();
 
   // $FlowFixMe
   module.paths.push(`${alfredConfig.root}/node_modules`);
 
-  switch (skill) {
+  // Built in, non-overridable skills are added here
+  switch (subcommand) {
     case 'clean': {
       const targetsPath = path.join(alfredConfig.root, 'targets');
       if (fs.existsSync(targetsPath)) {
@@ -60,22 +61,22 @@ import generateCtfFromConfig, {
     generateInterfaceStatesFromProject().map(interfaceState =>
       generateCtfFromConfig(alfredConfig, interfaceState).then(ctf => {
         const commands = getExecuteWrittenConfigsMethods(ctf, interfaceState);
-        const skillInterface = getInterfaceForSubcommand(ctf, skill);
+        const subcommandInterface = getInterfaceForSubcommand(ctf, subcommand);
 
-        if (!skillInterface.runForAllTargets) {
+        if (!subcommandInterface.runForAllTargets) {
           if (commandWasExceuted) {
             return true;
           }
           commandWasExceuted = true;
         }
 
-        if (!Object.keys(commands).includes(skill)) {
+        if (!Object.keys(commands).includes(subcommand)) {
           throw new Error(
-            `Subcommand "${skill}" is not supported by the skills you have installed`
+            `Subcommand "${subcommand}" is not supported by the skills you have installed`
           );
         }
 
-        return commands[skill](alfredConfig);
+        return commands[subcommand](alfredConfig);
       })
     )
   );
