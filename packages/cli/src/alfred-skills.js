@@ -45,8 +45,7 @@ import generateCtfFromConfig, {
       chalk.bold('Subcommand'),
       chalk.bold('Skills'),
       chalk.bold('Description')
-    ],
-    colWidths: [30, 30]
+    ]
   });
 
   Array.from(map.entries()).forEach(([subcommand, skills]) => {

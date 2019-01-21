@@ -42,6 +42,7 @@ const LIB_TEMPLATE = compile('lib.js.hbs');
 const APP_BROWSER_HTML_TEMPLATE = compile('index.html.hbs');
 const README_TEMPLATE = compile('README.md.hbs');
 const EDITORCONFIG_TEMPLATE = compile('.editorconfig.hbs');
+const TEST_TEMPLATE = compile('test.js.hbs');
 
 async function guessAuthor() {
   const author = {
@@ -165,7 +166,7 @@ async function createNewProject(cwd: string, name: string) {
 
   const filename = `${answers.projectType}.${answers.target}.js`;
   const entry = `./src/${filename}`;
-  const target = `./targets/prod/${filename}`;
+  const targetFile = `./targets/prod/${filename}`;
 
   answers.name = {
     npm: {
@@ -177,9 +178,9 @@ async function createNewProject(cwd: string, name: string) {
   answers.description = escapeQuotes(answers.description);
   answers.git = encodeURI(answers.git);
   answers.author = escapeQuotes(answers.author);
-  answers.main = target;
-  answers.target = target;
-  answers.module = target;
+  answers.main = targetFile;
+  answers.targetFile = targetFile;
+  answers.module = targetFile;
 
   const alfredCoreFilePath = path.join(__dirname, '../../core');
   const alfredCliFilePath = path.join(__dirname, '../../cli');
@@ -208,8 +209,10 @@ async function createNewProject(cwd: string, name: string) {
   if (!dirnameEqualsName) {
     await fs.promises.mkdir(name);
   }
-  const src = path.resolve(root, 'src');
-  await fs.promises.mkdir(src);
+  const srcDir = path.join(root, 'src');
+  const testsDir = path.join(root, 'tests');
+  await fs.promises.mkdir(srcDir);
+  await fs.promises.mkdir(testsDir);
 
   await Promise.all(
     [
@@ -232,6 +235,10 @@ async function createNewProject(cwd: string, name: string) {
       {
         file: entry,
         content: (await (isApp ? APP_TEMPLATE : LIB_TEMPLATE))(templateData)
+      },
+      {
+        file: `./tests/${answers.projectType}.${answers.target}.spec.js`,
+        content: (await TEST_TEMPLATE)(templateData)
       }
     ].map(({ file, content }) =>
       fs.promises.writeFile(path.join(root, file), content)
@@ -240,10 +247,7 @@ async function createNewProject(cwd: string, name: string) {
 
   if (isApp && isBrowser) {
     const content = (await APP_BROWSER_HTML_TEMPLATE)(templateData);
-    await await fs.promises.writeFile(
-      path.join(root, './src/index.html'),
-      content
-    );
+    await fs.promises.writeFile(path.join(root, './src/index.html'), content);
   }
 
   const relativeRoot = path.relative(cwd, root);

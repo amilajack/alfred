@@ -241,6 +241,7 @@ Would you like to install it? (Y/n)
 ## Required Files and Folders
 
 * `./src/{projectType}.{target}.js`, e.g.: `./src/lib.node.js`
+* `./tests/{projectType}.{target}.spec.js`, e.g.: `./tests/lib.node.spec.js`
 * `.editorconfig`
 * `.gitignore`
 * `LICENSE`
