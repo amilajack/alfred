@@ -9,7 +9,7 @@ module.exports = {
     babel(config) {
       return config
         .extendConfig('babel', {
-          presets: ['@babel/preset-env', '@babel/preset-react'],
+          presets: ['@babel/preset-react'],
           env: {
             production: {
               plugins: [
@@ -35,10 +35,15 @@ module.exports = {
         });
     },
     webpack(config) {
+      const webpack = require('webpack');
       return config.extendConfig('webpack.base', {
         resolve: {
-          extensions: ['.js', '.jsx', '.json']
-        }
+          extensions: ['.jsx']
+        },
+        devServer: {
+          hot: true
+        },
+        plugins: [new webpack.HotModuleReplacementPlugin()]
       });
     },
     eslint(config) {

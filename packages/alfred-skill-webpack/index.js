@@ -36,7 +36,6 @@ module.exports = {
     {
       name: 'webpack.base',
       path: 'webpack.base.js',
-      write: true,
       config: {
         mode: 'development',
         output: {
@@ -161,6 +160,11 @@ module.exports = {
         case 'start': {
           const Webpack = require('webpack');
           const WebpackDevServer = require('webpack-dev-server');
+          WebpackDevServer.addDevServerEntrypoints(mergedConfig, {
+            contentBase: path.join(projectRoot, 'src'),
+            hot: true,
+            host: 'localhost'
+          });
           const compiler = Webpack(mergedConfig);
           const { devServer } = mergedConfig;
           const server = new WebpackDevServer(compiler, devServer);

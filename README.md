@@ -30,14 +30,20 @@ alfred new my-lib --lib --browser
 alfred new my-app
 cd my-app
 
-# Standard scripts
+# Built-in Subcommands
 alfred start
 alfred build
 alfred clean
 alfred format
 alfred test
+alfred new
+alfred skills
+
+# Planned Built-in Subcommands
+alfred ls
+alfred publish
 alfred search
-alfred doc
+alfred docs
 alfred migrate
 alfred types
 
@@ -237,7 +243,6 @@ Would you like to install it? (Y/n)
 * `./src/{projectType}.{target}.js`, e.g.: `./src/lib.node.js`
 * `.editorconfig`
 * `.gitignore`
-* `.travis.yml`
 * `LICENSE`
 * `package.json`
 * `package-lock.json` or `yarn.lock`

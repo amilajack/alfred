@@ -2,7 +2,8 @@ const path = require('path');
 const {
   getConfigPathByConfigName,
   execCommand,
-  getPkgBinPath
+  getPkgBinPath,
+  getConfigByConfigName
 } = require('@alfredpkg/core');
 
 module.exports = {
@@ -38,7 +39,7 @@ module.exports = {
     }
   },
   ctfs: {
-    webpack(config) {
+    webpack(config, ctf) {
       return config
         .extendConfig('webpack.base', {
           module: {
@@ -49,6 +50,10 @@ module.exports = {
                 use: {
                   loader: 'babel-loader',
                   options: {
+                    ...getConfigByConfigName(
+                      'babel',
+                      ctf.get('babel').configFiles
+                    ).config,
                     cacheDirectory: true
                   }
                 }

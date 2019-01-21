@@ -1,5 +1,7 @@
-import app from '../src/app.browser';
+import app from '../src/app';
 
 describe('app', () => {
-  expect(app).toBeTruthy();
+  it('should be truthy', () => {
+    expect(app).toBeTruthy();
+  });
 });

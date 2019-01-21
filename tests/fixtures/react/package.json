@@ -9,7 +9,7 @@
     "lint": "../../../packages/cli/lib/alfred.js run lint",
     "skills": "../../../packages/cli/lib/alfred.js skills",
     "start": "../../../packages/cli/lib/alfred.js run start",
-    "_test": "../../../packages/cli/lib/alfred.js run test && yarn skills && yarn lint && yarn format && yarn build"
+    "test": "../../../packages/cli/lib/alfred.js run test && yarn skills && yarn lint && yarn format && yarn build"
   },
   "devDependencies": {
     "@alfredpkg/cli": "^0.0.0",
@@ -18,10 +18,13 @@
   },
   "alfred": {
     "showConfigs": true,
-    "skills": ["@alfredpkg/skill-react"]
+    "skills": [
+      "@alfredpkg/skill-react"
+    ]
   },
   "dependencies": {
     "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "react-dom": "^16.7.0",
+    "react-hot-loader": "^4.6.3"
   }
 }

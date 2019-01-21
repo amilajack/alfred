@@ -1,4 +1,3 @@
-import lodash from 'lodash';
 import path from 'path';
 import rimraf from 'rimraf';
 import fs from 'fs';
@@ -12,7 +11,9 @@ import react from '@alfredpkg/skill-react';
 import prettier from '@alfredpkg/skill-prettier';
 import rollup from '@alfredpkg/skill-rollup';
 import lodashCtf from '@alfredpkg/skill-lodash';
+import mergeConfigs from '@alfredpkg/merge-configs';
 import pkgUp from 'pkg-up';
+import lodash from 'lodash';
 
 // All the possible interface states
 export const INTERFACE_STATES = [
@@ -255,7 +256,7 @@ export function getConfigPathByConfigName(
 }
 
 type CtfHelpers = {
-  findConfig: (configName: string) => configType,
+  findConfig: (configName: string) => configFileType,
   addDependencies: ({ [x: string]: string }) => { [x: string]: string },
   addDevDependencies: ({ [x: string]: string }) => { [x: string]: string },
   extendConfig: (x: string) => CtfNode,
@@ -277,14 +278,12 @@ export const AddCtfHelpers: CtfHelpers = {
     configExtension: { [x: string]: string } = {}
   ): CtfNode {
     const foundConfig = this.findConfig(configName);
-    const mergedConfigFile = lodash.merge({}, foundConfig, {
+    const mergedConfigFile = mergeConfigs({}, foundConfig, {
       config: configExtension
     });
     const configFiles = this.configFiles.map(configFile =>
       configFile.name === configName ? mergedConfigFile : configFile
     );
-    // @TODO Consider changing this to use @alfredpkg/merge-configs. This does
-    //       not work well with configs that have arrays
     return lodash.merge({}, this, {
       configFiles
     });
