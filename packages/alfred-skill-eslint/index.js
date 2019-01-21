@@ -1,3 +1,4 @@
+const path = require('path');
 const {
   getConfigPathByConfigName,
   getConfigByConfigName,
@@ -16,6 +17,10 @@ module.exports = {
       path: '.eslintrc.json',
       write: true,
       config: {
+        env: {
+          browser: true,
+          node: true
+        },
         extends: ['bliss']
       }
     }
@@ -25,17 +30,19 @@ module.exports = {
       const configPath = getConfigPathByConfigName('eslint', configFiles);
       const binPath = await getPkgBinPath('eslint', 'eslint');
       if (alfredConfig.showConfigs) {
-        return execCommand([binPath, `--config ${configPath} .`].join(' '));
+        return execCommand(
+          [binPath, `--config ${configPath} src tests`].join(' ')
+        );
       }
       const { config } = getConfigByConfigName('eslint', configFiles);
       const { CLIEngine } = require('eslint');
       const cli = new CLIEngine({ ...config, useEslintrc: false });
-      const report = cli.executeOnFiles([alfredConfig.root]);
+      const report = cli.executeOnFiles([
+        path.join(alfredConfig.root, 'src'),
+        path.join(alfredConfig.root, 'tests')
+      ]);
       const formatter = cli.getFormatter();
       console.log(formatter(report.results));
-      if (report.results.length) {
-        process.exit(1);
-      }
       return true;
     }
   },

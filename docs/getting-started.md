@@ -30,9 +30,9 @@ alfred migrate
 
 ```bash
 # Learning skills
-alfred learn alfred-skill-build-parcel
+alfred learn @alfredpkg/skill-parcel
 # Build using the new subcommand
 alfred build
 # Learning multiple skills
-alfred learn alfred-skill-build-angular alfred-skill-build-redux
+alfred learn @alfredpkg/skill-angular @alfredpkg/skill-redux
 ```

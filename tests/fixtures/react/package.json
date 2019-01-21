@@ -1,5 +1,5 @@
 {
-  "name": "@fixtures/app",
+  "name": "@fixtures/react",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
@@ -9,7 +9,7 @@
     "lint": "../../../packages/cli/lib/alfred.js run lint",
     "skills": "../../../packages/cli/lib/alfred.js skills",
     "start": "../../../packages/cli/lib/alfred.js run start",
-    "test": "../../../packages/cli/lib/alfred.js run test && yarn skills && yarn lint && yarn format && yarn build"
+    "_test": "../../../packages/cli/lib/alfred.js run test && yarn skills && yarn lint && yarn format && yarn build"
   },
   "devDependencies": {
     "@alfredpkg/cli": "^0.0.0",
@@ -17,6 +17,11 @@
     "@alfredpkg/skill-react": "^0.0.0"
   },
   "alfred": {
-    "showConfigs": true
+    "showConfigs": true,
+    "skills": ["@alfredpkg/skill-react"]
+  },
+  "dependencies": {
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
   }
 }

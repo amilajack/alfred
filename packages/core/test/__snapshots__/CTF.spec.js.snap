@@ -119,6 +119,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -154,6 +158,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -189,6 +197,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -224,6 +236,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -260,6 +276,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -311,6 +331,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -362,6 +386,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -413,6 +441,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -472,6 +504,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -533,6 +569,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -594,6 +634,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -655,6 +699,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -720,10 +768,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -795,10 +848,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -870,10 +928,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -945,10 +1008,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -1021,10 +1089,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -1099,10 +1172,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -1177,10 +1255,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -1255,10 +1338,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -1333,10 +1421,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -1409,10 +1502,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -1485,10 +1583,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -1599,10 +1702,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -1714,10 +1822,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -1793,10 +1906,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -1872,10 +1990,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -1989,10 +2112,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -2093,6 +2221,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -2145,6 +2277,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -2197,6 +2333,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -2287,6 +2427,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -2385,6 +2529,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -2447,6 +2595,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -2509,6 +2661,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -2609,6 +2765,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -2707,6 +2867,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -2755,6 +2919,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -2803,6 +2971,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -2851,6 +3023,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -2892,6 +3068,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -2938,6 +3118,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -2984,6 +3168,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -3030,6 +3218,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -3077,6 +3269,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -3133,6 +3329,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -3189,6 +3389,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -3245,6 +3449,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -3309,6 +3517,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -3375,6 +3587,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -3441,6 +3657,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -3507,6 +3727,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -3577,10 +3801,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -3657,10 +3886,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -3737,10 +3971,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -3817,10 +4056,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -3898,10 +4142,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -3981,10 +4230,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -4064,10 +4318,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -4147,10 +4406,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -4230,10 +4494,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -4311,10 +4580,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -4392,10 +4666,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -4511,10 +4790,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -4631,10 +4915,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -4715,10 +5004,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -4799,10 +5093,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -4921,10 +5220,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -5030,6 +5334,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -5087,6 +5395,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -5144,6 +5456,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -5239,6 +5555,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -5342,6 +5662,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -5409,6 +5733,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -5476,6 +5804,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -5581,6 +5913,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -5684,6 +6020,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -5740,6 +6080,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -5796,6 +6140,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -5852,6 +6200,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -5912,10 +6264,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -5982,10 +6339,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -6052,10 +6414,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -6122,10 +6489,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -6193,10 +6565,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -6266,10 +6643,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -6339,10 +6721,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -6412,10 +6799,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -6485,10 +6877,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -6556,10 +6953,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -6627,10 +7029,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -6736,10 +7143,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -6846,10 +7258,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -6920,10 +7337,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -6994,10 +7416,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -7106,10 +7533,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -7205,6 +7637,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -7252,6 +7688,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -7299,6 +7739,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -7384,6 +7828,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -7477,6 +7925,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -7534,6 +7986,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -7591,6 +8047,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -7686,6 +8146,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -7783,10 +8247,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -7842,10 +8311,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -7901,10 +8375,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -7960,10 +8439,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -8020,10 +8504,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -8085,10 +8574,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -8150,10 +8644,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -8215,10 +8714,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -8280,10 +8784,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -8340,10 +8849,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -8400,10 +8914,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -8498,10 +9017,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -8597,10 +9121,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -8663,10 +9192,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -8729,10 +9263,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -8833,10 +9372,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -8924,6 +9468,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -8960,6 +9508,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -8996,6 +9548,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -9070,6 +9626,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -9152,6 +9712,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -9201,6 +9765,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -9250,6 +9818,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -9337,6 +9909,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -9771,6 +10347,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -9832,6 +10409,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -9893,6 +10471,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -9954,6 +10533,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -10016,6 +10596,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -10080,6 +10661,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -10144,6 +10726,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -10208,6 +10791,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -10272,6 +10856,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -10334,6 +10919,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -10396,6 +10982,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -10496,6 +11083,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -10597,6 +11185,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -10662,6 +11251,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -10727,6 +11317,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -10830,6 +11421,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -12076,6 +12668,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -12140,6 +12733,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -12204,6 +12798,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -12268,6 +12863,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -12333,6 +12929,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -12400,6 +12997,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -12467,6 +13065,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -12534,6 +13133,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -12601,6 +13201,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -12666,6 +13267,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -12731,6 +13333,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -12834,6 +13437,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -12938,6 +13542,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -13006,6 +13611,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -13074,6 +13680,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -13180,6 +13787,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -13979,6 +14587,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -14031,6 +14640,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -14083,6 +14693,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -14135,6 +14746,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -14188,6 +14800,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -14246,6 +14859,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -14304,6 +14918,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -14362,6 +14977,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -14420,6 +15036,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -14473,6 +15090,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -14526,6 +15144,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -14617,6 +15236,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -14709,6 +15329,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -14768,6 +15389,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -14827,6 +15449,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -14924,6 +15547,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -15462,6 +16086,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -15511,6 +16136,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -15560,6 +16186,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -15609,6 +16236,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -15659,6 +16287,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -15714,6 +16343,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -15769,6 +16399,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -15824,6 +16455,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -15879,6 +16511,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -15929,6 +16562,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -15979,6 +16613,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -16067,6 +16702,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -16156,6 +16792,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -16212,6 +16849,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -16268,6 +16906,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -16362,6 +17001,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -17277,6 +17917,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -17423,6 +18067,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -17470,6 +18118,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -17506,6 +18158,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -17642,6 +18298,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -17809,6 +18469,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -17877,6 +18541,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -17929,6 +18597,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -18091,6 +18763,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -18272,6 +18948,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -18351,6 +19031,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -18413,6 +19097,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -18479,6 +19167,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -18582,6 +19271,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -18670,6 +19363,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -18773,6 +19467,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -18861,10 +19559,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -18937,10 +19640,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -19014,6 +19722,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -19120,6 +19829,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -19212,6 +19925,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -19318,6 +20032,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -19410,10 +20128,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -19489,10 +20212,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -19568,6 +20296,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -19671,6 +20400,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -19798,6 +20531,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -19901,6 +20635,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -20028,6 +20766,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -20131,6 +20870,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -20258,6 +21001,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -20361,6 +21105,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -20489,6 +21237,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -20595,6 +21344,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -20726,6 +21479,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -20832,6 +21586,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -20963,6 +21721,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -21069,6 +21828,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -21200,6 +21963,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -21306,6 +22070,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -21523,6 +22291,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -21729,6 +22501,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -21935,6 +22711,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -22141,6 +22921,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -22358,6 +23142,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -22578,6 +23366,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -22798,6 +23590,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -23018,6 +23814,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -23236,6 +24036,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -23399,6 +24203,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -23460,6 +24268,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -23509,6 +24321,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -23650,6 +24466,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -23807,6 +24627,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -23865,6 +24689,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -23912,6 +24740,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -24059,6 +24891,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -24231,6 +25067,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -24304,6 +25144,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -24361,6 +25205,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -24528,6 +25376,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -24714,6 +25566,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -24798,6 +25654,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -24865,6 +25725,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -24936,6 +25800,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -25039,6 +25904,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -25132,6 +26001,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -25235,6 +26105,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -25328,10 +26202,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -25409,10 +26288,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -25491,6 +26375,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -25597,6 +26482,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -25694,6 +26583,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -25800,6 +26690,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -25897,10 +26791,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -25981,10 +26880,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -26065,6 +26969,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -26168,6 +27073,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -26300,6 +27209,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -26403,6 +27313,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -26535,6 +27449,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -26638,6 +27553,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -26770,6 +27689,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -26873,6 +27793,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -27006,6 +27930,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -27112,6 +28037,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -27248,6 +28177,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -27354,6 +28284,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -27490,6 +28424,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -27596,6 +28531,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -27732,6 +28671,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -27838,6 +28778,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -28060,6 +29004,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -28271,6 +29219,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -28482,6 +29434,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -28693,6 +29649,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -28915,6 +29875,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -29140,6 +30104,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -29365,6 +30333,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -29590,6 +30562,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -29813,6 +30789,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -29984,6 +30964,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -30053,6 +31037,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -30110,6 +31098,10 @@ Array [
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -30171,6 +31163,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -30274,6 +31267,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -30352,6 +31349,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -30455,6 +31453,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -30533,10 +31535,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -30604,10 +31611,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -30676,6 +31688,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -30782,6 +31795,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -30864,6 +31881,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -30970,6 +31988,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -31052,10 +32074,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -31126,10 +32153,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -31200,6 +32232,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -31303,6 +32336,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -31420,6 +32457,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -31523,6 +32561,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -31640,6 +32682,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -31743,6 +32786,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -31860,6 +32907,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -31963,6 +33011,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -32081,6 +33133,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -32187,6 +33240,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -32308,6 +33365,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -32414,6 +33472,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -32535,6 +33597,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -32641,6 +33704,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -32762,6 +33829,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -32868,6 +33936,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -33075,6 +34147,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -33271,6 +34347,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -33467,6 +34547,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -33663,6 +34747,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -33870,6 +34958,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -34080,6 +35172,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -34290,6 +35386,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -34500,6 +35600,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -34610,6 +35714,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -34713,6 +35818,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -34780,6 +35889,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -34883,6 +35993,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -34950,10 +36064,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -35010,10 +36129,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -35071,6 +36195,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -35177,6 +36302,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -35251,6 +36380,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -35357,6 +36487,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -35431,10 +36565,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -35497,10 +36636,15 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -35563,6 +36707,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -35666,6 +36811,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -35772,6 +36921,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -35875,6 +37025,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -35981,6 +37135,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -36084,6 +37239,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -36190,6 +37349,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -36293,6 +37453,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -36400,6 +37564,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -36506,6 +37671,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -36619,6 +37788,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -36725,6 +37895,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -36838,6 +38012,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -36944,6 +38119,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -37057,6 +38236,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -37163,6 +38343,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -37362,6 +38546,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -37547,6 +38735,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -37732,6 +38924,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -37917,6 +39113,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -38113,6 +39313,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -38315,6 +39519,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -38517,6 +39725,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -38719,6 +39931,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -39614,6 +40830,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -39784,6 +41001,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -39954,6 +41172,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -40016,6 +41235,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -40079,6 +41299,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -40256,6 +41477,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -40433,6 +41655,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -40498,6 +41721,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -40563,6 +41787,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -40772,6 +41997,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -40981,6 +42207,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -41190,6 +42417,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -41400,6 +42628,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -41616,6 +42845,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -41832,6 +43062,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -42048,6 +43279,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -45323,6 +46555,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -45496,6 +46729,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -45669,6 +46903,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -45734,6 +46969,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -45800,6 +47036,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -45980,6 +47217,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -46160,6 +47398,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -46228,6 +47467,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -46296,6 +47536,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -46508,6 +47749,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -46720,6 +47962,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -46932,6 +48175,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -47145,6 +48389,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -47364,6 +48609,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -47583,6 +48829,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -47802,6 +49049,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -49972,6 +51220,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -50128,6 +51377,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -50284,6 +51534,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -50337,6 +51588,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -50391,6 +51643,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -50557,6 +51810,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -50723,6 +51977,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -50782,6 +52037,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -50841,6 +52097,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -51036,6 +52293,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -51231,6 +52489,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -51426,6 +52685,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -51622,6 +52882,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -51827,6 +53088,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -52032,6 +53294,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -52237,6 +53500,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -53883,6 +55147,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -54036,6 +55301,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -54189,6 +55455,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -54239,6 +55506,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -54290,6 +55558,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -54453,6 +55722,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -54616,6 +55886,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -54672,6 +55943,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -54728,6 +56000,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -54920,6 +56193,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -55112,6 +56386,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -55304,6 +56579,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -55497,6 +56773,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -55699,6 +56976,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -55901,6 +57179,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -56103,6 +57382,7 @@ Array [
       },
     },
     "presets": Array [
+      "@babel/preset-env",
       "@babel/preset-react",
     ],
   },
@@ -57705,6 +58985,10 @@ Array [
 exports[`CTF combination eslint interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -57729,6 +59013,10 @@ Array [
 exports[`CTF combination eslint interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -57753,6 +59041,10 @@ Array [
 exports[`CTF combination eslint interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -57777,6 +59069,10 @@ Array [
 exports[`CTF combination eslint interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -57802,6 +59098,10 @@ Array [
 exports[`CTF combination eslint,jest interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -57833,6 +59133,10 @@ Array [
 exports[`CTF combination eslint,jest interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -57864,6 +59168,10 @@ Array [
 exports[`CTF combination eslint,jest interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -57895,6 +59203,10 @@ Array [
 exports[`CTF combination eslint,jest interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -57927,6 +59239,10 @@ Array [
 exports[`CTF combination eslint,jest,lodash interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -57963,6 +59279,10 @@ Array [
 exports[`CTF combination eslint,jest,lodash interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -57999,6 +59319,10 @@ Array [
 exports[`CTF combination eslint,jest,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -58035,6 +59359,10 @@ Array [
 exports[`CTF combination eslint,jest,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -58071,6 +59399,10 @@ Array [
 exports[`CTF combination eslint,jest,react interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -58105,6 +59437,10 @@ Array [
 exports[`CTF combination eslint,jest,react interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -58139,6 +59475,10 @@ Array [
 exports[`CTF combination eslint,jest,react interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -58173,6 +59513,10 @@ Array [
 exports[`CTF combination eslint,jest,react interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -58208,6 +59552,10 @@ Array [
 exports[`CTF combination eslint,jest,react,lodash interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -58247,6 +59595,10 @@ Array [
 exports[`CTF combination eslint,jest,react,lodash interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -58286,6 +59638,10 @@ Array [
 exports[`CTF combination eslint,jest,react,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -58325,6 +59681,10 @@ Array [
 exports[`CTF combination eslint,jest,react,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -58364,6 +59724,10 @@ Array [
 exports[`CTF combination eslint,jest,react,rollup interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -58399,6 +59763,10 @@ Array [
 exports[`CTF combination eslint,jest,react,rollup interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -58434,6 +59802,10 @@ Array [
 exports[`CTF combination eslint,jest,react,rollup interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -58503,6 +59875,10 @@ Array [
 exports[`CTF combination eslint,jest,react,rollup interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -58573,6 +59949,10 @@ Array [
 exports[`CTF combination eslint,jest,react,rollup,lodash interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -58613,6 +59993,10 @@ Array [
 exports[`CTF combination eslint,jest,react,rollup,lodash interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -58653,6 +60037,10 @@ Array [
 exports[`CTF combination eslint,jest,react,rollup,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -58727,6 +60115,10 @@ Array [
 exports[`CTF combination eslint,jest,react,rollup,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -58799,6 +60191,10 @@ Array [
 exports[`CTF combination eslint,jest,rollup interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -58831,6 +60227,10 @@ Array [
 exports[`CTF combination eslint,jest,rollup interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -58863,6 +60263,10 @@ Array [
 exports[`CTF combination eslint,jest,rollup interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -58929,6 +60333,10 @@ Array [
 exports[`CTF combination eslint,jest,rollup interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -58996,6 +60404,10 @@ Array [
 exports[`CTF combination eslint,jest,rollup,lodash interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -59033,6 +60445,10 @@ Array [
 exports[`CTF combination eslint,jest,rollup,lodash interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -59070,6 +60486,10 @@ Array [
 exports[`CTF combination eslint,jest,rollup,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -59141,6 +60561,10 @@ Array [
 exports[`CTF combination eslint,jest,rollup,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -59210,6 +60634,10 @@ Array [
 exports[`CTF combination eslint,lodash interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -59239,6 +60667,10 @@ Array [
 exports[`CTF combination eslint,lodash interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -59268,6 +60700,10 @@ Array [
 exports[`CTF combination eslint,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -59297,6 +60733,10 @@ Array [
 exports[`CTF combination eslint,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -59326,6 +60766,10 @@ Array [
 exports[`CTF combination eslint,prettier interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -59361,6 +60805,10 @@ Array [
 exports[`CTF combination eslint,prettier interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -59396,6 +60844,10 @@ Array [
 exports[`CTF combination eslint,prettier interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -59431,6 +60883,10 @@ Array [
 exports[`CTF combination eslint,prettier interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -59467,6 +60923,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -59506,6 +60966,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -59545,6 +61009,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -59584,6 +61052,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -59624,6 +61096,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,lodash interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -59665,6 +61141,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,lodash interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -59706,6 +61186,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -59747,6 +61231,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -59788,6 +61276,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,react interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -59830,6 +61322,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,react interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -59872,6 +61368,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,react interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -59914,6 +61414,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,react interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -59957,6 +61461,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,react,lodash interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -60001,6 +61509,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,react,lodash interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -60045,6 +61557,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,react,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -60089,6 +61605,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,react,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -60133,6 +61653,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,react,rollup interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -60176,6 +61700,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,react,rollup interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -60219,6 +61747,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,react,rollup interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -60296,6 +61828,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,react,rollup interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -60374,6 +61910,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,react,rollup,lodash interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -60419,6 +61959,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,react,rollup,lodash interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -60464,6 +62008,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,react,rollup,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -60543,6 +62091,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,react,rollup,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -60620,6 +62172,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,rollup interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -60660,6 +62216,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,rollup interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -60700,6 +62260,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,rollup interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -60774,6 +62338,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,rollup interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -60849,6 +62417,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,rollup,lodash interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -60891,6 +62463,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,rollup,lodash interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -60933,6 +62509,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,rollup,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -61009,6 +62589,10 @@ Array [
 exports[`CTF combination eslint,prettier,jest,rollup,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -61083,6 +62667,10 @@ Array [
 exports[`CTF combination eslint,prettier,lodash interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -61120,6 +62708,10 @@ Array [
 exports[`CTF combination eslint,prettier,lodash interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -61157,6 +62749,10 @@ Array [
 exports[`CTF combination eslint,prettier,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -61194,6 +62790,10 @@ Array [
 exports[`CTF combination eslint,prettier,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -61231,6 +62831,10 @@ Array [
 exports[`CTF combination eslint,prettier,react interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -61269,6 +62873,10 @@ Array [
 exports[`CTF combination eslint,prettier,react interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -61307,6 +62915,10 @@ Array [
 exports[`CTF combination eslint,prettier,react interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -61345,6 +62957,10 @@ Array [
 exports[`CTF combination eslint,prettier,react interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -61384,6 +63000,10 @@ Array [
 exports[`CTF combination eslint,prettier,react,lodash interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -61424,6 +63044,10 @@ Array [
 exports[`CTF combination eslint,prettier,react,lodash interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -61464,6 +63088,10 @@ Array [
 exports[`CTF combination eslint,prettier,react,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -61504,6 +63132,10 @@ Array [
 exports[`CTF combination eslint,prettier,react,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -61544,6 +63176,10 @@ Array [
 exports[`CTF combination eslint,prettier,react,rollup interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -61583,6 +63219,10 @@ Array [
 exports[`CTF combination eslint,prettier,react,rollup interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -61622,6 +63262,10 @@ Array [
 exports[`CTF combination eslint,prettier,react,rollup interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -61695,6 +63339,10 @@ Array [
 exports[`CTF combination eslint,prettier,react,rollup interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -61769,6 +63417,10 @@ Array [
 exports[`CTF combination eslint,prettier,react,rollup,lodash interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -61810,6 +63462,10 @@ Array [
 exports[`CTF combination eslint,prettier,react,rollup,lodash interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -61851,6 +63507,10 @@ Array [
 exports[`CTF combination eslint,prettier,react,rollup,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -61926,6 +63586,10 @@ Array [
 exports[`CTF combination eslint,prettier,react,rollup,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -61999,6 +63663,10 @@ Array [
 exports[`CTF combination eslint,prettier,rollup interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -62035,6 +63703,10 @@ Array [
 exports[`CTF combination eslint,prettier,rollup interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -62071,6 +63743,10 @@ Array [
 exports[`CTF combination eslint,prettier,rollup interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -62141,6 +63817,10 @@ Array [
 exports[`CTF combination eslint,prettier,rollup interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -62212,6 +63892,10 @@ Array [
 exports[`CTF combination eslint,prettier,rollup,lodash interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -62250,6 +63934,10 @@ Array [
 exports[`CTF combination eslint,prettier,rollup,lodash interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -62288,6 +63976,10 @@ Array [
 exports[`CTF combination eslint,prettier,rollup,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -62360,6 +64052,10 @@ Array [
 exports[`CTF combination eslint,prettier,rollup,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -62430,6 +64126,10 @@ Array [
 exports[`CTF combination eslint,react interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -62457,6 +64157,10 @@ Array [
 exports[`CTF combination eslint,react interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -62484,6 +64188,10 @@ Array [
 exports[`CTF combination eslint,react interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -62511,6 +64219,10 @@ Array [
 exports[`CTF combination eslint,react interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -62539,6 +64251,10 @@ Array [
 exports[`CTF combination eslint,react,lodash interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -62571,6 +64287,10 @@ Array [
 exports[`CTF combination eslint,react,lodash interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -62603,6 +64323,10 @@ Array [
 exports[`CTF combination eslint,react,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -62635,6 +64359,10 @@ Array [
 exports[`CTF combination eslint,react,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -62667,6 +64395,10 @@ Array [
 exports[`CTF combination eslint,react,rollup interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -62695,6 +64427,10 @@ Array [
 exports[`CTF combination eslint,react,rollup interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -62723,6 +64459,10 @@ Array [
 exports[`CTF combination eslint,react,rollup interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -62785,6 +64525,10 @@ Array [
 exports[`CTF combination eslint,react,rollup interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -62848,6 +64592,10 @@ Array [
 exports[`CTF combination eslint,react,rollup,lodash interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -62881,6 +64629,10 @@ Array [
 exports[`CTF combination eslint,react,rollup,lodash interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -62914,6 +64666,10 @@ Array [
 exports[`CTF combination eslint,react,rollup,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -62981,6 +64737,10 @@ Array [
 exports[`CTF combination eslint,react,rollup,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -63046,6 +64806,10 @@ Array [
 exports[`CTF combination eslint,rollup interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -63071,6 +64835,10 @@ Array [
 exports[`CTF combination eslint,rollup interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -63096,6 +64864,10 @@ Array [
 exports[`CTF combination eslint,rollup interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -63155,6 +64927,10 @@ Array [
 exports[`CTF combination eslint,rollup interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -63215,6 +64991,10 @@ Array [
 exports[`CTF combination eslint,rollup,lodash interface state {"projectType":"app","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -63245,6 +65025,10 @@ Array [
 exports[`CTF combination eslint,rollup,lodash interface state {"projectType":"app","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -63275,6 +65059,10 @@ Array [
 exports[`CTF combination eslint,rollup,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -63339,6 +65127,10 @@ Array [
 exports[`CTF combination eslint,rollup,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -67731,6 +69523,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -67851,6 +69647,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -67886,6 +69686,10 @@ Array [
 exports[`CTF combination webpack,eslint interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -67911,6 +69715,10 @@ Array [
 exports[`CTF combination webpack,eslint interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -68022,6 +69830,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -68155,6 +69967,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -68203,6 +70019,10 @@ Array [
 exports[`CTF combination webpack,eslint,jest interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -68235,6 +70055,10 @@ Array [
 exports[`CTF combination webpack,eslint,jest interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -68356,6 +70180,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -68498,6 +70326,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -68552,6 +70384,10 @@ Array [
 exports[`CTF combination webpack,eslint,jest,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -68589,6 +70425,10 @@ Array [
 exports[`CTF combination webpack,eslint,jest,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -68711,6 +70551,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -68847,6 +70691,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -68898,6 +70746,10 @@ Array [
 exports[`CTF combination webpack,eslint,jest,react interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -68933,6 +70785,10 @@ Array [
 exports[`CTF combination webpack,eslint,jest,react interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -69057,6 +70913,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -69202,6 +71062,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -69259,6 +71123,10 @@ Array [
 exports[`CTF combination webpack,eslint,jest,react,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -69299,6 +71167,10 @@ Array [
 exports[`CTF combination webpack,eslint,jest,react,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -69424,6 +71296,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -69595,6 +71471,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -69766,6 +71646,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -69937,6 +71821,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -70112,6 +72000,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -70292,6 +72184,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -70472,6 +72368,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -70652,6 +72552,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -70827,6 +72731,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -70995,6 +72903,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -71163,6 +73075,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -71331,6 +73247,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -71503,6 +73423,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -71680,6 +73604,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -71857,6 +73785,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -72034,6 +73966,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -72209,6 +74145,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -72338,6 +74278,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -72379,6 +74323,10 @@ Array [
 exports[`CTF combination webpack,eslint,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -72409,6 +74357,10 @@ Array [
 exports[`CTF combination webpack,eslint,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -72524,6 +74476,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -72655,6 +74611,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -72701,6 +74661,10 @@ Array [
 exports[`CTF combination webpack,eslint,prettier interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -72737,6 +74701,10 @@ Array [
 exports[`CTF combination webpack,eslint,prettier interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -72859,6 +74827,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -73000,6 +74972,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -73056,6 +75032,10 @@ Array [
 exports[`CTF combination webpack,eslint,prettier,jest interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -73096,6 +75076,10 @@ Array [
 exports[`CTF combination webpack,eslint,prettier,jest interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -73225,6 +75209,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -73372,6 +75360,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -73431,6 +75423,10 @@ Array [
 exports[`CTF combination webpack,eslint,prettier,jest,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -73473,6 +75469,10 @@ Array [
 exports[`CTF combination webpack,eslint,prettier,jest,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -73600,6 +75600,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -73744,6 +75748,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -73803,6 +75811,10 @@ Array [
 exports[`CTF combination webpack,eslint,prettier,jest,react interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -73846,6 +75858,10 @@ Array [
 exports[`CTF combination webpack,eslint,prettier,jest,react interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -73978,6 +75994,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -74128,6 +76148,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -74190,6 +76214,10 @@ Array [
 exports[`CTF combination webpack,eslint,prettier,jest,react,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -74235,6 +76263,10 @@ Array [
 exports[`CTF combination webpack,eslint,prettier,jest,react,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -74365,6 +76397,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -74544,6 +76580,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -74723,6 +76763,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -74902,6 +76946,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -75085,6 +77133,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -75270,6 +77322,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -75455,6 +77511,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -75640,6 +77700,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -75820,6 +77884,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -75996,6 +78064,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -76172,6 +78244,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -76348,6 +78424,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -76528,6 +78608,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -76710,6 +78794,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -76892,6 +78980,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -77074,6 +79166,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -77254,6 +79350,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -77391,6 +79491,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -77440,6 +79544,10 @@ Array [
 exports[`CTF combination webpack,eslint,prettier,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -77478,6 +79586,10 @@ Array [
 exports[`CTF combination webpack,eslint,prettier,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -77601,6 +79713,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -77735,6 +79851,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -77784,6 +79904,10 @@ Array [
 exports[`CTF combination webpack,eslint,prettier,react interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -77823,6 +79947,10 @@ Array [
 exports[`CTF combination webpack,eslint,prettier,react interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -77951,6 +80079,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -78091,6 +80223,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -78143,6 +80279,10 @@ Array [
 exports[`CTF combination webpack,eslint,prettier,react,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -78184,6 +80324,10 @@ Array [
 exports[`CTF combination webpack,eslint,prettier,react,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -78310,6 +80454,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -78479,6 +80627,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -78648,6 +80800,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -78817,6 +80973,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -78990,6 +81150,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -79165,6 +81329,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -79340,6 +81508,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -79515,6 +81687,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -79685,6 +81861,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -79851,6 +82031,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -80017,6 +82201,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -80183,6 +82371,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -80353,6 +82545,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -80525,6 +82721,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -80697,6 +82897,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -80869,6 +83073,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "prettier",
     ],
@@ -81036,6 +83244,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -81159,6 +83371,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -81197,6 +83413,10 @@ Array [
 exports[`CTF combination webpack,eslint,react interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -81225,6 +83445,10 @@ Array [
 exports[`CTF combination webpack,eslint,react interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -81342,6 +83566,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -81474,6 +83702,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -81518,6 +83750,10 @@ Array [
 exports[`CTF combination webpack,eslint,react,lodash interface state {"projectType":"lib","target":"browser","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -81551,6 +83787,10 @@ Array [
 exports[`CTF combination webpack,eslint,react,lodash interface state {"projectType":"lib","target":"node","env":"production"} 2`] = `
 Array [
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -81669,6 +83909,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -81827,6 +84071,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -81985,6 +84233,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -82143,6 +84395,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -82305,6 +84561,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -82472,6 +84732,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -82639,6 +84903,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -82806,6 +85074,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "eslint-config-airbnb",
     ],
@@ -82968,6 +85240,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -83123,6 +85399,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -83278,6 +85558,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -83433,6 +85717,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -83592,6 +85880,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -83756,6 +86048,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -83920,6 +86216,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],
@@ -84084,6 +86384,10 @@ Array [
     "target": "web",
   },
   Object {
+    "env": Object {
+      "browser": true,
+      "node": true,
+    },
     "extends": Array [
       "bliss",
     ],

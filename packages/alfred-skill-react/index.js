@@ -9,7 +9,7 @@ module.exports = {
     babel(config) {
       return config
         .extendConfig('babel', {
-          presets: ['@babel/preset-react'],
+          presets: ['@babel/preset-env', '@babel/preset-react'],
           env: {
             production: {
               plugins: [

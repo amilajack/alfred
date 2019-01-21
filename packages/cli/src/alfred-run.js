@@ -4,7 +4,9 @@ import path from 'path';
 import program from 'commander';
 import {
   getExecuteWrittenConfigsMethods,
-  getInterfaceForSubcommand
+  getInterfaceForSubcommand,
+  deleteConfigs,
+  writeConfigsFromCtf
 } from '@alfredpkg/core';
 import rimraf from 'rimraf';
 import generateCtfFromConfig, {
@@ -14,9 +16,9 @@ import generateCtfFromConfig, {
 
 (async () => {
   const args = program.parse(process.argv);
-  const { args: skills = [] } = args;
+  const { args: subcommands = [] } = args;
 
-  switch (skills.length) {
+  switch (subcommands.length) {
     case 0: {
       throw new Error('One subcommand must be passed');
     }
@@ -28,13 +30,14 @@ import generateCtfFromConfig, {
     }
   }
 
-  const [skill] = skills;
+  const [subcommand] = subcommands;
   const { alfredConfig } = await loadConfigs();
 
   // $FlowFixMe
   module.paths.push(`${alfredConfig.root}/node_modules`);
 
-  switch (skill) {
+  // Built in, non-overridable skills are added here
+  switch (subcommand) {
     case 'clean': {
       const targetsPath = path.join(alfredConfig.root, 'targets');
       if (fs.existsSync(targetsPath)) {
@@ -56,27 +59,34 @@ import generateCtfFromConfig, {
   //                 subcommands are run only once
   let commandWasExceuted = false;
 
+  await deleteConfigs();
+
   return Promise.all(
     generateInterfaceStatesFromProject().map(interfaceState =>
-      generateCtfFromConfig(alfredConfig, interfaceState).then(ctf => {
-        const commands = getExecuteWrittenConfigsMethods(ctf, interfaceState);
-        const skillInterface = getInterfaceForSubcommand(ctf, skill);
-
-        if (!skillInterface.runForAllTargets) {
-          if (commandWasExceuted) {
-            return true;
-          }
-          commandWasExceuted = true;
-        }
-
-        if (!Object.keys(commands).includes(skill)) {
-          throw new Error(
-            `Subcommand "${skill}" is not supported by the skills you have installed`
+      generateCtfFromConfig(alfredConfig, interfaceState)
+        .then(writeConfigsFromCtf)
+        .then(ctf => {
+          const commands = getExecuteWrittenConfigsMethods(ctf, interfaceState);
+          const subcommandInterface = getInterfaceForSubcommand(
+            ctf,
+            subcommand
           );
-        }
 
-        return commands[skill](alfredConfig);
-      })
+          if (!subcommandInterface.runForAllTargets) {
+            if (commandWasExceuted) {
+              return true;
+            }
+            commandWasExceuted = true;
+          }
+
+          if (!Object.keys(commands).includes(subcommand)) {
+            throw new Error(
+              `Subcommand "${subcommand}" is not supported by the skills you have installed`
+            );
+          }
+
+          return commands[subcommand](alfredConfig);
+        })
     )
   );
 })();

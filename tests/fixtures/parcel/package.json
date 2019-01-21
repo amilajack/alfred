@@ -9,8 +9,9 @@
     "clean": "../../../packages/cli/lib/alfred.js run clean",
     "format": "../../../packages/cli/lib/alfred.js run format",
     "lint": "../../../packages/cli/lib/alfred.js run lint",
+    "skills": "../../../packages/cli/lib/alfred.js skills",
     "start": "../../../packages/cli/lib/alfred.js run start",
-    "test": "../../../packages/cli/lib/alfred.js run test"
+    "test": "../../../packages/cli/lib/alfred.js run test && yarn skills && yarn lint && yarn format && yarn build"
   },
   "alfred": {
     "skills": [

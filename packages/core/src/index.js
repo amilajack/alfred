@@ -71,7 +71,6 @@ export const CORE_CTFS = {
 
 // @TODO send the information to a crash reporting service (like sentry.io)
 process.on('unhandledRejection', err => {
-  console.log(err);
   throw err;
 });
 
@@ -100,7 +99,7 @@ export function normalizeInterfacesOfSkill(
   if (Array.isArray(interfaces)) {
     // @HACK Check if the array is alread formatted with this function by
     //       checking if name property exists
-    if (interfaces[0].name) {
+    if (interfaces[0] && interfaces[0].name) {
       return interfaces;
     }
     return interfaces.map(e => {
@@ -263,7 +262,7 @@ type CtfHelpers = {
   replaceConfig: (x: string, configReplacement: configType) => CtfNode
 };
 
-const AddCtfHelpers: CtfHelpers = {
+export const AddCtfHelpers: CtfHelpers = {
   findConfig(configName: string) {
     const config = this.configFiles.find(
       configFile => configFile.name === configName
@@ -284,6 +283,8 @@ const AddCtfHelpers: CtfHelpers = {
     const configFiles = this.configFiles.map(configFile =>
       configFile.name === configName ? mergedConfigFile : configFile
     );
+    // @TODO Consider changing this to use @alfredpkg/merge-configs. This does
+    //       not work well with configs that have arrays
     return lodash.merge({}, this, {
       configFiles
     });
@@ -379,9 +380,7 @@ export function deleteConfigs(): Promise<void> {
 /**
  * Write configs to a './.configs' directory
  */
-export async function writeConfigsFromCtf(ctf: CtfMap) {
-  await deleteConfigs();
-
+export async function writeConfigsFromCtf(ctf: CtfMap): CtfMap {
   // Create a new .configs dir and write the configs
   const configs = Array.from(ctf.values())
     .map(ctfNode => ctfNode.configFiles || [])
@@ -401,9 +400,12 @@ export async function writeConfigsFromCtf(ctf: CtfMap) {
             ? config.config
             : JSON.stringify(config.config);
 
-        return fs.promises.writeFile(filePath, convertedConfig);
+        // Write sync to prevent data races when writing configs in parallel
+        return fs.writeFileSync(filePath, convertedConfig);
       })
   );
+
+  return ctf;
 }
 
 export function addSubCommandsToCtfNodes(ctf: CtfMap): CtfMap {

@@ -42,11 +42,11 @@ alfred migrate
 alfred types
 
 # Learning skills
-alfred learn alfred-skill-build-parcel
+alfred learn @alfredpkg/skill-parcel
 # Build using the new subcommand
 alfred build
 # Learning multiple skills
-alfred learn alfred-skill-build-angular alfred-skill-build-redux
+alfred learn @alfredpkg/skill-angular @alfredpkg/skill-redux
 ```
 
 ## Docs
@@ -81,7 +81,7 @@ export default {
   name: 'babel',
   // The (optional) interface that this skill will implement. A skill uses an interface
   // when it is able to replace an existing subcommand. For example, both the
-  // alfred-skill-parcel and alfred-skill-webpack skills, which both register a 'build'
+  // @alfredpkg/skill-parcel and @alfredpkg/skill-webpack skills, which both register a 'build'
   // subcommand, will both implement @alfredpkg/interface-build. Implementing it will require
   // them to adhere to a shared set of calling conventions such as flags, subcommands, etc. In
   // the case of babel, no interface will be implemented because babel will not be invoked directly
@@ -141,7 +141,7 @@ export default {
 ```jsonc
 // package.json
 {
-  "name": "alfred-skill-parcel",
+  "name": "@alfredpkg/skill-parcel",
   "peerDependencies": {
     "react": "0.15.0"
   }
@@ -193,7 +193,7 @@ type AlfredInterface = {
     },
     // Config for all lib targets
     "lib": {
-      "recommendSkills": ["alfred-skill-react"]
+      "recommendSkills": ["@alfredpkg/skill-react"]
     },
     // Config only applied to browser libs
     "browser": {
@@ -216,7 +216,7 @@ Assume `react` has the following `package.json`:
   "alfred": {
     // ...
     "lib": {
-      "recommendSkills": ["alfred-skill-react"]
+      "recommendSkills": ["@alfredpkg/skill-react"]
     }
   }
 }
@@ -227,7 +227,7 @@ When a author of the app installs `react`, Alfred will recommend the skills `rec
 ```
 $ yarn add react
 
-`react` recommends installing the Alfred skill `"alfred-skill-react"`.
+`react` recommends installing the Alfred skill `"@alfredpkg/skill-react"`.
 
 Would you like to install it? (Y/n)
 ```

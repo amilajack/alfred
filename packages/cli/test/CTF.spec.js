@@ -17,7 +17,7 @@ const defaultAlfredConfig = {
 
 describe('alfred cli helpers', () => {
   it('should install new deps after learning new skill', async () => {
-    const alfredConfig = await loadConfigs();
+    const { alfredConfig } = await loadConfigs();
     const { webpack, babel } = CORE_CTFS;
     const oldCtf = CTF([webpack], alfredConfig, defaultInterfaceState);
     const newCtf = CTF([webpack, babel], alfredConfig, defaultInterfaceState);
@@ -27,16 +27,23 @@ describe('alfred cli helpers', () => {
 
   it('should add missing std skills to ctf', async () => {
     {
-      const alfredConfig = await loadConfigs();
+      const { alfredConfig } = await loadConfigs();
       const { webpack } = CORE_CTFS;
       const ctf = CTF([webpack], alfredConfig, defaultInterfaceState);
       expect(Array.from(ctf.keys())).toMatchSnapshot();
+      console.log(alfredConfig);
       expect(
-        Array.from(addMissingStdSkillsToCtf(ctf, defaultInterfaceState).keys())
+        Array.from(
+          addMissingStdSkillsToCtf(
+            ctf,
+            alfredConfig,
+            defaultInterfaceState
+          ).keys()
+        )
       ).toMatchSnapshot();
     }
     {
-      const alfredConfig = await loadConfigs();
+      const { alfredConfig } = await loadConfigs();
       const interfaceState = {
         env: 'production',
         projectType: 'app',
@@ -45,7 +52,7 @@ describe('alfred cli helpers', () => {
       const ctf = CTF([parcel], alfredConfig, interfaceState);
       expect(Array.from(ctf.keys())).toMatchSnapshot();
       const ctfSkillNames = Array.from(
-        addMissingStdSkillsToCtf(ctf, interfaceState).keys()
+        addMissingStdSkillsToCtf(ctf, alfredConfig, interfaceState).keys()
       );
       expect(ctfSkillNames).toMatchSnapshot();
       expect(ctfSkillNames).toContain('parcel');
@@ -53,7 +60,7 @@ describe('alfred cli helpers', () => {
       expect(ctfSkillNames).not.toContain('webpack');
     }
     {
-      const alfredConfig = await loadConfigs();
+      const { alfredConfig } = await loadConfigs();
       const interfaceState = {
         env: 'production',
         projectType: 'lib',
@@ -62,7 +69,7 @@ describe('alfred cli helpers', () => {
       const ctf = CTF([parcel], alfredConfig, interfaceState);
       expect(Array.from(ctf.keys())).toMatchSnapshot();
       const ctfSkillNames = Array.from(
-        addMissingStdSkillsToCtf(ctf, interfaceState).keys()
+        addMissingStdSkillsToCtf(ctf, alfredConfig, interfaceState).keys()
       );
       expect(ctfSkillNames).toMatchSnapshot();
       expect(ctfSkillNames).toContain('rollup');
@@ -72,7 +79,7 @@ describe('alfred cli helpers', () => {
   });
 
   it('should override core ctf skills that support same interface states', async () => {
-    const alfredConfig = await loadConfigs();
+    const { alfredConfig } = await loadConfigs();
     const interfaceState = {
       env: 'production',
       projectType: 'app',
@@ -82,7 +89,7 @@ describe('alfred cli helpers', () => {
 
     expect(Array.from(ctf.keys())).toMatchSnapshot();
     const ctfSkillNames = Array.from(
-      addMissingStdSkillsToCtf(ctf, interfaceState).keys()
+      addMissingStdSkillsToCtf(ctf, alfredConfig, interfaceState).keys()
     );
     expect(ctfSkillNames).toMatchSnapshot();
     expect(ctfSkillNames).toContain('parcel');
@@ -91,7 +98,7 @@ describe('alfred cli helpers', () => {
   });
 
   it('should not use CTF skills that do not support current interface state', async () => {
-    const alfredConfig = await loadConfigs();
+    const { alfredConfig } = await loadConfigs();
     const interfaceState = {
       env: 'production',
       projectType: 'lib',
@@ -100,7 +107,7 @@ describe('alfred cli helpers', () => {
     const ctf = CTF([parcel], alfredConfig, interfaceState);
     expect(Array.from(ctf.keys())).toEqual([]);
     const ctfSkillNames = Array.from(
-      addMissingStdSkillsToCtf(ctf, interfaceState).keys()
+      addMissingStdSkillsToCtf(ctf, alfredConfig, interfaceState).keys()
     );
     expect(ctfSkillNames).toMatchSnapshot();
     expect(ctfSkillNames).not.toContain('parcel');

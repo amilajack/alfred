@@ -3,12 +3,11 @@ import fs from 'fs';
 import npm from 'npm';
 import yarn from 'yarn-api';
 import CTF, {
-  writeConfigsFromCtf,
-  deleteConfigs,
   getDevDependencies,
   CORE_CTFS,
   INTERFACE_STATES,
-  normalizeInterfacesOfSkill
+  normalizeInterfacesOfSkill,
+  AddCtfHelpers
 } from '@alfredpkg/core';
 import type { CtfMap, InterfaceState } from '@alfredpkg/core';
 import ValidateConfig from './Validation';
@@ -111,11 +110,22 @@ export function installDeps(
   }
 }
 
+export type AlfredConfig = {
+  npmClient: 'npm' | 'yarn',
+  skills: Array<string>,
+  root: string,
+  showConfigs: boolean
+};
+
 /**
  * Add skills to a given list of skills to ensure that the list has a complete set
  * of standard ctfs
  */
-export function addMissingStdSkillsToCtf(ctf: CtfMap, interfaceState): CtfMap {
+export function addMissingStdSkillsToCtf(
+  ctf: CtfMap,
+  alfredConfig: AlfredConfig,
+  interfaceState: InterfaceState
+): CtfMap {
   const stdCtf = new Map(
     Object.entries({
       lint: CORE_CTFS.eslint,
@@ -164,24 +174,36 @@ export function addMissingStdSkillsToCtf(ctf: CtfMap, interfaceState): CtfMap {
           stdCtfSkillToAdd.interfaces
         );
       }
-      ctf.set(stdCtfSkillToAdd.name, stdCtfSkillToAdd);
+      ctf.set(stdCtfSkillToAdd.name, {
+        ...stdCtfSkillToAdd,
+        ...AddCtfHelpers
+      });
     }
   });
 
   // Add all the CORE_CTF's without subcommands
-  ctf.set('babel', CORE_CTFS.babel);
+  ctf.set('babel', { ...CORE_CTFS.babel, ...AddCtfHelpers });
   // @TODO
-  // ctf.set('lodash', CORE_CTFS.lodash);
+  // ctf.set('lodash', { ...CORE_CTFS.lodash, ...AddCtfHelpers });
+
+  ctf.forEach(ctfNode => {
+    const ctfWithHelpers = {
+      ...ctfNode,
+      ...AddCtfHelpers
+    };
+    Object.entries(ctfWithHelpers.ctfs || {}).forEach(([ctfName, ctfFn]) => {
+      const correspondingCtfNode = ctf.get(ctfName);
+      if (correspondingCtfNode) {
+        ctf.set(
+          ctfName,
+          ctfFn(correspondingCtfNode, ctf, { alfredConfig, ...interfaceState })
+        );
+      }
+    });
+  });
 
   return ctf;
 }
-
-export type AlfredConfig = {
-  npmClient: 'npm' | 'yarn',
-  skills: Array<string>,
-  root: string,
-  showConfigs: boolean
-};
 
 export async function loadConfigs(
   pkgPath: string = path.join(projectRoot, 'package.json')
@@ -230,13 +252,7 @@ export default async function generateCtfFromConfig(
   });
 
   const ctf = CTF(Array.from(tmpCtf.values()), alfredConfig, interfaceState);
-  addMissingStdSkillsToCtf(ctf, interfaceState);
-
-  if (alfredConfig.showConfigs) {
-    await writeConfigsFromCtf(ctf);
-  } else {
-    await deleteConfigs();
-  }
+  addMissingStdSkillsToCtf(ctf, alfredConfig, interfaceState);
 
   return ctf;
 }
