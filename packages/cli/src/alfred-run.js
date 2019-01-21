@@ -4,7 +4,9 @@ import path from 'path';
 import program from 'commander';
 import {
   getExecuteWrittenConfigsMethods,
-  getInterfaceForSubcommand
+  getInterfaceForSubcommand,
+  deleteConfigs,
+  writeConfigsFromCtf
 } from '@alfredpkg/core';
 import rimraf from 'rimraf';
 import generateCtfFromConfig, {
@@ -57,27 +59,34 @@ import generateCtfFromConfig, {
   //                 subcommands are run only once
   let commandWasExceuted = false;
 
+  await deleteConfigs();
+
   return Promise.all(
     generateInterfaceStatesFromProject().map(interfaceState =>
-      generateCtfFromConfig(alfredConfig, interfaceState).then(ctf => {
-        const commands = getExecuteWrittenConfigsMethods(ctf, interfaceState);
-        const subcommandInterface = getInterfaceForSubcommand(ctf, subcommand);
-
-        if (!subcommandInterface.runForAllTargets) {
-          if (commandWasExceuted) {
-            return true;
-          }
-          commandWasExceuted = true;
-        }
-
-        if (!Object.keys(commands).includes(subcommand)) {
-          throw new Error(
-            `Subcommand "${subcommand}" is not supported by the skills you have installed`
+      generateCtfFromConfig(alfredConfig, interfaceState)
+        .then(writeConfigsFromCtf)
+        .then(ctf => {
+          const commands = getExecuteWrittenConfigsMethods(ctf, interfaceState);
+          const subcommandInterface = getInterfaceForSubcommand(
+            ctf,
+            subcommand
           );
-        }
 
-        return commands[subcommand](alfredConfig);
-      })
+          if (!subcommandInterface.runForAllTargets) {
+            if (commandWasExceuted) {
+              return true;
+            }
+            commandWasExceuted = true;
+          }
+
+          if (!Object.keys(commands).includes(subcommand)) {
+            throw new Error(
+              `Subcommand "${subcommand}" is not supported by the skills you have installed`
+            );
+          }
+
+          return commands[subcommand](alfredConfig);
+        })
     )
   );
 })();

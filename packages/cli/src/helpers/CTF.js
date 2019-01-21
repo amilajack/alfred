@@ -3,8 +3,6 @@ import fs from 'fs';
 import npm from 'npm';
 import yarn from 'yarn-api';
 import CTF, {
-  writeConfigsFromCtf,
-  deleteConfigs,
   getDevDependencies,
   CORE_CTFS,
   INTERFACE_STATES,
@@ -255,12 +253,6 @@ export default async function generateCtfFromConfig(
 
   const ctf = CTF(Array.from(tmpCtf.values()), alfredConfig, interfaceState);
   addMissingStdSkillsToCtf(ctf, alfredConfig, interfaceState);
-
-  if (alfredConfig.showConfigs) {
-    await writeConfigsFromCtf(ctf);
-  } else {
-    await deleteConfigs();
-  }
 
   return ctf;
 }

@@ -28,8 +28,8 @@ module.exports = {
           '.gitignore',
           '--single-quote',
           '--write',
-          '**/*.{*{js,jsx,json},babelrc,eslintrc,prettierrc,stylelintrc}',
-          alfredConfig.showConfigs ? `--config ${configPath} .` : ''
+          '{src,tests}/*',
+          alfredConfig.showConfigs ? `--config ${configPath}` : ''
         ].join(' ')
       );
     }

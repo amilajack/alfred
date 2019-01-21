@@ -30,7 +30,7 @@ module.exports = {
         require("@babel/register")(${JSON.stringify(babelConfig)});`
       );
       return execCommand(
-        [binPath, `--require ${mochaBabelRegisterPath}`].join(' ')
+        [binPath, `--require ${mochaBabelRegisterPath} tests`].join(' ')
       );
     }
   },
