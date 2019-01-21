@@ -21,10 +21,12 @@ import generateCtfFromConfig, {
   );
 
   const map: Map<string, Set<string>> = new Map();
+  const subcommandDict: Map<string, Object> = new Map();
 
   interfaceStateCtfs.forEach(interfaceStateCtf => {
     interfaceStateCtf.forEach(result => {
       result.interfaces.forEach(e => {
+        subcommandDict.set(e.module.subcommand, e);
         if (map.has(e.module.subcommand)) {
           const set = map.get(e.module.subcommand);
           if (set) {
@@ -39,12 +41,30 @@ import generateCtfFromConfig, {
   });
 
   const table = new Table({
-    head: [chalk.bold('Subcommand'), chalk.bold('Skills')],
+    head: [
+      chalk.bold('Subcommand'),
+      chalk.bold('Skills'),
+      chalk.bold('Description')
+    ],
     colWidths: [30, 30]
   });
 
   Array.from(map.entries()).forEach(([subcommand, skills]) => {
-    table.push([subcommand, Array.from(skills).join(', ')]);
+    const description = (() => {
+      if (subcommandDict.has(subcommand)) {
+        const interfaceForSubcommand = subcommandDict.get(subcommand);
+        if (
+          interfaceForSubcommand &&
+          interfaceForSubcommand.module &&
+          interfaceForSubcommand.module.description
+        ) {
+          return interfaceForSubcommand.module.description;
+        }
+      }
+      return '';
+    })();
+
+    table.push([subcommand, Array.from(skills).join(', '), description]);
   });
 
   console.log(table.toString());

@@ -40,7 +40,7 @@ alfred new
 alfred skills
 
 # Planned Built-in Subcommands
-alfred ls
+alfred targets
 alfred publish
 alfred search
 alfred docs

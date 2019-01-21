@@ -10,6 +10,8 @@ debug('booting %o', name);
 module.exports = {
   subcommand: 'start',
 
+  description: 'Start your app and library and reload on change',
+
   runForAllTargets: true,
   /**
    * Given an array of CTF nodes, return the CTF which should be used based

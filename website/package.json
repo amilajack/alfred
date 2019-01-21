@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "docusaurus-build",
+    "build": "docusaurus-build && yarn clean",
     "clean": "rm -rf build",
     "examples": "docusaurus-examples",
     "publish-gh-pages": "docusaurus-publish",

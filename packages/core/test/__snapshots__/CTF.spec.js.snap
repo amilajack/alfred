@@ -103962,6 +103962,7 @@ exports[`CTF interfaces should allow array of strings input 1`] = `
 Array [
   Object {
     "module": Object {
+      "description": "Build, optimize, and bundle assets in your app",
       "resolveSkill": [Function],
       "runForAllTargets": true,
       "subcommand": "build",
@@ -103975,6 +103976,7 @@ exports[`CTF interfaces should allow array of strings input 2`] = `
 Array [
   Object {
     "module": Object {
+      "description": "Build, optimize, and bundle assets in your app",
       "resolveSkill": [Function],
       "runForAllTargets": true,
       "subcommand": "build",
@@ -103983,6 +103985,7 @@ Array [
   },
   Object {
     "module": Object {
+      "description": "Start your app and library and reload on change",
       "resolveSkill": [Function],
       "runForAllTargets": true,
       "subcommand": "start",
@@ -103994,6 +103997,7 @@ Array [
 
 exports[`CTF interfaces subcommand should get corresponding interface 1`] = `
 Object {
+  "description": "Build, optimize, and bundle assets in your app",
   "resolveSkill": [Function],
   "runForAllTargets": true,
   "subcommand": "build",
@@ -104002,6 +104006,7 @@ Object {
 
 exports[`CTF interfaces subcommand should get corresponding interface 2`] = `
 Object {
+  "description": "Build, optimize, and bundle assets in your app",
   "resolveSkill": [Function],
   "runForAllTargets": true,
   "subcommand": "build",
@@ -104010,6 +104015,7 @@ Object {
 
 exports[`CTF interfaces subcommand should get corresponding interface 3`] = `
 Object {
+  "description": "Build, optimize, and bundle assets in your app",
   "resolveSkill": [Function],
   "runForAllTargets": true,
   "subcommand": "build",
@@ -104018,6 +104024,7 @@ Object {
 
 exports[`CTF interfaces subcommand should get corresponding interface 4`] = `
 Object {
+  "description": "Build, optimize, and bundle assets in your app",
   "resolveSkill": [Function],
   "runForAllTargets": true,
   "subcommand": "build",

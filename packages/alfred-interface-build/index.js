@@ -15,6 +15,8 @@ const debug = require('debug')('@alfredpkg/interface-build');
 module.exports = {
   subcommand: 'build',
 
+  description: 'Build, optimize, and bundle assets in your app',
+
   runForAllTargets: true,
 
   /**

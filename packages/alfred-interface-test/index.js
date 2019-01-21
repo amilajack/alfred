@@ -1,3 +1,4 @@
 module.exports = {
-  subcommand: 'test'
+  subcommand: 'test',
+  description: 'Test your app'
 };
