@@ -23,7 +23,7 @@ const interfaceConfig = {
 module.exports = {
   name: 'webpack',
   description: 'Build, optimize, and bundle assets in your app',
-  write: true,
+  default: true,
   interfaces: [
     ['@alfredpkg/interface-build', interfaceConfig],
     ['@alfredpkg/interface-start', interfaceConfig]

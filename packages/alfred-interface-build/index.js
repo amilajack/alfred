@@ -52,7 +52,7 @@ module.exports = {
    * on the current environment and current target
    */
   resolveSkill(skills = [], interfaceState) {
-    const resolvedSkill = skills
+    const resolvedSkills = skills
       .map(skill => ({
         ...skill,
         interfaces: normalizeInterfacesOfSkill(skill.interfaces)
@@ -60,7 +60,7 @@ module.exports = {
       .filter(skill =>
         skill.interfaces.find(e => e.module.subcommand === 'build')
       )
-      .find(sk => {
+      .filter(sk => {
         const { supports } = sk.interfaces.find(
           e => e.module.subcommand === 'build'
         ).config;
@@ -78,7 +78,7 @@ module.exports = {
         );
       });
 
-    if (!resolvedSkill) {
+    if (!resolvedSkills.length) {
       debug(
         `No installed skill for the "build" subcommand could be found that works for the given development environment and target: ${JSON.stringify(
           interfaceState
@@ -87,6 +87,8 @@ module.exports = {
       return false;
     }
 
-    return resolvedSkill;
+    return resolvedSkills.length === 1
+      ? resolvedSkills[0]
+      : resolvedSkills.find(skill => skill.default === true);
   }
 };

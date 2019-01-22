@@ -36,6 +36,7 @@ alfred learn
 alfred skills
 alfred start
 alfred build
+alfred build --prod
 alfred clean
 alfred format
 alfred test
@@ -59,7 +60,7 @@ alfred learn @alfredpkg/skill-angular @alfredpkg/skill-redux
 ## Docs
 
 * **[website](https://alfred.js.org)** ([alfred.js.org](https://alfred.js.org))
-* **[docs](https://alfred.js.org/docs)** ([alfred.js.org/docs](https://alfred.js.org/docs))
+* **[docs](https://alfred.js.org/docs/getting-started)** ([alfred.js.org/docs/getting-started](https://alfred.js.org/docs/getting-started))
 
 ## Examples
 
@@ -68,8 +69,9 @@ See our [examples directory](https://github.com/amilajack/alfred/tree/master/exa
 |  | Example | Descrption |
 | --- | --- | --- |
 | 1.|  [hello world](https://github.com/amilajack/alfred/tree/master/examples/hello-world) | A simple hello work app in node |
-| 2.|  typescript | **HELP WANTED** |
-| 3.|  react | **HELP WANTED** |
+| 2.|  [react library](https://github.com/amilajack/alfred/tree/master/examples/react-lib) | A small button library built with React |
+| 3.|  typescript | **HELP WANTED** |
+| 4.|  react | **HELP WANTED** |
 
 ## Local Setup
 
@@ -326,9 +328,27 @@ Would you like to install it? (Y/n)
 * `package-lock.json` or `yarn.lock`
 * `README.md`
 
+## Implemented Skills
+
+| Infrastructure   | Implemented Skills ✅     |
+| ---              | ---                      |
+| Bundlers         |  Webpack, Rollup, Parcel |
+| Transpilers      |  Babel                   |
+| Test Frameworks  |  Jest, Mocha             |
+| Formatters       |  Prettier                |
+| Libraries        |  Lodash                  |
+| Linters          |  ESLint                  |
+| Front End        |  React                   |
 
 ## Prior Art
 
 * [Cargo](https://github.com/rust-lang/cargo)
 * [NPM](https://npmjs.org), [Yarn](https://yarnpkg.com)
 * [Yeoman](http://yeoman.io)
+
+## Inspiration
+
+* [parcel](http://parceljs.org)
+* [Cargo](https://github.com/rust-lang/cargo)
+* [NPM](https://npmjs.org), [Yarn](https://yarnpkg.com)
+* [webpack-merge](https://github.com/survivejs/webpack-merge)

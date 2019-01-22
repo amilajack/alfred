@@ -111,6 +111,7 @@ export function installDeps(
 }
 
 export type AlfredConfig = {
+  extends?: Array<string> | Array<[string, { [x: string]: any }]> | string,
   npmClient: 'npm' | 'yarn',
   skills: Array<string>,
   root: string,
