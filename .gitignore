@@ -39,6 +39,6 @@ npm-debug.log.*
 
 lib
 dist
-target
+targets
 package-lock.json
 .configs

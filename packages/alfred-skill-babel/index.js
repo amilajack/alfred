@@ -20,7 +20,8 @@ module.exports = {
       path: '.babelrc.js',
       write: true,
       config: {
-        presets: ['@babel/preset-env']
+        presets: ['@babel/preset-env'],
+        plugins: ['@babel/plugin-proposal-class-properties']
       }
     }
   ],
@@ -63,12 +64,18 @@ module.exports = {
         })
         .addDevDependencies({ 'babel-loader': '5.0.0' });
     },
-    rollup(config) {
+    rollup(config, ctf) {
       // eslint-disable-next-line
       const babel = require('rollup-plugin-babel');
       return config
         .extendConfig('rollup.base', {
-          plugins: [babel]
+          plugins: [
+            babel({
+              ...getConfigByConfigName('babel', ctf.get('babel').configFiles)
+                .config,
+              exclude: 'node_modules/**'
+            })
+          ]
         })
         .addDevDependencies({
           'rollup-plugin-babel': '4.2.0'

@@ -62,6 +62,8 @@ alfred learn @alfredpkg/skill-angular @alfredpkg/skill-redux
 
 ## Examples
 
+See our [examples directory](https://github.com/amilajack/alfred/tree/master/examples)
+
 |  | Example | Descrption |
 | --- | --- | --- |
 | 1.|  [hello world](https://github.com/amilajack/alfred/tree/master/examples/hello-world) | A simple hello work app in node |

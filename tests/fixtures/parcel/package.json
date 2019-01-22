@@ -11,7 +11,8 @@
     "lint": "../../../packages/cli/lib/alfred.js run lint",
     "skills": "../../../packages/cli/lib/alfred.js skills",
     "start": "../../../packages/cli/lib/alfred.js run start",
-    "test": "../../../packages/cli/lib/alfred.js run test && yarn skills && yarn lint && yarn format && yarn build"
+    "test": "../../../packages/cli/lib/alfred.js run test",
+    "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
   "alfred": {
     "skills": [

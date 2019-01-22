@@ -119,6 +119,17 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/helper-replace-supers" "^7.2.3"
 
+"@babel/helper-create-class-features-plugin@^7.3.0":
+  version "7.3.0"
+  resolved "https://registry.npmjs.org/@babel/helper-create-class-features-plugin/-/helper-create-class-features-plugin-7.3.0.tgz#2b01a81b3adc2b1287f9ee193688ef8dc71e718f"
+  integrity sha512-DUsQNS2CGLZZ7I3W3fvh0YpPDd6BuWJlDl+qmZZpABZHza2ErE3LxtEzLJFHFC1ZwtlAXvHhbFYbtM5o5B0WBw==
+  dependencies:
+    "@babel/helper-function-name" "^7.1.0"
+    "@babel/helper-member-expression-to-functions" "^7.0.0"
+    "@babel/helper-optimise-call-expression" "^7.0.0"
+    "@babel/helper-plugin-utils" "^7.0.0"
+    "@babel/helper-replace-supers" "^7.2.3"
+
 "@babel/helper-define-map@^7.1.0":
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/@babel/helper-define-map/-/helper-define-map-7.1.0.tgz#3b74caec329b3c80c116290887c0dd9ae468c20c"
@@ -288,6 +299,14 @@
   integrity sha512-FVuQngLoN2iDrpW7LmhPZ2sO4DJxf35FOcwidwB9Ru9tMvI5URthnkVHuG14IStV+TzkMTyLMoOUlSTtrdVwqw==
   dependencies:
     "@babel/helper-create-class-features-plugin" "^7.2.3"
+    "@babel/helper-plugin-utils" "^7.0.0"
+
+"@babel/plugin-proposal-class-properties@^7.3.0":
+  version "7.3.0"
+  resolved "https://registry.npmjs.org/@babel/plugin-proposal-class-properties/-/plugin-proposal-class-properties-7.3.0.tgz#272636bc0fa19a0bc46e601ec78136a173ea36cd"
+  integrity sha512-wNHxLkEKTQ2ay0tnsam2z7fGZUi+05ziDJflEt3AZTP3oXLKHJp9HqhfroB/vdMvt3sda9fAbq7FsG8QPDrZBg==
+  dependencies:
+    "@babel/helper-create-class-features-plugin" "^7.3.0"
     "@babel/helper-plugin-utils" "^7.0.0"
 
 "@babel/plugin-proposal-export-namespace-from@^7.2.0":
@@ -564,11 +583,27 @@
     "@babel/helper-get-function-arity" "^7.0.0"
     "@babel/helper-plugin-utils" "^7.0.0"
 
+"@babel/plugin-transform-react-constant-elements@^7.0.0":
+  version "7.2.0"
+  resolved "https://registry.npmjs.org/@babel/plugin-transform-react-constant-elements/-/plugin-transform-react-constant-elements-7.2.0.tgz#ed602dc2d8bff2f0cb1a5ce29263dbdec40779f7"
+  integrity sha512-YYQFg6giRFMsZPKUM9v+VcHOdfSQdz9jHCx3akAi3UYgyjndmdYGSXylQ/V+HswQt4fL8IklchD9HTsaOCrWQQ==
+  dependencies:
+    "@babel/helper-annotate-as-pure" "^7.0.0"
+    "@babel/helper-plugin-utils" "^7.0.0"
+
 "@babel/plugin-transform-react-display-name@^7.0.0":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-display-name/-/plugin-transform-react-display-name-7.2.0.tgz#ebfaed87834ce8dc4279609a4f0c324c156e3eb0"
   integrity sha512-Htf/tPa5haZvRMiNSQSFifK12gtr/8vwfr+A9y69uF0QcU77AVu4K7MiHEkTxF7lQoHOL0F9ErqgfNEAKgXj7A==
   dependencies:
+    "@babel/helper-plugin-utils" "^7.0.0"
+
+"@babel/plugin-transform-react-inline-elements@^7.0.0":
+  version "7.2.0"
+  resolved "https://registry.npmjs.org/@babel/plugin-transform-react-inline-elements/-/plugin-transform-react-inline-elements-7.2.0.tgz#3e36e7c47f1c21f52b2b0090d5cd83ceb19a4770"
+  integrity sha512-OAflI+josEl8xoAzZYpFnN+C4e9wvxDecExTtvDsteAcChIZtsH/D2kMNcJnrrzbFzCroGajCTr9tAB7K0KsiQ==
+  dependencies:
+    "@babel/helper-builder-react-jsx" "^7.0.0"
     "@babel/helper-plugin-utils" "^7.0.0"
 
 "@babel/plugin-transform-react-jsx-self@^7.0.0":
@@ -720,7 +755,7 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-transform-flow-strip-types" "^7.0.0"
 
-"@babel/preset-react@^7.0.0":
+"@babel/preset-react@7.0.0", "@babel/preset-react@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/preset-react/-/preset-react-7.0.0.tgz#e86b4b3d99433c7b3e9e91747e2653958bc6b3c0"
   integrity sha512-oayxyPS4Zj+hF6Et11BwuBkmpgT/zMxyuZgFrMeZID6Hdh3dGlk4sHCAhdBCpuCKW2ppBfl2uCCetlrUIJRY3w==
@@ -2533,6 +2568,11 @@ babel-plugin-dead-code-elimination@^1.0.2:
   resolved "https://registry.yarnpkg.com/babel-plugin-dead-code-elimination/-/babel-plugin-dead-code-elimination-1.0.2.tgz#5f7c451274dcd7cccdbfbb3e0b85dd28121f0f65"
   integrity sha1-X3xFEnTc18zNv7s+C4XdKBIfD2U=
 
+babel-plugin-dev-expression@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.npmjs.org/babel-plugin-dev-expression/-/babel-plugin-dev-expression-0.2.1.tgz#d4a7beefefbb50e3f2734990a82a2486cf9eb9ee"
+  integrity sha1-1Ke+7++7UOPyc0mQqCokhs+eue4=
+
 babel-plugin-eval@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-eval/-/babel-plugin-eval-1.0.1.tgz#a2faed25ce6be69ade4bfec263f70169195950da"
@@ -2930,6 +2970,11 @@ babel-plugin-transform-object-rest-spread@^6.22.0:
   dependencies:
     babel-plugin-syntax-object-rest-spread "^6.8.0"
     babel-runtime "^6.26.0"
+
+babel-plugin-transform-react-remove-prop-types@^0.4.20:
+  version "0.4.23"
+  resolved "https://registry.npmjs.org/babel-plugin-transform-react-remove-prop-types/-/babel-plugin-transform-react-remove-prop-types-0.4.23.tgz#f8677da27c9b0eb463aed1f8fd551df783ef142f"
+  integrity sha512-qMF7Il49meopQZ4d8cmLvlUnJhV8cREs5b55j1SaK7Wa+AHpg6t9SqqHFlM+qZoG4wagZIIB43Gn53Ur7J5xPg==
 
 babel-plugin-transform-regenerator@^6.24.1:
   version "6.26.0"

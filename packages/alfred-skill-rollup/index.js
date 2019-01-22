@@ -26,6 +26,7 @@ module.exports = {
     {
       name: 'rollup.base',
       path: 'rollup.base.js',
+      write: true,
       config: {
         external(id) {
           return id.includes('node_modules');

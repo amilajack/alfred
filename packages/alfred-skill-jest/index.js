@@ -30,10 +30,9 @@ module.exports = {
         'node_modules',
         'jest-transformer.js'
       );
-      const babelConfig = JSON.stringify({
-        presets: getConfigByConfigName('babel', ctf.get('babel').configFiles)
-          .config.presets
-      });
+      const babelConfig = JSON.stringify(
+        getConfigByConfigName('babel', ctf.get('babel').configFiles).config
+      );
       const hiddenTmpConfigPath = path.join(
         alfredConfig.root,
         'node_modules',
