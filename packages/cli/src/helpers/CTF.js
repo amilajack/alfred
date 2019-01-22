@@ -262,10 +262,10 @@ export async function diffCtfDepsOfAllInterfaceStates(
   currAlfredConfig: AlfredConfig
 ): Set<string> {
   const stateWithDuplicateDeps = await Promise.all(
-    INTERFACE_STATES.map(state =>
+    INTERFACE_STATES.map(interfaceState =>
       Promise.all([
-        generateCtfFromConfig(prevAlfredConfig, state),
-        generateCtfFromConfig(currAlfredConfig, state)
+        generateCtfFromConfig(prevAlfredConfig, interfaceState),
+        generateCtfFromConfig(currAlfredConfig, interfaceState)
       ])
     )
   );

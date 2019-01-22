@@ -17,6 +17,7 @@ const siteConfig = {
   url: 'https://alfred.js.org',
   cname: 'alfred.js.org',
   baseUrl: '/',
+  editUrl: 'https://github.com/alfred-js/alfred/blob/master/docs/',
 
   projectName: 'alfred',
   organizationName: 'amilajack',

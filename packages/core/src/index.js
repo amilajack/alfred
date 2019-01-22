@@ -14,6 +14,7 @@ import lodashCtf from '@alfredpkg/skill-lodash';
 import mergeConfigs from '@alfredpkg/merge-configs';
 import pkgUp from 'pkg-up';
 import lodash from 'lodash';
+import type { AlfredConfig } from '@alfredpkg/cli';
 
 // All the possible interface states
 export const INTERFACE_STATES = [
@@ -155,13 +156,13 @@ type UsingInterface = {|
   interfaces: InterfaceInputType,
   subcommand: string,
   hooks: {
-    call: (
+    call: ({
       fileConfigPath: string,
       config: configFileType,
       alfredConfig: Object,
-      state: InterfaceState,
+      interfaceState: InterfaceState,
       subcommand: string
-    ) => string,
+    }) => string,
     install?: () => void
   }
 |};
@@ -310,7 +311,7 @@ export const AddCtfHelpers: CtfHelpers = {
 };
 export default function CTF(
   ctfs: Array<CtfNode>,
-  alfredConfig: Object,
+  alfredConfig: AlfredConfig,
   interfaceState: InterfaceState
 ): CtfMap {
   const map: CtfMap = new Map();
@@ -454,7 +455,7 @@ export function getInterfaceForSubcommand(ctf: CtfMap, subcommand: string) {
 
 export function getExecuteWrittenConfigsMethods(
   ctf: CtfMap,
-  state: InterfaceState
+  interfaceState: InterfaceState
 ) {
   return Array.from(ctf.values())
     .filter(
@@ -470,15 +471,15 @@ export function getExecuteWrittenConfigsMethods(
       return ctfNode.interfaces.map(e => {
         const { subcommand } = require(e.name); // eslint-disable-line
         return {
-          fn: alfredConfig =>
-            // @TODO: Pass configFiles, ctf, alfredConfig, and state as an object to .call()
-            ctfNode.hooks.call(
+          fn: (alfredConfig: AlfredConfig, flags: Array<string> = []) =>
+            ctfNode.hooks.call({
               configFiles,
               ctf,
               alfredConfig,
-              state,
-              subcommand
-            ),
+              interfaceState,
+              subcommand,
+              flags
+            }),
           // @HACK: If interfaces were defined, we could import the @alfredpkg/interface-*
           //        and use the `subcommand` property. This should be done after we have
           //        some interfaces to work with

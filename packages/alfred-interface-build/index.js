@@ -1,7 +1,7 @@
-// Example of a state object
+// Example of a interfaceState object
 // Note how the property names are singular, unlike the 'supports' config
 //
-// state = {
+// interfaceState = {
 //   // Flag name and argument types
 //   env: 'production'
 //   // All the supported targets a `build` skill should build

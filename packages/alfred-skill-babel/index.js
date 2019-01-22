@@ -26,7 +26,7 @@ module.exports = {
     }
   ],
   hooks: {
-    async call(configFiles, ctf, alfredConfig) {
+    async call({ configFiles, alfredConfig, flags }) {
       const configPath = getConfigPathByConfigName('babel', configFiles);
       const binPath = await getPkgBinPath('@babel/cli', 'babel');
       return execCommand(
@@ -34,7 +34,8 @@ module.exports = {
           binPath,
           alfredConfig.showConfigs
             ? `--configFile ${configPath} .`
-            : path.join(alfredConfig.root, 'node_modules', 'jest.config.js')
+            : path.join(alfredConfig.root, 'node_modules', 'jest.config.js'),
+          ...flags
         ].join(' ')
       );
     }

@@ -21,7 +21,7 @@ module.exports = {
     }
   ],
   hooks: {
-    async call(configFiles, ctf, alfredConfig) {
+    async call({ configFiles, ctf, alfredConfig, flags }) {
       const configPath = getConfigPathByConfigName('jest', configFiles);
       const binPath = await getPkgBinPath('jest-cli', 'jest');
       // @TODO Create a hidden `./node_modules/.alfred` directory to put configs in
@@ -60,7 +60,8 @@ module.exports = {
           binPath,
           alfredConfig.showConfigs
             ? `--config ${configPath} ${alfredConfig.root}`
-            : `--config ${hiddenTmpConfigPath} ${alfredConfig.root}`
+            : `--config ${hiddenTmpConfigPath} ${alfredConfig.root}`,
+          ...flags
         ].join(' ')
       );
     }

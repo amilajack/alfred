@@ -66,17 +66,17 @@ module.exports = {
     }
   ],
   hooks: {
-    async call(configFiles, ctf, alfredConfig, state, subcommand) {
+    async call({ configFiles, interfaceState, subcommand }) {
       // if (alfredConfig.showConfigs) {
       //   const configPath = getConfigPathByConfigName(
       //     'rollup.base',
       //     configFiles
       //   );
       //   const binPath = await getPkgBinPath('rollup', 'rollup');
-      //   const filename = [state.projectType, state.target, 'js'].join('.');
+      //   const filename = [interfaceState.projectType, interfaceState.target, 'js'].join('.');
       //   const watchFlag = subcommand === 'start' ? '--watch' : '';
       //   const cmd =
-      //     state.env === 'production'
+      //     interfaceState.env === 'production'
       //       ? `./src/${filename} ${watchFlag} --format esm --file ./targets/prod/${filename}`
       //       : `./src/${filename} ${watchFlag} --format cjs --file ./targets/dev/${filename}`;
       //   return execCommand(
@@ -94,10 +94,10 @@ module.exports = {
         'rollup.dev'
       ].map(e => getConfigByConfigName(e, configFiles).config);
       const inputAndOutputConfigs = {
-        input: `./src/lib.${state.target}.js`,
+        input: `./src/lib.${interfaceState.target}.js`,
         output: {
-          file: `./targets/${mapEnvToShortName(state.env)}/lib.${
-            state.target
+          file: `./targets/${mapEnvToShortName(interfaceState.env)}/lib.${
+            interfaceState.target
           }.js`
         }
       };
@@ -118,11 +118,11 @@ module.exports = {
 
       switch (subcommand) {
         case 'start': {
-          const watchConf = state.env === 'production' ? prod : dev;
+          const watchConf = interfaceState.env === 'production' ? prod : dev;
           // @TODO: Mention which port and host the server is running (see webpack skill)
           console.log(
             `Starting ${
-              state.env !== 'production' ? 'unoptimized' : 'optimized'
+              interfaceState.env !== 'production' ? 'unoptimized' : 'optimized'
             } build...`
           );
           return rollup.watch({
@@ -133,14 +133,16 @@ module.exports = {
         case 'build': {
           console.log(
             `Building ${
-              state.env !== 'production' ? 'unoptimized' : 'optimized'
+              interfaceState.env !== 'production' ? 'unoptimized' : 'optimized'
             } build...`
           );
           const bundle = await rollup.rollup(
-            state.env === 'production' ? prod : dev
+            interfaceState.env === 'production' ? prod : dev
           );
 
-          return bundle.write((state.env === 'production' ? prod : dev).output);
+          return bundle.write(
+            (interfaceState.env === 'production' ? prod : dev).output
+          );
         }
         default:
           throw new Error(`Invalid subcommand: "${subcommand}"`);

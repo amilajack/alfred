@@ -2,7 +2,7 @@ alfred
 ======
 [![Build Status](https://travis-ci.com/amilajack/alfred.svg?token=stGf151gAJ11ZUi8LyvG&branch=master)](https://travis-ci.com/amilajack/alfred)
 
-A standard workflow for JavaScript projects
+A Modular JS Toolchain
 
 ## Goals
 
@@ -31,13 +31,14 @@ alfred new my-app
 cd my-app
 
 # Built-in Subcommands
+alfred new
+alfred learn
+alfred skills
 alfred start
 alfred build
 alfred clean
 alfred format
 alfred test
-alfred new
-alfred skills
 
 # Planned Built-in Subcommands
 alfred targets
@@ -67,8 +68,8 @@ See our [examples directory](https://github.com/amilajack/alfred/tree/master/exa
 |  | Example | Descrption |
 | --- | --- | --- |
 | 1.|  [hello world](https://github.com/amilajack/alfred/tree/master/examples/hello-world) | A simple hello work app in node |
-| 2.|  [typescript](https://github.com/amilajack/alfred/tree/master/examples/typescript) | **HELP WANTED** |
-| 3.|  [react](https://github.com/amilajack/alfred/tree/master/examples/react) | **HELP WANTED** |
+| 2.|  typescript | **HELP WANTED** |
+| 3.|  react | **HELP WANTED** |
 
 ## Local Setup
 
@@ -76,6 +77,7 @@ See our [examples directory](https://github.com/amilajack/alfred/tree/master/exa
 git clone https://github.com/amilajack/alfred
 cd alfred
 yarn
+yarn test
 ```
 
 ## Alfred Skill Example
@@ -235,7 +237,7 @@ When a author of the app installs `react`, Alfred will recommend the skills `rec
 ```
 $ yarn add react
 
-`react` recommends installing the Alfred skill `"@alfredpkg/skill-react"`.
+`react` recommends installing the Alfred skill "@alfredpkg/skill-react".
 
 Would you like to install it? (Y/n)
 ```
@@ -250,3 +252,10 @@ Would you like to install it? (Y/n)
 * `package.json`
 * `package-lock.json` or `yarn.lock`
 * `README.md`
+
+
+## Prior Art
+
+* [Cargo](https://github.com/rust-lang/cargo)
+* [NPM](https://npmjs.org), [Yarn](https://yarnpkg.com)
+* [Yeoman](http://yeoman.io)

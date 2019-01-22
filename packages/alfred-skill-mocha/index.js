@@ -13,7 +13,7 @@ module.exports = {
   devDependencies: { mocha: '5.2.0' },
   configFiles: [],
   hooks: {
-    async call(configFiles, ctf, alfredConfig) {
+    async call({ ctf, alfredConfig, flags }) {
       const binPath = await getPkgBinPath('mocha', 'mocha');
       const mochaBabelRegisterPath = path.join(
         alfredConfig.root,
@@ -30,7 +30,9 @@ module.exports = {
         require("@babel/register")(${JSON.stringify(babelConfig)});`
       );
       return execCommand(
-        [binPath, `--require ${mochaBabelRegisterPath} tests`].join(' ')
+        [binPath, `--require ${mochaBabelRegisterPath} tests`, ...flags].join(
+          ' '
+        )
       );
     }
   },

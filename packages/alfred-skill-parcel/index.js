@@ -24,7 +24,7 @@ module.exports = {
   },
   configFiles: [],
   hooks: {
-    async call(configFiles, ctf, alfredConfig, interfaceState, subcommand) {
+    async call({ alfredConfig, interfaceState, subcommand }) {
       const Bundler = require('parcel');
       const src = path.join(alfredConfig.root, 'src');
       const entryFiles = [];

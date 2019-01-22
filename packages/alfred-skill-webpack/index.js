@@ -23,6 +23,7 @@ const interfaceConfig = {
 module.exports = {
   name: 'webpack',
   description: 'Build, optimize, and bundle assets in your app',
+  write: true,
   interfaces: [
     ['@alfredpkg/interface-build', interfaceConfig],
     ['@alfredpkg/interface-start', interfaceConfig]
@@ -129,7 +130,7 @@ module.exports = {
     }
   ],
   hooks: {
-    async call(configFiles, ctf, alfredConfig, state, subcommand) {
+    async call({ configFiles, interfaceState, subcommand }) {
       const { config: baseConfig } = getConfigByConfigName(
         'webpack.base',
         configFiles
@@ -152,8 +153,8 @@ module.exports = {
       );
       const mergedConfig = mergeConfigs(
         baseConfig,
-        state.env === 'production' ? prodConfig : devConfig,
-        state.target === 'browser' ? browserConfig : nodeConfig
+        interfaceState.env === 'production' ? prodConfig : devConfig,
+        interfaceState.target === 'browser' ? browserConfig : nodeConfig
       );
 
       switch (subcommand) {
@@ -173,7 +174,9 @@ module.exports = {
             const url = `http://localhost:${port}`;
             console.log(
               `Starting ${
-                state.env !== 'production' ? 'unoptimized' : 'optimized'
+                interfaceState.env !== 'production'
+                  ? 'unoptimized'
+                  : 'optimized'
               } build on ${url}...`
             );
             await openInBrowser(url);
@@ -182,7 +185,7 @@ module.exports = {
         case 'build': {
           console.log(
             `Building ${
-              state.env !== 'production' ? 'unoptimized' : 'optimized'
+              interfaceState.env !== 'production' ? 'unoptimized' : 'optimized'
             } build...`
           );
           return webpack(mergedConfig, (err, stats) => {

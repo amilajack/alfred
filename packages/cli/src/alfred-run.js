@@ -33,6 +33,11 @@ import generateCtfFromConfig, {
   const [subcommand] = subcommands;
   const { alfredConfig } = await loadConfigs();
 
+  // Get the flags that are passed to the skills
+  const [, ...skillFlags] = args.rawArgs.slice(
+    args.rawArgs.findIndex(curr => curr === subcommand)
+  );
+
   // $FlowFixMe
   module.paths.push(`${alfredConfig.root}/node_modules`);
 
@@ -85,7 +90,7 @@ import generateCtfFromConfig, {
             );
           }
 
-          return commands[subcommand](alfredConfig);
+          return commands[subcommand](alfredConfig, skillFlags || []);
         })
     )
   );

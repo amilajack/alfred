@@ -18,7 +18,7 @@ module.exports = {
     }
   ],
   hooks: {
-    async call(configFiles, ctf, alfredConfig) {
+    async call({ configFiles, alfredConfig, flags }) {
       const binPath = await getPkgBinPath('prettier');
       const configPath = getConfigPathByConfigName('prettier', configFiles);
       return execCommand(
@@ -29,6 +29,7 @@ module.exports = {
           '--single-quote',
           '--write',
           '{src,tests}/*',
+          ...flags,
           alfredConfig.showConfigs ? `--config ${configPath}` : ''
         ].join(' ')
       );

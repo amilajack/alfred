@@ -26,12 +26,12 @@ module.exports = {
     }
   ],
   hooks: {
-    async call(configFiles, ctf, alfredConfig) {
+    async call({ configFiles, alfredConfig, flags }) {
       const configPath = getConfigPathByConfigName('eslint', configFiles);
       const binPath = await getPkgBinPath('eslint', 'eslint');
       if (alfredConfig.showConfigs) {
         return execCommand(
-          [binPath, `--config ${configPath} src tests`].join(' ')
+          [binPath, `--config ${configPath} src tests`, ...flags].join(' ')
         );
       }
       const { config } = getConfigByConfigName('eslint', configFiles);
