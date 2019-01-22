@@ -218,7 +218,21 @@ export function mapEnvToShortName(envName: string): string {
       return 'test';
     }
     default: {
-      throw new Error(`Unsupported environment name "${envName}"`);
+      throw new Error(`Unsupported environment "${envName}"`);
+    }
+  }
+}
+
+export function mapShortNameEnvToLongName(envName: string): string {
+  switch (envName) {
+    case 'prod': {
+      return 'production';
+    }
+    case 'dev': {
+      return 'development';
+    }
+    default: {
+      throw new Error(`Unsupported short name environment "${envName}"`);
     }
   }
 }

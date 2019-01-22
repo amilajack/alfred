@@ -34,8 +34,8 @@ import generateCtfFromConfig, {
   const { alfredConfig } = await loadConfigs();
 
   // Get the flags that are passed to the skills
-  const [, ...skillFlags] = args.rawArgs.slice(
-    args.rawArgs.findIndex(curr => curr === subcommand)
+  const skillFlags = args.rawArgs.slice(
+    args.rawArgs.findIndex(curr => curr === subcommand) + 1
   );
 
   // $FlowFixMe
@@ -71,11 +71,17 @@ import generateCtfFromConfig, {
       generateCtfFromConfig(alfredConfig, interfaceState)
         .then(writeConfigsFromCtf)
         .then(ctf => {
-          const commands = getExecuteWrittenConfigsMethods(ctf, interfaceState);
           const subcommandInterface = getInterfaceForSubcommand(
             ctf,
             subcommand
           );
+
+          const filteredSkillFlags =
+            'handleFlags' in subcommandInterface
+              ? subcommandInterface.handleFlags(skillFlags, interfaceState)
+              : skillFlags;
+
+          const commands = getExecuteWrittenConfigsMethods(ctf, interfaceState);
 
           if (!subcommandInterface.runForAllTargets) {
             if (commandWasExceuted) {
@@ -90,7 +96,7 @@ import generateCtfFromConfig, {
             );
           }
 
-          return commands[subcommand](alfredConfig, skillFlags || []);
+          return commands[subcommand](alfredConfig, filteredSkillFlags || []);
         })
     )
   );

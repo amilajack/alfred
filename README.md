@@ -158,6 +158,16 @@ export default {
 }
 ```
 
+## Passing Flags to Skills
+
+The following example passes flags to eslint. The example adds a custom formatter to eslint.
+
+```bash
+alfred lint --format pretty
+```
+
+For now, this **only works when `showConfigs` is set to `true`**.
+
 ## Interface Example
 
 ```js

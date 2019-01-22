@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "../../../packages/cli/lib/alfred.js run build",
+    "_build": "../../../packages/cli/lib/alfred.js run build",
+    "build": "yarn _build && yarn _build --production && yarn _build --prod && yarn _build --development && yarn _build --dev && yarn _build --test",
     "clean": "../../../packages/cli/lib/alfred.js run clean",
     "format": "../../../packages/cli/lib/alfred.js run format",
     "lint": "../../../packages/cli/lib/alfred.js run lint --env browser,node --format pretty",

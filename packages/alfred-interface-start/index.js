@@ -1,4 +1,8 @@
-const { normalizeInterfacesOfSkill } = require('@alfredpkg/core');
+/* eslint no-param-reassign: off */
+const {
+  normalizeInterfacesOfSkill,
+  mapShortNameEnvToLongName
+} = require('@alfredpkg/core');
 const debug = require('debug')('@alfredpkg/interface-start');
 
 const name = 'My App';
@@ -13,6 +17,31 @@ module.exports = {
   description: 'Start your app and library and reload on change',
 
   runForAllTargets: true,
+
+  handleFlags(flags, interfaceState) {
+    const supportedFlags = new Set(['--production', '--development', '--test']);
+    const shortNameSupportedFlags = new Set(['--prod', '--dev']);
+    return flags.reduce((prev, curr) => {
+      const env = curr.slice('--'.length);
+      if (shortNameSupportedFlags.has(curr)) {
+        interfaceState.env = mapShortNameEnvToLongName(env);
+        console.log(
+          `Setting "process.env.NODE_ENV" to "${interfaceState.env}"`
+        );
+        return prev;
+      }
+      if (supportedFlags.has(curr)) {
+        interfaceState.env = env;
+        console.log(
+          `Setting "process.env.NODE_ENV" to "${interfaceState.env}"`
+        );
+        return prev;
+      }
+      prev.push(curr);
+      return prev;
+    }, []);
+  },
+
   /**
    * Given an array of CTF nodes, return the CTF which should be used based
    * on the current environment and current target

@@ -1,3 +1,4 @@
+/* eslint no-param-reassign: off */
 // Example of a interfaceState object
 // Note how the property names are singular, unlike the 'supports' config
 //
@@ -9,7 +10,10 @@
 //   // Project type
 //   projectType: 'lib'
 // },
-const { normalizeInterfacesOfSkill } = require('@alfredpkg/core');
+const {
+  normalizeInterfacesOfSkill,
+  mapShortNameEnvToLongName
+} = require('@alfredpkg/core');
 const debug = require('debug')('@alfredpkg/interface-build');
 
 module.exports = {
@@ -18,6 +22,30 @@ module.exports = {
   description: 'Build, optimize, and bundle assets in your app',
 
   runForAllTargets: true,
+
+  handleFlags(flags, interfaceState) {
+    const supportedFlags = new Set(['--production', '--development', '--test']);
+    const shortNameSupportedFlags = new Set(['--prod', '--dev']);
+    return flags.reduce((prev, curr) => {
+      const env = curr.slice('--'.length);
+      if (shortNameSupportedFlags.has(curr)) {
+        interfaceState.env = mapShortNameEnvToLongName(env);
+        console.log(
+          `Setting "process.env.NODE_ENV" to "${interfaceState.env}"`
+        );
+        return prev;
+      }
+      if (supportedFlags.has(curr)) {
+        interfaceState.env = env;
+        console.log(
+          `Setting "process.env.NODE_ENV" to "${interfaceState.env}"`
+        );
+        return prev;
+      }
+      prev.push(curr);
+      return prev;
+    }, []);
+  },
 
   /**
    * Given an array of CTF nodes, return the CTF which should be used based
