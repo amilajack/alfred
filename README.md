@@ -215,6 +215,69 @@ type AlfredInterface = {
 }
 ```
 
+## Alfred Configs and Extending Them
+
+Suppose you have the following Alfred config:
+
+```jsonc
+{
+  // ...
+  "alfred": {
+    "skills": [
+      "@alfredpkg/skill-parcel",
+      ["@alfredpkg/skill-babel", {
+        "presets": [
+          "@babel-preset-env",
+          "@babel-preset-flow",
+          "@babel-preset-react"
+        ],
+        "plugins": [
+          "@babel/plugin-proposal-class-properties"
+        ]
+      }],
+      ["@alfredpkg/skill-eslint", {
+        "rules": {
+          "no-console": "off"
+        }
+      }]
+    ]
+  }
+}
+```
+
+This config can be extracted to an Alfred config like so:
+
+```jsonc
+// alfred-config-my-app/index.json
+{
+  "skills": [
+    "@alfredpkg/skill-parcel",
+    ["@alfredpkg/skill-babel", {
+      "presets": [
+        "@babel-preset-env",
+        "@babel-preset-flow",
+        "@babel-preset-react"
+      ],
+    }],
+    ["@alfredpkg/skill-eslint", {
+      "rules": {
+        "no-console": "off"
+      }
+    }]
+  ]
+}
+```
+
+This config can be imported like so:
+
+```jsonc
+{
+  "alfred": {
+    "extends": "my-app"
+  }
+}
+```
+
 ## Alfred Libraries Suggesting Skills
 
 Assume `react` has the following `package.json`:
