@@ -1,3 +1,4 @@
+/* eslint import/no-dynamic-require: off */
 import path from 'path';
 import rimraf from 'rimraf';
 import fs from 'fs';
@@ -15,6 +16,8 @@ import mergeConfigs from '@alfredpkg/merge-configs';
 import pkgUp from 'pkg-up';
 import lodash from 'lodash';
 import type { AlfredConfig } from '@alfredpkg/cli';
+
+export { default as config } from './config';
 
 // All the possible interface states
 export const INTERFACE_STATES = [
@@ -108,7 +111,7 @@ export function normalizeInterfacesOfSkill(
       if (typeof e === 'string') {
         return {
           name: e,
-          module: require(e), // eslint-disable-line
+          module: require(e)
         };
       }
       if (Array.isArray(e)) {
@@ -120,7 +123,7 @@ export function normalizeInterfacesOfSkill(
         const [name, config] = e;
         return {
           name,
-          module: require(name), // eslint-disable-line
+          module: require(name),
           config
         };
       }
@@ -246,7 +249,7 @@ export async function getPkgBinPath(pkgName: string, binName: string) {
   const pkgPath = require.resolve(pkgName);
   const pkgJsonPath = await pkgUp(pkgPath);
 
-  const { bin } = require(pkgJsonPath); // eslint-disable-line
+  const { bin } = require(pkgJsonPath);
   if (!bin) {
     throw new Error(
       `Module "${pkgName}" does not have a binary because it does not have a "bin" property in it's package.json`
@@ -335,8 +338,9 @@ export default function CTF(
       ...ctfNode,
       ...AddCtfHelpers
     };
-    // eslint-disable-next-line
-    ctfWithHelpers.interfaces = normalizeInterfacesOfSkill(ctfWithHelpers.interfaces);
+    ctfWithHelpers.interfaces = normalizeInterfacesOfSkill(
+      ctfWithHelpers.interfaces
+    );
     if (ctfWithHelpers.interfaces.length) {
       ctfWithHelpers.interfaces.forEach(e => {
         if (e.module.resolveSkill) {
@@ -424,8 +428,9 @@ export async function writeConfigsFromCtf(ctf: CtfMap): CtfMap {
 
 export function addSubCommandsToCtfNodes(ctf: CtfMap): CtfMap {
   ctf.forEach(ctfNode => {
-    const subcommands = ctfNode.interfaces.map(e => require(e.name).subcommand); // eslint-disable-line
-    ctfNode.subcommands = subcommands; // eslint-disable-line
+    const subcommands = ctfNode.interfaces.map(e => require(e.name).subcommand);
+    // eslint-disable-next-line no-param-reassign
+    ctfNode.subcommands = subcommands;
   });
   return ctf;
 }
@@ -455,7 +460,11 @@ export function getInterfaceForSubcommand(ctf: CtfMap, subcommand: string) {
       ctfNode =>
         ctfNode.hooks && ctfNode.interfaces && ctfNode.interfaces.length
     )
-    .reduce((arr, ctfNode) => arr.concat(ctfNode.interfaces.map(e => require(e.name))), []) // eslint-disable-line
+    .reduce(
+      (arr, ctfNode) =>
+        arr.concat(ctfNode.interfaces.map(e => require(e.name))),
+      []
+    )
     .find(ctfInterface => ctfInterface.subcommand === subcommand);
 
   if (!interfaceForSubcommand) {
@@ -483,7 +492,7 @@ export function getExecuteWrittenConfigsMethods(
         path: path.join(configsBasePath, configFile.path)
       }));
       return ctfNode.interfaces.map(e => {
-        const { subcommand } = require(e.name); // eslint-disable-line
+        const { subcommand } = require(e.name);
         return {
           fn: (alfredConfig: AlfredConfig, flags: Array<string> = []) =>
             ctfNode.hooks.call({

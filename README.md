@@ -227,7 +227,7 @@ type AlfredInterface = {
 }
 ```
 
-## Alfred Configs and Extending Them
+## Extending Alfred Configs
 
 Suppose you have the following Alfred config:
 
@@ -328,17 +328,20 @@ Would you like to install it? (Y/n)
 * `package-lock.json` or `yarn.lock`
 * `README.md`
 
-## Implemented Skills
+## Alfred Skills Implementation Status
 
-| Infrastructure   | Implemented Skills ✅     |
-| ---              | ---                      |
-| Bundlers         |  Webpack, Rollup, Parcel |
-| Transpilers      |  Babel                   |
-| Test Frameworks  |  Jest, Mocha             |
-| Formatters       |  Prettier                |
-| Libraries        |  Lodash                  |
-| Linters          |  ESLint                  |
-| Front End        |  React                   |
+| Infrastructure     | Skills                   | Implemented |
+| ---                | ---                      | ---         |
+| Bundlers           |  Webpack, Rollup, Parcel | ✅           |
+| Transpilers        |  Babel                   | ✅           |
+| Test Frameworks    |  Jest, Mocha, Jasmine    | ✅ ✅ ❌      |
+| Formatters         |  Prettier                | ✅           |
+| Libraries          |  Lodash                  | ✅           |
+| Linters            |  ESLint                  | ✅           |
+| Front End          |  React, Angular          | ✅ ❌        |
+| Documentation      |  JSDoc, Typedoc          | ❌           |
+| Type Checkers      |  Flow, TypeScript        | ❌           |
+| End to End Testing |  TestCafe, Cypress       | ❌           |
 
 ## Prior Art
 
@@ -349,6 +352,7 @@ Would you like to install it? (Y/n)
 ## Inspiration
 
 * [parcel](http://parceljs.org)
+* [elm](https://elm-lang.org)
 * [Cargo](https://github.com/rust-lang/cargo)
 * [NPM](https://npmjs.org), [Yarn](https://yarnpkg.com)
 * [webpack-merge](https://github.com/survivejs/webpack-merge)

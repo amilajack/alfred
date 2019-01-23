@@ -5,7 +5,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps inline",
     "build-watch": "cross-env NODE_ENV=production babel src --out-dir lib --watch --source-maps inline",
-    "test": "jest"
+    "test": "jest --color"
   },
   "jest": {
     "testEnvironment": "node"
@@ -24,13 +24,17 @@
     "@alfredpkg/skill-babel": "^0.0.0",
     "@alfredpkg/skill-eslint": "^0.0.0",
     "@alfredpkg/skill-jest": "^0.0.0",
+    "@alfredpkg/skill-lodash": "^0.0.0",
     "@alfredpkg/skill-prettier": "^0.0.0",
     "@alfredpkg/skill-react": "^0.0.0",
     "@alfredpkg/skill-rollup": "^0.0.0",
     "@alfredpkg/skill-webpack": "^0.0.0",
-    "@alfredpkg/skill-lodash": "^0.0.0",
+    "debug": "^4.1.1",
+    "import-fresh": "^3.0.0",
     "lodash": "^4.17.11",
+    "path-is-inside": "^1.0.2",
     "pkg-up": "^2.0.0",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "strip-json-comments": "^2.0.1"
   }
 }
