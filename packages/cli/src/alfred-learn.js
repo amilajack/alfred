@@ -1,6 +1,7 @@
 import program from 'commander';
 import fs from 'fs';
 import formatPkg from 'format-package';
+import sortPkgJson from 'sort-package-json';
 import {
   loadConfigs,
   installDeps,
@@ -41,13 +42,15 @@ import {
   const dedupedSkills = Array.from(
     new Set([...configSkills, ...skillPkgNames])
   );
-  const formattedPkg = await formatPkg({
-    ...newPkg,
-    alfred: {
-      ...newPkg.alfred,
-      skills: dedupedSkills
-    }
-  });
+  const formattedPkg = await formatPkg(
+    sortPkgJson({
+      ...newPkg,
+      alfred: {
+        ...newPkg.alfred,
+        skills: dedupedSkills
+      }
+    })
+  );
   await fs.promises.writeFile(pkgPath, formattedPkg);
 
   // Find if any new deps need to be installed and install them
