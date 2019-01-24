@@ -356,3 +356,10 @@ Would you like to install it? (Y/n)
 * [Cargo](https://github.com/rust-lang/cargo)
 * [NPM](https://npmjs.org), [Yarn](https://yarnpkg.com)
 * [webpack-merge](https://github.com/survivejs/webpack-merge)
+
+## Philosophy
+
+* High Level
+* Opinionated
+* Simplicity
+* Reusability
