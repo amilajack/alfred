@@ -15,6 +15,7 @@
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
   "devDependencies": {
-    "@alfredpkg/alfred": "^0.0.0"
+    "@alfredpkg/cli": "^0.0.0",
+    "@alfredpkg/core": "^0.0.0"
   }
 }

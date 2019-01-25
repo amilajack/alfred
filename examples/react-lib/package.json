@@ -26,7 +26,8 @@
     "react-dom": "^16.7.0"
   },
   "devDependencies": {
-    "@alfredpkg/alfred": "^0.0.0",
+    "@alfredpkg/cli": "^0.0.0",
+    "@alfredpkg/core": "^0.0.0",
     "@alfredpkg/skill-react": "^0.0.0",
     "@babel/preset-react": "7.0.0",
     "babel-plugin-dev-expression": "^0.2.1",

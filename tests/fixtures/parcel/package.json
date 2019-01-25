@@ -20,7 +20,8 @@
     ]
   },
   "devDependencies": {
-    "@alfredpkg/alfred": "^0.0.0",
+    "@alfredpkg/cli": "^0.0.0",
+    "@alfredpkg/core": "^0.0.0",
     "@alfredpkg/skill-parcel": "0.0.0",
     "@babel/core": "^7.2.2"
   }
