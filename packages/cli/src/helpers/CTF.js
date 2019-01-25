@@ -7,7 +7,8 @@ import CTF, {
   CORE_CTFS,
   INTERFACE_STATES,
   normalizeInterfacesOfSkill,
-  AddCtfHelpers
+  AddCtfHelpers,
+  Config
 } from '@alfredpkg/core';
 import type { CtfMap, InterfaceState } from '@alfredpkg/core';
 import ValidateConfig from './Validation';
@@ -206,6 +207,9 @@ export function addMissingStdSkillsToCtf(
   return ctf;
 }
 
+/**
+ * @TODO Move to core/configs
+ */
 export async function loadConfigs(
   pkgPath: string = path.join(projectRoot, 'package.json')
 ): Promise<{ pkg: Object, pkgPath: string, alfredConfig: AlfredConfig }> {
@@ -215,15 +219,15 @@ export async function loadConfigs(
 
   // Read the package.json and validate the Alfred config
   const pkg = JSON.parse((await fs.promises.readFile(pkgPath)).toString());
-  const tmpAlfredConfig = pkg.alfred || {};
-  ValidateConfig(tmpAlfredConfig || {});
+  const rawAlfredConfig = pkg.alfred || {};
+  ValidateConfig(rawAlfredConfig || {});
 
   const defaultOpts = {
     npmClient: 'npm',
     skills: [],
     root: projectRoot
   };
-  const alfredConfig = Object.assign({}, defaultOpts, tmpAlfredConfig);
+  const alfredConfig = Config(Object.assign({}, defaultOpts, rawAlfredConfig));
 
   return { pkg, pkgPath, alfredConfig };
 }

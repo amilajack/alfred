@@ -17,7 +17,7 @@ import pkgUp from 'pkg-up';
 import lodash from 'lodash';
 import type { AlfredConfig } from '@alfredpkg/cli';
 
-export { default as config } from './config';
+export { default as Config } from './config';
 
 // All the possible interface states
 export const INTERFACE_STATES = [

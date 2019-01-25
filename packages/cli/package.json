@@ -65,10 +65,9 @@
     "validate-npm-package-name": "^3.0.0",
     "yarn-api": "^1.1.0"
   },
+  "engineStrict": true,
   "engines": {
-    "node": ">=8",
-    "npm": ">=6.6.0",
-    "yarn": ">=1.13.0"
+    "node": ">=10"
   },
   "files": [
     "lib"

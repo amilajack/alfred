@@ -1,0 +1,4 @@
+{
+  "skills": ["@alfredpkg/skill-parcel", "@alfredpkg/skill-lodash"],
+  "npmClient": "yarn"
+}

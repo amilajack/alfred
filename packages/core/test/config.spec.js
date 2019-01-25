@@ -1,4 +1,4 @@
-import config, { getConfigs } from '../src/config';
+import config, { getConfigs, requireConfig } from '../src/config';
 
 describe('config', () => {
   describe('getConfig', () => {
@@ -108,6 +108,37 @@ describe('config', () => {
           extends: () => {}
         })
       ).toThrowErrorMatchingSnapshot();
+    });
+
+    it('should require non-prefied modules', () => {
+      jest.mock(
+        'alfred-config-bliss',
+        () => ({
+          bar: 'bar',
+          foo: 'foobar'
+        }),
+        { virtual: true }
+      );
+      expect(
+        config({
+          extends: ['bliss', 'bliss']
+        })
+      ).toEqual({
+        bar: 'bar',
+        foo: 'foobar'
+      });
+      expect(
+        config({
+          extends: 'alfred-config-bliss'
+        })
+      ).toEqual({
+        bar: 'bar',
+        foo: 'foobar'
+      });
+    });
+
+    it('should throw if require non-existent module', () => {
+      expect(() => requireConfig('foo')).toThrowErrorMatchingSnapshot();
     });
   });
 });
