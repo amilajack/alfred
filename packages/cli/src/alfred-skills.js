@@ -12,7 +12,7 @@ import { getProjectRoot } from './helpers';
   const { alfredConfig } = await loadConfig(projectRoot);
 
   const interfaceStateCtfs = await Promise.all(
-    generateInterfaceStatesFromProject().map(interfaceState =>
+    generateInterfaceStatesFromProject(alfredConfig).map(interfaceState =>
       generateCtfFromConfig(alfredConfig, interfaceState).then(ctf =>
         Array.from(ctf.values()).filter(
           ctfNode =>

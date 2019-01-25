@@ -94,11 +94,16 @@ describe.skip('Migrate', () => {
   });
 
   it.skip("should not parse .gitignore'd files", async () => {
-    const files = await handleInput({
-      files: ['.'],
-      packageJsonPath: path.join(__dirname, '..', 'package.json'),
-      ...defaultConfig
-    });
+    const files = await handleInput(
+      {
+        files: ['.'],
+        packageJsonPath: path.join(__dirname, '..', 'package.json'),
+        ...defaultConfig
+      },
+      {
+        root: '/'
+      }
+    );
 
     console.log(files);
 

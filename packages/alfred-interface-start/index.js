@@ -18,7 +18,7 @@ module.exports = {
 
   runForAllTargets: true,
 
-  handleFlags(flags, interfaceState) {
+  handleFlags(flags, { interfaceState }) {
     const supportedFlags = new Set(['--production', '--development', '--test']);
     const shortNameSupportedFlags = new Set(['--prod', '--dev']);
     return flags.reduce((prev, curr) => {

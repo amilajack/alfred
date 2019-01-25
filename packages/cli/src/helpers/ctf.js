@@ -10,7 +10,6 @@ import CTF, {
   AddCtfHelpers
 } from '@alfredpkg/core';
 import type { CtfMap, InterfaceState, AlfredConfig } from '@alfredpkg/core';
-import { getProjectRoot } from './cli';
 
 export const ENTRYPOINTS = [
   'lib.node.js',
@@ -25,10 +24,9 @@ export const ENTRYPOINTS = [
   'app.react-native.js'
 ];
 
-// @HACK project root should be passed as argument to configFiles, which could be a function
-const projectRoot = getProjectRoot();
-
-export function generateInterfaceStatesFromProject(): Array<InterfaceState> {
+export function generateInterfaceStatesFromProject(
+  config: AlfredConfig
+): Array<InterfaceState> {
   const envs = ['production', 'development', 'test'];
   // Default to development env if no config given
   const env = envs.includes(process.env.NODE_ENV)
@@ -36,7 +34,7 @@ export function generateInterfaceStatesFromProject(): Array<InterfaceState> {
     : 'development';
 
   return ENTRYPOINTS.filter(e =>
-    fs.existsSync(path.join(projectRoot, 'src', e))
+    fs.existsSync(path.join(config.root, 'src', e))
   ).map(e => {
     const [projectType, target] = e.split('.');
     return {
@@ -203,7 +201,7 @@ export default async function generateCtfFromConfig(
   interfaceState: InterfaceState
 ): Promise<CtfMap> {
   // Check if any valid entrypoints exist
-  const states = generateInterfaceStatesFromProject();
+  const states = generateInterfaceStatesFromProject(alfredConfig);
   if (!states.length) {
     throw new Error(
       `The project must have at least one entrypoint. Here are some examples of entrypoints:\n\n${ENTRYPOINTS.map(

@@ -6,11 +6,11 @@ import path from 'path';
 import os from 'os';
 import fs from 'fs';
 import parser from 'gitignore-parser';
+import type { AlfredConfig } from '@alfredpkg/core';
 import Es6ImportsProvider from './es6-imports-provider';
 import LebabProvider from './lebab-provider';
 import EslintProvider from './eslint-provider';
 import ParseInput from '../helpers/parse-input';
-import { getProjectRoot } from '../helpers';
 import type { UserProviderInput, ProviderInput } from './provider-interface';
 
 export const copyFileAsync = util.promisify(fs.copyFile);
@@ -69,23 +69,25 @@ Proceeding anyway.
 
 type ProvidersType = Promise<Array<string> | void>;
 
-const projectRoot = getProjectRoot();
-
-export function handleInput(userInput: UserProviderInput) {
-  return fs.existsSync(path.join(projectRoot, '.gitignore'))
+export function handleInput(
+  userInput: UserProviderInput,
+  config: AlfredConfig
+) {
+  const { root } = config;
+  return fs.existsSync(path.join(root, '.gitignore'))
     ? (async () => {
         // Remove gitignored files
         const gitignoreFile = await readFileAsync(
-          path.join(projectRoot, '.gitignore')
+          path.join(root, '.gitignore')
         );
         const gitignore = parser.compile(gitignoreFile.toString());
-        // Strip the projectRoot from all filepaths. gitignore-parse only
+        // Strip the root from all filepaths. gitignore-parse only
         // works with relative filepaths
         const files = await ParseInput(userInput.files);
 
         return (files.filter(
           file =>
-            gitignore.accepts(file.substring(projectRoot.length)) &&
+            gitignore.accepts(file.substring(root.length)) &&
             !file.includes('node_modules') &&
             !file.includes('bower_components')
         ): Array<string>);
@@ -94,7 +96,8 @@ export function handleInput(userInput: UserProviderInput) {
 }
 
 export default async function Providers(
-  userInput: UserProviderInput
+  userInput: UserProviderInput,
+  config: AlfredConfig
 ): ProvidersType | Array<string> {
   const providers = [Es6ImportsProvider, LebabProvider, EslintProvider]
     .map(Provider => new Provider())
@@ -116,7 +119,7 @@ export default async function Providers(
 
   const parsedUserInput = {
     ...userInput,
-    files: await handleInput(userInput)
+    files: await handleInput(userInput, config)
   };
 
   // Validate files

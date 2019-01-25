@@ -69,7 +69,7 @@ import { getProjectRoot } from './helpers';
   await deleteConfigs(alfredConfig);
 
   return Promise.all(
-    generateInterfaceStatesFromProject().map(interfaceState =>
+    generateInterfaceStatesFromProject(alfredConfig).map(interfaceState =>
       generateCtfFromConfig(alfredConfig, interfaceState)
         .then(ctf => writeConfigsFromCtf(ctf, alfredConfig))
         .then(ctf => {
@@ -80,7 +80,10 @@ import { getProjectRoot } from './helpers';
 
           const filteredSkillFlags =
             'handleFlags' in subcommandInterface
-              ? subcommandInterface.handleFlags(skillFlags, interfaceState)
+              ? subcommandInterface.handleFlags(skillFlags, {
+                  interfaceState,
+                  alfredConfig
+                })
               : skillFlags;
 
           const commands = getExecuteWrittenConfigsMethods(
