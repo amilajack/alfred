@@ -5,23 +5,20 @@ Alfred
 ======
 [![Build Status](https://travis-ci.com/amilajack/alfred.svg?token=stGf151gAJ11ZUi8LyvG&branch=master)](https://travis-ci.com/amilajack/alfred)
 
-A Modular JS Toolchain
+### Alfred is a Modular JS Toolchain with the following goals:
 
-## Goals
-
-* Standardizing and simplifying JS infra and conventions
-* Allow extensibility of Alfred-configured infra
-* Ease of integration and migration Alfred
+* Standardizing and simplifying JS infrastructure and conventions
+* Encourage extensible and reusable infrastructure configuration
 * Provide opinionated configuration out of the box that meets the needs of most users
-* Encourage JS best practices
+* Encourage and implement best practices for JS libraries and applications
 
 ## Installation
 
 ```bash
 # NPM
-npm install --global @alfredpkg/cli
+npm install --global @alfredpkg/alfred
 # Yarn
-yarn global add @alfredpkg/cli
+yarn global add @alfredpkg/alfred
 ```
 
 ## Usage
@@ -361,6 +358,8 @@ Would you like to install it? (Y/n)
 * [Cargo](https://github.com/rust-lang/cargo)
 * [NPM](https://npmjs.org), [Yarn](https://yarnpkg.com)
 * [Yeoman](http://yeoman.io)
+* [create-react-app](https://github.com/facebook/create-react-app)
+* [react-boilerplate](https://www.github.com/react-boilerplate/react-boilerplate), [electron-react-boilerplate](https://www.github.com/electron-react-boilerplate/electron-react-boilerplate), and [many many other boilerplates](https://github.com/search?q=boilerplate)
 
 ## Inspiration
 

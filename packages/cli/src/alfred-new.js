@@ -13,8 +13,7 @@ import getSingleSubcommandFromArgs from './helpers/cli';
 
 const TEMPLATES_DIR = path.resolve(__dirname, 'templates');
 // @TODO @HARDCODE Remove hardcoding of versions
-const ALFRED_CLI_VERSION = '0.0.0';
-const ALFRED_CORE_VERSION = '0.0.0';
+const ALFRED_PKG_VERSION = '0.0.0';
 
 const gitConfig = () =>
   new Promise((resolve, reject) => {
@@ -182,8 +181,7 @@ async function createNewProject(cwd: string, name: string) {
   answers.targetFile = targetFile;
   answers.module = targetFile;
 
-  const alfredCoreFilePath = path.join(__dirname, '../../core');
-  const alfredCliFilePath = path.join(__dirname, '../../cli');
+  const alfredFilePath = path.join(__dirname, '../../alfred');
   const isApp = answers.projectType === 'app';
   const isBrowser = answers.target === 'browser';
   answers.isApp = isApp;
@@ -192,17 +190,11 @@ async function createNewProject(cwd: string, name: string) {
 
   const templateData = {
     project: answers,
-    'alfred-core': {
+    'alfred-pkg': {
       semver:
         process.env.NODE_ENV === 'test'
-          ? `file:${alfredCoreFilePath}`
-          : `^${ALFRED_CORE_VERSION}`
-    },
-    'alfred-cli': {
-      semver:
-        process.env.NODE_ENV === 'test'
-          ? `file:${alfredCliFilePath}`
-          : `^${ALFRED_CLI_VERSION}`
+          ? `file:${alfredFilePath}`
+          : `^${ALFRED_PKG_VERSION}`
     }
   };
 

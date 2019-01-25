@@ -13,9 +13,6 @@
   "files": [
     "lib"
   ],
-  "peerDependencies": {
-    "@alfredpkg/cli": "^0.0.0"
-  },
   "dependencies": {
     "@alfredpkg/merge-configs": "^0.0.0",
     "@alfredpkg/skill-babel": "^0.0.0",

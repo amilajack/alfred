@@ -66,12 +66,12 @@ import { getProjectRoot } from './helpers';
   //                 subcommands are run only once
   let commandWasExceuted = false;
 
-  await deleteConfigs();
+  await deleteConfigs(alfredConfig);
 
   return Promise.all(
     generateInterfaceStatesFromProject().map(interfaceState =>
       generateCtfFromConfig(alfredConfig, interfaceState)
-        .then(writeConfigsFromCtf)
+        .then(ctf => writeConfigsFromCtf(ctf, alfredConfig))
         .then(ctf => {
           const subcommandInterface = getInterfaceForSubcommand(
             ctf,
@@ -83,7 +83,11 @@ import { getProjectRoot } from './helpers';
               ? subcommandInterface.handleFlags(skillFlags, interfaceState)
               : skillFlags;
 
-          const commands = getExecuteWrittenConfigsMethods(ctf, interfaceState);
+          const commands = getExecuteWrittenConfigsMethods(
+            ctf,
+            interfaceState,
+            alfredConfig
+          );
 
           if (!subcommandInterface.runForAllTargets) {
             if (commandWasExceuted) {

@@ -11,5 +11,10 @@
   "scripts": {
     "lint": "eslint --cache --format=eslint-formatter-pretty .",
     "lint-fix": "yarn --silent lint --fix"
+  },
+  "command": {
+    "run": {
+      "npmClient": "yarn"
+    }
   }
 }

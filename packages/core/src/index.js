@@ -3,7 +3,6 @@ import path from 'path';
 import rimraf from 'rimraf';
 import fs from 'fs';
 import childProcess from 'child_process';
-import { getProjectRoot } from '@alfredpkg/cli';
 import jestCtf from '@alfredpkg/skill-jest';
 import babel from '@alfredpkg/skill-babel';
 import webpack from '@alfredpkg/skill-webpack';
@@ -269,7 +268,8 @@ export async function getPkgBinPath(pkgName: string, binName: string) {
   );
 }
 
-const configsBasePath = path.join(getProjectRoot(), '.configs');
+const getConfigsBasePath = (projectRoot: string) =>
+  path.join(projectRoot, '.configs');
 
 export function getConfigPathByConfigName(
   configName: string,
@@ -391,7 +391,8 @@ export function getConfigs(ctf: CtfMap): Array<configType> {
 /**
  * Delete .configs dir
  */
-export function deleteConfigs(): Promise<void> {
+export function deleteConfigs(config: AlfredConfig): Promise<void> {
+  const configsBasePath = getConfigsBasePath(config.root);
   if (fs.existsSync(configsBasePath)) {
     return new Promise(resolve => {
       rimraf(configsBasePath, () => {
@@ -405,7 +406,11 @@ export function deleteConfigs(): Promise<void> {
 /**
  * Write configs to a './.configs' directory
  */
-export async function writeConfigsFromCtf(ctf: CtfMap): CtfMap {
+export async function writeConfigsFromCtf(
+  ctf: CtfMap,
+  config: AlfredConfig
+): CtfMap {
+  const configsBasePath = getConfigsBasePath(config.root);
   // Create a new .configs dir and write the configs
   const configs = Array.from(ctf.values())
     .map(ctfNode => ctfNode.configFiles || [])
@@ -417,13 +422,13 @@ export async function writeConfigsFromCtf(ctf: CtfMap): CtfMap {
 
   await Promise.all(
     configs
-      .filter(config => config.write === true)
-      .map(config => {
-        const filePath = path.join(configsBasePath, config.path);
+      .filter(configFile => configFile.write === true)
+      .map(configFile => {
+        const filePath = path.join(configsBasePath, configFile.path);
         const convertedConfig =
-          typeof config.config === 'string'
-            ? config.config
-            : JSON.stringify(config.config);
+          typeof configFile.config === 'string'
+            ? configFile.config
+            : JSON.stringify(configFile.config);
 
         // Write sync to prevent data races when writing configs in parallel
         return fs.writeFileSync(filePath, convertedConfig);
@@ -485,8 +490,11 @@ export function getInterfaceForSubcommand(ctf: CtfMap, subcommand: string) {
 
 export function getExecuteWrittenConfigsMethods(
   ctf: CtfMap,
-  interfaceState: InterfaceState
+  interfaceState: InterfaceState,
+  config: AlfredConfig
 ) {
+  const configsBasePath = getConfigsBasePath(config.root);
+
   return Array.from(ctf.values())
     .filter(
       ctfNode =>

@@ -126,7 +126,11 @@ describe('CTF', () => {
           defaultInterfaceState
         );
         expect(
-          getExecuteWrittenConfigsMethods(ctf, defaultInterfaceState)
+          getExecuteWrittenConfigsMethods(
+            ctf,
+            defaultInterfaceState,
+            defaultAlfredConfig
+          )
         ).toMatchSnapshot();
       });
     });
