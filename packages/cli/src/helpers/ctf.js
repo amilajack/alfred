@@ -25,6 +25,7 @@ export const ENTRYPOINTS = [
   'app.react-native.js'
 ];
 
+// @HACK project root should be passed as argument to configFiles, which could be a function
 const projectRoot = getProjectRoot();
 
 export function generateInterfaceStatesFromProject(): Array<InterfaceState> {

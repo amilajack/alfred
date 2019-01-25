@@ -24,6 +24,10 @@ module.exports = {
     async call({ configFiles, ctf, alfredConfig, flags }) {
       const configPath = getConfigPathByConfigName('jest', configFiles);
       const binPath = await getPkgBinPath('jest-cli', 'jest');
+      const nodeModulesPath = path.join(alfredConfig.root, 'node_modules');
+      if (!fs.existsSync(nodeModulesPath)) {
+        await fs.promises.mkdir(nodeModulesPath);
+      }
       // @TODO Create a hidden `./node_modules/.alfred` directory to put configs in
       const jestTransformerPath = path.join(
         alfredConfig.root,

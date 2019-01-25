@@ -19,20 +19,22 @@
     ]
   },
   "dependencies": {
-    "prop-types": "^15.6.2",
+    "prop-types": "^15.6.2"
+  },
+  "peerDependencies": {
     "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "react-hot-loader": "^4.6.3"
+    "react-dom": "^16.7.0"
   },
   "devDependencies": {
-    "@alfredpkg/cli": "^0.0.0",
-    "@alfredpkg/core": "^0.0.0",
+    "@alfredpkg/alfred": "^0.0.0",
     "@alfredpkg/skill-react": "^0.0.0",
     "@babel/preset-react": "7.0.0",
     "babel-plugin-dev-expression": "^0.2.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
     "@babel/plugin-transform-react-constant-elements": "^7.0.0",
     "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
     "react-hot-loader": "^4.3.12"
   }
 }
