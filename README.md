@@ -235,6 +235,7 @@ type AlfredInterface = {
 Suppose you have the following Alfred config:
 
 ```jsonc
+// package.json
 {
   // ...
   "alfred": {
@@ -261,6 +262,15 @@ Suppose you have the following Alfred config:
 ```
 
 This config can be extracted to an Alfred config like so:
+
+```jsonc
+// alfred-config-my-app/package.json
+{
+  "name": "alfred-config-my-app",
+  "version": "0.0.0",
+  "main": "index.json"
+}
+```
 
 ```jsonc
 // alfred-config-my-app/index.json
