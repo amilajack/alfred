@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`config config should throw if extends property is not a string or an array 1`] = `"Values in \\".extends\\" property in Alfred config must be a string. Instead passed [{\\"extends\\":\\"\\"}]"`;
+
+exports[`config config should throw if extends property is not a string or an array 2`] = `"Values in \\".extends\\" property in Alfred config must be a string. Instead passed undefined"`;
+
+exports[`config config should throw if require non-existent module 1`] = `"Could not resolve \\"foo\\" module or \\"eslint-config-foo\\" module"`;

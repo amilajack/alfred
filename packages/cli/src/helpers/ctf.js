@@ -9,9 +9,8 @@ import CTF, {
   normalizeInterfacesOfSkill,
   AddCtfHelpers
 } from '@alfredpkg/core';
-import type { CtfMap, InterfaceState } from '@alfredpkg/core';
-import ValidateConfig from './Validation';
-import { getProjectRoot } from './CLI';
+import type { CtfMap, InterfaceState, AlfredConfig } from '@alfredpkg/core';
+import { getProjectRoot } from './cli';
 
 export const ENTRYPOINTS = [
   'lib.node.js',
@@ -110,14 +109,6 @@ export function installDeps(
   }
 }
 
-export type AlfredConfig = {
-  extends?: Array<string> | Array<[string, { [x: string]: any }]> | string,
-  npmClient: 'npm' | 'yarn',
-  skills: Array<string>,
-  root: string,
-  showConfigs: boolean
-};
-
 /**
  * Add skills to a given list of skills to ensure that the list has a complete set
  * of standard ctfs
@@ -204,28 +195,6 @@ export function addMissingStdSkillsToCtf(
   });
 
   return ctf;
-}
-
-export async function loadConfigs(
-  pkgPath: string = path.join(projectRoot, 'package.json')
-): Promise<{ pkg: Object, pkgPath: string, alfredConfig: AlfredConfig }> {
-  if (!fs.existsSync(pkgPath)) {
-    throw new Error('Current working directory does not have "package.json"');
-  }
-
-  // Read the package.json and validate the Alfred config
-  const pkg = JSON.parse((await fs.promises.readFile(pkgPath)).toString());
-  const tmpAlfredConfig = pkg.alfred || {};
-  ValidateConfig(tmpAlfredConfig || {});
-
-  const defaultOpts = {
-    npmClient: 'npm',
-    skills: [],
-    root: projectRoot
-  };
-  const alfredConfig = Object.assign({}, defaultOpts, tmpAlfredConfig);
-
-  return { pkg, pkgPath, alfredConfig };
 }
 
 export default async function generateCtfFromConfig(

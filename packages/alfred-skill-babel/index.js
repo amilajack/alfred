@@ -66,7 +66,7 @@ module.exports = {
         .addDevDependencies({ 'babel-loader': '5.0.0' });
     },
     rollup(config, ctf) {
-      // eslint-disable-next-line
+      // eslint-disable-next-line import/no-extraneous-dependencies
       const babel = require('rollup-plugin-babel');
       return config
         .extendConfig('rollup.base', {

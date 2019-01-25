@@ -17,7 +17,7 @@
     "build-watch": "cross-env NODE_ENV=production babel src --out-dir lib --watch --source-maps inline",
     "flow": "flow",
     "flow-typed": "flow-typed install",
-    "test": "jest",
+    "test": "jest --color",
     "version": "rm -rf lib && yarn build"
   },
   "devDependencies": {
@@ -43,12 +43,10 @@
     "eslint-config-bliss": "^3.2.0",
     "eslint-plugin-flowtype-errors": "^3.6.0",
     "findit": "^2.0.0",
-    "format-package": "^4.5.0",
     "git-config": "^0.0.7",
     "gitignore-parser": "^0.0.2",
     "handlebars": "^4.0.12",
     "inquirer": "^6.2.1",
-    "joi": "^14.3.1",
     "jscodeshift": "^0.6.3",
     "lebab": "^3.0.3",
     "lodash": "^4.17.11",
@@ -64,10 +62,9 @@
     "validate-npm-package-name": "^3.0.0",
     "yarn-api": "^1.1.0"
   },
+  "engineStrict": true,
   "engines": {
-    "node": ">=8",
-    "npm": ">=6.6.0",
-    "yarn": ">=1.13.0"
+    "node": ">=10"
   },
   "files": [
     "lib"

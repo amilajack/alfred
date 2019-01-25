@@ -1,0 +1,9 @@
+{
+  "name": "@examples/alfred-config-example",
+  "version": "0.0.0",
+  "main": "index.json",
+  "dependencies": {
+    "@alfredpkg/skill-parcel": "0.0.0",
+    "@alfredpkg/skill-lodash": "0.0.0"
+  }
+}

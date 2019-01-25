@@ -9,7 +9,7 @@ import validateName from 'validate-npm-package-name';
 import program from 'commander';
 import git from 'git-config';
 import chalk from 'chalk';
-import getSingleSubcommandFromArgs from './helpers/CLI';
+import getSingleSubcommandFromArgs from './helpers/cli';
 
 const TEMPLATES_DIR = path.resolve(__dirname, 'templates');
 // @TODO @HARDCODE Remove hardcoding of versions
