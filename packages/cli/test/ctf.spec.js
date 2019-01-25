@@ -1,23 +1,25 @@
-import CTF, { CORE_CTFS, INTERFACE_STATES } from '@alfredpkg/core';
+import path from 'path';
+import CTF, { CORE_CTFS, INTERFACE_STATES, loadConfig } from '@alfredpkg/core';
 import {
   diffCtfDeps,
   addMissingStdSkillsToCtf,
-  loadConfigs,
   diffCtfDepsOfAllInterfaceStates
-} from '../src/helpers/CTF';
+} from '../src/helpers';
 import parcel from '../../alfred-skill-parcel';
 
 const [defaultInterfaceState] = INTERFACE_STATES;
 
 const defaultAlfredConfig = {
-  root: '/',
+  root: path.join(__dirname, '../../../tests/fixtures/app'),
   skills: [],
   npmClient: 'npm'
 };
 
 describe('alfred cli helpers', () => {
+  const { root: projectRoot } = defaultAlfredConfig;
+
   it('should install new deps after learning new skill', async () => {
-    const { alfredConfig } = await loadConfigs();
+    const { alfredConfig } = await loadConfig(projectRoot);
     const { webpack, babel } = CORE_CTFS;
     const oldCtf = CTF([webpack], alfredConfig, defaultInterfaceState);
     const newCtf = CTF([webpack, babel], alfredConfig, defaultInterfaceState);
@@ -27,7 +29,7 @@ describe('alfred cli helpers', () => {
 
   it('should add missing std skills to ctf', async () => {
     {
-      const { alfredConfig } = await loadConfigs();
+      const { alfredConfig } = await loadConfig(projectRoot);
       const { webpack } = CORE_CTFS;
       const ctf = CTF([webpack], alfredConfig, defaultInterfaceState);
       expect(Array.from(ctf.keys())).toMatchSnapshot();
@@ -43,7 +45,7 @@ describe('alfred cli helpers', () => {
       ).toMatchSnapshot();
     }
     {
-      const { alfredConfig } = await loadConfigs();
+      const { alfredConfig } = await loadConfig(projectRoot);
       const interfaceState = {
         env: 'production',
         projectType: 'app',
@@ -60,7 +62,7 @@ describe('alfred cli helpers', () => {
       expect(ctfSkillNames).not.toContain('webpack');
     }
     {
-      const { alfredConfig } = await loadConfigs();
+      const { alfredConfig } = await loadConfig(projectRoot);
       const interfaceState = {
         env: 'production',
         projectType: 'lib',
@@ -79,7 +81,7 @@ describe('alfred cli helpers', () => {
   });
 
   it('should override core ctf skills that support same interface states', async () => {
-    const { alfredConfig } = await loadConfigs();
+    const { alfredConfig } = await loadConfig(projectRoot);
     const interfaceState = {
       env: 'production',
       projectType: 'app',
@@ -98,7 +100,7 @@ describe('alfred cli helpers', () => {
   });
 
   it('should not use CTF skills that do not support current interface state', async () => {
-    const { alfredConfig } = await loadConfigs();
+    const { alfredConfig } = await loadConfig(projectRoot);
     const interfaceState = {
       env: 'production',
       projectType: 'lib',

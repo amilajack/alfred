@@ -1,7 +1,7 @@
 // @flow
 import lebab from 'lebab';
 import { readFileAsync, writeFileAsync } from '.';
-import type { ProviderInput, ProviderInterface } from './ProviderInterface';
+import type { ProviderInput, ProviderInterface } from './provider-interface';
 
 export default class LebabProvider implements ProviderInterface {
   /**

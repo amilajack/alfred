@@ -6,12 +6,12 @@ import path from 'path';
 import os from 'os';
 import fs from 'fs';
 import parser from 'gitignore-parser';
-import Es6ImportsProvider from './Es6ImportsProvider';
-import LebabProvider from './LebabProvider';
-import EslintProvider from './EslintProvider';
-import ParseInput from '../helpers/ParseInput';
+import Es6ImportsProvider from './es6-imports-provider';
+import LebabProvider from './lebab-provider';
+import EslintProvider from './eslint-provider';
+import ParseInput from '../helpers/parse-input';
 import { getProjectRoot } from '../helpers';
-import type { UserProviderInput, ProviderInput } from './ProviderInterface';
+import type { UserProviderInput, ProviderInput } from './provider-interface';
 
 export const copyFileAsync = util.promisify(fs.copyFile);
 export const writeFileAsync = util.promisify(fs.writeFile);

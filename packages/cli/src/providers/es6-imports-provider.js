@@ -1,6 +1,6 @@
 // @flow
 import { spawn } from 'child-process-promise';
-import type { ProviderInput, ProviderInterface } from './ProviderInterface';
+import type { ProviderInput, ProviderInterface } from './provider-interface';
 
 export default class Es6ImportsProvider implements ProviderInterface {
   providerName = 'es6-imports';

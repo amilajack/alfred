@@ -3,7 +3,7 @@ import path from 'path';
 import rimraf from 'rimraf';
 import fs from 'fs';
 import childProcess from 'child_process';
-import { getProjectRoot } from '@alfredpkg/cli/lib/helpers/CLI';
+import { getProjectRoot } from '@alfredpkg/cli';
 import jestCtf from '@alfredpkg/skill-jest';
 import babel from '@alfredpkg/skill-babel';
 import webpack from '@alfredpkg/skill-webpack';
@@ -15,9 +15,16 @@ import lodashCtf from '@alfredpkg/skill-lodash';
 import mergeConfigs from '@alfredpkg/merge-configs';
 import pkgUp from 'pkg-up';
 import lodash from 'lodash';
-import type { AlfredConfig } from '@alfredpkg/cli';
 
-export { default as Config } from './config';
+export type AlfredConfig = {
+  extends?: Array<string> | Array<[string, { [x: string]: any }]> | string,
+  npmClient: 'npm' | 'yarn',
+  skills: Array<string>,
+  root: string,
+  showConfigs: boolean
+};
+
+export { default as Config, loadConfig } from './config';
 
 // All the possible interface states
 export const INTERFACE_STATES = [

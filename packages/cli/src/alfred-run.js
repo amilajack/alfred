@@ -6,13 +6,14 @@ import {
   getExecuteWrittenConfigsMethods,
   getInterfaceForSubcommand,
   deleteConfigs,
-  writeConfigsFromCtf
+  writeConfigsFromCtf,
+  loadConfig
 } from '@alfredpkg/core';
 import rimraf from 'rimraf';
 import generateCtfFromConfig, {
-  generateInterfaceStatesFromProject,
-  loadConfigs
-} from './helpers/CTF';
+  generateInterfaceStatesFromProject
+} from './helpers/ctf';
+import { getProjectRoot } from './helpers';
 
 (async () => {
   const args = program.parse(process.argv);
@@ -31,7 +32,8 @@ import generateCtfFromConfig, {
   }
 
   const [subcommand] = subcommands;
-  const { alfredConfig } = await loadConfigs();
+  const projectRoot = getProjectRoot();
+  const { alfredConfig } = await loadConfig(projectRoot);
 
   // Get the flags that are passed to the skills
   const skillFlags = args.rawArgs.slice(

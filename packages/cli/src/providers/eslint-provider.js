@@ -1,7 +1,7 @@
 // @flow
 import { CLIEngine } from 'eslint';
 import path from 'path';
-import type { ProviderInput, ProviderInterface } from './ProviderInterface';
+import type { ProviderInput, ProviderInterface } from './provider-interface';
 
 export default class EslintProvider implements ProviderInterface {
   providerName = 'eslint';

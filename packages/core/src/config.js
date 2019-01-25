@@ -1,7 +1,12 @@
 // @flow
 /* eslint import/no-dynamic-require: off, no-param-reassign: off */
+import path from 'path';
+import fs from 'fs';
+import formatPkg from 'format-package';
+import sortPkgJson from 'sort-package-json';
 import mergeConfigs from '@alfredpkg/merge-configs';
-import type { AlfredConfig } from '@alfredpkg/cli';
+import Validate from './validation';
+import type { AlfredConfig } from '.';
 
 export function requireConfig(configName: string): any {
   try {
@@ -78,4 +83,36 @@ export default function Config(config: AlfredConfig = {}): AlfredConfig {
   }
 
   return getConfigs(config);
+}
+
+export async function writeConfig(
+  pkgPath: string,
+  config: AlfredConfig
+): AlfredConfig {
+  const formattedPkg = await formatPkg(sortPkgJson(config));
+  await fs.promises.writeFile(pkgPath, formattedPkg);
+  return formattedPkg;
+}
+
+export async function loadConfig(
+  projectRoot: string,
+  pkgPath: string = path.join(projectRoot, 'package.json')
+): Promise<{ pkg: Object, pkgPath: string, alfredConfig: AlfredConfig }> {
+  if (!fs.existsSync(pkgPath)) {
+    throw new Error('Current working directory does not have "package.json"');
+  }
+
+  // Read the package.json and validate the Alfred config
+  const pkg = JSON.parse((await fs.promises.readFile(pkgPath)).toString());
+  const rawAlfredConfig = pkg.alfred || {};
+  Validate(rawAlfredConfig || {});
+
+  const defaultOpts = {
+    npmClient: 'npm',
+    skills: [],
+    root: projectRoot
+  };
+  const alfredConfig = Config(Object.assign({}, defaultOpts, rawAlfredConfig));
+
+  return { pkg, pkgPath, alfredConfig };
 }
