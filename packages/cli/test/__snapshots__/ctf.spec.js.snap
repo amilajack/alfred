@@ -78,3 +78,7 @@ Array [
   "babel",
 ]
 `;
+
+exports[`alfred cli helpers skills should throw if skill does not exist 1`] = `[Error: Cannot find module '@alfredpkg/skill-non-existent-skill' from 'ctf.js']`;
+
+exports[`alfred cli helpers skills should throw if unsupported skill is used 1`] = `[Error: The "mocha" skill, which supports {"env":["production","development","test"],"targets":["node"],"projectTypes":["app","lib"]}}, does not support the current environment, project type, or target, which are {"projectType":"app","target":"browser","env":"production"}]`;

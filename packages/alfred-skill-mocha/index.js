@@ -12,6 +12,11 @@ module.exports = {
   interfaces: ['@alfredpkg/interface-test'],
   devDependencies: { mocha: '5.2.0' },
   configFiles: [],
+  supports: {
+    env: ['production', 'development', 'test'],
+    targets: ['node'],
+    projectTypes: ['app', 'lib']
+  },
   hooks: {
     async call({ ctf, alfredConfig, flags }) {
       const binPath = await getPkgBinPath('mocha', 'mocha');

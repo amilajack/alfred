@@ -3,6 +3,7 @@ import os from 'os';
 import powerset from '@amilajack/powerset';
 import CTF, {
   CORE_CTFS,
+  INTERFACE_STATES,
   getConfigs,
   getDependencies,
   getDevDependencies,
@@ -10,29 +11,6 @@ import CTF, {
   normalizeInterfacesOfSkill,
   getInterfaceForSubcommand
 } from '../src';
-
-const interfaceStates = [
-  {
-    projectType: 'app',
-    target: 'browser',
-    env: 'production'
-  },
-  {
-    projectType: 'lib',
-    target: 'browser',
-    env: 'production'
-  },
-  {
-    projectType: 'app',
-    target: 'node',
-    env: 'production'
-  },
-  {
-    projectType: 'lib',
-    target: 'node',
-    env: 'production'
-  }
-];
 
 const defaultAlfredConfig = {
   root: '/',
@@ -85,8 +63,10 @@ describe('CTF', () => {
     });
 
     describe('subcommand', () => {
-      interfaceStates.forEach(defaultInterfaceState => {
-        it('should get corresponding interface', () => {
+      INTERFACE_STATES.forEach(defaultInterfaceState => {
+        it(`should get corresponding interface for interface state ${JSON.stringify(
+          defaultInterfaceState
+        )}`, () => {
           expect(
             getInterfaceForSubcommand(
               CTF(
@@ -101,7 +81,7 @@ describe('CTF', () => {
       });
 
       it('should error if subcommand does not exist', () => {
-        interfaceStates.forEach(defaultInterfaceState => {
+        INTERFACE_STATES.forEach(defaultInterfaceState => {
           expect(() =>
             getInterfaceForSubcommand(
               CTF(
@@ -119,7 +99,7 @@ describe('CTF', () => {
 
   describe('executors', () => {
     it('should generate functions for scripts', () => {
-      interfaceStates.forEach(defaultInterfaceState => {
+      INTERFACE_STATES.forEach(defaultInterfaceState => {
         const ctf = CTF(
           [CORE_CTFS.webpack],
           defaultAlfredConfig,
@@ -139,7 +119,7 @@ describe('CTF', () => {
   // Generate tests for CTF combinations
   const ctfNamesCombinations = powerset(Object.keys(CORE_CTFS)).sort();
   for (const ctfCombination of ctfNamesCombinations) {
-    interfaceStates.forEach(defaultInterfaceState => {
+    INTERFACE_STATES.forEach(defaultInterfaceState => {
       it(`combination ${ctfCombination.join(
         ','
       )} interface state ${JSON.stringify(defaultInterfaceState)}`, () => {
@@ -160,7 +140,7 @@ describe('CTF', () => {
     });
   }
 
-  interfaceStates.forEach(defaultInterfaceState => {
+  INTERFACE_STATES.forEach(defaultInterfaceState => {
     it(`should add devDepencencies with interface state ${JSON.stringify(
       defaultInterfaceState
     )}`, () => {

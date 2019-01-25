@@ -7,7 +7,8 @@ import CTF, {
   CORE_CTFS,
   INTERFACE_STATES,
   normalizeInterfacesOfSkill,
-  AddCtfHelpers
+  AddCtfHelpers,
+  validateCtf
 } from '@alfredpkg/core';
 import type { CtfMap, InterfaceState, AlfredConfig } from '@alfredpkg/core';
 
@@ -196,6 +197,9 @@ export function addMissingStdSkillsToCtf(
   return ctf;
 }
 
+/**
+ * @TODO @REFACTOR Move to core
+ */
 export default async function generateCtfFromConfig(
   alfredConfig: AlfredConfig,
   interfaceState: InterfaceState
@@ -222,6 +226,8 @@ export default async function generateCtfFromConfig(
 
   const ctf = CTF(Array.from(tmpCtf.values()), alfredConfig, interfaceState);
   addMissingStdSkillsToCtf(ctf, alfredConfig, interfaceState);
+
+  validateCtf(ctf, interfaceState);
 
   return ctf;
 }

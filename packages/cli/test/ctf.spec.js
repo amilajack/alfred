@@ -5,6 +5,7 @@ import {
   addMissingStdSkillsToCtf,
   diffCtfDepsOfAllInterfaceStates
 } from '../src/helpers';
+import generateCtfFromConfig from '../src/helpers/ctf';
 import parcel from '../../alfred-skill-parcel';
 
 const [defaultInterfaceState] = INTERFACE_STATES;
@@ -33,7 +34,6 @@ describe('alfred cli helpers', () => {
       const { webpack } = CORE_CTFS;
       const ctf = CTF([webpack], alfredConfig, defaultInterfaceState);
       expect(Array.from(ctf.keys())).toMatchSnapshot();
-      console.log(alfredConfig);
       expect(
         Array.from(
           addMissingStdSkillsToCtf(
@@ -78,6 +78,30 @@ describe('alfred cli helpers', () => {
       expect(ctfSkillNames).not.toContain('parcel');
       expect(ctfSkillNames).not.toContain('webpack');
     }
+  });
+
+  describe('skills', () => {
+    it('should throw if skill does not exist', async () => {
+      const [state] = INTERFACE_STATES;
+      const config = {
+        ...defaultAlfredConfig,
+        skills: ['@alfredpkg/skill-non-existent-skill']
+      };
+      await expect(
+        generateCtfFromConfig(config, state)
+      ).rejects.toMatchSnapshot();
+    });
+
+    it('should throw if unsupported skill is used', async () => {
+      const [state] = INTERFACE_STATES;
+      const config = {
+        ...defaultAlfredConfig,
+        skills: ['@alfredpkg/skill-mocha']
+      };
+      await expect(
+        generateCtfFromConfig(config, state)
+      ).rejects.toMatchSnapshot();
+    });
   });
 
   it('should override core ctf skills that support same interface states', async () => {
