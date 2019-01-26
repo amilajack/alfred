@@ -60,9 +60,8 @@ export function getConfigs(config: AlfredConfig = {}): AlfredConfig {
   return mergedConfig;
 }
 
-export default function Config(config: AlfredConfig = {}): AlfredConfig {
+function validate(config: AlfredConfig): AlfredConfig {
   if (!config.extends) return config;
-
   // Validate if each config in `.extends` is a string
   if (Array.isArray(config.extends)) {
     config.extends.forEach(_config => {
@@ -81,8 +80,48 @@ export default function Config(config: AlfredConfig = {}): AlfredConfig {
       )}`
     );
   }
+  return config;
+}
 
-  return getConfigs(config);
+export type ConfigSkillType = [string, any] | string;
+type ConfigMap = Map<string, any>;
+
+/**
+ * @TODO @REFACTOR This function is not used outside of this module. Consider
+ *                 not using it as the default export
+ */
+export default function Config(config: AlfredConfig): AlfredConfig {
+  validate(config);
+
+  const mergedConfig = getConfigs(config);
+  if (!mergedConfig.skills || !mergedConfig.skills.length) return mergedConfig;
+
+  const skillsMap: ConfigMap = new Map();
+  mergedConfig.skills = Array.from(
+    mergedConfig.skills
+      .reduce((map: ConfigMap, skill: ConfigSkillType) => {
+        if (typeof skill === 'string') {
+          map.set(skill, {});
+          return map;
+        }
+        if (Array.isArray(skill)) {
+          const [skillName, skillConfig] = skill;
+          if (map.has(skillName)) {
+            map.set(
+              skillName,
+              mergeConfigs({}, map.get(skillName), skillConfig)
+            );
+          } else {
+            map.set(skillName, skillConfig);
+          }
+          return map;
+        }
+        throw new Error(`Config type not supported: ${JSON.stringify(skill)}`);
+      }, skillsMap)
+      .entries()
+  );
+
+  return mergedConfig;
 }
 
 export async function writeConfig(
@@ -94,6 +133,9 @@ export async function writeConfig(
   return formattedPkg;
 }
 
+/**
+ * @TODO @REFACTOR Make this the default exported function and rename it to Configs
+ */
 export async function loadConfig(
   projectRoot: string,
   pkgPath: string = path.join(projectRoot, 'package.json')
@@ -106,12 +148,15 @@ export async function loadConfig(
   const pkg = JSON.parse((await fs.promises.readFile(pkgPath)).toString());
   const rawAlfredConfig = pkg.alfred || {};
   Validate(rawAlfredConfig || {});
+  // Format the config
+  await writeConfig(pkgPath, pkg);
 
   const defaultOpts = {
     npmClient: 'npm',
     skills: [],
     root: projectRoot
   };
+
   const alfredConfig = Config(Object.assign({}, defaultOpts, rawAlfredConfig));
 
   return { pkg, pkgPath, alfredConfig };

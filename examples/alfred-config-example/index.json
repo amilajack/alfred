@@ -1,7 +1,15 @@
 {
   "skills": [
     "@alfredpkg/skill-parcel",
-    "@alfredpkg/skill-lodash"
+    ["@alfredpkg/skill-lodash", {
+      "collections": true,
+      "paths": true
+    }],
+    ["@alfredpkg/skill-babel", {
+      "plugins": [
+        "@babel/plugin-proposal-class-properties"
+      ]
+    }]
   ],
   "npmClient": "yarn"
 }

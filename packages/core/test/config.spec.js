@@ -137,6 +137,82 @@ describe('config', () => {
       });
     });
 
+    it('should accept options that can be overriden', () => {
+      jest.mock(
+        'alfred-config-test',
+        () => ({
+          bar: 'bar',
+          foo: 'foobar',
+          skills: [
+            [
+              '@alfredpkg/skill-lodash',
+              {
+                collections: true,
+                paths: true
+              }
+            ]
+          ]
+        }),
+        { virtual: true }
+      );
+      expect(
+        config({
+          extends: 'alfred-config-test'
+        })
+      ).toEqual({
+        bar: 'bar',
+        foo: 'foobar',
+        skills: [
+          [
+            '@alfredpkg/skill-lodash',
+            {
+              collections: true,
+              paths: true
+            }
+          ]
+        ]
+      });
+      expect(
+        config({
+          extends: 'alfred-config-test',
+          skills: [
+            '@alfredpkg/skill-parcel',
+            [
+              '@alfredpkg/skill-babel',
+              {
+                plugins: ['@babel/preset-flow']
+              }
+            ],
+            [
+              '@alfredpkg/skill-babel',
+              {
+                plugins: ['@babel/preset-react']
+              }
+            ]
+          ]
+        })
+      ).toEqual({
+        bar: 'bar',
+        foo: 'foobar',
+        skills: [
+          [
+            '@alfredpkg/skill-lodash',
+            {
+              collections: true,
+              paths: true
+            }
+          ],
+          ['@alfredpkg/skill-parcel', {}],
+          [
+            '@alfredpkg/skill-babel',
+            {
+              plugins: ['@babel/preset-flow', '@babel/preset-react']
+            }
+          ]
+        ]
+      });
+    });
+
     it('should throw if require non-existent module', () => {
       expect(() => requireConfig('foo')).toThrowErrorMatchingSnapshot();
     });

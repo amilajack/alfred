@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "main": "index.json",
   "dependencies": {
+    "@alfredpkg/skill-lodash": "0.0.0",
     "@alfredpkg/skill-parcel": "0.0.0",
-    "@alfredpkg/skill-lodash": "0.0.0"
+    "@babel/plugin-proposal-class-properties": "^7.3.0"
   }
 }

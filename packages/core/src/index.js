@@ -15,10 +15,12 @@ import mergeConfigs from '@alfredpkg/merge-configs';
 import pkgUp from 'pkg-up';
 import lodash from 'lodash';
 
+import type { ConfigType } from './config';
+
 export type AlfredConfig = {
   extends?: Array<string> | Array<[string, { [x: string]: any }]> | string,
   npmClient: 'npm' | 'yarn',
-  skills: Array<string>,
+  skills: Array<ConfigType>,
   root: string,
   showConfigs: boolean
 };
@@ -439,30 +441,49 @@ export async function writeConfigsFromCtf(
   ctf: CtfMap,
   config: AlfredConfig
 ): CtfMap {
+  // Create a .configs dir if it doesn't exist
   const configsBasePath = getConfigsBasePath(config.root);
-  // Create a new .configs dir and write the configs
-  const configs = Array.from(ctf.values())
-    .map(ctfNode => ctfNode.configFiles || [])
-    .reduce((p, c) => [...p, ...c], []);
-
   if (!fs.existsSync(configsBasePath)) {
     fs.mkdirSync(configsBasePath);
   }
 
-  await Promise.all(
-    configs
-      .filter(configFile => configFile.write === true)
-      .map(configFile => {
+  // Create a map of the skill configs
+  const skillsConfigMap: Map<string, ConfigType> = new Map(
+    config.skills.map(([skillPkgName, skillConfig]) => [
+      require(skillPkgName).name,
+      skillConfig
+    ])
+  );
+
+  const ctfNodes = Array.from(ctf.values());
+
+  ctfNodes
+    .filter(ctfNode => ctfNode.configFiles && ctfNode.configFiles.length)
+    .forEach(ctfNode => {
+      const skillConfig = (() => {
+        if (skillsConfigMap.has(ctfNode.name)) {
+          // Apply the skill config if there is only one file
+          if (ctfNode.configFiles.length === 1) {
+            return skillsConfigMap.get(ctfNode.name);
+          }
+          if (ctfNode.configFiles.length > 1) {
+            console.log(
+              'Applying user configs to skills that have more than one config file is not supported at the moment'
+            );
+          }
+        }
+        return {};
+      })();
+      ctfNode.configFiles.forEach(configFile => {
         const filePath = path.join(configsBasePath, configFile.path);
         const convertedConfig =
           typeof configFile.config === 'string'
             ? configFile.config
-            : JSON.stringify(configFile.config);
-
+            : JSON.stringify(mergeConfigs({}, configFile.config, skillConfig));
         // Write sync to prevent data races when writing configs in parallel
-        return fs.writeFileSync(filePath, convertedConfig);
-      })
-  );
+        fs.writeFileSync(filePath, convertedConfig);
+      });
+    });
 
   return ctf;
 }
@@ -523,6 +544,12 @@ export function getExecuteWrittenConfigsMethods(
   config: AlfredConfig
 ) {
   const configsBasePath = getConfigsBasePath(config.root);
+  const skillsConfigMap: Map<string, ConfigType> = new Map(
+    config.skills.map(([skillPkgName, skillConfig]) => [
+      require(skillPkgName).name,
+      skillConfig
+    ])
+  );
 
   return Array.from(ctf.values())
     .filter(
@@ -537,6 +564,7 @@ export function getExecuteWrittenConfigsMethods(
       }));
       return ctfNode.interfaces.map(e => {
         const { subcommand } = require(e.name);
+        const skillConfig = skillsConfigMap.get(ctfNode.name);
         return {
           fn: (alfredConfig: AlfredConfig, flags: Array<string> = []) =>
             ctfNode.hooks.call({
@@ -545,7 +573,8 @@ export function getExecuteWrittenConfigsMethods(
               alfredConfig,
               interfaceState,
               subcommand,
-              flags
+              flags,
+              skillConfig
             }),
           // @HACK: If interfaces were defined, we could import the @alfredpkg/interface-*
           //        and use the `subcommand` property. This should be done after we have

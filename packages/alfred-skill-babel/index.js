@@ -1,10 +1,4 @@
-const path = require('path');
-const {
-  getConfigPathByConfigName,
-  execCommand,
-  getPkgBinPath,
-  getConfigByConfigName
-} = require('@alfredpkg/core');
+const { getConfigByConfigName } = require('@alfredpkg/core');
 
 module.exports = {
   name: 'babel',
@@ -20,26 +14,11 @@ module.exports = {
       path: '.babelrc.js',
       write: true,
       config: {
-        presets: ['@babel/preset-env'],
-        plugins: ['@babel/plugin-proposal-class-properties']
+        presets: ['@babel/preset-env']
       }
     }
   ],
-  hooks: {
-    async call({ configFiles, alfredConfig, flags }) {
-      const configPath = getConfigPathByConfigName('babel', configFiles);
-      const binPath = await getPkgBinPath('@babel/cli', 'babel');
-      return execCommand(
-        [
-          binPath,
-          alfredConfig.showConfigs
-            ? `--configFile ${configPath} .`
-            : path.join(alfredConfig.root, 'node_modules', 'jest.config.js'),
-          ...flags
-        ].join(' ')
-      );
-    }
-  },
+  hooks: {},
   ctfs: {
     webpack(config, ctf) {
       return config
@@ -68,6 +47,9 @@ module.exports = {
     rollup(config, ctf) {
       // eslint-disable-next-line import/no-extraneous-dependencies
       const babel = require('rollup-plugin-babel');
+      console.log(
+        getConfigByConfigName('babel', ctf.get('babel').configFiles).config
+      );
       return config
         .extendConfig('rollup.base', {
           plugins: [

@@ -12,13 +12,13 @@
     "test": "../../../packages/cli/lib/alfred.js run test",
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
+  "alfred": {
+    "extends": "@examples/alfred-config-example",
+    "showConfigs": true
+  },
   "devDependencies": {
     "@alfredpkg/cli": "^0.0.0",
     "@alfredpkg/core": "^0.0.0",
     "@examples/alfred-config-example": "^0.0.0"
-  },
-  "alfred": {
-    "extends": "@examples/alfred-config-example",
-    "showConfigs": true
   }
 }

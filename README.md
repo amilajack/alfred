@@ -239,6 +239,7 @@ Suppose you have the following Alfred config:
     "skills": [
       "@alfredpkg/skill-parcel",
       ["@alfredpkg/skill-babel", {
+        // Config for Babel
         "presets": [
           "@babel-preset-env",
           "@babel-preset-flow",
@@ -249,6 +250,7 @@ Suppose you have the following Alfred config:
         ]
       }],
       ["@alfredpkg/skill-eslint", {
+        // Config for ESLint
         "rules": {
           "no-console": "off"
         }

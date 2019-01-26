@@ -1,3 +1,4 @@
+/* eslint import/no-dynamic-require: off */
 import path from 'path';
 import fs from 'fs';
 import npm from 'npm';
@@ -112,6 +113,7 @@ export function installDeps(
 /**
  * Add skills to a given list of skills to ensure that the list has a complete set
  * of standard ctfs
+ * @TODO @REFACTOR Share logic between this and CTF(). Much duplication here
  */
 export function addMissingStdSkillsToCtf(
   ctf: CtfMap,
@@ -174,7 +176,10 @@ export function addMissingStdSkillsToCtf(
   });
 
   // Add all the CORE_CTF's without subcommands
-  ctf.set('babel', { ...CORE_CTFS.babel, ...AddCtfHelpers });
+  // @HACK
+  if (!ctf.has('babel')) {
+    ctf.set('babel', { ...CORE_CTFS.babel, ...AddCtfHelpers });
+  }
   // @TODO
   // ctf.set('lodash', { ...CORE_CTFS.lodash, ...AddCtfHelpers });
 
@@ -217,11 +222,9 @@ export default async function generateCtfFromConfig(
   // Generate the CTF
   const tmpCtf: CtfMap = new Map();
   const { skills = [] } = alfredConfig;
-  skills.forEach(skill => {
-    /* eslint-disable */
-    const c = require(skill);
-    /* eslint-enable */
-    tmpCtf.set(c.name, c);
+  skills.forEach(([skillPkgName]) => {
+    const ctfNode = require(skillPkgName);
+    tmpCtf.set(ctfNode.name, ctfNode);
   });
 
   const ctf = CTF(Array.from(tmpCtf.values()), alfredConfig, interfaceState);
