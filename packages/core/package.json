@@ -32,7 +32,9 @@
     "pkg-up": "^2.0.0",
     "rimraf": "^2.6.2",
     "sort-package-json": "^1.17.1",
-    "strip-json-comments": "^2.0.1"
+    "strip-json-comments": "^2.0.1",
+    "toposort": "^2.0.2",
+    "topsort": "^0.0.2"
   },
   "engineStrict": true,
   "engines": {

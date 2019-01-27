@@ -9,8 +9,12 @@ import CTF, {
   INTERFACE_STATES,
   normalizeInterfacesOfSkill,
   AddCtfHelpers,
-  validateCtf
+  validateCtf,
+  callCtfFnsInOrder,
+  getConfigsBasePath
 } from '@alfredpkg/core';
+import mergeConfigs from '@alfredpkg/merge-configs';
+import formatJson from 'format-package';
 import type { CtfMap, InterfaceState, AlfredConfig } from '@alfredpkg/core';
 
 export const ENTRYPOINTS = [
@@ -70,6 +74,40 @@ export function diffCtfDeps(oldCtf: CtfMap, newCtf: CtfMap): Array<string> {
   });
 
   return Array.from(s.entries()).map(([key, val]) => `${key}@${val}`);
+}
+
+/**
+ * Write configs to a './.configs' directory
+ * @TODO @REFACTOR Move to CLI
+ */
+export async function writeConfigsFromCtf(
+  ctf: CtfMap,
+  config: AlfredConfig
+): Promise<CtfMap> {
+  // Create a .configs dir if it doesn't exist
+  const configsBasePath = getConfigsBasePath(config.root);
+  if (!fs.existsSync(configsBasePath)) {
+    fs.mkdirSync(configsBasePath);
+  }
+
+  const ctfNodes = Array.from(ctf.values());
+
+  await Promise.all(
+    ctfNodes
+      .filter(ctfNode => ctfNode.configFiles && ctfNode.configFiles.length)
+      .reduce((prev, ctfNode) => prev.concat(ctfNode.configFiles), [])
+      .map(async configFile => {
+        const filePath = path.join(configsBasePath, configFile.path);
+        const convertedConfig =
+          typeof configFile.config === 'string'
+            ? configFile.config
+            : await formatJson(configFile.config);
+        // Write sync to prevent data races when writing configs in parallel
+        fs.writeFileSync(filePath, convertedConfig);
+      })
+  );
+
+  return ctf;
 }
 
 /**
@@ -183,21 +221,7 @@ export function addMissingStdSkillsToCtf(
   // @TODO
   // ctf.set('lodash', { ...CORE_CTFS.lodash, ...AddCtfHelpers });
 
-  ctf.forEach(ctfNode => {
-    const ctfWithHelpers = {
-      ...ctfNode,
-      ...AddCtfHelpers
-    };
-    Object.entries(ctfWithHelpers.ctfs || {}).forEach(([ctfName, ctfFn]) => {
-      const correspondingCtfNode = ctf.get(ctfName);
-      if (correspondingCtfNode) {
-        ctf.set(
-          ctfName,
-          ctfFn(correspondingCtfNode, ctf, { alfredConfig, ...interfaceState })
-        );
-      }
-    });
-  });
+  callCtfFnsInOrder(ctf, alfredConfig, interfaceState);
 
   return ctf;
 }
@@ -222,8 +246,21 @@ export default async function generateCtfFromConfig(
   // Generate the CTF
   const tmpCtf: CtfMap = new Map();
   const { skills = [] } = alfredConfig;
-  skills.forEach(([skillPkgName]) => {
+  skills.forEach(([skillPkgName, skillConfig]) => {
+    // Add the skill config to the ctfNode
     const ctfNode = require(skillPkgName);
+    ctfNode.config = skillConfig;
+    if (ctfNode.configFiles) {
+      ctfNode.configFiles = ctfNode.configFiles.map(configFile => ({
+        ...configFile,
+        config: mergeConfigs(
+          {},
+          configFile.config,
+          // Only apply config if skill has only one config file
+          ctfNode.configFiles.length === 1 ? skillConfig : {}
+        )
+      }));
+    }
     tmpCtf.set(ctfNode.name, ctfNode);
   });
 

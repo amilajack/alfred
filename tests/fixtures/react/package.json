@@ -12,11 +12,6 @@
     "test": "../../../packages/cli/lib/alfred.js run test",
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
-  "devDependencies": {
-    "@alfredpkg/cli": "^0.0.0",
-    "@alfredpkg/core": "^0.0.0",
-    "@alfredpkg/skill-react": "^0.0.0"
-  },
   "alfred": {
     "showConfigs": true,
     "skills": [
@@ -27,5 +22,10 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-hot-loader": "^4.6.3"
+  },
+  "devDependencies": {
+    "@alfredpkg/cli": "^0.0.0",
+    "@alfredpkg/core": "^0.0.0",
+    "@alfredpkg/skill-react": "^0.0.0"
   }
 }

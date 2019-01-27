@@ -46,10 +46,10 @@ Array [
 
 exports[`alfred cli helpers should install new deps after learning new skill 1`] = `
 Array [
-  "babel-loader@5.0.0",
   "@babel/cli@7.2.0",
   "@babel/core@7.2.0",
   "@babel/preset-env@7.2.0",
+  "babel-core@^7.0.0-bridge.0",
 ]
 `;
 
@@ -78,7 +78,3 @@ Array [
   "babel",
 ]
 `;
-
-exports[`alfred cli helpers skills should throw if skill does not exist 1`] = `[Error: Cannot find module '@alfredpkg/skill-non-existent-skill' from 'ctf.js']`;
-
-exports[`alfred cli helpers skills should throw if unsupported skill is used 1`] = `[Error: The "mocha" skill, which supports {"env":["production","development","test"],"targets":["node"],"projectTypes":["app","lib"]}}, does not support the current environment, project type, or target, which are {"projectType":"app","target":"browser","env":"production"}]`;

@@ -9,7 +9,9 @@ import CTF, {
   getDevDependencies,
   getExecuteWrittenConfigsMethods,
   normalizeInterfacesOfSkill,
-  getInterfaceForSubcommand
+  getInterfaceForSubcommand,
+  topsortCtfs,
+  callCtfFnsInOrder
 } from '../src';
 
 const defaultAlfredConfig = {
@@ -34,6 +36,44 @@ function removePathsPropertiesFromObject(obj) {
 }
 
 describe('CTF', () => {
+  describe('topological sort', () => {
+    it('should topsort', () => {
+      {
+        const sortedCtfs = topsortCtfs(
+          CTF(
+            Object.values(CORE_CTFS),
+            defaultAlfredConfig,
+            INTERFACE_STATES[0]
+          )
+        ).map(e => e.name);
+        expect(sortedCtfs).toMatchSnapshot();
+        expect(Object.keys(CORE_CTFS).length).toEqual(sortedCtfs.length);
+      }
+      {
+        const sortedCtfs = topsortCtfs(
+          CTF([CORE_CTFS.react], defaultAlfredConfig, INTERFACE_STATES[0])
+        ).map(e => e.name);
+        expect(sortedCtfs).toMatchSnapshot();
+        expect(sortedCtfs.length).toEqual(1);
+      }
+    });
+
+    it('should call ctfs in order', () => {
+      const ctf = CTF(
+        Object.values(CORE_CTFS),
+        defaultAlfredConfig,
+        INTERFACE_STATES[0]
+      );
+      const { orderedSelfTransforms } = callCtfFnsInOrder(
+        ctf,
+        defaultAlfredConfig,
+        INTERFACE_STATES[0]
+      );
+
+      expect(orderedSelfTransforms).toMatchSnapshot();
+    });
+  });
+
   describe('interfaces', () => {
     it('should allow falsy inputs', () => {
       expect(normalizeInterfacesOfSkill(undefined)).toEqual([]);

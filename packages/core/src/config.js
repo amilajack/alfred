@@ -124,6 +124,9 @@ export default function Config(config: AlfredConfig): AlfredConfig {
   return mergedConfig;
 }
 
+/**
+ * Writes an Alfred config to a user's package.json
+ */
 export async function writeConfig(
   pkgPath: string,
   config: AlfredConfig

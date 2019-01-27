@@ -6,7 +6,8 @@ module.exports = {
   devDependencies: {
     '@babel/cli': '7.2.0',
     '@babel/core': '7.2.0',
-    '@babel/preset-env': '7.2.0'
+    '@babel/preset-env': '7.2.0',
+    'babel-core': '^7.0.0-bridge.0'
   },
   configFiles: [
     {
@@ -47,9 +48,6 @@ module.exports = {
     rollup(config, ctf) {
       // eslint-disable-next-line import/no-extraneous-dependencies
       const babel = require('rollup-plugin-babel');
-      console.log(
-        getConfigByConfigName('babel', ctf.get('babel').configFiles).config
-      );
       return config
         .extendConfig('rollup.base', {
           plugins: [

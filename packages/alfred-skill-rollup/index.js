@@ -115,8 +115,6 @@ module.exports = {
         inputAndOutputConfigs
       );
 
-      console.log(baseConfig);
-
       const rollup = require('rollup');
 
       switch (subcommand) {

@@ -1,7 +1,5 @@
 /* eslint import/no-dynamic-require: off */
 import path from 'path';
-import rimraf from 'rimraf';
-import fs from 'fs';
 import childProcess from 'child_process';
 import jestCtf from '@alfredpkg/skill-jest';
 import babel from '@alfredpkg/skill-babel';
@@ -14,6 +12,7 @@ import lodashCtf from '@alfredpkg/skill-lodash';
 import mergeConfigs from '@alfredpkg/merge-configs';
 import pkgUp from 'pkg-up';
 import lodash from 'lodash';
+import topsort from 'toposort';
 
 import type { ConfigType } from './config';
 
@@ -96,16 +95,17 @@ export type InterfaceState = {
   projectType: 'lib' | 'app'
 };
 
-export type InterfaceInputType = Array<
+export type RawInterfaceInputType = Array<
   string | [string, { [x: string]: string }]
 >;
+export type InterfaceInputType = Array<[string, { [x: string]: string }]>;
 export type NormalizedInterfacesType = Array<{
   name: string,
-  module: Object
+  module: module
 }>;
 
 export function normalizeInterfacesOfSkill(
-  interfaces: InterfaceState
+  interfaces: RawInterfaceInputType
 ): NormalizedInterfacesType {
   if (!interfaces) return [];
   // `interfaces` is an array
@@ -168,11 +168,11 @@ type UsingInterface = {|
   subcommand: string,
   hooks: {
     call: ({
-      fileConfigPath: string,
-      config: configFileType,
-      alfredConfig: Object,
+      configFiles: Array<configFileType>,
+      alfredConfig: AlfredConfig,
       interfaceState: InterfaceState,
-      subcommand: string
+      subcommand: string,
+      skillConfig: any
     }) => string,
     install?: () => void
   }
@@ -188,7 +188,29 @@ type RequiredCtfNodeParams = {|
     [x: string]: any
   },
   description: string,
+  supports?: {
+    // Flag name and argument types
+    env: Array<'production' | 'development' | 'test'>,
+    // All the supported targets a `build` skill should build
+    targets: Array<'browser' | 'node' | 'electron' | 'react-native'>,
+    // Project type
+    projectTypes: Array<'lib' | 'app'>
+  },
+  subcommands?: Array<string>,
   configFiles: Array<configFileType>,
+  interfaces: InterfaceInputType,
+  hooks: {
+    call: ({
+      configFiles: Array<configFileType>,
+      // eslint-disable-next-line no-use-before-define
+      ctf: CtfMap,
+      alfredConfig: AlfredConfig,
+      interfaceState: InterfaceState,
+      subcommand: string,
+      flags: Array<string>,
+      skillConfig: any
+    }) => Promise<void>
+  },
   ctfs: {
     [x: string]: (
       RequiredCtfNodeParams,
@@ -270,8 +292,9 @@ export async function getPkgBinPath(pkgName: string, binName: string) {
   );
 }
 
-const getConfigsBasePath = (projectRoot: string) =>
-  path.join(projectRoot, '.configs');
+export function getConfigsBasePath(projectRoot: string): string {
+  return path.join(projectRoot, '.configs');
+}
 
 export function getConfigPathByConfigName(
   configName: string,
@@ -362,6 +385,73 @@ export function validateCtf(ctf: CtfMap, interfaceState: InterfaceState) {
   });
 }
 
+/**
+ * Topologically sort the CTFs
+ */
+export function topsortCtfs(ctfs: CtfMap): Array<string> {
+  const topsortEntries = [];
+  const ctfNodeNames = new Set(ctfs.keys());
+
+  ctfs.forEach(ctfNode => {
+    if (ctfNode.ctfs) {
+      Object.keys(ctfNode.ctfs).forEach(ctfFnName => {
+        if (ctfNodeNames.has(ctfFnName)) {
+          topsortEntries.push([ctfNode.name, ctfFnName]);
+        }
+      });
+    }
+  });
+
+  const sortedCtfNames = topsort(topsortEntries);
+  ctfs.forEach(e => {
+    if (!sortedCtfNames.includes(e.name)) {
+      sortedCtfNames.push(e.name);
+    }
+  });
+
+  return sortedCtfNames;
+}
+
+export function callCtfFnsInOrder(
+  ctf: CtfMap,
+  alfredConfig: AlfredConfig,
+  interfaceState: InterfaceState
+) {
+  const ordered = topsortCtfs(ctf);
+  // All the ctfs Fns from other ctfNodes that transform each ctfNode
+  const selfTransforms = new Map(topsortCtfs(ctf).map(e => [e, []]));
+
+  ctf.forEach(ctfNode => {
+    Object.entries(ctfNode.ctfs || {}).forEach(([ctfName, ctfFn]) => {
+      if (ctf.has(ctfName)) {
+        const fn = () => {
+          const correspondingCtfNode = ctf.get(ctfName);
+          ctf.set(
+            ctfName,
+            ctfFn(correspondingCtfNode, ctf, {
+              alfredConfig,
+              ...interfaceState
+            })
+          );
+        };
+        const ctfSelfTransforms = selfTransforms.get(ctfName);
+        ctfSelfTransforms.push(fn);
+        selfTransforms.set(ctfName, ctfSelfTransforms);
+      }
+    });
+  });
+
+  const orderedSelfTransforms = ordered.map(e => selfTransforms.get(e));
+
+  orderedSelfTransforms.forEach(selfTransform => {
+    selfTransform.forEach(_selfTransform => {
+      _selfTransform(ctf);
+    });
+  });
+
+  return { ctf, orderedSelfTransforms };
+}
+
 export default function CTF(
   ctfs: Array<CtfNode>,
   alfredConfig: AlfredConfig,
@@ -392,18 +482,6 @@ export default function CTF(
     }
   });
 
-  map.forEach(ctf => {
-    Object.entries(ctf.ctfs || {}).forEach(([ctfName, ctfFn]) => {
-      const correspondingCtfNode = map.get(ctfName);
-      if (correspondingCtfNode) {
-        map.set(
-          ctfName,
-          ctfFn(correspondingCtfNode, map, { alfredConfig, ...interfaceState })
-        );
-      }
-    });
-  });
-
   validateCtf(map, interfaceState);
 
   return map;
@@ -417,75 +495,6 @@ export function getConfigs(ctf: CtfMap): Array<configType> {
     .map(ctfNode => ctfNode.configFiles || [])
     .reduce((p, c) => [...p, ...c], [])
     .map(e => e.config);
-}
-
-/**
- * Delete .configs dir
- */
-export function deleteConfigs(config: AlfredConfig): Promise<void> {
-  const configsBasePath = getConfigsBasePath(config.root);
-  if (fs.existsSync(configsBasePath)) {
-    return new Promise(resolve => {
-      rimraf(configsBasePath, () => {
-        resolve();
-      });
-    });
-  }
-  return Promise.resolve();
-}
-
-/**
- * Write configs to a './.configs' directory
- */
-export async function writeConfigsFromCtf(
-  ctf: CtfMap,
-  config: AlfredConfig
-): CtfMap {
-  // Create a .configs dir if it doesn't exist
-  const configsBasePath = getConfigsBasePath(config.root);
-  if (!fs.existsSync(configsBasePath)) {
-    fs.mkdirSync(configsBasePath);
-  }
-
-  // Create a map of the skill configs
-  const skillsConfigMap: Map<string, ConfigType> = new Map(
-    config.skills.map(([skillPkgName, skillConfig]) => [
-      require(skillPkgName).name,
-      skillConfig
-    ])
-  );
-
-  const ctfNodes = Array.from(ctf.values());
-
-  ctfNodes
-    .filter(ctfNode => ctfNode.configFiles && ctfNode.configFiles.length)
-    .forEach(ctfNode => {
-      const skillConfig = (() => {
-        if (skillsConfigMap.has(ctfNode.name)) {
-          // Apply the skill config if there is only one file
-          if (ctfNode.configFiles.length === 1) {
-            return skillsConfigMap.get(ctfNode.name);
-          }
-          if (ctfNode.configFiles.length > 1) {
-            console.log(
-              'Applying user configs to skills that have more than one config file is not supported at the moment'
-            );
-          }
-        }
-        return {};
-      })();
-      ctfNode.configFiles.forEach(configFile => {
-        const filePath = path.join(configsBasePath, configFile.path);
-        const convertedConfig =
-          typeof configFile.config === 'string'
-            ? configFile.config
-            : JSON.stringify(mergeConfigs({}, configFile.config, skillConfig));
-        // Write sync to prevent data races when writing configs in parallel
-        fs.writeFileSync(filePath, convertedConfig);
-      });
-    });
-
-  return ctf;
 }
 
 export function addSubCommandsToCtfNodes(ctf: CtfMap): CtfMap {

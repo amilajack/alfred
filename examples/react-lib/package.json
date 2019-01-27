@@ -13,6 +13,7 @@
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
   "alfred": {
+    "extends": "@examples/alfred-config-example",
     "showConfigs": true,
     "skills": [
       "@alfredpkg/skill-react"

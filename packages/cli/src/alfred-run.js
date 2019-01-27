@@ -5,15 +5,14 @@ import program from 'commander';
 import {
   getExecuteWrittenConfigsMethods,
   getInterfaceForSubcommand,
-  deleteConfigs,
-  writeConfigsFromCtf,
   loadConfig
 } from '@alfredpkg/core';
 import rimraf from 'rimraf';
 import generateCtfFromConfig, {
-  generateInterfaceStatesFromProject
+  generateInterfaceStatesFromProject,
+  writeConfigsFromCtf
 } from './helpers/ctf';
-import { getProjectRoot } from './helpers';
+import { getProjectRoot, deleteConfigs } from './helpers';
 
 (async () => {
   const args = program.parse(process.argv);
