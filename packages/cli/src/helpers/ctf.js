@@ -17,6 +17,7 @@ import mergeConfigs from '@alfredpkg/merge-configs';
 import formatJson from 'format-package';
 import type { CtfMap, InterfaceState, AlfredConfig } from '@alfredpkg/core';
 
+// @TODO Also allow .ts entrypoints
 export const ENTRYPOINTS = [
   'lib.node.js',
   'app.node.js',

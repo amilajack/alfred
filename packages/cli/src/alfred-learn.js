@@ -1,16 +1,11 @@
 import program from 'commander';
 import { loadConfig, writeConfig } from '@alfredpkg/core';
-import {
-  installDeps,
-  diffCtfDepsOfAllInterfaceStates,
-  getProjectRoot
-} from './helpers';
+import { installDeps, diffCtfDepsOfAllInterfaceStates, init } from './helpers';
 
 (async () => {
   const args = program.parse(process.argv);
   const { args: skillsPkgNames } = args;
-  const projectRoot = getProjectRoot();
-  const { pkgPath, alfredConfig } = await loadConfig(projectRoot);
+  const { alfredConfig, projectRoot, pkgPath } = await init();
 
   // Install skills using NPM's API
   const { npmClient } = alfredConfig;
