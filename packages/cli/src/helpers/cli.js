@@ -28,7 +28,9 @@ export function checkIsAlfredProject(
 
   if (!hasEntrypoint) {
     throw new Error(
-      'An entrypoint could not be found in the "./src" directory'
+      `The project must have at least one entrypoint. Here are some examples of entrypoints:\n\n${ENTRYPOINTS.map(
+        e => `"./src/${e}"`
+      ).join('\n')}`
     );
   }
 

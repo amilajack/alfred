@@ -457,7 +457,7 @@ export default function CTF(
   alfredConfig: AlfredConfig,
   interfaceState: InterfaceState
 ): CtfMap {
-  const map: CtfMap = new Map();
+  const ctf: CtfMap = new Map();
 
   ctfs.forEach(ctfNode => {
     const ctfWithHelpers = {
@@ -471,20 +471,20 @@ export default function CTF(
       ctfWithHelpers.interfaces.forEach(e => {
         if (e.module.resolveSkill) {
           if (e.module.resolveSkill(ctfs, interfaceState) !== false) {
-            map.set(ctfNode.name, ctfWithHelpers);
+            ctf.set(ctfNode.name, ctfWithHelpers);
           }
         } else {
-          map.set(ctfNode.name, ctfWithHelpers);
+          ctf.set(ctfNode.name, ctfWithHelpers);
         }
       });
     } else {
-      map.set(ctfNode.name, ctfWithHelpers);
+      ctf.set(ctfNode.name, ctfWithHelpers);
     }
   });
 
-  validateCtf(map, interfaceState);
+  // validateCtf(ctf, interfaceState);
 
-  return map;
+  return ctf;
 }
 
 /*
