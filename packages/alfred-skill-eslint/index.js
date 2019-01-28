@@ -36,13 +36,18 @@ module.exports = {
       }
       const { config } = getConfigByConfigName('eslint', configFiles);
       const { CLIEngine } = require('eslint');
-      const cli = new CLIEngine({ ...config, useEslintrc: false });
+      const cli = new CLIEngine({ baseConfig: config, useEslintrc: false });
       const report = cli.executeOnFiles([
         path.join(alfredConfig.root, 'src'),
         path.join(alfredConfig.root, 'tests')
       ]);
       const formatter = cli.getFormatter();
-      console.log(formatter(report.results));
+      if (report.errorCount) {
+        throw new Error(formatter(report.results));
+      } else {
+        console.log(formatter(report.results));
+      }
+
       return true;
     }
   },

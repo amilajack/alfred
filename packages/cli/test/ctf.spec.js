@@ -85,22 +85,22 @@ describe('alfred cli helpers', () => {
       const [state] = INTERFACE_STATES;
       const config = {
         ...defaultAlfredConfig,
-        skills: ['@alfredpkg/skill-non-existent-skill']
+        skills: [['@alfredpkg/skill-non-existent-skill', {}]]
       };
-      await expect(
-        generateCtfFromConfig(config, state)
-      ).rejects.toMatchSnapshot();
+      await expect(generateCtfFromConfig(config, state)).rejects.toThrow(
+        "Cannot find module '@alfredpkg/skill-non-existent-skill' from 'ctf.js'"
+      );
     });
 
     it('should throw if unsupported skill is used', async () => {
       const [state] = INTERFACE_STATES;
       const config = {
         ...defaultAlfredConfig,
-        skills: ['@alfredpkg/skill-mocha']
+        skills: [['@alfredpkg/skill-non-existent-skill', {}]]
       };
-      await expect(
-        generateCtfFromConfig(config, state)
-      ).rejects.toMatchSnapshot();
+      await expect(generateCtfFromConfig(config, state)).rejects.toThrow(
+        "Cannot find module '@alfredpkg/skill-non-existent-skill' from 'ctf.js'"
+      );
     });
   });
 

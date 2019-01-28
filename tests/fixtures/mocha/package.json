@@ -14,16 +14,16 @@
     "test": "../../../packages/cli/lib/alfred.js run test",
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
+  "alfred": {
+    "showConfigs": true,
+    "skills": [
+      "@alfredpkg/skill-mocha"
+    ]
+  },
   "devDependencies": {
     "@alfredpkg/cli": "^0.0.0",
     "@alfredpkg/core": "^0.0.0",
     "@alfredpkg/skill-mocha": "file:../../../packages/alfred-skill-mocha",
     "eslint-plugin-mocha": "^5.2.1"
-  },
-  "alfred": {
-    "skills": [
-      "@alfredpkg/skill-mocha"
-    ],
-    "showConfigs": true
   }
 }

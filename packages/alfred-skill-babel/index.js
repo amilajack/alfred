@@ -1,10 +1,4 @@
-const path = require('path');
-const {
-  getConfigPathByConfigName,
-  execCommand,
-  getPkgBinPath,
-  getConfigByConfigName
-} = require('@alfredpkg/core');
+const { getConfigByConfigName } = require('@alfredpkg/core');
 
 module.exports = {
   name: 'babel',
@@ -12,7 +6,8 @@ module.exports = {
   devDependencies: {
     '@babel/cli': '7.2.0',
     '@babel/core': '7.2.0',
-    '@babel/preset-env': '7.2.0'
+    '@babel/preset-env': '7.2.0',
+    'babel-core': '^7.0.0-bridge.0'
   },
   configFiles: [
     {
@@ -20,26 +15,11 @@ module.exports = {
       path: '.babelrc.js',
       write: true,
       config: {
-        presets: ['@babel/preset-env'],
-        plugins: ['@babel/plugin-proposal-class-properties']
+        presets: ['@babel/preset-env']
       }
     }
   ],
-  hooks: {
-    async call({ configFiles, alfredConfig, flags }) {
-      const configPath = getConfigPathByConfigName('babel', configFiles);
-      const binPath = await getPkgBinPath('@babel/cli', 'babel');
-      return execCommand(
-        [
-          binPath,
-          alfredConfig.showConfigs
-            ? `--configFile ${configPath} .`
-            : path.join(alfredConfig.root, 'node_modules', 'jest.config.js'),
-          ...flags
-        ].join(' ')
-      );
-    }
-  },
+  hooks: {},
   ctfs: {
     webpack(config, ctf) {
       return config

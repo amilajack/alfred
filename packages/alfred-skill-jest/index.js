@@ -78,10 +78,11 @@ module.exports = {
         })
         .extendConfig('eslint', {
           plugins: ['jest']
-        }),
-    babel: config =>
-      config.addDependencies({
-        'babel-core': '^7.0.0-bridge.0'
-      })
+        })
+    // This causes a cycle in the CTF graph, does not allow topsort
+    // babel: config =>
+    //   config.addDependencies({
+    //     'babel-core': '^7.0.0-bridge.0'
+    //   })
   }
 };

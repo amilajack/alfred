@@ -1,3 +1,4 @@
+/* eslint import/no-dynamic-require: off */
 import path from 'path';
 import fs from 'fs';
 import npm from 'npm';
@@ -8,10 +9,15 @@ import CTF, {
   INTERFACE_STATES,
   normalizeInterfacesOfSkill,
   AddCtfHelpers,
-  validateCtf
+  validateCtf,
+  callCtfFnsInOrder,
+  getConfigsBasePath
 } from '@alfredpkg/core';
+import mergeConfigs from '@alfredpkg/merge-configs';
+import formatJson from 'format-package';
 import type { CtfMap, InterfaceState, AlfredConfig } from '@alfredpkg/core';
 
+// @TODO Also allow .ts entrypoints
 export const ENTRYPOINTS = [
   'lib.node.js',
   'app.node.js',
@@ -72,6 +78,40 @@ export function diffCtfDeps(oldCtf: CtfMap, newCtf: CtfMap): Array<string> {
 }
 
 /**
+ * Write configs to a './.configs' directory
+ * @TODO @REFACTOR Move to CLI
+ */
+export async function writeConfigsFromCtf(
+  ctf: CtfMap,
+  config: AlfredConfig
+): Promise<CtfMap> {
+  // Create a .configs dir if it doesn't exist
+  const configsBasePath = getConfigsBasePath(config.root);
+  if (!fs.existsSync(configsBasePath)) {
+    fs.mkdirSync(configsBasePath);
+  }
+
+  const ctfNodes = Array.from(ctf.values());
+
+  await Promise.all(
+    ctfNodes
+      .filter(ctfNode => ctfNode.configFiles && ctfNode.configFiles.length)
+      .reduce((prev, ctfNode) => prev.concat(ctfNode.configFiles), [])
+      .map(async configFile => {
+        const filePath = path.join(configsBasePath, configFile.path);
+        const convertedConfig =
+          typeof configFile.config === 'string'
+            ? configFile.config
+            : await formatJson(configFile.config);
+        // Write sync to prevent data races when writing configs in parallel
+        fs.writeFileSync(filePath, convertedConfig);
+      })
+  );
+
+  return ctf;
+}
+
+/**
  * @TODO Account for `devDependencies` and `dependencies`
  */
 export function installDeps(
@@ -111,13 +151,38 @@ export function installDeps(
 
 /**
  * Add skills to a given list of skills to ensure that the list has a complete set
- * of standard ctfs
+ * of standard ctfs. Also remove skills that do not support the current interfaceState
+ * @TODO @REFACTOR Share logic between this and CTF(). Much duplication here
  */
 export function addMissingStdSkillsToCtf(
   ctf: CtfMap,
   alfredConfig: AlfredConfig,
   interfaceState: InterfaceState
 ): CtfMap {
+  // Remove skills that do not support the current interfaceState
+  const ctfNodesToBeRemoved = [];
+  ctf.forEach(ctfNode => {
+    if (ctfNode && ctfNode.supports) {
+      const supports = {
+        env: ctfNode.supports.env.includes(interfaceState.env),
+        target: ctfNode.supports.targets.includes(interfaceState.target),
+        projectType: ctfNode.supports.projectTypes.includes(
+          interfaceState.projectType
+        )
+      };
+      const { env, target, projectType } = supports;
+      const isSupported = env && target && projectType;
+      if (!isSupported) {
+        ctfNodesToBeRemoved.push(ctfNode.name);
+      }
+    }
+  });
+
+  ctfNodesToBeRemoved.forEach(ctfNodeName => {
+    ctf.delete(ctfNodeName);
+  });
+
+  // Create a set of standard skills
   const stdCtf = new Map(
     Object.entries({
       lint: CORE_CTFS.eslint,
@@ -174,25 +239,15 @@ export function addMissingStdSkillsToCtf(
   });
 
   // Add all the CORE_CTF's without subcommands
-  ctf.set('babel', { ...CORE_CTFS.babel, ...AddCtfHelpers });
+  // @HACK
+  if (!ctf.has('babel')) {
+    ctf.set('babel', { ...CORE_CTFS.babel, ...AddCtfHelpers });
+  }
   // @TODO
   // ctf.set('lodash', { ...CORE_CTFS.lodash, ...AddCtfHelpers });
 
-  ctf.forEach(ctfNode => {
-    const ctfWithHelpers = {
-      ...ctfNode,
-      ...AddCtfHelpers
-    };
-    Object.entries(ctfWithHelpers.ctfs || {}).forEach(([ctfName, ctfFn]) => {
-      const correspondingCtfNode = ctf.get(ctfName);
-      if (correspondingCtfNode) {
-        ctf.set(
-          ctfName,
-          ctfFn(correspondingCtfNode, ctf, { alfredConfig, ...interfaceState })
-        );
-      }
-    });
-  });
+  callCtfFnsInOrder(ctf, alfredConfig, interfaceState);
+  validateCtf(ctf, interfaceState);
 
   return ctf;
 }
@@ -204,30 +259,29 @@ export default async function generateCtfFromConfig(
   alfredConfig: AlfredConfig,
   interfaceState: InterfaceState
 ): Promise<CtfMap> {
-  // Check if any valid entrypoints exist
-  const states = generateInterfaceStatesFromProject(alfredConfig);
-  if (!states.length) {
-    throw new Error(
-      `The project must have at least one entrypoint. Here are some examples of entrypoints:\n\n${ENTRYPOINTS.map(
-        e => `"./src/${e}"`
-      ).join('\n')}`
-    );
-  }
-
   // Generate the CTF
   const tmpCtf: CtfMap = new Map();
   const { skills = [] } = alfredConfig;
-  skills.forEach(skill => {
-    /* eslint-disable */
-    const c = require(skill);
-    /* eslint-enable */
-    tmpCtf.set(c.name, c);
+  skills.forEach(([skillPkgName, skillConfig]) => {
+    // Add the skill config to the ctfNode
+    const ctfNode = require(skillPkgName);
+    ctfNode.config = skillConfig;
+    if (ctfNode.configFiles) {
+      ctfNode.configFiles = ctfNode.configFiles.map(configFile => ({
+        ...configFile,
+        config: mergeConfigs(
+          {},
+          configFile.config,
+          // Only apply config if skill has only one config file
+          ctfNode.configFiles.length === 1 ? skillConfig : {}
+        )
+      }));
+    }
+    tmpCtf.set(ctfNode.name, ctfNode);
   });
 
   const ctf = CTF(Array.from(tmpCtf.values()), alfredConfig, interfaceState);
   addMissingStdSkillsToCtf(ctf, alfredConfig, interfaceState);
-
-  validateCtf(ctf, interfaceState);
 
   return ctf;
 }

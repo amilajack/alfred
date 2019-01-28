@@ -1,9 +1,8 @@
 // @flow
 import path from 'path';
 import program from 'commander';
-import { loadConfig } from '@alfredpkg/core';
 import Providers from './providers';
-import { getProjectRoot } from './helpers';
+import { init } from './helpers';
 
 (async () => {
   const parsedArguments = program
@@ -12,11 +11,10 @@ import { getProjectRoot } from './helpers';
     .option('-d, --debug', 'show debugging output')
     .parse(process.argv);
 
-  const { alfredConfig } = await loadConfig(getProjectRoot);
-  const { root } = alfredConfig;
+  const { projectRoot } = await init();
 
   const filesPattern: Array<string> = parsedArguments.args.map(arg =>
-    path.join(root, arg)
+    path.join(projectRoot, arg)
   );
 
   // @TODO Create backups from the files and pass the paths to the backups
@@ -25,7 +23,7 @@ import { getProjectRoot } from './helpers';
   //        files
   Providers({
     files: filesPattern,
-    packageJsonPath: path.join(root, 'package.json'),
+    packageJsonPath: path.join(projectRoot, 'package.json'),
     unsafe: parsedArguments.unsafe,
     verbose: parsedArguments.verbose,
     write: parsedArguments.write

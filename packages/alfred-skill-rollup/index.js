@@ -26,6 +26,7 @@ module.exports = {
     {
       name: 'rollup.base',
       path: 'rollup.base.js',
+      applySkillConfig: true,
       write: true,
       config: {
         external(id) {

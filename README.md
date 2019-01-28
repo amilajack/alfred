@@ -239,6 +239,7 @@ Suppose you have the following Alfred config:
     "skills": [
       "@alfredpkg/skill-parcel",
       ["@alfredpkg/skill-babel", {
+        // Config for Babel
         "presets": [
           "@babel-preset-env",
           "@babel-preset-flow",
@@ -249,6 +250,7 @@ Suppose you have the following Alfred config:
         ]
       }],
       ["@alfredpkg/skill-eslint", {
+        // Config for ESLint
         "rules": {
           "no-console": "off"
         }
@@ -327,16 +329,16 @@ $ yarn add react
 Would you like to install it? (Y/n)
 ```
 
-## Required Files and Folders
+## Roadmap
 
-* `./src/{projectType}.{target}.js`, e.g.: `./src/lib.node.js`
-* `./tests/{projectType}.{target}.spec.js`, e.g.: `./tests/lib.node.spec.js`
-* `.editorconfig`
-* `.gitignore`
-* `LICENSE`
-* `package.json`
-* `package-lock.json` or `yarn.lock`
-* `README.md`
+### In progress
+* Implement at least one skill for each type of JS infrastructure
+
+### Future
+* `alfred migrate`: Migration script to Alfred
+* `alfred upgrade`: Upgrade codebase to latest codebase to latest ES version
+* `alfred bug`: Generating bug reports on user's behalf
+* `alfred doc`: Generating documentation
 
 ## Alfred Skills Implementation Status
 
