@@ -110,58 +110,64 @@ async function createNewProject(cwd: string, name: string) {
 
   const guess = await guessAuthor();
 
-  const answers = await prompt([
-    { type: 'input', name: 'description', message: 'description' },
-    { type: 'input', name: 'git', message: 'git repository' },
-    {
-      name: 'author',
-      type: 'input',
-      message: 'author',
-      default: guess.name
-    },
-    {
-      name: 'email',
-      type: 'input',
-      message: 'email',
-      default: guess.email
-    },
-    {
-      name: 'license',
-      type: 'input',
-      message: 'license',
-      default: 'MIT',
-      validate(input) {
-        const self = validateLicense(input);
-        if (self.validForNewPackages) {
-          return true;
+  let answers;
+
+  if (process.env.E2E_CLI_TEST) {
+    answers = JSON.parse(process.env.FOO);
+  } else {
+    answers = await prompt([
+      { type: 'input', name: 'description', message: 'description' },
+      { type: 'input', name: 'git', message: 'git repository' },
+      {
+        name: 'author',
+        type: 'input',
+        message: 'author',
+        default: guess.name
+      },
+      {
+        name: 'email',
+        type: 'input',
+        message: 'email',
+        default: guess.email
+      },
+      {
+        name: 'license',
+        type: 'input',
+        message: 'license',
+        default: 'MIT',
+        validate(input) {
+          const self = validateLicense(input);
+          if (self.validForNewPackages) {
+            return true;
+          }
+          const errors = self.warnings || [];
+          return `Sorry, ${errors.join(' and ')}.`;
         }
-        const errors = self.warnings || [];
-        return `Sorry, ${errors.join(' and ')}.`;
+      },
+      {
+        name: 'npmClient',
+        type: 'list',
+        choices: ['NPM', 'Yarn'],
+        message: 'npm client',
+        default: 'NPM'
+      },
+      {
+        name: 'projectType',
+        type: 'list',
+        choices: ['app', 'lib'],
+        message: 'project type',
+        default: 'app'
+      },
+      {
+        name: 'target',
+        type: 'list',
+        // @TODO @HARDCODE Dynamically get the targets
+        choices: ['browser', 'node'],
+        message: 'project type',
+        default: 'browser'
       }
-    },
-    {
-      name: 'npmClient',
-      type: 'list',
-      choices: ['NPM', 'Yarn'],
-      message: 'npm client',
-      default: 'NPM'
-    },
-    {
-      name: 'projectType',
-      type: 'list',
-      choices: ['app', 'lib'],
-      message: 'project type',
-      default: 'app'
-    },
-    {
-      name: 'target',
-      type: 'list',
-      // @TODO @HARDCODE Dynamically get the targets
-      choices: ['browser', 'node'],
-      message: 'project type',
-      default: 'browser'
-    }
-  ]);
+    ]);
+  }
 
   const filename = `${answers.projectType}.${answers.target}.js`;
   const entry = `./src/${filename}`;
