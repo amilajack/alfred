@@ -42,3 +42,4 @@ dist
 targets
 package-lock.json
 .configs
+tmp

@@ -1,30 +1,49 @@
 {
   "name": "alfred",
   "version": "0.0.0",
-  "description": "A framework for upgrading JavaScript codebases",
-  "preferGlobal": true,
   "private": true,
+  "description": "A framework for upgrading JavaScript codebases",
+  "repository": "https://github.com/amilajack/alfred.git",
+  "license": "MIT",
+  "author": "Amila Welihinda <amilajack@gmail.com>",
   "workspaces": [
     "examples/*",
     "packages/*",
+    "packages/cli/test/e2e/tmp/*",
     "tests/fixtures/*",
     "website"
   ],
-  "repository": "https://github.com/amilajack/alfred.git",
-  "author": "Amila Welihinda <amilajack@gmail.com>",
-  "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_ENV=production lerna run build --stream",
     "flow-typed": "lerna run flow-typed",
     "lint": "eslint .",
-    "test": "yarn build && yarn lint && lerna run lint --parallel --ignore @fixtures/*,@examples/* && lerna run flow --parallel && lerna run test --parallel --ignore '{@fixtures/*,@examples/*}' && lerna run test-all --parallel",
+    "test": "yarn build && yarn lint && lerna run lint --parallel --ignore @fixtures/*,@examples/* && lerna run flow --parallel && lerna run test --parallel --ignore '{@fixtures/*,@examples/*}' && lerna run test-all --parallel lerna run e2e --stream",
+    "version": "lerna run build:clean && yarn build",
     "website:build": "yarn workspace @alfredpkg/website build",
     "website:clean": "yarn workspace @alfredpkg/website clean",
     "website:publish-gh-pages": "yarn workspace @alfredpkg/website publish-gh-pages && yarn website:clean",
     "website:start": "yarn workspace @alfredpkg/website start",
     "website:test": "yarn website:build",
-    "website:version": "yarn workspace @alfredpkg/website version",
-    "version": "lerna run build:clean && yarn build"
+    "website:version": "yarn workspace @alfredpkg/website version"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn test"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "bliss",
+    "rules": {
+      "class-methods-use-this": "off",
+      "flowtype-errors/show-errors": "off",
+      "global-require": "off"
+    }
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -49,31 +68,13 @@
     "shebang-loader": "^0.0.1",
     "yarn": "^1.13.0"
   },
-  "eslintConfig": {
-    "extends": "bliss",
-    "rules": {
-      "class-methods-use-this": "off",
-      "flowtype-errors/show-errors": "off",
-      "global-require": "off"
-    }
-  },
-  "renovate": {
-    "extends": "bliss"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn test"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ]
-  },
   "engines": {
     "node": ">=8",
     "npm": ">=6.7.0",
     "yarn": ">=1.13.0"
+  },
+  "preferGlobal": true,
+  "renovate": {
+    "extends": "bliss"
   }
 }

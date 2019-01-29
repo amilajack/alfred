@@ -2,32 +2,30 @@
   "name": "@alfredpkg/cli",
   "version": "0.0.0",
   "description": "A framework for upgrading JavaScript codebases",
-  "main": "./lib/helpers",
+  "license": "MIT",
+  "engines": {
+    "node": ">=10"
+  },
+  "repository": "git@github.com:amilajack/alfred.git",
+  "author": "Amila Welihinda <amilajack@gmail.com>",
   "bin": {
     "alfred": "./lib/alfred.js"
   },
-  "preferGlobal": true,
-  "repository": "git@github.com:amilajack/alfred.git",
-  "author": "Amila Welihinda <amilajack@gmail.com>",
-  "license": "MIT",
+  "main": "./lib/helpers",
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps inline && cp -r src/providers/resources lib/providers && cp -r src/templates lib",
     "build-watch": "cross-env NODE_ENV=production babel src --out-dir lib --watch --source-maps inline",
+    "e2e": "node -r @babel/register test/e2e/alfred-e2e.js",
     "flow": "flow",
     "flow-typed": "flow-typed install",
     "test": "jest --color",
     "version": "rm -rf lib && yarn build"
   },
-  "devDependencies": {
-    "chai": "^4.2.0",
-    "espree": "^5.0.0",
-    "flow-bin": "^0.92.0",
-    "flow-typed": "^2.5.1",
-    "lodash.flatten": "^4.4.0"
-  },
-  "peerDependencies": {
-    "@alfredpkg/core": "0.0.0"
-  },
+  "engineStrict": true,
+  "files": [
+    "lib"
+  ],
+  "preferGlobal": true,
   "dependencies": {
     "5to6-codemod": "^1.7.1",
     "@alfredpkg/interface-build": "^0.0.0",
@@ -62,11 +60,14 @@
     "validate-npm-package-name": "^3.0.0",
     "yarn-api": "^1.1.0"
   },
-  "engineStrict": true,
-  "engines": {
-    "node": ">=10"
+  "peerDependencies": {
+    "@alfredpkg/core": "0.0.0"
   },
-  "files": [
-    "lib"
-  ]
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "espree": "^5.0.0",
+    "flow-bin": "^0.90.0",
+    "flow-typed": "^2.5.1",
+    "lodash.flatten": "^4.4.0"
+  }
 }

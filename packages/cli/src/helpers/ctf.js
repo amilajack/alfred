@@ -2,7 +2,8 @@
 import path from 'path';
 import fs from 'fs';
 import npm from 'npm';
-import yarn from 'yarn-api';
+// This dep has issues with being imported
+// import yarn from 'yarn-api';
 import CTF, {
   getDevDependencies,
   CORE_CTFS,
@@ -135,14 +136,14 @@ export function installDeps(
         });
       });
     }
-    case 'yarn': {
-      return new Promise((resolve, reject) => {
-        yarn(['why', 'isobject'], err => {
-          if (err) reject(err);
-          resolve();
-        });
-      });
-    }
+    // case 'yarn': {
+    //   return new Promise((resolve, reject) => {
+    //     yarn(['why', 'isobject'], err => {
+    //       if (err) reject(err);
+    //       resolve();
+    //     });
+    //   });
+    // }
     default: {
       throw new Error('Unsupported npm client. Can only be "npm" or "yarn"');
     }

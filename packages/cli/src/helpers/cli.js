@@ -28,7 +28,7 @@ export function checkIsAlfredProject(
 
   if (!hasEntrypoint) {
     throw new Error(
-      `The project must have at least one entrypoint. Here are some examples of entrypoints:\n\n${ENTRYPOINTS.map(
+      `You might be in the wrong directory or this is not an Alfred project. The project must have at least one entrypoint. Here are some examples of entrypoints:\n\n${ENTRYPOINTS.map(
         e => `"./src/${e}"`
       ).join('\n')}`
     );

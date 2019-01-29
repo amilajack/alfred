@@ -113,7 +113,7 @@ async function createNewProject(cwd: string, name: string) {
   let answers;
 
   if (process.env.E2E_CLI_TEST) {
-    answers = JSON.parse(process.env.FOO);
+    answers = JSON.parse(process.env.CLI_INPUT || '{}');
   } else {
     answers = await prompt([
       { type: 'input', name: 'description', message: 'description' },
@@ -197,10 +197,9 @@ async function createNewProject(cwd: string, name: string) {
   const templateData = {
     project: answers,
     'alfred-pkg': {
-      semver:
-        process.env.NODE_ENV === 'test'
-          ? `file:${alfredFilePath}`
-          : `^${ALFRED_PKG_VERSION}`
+      semver: process.env.E2E_CLI_TEST
+        ? `file:${alfredFilePath}`
+        : `^${ALFRED_PKG_VERSION}`
     }
   };
 
@@ -252,14 +251,15 @@ async function createNewProject(cwd: string, name: string) {
   const relativeEntryPoint = path.relative(cwd, path.resolve(root, entry));
 
   renderLines(['I am now installing the dependencies for your app']);
-  const installCommand = answers.npmClient === 'NPM' ? 'npm install' : 'yarn';
+  const installCommand =
+    answers.npmClient === 'NPM' ? `npm install --prefix ${root}` : 'yarn';
   const buildCommand =
     answers.npmClient === 'NPM' ? 'npm run build' : 'yarn build';
   // @TODO Install the deps
   if (!process.env.IGNORE_INSTALL) {
     childProcess.execSync(installCommand, {
       cwd: root,
-      stdio: [0, 1, 2]
+      stdio: 'inherit'
     });
   }
 

@@ -14,7 +14,7 @@ export default function Validate(alfredPkg: { [x: string]: any }) {
     extends: [Joi.string(), Joi.array().items(Joi.string())],
     skills,
     app: Joi.object().keys({
-      targets: [Joi.string(), Joi.object()]
+      targets: [Joi.string(), Joi.object(), Joi.array()]
     }),
     lib: Joi.object().keys({
       recommendSkills: skills

@@ -522,7 +522,7 @@ export function getDevDependencies(ctf: CtfMap): { [x: string]: string } {
 }
 
 export function execCommand(cmd: string) {
-  return childProcess.execSync(cmd, { stdio: [0, 1, 2] });
+  return childProcess.execSync(cmd, { stdio: 'inherit' });
 }
 
 export function getInterfaceForSubcommand(ctf: CtfMap, subcommand: string) {
