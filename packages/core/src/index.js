@@ -24,7 +24,7 @@ export type AlfredConfig = {
   showConfigs: boolean
 };
 
-export { default as Config, loadConfig } from './config';
+export { default as Config, loadConfig, writeConfig } from './config';
 
 // All the possible interface states
 export const INTERFACE_STATES = [

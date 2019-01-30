@@ -6,6 +6,10 @@ import powerset from '@amilajack/powerset';
 import childProcess from 'child_process';
 // import { INTERFACE_STATES } from '@alfredpkg/core';
 
+process.on('unhandledRejection', err => {
+  throw err;
+});
+
 // Create a ./tmp directory
 // Start by having all the packages for the skills installed
 // For each combination c[] of CTFs
@@ -27,81 +31,73 @@ import childProcess from 'child_process';
 //      test with showConfigs: true
 //      test with showConfigs: false
 
+const nonCoreCts = ['lodash', 'webpack', 'react', 'mocha'];
+
 (async () => {
   const tmpDir = path.join(__dirname, 'tmp');
-  const packagesDir = path.join(__dirname, '..', '..', '..');
-  const dirnames = await fs.promises.readdir(packagesDir);
-  const skillPkgNames = dirnames
-    .filter(dirname => dirname.includes('alfred-skill'))
-    .map(
-      //
-      dirname => require(path.join(packagesDir, dirname, 'package.json')).name
-    );
-
   rimraf.sync(tmpDir);
   await fs.promises.mkdir(tmpDir);
 
-  powerset(skillPkgNames.sort())
+  const CLI_INPUT = {
+    description: 'foo',
+    git: 'foo',
+    author: 'foo',
+    email: 'foo',
+    license: 'MIT',
+    projectType: 'lib',
+    npmClient: 'NPM',
+    target: 'browser'
+  };
+  const env = {
+    ...process.env,
+    E2E_CLI_TEST: true,
+    CLI_INPUT: JSON.stringify(CLI_INPUT),
+    IGNORE_INSTALL: true
+  };
+
+  powerset(nonCoreCts)
+    .sort((a, b) => a.length - b.length)
     // @HACK A temporary hack preventing all the tests from being run
-    .slice(0, 1)
+    .slice(0, 5)
     .forEach(async skillCombination => {
-      const folderName = skillCombination
-        .map(skillName => skillName.slice('@alfredpkg/skill-'.length))
-        .join('-');
+      const folderName = skillCombination.join('-');
 
       const binPath = require.resolve('../../lib/alfred');
-      const CLI_INPUT = {
-        description: 'foo',
-        git: 'foo',
-        author: 'foo',
-        email: 'foo',
-        license: 'MIT',
-        projectType: 'app',
-        npmClient: 'NPM',
-        target: 'browser'
-      };
       childProcess.execSync(`${binPath} new ${folderName}`, {
         cwd: tmpDir,
         stdio: 'inherit',
-        env: {
-          ...process.env,
-          E2E_CLI_TEST: true,
-          CLI_INPUT: JSON.stringify(CLI_INPUT),
-          IGNORE_INSTALL: true
-        }
+        env
       });
       const projectDir = path.join(tmpDir, folderName);
       childProcess.execSync('yarn', {
         cwd: projectDir,
-        stdio: 'inherit'
+        stdio: 'inherit',
+        env
       });
 
-      // Add the skills to the alfred.skills config
-      // skillCombination.forEach(skill => {
-      //   childProcess.execSync(
-      //     `${binPath} learn file:../../alfred-skill-${skill}`,
-      //     {
-      //       // cwd: path.join(folderName),
-      //       stdio: 'inherit',
-      //       env: {
-      //         ...process.env,
-      //         E2E_CLI_TEST: true
-      //       }
-      //     }
-      //   );
-      // });
+      console.log(`Testing skill combination ${skillCombination.join(' ')}`);
 
-      ['build', 'build --prod', 'test', 'lint'].forEach(script => {
+      // Add the skills to the alfred.skills config
+      const projectPkgJson = path.join(projectDir, 'package.json');
+      const a = JSON.parse(await fs.promises.readFile(projectPkgJson));
+      const skillsPkgNames = skillCombination.map(e => `@alfredpkg/skill-${e}`);
+      await fs.promises.writeFile(
+        projectPkgJson,
+        JSON.stringify({
+          ...a,
+          alfred: {
+            ...(a.alfred || {}),
+            skills: skillsPkgNames
+          }
+        })
+      );
+
+      ['build', 'build --prod', 'test', 'lint', 'format'].forEach(script => {
         childProcess.execSync(`${binPath} run ${script}`, {
           cwd: projectDir,
           stdio: 'inherit',
-          env: {
-            ...process.env,
-            E2E_CLI_TEST: true
-          }
+          env
         });
       });
     });
-
-  rimraf.sync(tmpDir);
 })();

@@ -24,7 +24,7 @@ import { installDeps, diffCtfDepsOfAllInterfaceStates, init } from './helpers';
     ...newPkg,
     alfred: {
       ...newPkg.alfred,
-      skills: [...newPkg.alfred.skills, ...skillsPkgNames]
+      skills: [...(newPkg.alfred.skills || []), ...skillsPkgNames]
     }
   });
 
