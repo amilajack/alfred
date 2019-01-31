@@ -12,7 +12,8 @@ import CTF, {
   AddCtfHelpers,
   validateCtf,
   callCtfFnsInOrder,
-  getConfigsBasePath
+  getConfigsBasePath,
+  writeConfig
 } from '@alfredpkg/core';
 import mergeConfigs from '@alfredpkg/merge-configs';
 import formatJson from 'format-package';
@@ -115,9 +116,10 @@ export async function writeConfigsFromCtf(
 /**
  * @TODO Account for `devDependencies` and `dependencies`
  */
-export function installDeps(
+export async function installDeps(
   dependencies: Array<string> = [],
-  npmClient: 'npm' | 'yarn' = 'npm'
+  npmClient: 'npm' | 'yarn' | 'write' = 'npm',
+  alfredConfig: AlfredConfig
 ): Promise<any> {
   if (!dependencies.length) return Promise.resolve();
 
@@ -134,6 +136,25 @@ export function installDeps(
 
           npm.on('log', console.log);
         });
+      });
+    }
+    // Write the package to the package.json but do not install them
+    case 'write': {
+      const { root } = alfredConfig;
+      const rawPkg = await fs.promises.readFile(
+        path.join(root, 'package.json')
+      );
+      const pkg = JSON.parse(rawPkg.toString());
+      const { dependencies: currentDependencies = {} } = pkg;
+      const newDependencies = {
+        ...currentDependencies,
+        ...dependencies
+          .map(e => ({ e: `${e}@latest` }))
+          .reduce((p, c) => ({ ...p, ...c }))
+      };
+      return writeConfig(path.join(root, 'package.json'), {
+        ...pkg,
+        dependencies: newDependencies
       });
     }
     // case 'yarn': {

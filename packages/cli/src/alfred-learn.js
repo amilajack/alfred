@@ -9,16 +9,20 @@ import { installDeps, diffCtfDepsOfAllInterfaceStates, init } from './helpers';
 
   // Install skills using NPM's API
   const { npmClient } = alfredConfig;
-  await installDeps(skillsPkgNames, npmClient);
+  if (!process.env.IGNORE_INSTALL) {
+    await installDeps(skillsPkgNames, npmClient, alfredConfig.root);
+  }
 
   // Check if a skill with the same interface is already being used.
   // If so, uninstall it
 
   // Find the name of the packages that were installed and add the package names to
   // the alfred skills array
-  const { pkg: newPkg, alfredConfig: newAlfredConfig } = await loadConfig(
+  const { pkg: rawNewPkg, alfredConfig: newAlfredConfig } = await loadConfig(
     projectRoot
   );
+
+  const newPkg = Object.assign({}, rawNewPkg, { alfred: { skills: [] } });
 
   await writeConfig(pkgPath, {
     ...newPkg,
@@ -33,7 +37,7 @@ import { installDeps, diffCtfDepsOfAllInterfaceStates, init } from './helpers';
     alfredConfig,
     newAlfredConfig
   );
-  if (newSkills.length) {
-    await installDeps(newSkills);
+  if (newSkills.length && !process.env.IGNORE_INSTALL) {
+    await installDeps(newSkills, npmClient, alfredConfig.root);
   }
 })();

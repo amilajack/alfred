@@ -23,6 +23,7 @@
     "@alfredpkg/skill-react": "^0.0.0",
     "@alfredpkg/skill-rollup": "^0.0.0",
     "@alfredpkg/skill-webpack": "^0.0.0",
+    "@alfredpkg/skill-parcel": "^0.0.0",
     "debug": "^4.1.1",
     "format-package": "^4.5.0",
     "import-fresh": "^3.0.0",

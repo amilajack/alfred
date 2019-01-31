@@ -127,11 +127,8 @@ export default function Config(config: AlfredConfig): AlfredConfig {
 /**
  * Writes an Alfred config to a user's package.json
  */
-export async function writeConfig(
-  pkgPath: string,
-  config: AlfredConfig
-): AlfredConfig {
-  const formattedPkg = await formatPkg(sortPkgJson(config));
+export async function writeConfig(pkgPath: string, pkg: Object): AlfredConfig {
+  const formattedPkg = await formatPkg(sortPkgJson(pkg));
   await fs.promises.writeFile(pkgPath, formattedPkg);
   return formattedPkg;
 }

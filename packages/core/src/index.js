@@ -7,6 +7,7 @@ import webpack from '@alfredpkg/skill-webpack';
 import eslint from '@alfredpkg/skill-eslint';
 import react from '@alfredpkg/skill-react';
 import prettier from '@alfredpkg/skill-prettier';
+import parcel from '@alfredpkg/skill-parcel';
 import rollup from '@alfredpkg/skill-rollup';
 import lodashCtf from '@alfredpkg/skill-lodash';
 import mergeConfigs from '@alfredpkg/merge-configs';
@@ -73,6 +74,7 @@ export const INTERFACE_STATES = [
 export const CORE_CTFS = {
   babel,
   webpack,
+  parcel,
   eslint,
   prettier,
   jest: jestCtf,

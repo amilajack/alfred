@@ -105,7 +105,7 @@ async function createNewProject(cwd: string, name: string) {
     `I'm your assistant Alfred. I'll walk you through creating your new Alfred project "${style.project(
       name
     )}"`,
-    'Press ^C at any time to quit.'
+    'Press "ctrl + C" at any time to quit.'
   ]);
 
   const guess = await guessAuthor();

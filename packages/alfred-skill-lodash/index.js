@@ -5,12 +5,14 @@ module.exports = {
   configFiles: [],
   ctfs: {
     webpack(config) {
+      // eslint-disable-next-line import/no-unresolved
+      const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
       return config
         .addDevDependencies({
           'lodash-webpack-plugin': '0.11.5'
         })
         .extendConfig('webpack.prod', {
-          plugins: ['lodash-webpack-plugin']
+          plugins: [new LodashModuleReplacementPlugin()]
         });
     },
     /**
