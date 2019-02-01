@@ -1,5 +1,5 @@
 // @flow
-/* eslint import/no-dynamic-require: off */
+/* eslint import/no-dynamic-require: off, no-console: off */
 import fs from 'fs';
 import path from 'path';
 import rimraf from 'rimraf';
@@ -34,7 +34,8 @@ process.on('unhandledRejection', err => {
 //      test with showConfigs: true
 //      test with showConfigs: false
 
-const nonCoreCts = ['lodash', 'webpack', 'react', 'mocha'];
+const nonCoreCts = ['mocha'];
+// const nonCoreCts = ['lodash', 'webpack', 'react', 'mocha'];
 
 async function generateTests(
   skillCombination: Array<string>,
@@ -115,7 +116,9 @@ async function generateTests(
 
   res.forEach(
     ({ binPath, projectDir, skillCombination, target, projectType, env }) => {
+      let command;
       try {
+        command = 'skills';
         childProcess.execSync(`${binPath} skills`, {
           cwd: projectDir,
           stdio: 'inherit',
@@ -130,21 +133,40 @@ async function generateTests(
           })}`
         );
 
-        ['build', 'build --prod', 'test', 'lint', 'format'].forEach(script => {
-          childProcess.execSync(`${binPath} run ${script}`, {
-            cwd: projectDir,
-            stdio: 'inherit',
-            env
-          });
-        });
+        ['build', 'build --prod', 'test', 'lint', 'format'].forEach(
+          subcommand => {
+            command = subcommand;
+            try {
+              childProcess.execSync(`${binPath} run ${subcommand}`, {
+                cwd: projectDir,
+                stdio: 'inherit',
+                env
+              });
+            } catch (e) {
+              issues.push([
+                skillCombination.join(', '),
+                target,
+                projectType,
+                command
+              ]);
+              console.log(e);
+            }
+          }
+        );
 
+        command = 'clean';
         childProcess.execSync(`${binPath} clean`, {
           cwd: projectDir,
           stdio: 'inherit',
           env
         });
       } catch (e) {
-        issues.push([skillCombination.join(', '), target, projectType]);
+        issues.push([
+          skillCombination.join(', '),
+          target,
+          projectType,
+          command
+        ]);
         console.log(e);
       }
     }
@@ -155,13 +177,14 @@ async function generateTests(
       head: [
         chalk.bold('Failing Skill Combinations'),
         chalk.bold('Target'),
-        chalk.bold('Project Type')
+        chalk.bold('Project Type'),
+        chalk.bold('Command')
       ]
     });
     issues.forEach(issue => {
       table.push(issue);
     });
-    console.log(table.toString());
+    throw new Error(table.toString());
   } else {
     console.log('All e2e tests are passing! Yayy 🎉 🎉 🎉');
     rimraf.sync(tmpDir);
