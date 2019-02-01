@@ -18,7 +18,7 @@
     "e2e": "node -r @babel/register ./test/e2e/alfred-e2e.js",
     "flow": "flow",
     "flow-typed": "flow-typed install",
-    "test": "jest --color",
+    "test": "jest --color ./test/*.spec.js",
     "version": "rm -rf lib && yarn build"
   },
   "engineStrict": true,

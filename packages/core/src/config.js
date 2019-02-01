@@ -126,6 +126,8 @@ export default function Config(config: AlfredConfig): AlfredConfig {
 
 /**
  * Writes an Alfred config to a user's package.json
+ * @REFACTOR This should focus on only writing the alfred config, not the whole
+ *           package.json
  */
 export async function writeConfig(pkgPath: string, pkg: Object): AlfredConfig {
   const formattedPkg = await formatPkg(sortPkgJson(pkg));

@@ -34,8 +34,9 @@ process.on('unhandledRejection', err => {
 //      test with showConfigs: true
 //      test with showConfigs: false
 
-const nonCoreCts = ['mocha'];
-// const nonCoreCts = ['lodash', 'webpack', 'react', 'mocha'];
+// If there are n elmenets in this array, 2^n tests will run since that's the number
+// of total combinations of the elements in the array
+const nonCoreCts = ['lodash', 'webpack', 'react', 'mocha'];
 
 async function generateTests(
   skillCombination: Array<string>,
@@ -89,7 +90,7 @@ async function generateTests(
   rimraf.sync(tmpDir);
   await fs.promises.mkdir(tmpDir);
 
-  const res = await Promise.all(
+  const e2eTests = await Promise.all(
     powerset(nonCoreCts)
       .sort((a, b) => a.length - b.length)
       .map(skillCombination =>
@@ -104,7 +105,7 @@ async function generateTests(
         )
       )
       .reduce((p, c) => p.concat(c))
-      // .slice(0, 5)
+      .slice(0, 1)
       .map(e => e())
   );
 
@@ -114,7 +115,7 @@ async function generateTests(
 
   const issues = [];
 
-  res.forEach(
+  e2eTests.forEach(
     ({ binPath, projectDir, skillCombination, target, projectType, env }) => {
       let command;
       try {
@@ -184,9 +185,16 @@ async function generateTests(
     issues.forEach(issue => {
       table.push(issue);
     });
-    throw new Error(table.toString());
+    throw new Error(
+      [
+        '',
+        table.toString(),
+        `❗️ ${issues.length} e2e tests failed`,
+        `✅ ${e2eTests.length - issues.length} e2e tests passed`
+      ].join('\n')
+    );
   } else {
-    console.log('All e2e tests are passing! Yayy 🎉 🎉 🎉');
+    console.log(`All ${e2eTests.length} e2e tests passed! Yayy 🎉 🎉 🎉`);
     rimraf.sync(tmpDir);
   }
 })();

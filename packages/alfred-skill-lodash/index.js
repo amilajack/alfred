@@ -1,7 +1,7 @@
 module.exports = {
   name: 'lodash',
   description: 'lodash optimizations for your app',
-  dependencies: { 'lodash-es': '*' },
+  devDependencies: { 'lodash-es': '*' },
   configFiles: [],
   ctfs: {
     webpack(config) {

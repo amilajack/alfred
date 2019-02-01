@@ -63,16 +63,16 @@ export function diffCtfDeps(oldCtf: CtfMap, newCtf: CtfMap): Array<string> {
   const t: Map<string, string> = new Map();
   const s: Map<string, string> = new Map();
 
-  Object.entries(getDevDependencies(oldCtf)).forEach(([key, val]) => {
-    t.set(key, val);
+  Object.entries(getDevDependencies(oldCtf)).forEach(([dependency, semver]) => {
+    t.set(dependency, semver);
   });
-  Object.entries(getDevDependencies(newCtf)).forEach(([key, val]) => {
-    if (t.has(key)) {
-      if (t.get(key) !== val) {
+  Object.entries(getDevDependencies(newCtf)).forEach(([dependency, semver]) => {
+    if (t.has(dependency)) {
+      if (t.get(dependency) !== semver) {
         throw new Error('Cannot resolve diff deps');
       }
     } else {
-      s.set(key, val);
+      s.set(dependency, semver);
     }
   });
 
@@ -124,6 +124,7 @@ export async function installDeps(
   if (!dependencies.length) return Promise.resolve();
 
   switch (npmClient) {
+    // Install dependencies with NPM, which is the default
     case 'npm': {
       return new Promise((resolve, reject) => {
         npm.load({ save: true }, err => {
@@ -138,25 +139,39 @@ export async function installDeps(
         });
       });
     }
-    // Write the package to the package.json but do not install them
-    case 'write': {
+    // Write the package to the package.json but do not install them. This is intended
+    // to be used for end to end testing
+    case 'writeOnly': {
       const { root } = alfredConfig;
       const rawPkg = await fs.promises.readFile(
         path.join(root, 'package.json')
       );
       const pkg = JSON.parse(rawPkg.toString());
       const { dependencies: currentDependencies = {} } = pkg;
+      const dependenciesAsObject = dependencies
+        .map(dependency => {
+          if (dependency[0] !== '@') {
+            return dependency.split('@');
+          }
+          // A temporary hack that handles scoped npm packages. A proper solution would be
+          // using a semver parser. Package names come in the following form: ['@a/b@1.2.3', 'a@latest', ...].
+          // Temporarily remove the scope so we can split the package name
+          const pkgWithoutScope = dependency.slice(1).split('@');
+          // Then add it back
+          return [`@${pkgWithoutScope[0]}`, pkgWithoutScope[1]];
+        })
+        .map(([p, c]) => ({ [p]: c }))
+        .reduce((p, c) => ({ ...p, ...c }));
       const newDependencies = {
         ...currentDependencies,
-        ...dependencies
-          .map(e => ({ e: `${e}@latest` }))
-          .reduce((p, c) => ({ ...p, ...c }))
+        ...dependenciesAsObject
       };
       return writeConfig(path.join(root, 'package.json'), {
         ...pkg,
         dependencies: newDependencies
       });
     }
+    // Install dependencies with Yarn
     // case 'yarn': {
     //   return new Promise((resolve, reject) => {
     //     yarn(['why', 'isobject'], err => {
@@ -311,7 +326,7 @@ export default async function generateCtfFromConfig(
 export async function diffCtfDepsOfAllInterfaceStates(
   prevAlfredConfig: AlfredConfig,
   currAlfredConfig: AlfredConfig
-): Set<string> {
+): Array<string> {
   const stateWithDuplicateDeps = await Promise.all(
     INTERFACE_STATES.map(interfaceState =>
       Promise.all([
