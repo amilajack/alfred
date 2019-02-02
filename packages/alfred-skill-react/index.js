@@ -2,7 +2,7 @@ module.exports = {
   name: 'react',
   description: 'A JavaScript library for building user interfaces',
   devDependencies: {
-    react: '0.16.0'
+    react: '16.7.0'
   },
   ctfs: {
     // @TODO Add React HMR support

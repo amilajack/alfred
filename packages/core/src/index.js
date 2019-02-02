@@ -14,7 +14,6 @@ import mergeConfigs from '@alfredpkg/merge-configs';
 import pkgUp from 'pkg-up';
 import lodash from 'lodash';
 import topsort from 'toposort';
-
 import type { ConfigType } from './config';
 
 export type AlfredConfig = {
@@ -28,6 +27,14 @@ export type AlfredConfig = {
 export { default as Config, loadConfig, writeConfig } from './config';
 
 // All the possible interface states
+// @TODO Also allow .ts entrypoints
+// @TODO Allow the follow entrypoints:
+// 'lib.electron.main.js',
+// 'lib.electron.renderer.js',
+// 'app.electron.main.js',
+// 'app.electron.renderer.js',
+// 'lib.react-native.js',
+// 'app.react-native.js'
 export const INTERFACE_STATES = [
   {
     projectType: 'app',

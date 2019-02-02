@@ -3,15 +3,13 @@ import path from 'path';
 import fs from 'fs';
 import childProcess from 'child_process';
 import { prompt } from 'inquirer';
-import handlebars from 'handlebars';
 import validateLicense from 'validate-npm-package-license';
 import validateName from 'validate-npm-package-name';
 import program from 'commander';
 import git from 'git-config';
 import chalk from 'chalk';
-import getSingleSubcommandFromArgs from './helpers/cli';
+import getSingleSubcommandFromArgs, { addBoilerplate } from './helpers/cli';
 
-const TEMPLATES_DIR = path.resolve(__dirname, 'templates');
 // @TODO @HARDCODE Remove hardcoding of versions
 const ALFRED_PKG_VERSION = '0.0.0';
 
@@ -26,22 +24,6 @@ const gitConfig = () =>
 function escapeQuotes(str: string): string {
   return str.replace(/"/g, '\\"');
 }
-
-async function compile(filename: string) {
-  const source = await fs.promises.readFile(
-    path.resolve(TEMPLATES_DIR, filename)
-  );
-  return handlebars.compile(source.toString(), { noEscape: true });
-}
-
-const GITIGNORE_TEMPLATE = compile('.gitignore.hbs');
-const NPM_TEMPLATE = compile('package.json.hbs');
-const APP_TEMPLATE = compile('app.js.hbs');
-const LIB_TEMPLATE = compile('lib.js.hbs');
-const APP_BROWSER_HTML_TEMPLATE = compile('index.html.hbs');
-const README_TEMPLATE = compile('README.md.hbs');
-const EDITORCONFIG_TEMPLATE = compile('.editorconfig.hbs');
-const TEST_TEMPLATE = compile('test.js.hbs');
 
 async function guessAuthor() {
   const author = {
@@ -211,41 +193,7 @@ async function createNewProject(cwd: string, name: string) {
   await fs.promises.mkdir(srcDir);
   await fs.promises.mkdir(testsDir);
 
-  await Promise.all(
-    [
-      {
-        file: '.gitignore',
-        content: (await GITIGNORE_TEMPLATE)(templateData)
-      },
-      {
-        file: '.editorconfig',
-        content: (await EDITORCONFIG_TEMPLATE)(templateData)
-      },
-      {
-        file: 'package.json',
-        content: (await NPM_TEMPLATE)(templateData)
-      },
-      {
-        file: 'README.md',
-        content: (await README_TEMPLATE)(templateData)
-      },
-      {
-        file: entry,
-        content: (await (isApp ? APP_TEMPLATE : LIB_TEMPLATE))(templateData)
-      },
-      {
-        file: `./tests/${answers.projectType}.${answers.target}.spec.js`,
-        content: (await TEST_TEMPLATE)(templateData)
-      }
-    ].map(({ file, content }) =>
-      fs.promises.writeFile(path.join(root, file), content)
-    )
-  );
-
-  if (isApp && isBrowser) {
-    const content = (await APP_BROWSER_HTML_TEMPLATE)(templateData);
-    await fs.promises.writeFile(path.join(root, './src/index.html'), content);
-  }
+  await addBoilerplate(templateData, root);
 
   const relativeRoot = path.relative(cwd, root);
   const relativeEntryPoint = path.relative(cwd, path.resolve(root, entry));

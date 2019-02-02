@@ -8,6 +8,7 @@ import chalk from 'chalk';
 import powerset from '@amilajack/powerset';
 import childProcess from 'child_process';
 import { INTERFACE_STATES } from '@alfredpkg/core';
+import { addEntrypoints, fromEntrypoints } from '../..';
 
 process.on('unhandledRejection', err => {
   throw err;
@@ -38,15 +39,16 @@ process.on('unhandledRejection', err => {
 // of total combinations of the elements in the array
 const nonCoreCts = ['lodash', 'webpack', 'react', 'mocha'];
 
-async function generateTests(
-  skillCombination: Array<string>,
-  tmpDir: string,
-  projectType: string,
-  target: string
-) {
-  const folderName = ['e2e', ...skillCombination, projectType, target].join(
-    '-'
-  );
+const scripts = ['build', 'build --prod', 'test', 'lint', 'format'];
+
+const stdio = process.env.CI ? 'ignore' : 'inherit';
+
+const prodInterfaceStates = INTERFACE_STATES.filter(
+  e => e.env === 'production'
+);
+
+async function generateTests(skillCombination: Array<string>, tmpDir: string) {
+  const folderName = ['e2e', ...skillCombination].join('-');
   const CLI_INPUT = {
     description: 'foo',
     git: 'foo',
@@ -54,21 +56,19 @@ async function generateTests(
     email: 'foo',
     license: 'MIT',
     npmClient: 'NPM',
-    projectType,
-    target
+    projectType: 'lib',
+    target: 'browser'
   };
-
   const env = {
     ...process.env,
     E2E_CLI_TEST: true,
     CLI_INPUT: JSON.stringify(CLI_INPUT),
     IGNORE_INSTALL: true
   };
-
   const binPath = require.resolve('../../lib/alfred');
   childProcess.execSync(`${binPath} new ${folderName}`, {
     cwd: tmpDir,
-    stdio: 'inherit',
+    stdio,
     env
   });
   const projectDir = path.join(tmpDir, folderName);
@@ -77,12 +77,12 @@ async function generateTests(
   skillCombination.forEach(skill => {
     childProcess.execSync(`${binPath} learn @alfredpkg/skill-${skill}`, {
       cwd: projectDir,
-      stdio: 'inherit',
+      stdio,
       env
     });
   });
 
-  return { skillCombination, projectDir, env, target, projectType, binPath };
+  return { skillCombination, projectDir, env, binPath };
 }
 
 (async () => {
@@ -93,19 +93,9 @@ async function generateTests(
   const e2eTests = await Promise.all(
     powerset(nonCoreCts)
       .sort((a, b) => a.length - b.length)
-      .map(skillCombination =>
-        INTERFACE_STATES.filter(e => e.env === 'production').map(
-          interfaceState => () =>
-            generateTests(
-              skillCombination,
-              tmpDir,
-              interfaceState.projectType,
-              interfaceState.target
-            )
-        )
-      )
-      .reduce((p, c) => p.concat(c))
-      .slice(0, 1)
+      // @TODO Instead of each interface state, generate tests from entrypointCombinations
+      .map(skillCombination => () => generateTests(skillCombination, tmpDir))
+      // .slice(0, 1)
       .map(e => e())
   );
 
@@ -115,82 +105,109 @@ async function generateTests(
 
   const issues = [];
 
-  e2eTests.forEach(
-    ({ binPath, projectDir, skillCombination, target, projectType, env }) => {
+  await Promise.all(
+    e2eTests.map(async ({ binPath, projectDir, skillCombination, env }) => {
       let command;
-      try {
-        command = 'skills';
-        childProcess.execSync(`${binPath} skills`, {
-          cwd: projectDir,
-          stdio: 'inherit',
-          env
-        });
 
-        console.log(
-          `Testing ${JSON.stringify({
-            skillCombination,
-            target,
-            projectType
-          })}`
-        );
+      // Remove the existing entrypoints in ./src
+      rimraf.sync(path.join(projectDir, 'src/*'));
 
-        ['build', 'build --prod', 'test', 'lint', 'format'].forEach(
-          subcommand => {
-            command = subcommand;
-            try {
-              childProcess.execSync(`${binPath} run ${subcommand}`, {
-                cwd: projectDir,
-                stdio: 'inherit',
-                env
-              });
-            } catch (e) {
-              issues.push([
-                skillCombination.join(', '),
-                target,
-                projectType,
-                command
-              ]);
-              console.log(e);
+      // Create a list of all subsets of the interface states like so:
+      // [['lib.node'], ['lib.node', 'lib.browser'], etc...]
+      await Promise.all(
+        powerset(
+          prodInterfaceStates.map(e => [e.projectType, e.target].join('.'))
+        ).map(async entrypointCombination => {
+          const templateData = {
+            project: {
+              name: {
+                npm: {
+                  full: 'foo'
+                }
+              },
+              projectDir: './src/',
+              projectType: './src/',
+              target: 'browser'
             }
-          }
-        );
+          };
 
-        command = 'clean';
-        childProcess.execSync(`${binPath} clean`, {
-          cwd: projectDir,
-          stdio: 'inherit',
-          env
-        });
-      } catch (e) {
-        issues.push([
-          skillCombination.join(', '),
-          target,
-          projectType,
-          command
-        ]);
-        console.log(e);
-      }
-    }
+          const interfaceStates = fromEntrypoints(entrypointCombination).sort(
+            (a, b) => a.length - b.length
+          );
+          await addEntrypoints(templateData, projectDir, interfaceStates);
+
+          try {
+            command = 'skills';
+            childProcess.execSync(`${binPath} skills`, {
+              cwd: projectDir,
+              stdio,
+              env
+            });
+
+            console.log(
+              `Testing ${JSON.stringify({
+                skillCombination,
+                entrypointCombination
+              })}`
+            );
+
+            scripts.forEach(subcommand => {
+              command = subcommand;
+              try {
+                childProcess.execSync(`${binPath} run ${subcommand}`, {
+                  cwd: projectDir,
+                  stdio,
+                  env
+                });
+              } catch (e) {
+                issues.push([
+                  skillCombination.join(', '),
+                  entrypointCombination.join(', '),
+                  command
+                ]);
+                console.log(e);
+              }
+            });
+
+            command = 'clean';
+            childProcess.execSync(`${binPath} clean`, {
+              cwd: projectDir,
+              stdio,
+              env
+            });
+          } catch (e) {
+            issues.push([
+              skillCombination.join(', '),
+              entrypointCombination.join(', '),
+              command
+            ]);
+            console.log(e);
+          }
+        })
+      );
+    })
   );
 
   if (issues.length) {
     const table = new Table({
       head: [
         chalk.bold('Failing Skill Combinations'),
-        chalk.bold('Target'),
-        chalk.bold('Project Type'),
+        chalk.bold('Entrypoints'),
         chalk.bold('Command')
       ]
     });
     issues.forEach(issue => {
       table.push(issue);
     });
+    const totalTestsCount =
+      e2eTests.length * (2 ** prodInterfaceStates.length - 1) * scripts.length;
+    // Throw error and don't remove tmpDir so that it can be inspected after the tests
     throw new Error(
       [
         '',
         table.toString(),
         `❗️ ${issues.length} e2e tests failed`,
-        `✅ ${e2eTests.length - issues.length} e2e tests passed`
+        `✅ ${totalTestsCount - issues.length} e2e tests passed`
       ].join('\n')
     );
   } else {

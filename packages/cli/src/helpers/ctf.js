@@ -19,19 +19,30 @@ import mergeConfigs from '@alfredpkg/merge-configs';
 import formatJson from 'format-package';
 import type { CtfMap, InterfaceState, AlfredConfig } from '@alfredpkg/core';
 
-// @TODO Also allow .ts entrypoints
+// Examples
+// 'lib.node.js',
+// 'app.node.js',
+// 'lib.browser.js',
+// 'app.browser.js'
+// etc...
 export const ENTRYPOINTS = [
   'lib.node.js',
   'app.node.js',
   'lib.browser.js',
-  'app.browser.js',
-  'lib.electron.main.js',
-  'lib.electron.renderer.js',
-  'app.electron.main.js',
-  'app.electron.renderer.js',
-  'lib.react-native.js',
-  'app.react-native.js'
+  'app.browser.js'
 ];
+
+/**
+ * Return an interface state
+ */
+export function fromEntrypoints(
+  entrypoints: Array<string>
+): Array<InterfaceState> {
+  return entrypoints.map(entrypoint => {
+    const [projectType, target] = entrypoint.split('.');
+    return { projectType, target, env: 'production' };
+  });
+}
 
 export function generateInterfaceStatesFromProject(
   config: AlfredConfig
