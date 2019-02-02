@@ -104,7 +104,7 @@ export async function addEntrypoints(
   );
 
   await Promise.all(
-    entrypointInterfaceStates.map(async interfaceState => {
+    entrypointInterfaceStates.map(interfaceState => {
       const { projectType, target } = interfaceState;
       const isApp = projectType === 'app';
       const isBrowser = target === 'browser';
@@ -113,13 +113,16 @@ export async function addEntrypoints(
         project: { projectType, target, isApp, isBrowser }
       });
 
-      if (isApp && isBrowser) {
-        const content = APP_BROWSER_HTML_TEMPLATE(templateData);
-        await fs.promises.writeFile(
-          path.join(root, './src/index.html'),
-          content
-        );
-      }
+      const writeIndexHtml = () => {
+        if (isApp && isBrowser) {
+          const content = APP_BROWSER_HTML_TEMPLATE(templateData);
+          return fs.promises.writeFile(
+            path.join(root, './src/index.html'),
+            content
+          );
+        }
+        return Promise.resolve();
+      };
 
       return Promise.all(
         [
@@ -131,9 +134,11 @@ export async function addEntrypoints(
             file: `./tests/${projectType}.${target}.spec.js`,
             content: TEST_TEMPLATE(templateData)
           }
-        ].map(({ file, content }) =>
-          fs.promises.writeFile(path.join(root, file), content)
-        )
+        ]
+          .map(({ file, content }) =>
+            fs.promises.writeFile(path.join(root, file), content)
+          )
+          .concat([writeIndexHtml()])
       );
     })
   );

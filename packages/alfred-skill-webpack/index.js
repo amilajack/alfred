@@ -169,7 +169,7 @@ module.exports = {
           const compiler = Webpack(mergedConfig);
           const { devServer } = mergedConfig;
           const server = new WebpackDevServer(compiler, devServer);
-          const port = await getPort({ port: 8080 });
+          const port = await getPort({ port: 1234 });
           return server.listen(port, '127.0.0.1', async () => {
             const url = `http://localhost:${port}`;
             console.log(

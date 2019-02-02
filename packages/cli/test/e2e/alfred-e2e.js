@@ -14,6 +14,7 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
+// Goal: Test subcommands for all combinations of entrypoints and skills
 // Create a ./tmp directory
 // Start by having all the packages for the skills installed
 // For each combination c[] of CTFs
@@ -36,12 +37,27 @@ process.on('unhandledRejection', err => {
 //      test with showConfigs: false
 
 // If there are n elmenets in this array, 2^n tests will run since that's the number
-// of total combinations of the elements in the array
-const nonCoreCts = ['lodash', 'webpack', 'react', 'mocha'];
+// of total combinations of the elements in the array.
+//
+// @TODO Temporarily removed mocha because it was not compatible with browser env
+const nonCoreCts = ['lodash', 'webpack', 'react'];
 
-const scripts = ['build', 'build --prod', 'test', 'lint', 'format'];
-
-const stdio = process.env.CI ? 'ignore' : 'inherit';
+const scripts = [
+  // Build
+  'build',
+  'build --prod',
+  'build --dev',
+  // Start
+  'start',
+  'start --prod',
+  'start --dev',
+  // Test
+  'test',
+  // Lint
+  'lint',
+  // Format
+  'format'
+];
 
 const prodInterfaceStates = INTERFACE_STATES.filter(
   e => e.env === 'production'
@@ -68,7 +84,7 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
   const binPath = require.resolve('../../lib/alfred');
   childProcess.execSync(`${binPath} new ${folderName}`, {
     cwd: tmpDir,
-    stdio,
+    stdio: 'inherit',
     env
   });
   const projectDir = path.join(tmpDir, folderName);
@@ -77,7 +93,7 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
   skillCombination.forEach(skill => {
     childProcess.execSync(`${binPath} learn @alfredpkg/skill-${skill}`, {
       cwd: projectDir,
-      stdio,
+      stdio: 'inherit',
       env
     });
   });
@@ -95,7 +111,6 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
       .sort((a, b) => a.length - b.length)
       // @TODO Instead of each interface state, generate tests from entrypointCombinations
       .map(skillCombination => () => generateTests(skillCombination, tmpDir))
-      // .slice(0, 1)
       .map(e => e())
   );
 
@@ -112,12 +127,18 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
       // Remove the existing entrypoints in ./src
       rimraf.sync(path.join(projectDir, 'src/*'));
 
+      const entrypoints = Array.from(
+        new Set(
+          powerset(
+            prodInterfaceStates.map(e => [e.projectType, e.target].join('.'))
+          )
+        )
+      );
+
       // Create a list of all subsets of the interface states like so:
       // [['lib.node'], ['lib.node', 'lib.browser'], etc...]
       await Promise.all(
-        powerset(
-          prodInterfaceStates.map(e => [e.projectType, e.target].join('.'))
-        ).map(async entrypointCombination => {
+        entrypoints.map(async entrypointCombination => {
           const templateData = {
             project: {
               name: {
@@ -140,7 +161,7 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
             command = 'skills';
             childProcess.execSync(`${binPath} skills`, {
               cwd: projectDir,
-              stdio,
+              stdio: 'inherit',
               env
             });
 
@@ -151,28 +172,58 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
               })}`
             );
 
-            scripts.forEach(subcommand => {
-              command = subcommand;
-              try {
-                childProcess.execSync(`${binPath} run ${subcommand}`, {
-                  cwd: projectDir,
-                  stdio,
-                  env
-                });
-              } catch (e) {
-                issues.push([
-                  skillCombination.join(', '),
-                  entrypointCombination.join(', '),
-                  command
-                ]);
-                console.log(e);
-              }
-            });
+            const interfaceStateContainsApp = interfaceStates.some(
+              interfaceState => interfaceState.projectType === 'app'
+            );
+
+            await Promise.all(
+              scripts.map(async subcommand => {
+                command = subcommand;
+                try {
+                  if (
+                    interfaceStateContainsApp &&
+                    subcommand.includes('start')
+                  ) {
+                    const start = childProcess.spawn(
+                      binPath,
+                      ['run', subcommand],
+                      {
+                        cwd: projectDir,
+                        // stdio: 'inherit',
+                        env
+                      }
+                    );
+
+                    start.stdout.once('data', data => {
+                      console.log(data);
+                      start.kill();
+                    });
+                    start.stderr.once('data', data => {
+                      start.kill();
+                      throw new Error(data);
+                    });
+                  } else {
+                    childProcess.execSync(`${binPath} run ${subcommand}`, {
+                      cwd: projectDir,
+                      stdio: 'inherit',
+                      env
+                    });
+                  }
+                } catch (e) {
+                  issues.push([
+                    skillCombination.join(', '),
+                    entrypointCombination.join(', '),
+                    command
+                  ]);
+                  console.log(e);
+                }
+              })
+            );
 
             command = 'clean';
             childProcess.execSync(`${binPath} clean`, {
               cwd: projectDir,
-              stdio,
+              stdio: 'inherit',
               env
             });
           } catch (e) {
@@ -188,6 +239,8 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
     })
   );
 
+  const totalTestsCount =
+    e2eTests.length * (2 ** prodInterfaceStates.length - 1) * scripts.length;
   if (issues.length) {
     const table = new Table({
       head: [
@@ -199,8 +252,6 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
     issues.forEach(issue => {
       table.push(issue);
     });
-    const totalTestsCount =
-      e2eTests.length * (2 ** prodInterfaceStates.length - 1) * scripts.length;
     // Throw error and don't remove tmpDir so that it can be inspected after the tests
     throw new Error(
       [
@@ -211,7 +262,7 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
       ].join('\n')
     );
   } else {
-    console.log(`All ${e2eTests.length} e2e tests passed! Yayy 🎉 🎉 🎉`);
+    console.log(`All ${totalTestsCount} e2e tests passed! Yayy 🎉 🎉 🎉`);
     rimraf.sync(tmpDir);
   }
 })();
