@@ -46,7 +46,7 @@
     "git-config": "^0.0.7",
     "gitignore-parser": "^0.0.2",
     "handlebars": "^4.0.12",
-    "inquirer": "^6.2.1",
+    "inquirer": "^6.2.2",
     "jscodeshift": "^0.6.3",
     "lebab": "^3.0.3",
     "lodash": "^4.17.11",
