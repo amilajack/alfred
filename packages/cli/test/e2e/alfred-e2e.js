@@ -48,9 +48,9 @@ const scripts = [
   'build --prod',
   'build --dev',
   // Start
-  'start',
-  'start --prod',
-  'start --dev',
+  // 'start',
+  // 'start --prod',
+  // 'start --dev',
   // Test
   'test',
   // Lint
@@ -106,11 +106,13 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
   rimraf.sync(tmpDir);
   await fs.promises.mkdir(tmpDir);
 
+  // Generate e2e tests for each combination of skills
   const e2eTests = await Promise.all(
     powerset(nonCoreCts)
       .sort((a, b) => a.length - b.length)
       // @TODO Instead of each interface state, generate tests from entrypointCombinations
       .map(skillCombination => () => generateTests(skillCombination, tmpDir))
+      // .slice(0, 1)
       .map(e => e())
   );
 
@@ -124,21 +126,19 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
     e2eTests.map(async ({ binPath, projectDir, skillCombination, env }) => {
       let command;
 
-      // Remove the existing entrypoints in ./src
-      rimraf.sync(path.join(projectDir, 'src/*'));
-
-      const entrypoints = Array.from(
-        new Set(
-          powerset(
+      // Generate all possible combinations of entrypoints and test each one
+      const entrypointsCombinations = powerset(
+        Array.from(
+          new Set(
             prodInterfaceStates.map(e => [e.projectType, e.target].join('.'))
           )
         )
-      );
+      ).sort((a, b) => a.length - b.length);
 
       // Create a list of all subsets of the interface states like so:
       // [['lib.node'], ['lib.node', 'lib.browser'], etc...]
       await Promise.all(
-        entrypoints.map(async entrypointCombination => {
+        entrypointsCombinations.map(async entrypointCombination => {
           const templateData = {
             project: {
               name: {
@@ -147,14 +147,15 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
                 }
               },
               projectDir: './src/',
-              projectType: './src/',
+              projectType: 'lib',
               target: 'browser'
             }
           };
 
-          const interfaceStates = fromEntrypoints(entrypointCombination).sort(
-            (a, b) => a.length - b.length
-          );
+          const interfaceStates = fromEntrypoints(entrypointCombination);
+          // Remove the existing entrypoints in ./src
+          rimraf.sync(path.join(projectDir, 'src/*'));
+          rimraf.sync(path.join(projectDir, 'tests/*'));
           await addEntrypoints(templateData, projectDir, interfaceStates);
 
           try {
@@ -172,7 +173,7 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
               })}`
             );
 
-            const interfaceStateContainsApp = interfaceStates.some(
+            const interfaceStateContainsAppProjectType = interfaceStates.some(
               interfaceState => interfaceState.projectType === 'app'
             );
 
@@ -181,7 +182,7 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
                 command = subcommand;
                 try {
                   if (
-                    interfaceStateContainsApp &&
+                    interfaceStateContainsAppProjectType &&
                     subcommand.includes('start')
                   ) {
                     const start = childProcess.spawn(
@@ -189,7 +190,6 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
                       ['run', subcommand],
                       {
                         cwd: projectDir,
-                        // stdio: 'inherit',
                         env
                       }
                     );
