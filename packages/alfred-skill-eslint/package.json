@@ -2,11 +2,11 @@
   "name": "@alfredpkg/skill-eslint",
   "version": "0.0.0",
   "dependencies": {
-    "eslint": "^5.12.1"
+    "eslint": "^5.13.0"
   },
   "peerDependencies": {
     "@alfredpkg/core": "0.0.0",
     "@alfredpkg/interface-lint": "0.0.0",
-    "eslint": "^5.12.1"
+    "eslint": "^5.13.0"
   }
 }
