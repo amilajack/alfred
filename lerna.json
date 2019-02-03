@@ -17,5 +17,8 @@
     "run": {
       "npmClient": "yarn"
     }
+  },
+  "publishConfig": {
+    "registry": "http://localhost:4873"
   }
 }
