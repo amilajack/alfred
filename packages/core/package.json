@@ -1,6 +1,9 @@
 {
   "name": "@alfredpkg/core",
   "version": "0.0.0",
+  "files": [
+    "lib"
+  ],
   "main": "./lib/index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps inline",
@@ -10,9 +13,6 @@
   "jest": {
     "testEnvironment": "node"
   },
-  "files": [
-    "lib"
-  ],
   "dependencies": {
     "@alfredpkg/merge-configs": "^0.0.0",
     "@alfredpkg/skill-babel": "^0.0.0",
@@ -23,6 +23,7 @@
     "@alfredpkg/skill-react": "^0.0.0",
     "@alfredpkg/skill-rollup": "^0.0.0",
     "@alfredpkg/skill-webpack": "^0.0.0",
+    "@alfredpkg/skill-parcel": "^0.0.0",
     "debug": "^4.1.1",
     "format-package": "^4.5.0",
     "import-fresh": "^3.0.0",
@@ -36,8 +37,8 @@
     "toposort": "^2.0.2",
     "topsort": "^0.0.2"
   },
-  "engineStrict": true,
   "engines": {
     "node": ">=10"
-  }
+  },
+  "engineStrict": true
 }

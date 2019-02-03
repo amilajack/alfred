@@ -2,6 +2,7 @@
   "packages": [
     "examples/*",
     "packages/*",
+    "packages/cli/test/e2e/tmp/*",
     "tests/fixtures/*",
     "website"
   ],

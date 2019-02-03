@@ -116,7 +116,7 @@ export default {
       path: '.babelrc.js',
       // The value of the config. Can be an object or a string
       config: {
-        presets: '@babel/preset-env'
+        presets: ['@babel/preset-env']
       }
     }
   ],
@@ -348,9 +348,11 @@ Would you like to install it? (Y/n)
 | Transpilers        |  Babel                   | ✅           |
 | Test Frameworks    |  Jest, Mocha, Jasmine    | ✅ ✅ ❌      |
 | Formatters         |  Prettier                | ✅           |
-| Libraries          |  Lodash                  | ✅           |
+| Libraries          |  Lodash, Moment          | ✅           |
 | Linters            |  ESLint                  | ✅           |
-| Front End          |  React, Angular          | ✅ ❌        |
+| Front End          |  React, Angular, Vue     | ✅ ❌        |
+| State Managment    |  Redux, Mobx             | ❌           |
+| Routing            |  react-router            | ❌           |
 | Documentation      |  JSDoc, Typedoc          | ❌           |
 | Type Checkers      |  Flow, TypeScript        | ❌           |
 | End to End Testing |  TestCafe, Cypress       | ❌           |

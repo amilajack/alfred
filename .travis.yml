@@ -6,3 +6,7 @@ node_js:
 cache: yarn
 
 before_install: npm install --global yarn@latest
+
+script:
+  - yarn test
+  - yarn e2e
