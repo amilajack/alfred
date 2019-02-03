@@ -99,7 +99,7 @@ async function createNewProject(cwd: string, name: string) {
   } else {
     answers = await prompt([
       { type: 'input', name: 'description', message: 'description' },
-      { type: 'input', name: 'git', message: 'git repository' },
+      { type: 'input', name: 'repository', message: 'git repository' },
       {
         name: 'author',
         type: 'input',
@@ -160,10 +160,10 @@ async function createNewProject(cwd: string, name: string) {
       full: name
     }
   };
-  answers.npmClient = escapeQuotes(answers.npmClient);
+  answers.npmClient = escapeQuotes(answers.npmClient).toLowerCase();
   answers.projectType = escapeQuotes(answers.projectType);
   answers.description = escapeQuotes(answers.description);
-  answers.git = encodeURI(answers.git);
+  answers.repository = encodeURI(answers.repository);
   answers.author = escapeQuotes(answers.author);
   answers.main = targetFile;
   answers.targetFile = targetFile;

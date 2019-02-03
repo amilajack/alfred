@@ -68,7 +68,7 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
   const folderName = ['e2e', ...skillCombination].join('-');
   const CLI_INPUT = {
     description: 'foo',
-    git: 'foo',
+    repository: 'foo',
     author: 'foo',
     email: 'foo',
     license: 'MIT',

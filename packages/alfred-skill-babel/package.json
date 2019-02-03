@@ -7,7 +7,8 @@
     "@babel/plugin-proposal-class-properties": "^7.3.0",
     "@babel/preset-env": "^7.3.1",
     "@babel/register": "^7.0.0",
-    "babel-core": "^7.0.0-bridge.0"
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "8.0.5"
   },
   "peerDependencies": {
     "@alfredpkg/core": "0.0.0"

@@ -6,7 +6,26 @@ import rimraf from 'rimraf';
 import { getConfigsBasePath, loadConfig } from '@alfredpkg/core';
 import type { AlfredConfig, InterfaceState } from '@alfredpkg/core';
 import handlebars from 'handlebars';
+import { Signale } from 'signale';
+import formatPkg from 'format-package';
+import sortPkgJson from 'sort-package-json';
 import { ENTRYPOINTS, generateInterfaceStatesFromProject } from './ctf';
+import PkgValidation from '../pkg-validation';
+
+export function validatePkg() {
+  const pkgPath = path.join(process.cwd(), 'package.json');
+  const result = PkgValidation.validate(fs.readFileSync(pkgPath).toString());
+  const signale = new Signale();
+  result.recommendations.forEach(warning => {
+    signale.warn(warning);
+  });
+  result.warnings.forEach(warning => {
+    signale.warn(warning);
+  });
+  result.errors.forEach(warning => {
+    signale.error(warning);
+  });
+}
 
 /**
  * Check if a directory contains an Alfred project
@@ -16,6 +35,7 @@ export function checkIsAlfredProject(
   interfaceStates: Array<InterfaceState>
 ) {
   const srcPath = path.join(config.root, 'src');
+  validatePkg();
 
   if (!fs.existsSync(srcPath)) {
     throw new Error(
@@ -144,6 +164,7 @@ export async function addEntrypoints(
   );
 }
 
+// This function lives here because it is used in both tests and the cli
 export async function addBoilerplate(templateData: Object, root: string) {
   const [
     GITIGNORE_TEMPLATE,
@@ -170,10 +191,6 @@ export async function addBoilerplate(templateData: Object, root: string) {
         content: EDITORCONFIG_TEMPLATE(templateData)
       },
       {
-        file: 'package.json',
-        content: NPM_TEMPLATE(templateData)
-      },
-      {
         file: 'README.md',
         content: README_TEMPLATE(templateData)
       }
@@ -182,6 +199,11 @@ export async function addBoilerplate(templateData: Object, root: string) {
     )
   );
 
+  const pkgPath = path.join(root, 'package.json');
+  const formattedPkg = await formatPkg(
+    sortPkgJson(JSON.parse(NPM_TEMPLATE(templateData)))
+  );
+  await fs.promises.writeFile(pkgPath, formattedPkg);
   const { projectType, target } = templateData.project;
 
   await addEntrypoints(templateData, root, [

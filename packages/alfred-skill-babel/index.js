@@ -7,7 +7,8 @@ module.exports = {
     '@babel/cli': '7.2.0',
     '@babel/core': '7.2.0',
     '@babel/preset-env': '7.2.0',
-    'babel-core': '^7.0.0-bridge.0'
+    'babel-core': '^7.0.0-bridge.0',
+    'babel-loader': '8.0.5'
   },
   configFiles: [
     {

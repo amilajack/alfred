@@ -65,8 +65,22 @@ import { deleteConfigs, init } from './helpers';
 
   await deleteConfigs(alfredConfig);
 
+  const interfaceStates = generateInterfaceStatesFromProject(alfredConfig);
+  // Validate that “start” subcommand should only work for apps
+  // @REFACTOR This validation logic should be handled by the @alfredpkg/interface-start interface
+  if (subcommand === 'start') {
+    const hasAppInterfaceState = interfaceStates.some(
+      interfaceState => interfaceState.projectType === 'app'
+    );
+    if (!hasAppInterfaceState) {
+      throw new Error(
+        'The “start” subcommand can only be used with app project types'
+      );
+    }
+  }
+
   return Promise.all(
-    generateInterfaceStatesFromProject(alfredConfig).map(interfaceState =>
+    interfaceStates.map(interfaceState =>
       generateCtfFromConfig(alfredConfig, interfaceState)
         .then(ctf => writeConfigsFromCtf(ctf, alfredConfig))
         .then(ctf => {

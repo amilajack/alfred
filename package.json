@@ -1,18 +1,18 @@
 {
   "name": "alfred",
   "version": "0.0.0",
-  "private": true,
   "description": "A framework for upgrading JavaScript codebases",
-  "repository": "https://github.com/amilajack/alfred.git",
   "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=8",
+    "npm": ">=6.7.0",
+    "yarn": ">=1.13.0"
+  },
+  "repository": "https://github.com/amilajack/alfred.git",
+  "bugs": "https://github.com/alfred-js/alfred/bugs",
+  "homepage": "https://github.com/alfred-js/alfred",
   "author": "Amila Welihinda <amilajack@gmail.com>",
-  "workspaces": [
-    "examples/*",
-    "packages/*",
-    "packages/cli/test/e2e/tmp/*",
-    "tests/fixtures/*",
-    "website"
-  ],
   "scripts": {
     "build": "cross-env NODE_ENV=production lerna run build --stream",
     "e2e": "lerna run e2e --stream",
@@ -28,11 +28,6 @@
     "website:test": "yarn website:build",
     "website:version": "yarn workspace @alfredpkg/website version"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn test"
-    }
-  },
   "lint-staged": {
     "*.js": [
       "eslint --fix",
@@ -47,6 +42,29 @@
       "global-require": "off"
     }
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn test"
+    }
+  },
+  "keywords": [
+    "browser",
+    "javascript",
+    "modular",
+    "node",
+    "toolchain"
+  ],
+  "preferGlobal": true,
+  "renovate": {
+    "extends": "bliss"
+  },
+  "workspaces": [
+    "examples/*",
+    "packages/*",
+    "packages/cli/test/e2e/tmp/*",
+    "tests/fixtures/*",
+    "website"
+  ],
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
@@ -70,14 +88,5 @@
     "lint-staged": "^8.1.3",
     "shebang-loader": "^0.0.1",
     "yarn": "^1.13.0"
-  },
-  "engines": {
-    "node": ">=8",
-    "npm": ">=6.7.0",
-    "yarn": ">=1.13.0"
-  },
-  "preferGlobal": true,
-  "renovate": {
-    "extends": "bliss"
   }
 }

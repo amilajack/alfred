@@ -331,14 +331,14 @@ Would you like to install it? (Y/n)
 
 ## Roadmap
 
-### In progress
+### v1.0.0
 * Implement at least one skill for each type of JS infrastructure
 
-### Future
+### Post v1.0.0
 * `alfred migrate`: Migration script to Alfred
 * `alfred upgrade`: Upgrade codebase to latest codebase to latest ES version
 * `alfred bug`: Generating bug reports on user's behalf
-* `alfred doc`: Generating documentation
+* `alfred doc`: Generating documentation that will be rendered to `README.md` and html
 
 ## Alfred Skills Implementation Status
 
