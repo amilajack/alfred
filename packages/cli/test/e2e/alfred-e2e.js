@@ -8,6 +8,7 @@ import chalk from 'chalk';
 import powerset from '@amilajack/powerset';
 import childProcess from 'child_process';
 import { INTERFACE_STATES } from '@alfredpkg/core';
+import mergeConfigs from '@alfredpkg/merge-configs';
 import { addEntrypoints, fromEntrypoints } from '../..';
 
 process.on('unhandledRejection', err => {
@@ -101,6 +102,15 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
   return { skillCombination, projectDir, env, binPath };
 }
 
+// eslint-disable-next-line import/prefer-default-export
+export const serial = (funcs: Array<() => Promise<any>>) =>
+  funcs.reduce(
+    (promise, func) =>
+      // eslint-disable-next-line promise/no-nesting
+      promise.then(result => func().then(Array.prototype.concat.bind(result))),
+    Promise.resolve([])
+  );
+
 (async () => {
   const tmpDir = path.join(__dirname, 'tmp');
   rimraf.sync(tmpDir);
@@ -112,7 +122,7 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
       .sort((a, b) => a.length - b.length)
       // @TODO Instead of each interface state, generate tests from entrypointCombinations
       .map(skillCombination => () => generateTests(skillCombination, tmpDir))
-      // .slice(0, 1)
+      .slice(0, parseInt(process.env.E2E_TEST_COUNT, 10) || undefined)
       .map(e => e())
   );
 
@@ -152,101 +162,129 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
             }
           };
 
+          // Generate interface states from the entrypoints
           const interfaceStates = fromEntrypoints(entrypointCombination);
           // Remove the existing entrypoints in ./src
           rimraf.sync(path.join(projectDir, 'src/*'));
           rimraf.sync(path.join(projectDir, 'tests/*'));
           await addEntrypoints(templateData, projectDir, interfaceStates);
 
-          try {
-            command = 'skills';
-            childProcess.execSync(`${binPath} skills`, {
-              cwd: projectDir,
-              stdio: 'inherit',
-              env
-            });
-
-            console.log(
-              `Testing ${JSON.stringify({
-                skillCombination,
-                entrypointCombination
-              })}`
-            );
-
-            const interfaceStateContainsAppProjectType = interfaceStates.some(
-              interfaceState => interfaceState.projectType === 'app'
-            );
-
-            await Promise.all(
-              scripts.map(async subcommand => {
-                command = subcommand;
-                try {
-                  if (
-                    interfaceStateContainsAppProjectType &&
-                    subcommand.includes('start')
-                  ) {
-                    const start = childProcess.spawn(
-                      binPath,
-                      ['run', subcommand],
-                      {
-                        cwd: projectDir,
-                        env
-                      }
-                    );
-
-                    start.stdout.once('data', data => {
-                      console.log(data);
-                      start.kill();
-                    });
-                    start.stderr.once('data', data => {
-                      start.kill();
-                      throw new Error(data);
-                    });
-                  } else {
-                    childProcess.execSync(`${binPath} run ${subcommand}`, {
-                      cwd: projectDir,
-                      stdio: 'inherit',
-                      env
-                    });
-                  }
-                } catch (e) {
-                  issues.push([
-                    skillCombination.join(', '),
-                    entrypointCombination.join(', '),
-                    command
-                  ]);
-                  console.log(e);
+          await serial(
+            [true, false].map(showConfigs => async () => {
+              // $FlowFixMe
+              const pkg = require(path.join(projectDir, 'package.json'));
+              const config = mergeConfigs({}, pkg, {
+                alfred: {
+                  showConfigs
                 }
-              })
-            );
+              });
+              fs.writeFileSync(
+                path.join(projectDir, 'package.json'),
+                JSON.stringify(config)
+              );
 
-            command = 'clean';
-            childProcess.execSync(`${binPath} clean`, {
-              cwd: projectDir,
-              stdio: 'inherit',
-              env
-            });
-          } catch (e) {
-            issues.push([
-              skillCombination.join(', '),
-              entrypointCombination.join(', '),
-              command
-            ]);
-            console.log(e);
-          }
+              try {
+                command = 'skills';
+                childProcess.execSync(`${binPath} skills`, {
+                  cwd: projectDir,
+                  stdio: 'inherit',
+                  env
+                });
+
+                console.log(
+                  `Testing ${JSON.stringify({
+                    skillCombination,
+                    entrypointCombination,
+                    showConfigs
+                  })}`
+                );
+
+                const interfaceStateContainsAppProjectType = interfaceStates.some(
+                  interfaceState => interfaceState.projectType === 'app'
+                );
+
+                await Promise.all(
+                  scripts.map(async subcommand => {
+                    command = subcommand;
+                    try {
+                      if (
+                        interfaceStateContainsAppProjectType &&
+                        subcommand.includes('start')
+                      ) {
+                        const start = childProcess.spawn(
+                          binPath,
+                          ['run', subcommand],
+                          {
+                            cwd: projectDir,
+                            env
+                          }
+                        );
+
+                        start.stdout.once('data', data => {
+                          console.log(data);
+                          start.kill();
+                        });
+                        start.stderr.once('data', data => {
+                          start.kill();
+                          throw new Error(data);
+                        });
+                      } else {
+                        childProcess.execSync(`${binPath} run ${subcommand}`, {
+                          cwd: projectDir,
+                          stdio: 'inherit',
+                          env
+                        });
+                      }
+                    } catch (e) {
+                      issues.push([
+                        skillCombination.join(', '),
+                        entrypointCombination.join(', '),
+                        command,
+                        showConfigs
+                      ]);
+                      console.log(e);
+                    }
+                  })
+                );
+
+                command = 'clean';
+                childProcess.execSync(`${binPath} clean`, {
+                  cwd: projectDir,
+                  stdio: 'inherit',
+                  env
+                });
+              } catch (e) {
+                issues.push([
+                  skillCombination.join(', '),
+                  entrypointCombination.join(', '),
+                  command,
+                  showConfigs
+                ]);
+                console.log(e);
+              }
+            })
+          );
         })
       );
     })
   );
 
   const totalTestsCount =
-    e2eTests.length * (2 ** prodInterfaceStates.length - 1) * scripts.length;
+    // The total # of combinations of skills
+    e2eTests.length *
+    // The total # of combinations of interfaceStates
+    (2 ** prodInterfaceStates.length - 1) *
+    // The number of subcommands tested
+    scripts.length *
+    // Show Configs
+    2;
   if (issues.length) {
     const table = new Table({
       head: [
         chalk.bold('Failing Skill Combinations'),
         chalk.bold('Entrypoints'),
-        chalk.bold('Command')
+        chalk.bold('Command'),
+        chalk.bold('Show Configs')
       ]
     });
     issues.forEach(issue => {
