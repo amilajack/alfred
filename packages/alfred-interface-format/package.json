@@ -1,6 +1,6 @@
 {
   "name": "@alfredpkg/interface-format",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "peerDependencies": {
     "@alfredpkg/core": "0.0.0"
   },

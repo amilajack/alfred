@@ -1,6 +1,6 @@
 {
   "name": "@fixtures/mocha",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "license": "MIT",
   "private": true,
   "main": "./targets/lib.node.js",
@@ -22,8 +22,8 @@
     ]
   },
   "devDependencies": {
-    "@alfredpkg/cli": "^0.0.0",
-    "@alfredpkg/core": "^0.0.0",
+    "@alfredpkg/cli": "^0.0.1-alpha.0",
+    "@alfredpkg/core": "^0.0.1-alpha.0",
     "@alfredpkg/skill-mocha": "file:../../../packages/alfred-skill-mocha",
     "@babel/core": "^7.2.2",
     "eslint-plugin-mocha": "^5.2.1"

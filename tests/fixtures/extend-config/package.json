@@ -1,6 +1,6 @@
 {
   "name": "@fixtures/extend-config",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -18,8 +18,8 @@
     "showConfigs": true
   },
   "devDependencies": {
-    "@alfredpkg/cli": "^0.0.0",
-    "@alfredpkg/core": "^0.0.0",
-    "@examples/alfred-config-example": "^0.0.0"
+    "@alfredpkg/cli": "^0.0.1-alpha.0",
+    "@alfredpkg/core": "^0.0.1-alpha.0",
+    "@examples/alfred-config-example": "^0.0.1-alpha.0"
   }
 }
