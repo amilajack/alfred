@@ -53,9 +53,10 @@ module.exports = {
         };
         `
       );
+      const babelJestPath = require.resolve('./babel-jest');
       await fs.promises.writeFile(
         jestTransformerPath,
-        `const babelJestTransform = require('babel-jest');
+        `const babelJestTransform = require('${babelJestPath}');
         module.exports = babelJestTransform.createTransformer(${babelConfig});`
       );
 

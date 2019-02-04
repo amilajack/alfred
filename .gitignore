@@ -43,3 +43,4 @@ targets
 package-lock.json
 .configs
 tmp
+package-lock.json

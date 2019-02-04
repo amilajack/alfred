@@ -9,7 +9,7 @@ import powerset from '@amilajack/powerset';
 import childProcess from 'child_process';
 import { INTERFACE_STATES } from '@alfredpkg/core';
 import mergeConfigs from '@alfredpkg/merge-configs';
-import { addEntrypoints, fromEntrypoints } from '../..';
+import { addEntrypoints, fromEntrypoints, serial } from '../..';
 
 process.on('unhandledRejection', err => {
   throw err;
@@ -101,15 +101,6 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
 
   return { skillCombination, projectDir, env, binPath };
 }
-
-// eslint-disable-next-line import/prefer-default-export
-export const serial = (funcs: Array<() => Promise<any>>) =>
-  funcs.reduce(
-    (promise, func) =>
-      // eslint-disable-next-line promise/no-nesting
-      promise.then(result => func().then(Array.prototype.concat.bind(result))),
-    Promise.resolve([])
-  );
 
 (async () => {
   const tmpDir = path.join(__dirname, 'tmp');

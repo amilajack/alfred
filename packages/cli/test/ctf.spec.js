@@ -144,7 +144,7 @@ describe('alfred cli helpers', () => {
   it('should diff ctfs for all interface states', async () => {
     const skills = [
       ...defaultAlfredConfig.skills,
-      '@alfredpkg/skill-parcel'
+      '@alfredpkg/skill-mocha'
     ].map(e => [e, {}]);
     const currentAlfredConfig = {
       ...defaultAlfredConfig,
@@ -154,6 +154,6 @@ describe('alfred cli helpers', () => {
       defaultAlfredConfig,
       currentAlfredConfig
     );
-    expect(result).toEqual(['parcel@^1.11.0']);
+    expect(result).toEqual(['mocha@5.2.0']);
   });
 });

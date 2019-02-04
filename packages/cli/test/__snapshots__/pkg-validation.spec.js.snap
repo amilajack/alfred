@@ -67,7 +67,7 @@ Object {
   "critical": true,
   "criticalMessage": "",
   "errors": Array [
-    "Invalid version range for dependency bad: [object Object]",
+    "Invalid version range for dependency \\"{\\"bad\\":{\\"version\\":\\"3.3.3\\"}}",
   ],
   "recommendations": Array [
     "Missing optional field: homepage",

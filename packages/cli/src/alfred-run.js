@@ -11,7 +11,7 @@ import generateCtfFromConfig, {
   generateInterfaceStatesFromProject,
   writeConfigsFromCtf
 } from './helpers/ctf';
-import { deleteConfigs, init } from './helpers';
+import { deleteConfigs, init, serial } from './helpers';
 
 (async () => {
   const args = program.parse(process.argv);
@@ -79,8 +79,9 @@ import { deleteConfigs, init } from './helpers';
     }
   }
 
-  return Promise.all(
-    interfaceStates.map(interfaceState =>
+  // Run this serially because concurrently running parcel causes issues
+  return serial(
+    interfaceStates.map(interfaceState => () =>
       generateCtfFromConfig(alfredConfig, interfaceState)
         .then(ctf => writeConfigsFromCtf(ctf, alfredConfig))
         .then(ctf => {

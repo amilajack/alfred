@@ -12,6 +12,14 @@ import sortPkgJson from 'sort-package-json';
 import { ENTRYPOINTS, generateInterfaceStatesFromProject } from './ctf';
 import PkgValidation from '../pkg-validation';
 
+export const serial = (funcs: Array<() => Promise<any>>) =>
+  funcs.reduce(
+    (promise, func) =>
+      // eslint-disable-next-line promise/no-nesting
+      promise.then(result => func().then(Array.prototype.concat.bind(result))),
+    Promise.resolve([])
+  );
+
 export function validatePkg() {
   const pkgPath = path.join(process.cwd(), 'package.json');
   const result = PkgValidation.validate(fs.readFileSync(pkgPath).toString());

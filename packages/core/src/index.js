@@ -530,6 +530,9 @@ export function getDevDependencies(ctf: CtfMap): { [x: string]: string } {
     .reduce((p, c) => ({ ...p, ...c }), {});
 }
 
+/**
+ * @TOOD @REFACTOR Move this to helpers package
+ */
 export function execCommand(cmd: string) {
   return childProcess.execSync(cmd, { stdio: 'inherit' });
 }

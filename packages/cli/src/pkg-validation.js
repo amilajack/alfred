@@ -209,14 +209,16 @@ export default class PkgValidation {
   // with package names and versions
   static validateDependencies(name: string, deps: { [dep: string]: string }) {
     const errors = [];
-    Object.entries(deps).forEach(([pkgName, semver]) => {
+    Object.entries(deps).forEach(([pkgName, pkgSemver]) => {
       if (!PkgValidation.packageFormat.test(pkgName)) {
-        errors.push(`Invalid dependency package name: ${pkgName}`);
+        errors.push(`Invalid dependency package name: "${pkgName}"`);
       }
 
-      if (!PkgValidation.isValidVersionRange(semver)) {
+      if (!PkgValidation.isValidVersionRange(pkgSemver)) {
         errors.push(
-          `Invalid version range for dependency ${pkgName}: ${semver}`
+          `Invalid version range for dependency "${JSON.stringify({
+            [pkgName]: pkgSemver
+          })}`
         );
       }
     });
@@ -231,6 +233,7 @@ export default class PkgValidation {
       version === '*' ||
       version === '' ||
       version === 'latest' ||
+      (typeof version === 'string' && version.includes('file')) ||
       (typeof version === 'string' && version.includes('git')) ||
       false
     );

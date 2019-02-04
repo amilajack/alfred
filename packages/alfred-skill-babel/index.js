@@ -64,15 +64,11 @@ module.exports = {
         });
     },
     jest(config) {
-      return config
-        .extendConfig('jest', {
-          transform: {
-            '^.+\\.jsx?$': './node_modules/jest-transformer.js'
-          }
-        })
-        .addDevDependencies({
-          'babel-jest': '23.6.0'
-        });
+      return config.extendConfig('jest', {
+        transform: {
+          '^.+\\.jsx?$': './node_modules/jest-transformer.js'
+        }
+      });
     },
     eslint(config) {
       return config

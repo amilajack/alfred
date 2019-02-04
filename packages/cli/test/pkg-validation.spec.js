@@ -107,7 +107,8 @@ describe('misc', () => {
         'tilde-first': '~1.2',
         'x-version': '1.2.x',
         'tilde-top': '~1',
-        'caret-top': '^1'
+        'caret-top': '^1',
+        file: 'file:./'
       },
       devDependencies: {
         range: '1.2.3 - 2.3.4',
