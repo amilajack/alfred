@@ -5,6 +5,7 @@ Object {
   "critical": true,
   "criticalMessage": "",
   "errors": Array [],
+  "messagesCount": 4,
   "recommendations": Array [
     "Missing optional field: homepage",
     "Missing optional field: engines",
@@ -25,6 +26,7 @@ Object {
   "critical": true,
   "criticalMessage": "",
   "errors": Array [],
+  "messagesCount": 4,
   "recommendations": Array [
     "Missing optional field: homepage",
     "Missing optional field: engines",
@@ -47,6 +49,7 @@ Object {
   "errors": Array [
     "Type for field bin, was expected to be string or object, not object",
   ],
+  "messagesCount": 5,
   "recommendations": Array [
     "Missing optional field: homepage",
     "Missing optional field: engines",
@@ -69,6 +72,7 @@ Object {
   "errors": Array [
     "Invalid version range for dependency \\"{\\"bad\\":{\\"version\\":\\"3.3.3\\"}}",
   ],
+  "messagesCount": 5,
   "recommendations": Array [
     "Missing optional field: homepage",
     "Missing optional field: engines",

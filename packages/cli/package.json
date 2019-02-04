@@ -59,8 +59,7 @@
     "uniq": "^1.0.1",
     "update-notifier": "^2.5.0",
     "validate-npm-package-license": "^3.0.4",
-    "validate-npm-package-name": "^3.0.0",
-    "yarn-api": "^1.1.0"
+    "validate-npm-package-name": "^3.0.0"
   },
   "peerDependencies": {
     "@alfredpkg/core": "0.0.0",

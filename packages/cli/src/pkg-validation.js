@@ -183,6 +183,11 @@ export default class PkgValidation {
       out.recommendations = recommendations;
     }
 
+    out.messagesCount =
+      out.recommendations.length +
+      out.recommendations.length +
+      out.errors.length;
+
     return out;
   }
 

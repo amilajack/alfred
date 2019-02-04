@@ -125,6 +125,7 @@ describe('misc', () => {
     });
     expect(result).toEqual({
       critical: true,
+      messagesCount: 0,
       criticalMessage: '',
       errors: [],
       recommendations: [],
@@ -149,6 +150,7 @@ describe('misc', () => {
     });
     expect(result).toEqual({
       critical: true,
+      messagesCount: 0,
       criticalMessage: '',
       errors: [],
       recommendations: [],
@@ -165,6 +167,8 @@ describe('misc', () => {
     });
     expect(result).toEqual({
       critical: true,
+      messagesCount: 0,
+
       criticalMessage: '',
       errors: [],
       recommendations: [],
@@ -182,6 +186,7 @@ describe('misc', () => {
 
       expect(result).toEqual({
         critical: true,
+        messagesCount: 1,
         criticalMessage: '',
         errors: [`Missing required field: ${field}`],
         recommendations: [],
@@ -199,6 +204,7 @@ describe('misc', () => {
     });
     expect(result).toEqual({
       critical: true,
+      messagesCount: 0,
       criticalMessage: '',
       errors: [],
       recommendations: [],
@@ -215,6 +221,7 @@ describe('misc', () => {
       });
       expect(result).toEqual({
         critical: true,
+        messagesCount: 0,
         criticalMessage: '',
         errors: [],
         recommendations: [],
@@ -236,6 +243,7 @@ describe('misc', () => {
     });
     expect(result).toEqual({
       critical: true,
+      messagesCount: 0,
       criticalMessage: '',
       errors: [],
       recommendations: [],
@@ -252,6 +260,7 @@ describe('misc', () => {
       });
       expect(result).toEqual({
         critical: true,
+        messagesCount: expect.any(Number),
         criticalMessage: '',
         errors: [],
         recommendations: [`Missing optional field: ${recommendedField}`],
@@ -272,6 +281,7 @@ describe('misc', () => {
     });
     expect(result).toEqual({
       critical: true,
+      messagesCount: 0,
       criticalMessage: '',
       errors: [],
       recommendations: [],
@@ -289,6 +299,7 @@ describe('misc', () => {
     });
     expect(result).toEqual({
       critical: true,
+      messagesCount: 0,
       criticalMessage: '',
       errors: [],
       recommendations: [],
@@ -305,6 +316,7 @@ describe('misc', () => {
     });
     expect(result).toEqual({
       critical: true,
+      messagesCount: 0,
       criticalMessage: '',
       errors: [],
       recommendations: [],

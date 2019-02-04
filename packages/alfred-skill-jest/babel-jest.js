@@ -8,7 +8,7 @@ const {
 } = require('@babel/core');
 
 const THIS_FILE = fs.readFileSync(__filename);
-const jestPresetPath = require.resolve('babel-preset-jest');
+const jestPresetPath = require('babel-preset-jest');
 const babelIstanbulPlugin = require.resolve('babel-plugin-istanbul');
 
 const createTransformer = options => {
@@ -20,7 +20,7 @@ const createTransformer = options => {
     },
     compact: false,
     plugins: (options && options.plugins) || [],
-    presets: ((options && options.presets) || []).concat(jestPresetPath),
+    presets: ((options && options.presets) || []).concat([jestPresetPath]),
     sourceMaps: 'both'
   };
 
@@ -94,5 +94,5 @@ const createTransformer = options => {
   };
 };
 
-module.exports = createTransformer();
+module.exports = createTransformer;
 module.exports.createTransformer = createTransformer;

@@ -23,16 +23,20 @@ export const serial = (funcs: Array<() => Promise<any>>) =>
 export function validatePkg() {
   const pkgPath = path.join(process.cwd(), 'package.json');
   const result = PkgValidation.validate(fs.readFileSync(pkgPath).toString());
-  const signale = new Signale();
-  result.recommendations.forEach(warning => {
-    signale.warn(warning);
-  });
-  result.warnings.forEach(warning => {
-    signale.warn(warning);
-  });
-  result.errors.forEach(warning => {
-    signale.error(warning);
-  });
+
+  if (result.messagesCount) {
+    const signale = new Signale();
+    signale.note(pkgPath);
+    result.recommendations.forEach(warning => {
+      signale.warn(warning);
+    });
+    result.warnings.forEach(warning => {
+      signale.warn(warning);
+    });
+    result.errors.forEach(warning => {
+      signale.error(warning);
+    });
+  }
 }
 
 /**
