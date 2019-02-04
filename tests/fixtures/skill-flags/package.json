@@ -2,6 +2,7 @@
   "name": "@fixtures/skill-flags",
   "version": "1.0.0",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "_build": "../../../packages/cli/lib/alfred.js run build",
     "build": "yarn _build && yarn _build --production && yarn _build --prod && yarn _build --development && yarn _build --dev && yarn _build --test",

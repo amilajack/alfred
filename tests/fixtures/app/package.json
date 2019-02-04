@@ -2,6 +2,7 @@
   "name": "@fixtures/app",
   "version": "1.0.0",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "build": "../../../packages/cli/lib/alfred.js run build",
     "clean": "../../../packages/cli/lib/alfred.js run clean",

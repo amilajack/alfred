@@ -2,6 +2,7 @@
   "name": "@fixtures/mocha",
   "version": "1.0.0",
   "license": "MIT",
+  "private": true,
   "main": "./targets/lib.node.js",
   "module": "./targets/lib.node.js",
   "scripts": {

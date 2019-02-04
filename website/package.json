@@ -2,6 +2,7 @@
   "name": "@alfredpkg/website",
   "version": "0.0.0",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "build": "docusaurus-build && yarn clean",
     "clean": "rm -rf build",
@@ -9,7 +10,6 @@
     "publish-gh-pages": "docusaurus-publish",
     "rename-version": "docusaurus-rename-version",
     "start": "docusaurus-start",
-    "version": "docusaurus-version",
     "write-translations": "docusaurus-write-translations"
   },
   "devDependencies": {
