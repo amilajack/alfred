@@ -2,7 +2,7 @@
   "name": "@alfredpkg/alfred",
   "version": "0.0.0",
   "dependencies": {
-    "@alfredpkg/cli": "0.0.0",
-    "@alfredpkg/core": "0.0.0"
+    "@alfredpkg/cli": "^0.0.0",
+    "@alfredpkg/core": "^0.0.0"
   }
 }
