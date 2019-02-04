@@ -3,12 +3,10 @@ import path from 'path';
 import fs from 'fs';
 import pkgUp from 'pkg-up';
 import rimraf from 'rimraf';
-import { getConfigsBasePath, loadConfig } from '@alfredpkg/core';
+import { getConfigsBasePath, loadConfig, formatPkgJson } from '@alfredpkg/core';
 import type { AlfredConfig, InterfaceState } from '@alfredpkg/core';
 import handlebars from 'handlebars';
 import { Signale } from 'signale';
-import formatPkg from 'format-package';
-import sortPkgJson from 'sort-package-json';
 import { ENTRYPOINTS, generateInterfaceStatesFromProject } from './ctf';
 import PkgValidation from '../pkg-validation';
 
@@ -212,8 +210,8 @@ export async function addBoilerplate(templateData: Object, root: string) {
   );
 
   const pkgPath = path.join(root, 'package.json');
-  const formattedPkg = await formatPkg(
-    sortPkgJson(JSON.parse(NPM_TEMPLATE(templateData)))
+  const formattedPkg = await formatPkgJson(
+    JSON.parse(NPM_TEMPLATE(templateData))
   );
   await fs.promises.writeFile(pkgPath, formattedPkg);
   const { projectType, target } = templateData.project;

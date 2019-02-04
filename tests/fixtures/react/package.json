@@ -1,8 +1,8 @@
 {
   "name": "@fixtures/react",
   "version": "0.0.1-alpha.0",
-  "license": "MIT",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "build": "../../../packages/cli/lib/alfred.js run build",
     "clean": "../../../packages/cli/lib/alfred.js run clean",
@@ -13,12 +13,6 @@
     "test": "../../../packages/cli/lib/alfred.js run test",
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
-  "alfred": {
-    "showConfigs": true,
-    "skills": [
-      "@alfredpkg/skill-react"
-    ]
-  },
   "dependencies": {
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -28,5 +22,11 @@
     "@alfredpkg/cli": "^0.0.1-alpha.0",
     "@alfredpkg/core": "^0.0.1-alpha.0",
     "@alfredpkg/skill-react": "^0.0.1-alpha.0"
+  },
+  "alfred": {
+    "showConfigs": true,
+    "skills": [
+      "@alfredpkg/skill-react"
+    ]
   }
 }

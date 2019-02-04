@@ -31,16 +31,11 @@
     "@alfredpkg/skill-webpack": "^0.0.1-alpha.0",
     "debug": "^4.1.1",
     "format-package": "^4.5.0",
-    "import-fresh": "^3.0.0",
     "joi": "^14.3.1",
     "lodash": "^4.17.11",
-    "path-is-inside": "^1.0.2",
     "pkg-up": "^2.0.0",
     "rimraf": "^2.6.2",
-    "sort-package-json": "^1.18.0",
-    "strip-json-comments": "^2.0.1",
-    "toposort": "^2.0.2",
-    "topsort": "^0.0.2"
+    "toposort": "^2.0.2"
   },
   "engines": {
     "node": ">=10"

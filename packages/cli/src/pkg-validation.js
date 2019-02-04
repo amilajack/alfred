@@ -1,3 +1,5 @@
+import type { Pkg } from '@alfredpkg/core';
+
 /* Parse the incoming string as JSON, validate it against the spec for package.json
  * See README for more details
  */
@@ -103,7 +105,7 @@ export default class PkgValidation {
     return parsed;
   }
 
-  static validate(data: any, options: Object = {}) {
+  static validate(data: string | Pkg, options: Object = {}) {
     const parsed = PkgValidation.parse(data);
     const out = {
       valid: false,
