@@ -24,7 +24,12 @@ export type AlfredConfig = {
   showConfigs: boolean
 };
 
-export { default as Config, loadConfig, writeConfig } from './config';
+export {
+  default as Config,
+  loadConfig,
+  writeConfig,
+  formatPkgJson
+} from './config';
 
 // All the possible interface states
 // @TODO Also allow .ts entrypoints

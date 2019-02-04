@@ -186,7 +186,7 @@ const PKG_SORT_ORDER = [
 
 export type Pkg = { [x: string]: string };
 
-function formatPkgJson(pkg: Pkg): Promise<string> {
+export function formatPkgJson(pkg: Pkg): Promise<string> {
   return formatPkg(pkg, { order: PKG_SORT_ORDER });
 }
 
