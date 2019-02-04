@@ -28,8 +28,6 @@
   "preferGlobal": true,
   "dependencies": {
     "5to6-codemod": "^1.7.1",
-    "@alfredpkg/interface-build": "^0.0.0",
-    "@alfredpkg/interface-start": "^0.0.0",
     "@alfredpkg/merge-configs": "^0.0.0",
     "@amilajack/powerset": "^0.0.0",
     "@babel/code-frame": "^7.0.0",
@@ -64,7 +62,9 @@
     "yarn-api": "^1.1.0"
   },
   "peerDependencies": {
-    "@alfredpkg/core": "0.0.0"
+    "@alfredpkg/core": "0.0.0",
+    "@alfredpkg/interface-build": "0.0.0",
+    "@alfredpkg/interface-start": "0.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
@@ -74,5 +74,6 @@
     "lodash.flatten": "^4.4.0",
     "microjob": "^0.4.2",
     "signale": "^1.3.0"
-  }
+  },
+  "gitHead": "95cd12c7400d480de642ba553ff265ed89a91e79"
 }

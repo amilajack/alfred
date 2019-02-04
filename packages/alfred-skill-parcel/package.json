@@ -7,8 +7,7 @@
   },
   "peerDependencies": {
     "@alfredpkg/core": "0.0.0",
-    "@alfredpkg/interface-build": "^0.0.0",
-    "@alfredpkg/interface-start": "^0.0.0",
     "parcel": "^1.11.0"
-  }
+  },
+  "gitHead": "95cd12c7400d480de642ba553ff265ed89a91e79"
 }

@@ -14,6 +14,11 @@
     "testEnvironment": "node"
   },
   "dependencies": {
+    "@alfredpkg/interface-build": "^0.0.0",
+    "@alfredpkg/interface-format": "^0.0.0",
+    "@alfredpkg/interface-lint": "^0.0.0",
+    "@alfredpkg/interface-start": "^0.0.0",
+    "@alfredpkg/interface-test": "^0.0.0",
     "@alfredpkg/merge-configs": "^0.0.0",
     "@alfredpkg/skill-babel": "^0.0.0",
     "@alfredpkg/skill-eslint": "^0.0.0",
@@ -40,5 +45,6 @@
   "engines": {
     "node": ">=10"
   },
-  "engineStrict": true
+  "engineStrict": true,
+  "gitHead": "95cd12c7400d480de642ba553ff265ed89a91e79"
 }
