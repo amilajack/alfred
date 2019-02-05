@@ -12,17 +12,18 @@
 {{#if project.license}}
   "license": "{{project.license}}",
 {{/if}}
-{{#if project.git}}
-  "repository": {
-    "type": "git",
-    "url": "{{project.git}}"
-  },
+{{#if project.repository}}
+  "repository": "{{project.repository}}",
+{{/if}}
+{{#if project.bugs}}
+  "bugs": "{{project.bugs}}",
 {{/if}}
   "devDependencies": {
     "@alfredpkg/alfred": "{{alfred-pkg.semver}}"
   },
 {{#if project.isApp}}
   "alfred": {
+    "npmClient": "{{project.npmClient}}",
     "app": {
       "targets": [
 {{#if project.isBrowser}}

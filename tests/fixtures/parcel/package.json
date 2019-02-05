@@ -1,6 +1,7 @@
 {
   "name": "@fixtures/parcel",
-  "version": "1.0.0",
+  "version": "0.0.1-alpha.0",
+  "private": true,
   "license": "MIT",
   "main": "./targets/lib.node.js",
   "module": "./targets/lib.node.js",
@@ -14,15 +15,15 @@
     "test": "../../../packages/cli/lib/alfred.js run test",
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
+  "devDependencies": {
+    "@alfredpkg/cli": "^0.0.1-alpha.0",
+    "@alfredpkg/core": "^0.0.1-alpha.0",
+    "@alfredpkg/skill-parcel": "^0.0.1-alpha.0",
+    "@babel/core": "^7.2.2"
+  },
   "alfred": {
     "skills": [
       "@alfredpkg/skill-parcel"
     ]
-  },
-  "devDependencies": {
-    "@alfredpkg/cli": "^0.0.0",
-    "@alfredpkg/core": "^0.0.0",
-    "@alfredpkg/skill-parcel": "0.0.0",
-    "@babel/core": "^7.2.2"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@alfredpkg/helpers",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "main": "lib/index.js",
   "files": [
     "lib"
@@ -11,5 +11,6 @@
   },
   "dependencies": {
     "opn": "^5.4.0"
-  }
+  },
+  "gitHead": "7193c706eff460e2000586d8ba456d5ad4087ce2"
 }

@@ -40,6 +40,7 @@ module.exports = {
         outFile: 'index.html',
         cacheDir: path.join(alfredConfig.root, 'node_modules', '.cache'),
         minify: interfaceState.env === 'production',
+        noAutoinstall: true,
         target
       };
 

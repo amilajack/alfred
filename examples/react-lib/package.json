@@ -1,6 +1,7 @@
 {
   "name": "@examples/react-lib",
-  "version": "1.0.0",
+  "version": "0.0.1-alpha.0",
+  "private": true,
   "license": "MIT",
   "scripts": {
     "build": "../../packages/cli/lib/alfred.js run build",
@@ -12,24 +13,13 @@
     "test": "../../packages/cli/lib/alfred.js run test",
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
-  "alfred": {
-    "extends": "@examples/alfred-config-example",
-    "showConfigs": true,
-    "skills": [
-      "@alfredpkg/skill-react"
-    ]
-  },
   "dependencies": {
     "prop-types": "^15.6.2"
   },
-  "peerDependencies": {
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0"
-  },
   "devDependencies": {
-    "@alfredpkg/cli": "^0.0.0",
-    "@alfredpkg/core": "^0.0.0",
-    "@alfredpkg/skill-react": "^0.0.0",
+    "@alfredpkg/cli": "^0.0.1-alpha.0",
+    "@alfredpkg/core": "^0.0.1-alpha.0",
+    "@alfredpkg/skill-react": "^0.0.1-alpha.0",
     "@babel/plugin-transform-react-constant-elements": "^7.0.0",
     "@babel/plugin-transform-react-inline-elements": "^7.0.0",
     "@babel/preset-react": "7.0.0",
@@ -40,5 +30,16 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-hot-loader": "^4.3.12"
+  },
+  "peerDependencies": {
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  },
+  "alfred": {
+    "extends": "@examples/alfred-config-example",
+    "showConfigs": true,
+    "skills": [
+      "@alfredpkg/skill-react"
+    ]
   }
 }

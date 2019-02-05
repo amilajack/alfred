@@ -24,7 +24,12 @@ export type AlfredConfig = {
   showConfigs: boolean
 };
 
-export { default as Config, loadConfig, writeConfig } from './config';
+export {
+  default as Config,
+  loadConfig,
+  writeConfig,
+  formatPkgJson
+} from './config';
 
 // All the possible interface states
 // @TODO Also allow .ts entrypoints
@@ -530,6 +535,9 @@ export function getDevDependencies(ctf: CtfMap): { [x: string]: string } {
     .reduce((p, c) => ({ ...p, ...c }), {});
 }
 
+/**
+ * @TOOD @REFACTOR Move this to helpers package
+ */
 export function execCommand(cmd: string) {
   return childProcess.execSync(cmd, { stdio: 'inherit' });
 }

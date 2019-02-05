@@ -11,7 +11,7 @@ import generateCtfFromConfig, {
   generateInterfaceStatesFromProject,
   writeConfigsFromCtf
 } from './helpers/ctf';
-import { deleteConfigs, init } from './helpers';
+import { deleteConfigs, init, serial } from './helpers';
 
 (async () => {
   const args = program.parse(process.argv);
@@ -65,8 +65,23 @@ import { deleteConfigs, init } from './helpers';
 
   await deleteConfigs(alfredConfig);
 
-  return Promise.all(
-    generateInterfaceStatesFromProject(alfredConfig).map(interfaceState =>
+  const interfaceStates = generateInterfaceStatesFromProject(alfredConfig);
+  // Validate that “start” subcommand should only work for apps
+  // @REFACTOR This validation logic should be handled by the @alfredpkg/interface-start interface
+  if (subcommand === 'start') {
+    const hasAppInterfaceState = interfaceStates.some(
+      interfaceState => interfaceState.projectType === 'app'
+    );
+    if (!hasAppInterfaceState) {
+      throw new Error(
+        'The “start” subcommand can only be used with app project types'
+      );
+    }
+  }
+
+  // Run this serially because concurrently running parcel causes issues
+  return serial(
+    interfaceStates.map(interfaceState => () =>
       generateCtfFromConfig(alfredConfig, interfaceState)
         .then(ctf => writeConfigsFromCtf(ctf, alfredConfig))
         .then(ctf => {

@@ -7,7 +7,8 @@ module.exports = {
     '@babel/cli': '7.2.0',
     '@babel/core': '7.2.0',
     '@babel/preset-env': '7.2.0',
-    'babel-core': '^7.0.0-bridge.0'
+    'babel-core': '^7.0.0-bridge.0',
+    'babel-loader': '8.0.5'
   },
   configFiles: [
     {
@@ -63,15 +64,11 @@ module.exports = {
         });
     },
     jest(config) {
-      return config
-        .extendConfig('jest', {
-          transform: {
-            '^.+\\.jsx?$': './node_modules/jest-transformer.js'
-          }
-        })
-        .addDevDependencies({
-          'babel-jest': '23.6.0'
-        });
+      return config.extendConfig('jest', {
+        transform: {
+          '^.+\\.jsx?$': './node_modules/jest-transformer.js'
+        }
+      });
     },
     eslint(config) {
       return config

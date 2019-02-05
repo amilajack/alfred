@@ -6,8 +6,9 @@ const { getProjectRoot } = require('@alfredpkg/cli');
 const getPort = require('get-port');
 const { openInBrowser } = require('@alfredpkg/helpers');
 
-// @HACK project root should be passed as argument to configFiles, which could be a function
-const projectRoot = getProjectRoot();
+function replaceProjectRoot(pathConfig, projectRoot) {
+  return pathConfig.replace('<projectRoot>', projectRoot);
+}
 
 const interfaceConfig = {
   supports: {
@@ -40,7 +41,7 @@ module.exports = {
       config: {
         mode: 'development',
         output: {
-          path: path.join(projectRoot, 'targets', 'dev'),
+          path: path.join('<projectRoot>', 'targets', 'dev'),
           publicPath: './targets/dev'
         },
         resolve: {
@@ -54,7 +55,7 @@ module.exports = {
       path: 'webpack.prod.js',
       config: {
         output: {
-          path: path.join(projectRoot, 'targets', 'prod'),
+          path: path.join('<projectRoot>', 'targets', 'prod'),
           publicPath: './targets/prod'
         },
         // @TODO: optimizations, etc
@@ -74,7 +75,7 @@ module.exports = {
           'webpack/hot/only-dev-server'
         ],
         output: {
-          path: path.join(projectRoot, 'targets', 'dev'),
+          path: path.join('<projectRoot>', 'targets', 'dev'),
           publicPath: 'http://localhost:8080/'
         },
         devServer: {
@@ -88,7 +89,7 @@ module.exports = {
           lazy: false,
           hot: true,
           headers: { 'Access-Control-Allow-Origin': '*' },
-          contentBase: path.join(projectRoot, 'src'),
+          contentBase: path.join('<projectRoot>', 'src'),
           watchOptions: {
             aggregateTimeout: 300,
             ignored: /node_modules/,
@@ -110,7 +111,7 @@ module.exports = {
       name: 'webpack.node',
       path: 'webpack.node.js',
       config: {
-        entry: [path.join(projectRoot, 'src', 'app.node.js')],
+        entry: [path.join('<projectRoot>', 'src', 'app.node.js')],
         output: {
           filename: 'app.node.js'
         },
@@ -121,7 +122,7 @@ module.exports = {
       name: 'webpack.browser',
       path: 'webpack.browser.js',
       config: {
-        entry: [path.join(projectRoot, 'src', 'app.browser.js')],
+        entry: [path.join('<projectRoot>', 'src', 'app.browser.js')],
         output: {
           filename: 'app.browser.js'
         },
@@ -157,12 +158,32 @@ module.exports = {
         interfaceState.target === 'browser' ? browserConfig : nodeConfig
       );
 
+      const projectRoot = getProjectRoot();
+      if (mergedConfig.output && mergedConfig.output.path) {
+        mergedConfig.output.path = replaceProjectRoot(
+          mergedConfig.output.path,
+          projectRoot
+        );
+      }
+      if (mergedConfig.entry) {
+        if (Array.isArray(mergedConfig.entry)) {
+          mergedConfig.entry = mergedConfig.entry.map(e =>
+            replaceProjectRoot(e, projectRoot)
+          );
+        } else {
+          mergedConfig.entry = replaceProjectRoot(
+            mergedConfig.entry,
+            projectRoot
+          );
+        }
+      }
+
       switch (subcommand) {
         case 'start': {
           const Webpack = require('webpack');
           const WebpackDevServer = require('webpack-dev-server');
           WebpackDevServer.addDevServerEntrypoints(mergedConfig, {
-            contentBase: path.join(projectRoot, 'src'),
+            contentBase: path.join('<projectRoot>', 'src'),
             hot: true,
             host: 'localhost'
           });

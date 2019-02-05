@@ -1,9 +1,8 @@
 /* eslint import/no-dynamic-require: off */
 import path from 'path';
 import fs from 'fs';
+import childProcess from 'child_process';
 import npm from 'npm';
-// This dep has issues with being imported
-// import yarn from 'yarn-api';
 import CTF, {
   getDevDependencies,
   CORE_CTFS,
@@ -150,6 +149,13 @@ export async function installDeps(
         });
       });
     }
+    // Install dependencies with Yarn
+    case 'yarn': {
+      return childProcess.execSync(['yarn', 'add', ...dependencies].join(' '), {
+        cwd: alfredConfig.root,
+        stdio: 'inherit'
+      });
+    }
     // Write the package to the package.json but do not install them. This is intended
     // to be used for end to end testing
     case 'writeOnly': {
@@ -182,15 +188,6 @@ export async function installDeps(
         dependencies: newDependencies
       });
     }
-    // Install dependencies with Yarn
-    // case 'yarn': {
-    //   return new Promise((resolve, reject) => {
-    //     yarn(['why', 'isobject'], err => {
-    //       if (err) reject(err);
-    //       resolve();
-    //     });
-    //   });
-    // }
     default: {
       throw new Error('Unsupported npm client. Can only be "npm" or "yarn"');
     }

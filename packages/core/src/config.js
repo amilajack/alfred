@@ -3,7 +3,6 @@
 import path from 'path';
 import fs from 'fs';
 import formatPkg from 'format-package';
-import sortPkgJson from 'sort-package-json';
 import mergeConfigs from '@alfredpkg/merge-configs';
 import Validate from './validation';
 import type { AlfredConfig } from '.';
@@ -124,13 +123,80 @@ export default function Config(config: AlfredConfig): AlfredConfig {
   return mergedConfig;
 }
 
+const PKG_SORT_ORDER = [
+  'name',
+  'version',
+  'private',
+  'description',
+  'keywords',
+  'homepage',
+  'bugs',
+  'repository',
+  'license',
+  'author',
+  'contributors',
+  'files',
+  'sideEffects',
+  'main',
+  'module',
+  'jsnext:main',
+  'browser',
+  'types',
+  'typings',
+  'style',
+  'example',
+  'examplestyle',
+  'assets',
+  'bin',
+  'man',
+  'directories',
+  'workspaces',
+  'scripts',
+  'dependencies',
+  'devDependencies',
+  'peerDependencies',
+  'bundledDependencies',
+  'bundleDependencies',
+  'optionalDependencies',
+  'resolutions',
+  'engines',
+  'engineStrict',
+  'os',
+  'cpu',
+  'preferGlobal',
+  'publishConfig',
+  'betterScripts',
+  'husky',
+  'pre-commit',
+  'commitlint',
+  'lint-staged',
+  'config',
+  'nodemonConfig',
+  'browserify',
+  'babel',
+  'browserslist',
+  'xo',
+  'prettier',
+  'eslintConfig',
+  'eslintIgnore',
+  'stylelint',
+  'jest',
+  '...rest'
+];
+
+export type Pkg = { [x: string]: string };
+
+export function formatPkgJson(pkg: Pkg): Promise<string> {
+  return formatPkg(pkg, { order: PKG_SORT_ORDER });
+}
+
 /**
  * Writes an Alfred config to a user's package.json
  * @REFACTOR This should focus on only writing the alfred config, not the whole
  *           package.json
  */
-export async function writeConfig(pkgPath: string, pkg: Object): AlfredConfig {
-  const formattedPkg = await formatPkg(sortPkgJson(pkg));
+export async function writeConfig(pkgPath: string, pkg: Pkg): AlfredConfig {
+  const formattedPkg = await formatPkgJson(pkg);
   await fs.promises.writeFile(pkgPath, formattedPkg);
   return formattedPkg;
 }
@@ -141,7 +207,7 @@ export async function writeConfig(pkgPath: string, pkg: Object): AlfredConfig {
 export async function loadConfig(
   projectRoot: string,
   pkgPath: string = path.join(projectRoot, 'package.json')
-): Promise<{ pkg: Object, pkgPath: string, alfredConfig: AlfredConfig }> {
+): Promise<{ pkg: Pkg, pkgPath: string, alfredConfig: AlfredConfig }> {
   if (!fs.existsSync(pkgPath)) {
     throw new Error('Current working directory does not have "package.json"');
   }

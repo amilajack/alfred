@@ -5,12 +5,6 @@ const {
 } = require('@alfredpkg/core');
 const debug = require('debug')('@alfredpkg/interface-start');
 
-const name = 'My App';
-
-// fake app
-
-debug('booting %o', name);
-
 module.exports = {
   subcommand: 'start',
 
@@ -25,16 +19,12 @@ module.exports = {
       const env = curr.slice('--'.length);
       if (shortNameSupportedFlags.has(curr)) {
         interfaceState.env = mapShortNameEnvToLongName(env);
-        console.log(
-          `Setting "process.env.NODE_ENV" to "${interfaceState.env}"`
-        );
+        debug(`Setting "process.env.NODE_ENV" to "${interfaceState.env}"`);
         return prev;
       }
       if (supportedFlags.has(curr)) {
         interfaceState.env = env;
-        console.log(
-          `Setting "process.env.NODE_ENV" to "${interfaceState.env}"`
-        );
+        debug(`Setting "process.env.NODE_ENV" to "${interfaceState.env}"`);
         return prev;
       }
       prev.push(curr);
