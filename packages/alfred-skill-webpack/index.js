@@ -27,7 +27,6 @@ const shouldOpenInBrowser =
 module.exports = {
   name: 'webpack',
   description: 'Build, optimize, and bundle assets in your app',
-  default: true,
   interfaces: [
     ['@alfred/interface-build', interfaceConfig],
     ['@alfred/interface-start', interfaceConfig]

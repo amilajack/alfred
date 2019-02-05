@@ -23,6 +23,7 @@ module.exports = {
   devDependencies: {
     parcel: '^1.11.0'
   },
+  default: true,
   configFiles: [],
   hooks: {
     async call({ interfaceState, alfredConfig, subcommand }) {
