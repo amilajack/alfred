@@ -1,8 +1,8 @@
 /* eslint import/no-dynamic-require: off */
 import path from 'path';
 import fs from 'fs';
+import childProcess from 'child_process';
 import npm from 'npm';
-import yarn from 'yarn-api';
 import CTF, {
   getDevDependencies,
   CORE_CTFS,
@@ -11,25 +11,37 @@ import CTF, {
   AddCtfHelpers,
   validateCtf,
   callCtfFnsInOrder,
-  getConfigsBasePath
+  getConfigsBasePath,
+  writeConfig
 } from '@alfredpkg/core';
 import mergeConfigs from '@alfredpkg/merge-configs';
 import formatJson from 'format-package';
 import type { CtfMap, InterfaceState, AlfredConfig } from '@alfredpkg/core';
 
-// @TODO Also allow .ts entrypoints
+// Examples
+// 'lib.node.js',
+// 'app.node.js',
+// 'lib.browser.js',
+// 'app.browser.js'
+// etc...
 export const ENTRYPOINTS = [
   'lib.node.js',
   'app.node.js',
   'lib.browser.js',
-  'app.browser.js',
-  'lib.electron.main.js',
-  'lib.electron.renderer.js',
-  'app.electron.main.js',
-  'app.electron.renderer.js',
-  'lib.react-native.js',
-  'app.react-native.js'
+  'app.browser.js'
 ];
+
+/**
+ * Return an interface state
+ */
+export function fromEntrypoints(
+  entrypoints: Array<string>
+): Array<InterfaceState> {
+  return entrypoints.map(entrypoint => {
+    const [projectType, target] = entrypoint.split('.');
+    return { projectType, target, env: 'production' };
+  });
+}
 
 export function generateInterfaceStatesFromProject(
   config: AlfredConfig
@@ -61,16 +73,16 @@ export function diffCtfDeps(oldCtf: CtfMap, newCtf: CtfMap): Array<string> {
   const t: Map<string, string> = new Map();
   const s: Map<string, string> = new Map();
 
-  Object.entries(getDevDependencies(oldCtf)).forEach(([key, val]) => {
-    t.set(key, val);
+  Object.entries(getDevDependencies(oldCtf)).forEach(([dependency, semver]) => {
+    t.set(dependency, semver);
   });
-  Object.entries(getDevDependencies(newCtf)).forEach(([key, val]) => {
-    if (t.has(key)) {
-      if (t.get(key) !== val) {
+  Object.entries(getDevDependencies(newCtf)).forEach(([dependency, semver]) => {
+    if (t.has(dependency)) {
+      if (t.get(dependency) !== semver) {
         throw new Error('Cannot resolve diff deps');
       }
     } else {
-      s.set(key, val);
+      s.set(dependency, semver);
     }
   });
 
@@ -114,13 +126,15 @@ export async function writeConfigsFromCtf(
 /**
  * @TODO Account for `devDependencies` and `dependencies`
  */
-export function installDeps(
+export async function installDeps(
   dependencies: Array<string> = [],
-  npmClient: 'npm' | 'yarn' = 'npm'
+  npmClient: 'npm' | 'yarn' | 'write' = 'npm',
+  alfredConfig: AlfredConfig
 ): Promise<any> {
   if (!dependencies.length) return Promise.resolve();
 
   switch (npmClient) {
+    // Install dependencies with NPM, which is the default
     case 'npm': {
       return new Promise((resolve, reject) => {
         npm.load({ save: true }, err => {
@@ -135,12 +149,43 @@ export function installDeps(
         });
       });
     }
+    // Install dependencies with Yarn
     case 'yarn': {
-      return new Promise((resolve, reject) => {
-        yarn(['why', 'isobject'], err => {
-          if (err) reject(err);
-          resolve();
-        });
+      return childProcess.execSync(['yarn', 'add', ...dependencies].join(' '), {
+        cwd: alfredConfig.root,
+        stdio: 'inherit'
+      });
+    }
+    // Write the package to the package.json but do not install them. This is intended
+    // to be used for end to end testing
+    case 'writeOnly': {
+      const { root } = alfredConfig;
+      const rawPkg = await fs.promises.readFile(
+        path.join(root, 'package.json')
+      );
+      const pkg = JSON.parse(rawPkg.toString());
+      const { dependencies: currentDependencies = {} } = pkg;
+      const dependenciesAsObject = dependencies
+        .map(dependency => {
+          if (dependency[0] !== '@') {
+            return dependency.split('@');
+          }
+          // A temporary hack that handles scoped npm packages. A proper solution would be
+          // using a semver parser. Package names come in the following form: ['@a/b@1.2.3', 'a@latest', ...].
+          // Temporarily remove the scope so we can split the package name
+          const pkgWithoutScope = dependency.slice(1).split('@');
+          // Then add it back
+          return [`@${pkgWithoutScope[0]}`, pkgWithoutScope[1]];
+        })
+        .map(([p, c]) => ({ [p]: c }))
+        .reduce((p, c) => ({ ...p, ...c }));
+      const newDependencies = {
+        ...currentDependencies,
+        ...dependenciesAsObject
+      };
+      return writeConfig(path.join(root, 'package.json'), {
+        ...pkg,
+        dependencies: newDependencies
       });
     }
     default: {
@@ -289,7 +334,7 @@ export default async function generateCtfFromConfig(
 export async function diffCtfDepsOfAllInterfaceStates(
   prevAlfredConfig: AlfredConfig,
   currAlfredConfig: AlfredConfig
-): Set<string> {
+): Array<string> {
   const stateWithDuplicateDeps = await Promise.all(
     INTERFACE_STATES.map(interfaceState =>
       Promise.all([

@@ -7,13 +7,13 @@ import webpack from '@alfredpkg/skill-webpack';
 import eslint from '@alfredpkg/skill-eslint';
 import react from '@alfredpkg/skill-react';
 import prettier from '@alfredpkg/skill-prettier';
+import parcel from '@alfredpkg/skill-parcel';
 import rollup from '@alfredpkg/skill-rollup';
 import lodashCtf from '@alfredpkg/skill-lodash';
 import mergeConfigs from '@alfredpkg/merge-configs';
 import pkgUp from 'pkg-up';
 import lodash from 'lodash';
 import topsort from 'toposort';
-
 import type { ConfigType } from './config';
 
 export type AlfredConfig = {
@@ -24,9 +24,22 @@ export type AlfredConfig = {
   showConfigs: boolean
 };
 
-export { default as Config, loadConfig } from './config';
+export {
+  default as Config,
+  loadConfig,
+  writeConfig,
+  formatPkgJson
+} from './config';
 
 // All the possible interface states
+// @TODO Also allow .ts entrypoints
+// @TODO Allow the follow entrypoints:
+// 'lib.electron.main.js',
+// 'lib.electron.renderer.js',
+// 'app.electron.main.js',
+// 'app.electron.renderer.js',
+// 'lib.react-native.js',
+// 'app.react-native.js'
 export const INTERFACE_STATES = [
   {
     projectType: 'app',
@@ -73,6 +86,7 @@ export const INTERFACE_STATES = [
 export const CORE_CTFS = {
   babel,
   webpack,
+  parcel,
   eslint,
   prettier,
   jest: jestCtf,
@@ -521,8 +535,11 @@ export function getDevDependencies(ctf: CtfMap): { [x: string]: string } {
     .reduce((p, c) => ({ ...p, ...c }), {});
 }
 
+/**
+ * @TOOD @REFACTOR Move this to helpers package
+ */
 export function execCommand(cmd: string) {
-  return childProcess.execSync(cmd, { stdio: [0, 1, 2] });
+  return childProcess.execSync(cmd, { stdio: 'inherit' });
 }
 
 export function getInterfaceForSubcommand(ctf: CtfMap, subcommand: string) {

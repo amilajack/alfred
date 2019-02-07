@@ -1,15 +1,14 @@
 // @flow
 import Table from 'cli-table3';
 import chalk from 'chalk';
-import { loadConfig } from '@alfredpkg/core';
 import generateCtfFromConfig, {
   generateInterfaceStatesFromProject
 } from './helpers/ctf';
-import { getProjectRoot } from './helpers';
+import { getProjectRoot, init } from './helpers';
 
 (async () => {
   const projectRoot = getProjectRoot();
-  const { alfredConfig } = await loadConfig(projectRoot);
+  const { alfredConfig } = await init(projectRoot);
 
   const interfaceStateCtfs = await Promise.all(
     generateInterfaceStatesFromProject(alfredConfig).map(interfaceState =>

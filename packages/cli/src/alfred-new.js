@@ -3,15 +3,13 @@ import path from 'path';
 import fs from 'fs';
 import childProcess from 'child_process';
 import { prompt } from 'inquirer';
-import handlebars from 'handlebars';
 import validateLicense from 'validate-npm-package-license';
 import validateName from 'validate-npm-package-name';
 import program from 'commander';
 import git from 'git-config';
 import chalk from 'chalk';
-import getSingleSubcommandFromArgs from './helpers/cli';
+import getSingleSubcommandFromArgs, { addBoilerplate } from './helpers/cli';
 
-const TEMPLATES_DIR = path.resolve(__dirname, 'templates');
 // @TODO @HARDCODE Remove hardcoding of versions
 const ALFRED_PKG_VERSION = '0.0.0';
 
@@ -26,22 +24,6 @@ const gitConfig = () =>
 function escapeQuotes(str: string): string {
   return str.replace(/"/g, '\\"');
 }
-
-async function compile(filename: string) {
-  const source = await fs.promises.readFile(
-    path.resolve(TEMPLATES_DIR, filename)
-  );
-  return handlebars.compile(source.toString(), { noEscape: true });
-}
-
-const GITIGNORE_TEMPLATE = compile('.gitignore.hbs');
-const NPM_TEMPLATE = compile('package.json.hbs');
-const APP_TEMPLATE = compile('app.js.hbs');
-const LIB_TEMPLATE = compile('lib.js.hbs');
-const APP_BROWSER_HTML_TEMPLATE = compile('index.html.hbs');
-const README_TEMPLATE = compile('README.md.hbs');
-const EDITORCONFIG_TEMPLATE = compile('.editorconfig.hbs');
-const TEST_TEMPLATE = compile('test.js.hbs');
 
 async function guessAuthor() {
   const author = {
@@ -105,63 +87,69 @@ async function createNewProject(cwd: string, name: string) {
     `I'm your assistant Alfred. I'll walk you through creating your new Alfred project "${style.project(
       name
     )}"`,
-    'Press ^C at any time to quit.'
+    'Press "ctrl + C" at any time to quit.'
   ]);
 
   const guess = await guessAuthor();
 
-  const answers = await prompt([
-    { type: 'input', name: 'description', message: 'description' },
-    { type: 'input', name: 'git', message: 'git repository' },
-    {
-      name: 'author',
-      type: 'input',
-      message: 'author',
-      default: guess.name
-    },
-    {
-      name: 'email',
-      type: 'input',
-      message: 'email',
-      default: guess.email
-    },
-    {
-      name: 'license',
-      type: 'input',
-      message: 'license',
-      default: 'MIT',
-      validate(input) {
-        const self = validateLicense(input);
-        if (self.validForNewPackages) {
-          return true;
+  let answers;
+
+  if (process.env.E2E_CLI_TEST) {
+    answers = JSON.parse(process.env.CLI_INPUT || '{}');
+  } else {
+    answers = await prompt([
+      { type: 'input', name: 'description', message: 'description' },
+      { type: 'input', name: 'repository', message: 'git repository' },
+      {
+        name: 'author',
+        type: 'input',
+        message: 'author',
+        default: guess.name
+      },
+      {
+        name: 'email',
+        type: 'input',
+        message: 'email',
+        default: guess.email
+      },
+      {
+        name: 'license',
+        type: 'input',
+        message: 'license',
+        default: 'MIT',
+        validate(input) {
+          const self = validateLicense(input);
+          if (self.validForNewPackages) {
+            return true;
+          }
+          const errors = self.warnings || [];
+          return `Sorry, ${errors.join(' and ')}.`;
         }
-        const errors = self.warnings || [];
-        return `Sorry, ${errors.join(' and ')}.`;
+      },
+      {
+        name: 'npmClient',
+        type: 'list',
+        choices: ['NPM', 'Yarn'],
+        message: 'npm client',
+        default: 'NPM'
+      },
+      {
+        name: 'projectType',
+        type: 'list',
+        choices: ['app', 'lib'],
+        message: 'project type',
+        default: 'app'
+      },
+      {
+        name: 'target',
+        type: 'list',
+        // @TODO @HARDCODE Dynamically get the targets
+        choices: ['browser', 'node'],
+        message: 'project type',
+        default: 'browser'
       }
-    },
-    {
-      name: 'npmClient',
-      type: 'list',
-      choices: ['NPM', 'Yarn'],
-      message: 'npm client',
-      default: 'NPM'
-    },
-    {
-      name: 'projectType',
-      type: 'list',
-      choices: ['app', 'lib'],
-      message: 'project type',
-      default: 'app'
-    },
-    {
-      name: 'target',
-      type: 'list',
-      // @TODO @HARDCODE Dynamically get the targets
-      choices: ['browser', 'node'],
-      message: 'project type',
-      default: 'browser'
-    }
-  ]);
+    ]);
+  }
 
   const filename = `${answers.projectType}.${answers.target}.js`;
   const entry = `./src/${filename}`;
@@ -172,10 +160,10 @@ async function createNewProject(cwd: string, name: string) {
       full: name
     }
   };
-  answers.npmClient = escapeQuotes(answers.npmClient);
+  answers.npmClient = escapeQuotes(answers.npmClient).toLowerCase();
   answers.projectType = escapeQuotes(answers.projectType);
   answers.description = escapeQuotes(answers.description);
-  answers.git = encodeURI(answers.git);
+  answers.repository = encodeURI(answers.repository);
   answers.author = escapeQuotes(answers.author);
   answers.main = targetFile;
   answers.targetFile = targetFile;
@@ -191,10 +179,9 @@ async function createNewProject(cwd: string, name: string) {
   const templateData = {
     project: answers,
     'alfred-pkg': {
-      semver:
-        process.env.NODE_ENV === 'test'
-          ? `file:${alfredFilePath}`
-          : `^${ALFRED_PKG_VERSION}`
+      semver: process.env.E2E_CLI_TEST
+        ? `file:${alfredFilePath}`
+        : `^${ALFRED_PKG_VERSION}`
     }
   };
 
@@ -206,54 +193,21 @@ async function createNewProject(cwd: string, name: string) {
   await fs.promises.mkdir(srcDir);
   await fs.promises.mkdir(testsDir);
 
-  await Promise.all(
-    [
-      {
-        file: '.gitignore',
-        content: (await GITIGNORE_TEMPLATE)(templateData)
-      },
-      {
-        file: '.editorconfig',
-        content: (await EDITORCONFIG_TEMPLATE)(templateData)
-      },
-      {
-        file: 'package.json',
-        content: (await NPM_TEMPLATE)(templateData)
-      },
-      {
-        file: 'README.md',
-        content: (await README_TEMPLATE)(templateData)
-      },
-      {
-        file: entry,
-        content: (await (isApp ? APP_TEMPLATE : LIB_TEMPLATE))(templateData)
-      },
-      {
-        file: `./tests/${answers.projectType}.${answers.target}.spec.js`,
-        content: (await TEST_TEMPLATE)(templateData)
-      }
-    ].map(({ file, content }) =>
-      fs.promises.writeFile(path.join(root, file), content)
-    )
-  );
-
-  if (isApp && isBrowser) {
-    const content = (await APP_BROWSER_HTML_TEMPLATE)(templateData);
-    await fs.promises.writeFile(path.join(root, './src/index.html'), content);
-  }
+  await addBoilerplate(templateData, root);
 
   const relativeRoot = path.relative(cwd, root);
   const relativeEntryPoint = path.relative(cwd, path.resolve(root, entry));
 
   renderLines(['I am now installing the dependencies for your app']);
-  const installCommand = answers.npmClient === 'NPM' ? 'npm install' : 'yarn';
+  const installCommand =
+    answers.npmClient === 'NPM' ? `npm install --prefix ${root}` : 'yarn';
   const buildCommand =
     answers.npmClient === 'NPM' ? 'npm run build' : 'yarn build';
   // @TODO Install the deps
   if (!process.env.IGNORE_INSTALL) {
     childProcess.execSync(installCommand, {
       cwd: root,
-      stdio: [0, 1, 2]
+      stdio: 'inherit'
     });
   }
 

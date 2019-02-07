@@ -1,14 +1,13 @@
 {
   "name": "@alfredpkg/skill-parcel",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "dependencies": {
-    "@alfredpkg/helpers": "^0.0.0",
+    "@alfredpkg/helpers": "^0.0.1-alpha.0",
     "parcel": "^1.11.0"
   },
   "peerDependencies": {
     "@alfredpkg/core": "0.0.0",
-    "@alfredpkg/interface-build": "^0.0.0",
-    "@alfredpkg/interface-start": "^0.0.0",
     "parcel": "^1.11.0"
-  }
+  },
+  "gitHead": "7193c706eff460e2000586d8ba456d5ad4087ce2"
 }

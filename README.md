@@ -4,6 +4,7 @@
 Alfred
 ======
 [![Build Status](https://travis-ci.com/amilajack/alfred.svg?token=stGf151gAJ11ZUi8LyvG&branch=master)](https://travis-ci.com/amilajack/alfred)
+[![Twitter Follow](https://img.shields.io/twitter/follow/alfredpkg.svg?style=social)](https://twitter.com/alfredpkg)
 
 ### Alfred is a Modular JS Toolchain with the following goals:
 
@@ -116,7 +117,7 @@ export default {
       path: '.babelrc.js',
       // The value of the config. Can be an object or a string
       config: {
-        presets: '@babel/preset-env'
+        presets: ['@babel/preset-env']
       }
     }
   ],
@@ -331,14 +332,14 @@ Would you like to install it? (Y/n)
 
 ## Roadmap
 
-### In progress
+### v1.0.0
 * Implement at least one skill for each type of JS infrastructure
 
-### Future
+### Post v1.0.0
 * `alfred migrate`: Migration script to Alfred
 * `alfred upgrade`: Upgrade codebase to latest codebase to latest ES version
 * `alfred bug`: Generating bug reports on user's behalf
-* `alfred doc`: Generating documentation
+* `alfred doc`: Generating documentation that will be rendered to `README.md` and html
 
 ## Alfred Skills Implementation Status
 
@@ -348,9 +349,11 @@ Would you like to install it? (Y/n)
 | Transpilers        |  Babel                   | ✅           |
 | Test Frameworks    |  Jest, Mocha, Jasmine    | ✅ ✅ ❌      |
 | Formatters         |  Prettier                | ✅           |
-| Libraries          |  Lodash                  | ✅           |
+| Libraries          |  Lodash, Moment          | ✅           |
 | Linters            |  ESLint                  | ✅           |
-| Front End          |  React, Angular          | ✅ ❌        |
+| Front End          |  React, Angular, Vue     | ✅ ❌        |
+| State Managment    |  Redux, Mobx             | ❌           |
+| Routing            |  react-router            | ❌           |
 | Documentation      |  JSDoc, Typedoc          | ❌           |
 | Type Checkers      |  Flow, TypeScript        | ❌           |
 | End to End Testing |  TestCafe, Cypress       | ❌           |

@@ -1,6 +1,7 @@
 {
   "name": "@fixtures/app",
-  "version": "1.0.0",
+  "version": "0.0.1-alpha.0",
+  "private": true,
   "license": "MIT",
   "scripts": {
     "build": "../../../packages/cli/lib/alfred.js run build",
@@ -12,12 +13,12 @@
     "test": "../../../packages/cli/lib/alfred.js run test",
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
+  "devDependencies": {
+    "@alfredpkg/cli": "^0.0.1-alpha.0",
+    "@alfredpkg/core": "^0.0.1-alpha.0",
+    "@alfredpkg/skill-react": "^0.0.1-alpha.0"
+  },
   "alfred": {
     "showConfigs": true
-  },
-  "devDependencies": {
-    "@alfredpkg/cli": "^0.0.0",
-    "@alfredpkg/core": "^0.0.0",
-    "@alfredpkg/skill-react": "^0.0.0"
   }
 }
