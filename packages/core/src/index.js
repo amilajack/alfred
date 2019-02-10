@@ -373,32 +373,6 @@ export const AddCtfHelpers: CtfHelpers = {
   }
 };
 
-export function validateCtf(ctf: CtfMap, interfaceState: InterfaceState) {
-  ctf.forEach(ctfNode => {
-    if (ctfNode && ctfNode.supports) {
-      const supports = {
-        env: ctfNode.supports.env.includes(interfaceState.env),
-        target: ctfNode.supports.targets.includes(interfaceState.target),
-        projectType: ctfNode.supports.projectTypes.includes(
-          interfaceState.projectType
-        )
-      };
-      const { env, target, projectType } = supports;
-      const isSupported = env && target && projectType;
-
-      if (!isSupported) {
-        throw new Error(
-          `The "${ctfNode.name}" skill, which supports ${JSON.stringify(
-            ctfNode.supports
-          )}}, does not support the current environment, project type, or target, which are ${JSON.stringify(
-            interfaceState
-          )}`
-        );
-      }
-    }
-  });
-}
-
 /**
  * Topologically sort the CTFs
  */
@@ -466,6 +440,34 @@ export function callCtfFnsInOrder(
   return { ctf, orderedSelfTransforms };
 }
 
+export function validateCtf(ctf: CtfMap, interfaceState: InterfaceState) {
+  ctf.forEach(ctfNode => {
+    if (ctfNode && ctfNode.supports) {
+      const supports = {
+        env: ctfNode.supports.env.includes(interfaceState.env),
+        target: ctfNode.supports.targets.includes(interfaceState.target),
+        projectType: ctfNode.supports.projectTypes.includes(
+          interfaceState.projectType
+        )
+      };
+      const { env, target, projectType } = supports;
+      const isSupported = env && target && projectType;
+
+      if (!isSupported) {
+        throw new Error(
+          `The "${ctfNode.name}" skill, which supports ${JSON.stringify(
+            ctfNode.supports
+          )}}, does not support the current environment, project type, or target, which are ${JSON.stringify(
+            interfaceState
+          )}`
+        );
+      }
+    }
+  });
+  // Check if the CTF's can be topsorted
+  topsortCtfs(ctf);
+}
+
 export default function CTF(
   ctfs: Array<CtfNode>,
   alfredConfig: AlfredConfig,
@@ -495,8 +497,6 @@ export default function CTF(
       ctf.set(ctfNode.name, ctfWithHelpers);
     }
   });
-
-  // validateCtf(ctf, interfaceState);
 
   return ctf;
 }
