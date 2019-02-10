@@ -9,6 +9,7 @@ import powerset from '@amilajack/powerset';
 import childProcess from 'child_process';
 import { INTERFACE_STATES } from '@alfredpkg/core';
 import mergeConfigs from '@alfredpkg/merge-configs';
+import assert from 'assert';
 import { addEntrypoints, fromEntrypoints, serial } from '../..';
 
 process.on('unhandledRejection', err => {
@@ -226,6 +227,12 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
                           env
                         });
                       }
+                      // Assert that the .configs dir should or should not exist
+                      const configsDir = path.join(projectDir, '.configs');
+                      assert.strictEqual(
+                        fs.existsSync(configsDir),
+                        showConfigs
+                      );
                     } catch (e) {
                       issues.push([
                         skillCombination.join(', '),

@@ -10,6 +10,9 @@ import { Signale } from 'signale';
 import { ENTRYPOINTS, generateInterfaceStatesFromProject } from './ctf';
 import PkgValidation from '../pkg-validation';
 
+/**
+ * Execute promises serially
+ */
 export const serial = (funcs: Array<() => Promise<any>>) =>
   funcs.reduce(
     (promise, func) =>

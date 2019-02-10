@@ -97,6 +97,7 @@ export async function writeConfigsFromCtf(
   ctf: CtfMap,
   config: AlfredConfig
 ): Promise<CtfMap> {
+  if (!config.showConfigs) return ctf;
   // Create a .configs dir if it doesn't exist
   const configsBasePath = getConfigsBasePath(config.root);
   if (!fs.existsSync(configsBasePath)) {

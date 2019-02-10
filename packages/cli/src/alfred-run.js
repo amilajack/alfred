@@ -83,7 +83,11 @@ import { deleteConfigs, init, serial } from './helpers';
   return serial(
     interfaceStates.map(interfaceState => () =>
       generateCtfFromConfig(alfredConfig, interfaceState)
-        .then(ctf => writeConfigsFromCtf(ctf, alfredConfig))
+        .then(ctf =>
+          alfredConfig.showConfigs
+            ? writeConfigsFromCtf(ctf, alfredConfig)
+            : ctf
+        )
         .then(ctf => {
           const subcommandInterface = getInterfaceForSubcommand(
             ctf,
