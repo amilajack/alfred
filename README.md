@@ -380,3 +380,7 @@ Would you like to install it? (Y/n)
 * Opinionated
 * Simplicity
 * Reusability
+
+## Donate
+
+Please [donate to my Patreon](https://www.patreon.com/join/2181265/checkout)

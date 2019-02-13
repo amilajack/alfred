@@ -30,7 +30,11 @@ const siteConfig = {
       href: 'http://github.com/alfred-js/alfred',
       label: 'GitHub'
     },
-    { blog: true, label: 'Blog' }
+    { blog: true, label: 'Blog' },
+    {
+      href: 'https://www.patreon.com/join/2181265/checkout',
+      label: 'Donate'
+    }
   ],
 
   // If you have users set above, you add it here:

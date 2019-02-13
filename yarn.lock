@@ -11,12 +11,6 @@
     lodash "^4.17.4"
     recast "^0.12.1"
 
-"@alfredpkg/alfred@file:packages/alfred":
-  version "0.0.1-alpha.0"
-  dependencies:
-    "@alfredpkg/cli" "^0.0.1-alpha.0"
-    "@alfredpkg/core" "^0.0.1-alpha.0"
-
 "@alfredpkg/skill-mocha@file:packages/alfred-skill-mocha":
   version "0.0.1-alpha.0"
   dependencies:
@@ -868,6 +862,13 @@
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.2.0.tgz#b03e42eeddf5898e00646e4c840fa07ba8dcad7f"
   integrity sha512-oouEibCbHMVdZSDlJBO6bZmID/zA/G/Qx3H1d3rSNPTD+L8UNKvCat7aKWSJ74zYbm5zWGh0GQN0hKj8zYFTCg==
+  dependencies:
+    regenerator-runtime "^0.12.0"
+
+"@babel/runtime@^7.3.1":
+  version "7.3.1"
+  resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.3.1.tgz#574b03e8e8a9898eaf4a872a92ea20b7846f6f2a"
+  integrity sha512-7jGW8ppV0ant637pIqAcFfQDDH1orEPGJb8aXfUozuCU3QqX7rX4DA8iwrbPrR1hcH0FTTHz47yQnk+bl5xHQA==
   dependencies:
     regenerator-runtime "^0.12.0"
 
@@ -2246,6 +2247,11 @@ assign-symbols@^1.0.0:
   resolved "https://registry.yarnpkg.com/assign-symbols/-/assign-symbols-1.0.0.tgz#59667f41fadd4f20ccbc2bb96b8d4f7f78ec0367"
   integrity sha1-WWZ/QfrdTyDMvCu5a41Pf3jsA2c=
 
+ast-metadata-inferer@^0.1.1-3:
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/ast-metadata-inferer/-/ast-metadata-inferer-0.1.1.tgz#66e24fae9d30ca961fac4880b7fc466f09b25165"
+  integrity sha512-hc9w8Qrgg9Lf9iFcZVhNjUnhrd2BBpTlyCnegPVvCe6O0yMrF57a6Cmh7k+xUsfUOMh9wajOL5AsGOBNEyTCcw==
+
 ast-traverse@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/ast-traverse/-/ast-traverse-0.1.1.tgz#69cf2b8386f19dcda1bb1e05d68fe359d8897de6"
@@ -2704,7 +2710,7 @@ babel-plugin-jscript@^1.0.4:
   resolved "https://registry.yarnpkg.com/babel-plugin-jscript/-/babel-plugin-jscript-1.0.4.tgz#8f342c38276e87a47d5fa0a8bd3d5eb6ccad8fcc"
   integrity sha1-jzQsOCduh6R9X6CovT1etsytj8w=
 
-babel-plugin-lodash@3.3.4, babel-plugin-lodash@^3.3.4:
+babel-plugin-lodash@^3.3.4:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/babel-plugin-lodash/-/babel-plugin-lodash-3.3.4.tgz#4f6844358a1340baed182adbeffa8df9967bc196"
   integrity sha512-yDZLjK7TCkWl1gpBeBGmuaDIFhZKmkoL+Cu2MUUjv5VxUZx/z7tBGBCBcQs5RI1Bkz5LLmNdjx7paOyQtMovyg==
@@ -3652,7 +3658,7 @@ browserslist@^1.3.6, browserslist@^1.5.2, browserslist@^1.7.6:
     caniuse-db "^1.0.30000639"
     electron-to-chromium "^1.2.7"
 
-browserslist@^4.0.0, browserslist@^4.1.0:
+browserslist@^4.0.0, browserslist@^4.1.0, browserslist@^4.4.1:
   version "4.4.1"
   resolved "https://registry.npmjs.org/browserslist/-/browserslist-4.4.1.tgz#42e828954b6b29a7a53e352277be429478a69062"
   integrity sha512-pEBxEXg7JwaakBXjATYw/D1YZh4QUSCX/Mnd/wnqSRPPSi1U39iDhDoKGoBUcraKdxDlrYqJxSI5nNvD+dWP2A==
@@ -3965,6 +3971,11 @@ caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639, ca
   version "1.0.30000928"
   resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000928.tgz#2e83d2b14276442da239511615eb7c62fed0cfa7"
   integrity sha512-nAoeTspAEzLjqGSeibzM09WojORi08faeOOI5GBmFWC3/brydovb9lYJWM+p48rEQsdevfpufK58gPiDtwOWKw==
+
+caniuse-db@^1.0.30000935:
+  version "1.0.30000936"
+  resolved "https://registry.npmjs.org/caniuse-db/-/caniuse-db-1.0.30000936.tgz#19035ce7c0f44c1562328d73bd455a2390206070"
+  integrity sha512-gOrcU8d+h5AdrO/Mhnj35vttNvAed2taqzrYDfhJE/qVnLxAaGb1doWlRF7iDex+EQPhkwAHc07RBwixnxpFDQ==
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000929:
   version "1.0.30000929"
@@ -6087,7 +6098,7 @@ eslint-config-airbnb-base@^13.1.0:
     object.assign "^4.1.0"
     object.entries "^1.0.4"
 
-eslint-config-airbnb@17.1.0, eslint-config-airbnb@^17.1.0:
+eslint-config-airbnb@^17.1.0:
   version "17.1.0"
   resolved "https://registry.yarnpkg.com/eslint-config-airbnb/-/eslint-config-airbnb-17.1.0.tgz#3964ed4bc198240315ff52030bf8636f42bc4732"
   integrity sha512-R9jw28hFfEQnpPau01NO5K/JWMGLi6aymiF6RsnMURjTk+MqZKllCqGK/0tOvHkPi/NWSSOU2Ced/GX++YxLnw==
@@ -6113,10 +6124,34 @@ eslint-config-bliss@^3.2.0:
     flow-bin "^0.89.0"
     prettier "^1.15.3"
 
+eslint-config-bliss@^3.3.0-0:
+  version "3.3.0-0"
+  resolved "https://registry.npmjs.org/eslint-config-bliss/-/eslint-config-bliss-3.3.0-0.tgz#cdcd63b4e4fba915ece52f210dcbbe4df6e15369"
+  integrity sha512-okSZgzFcrOq7c+qV79XqOtySuD+JNiUeNcBN8Nl0n5FgNKzTGSxHbs0EyKtNzcjrnst3qSmJhJGE1yX7BRPVug==
+  dependencies:
+    babel-eslint "^10.0.1"
+    eslint-config-airbnb-base "^13.1.0"
+    eslint-config-prettier "^4.0.0"
+    eslint-plugin-compat "^3.0.0-0"
+    eslint-plugin-flowtype-errors "^3.6.0"
+    eslint-plugin-import "^2.16.0"
+    eslint-plugin-jest "^22.2.2"
+    eslint-plugin-prettier "^3.0.1"
+    eslint-plugin-promise "^4.0.1"
+    flow-bin "^0.92.1"
+    prettier "^1.16.4"
+
 eslint-config-prettier@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-3.3.0.tgz#41afc8d3b852e757f06274ed6c44ca16f939a57d"
   integrity sha512-Bc3bh5bAcKNvs3HOpSi6EfGA2IIp7EzWcg2tS4vP7stnXu/J1opihHDM7jI9JCIckyIDTgZLSWn7J3HY0j2JfA==
+  dependencies:
+    get-stdin "^6.0.0"
+
+eslint-config-prettier@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmjs.org/eslint-config-prettier/-/eslint-config-prettier-4.0.0.tgz#16cedeea0a56e74de60dcbbe3be0ab2c645405b9"
+  integrity sha512-kWuiJxzV5NwOwZcpyozTzDT5KJhBw292bbYro9Is7BWnbNMg15Gmpluc1CTetiCatF8DRkNvgPAOaSyg+bYr3g==
   dependencies:
     get-stdin "^6.0.0"
 
@@ -6133,7 +6168,7 @@ eslint-formatter-pretty@^2.1.1:
     string-width "^2.0.0"
     supports-hyperlinks "^1.0.1"
 
-eslint-import-resolver-node@^0.3.1:
+eslint-import-resolver-node@^0.3.1, eslint-import-resolver-node@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/eslint-import-resolver-node/-/eslint-import-resolver-node-0.3.2.tgz#58f15fb839b8d0576ca980413476aab2472db66a"
   integrity sha512-sfmTqJfPSizWu4aymbPr4Iidp5yKm8yDkHp+Ir3YiTHiiDfxh69mOUsmiqW6RZ9zRXFaF64GtYmN7e+8GHBv6Q==
@@ -6149,6 +6184,14 @@ eslint-module-utils@^2.2.0:
     debug "^2.6.8"
     pkg-dir "^1.0.0"
 
+eslint-module-utils@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npmjs.org/eslint-module-utils/-/eslint-module-utils-2.3.0.tgz#546178dab5e046c8b562bbb50705e2456d7bda49"
+  integrity sha512-lmDJgeOOjk8hObTysjqH7wyMi+nsHwwvfBykwfhjR1LNdd7C2uFJBvx4OpWYpXOw4df1yE1cDEVd1yLHitk34w==
+  dependencies:
+    debug "^2.6.8"
+    pkg-dir "^2.0.0"
+
 eslint-plugin-compat@^2.6.3:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/eslint-plugin-compat/-/eslint-plugin-compat-2.6.3.tgz#2606644110ab1150bec23a45034367ddbea1f1e9"
@@ -6158,6 +6201,18 @@ eslint-plugin-compat@^2.6.3:
     browserslist "^4.3.4"
     caniuse-db "^1.0.30000889"
     mdn-browser-compat-data "^0.0.54"
+
+eslint-plugin-compat@^3.0.0-0:
+  version "3.0.0-0"
+  resolved "https://registry.npmjs.org/eslint-plugin-compat/-/eslint-plugin-compat-3.0.0-0.tgz#0c19031336c6065a42742c24e0fe06d78326f6ba"
+  integrity sha512-nTgHIABWo7+DMoxPPM/ItjBCCmzOchD/DmHokg9maxFjh9R1r7cvnTVcRU4dF0xTspoCdwSKqoGhVSGr6BUzUQ==
+  dependencies:
+    "@babel/runtime" "^7.3.1"
+    ast-metadata-inferer "^0.1.1-3"
+    browserslist "^4.4.1"
+    caniuse-db "^1.0.30000935"
+    mdn-browser-compat-data "^0.0.66"
+    semver "^5.6.0"
 
 eslint-plugin-flowtype-errors@^3.6.0:
   version "3.6.0"
@@ -6183,10 +6238,31 @@ eslint-plugin-import@^2.14.0:
     read-pkg-up "^2.0.0"
     resolve "^1.6.0"
 
+eslint-plugin-import@^2.16.0:
+  version "2.16.0"
+  resolved "https://registry.npmjs.org/eslint-plugin-import/-/eslint-plugin-import-2.16.0.tgz#97ac3e75d0791c4fac0e15ef388510217be7f66f"
+  integrity sha512-z6oqWlf1x5GkHIFgrSvtmudnqM6Q60KM4KvpWi5ubonMjycLjndvd5+8VAZIsTlHC03djdgJuyKG6XO577px6A==
+  dependencies:
+    contains-path "^0.1.0"
+    debug "^2.6.9"
+    doctrine "1.5.0"
+    eslint-import-resolver-node "^0.3.2"
+    eslint-module-utils "^2.3.0"
+    has "^1.0.3"
+    lodash "^4.17.11"
+    minimatch "^3.0.4"
+    read-pkg-up "^2.0.0"
+    resolve "^1.9.0"
+
 eslint-plugin-jest@^22.1.2:
   version "22.1.3"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.1.3.tgz#4444108dfcddc5d2117ed6dc551f529d7e73a99e"
   integrity sha512-JTZTI6WQoNruAugNyCO8fXfTONVcDd5i6dMRFA5g3rUFn1UDDLILY1bTL6alvNXbW2U7Sc2OSpi8m08pInnq0A==
+
+eslint-plugin-jest@^22.2.2:
+  version "22.2.2"
+  resolved "https://registry.npmjs.org/eslint-plugin-jest/-/eslint-plugin-jest-22.2.2.tgz#2a80d70a20c27dfb1503a6f32cdcb647fe5476df"
+  integrity sha512-hnWgh9o39VJfz6lJEyQJdTW7dN2yynlGkmPOlU/oMHh+d7WVMsJP1GeDTB520VCDljEdKExCwD5IBpQIUl4mJg==
 
 eslint-plugin-jsx-a11y@^6.2.0:
   version "6.2.0"
@@ -6973,6 +7049,11 @@ flow-bin@^0.92.0:
   version "0.92.0"
   resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.92.0.tgz#f5bf3e808b17b480e067ac673829ca715a168bea"
   integrity sha512-3ErXSAXZZlLV5/QPlaUDCWlDUXop1SiH32ifXL3SEiBwsmGbudCLim+HFVZfkegrn1nB4TcNSkMWtW8SnMPyAQ==
+
+flow-bin@^0.92.1:
+  version "0.92.1"
+  resolved "https://registry.npmjs.org/flow-bin/-/flow-bin-0.92.1.tgz#32c136c07235f30c42dc0549a0790f370fad4070"
+  integrity sha512-F5kC5oQOR2FXROAeybJHFqgZP+moKV9fa/53QK4Q4WayTQHdA0KSl48KD1gP0A9mioRLiKUegTva/7I15cX3Iw==
 
 flow-parser@0.*, flow-parser@^0.*:
   version "0.90.0"
@@ -9967,11 +10048,6 @@ lockfile@^1.0.4:
   dependencies:
     signal-exit "^3.0.2"
 
-lodash-es@*:
-  version "4.17.11"
-  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.11.tgz#145ab4a7ac5c5e52a3531fb4f310255a152b4be0"
-  integrity sha512-DHb1ub+rMjjrxqlB3H56/6MXtm1lSksDp2rA2cNWjG8mlDUYFhUj3Di2Zn5IwSU87xLv8tNIQ7sSwE/YOX/D/Q==
-
 lodash-webpack-plugin@0.11.5:
   version "0.11.5"
   resolved "https://registry.yarnpkg.com/lodash-webpack-plugin/-/lodash-webpack-plugin-0.11.5.tgz#c4bd064b4f561c3f823fa5982bdeb12c475390b9"
@@ -10364,6 +10440,13 @@ mdn-browser-compat-data@^0.0.54:
   version "0.0.54"
   resolved "https://registry.yarnpkg.com/mdn-browser-compat-data/-/mdn-browser-compat-data-0.0.54.tgz#e5a5a9b84b2d52a8ae553294055853584fa96be0"
   integrity sha512-eu0g/tlNB3+kqy1O7bzq84OR67Kg1HxRJ6v16P1rjcDsBL7RhJik7aXnzNvuaijNaR1rDana9IO5Lo1b3E4Qxg==
+  dependencies:
+    extend "3.0.2"
+
+mdn-browser-compat-data@^0.0.66:
+  version "0.0.66"
+  resolved "https://registry.npmjs.org/mdn-browser-compat-data/-/mdn-browser-compat-data-0.0.66.tgz#5739c6033059b5cb3d7414c00cb4367c8fceecb1"
+  integrity sha512-Exx+o05KYCltHmY2thfCoufBaHeqbIzqZHQPDtmcC+nkeFG++ONzwddBtgDBAKeI0IFFKqGIbRT1QBRwmk9QKA==
   dependencies:
     extend "3.0.2"
 
@@ -12809,6 +12892,11 @@ prettier@^1.16.3:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.16.3.tgz#8c62168453badef702f34b45b6ee899574a6a65d"
   integrity sha512-kn/GU6SMRYPxUakNXhpP0EedT/KmaPzr0H5lIsDogrykbaxOpOfAFfk5XA7DZrJyMAv1wlMV3CPcZruGXVVUZw==
 
+prettier@^1.16.4:
+  version "1.16.4"
+  resolved "https://registry.npmjs.org/prettier/-/prettier-1.16.4.tgz#73e37e73e018ad2db9c76742e2647e21790c9717"
+  integrity sha512-ZzWuos7TI5CKUeQAtFd6Zhm2s6EpAD/ZLApIhsF9pRvRtM1RFo61dM/4MSRUA0SuLugA/zgrZD8m0BaY46Og7g==
+
 pretty-format@^24.0.0:
   version "24.0.0"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-24.0.0.tgz#cb6599fd73ac088e37ed682f61291e4678f48591"
@@ -13192,7 +13280,7 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react@16.7.0, react@^16.5.0, react@^16.7.0:
+react@^16.5.0, react@^16.7.0:
   version "16.7.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.7.0.tgz#b674ec396b0a5715873b350446f7ea0802ab6381"
   integrity sha512-StCz3QY8lxTb5cl2HJxjwLFOXPIFQp+p+hxQfc8WE0QiLfCtIlKj8/+5tjjKm8uSTlAW+fCPaavGFS06V9Ar3A==
