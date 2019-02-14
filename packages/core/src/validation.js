@@ -13,6 +13,7 @@ export default function Validate(alfredPkg: { [x: string]: any }) {
     npmClient: Joi.string().valid(['npm', 'yarn']),
     showConfigs: Joi.boolean(),
     extends: [Joi.string(), Joi.array().items(Joi.string())],
+    autoInstall: Joi.bool(),
     skills,
     app: Joi.object().keys({
       targets: [Joi.string(), Joi.object(), Joi.array()]
