@@ -10,6 +10,13 @@ import { Signale } from 'signale';
 import { ENTRYPOINTS, generateInterfaceStatesFromProject } from './ctf';
 import PkgValidation from '../pkg-validation';
 
+export const getInstallCommmand = (alfredConfig: AlfredConfig): string => {
+  const { root, npmClient } = alfredConfig;
+  return npmClient.toLowerCase() === 'npm'
+    ? `npm install --prefix ${root}`
+    : 'yarn';
+};
+
 /**
  * Execute promises serially
  */

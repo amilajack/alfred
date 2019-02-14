@@ -1,6 +1,7 @@
 // @flow
 import fs from 'fs';
 import path from 'path';
+import childProcess from 'child_process';
 import program from 'commander';
 import {
   getExecuteWrittenConfigsMethods,
@@ -11,7 +12,7 @@ import generateCtfFromConfig, {
   generateInterfaceStatesFromProject,
   writeConfigsFromCtf
 } from './helpers/ctf';
-import { deleteConfigs, init, serial } from './helpers';
+import { deleteConfigs, init, serial, getInstallCommmand } from './helpers';
 
 (async () => {
   const args = program.parse(process.argv);
@@ -37,8 +38,18 @@ import { deleteConfigs, init, serial } from './helpers';
     args.rawArgs.findIndex(curr => curr === subcommand) + 1
   );
 
+  const nodeModulesPath = `${alfredConfig.root}/node_modules`;
+  // Install the modules if they are not installed if autoInstall: true
+  // @TODO @HACK Note that this might cause issues in monorepos
+  if (alfredConfig.autoInstall === true && !fs.existsSync(nodeModulesPath)) {
+    const installCommand = getInstallCommmand(alfredConfig);
+    childProcess.execSync(installCommand, {
+      cwd: alfredConfig.root,
+      stdio: 'inherit'
+    });
+  }
   // $FlowFixMe
-  module.paths.push(`${alfredConfig.root}/node_modules`);
+  module.paths.push(nodeModulesPath);
 
   // Built in, non-overridable skills are added here
   switch (subcommand) {
