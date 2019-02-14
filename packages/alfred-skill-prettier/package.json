@@ -1,6 +1,6 @@
 {
   "name": "@alfredpkg/skill-prettier",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-alpha.1",
   "dependencies": {
     "prettier": "^1.16.3"
   },

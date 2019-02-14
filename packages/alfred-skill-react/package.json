@@ -1,6 +1,6 @@
 {
   "name": "@alfredpkg/skill-react",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-alpha.1",
   "dependencies": {
     "@babel/preset-env": "^7.2.3",
     "react-hot-loader": "^4.6.3"
