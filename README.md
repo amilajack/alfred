@@ -381,6 +381,12 @@ Would you like to install it? (Y/n)
 * Simplicity
 * Reusability
 
-## Donate
+## Support
 
-Please [donate to my Patreon](https://www.patreon.com/join/2181265/checkout)
+If this project is saving you (or your team) time, please consider supporting it on Patreon 👍 thank you!
+
+<p>
+  <a href="https://www.patreon.com/amilajack">
+    <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
+  </a>
+</p>
