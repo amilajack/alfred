@@ -3,7 +3,7 @@
   "version": "0.0.1-alpha.1",
   "dependencies": {
     "@babel/preset-env": "^7.3.4",
-    "react-hot-loader": "^4.6.3"
+    "react-hot-loader": "^4.7.1"
   },
   "peerDependencies": {
     "@alfredpkg/core": "0.0.0",
