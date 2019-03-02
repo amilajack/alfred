@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "copy-webpack-plugin": "^4.6.0",
-    "mocha": "^5.2.0",
+    "mocha": "^6.0.2",
     "webpack": "^1.15.0"
   },
   "gitHead": "7193c706eff460e2000586d8ba456d5ad4087ce2"
