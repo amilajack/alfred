@@ -3,12 +3,12 @@
   "version": "0.0.1-alpha.1",
   "dependencies": {
     "crypto": "^1.0.1",
-    "jest": "^24.0.0"
+    "jest": "^24.1.0"
   },
   "peerDependencies": {
     "@alfredpkg/core": "0.0.0",
     "@alfredpkg/interface-test": "^0.0.0",
-    "jest": "^24.0.0"
+    "jest": "^24.1.0"
   },
   "gitHead": "7193c706eff460e2000586d8ba456d5ad4087ce2"
 }
