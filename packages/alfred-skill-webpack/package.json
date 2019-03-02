@@ -7,14 +7,14 @@
     "get-port": "^4.1.0",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.2.1"
   },
   "peerDependencies": {
     "@alfredpkg/cli": "0.0.0",
     "@alfredpkg/core": "0.0.0",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.2.1"
   },
   "gitHead": "7193c706eff460e2000586d8ba456d5ad4087ce2"
 }
