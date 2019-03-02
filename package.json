@@ -6,7 +6,7 @@
   "private": true,
   "engines": {
     "node": ">=8",
-    "npm": ">=6.7.0",
+    "npm": ">=6.8.0",
     "yarn": ">=1.13.0"
   },
   "repository": "https://github.com/amilajack/alfred.git",
