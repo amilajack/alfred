@@ -37,7 +37,7 @@
     "commander": "^2.19.0",
     "eslint": "^5.15.0",
     "eslint-config-bliss": "^3.2.0",
-    "eslint-plugin-flowtype-errors": "^3.6.0",
+    "eslint-plugin-flowtype-errors": "^4.0.0",
     "findit": "^2.0.0",
     "format-package": "^4.5.0",
     "git-config": "^0.0.7",
