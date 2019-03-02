@@ -9,7 +9,7 @@
     "@alfredpkg/core": "0.0.0",
     "@alfredpkg/interface-test": "^0.0.0",
     "webpack": "4.28.3",
-    "webpack-cli": "3.2.1",
+    "webpack-cli": "3.2.3",
     "webpack-dev-server": "3.1.14"
   },
   "gitHead": "7193c706eff460e2000586d8ba456d5ad4087ce2"
