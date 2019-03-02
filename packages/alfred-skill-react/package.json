@@ -8,7 +8,7 @@
   "peerDependencies": {
     "@alfredpkg/core": "0.0.0",
     "@alfredpkg/interface-test": "^0.0.0",
-    "webpack": "4.28.3",
+    "webpack": "4.29.6",
     "webpack-cli": "3.2.1",
     "webpack-dev-server": "3.1.14"
   },
