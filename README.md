@@ -3,7 +3,7 @@
 
 Alfred
 ======
-[![Build Status](https://travis-ci.com/amilajack/alfred.svg?token=stGf151gAJ11ZUi8LyvG&branch=master)](https://travis-ci.com/amilajack/alfred)
+[![Build Status](https://dev.azure.com/amilajack/amilajack/_apis/build/status/amilajack.alfred?branchName=master)](https://dev.azure.com/amilajack/amilajack/_build/latest?definitionId=6&branchName=master)
 [![Twitter Follow](https://img.shields.io/twitter/follow/alfredpkg.svg?style=social)](https://twitter.com/alfredpkg)
 
 ### Alfred is a Modular JS Toolchain with the following goals:
