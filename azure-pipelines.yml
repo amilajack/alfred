@@ -4,8 +4,9 @@ strategy:
       imageName: 'ubuntu-16.04'
     mac:
       imageName: 'macos-10.13'
-    windows:
-      imageName: 'windows-2019'
+    # Windows builds don't work at the moment
+    # windows:
+    #  imageName: 'windows-2019'
 
 pool:
   vmImage: $(imageName)
