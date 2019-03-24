@@ -19,6 +19,6 @@ const program = dark()
   .command('skills', 'List all the subcommands and skills')
   .command('run <skill>', 'Run an Alfred skill')
   .command('migrate [glob]', 'Migrate to the latest version of ES')
-  .parse(process.argv);
+  .init();
 
 export default program;

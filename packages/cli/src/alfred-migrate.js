@@ -9,7 +9,7 @@ import { init } from './helpers';
     .option('-u, --unsafe', 'allow unsafe transformations')
     .option('-v, --verbose', 'show verbose output')
     .option('-d, --debug', 'show debugging output')
-    .parse(process.argv);
+    .init();
 
   const { projectRoot } = await init();
 

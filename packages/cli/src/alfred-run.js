@@ -15,7 +15,7 @@ import generateCtfFromConfig, {
 import { deleteConfigs, init, serial, getInstallCommmand } from './helpers';
 
 (async () => {
-  const args = program.parse(process.argv);
+  const args = program.allowUnknownOption().init();
   const { args: subcommands = [] } = args;
   const { alfredConfig } = await init();
 

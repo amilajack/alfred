@@ -225,7 +225,7 @@ async function createNewProject(cwd: string, name: string) {
 }
 
 (async () => {
-  const { args } = program.parse(process.argv);
+  const { args } = program.init();
   const name = getSingleSubcommandFromArgs(args);
   createNewProject(process.cwd(), name);
 })();

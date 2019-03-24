@@ -3,7 +3,7 @@ import program from './alfred';
 import { installDeps, diffCtfDepsOfAllInterfaceStates, init } from './helpers';
 
 (async () => {
-  const args = program.parse(process.argv);
+  const args = program.init();
   const { args: skillsPkgNames } = args;
   const { alfredConfig, projectRoot, pkgPath, pkg: rawPkg } = await init();
 
