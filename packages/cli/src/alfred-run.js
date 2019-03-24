@@ -2,12 +2,12 @@
 import fs from 'fs';
 import path from 'path';
 import childProcess from 'child_process';
-import program from 'commander';
 import {
   getExecuteWrittenConfigsMethods,
   getInterfaceForSubcommand
 } from '@alfredpkg/core';
 import rimraf from 'rimraf';
+import program from './alfred';
 import generateCtfFromConfig, {
   generateInterfaceStatesFromProject,
   writeConfigsFromCtf

@@ -5,9 +5,9 @@ import childProcess from 'child_process';
 import { prompt } from 'inquirer';
 import validateLicense from 'validate-npm-package-license';
 import validateName from 'validate-npm-package-name';
-import program from 'commander';
 import git from 'git-config';
 import chalk from 'chalk';
+import program from './alfred';
 import getSingleSubcommandFromArgs, { addBoilerplate } from './helpers/cli';
 
 // @TODO @HARDCODE Remove hardcoding of versions

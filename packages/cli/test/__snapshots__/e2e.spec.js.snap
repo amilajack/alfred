@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`e2e should get help commands 1`] = `
+"Usage: alfred [options] [command]
+
+A Modular JS Toolchain
+
+Options:
+  -v, --version       output the version number
+  -h, --help          output usage information
+
+Commands:
+  new <project-name>  Create a new Alfred project
+  learn <skill>       Add an Alfred skill to your project
+  skills              List all the subcommands and skills
+  run <skill>         Run an Alfred skill
+  migrate [glob]      Migrate to the latest version of ES
+  help [cmd]          display help for [cmd]"
+`;

@@ -1,6 +1,6 @@
 // @flow
 import path from 'path';
-import program from 'commander';
+import program from './alfred';
 import Providers from './providers';
 import { init } from './helpers';
 
