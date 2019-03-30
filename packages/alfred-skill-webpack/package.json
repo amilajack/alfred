@@ -1,9 +1,9 @@
 {
   "name": "@alfredpkg/skill-webpack",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.3",
   "dependencies": {
-    "@alfredpkg/helpers": "^0.0.1-alpha.1",
-    "@alfredpkg/merge-configs": "^0.0.1-alpha.1",
+    "@alfredpkg/helpers": "^0.0.1-alpha.3",
+    "@alfredpkg/merge-configs": "^0.0.1-alpha.3",
     "get-port": "^4.1.0",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",

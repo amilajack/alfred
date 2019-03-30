@@ -1,6 +1,6 @@
 {
   "name": "@alfredpkg/interface-build",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.3",
   "peerDependencies": {
     "@alfredpkg/core": "0.0.0"
   },
