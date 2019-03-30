@@ -1,6 +1,6 @@
 {
   "name": "@examples/hello-world",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.2",
   "private": true,
   "license": "MIT",
   "main": "./targets/lib.node.js",
@@ -16,8 +16,8 @@
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
   "devDependencies": {
-    "@alfredpkg/cli": "^0.0.1-alpha.1",
-    "@alfredpkg/core": "^0.0.1-alpha.1",
+    "@alfredpkg/cli": "^0.0.1-alpha.2",
+    "@alfredpkg/core": "^0.0.1-alpha.2",
     "@babel/core": "^7.2.2"
   }
 }

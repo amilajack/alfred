@@ -1,6 +1,6 @@
 {
   "name": "@alfredpkg/core",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.2",
   "files": [
     "lib"
   ],
@@ -20,13 +20,13 @@
     "@alfredpkg/interface-start": "^0.0.1-alpha.1",
     "@alfredpkg/interface-test": "^0.0.1-alpha.1",
     "@alfredpkg/merge-configs": "^0.0.1-alpha.1",
-    "@alfredpkg/skill-babel": "^0.0.1-alpha.1",
-    "@alfredpkg/skill-eslint": "^0.0.1-alpha.1",
+    "@alfredpkg/skill-babel": "^0.0.1-alpha.2",
+    "@alfredpkg/skill-eslint": "^0.0.1-alpha.2",
     "@alfredpkg/skill-jest": "^0.0.1-alpha.1",
     "@alfredpkg/skill-lodash": "^0.0.1-alpha.1",
     "@alfredpkg/skill-parcel": "^0.0.1-alpha.1",
-    "@alfredpkg/skill-prettier": "^0.0.1-alpha.1",
-    "@alfredpkg/skill-react": "^0.0.1-alpha.1",
+    "@alfredpkg/skill-prettier": "^0.0.1-alpha.2",
+    "@alfredpkg/skill-react": "^0.0.1-alpha.2",
     "@alfredpkg/skill-rollup": "^0.0.1-alpha.1",
     "@alfredpkg/skill-webpack": "^0.0.1-alpha.1",
     "debug": "^4.1.1",
