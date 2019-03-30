@@ -1,10 +1,10 @@
-> ## 🛠 Status: In Development
-> Alfred is currently in development. It's on the fast track to a 1.0 release, so we encourage you to use it and give us your feedback, but there are things that haven't been finalized yet and you can expect some changes.
-
 Alfred
 ======
 [![Build Status](https://dev.azure.com/amilajack/amilajack/_apis/build/status/amilajack.alfred?branchName=master)](https://dev.azure.com/amilajack/amilajack/_build/latest?definitionId=6&branchName=master)
 [![Twitter Follow](https://img.shields.io/twitter/follow/alfredpkg.svg?style=social)](https://twitter.com/alfredpkg)
+
+> ## 🛠 Status: In Development
+> Alfred is currently in development. It's on the fast track to a 1.0 release, so we encourage you to use it and give us your feedback, but there are things that haven't been finalized yet and you can expect some changes.
 
 ### Alfred is a Modular JS Toolchain with the following goals:
 
@@ -343,11 +343,11 @@ Would you like to install it? (Y/n)
 
 ## Alfred Skills Implementation Status
 
-| Infrastructure     | Skills                   | Implemented |
-| ---                | ---                      | ---         |
+| Infrastructure     | Skills                   | Implemented  |
+| ---                | ---                      | ---          |
 | Bundlers           |  Webpack, Rollup, Parcel | ✅           |
 | Transpilers        |  Babel                   | ✅           |
-| Test Frameworks    |  Jest, Mocha, Jasmine    | ✅ ✅ ❌      |
+| Test Frameworks    |  Jest, Mocha, Jasmine    | ✅ ✅ ❌     |
 | Formatters         |  Prettier                | ✅           |
 | Libraries          |  Lodash, Moment          | ✅           |
 | Linters            |  ESLint                  | ✅           |
