@@ -28,7 +28,7 @@ module.exports = {
           '.gitignore',
           '--single-quote',
           '--write',
-          '{src,tests}/*',
+          '**/*',
           ...flags,
           alfredConfig.showConfigs ? `--config ${configPath}` : ''
         ].join(' ')

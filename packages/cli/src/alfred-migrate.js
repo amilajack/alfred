@@ -11,7 +11,7 @@ import { init } from './helpers';
     .option('-d, --debug', 'show debugging output')
     .parse(process.argv);
 
-  const { projectRoot } = await init();
+  const { projectRoot, alfredConfig } = await init();
 
   const filesPattern: Array<string> = parsedArguments.args.map(arg =>
     path.join(projectRoot, arg)
@@ -21,11 +21,14 @@ import { init } from './helpers';
   //        instead of the actual filenames. Preserve the original filenames
   //        if the migration was successful and we want to write to the original
   //        files
-  Providers({
-    files: filesPattern,
-    packageJsonPath: path.join(projectRoot, 'package.json'),
-    unsafe: parsedArguments.unsafe,
-    verbose: parsedArguments.verbose,
-    write: parsedArguments.write
-  });
+  Providers(
+    {
+      files: filesPattern,
+      packageJsonPath: path.join(projectRoot, 'package.json'),
+      unsafe: parsedArguments.unsafe,
+      verbose: parsedArguments.verbose,
+      write: parsedArguments.write
+    },
+    alfredConfig
+  );
 })();
