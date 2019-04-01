@@ -15,7 +15,7 @@ function parseCodeSnippets(codeSnippets: Array<string> | void) {
   }
 }
 
-describe.skip('Migrate', () => {
+describe('Migrate', () => {
   const defaultConfig = {
     packageJsonPath: __dirname,
     write: false,
@@ -93,7 +93,7 @@ describe.skip('Migrate', () => {
     parseCodeSnippets(result);
   });
 
-  it.skip("should not parse .gitignore'd files", async () => {
+  it("should not parse .gitignore'd files", async () => {
     const files = await handleInput(
       {
         files: ['.'],
