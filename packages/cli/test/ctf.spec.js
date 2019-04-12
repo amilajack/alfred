@@ -142,10 +142,9 @@ describe('alfred cli helpers', () => {
   });
 
   it('should diff ctfs for all interface states', async () => {
-    const skills = [
-      ...defaultAlfredConfig.skills,
-      '@alfred/skill-mocha'
-    ].map(e => [e, {}]);
+    const skills = [...defaultAlfredConfig.skills, '@alfred/skill-mocha'].map(
+      e => [e, {}]
+    );
     const currentAlfredConfig = {
       ...defaultAlfredConfig,
       skills
