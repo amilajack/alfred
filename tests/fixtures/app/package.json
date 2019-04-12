@@ -14,9 +14,9 @@
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
   "devDependencies": {
-    "@alfredpkg/cli": "^0.0.1-alpha.3",
-    "@alfredpkg/core": "^0.0.1-alpha.3",
-    "@alfredpkg/skill-react": "^0.0.1-alpha.3"
+    "@alfred/cli": "^0.0.1-alpha.3",
+    "@alfred/core": "^0.0.1-alpha.3",
+    "@alfred/skill-react": "^0.0.1-alpha.3"
   },
   "alfred": {
     "showConfigs": true

@@ -15,8 +15,8 @@
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
   "devDependencies": {
-    "@alfredpkg/cli": "^0.0.1-alpha.3",
-    "@alfredpkg/core": "^0.0.1-alpha.3",
+    "@alfred/cli": "^0.0.1-alpha.3",
+    "@alfred/core": "^0.0.1-alpha.3",
     "eslint-formatter-pretty": "^2.1.1"
   },
   "alfred": {

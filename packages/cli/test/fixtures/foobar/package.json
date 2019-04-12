@@ -10,8 +10,8 @@
     ]
   },
   "dependencies": {
-    "@alfredpkg/skill-eslint": "file:../../../../alfred-skill-eslint",
-    "@alfredpkg/skill-prettier": "file:../../../../alfred-skill-prettier",
+    "@alfred/skill-eslint": "file:../../../../alfred-skill-eslint",
+    "@alfred/skill-prettier": "file:../../../../alfred-skill-prettier",
     "prettier": "^1.15.3"
   },
   "devDependencies": {}

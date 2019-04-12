@@ -1,5 +1,5 @@
 {
-  "name": "@alfredpkg/skill-babel",
+  "name": "@alfred/skill-babel",
   "version": "0.0.1-alpha.3",
   "dependencies": {
     "@babel/cli": "^7.2.3",
@@ -11,7 +11,7 @@
     "babel-loader": "8.0.5"
   },
   "peerDependencies": {
-    "@alfredpkg/core": "0.0.0"
+    "@alfred/core": "0.0.0"
   },
   "gitHead": "7193c706eff460e2000586d8ba456d5ad4087ce2"
 }

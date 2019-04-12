@@ -1,5 +1,5 @@
 {
-  "name": "@alfredpkg/cli",
+  "name": "@alfred/cli",
   "version": "0.0.1-alpha.3",
   "description": "A framework for upgrading JavaScript codebases",
   "license": "MIT",
@@ -28,7 +28,7 @@
   "preferGlobal": true,
   "dependencies": {
     "5to6-codemod": "^1.7.1",
-    "@alfredpkg/merge-configs": "^0.0.1-alpha.3",
+    "@alfred/merge-configs": "^0.0.1-alpha.3",
     "@amilajack/powerset": "^0.0.0",
     "@babel/code-frame": "^7.0.0",
     "chalk": "^2.4.2",
@@ -61,9 +61,9 @@
     "validate-npm-package-name": "^3.0.0"
   },
   "peerDependencies": {
-    "@alfredpkg/core": "0.0.0",
-    "@alfredpkg/interface-build": "0.0.0",
-    "@alfredpkg/interface-start": "0.0.0"
+    "@alfred/core": "0.0.0",
+    "@alfred/interface-build": "0.0.0",
+    "@alfred/interface-start": "0.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",

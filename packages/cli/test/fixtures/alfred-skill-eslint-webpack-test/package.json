@@ -4,18 +4,18 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "@alfredpkg/skill-eslint": "file:../../../../alfred-skill-eslint",
-    "@alfredpkg/skill-webpack": "file:../../../../alfred-skill-webpack",
-    "@alfredpkg/interface-build": "file:../../../../alfred-interface-build",
-    "@alfredpkg/interface-lint": "file:../../../../alfred-interface-lint",
+    "@alfred/skill-eslint": "file:../../../../alfred-skill-eslint",
+    "@alfred/skill-webpack": "file:../../../../alfred-skill-webpack",
+    "@alfred/interface-build": "file:../../../../alfred-interface-build",
+    "@alfred/interface-lint": "file:../../../../alfred-interface-lint",
     "eslint": "^5.10.0",
     "webpack": "^4.28.3",
     "webpack-cli": "^3.2.0"
   },
   "alfred": {
     "skills": [
-      "@alfredpkg/skill-eslint",
-      "@alfredpkg/skill-webpack"
+      "@alfred/skill-eslint",
+      "@alfred/skill-webpack"
     ]
   }
 }

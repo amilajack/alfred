@@ -145,7 +145,7 @@ describe('config', () => {
           foo: 'foobar',
           skills: [
             [
-              '@alfredpkg/skill-lodash',
+              '@alfred/skill-lodash',
               {
                 collections: true,
                 paths: true
@@ -164,7 +164,7 @@ describe('config', () => {
         foo: 'foobar',
         skills: [
           [
-            '@alfredpkg/skill-lodash',
+            '@alfred/skill-lodash',
             {
               collections: true,
               paths: true
@@ -176,15 +176,15 @@ describe('config', () => {
         config({
           extends: 'alfred-config-test',
           skills: [
-            '@alfredpkg/skill-parcel',
+            '@alfred/skill-parcel',
             [
-              '@alfredpkg/skill-babel',
+              '@alfred/skill-babel',
               {
                 plugins: ['@babel/preset-flow']
               }
             ],
             [
-              '@alfredpkg/skill-babel',
+              '@alfred/skill-babel',
               {
                 plugins: ['@babel/preset-react']
               }
@@ -196,15 +196,15 @@ describe('config', () => {
         foo: 'foobar',
         skills: [
           [
-            '@alfredpkg/skill-lodash',
+            '@alfred/skill-lodash',
             {
               collections: true,
               paths: true
             }
           ],
-          ['@alfredpkg/skill-parcel', {}],
+          ['@alfred/skill-parcel', {}],
           [
-            '@alfredpkg/skill-babel',
+            '@alfred/skill-babel',
             {
               plugins: ['@babel/preset-flow', '@babel/preset-react']
             }

@@ -5,12 +5,12 @@ const {
   getConfigByConfigName,
   getPkgBinPath,
   execCommand
-} = require('@alfredpkg/core');
+} = require('@alfred/core');
 
 module.exports = {
   name: 'jest',
   description: 'Test your JS files',
-  interfaces: ['@alfredpkg/interface-test'],
+  interfaces: ['@alfred/interface-test'],
   devDependencies: { jest: '5.0.0' },
   configFiles: [
     {

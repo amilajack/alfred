@@ -6,7 +6,7 @@ import program from 'commander';
 import {
   getExecuteWrittenConfigsMethods,
   getInterfaceForSubcommand
-} from '@alfredpkg/core';
+} from '@alfred/core';
 import rimraf from 'rimraf';
 import generateCtfFromConfig, {
   generateInterfaceStatesFromProject,
@@ -78,7 +78,7 @@ import { deleteConfigs, init, serial, getInstallCommmand } from './helpers';
 
   const interfaceStates = generateInterfaceStatesFromProject(alfredConfig);
   // Validate that “start” subcommand should only work for apps
-  // @REFACTOR This validation logic should be handled by the @alfredpkg/interface-start interface
+  // @REFACTOR This validation logic should be handled by the @alfred/interface-start interface
   if (subcommand === 'start') {
     const hasAppInterfaceState = interfaceStates.some(
       interfaceState => interfaceState.projectType === 'app'

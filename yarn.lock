@@ -11,7 +11,7 @@
     lodash "^4.17.4"
     recast "^0.12.1"
 
-"@alfredpkg/skill-mocha@file:packages/alfred-skill-mocha":
+"@alfred/skill-mocha@file:packages/alfred-skill-mocha":
   version "0.0.1-alpha.3"
   dependencies:
     mocha "^5.2.0"
@@ -1053,8 +1053,8 @@
 "@examples/alfred-config-example@file:examples/alfred-config-example":
   version "0.0.1-alpha.3"
   dependencies:
-    "@alfredpkg/skill-lodash" "^0.0.1-alpha.3"
-    "@alfredpkg/skill-parcel" "^0.0.1-alpha.3"
+    "@alfred/skill-lodash" "^0.0.1-alpha.3"
+    "@alfred/skill-parcel" "^0.0.1-alpha.3"
     "@babel/plugin-proposal-class-properties" "^7.3.0"
 
 "@iarna/toml@^2.2.0":

@@ -1,7 +1,7 @@
 const replace = require('rollup-plugin-replace');
 const commonjs = require('rollup-plugin-commonjs');
-const { getConfigByConfigName, mapEnvToShortName } = require('@alfredpkg/core');
-const { default: mergeConfigs } = require('@alfredpkg/merge-configs');
+const { getConfigByConfigName, mapEnvToShortName } = require('@alfred/core');
+const { default: mergeConfigs } = require('@alfred/merge-configs');
 
 const interfaceConfig = {
   supports: {
@@ -18,8 +18,8 @@ module.exports = {
   name: 'rollup',
   description: 'Build, optimize, and bundle assets in your app',
   interfaces: [
-    ['@alfredpkg/interface-build', interfaceConfig],
-    ['@alfredpkg/interface-start', interfaceConfig]
+    ['@alfred/interface-build', interfaceConfig],
+    ['@alfred/interface-start', interfaceConfig]
   ],
   devDependencies: { rollup: '4.28.3', 'rollup-plugin-replace': '2.1.0' },
   configFiles: [

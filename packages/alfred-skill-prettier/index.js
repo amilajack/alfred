@@ -2,12 +2,12 @@ const {
   getConfigPathByConfigName,
   getPkgBinPath,
   execCommand
-} = require('@alfredpkg/core');
+} = require('@alfred/core');
 
 module.exports = {
   name: 'prettier',
   description: 'Format the source files in your project',
-  interfaces: ['@alfredpkg/interface-format'],
+  interfaces: ['@alfred/interface-format'],
   devDependencies: { prettier: '1.15.3' },
   configFiles: [
     {

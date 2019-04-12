@@ -1,11 +1,11 @@
 {
   "skills": [
-    "@alfredpkg/skill-parcel",
-    ["@alfredpkg/skill-lodash", {
+    "@alfred/skill-parcel",
+    ["@alfred/skill-lodash", {
       "collections": true,
       "paths": true
     }],
-    ["@alfredpkg/skill-babel", {
+    ["@alfred/skill-babel", {
       "plugins": [
         "@babel/plugin-proposal-class-properties"
       ]
