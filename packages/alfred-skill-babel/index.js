@@ -17,15 +17,16 @@ module.exports = {
       write: true,
       config: {
         presets: [
-          [
-            '@babel/preset-env',
-            {
-              targets: {
-                esmodules: true
-              },
-              modules: false
-            }
-          ]
+          '@babel/preset-env'
+          // [
+          //   '@babel/preset-env',
+          //   {
+          //     targets: {
+          //       esmodules: true
+          //     },
+          //     modules: false
+          //   }
+          // ]
         ]
       }
     }
