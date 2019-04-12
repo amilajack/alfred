@@ -4,12 +4,12 @@ const {
   getPkgBinPath,
   execCommand,
   getConfigByConfigName
-} = require('@alfredpkg/core');
+} = require('@alfred/core');
 
 module.exports = {
   name: 'mocha',
   description: 'Run tests for your project',
-  interfaces: ['@alfredpkg/interface-test'],
+  interfaces: ['@alfred/interface-test'],
   devDependencies: { mocha: '5.2.0' },
   configFiles: [],
   supports: {

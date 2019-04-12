@@ -1,11 +1,11 @@
 {
-  "name": "@alfredpkg/skill-lodash",
+  "name": "@alfred/skill-lodash",
   "version": "0.0.1-alpha.3",
   "dependencies": {
     "lodash-webpack-plugin": "0.11.5"
   },
   "peerDependencies": {
-    "@alfredpkg/core": "0.0.0"
+    "@alfred/core": "0.0.0"
   },
   "gitHead": "7193c706eff460e2000586d8ba456d5ad4087ce2"
 }

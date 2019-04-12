@@ -1,4 +1,4 @@
-const { getConfigByConfigName } = require('@alfredpkg/core');
+const { getConfigByConfigName } = require('@alfred/core');
 
 module.exports = {
   name: 'babel',
@@ -16,7 +16,17 @@ module.exports = {
       path: '.babelrc.js',
       write: true,
       config: {
-        presets: ['@babel/preset-env']
+        presets: [
+          [
+            '@babel/preset-env',
+            {
+              targets: {
+                esmodules: true
+              },
+              modules: false
+            }
+          ]
+        ]
       }
     }
   ],

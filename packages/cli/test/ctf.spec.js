@@ -1,5 +1,5 @@
 import path from 'path';
-import CTF, { CORE_CTFS, INTERFACE_STATES, loadConfig } from '@alfredpkg/core';
+import CTF, { CORE_CTFS, INTERFACE_STATES, loadConfig } from '@alfred/core';
 import {
   diffCtfDeps,
   addMissingStdSkillsToCtf,
@@ -85,10 +85,10 @@ describe('alfred cli helpers', () => {
       const [state] = INTERFACE_STATES;
       const config = {
         ...defaultAlfredConfig,
-        skills: [['@alfredpkg/skill-non-existent-skill', {}]]
+        skills: [['@alfred/skill-non-existent-skill', {}]]
       };
       await expect(generateCtfFromConfig(config, state)).rejects.toThrow(
-        "Cannot find module '@alfredpkg/skill-non-existent-skill' from 'ctf.js'"
+        "Cannot find module '@alfred/skill-non-existent-skill' from 'ctf.js'"
       );
     });
 
@@ -96,10 +96,10 @@ describe('alfred cli helpers', () => {
       const [state] = INTERFACE_STATES;
       const config = {
         ...defaultAlfredConfig,
-        skills: [['@alfredpkg/skill-non-existent-skill', {}]]
+        skills: [['@alfred/skill-non-existent-skill', {}]]
       };
       await expect(generateCtfFromConfig(config, state)).rejects.toThrow(
-        "Cannot find module '@alfredpkg/skill-non-existent-skill' from 'ctf.js'"
+        "Cannot find module '@alfred/skill-non-existent-skill' from 'ctf.js'"
       );
     });
   });
@@ -144,7 +144,7 @@ describe('alfred cli helpers', () => {
   it('should diff ctfs for all interface states', async () => {
     const skills = [
       ...defaultAlfredConfig.skills,
-      '@alfredpkg/skill-mocha'
+      '@alfred/skill-mocha'
     ].map(e => [e, {}]);
     const currentAlfredConfig = {
       ...defaultAlfredConfig,

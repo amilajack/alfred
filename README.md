@@ -17,9 +17,9 @@ Alfred
 
 ```bash
 # NPM
-npm install --global @alfredpkg/alfred
+npm install --global @alfred/alfred
 # Yarn
-yarn global add @alfredpkg/alfred
+yarn global add @alfred/alfred
 ```
 
 ## Usage
@@ -51,11 +51,11 @@ alfred migrate
 alfred types
 
 # Learning skills
-alfred learn @alfredpkg/skill-parcel
+alfred learn @alfred/skill-parcel
 # Build using the new subcommand
 alfred build
 # Learning multiple skills
-alfred learn @alfredpkg/skill-angular @alfredpkg/skill-redux
+alfred learn @alfred/skill-angular @alfred/skill-redux
 ```
 
 ## Docs
@@ -94,8 +94,8 @@ export default {
   name: 'babel',
   // The (optional) interface that this skill will implement. A skill uses an interface
   // when it is able to replace an existing subcommand. For example, both the
-  // @alfredpkg/skill-parcel and @alfredpkg/skill-webpack skills, which both register a 'build'
-  // subcommand, will both implement @alfredpkg/interface-build. Implementing it will require
+  // @alfred/skill-parcel and @alfred/skill-webpack skills, which both register a 'build'
+  // subcommand, will both implement @alfred/interface-build. Implementing it will require
   // them to adhere to a shared set of calling conventions such as flags, subcommands, etc. In
   // the case of babel, no interface will be implemented because babel will not be invoked directly
   // as a subcommand. A bundler will always call babel.
@@ -154,7 +154,7 @@ export default {
 ```jsonc
 // package.json
 {
-  "name": "@alfredpkg/skill-parcel",
+  "name": "@alfred/skill-parcel",
   "peerDependencies": {
     "react": "0.15.0"
   }
@@ -199,8 +199,8 @@ type AlfredInterface = {
   "alfred": {
     // Skills that override the default skills
     "skills": [
-      "@alfredpkg/skill-parcel",
-      "@alfredpkg/skill-testcafe"
+      "@alfred/skill-parcel",
+      "@alfred/skill-testcafe"
     ],
     // Determine to install with NPM or Yarn (defaults to NPM)
     "npmClient": "yarn",
@@ -216,7 +216,7 @@ type AlfredInterface = {
     },
     // Config for all lib targets
     "lib": {
-      "recommendSkills": ["@alfredpkg/skill-react"]
+      "recommendSkills": ["@alfred/skill-react"]
     },
     // Config only applied to browser libs
     "browser": {
@@ -238,8 +238,8 @@ Suppose you have the following Alfred config:
   // ...
   "alfred": {
     "skills": [
-      "@alfredpkg/skill-parcel",
-      ["@alfredpkg/skill-babel", {
+      "@alfred/skill-parcel",
+      ["@alfred/skill-babel", {
         // Config for Babel
         "presets": [
           "@babel-preset-env",
@@ -250,7 +250,7 @@ Suppose you have the following Alfred config:
           "@babel/plugin-proposal-class-properties"
         ]
       }],
-      ["@alfredpkg/skill-eslint", {
+      ["@alfred/skill-eslint", {
         // Config for ESLint
         "rules": {
           "no-console": "off"
@@ -276,15 +276,15 @@ This config can be extracted to an Alfred config like so:
 // alfred-config-my-app/index.json
 {
   "skills": [
-    "@alfredpkg/skill-parcel",
-    ["@alfredpkg/skill-babel", {
+    "@alfred/skill-parcel",
+    ["@alfred/skill-babel", {
       "presets": [
         "@babel-preset-env",
         "@babel-preset-flow",
         "@babel-preset-react"
       ],
     }],
-    ["@alfredpkg/skill-eslint", {
+    ["@alfred/skill-eslint", {
       "rules": {
         "no-console": "off"
       }
@@ -314,7 +314,7 @@ Assume `react` has the following `package.json`:
   "alfred": {
     // ...
     "lib": {
-      "recommendSkills": ["@alfredpkg/skill-react"]
+      "recommendSkills": ["@alfred/skill-react"]
     }
   }
 }
@@ -325,7 +325,7 @@ When a author of the app installs `react`, Alfred will recommend the skills `rec
 ```
 $ yarn add react
 
-`react` recommends installing the Alfred skill "@alfredpkg/skill-react".
+`react` recommends installing the Alfred skill "@alfred/skill-react".
 
 Would you like to install it? (Y/n)
 ```

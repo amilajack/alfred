@@ -1,5 +1,5 @@
 const path = require('path');
-const { openInBrowser } = require('@alfredpkg/helpers');
+const { openInBrowser } = require('@alfred/helpers');
 
 const interfaceConfig = {
   supports: {
@@ -16,8 +16,8 @@ module.exports = {
   name: 'parcel',
   description: 'Build, optimize, and bundle assets in your app',
   interfaces: [
-    ['@alfredpkg/interface-build', interfaceConfig],
-    ['@alfredpkg/interface-start', interfaceConfig]
+    ['@alfred/interface-build', interfaceConfig],
+    ['@alfred/interface-start', interfaceConfig]
   ],
   devDependencies: {
     parcel: '^1.11.0'

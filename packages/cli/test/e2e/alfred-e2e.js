@@ -7,8 +7,8 @@ import Table from 'cli-table3';
 import chalk from 'chalk';
 import powerset from '@amilajack/powerset';
 import childProcess from 'child_process';
-import { INTERFACE_STATES } from '@alfredpkg/core';
-import mergeConfigs from '@alfredpkg/merge-configs';
+import { INTERFACE_STATES } from '@alfred/core';
+import mergeConfigs from '@alfred/merge-configs';
 import assert from 'assert';
 import { addEntrypoints, fromEntrypoints, serial } from '../..';
 
@@ -93,7 +93,7 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
 
   // Add the skills to the alfred.skills config
   skillCombination.forEach(skill => {
-    childProcess.execSync(`${binPath} learn @alfredpkg/skill-${skill}`, {
+    childProcess.execSync(`${binPath} learn @alfred/skill-${skill}`, {
       cwd: projectDir,
       stdio: 'inherit',
       env

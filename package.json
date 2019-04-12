@@ -21,12 +21,12 @@
     "lint": "eslint .",
     "test": "yarn e2e:clean && yarn build && yarn lint && lerna run lint --parallel --ignore @fixtures/*,@examples/* && lerna run flow --parallel && lerna run test --parallel --ignore '{@fixtures/*,@examples/*}' && lerna run test-all --parallel",
     "version": "lerna run build:clean && yarn build",
-    "website:build": "yarn workspace @alfredpkg/website build",
-    "website:clean": "yarn workspace @alfredpkg/website clean",
-    "website:publish-gh-pages": "yarn workspace @alfredpkg/website publish-gh-pages && yarn website:clean",
-    "website:start": "yarn workspace @alfredpkg/website start",
+    "website:build": "yarn workspace @alfred/website build",
+    "website:clean": "yarn workspace @alfred/website clean",
+    "website:publish-gh-pages": "yarn workspace @alfred/website publish-gh-pages && yarn website:clean",
+    "website:start": "yarn workspace @alfred/website start",
     "website:test": "yarn website:build",
-    "website:version": "yarn workspace @alfredpkg/website version"
+    "website:version": "yarn workspace @alfred/website version"
   },
   "lint-staged": {
     "*.js": [

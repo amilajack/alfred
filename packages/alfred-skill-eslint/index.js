@@ -4,12 +4,12 @@ const {
   getConfigByConfigName,
   execCommand,
   getPkgBinPath
-} = require('@alfredpkg/core');
+} = require('@alfred/core');
 
 module.exports = {
   name: 'eslint',
   description: 'Lint all your JS files',
-  interfaces: ['@alfredpkg/interface-lint'],
+  interfaces: ['@alfred/interface-lint'],
   devDependencies: { eslint: '5.10.0' },
   configFiles: [
     {

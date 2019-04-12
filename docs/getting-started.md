@@ -8,9 +8,9 @@ sidebar_label: Getting Started
 
 ```bash
 # NPM
-npm install --global @alfredpkg/cli
+npm install --global @alfred/cli
 # Yarn
-yarn global add @alfredpkg/cli
+yarn global add @alfred/cli
 
 alfred new my-new-project
 cd my-new-project
@@ -30,9 +30,9 @@ alfred migrate
 
 ```bash
 # Learning skills
-alfred learn @alfredpkg/skill-parcel
+alfred learn @alfred/skill-parcel
 # Build using the new subcommand
 alfred build
 # Learning multiple skills
-alfred learn @alfredpkg/skill-angular @alfredpkg/skill-redux
+alfred learn @alfred/skill-angular @alfred/skill-redux
 ```

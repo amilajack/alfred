@@ -13,8 +13,8 @@
 const {
   normalizeInterfacesOfSkill,
   mapShortNameEnvToLongName
-} = require('@alfredpkg/core');
-const debug = require('debug')('@alfredpkg/interface-build');
+} = require('@alfred/core');
+const debug = require('debug')('@alfred/interface-build');
 
 module.exports = {
   subcommand: 'build',
@@ -64,7 +64,7 @@ module.exports = {
           throw new Error(
             `Skill "${
               sk.name
-            }" requires the "support" property, which is required by "@alfredpkg/interface-build"`
+            }" requires the "support" property, which is required by "@alfred/interface-build"`
           );
         }
         return (

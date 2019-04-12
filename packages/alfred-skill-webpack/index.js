@@ -1,10 +1,10 @@
 const webpack = require('webpack');
 const path = require('path');
-const { getConfigByConfigName } = require('@alfredpkg/core');
-const { default: mergeConfigs } = require('@alfredpkg/merge-configs');
-const { getProjectRoot } = require('@alfredpkg/cli');
+const { getConfigByConfigName } = require('@alfred/core');
+const { default: mergeConfigs } = require('@alfred/merge-configs');
+const { getProjectRoot } = require('@alfred/cli');
 const getPort = require('get-port');
-const { openInBrowser } = require('@alfredpkg/helpers');
+const { openInBrowser } = require('@alfred/helpers');
 
 function replaceProjectRoot(pathConfig, projectRoot) {
   return pathConfig.replace('<projectRoot>', projectRoot);
@@ -26,8 +26,8 @@ module.exports = {
   description: 'Build, optimize, and bundle assets in your app',
   default: true,
   interfaces: [
-    ['@alfredpkg/interface-build', interfaceConfig],
-    ['@alfredpkg/interface-start', interfaceConfig]
+    ['@alfred/interface-build', interfaceConfig],
+    ['@alfred/interface-start', interfaceConfig]
   ],
   devDependencies: {
     webpack: '4.28.3',

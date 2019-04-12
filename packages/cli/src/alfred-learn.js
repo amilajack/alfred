@@ -1,5 +1,5 @@
 import program from 'commander';
-import { loadConfig, writeConfig } from '@alfredpkg/core';
+import { loadConfig, writeConfig } from '@alfred/core';
 import { installDeps, diffCtfDepsOfAllInterfaceStates, init } from './helpers';
 
 (async () => {
