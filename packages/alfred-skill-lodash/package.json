@@ -1,6 +1,6 @@
 {
   "name": "@alfred/skill-lodash",
-  "version": "0.0.1-alpha.3",
+  "version": "0.0.1-alpha.4",
   "dependencies": {
     "lodash-webpack-plugin": "0.11.5"
   },
