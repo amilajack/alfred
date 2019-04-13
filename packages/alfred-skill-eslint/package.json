@@ -1,6 +1,6 @@
 {
   "name": "@alfred/skill-eslint",
-  "version": "0.0.1-alpha.4",
+  "version": "0.0.1-alpha.5",
   "dependencies": {
     "eslint": "^5.15.0"
   },

@@ -1,8 +1,8 @@
 {
   "name": "@alfred/skill-parcel",
-  "version": "0.0.1-alpha.4",
+  "version": "0.0.1-alpha.5",
   "dependencies": {
-    "@alfred/helpers": "^0.0.1-alpha.4",
+    "@alfred/helpers": "^0.0.1-alpha.5",
     "parcel": "^1.11.0"
   },
   "peerDependencies": {

@@ -1,8 +1,8 @@
 {
   "name": "@alfred/skill-rollup",
-  "version": "0.0.1-alpha.4",
+  "version": "0.0.1-alpha.5",
   "dependencies": {
-    "@alfred/merge-configs": "^0.0.1-alpha.4",
+    "@alfred/merge-configs": "^0.0.1-alpha.5",
     "rollup": "1.1.2",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^9.2.0",
