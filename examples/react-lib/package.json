@@ -1,6 +1,6 @@
 {
   "name": "@examples/react-lib",
-  "version": "0.0.1-alpha.5",
+  "version": "0.0.1-alpha.6",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -17,9 +17,9 @@
     "prop-types": "^15.6.2"
   },
   "devDependencies": {
-    "@alfred/cli": "^0.0.1-alpha.5",
-    "@alfred/core": "^0.0.1-alpha.5",
-    "@alfred/skill-react": "^0.0.1-alpha.5",
+    "@alfred/cli": "^0.0.1-alpha.6",
+    "@alfred/core": "^0.0.1-alpha.6",
+    "@alfred/skill-react": "^0.0.1-alpha.6",
     "@babel/plugin-transform-react-constant-elements": "^7.0.0",
     "@babel/plugin-transform-react-inline-elements": "^7.0.0",
     "@babel/preset-react": "7.0.0",

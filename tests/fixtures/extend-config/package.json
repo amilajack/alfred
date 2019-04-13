@@ -1,6 +1,6 @@
 {
   "name": "@fixtures/extend-config",
-  "version": "0.0.1-alpha.5",
+  "version": "0.0.1-alpha.6",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -14,9 +14,9 @@
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
   "devDependencies": {
-    "@alfred/cli": "^0.0.1-alpha.5",
-    "@alfred/core": "^0.0.1-alpha.5",
-    "@examples/alfred-config-example": "^0.0.1-alpha.5"
+    "@alfred/cli": "^0.0.1-alpha.6",
+    "@alfred/core": "^0.0.1-alpha.6",
+    "@examples/alfred-config-example": "^0.0.1-alpha.6"
   },
   "alfred": {
     "extends": "@examples/alfred-config-example",
