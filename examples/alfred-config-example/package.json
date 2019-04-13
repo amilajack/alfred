@@ -1,10 +1,10 @@
 {
   "name": "@examples/alfred-config-example",
-  "version": "0.0.1-alpha.6",
+  "version": "0.0.1",
   "main": "index.json",
   "dependencies": {
-    "@alfred/skill-lodash": "^0.0.1-alpha.6",
-    "@alfred/skill-parcel": "^0.0.1-alpha.6",
+    "@alfred/skill-lodash": "^0.0.1",
+    "@alfred/skill-parcel": "^0.0.1",
     "@babel/plugin-proposal-class-properties": "^7.3.0"
   },
   "gitHead": "d83082a035f28b19fd43411985c9a18f5016f37c"

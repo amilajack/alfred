@@ -1,9 +1,9 @@
 {
   "name": "@alfred/alfred",
-  "version": "0.0.1-alpha.6",
+  "version": "0.0.1",
   "dependencies": {
-    "@alfred/cli": "^0.0.1-alpha.6",
-    "@alfred/core": "^0.0.1-alpha.6"
+    "@alfred/cli": "^0.0.1",
+    "@alfred/core": "^0.0.1"
   },
   "gitHead": "d83082a035f28b19fd43411985c9a18f5016f37c"
 }
