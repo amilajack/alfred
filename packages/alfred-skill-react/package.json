@@ -1,6 +1,6 @@
 {
   "name": "@alfred/skill-react",
-  "version": "0.0.1",
+  "version": "0.0.2-alpha.0",
   "dependencies": {
     "@babel/preset-env": "^7.3.4",
     "react-hot-loader": "^4.6.3"
