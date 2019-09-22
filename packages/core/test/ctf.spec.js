@@ -73,7 +73,7 @@ describe('CTF', () => {
       expect(orderedSelfTransforms).toMatchSnapshot();
     });
 
-    it('should handle ctf graph with cycles', () => {
+    it('should allow cycles with non-conflicting ctf nodes', () => {
       const ctfNode1 = {
         name: 'ctf-node-1',
         description: '',

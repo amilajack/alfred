@@ -13,7 +13,7 @@ import lodashCtf from '@alfred/skill-lodash';
 import mergeConfigs from '@alfred/merge-configs';
 import pkgUp from 'pkg-up';
 import lodash from 'lodash';
-import topsort from 'toposort';
+import topsort from './topsort';
 import type { ConfigType } from './config';
 
 export type AlfredConfig = {
