@@ -1,4 +1,4 @@
-import type { Pkg } from '@alfredpkg/core';
+import type { Pkg } from '@alfred/core';
 
 /* Parse the incoming string as JSON, validate it against the spec for package.json
  * See README for more details

@@ -105,12 +105,12 @@ describe('CTF', () => {
 
     it('should allow array of strings input', () => {
       expect(
-        normalizeInterfacesOfSkill(['@alfredpkg/interface-build'])
+        normalizeInterfacesOfSkill(['@alfred/interface-build'])
       ).toMatchSnapshot();
       expect(
         normalizeInterfacesOfSkill([
-          '@alfredpkg/interface-build',
-          '@alfredpkg/interface-start'
+          '@alfred/interface-build',
+          '@alfred/interface-start'
         ])
       ).toMatchSnapshot();
     });
@@ -118,8 +118,8 @@ describe('CTF', () => {
     it('should not allow non-array or string inputs', () => {
       expect(() =>
         normalizeInterfacesOfSkill({
-          '@alfredpkg/interface-build': {},
-          '@alfredpkg/interface-start': {}
+          '@alfred/interface-build': {},
+          '@alfred/interface-start': {}
         })
       ).toThrow();
       expect(() => normalizeInterfacesOfSkill('incorrect-input')).toThrow();

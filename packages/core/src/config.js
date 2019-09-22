@@ -3,7 +3,7 @@
 import path from 'path';
 import fs from 'fs';
 import formatPkg from 'format-package';
-import mergeConfigs from '@alfredpkg/merge-configs';
+import mergeConfigs from '@alfred/merge-configs';
 import Validate from './validation';
 import type { AlfredConfig } from '.';
 

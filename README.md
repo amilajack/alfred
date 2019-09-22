@@ -1,11 +1,11 @@
-> ## 🛠 Status: In Development
-> Alfred is currently in development. It's on the fast track to a 1.0 release, so we encourage you to use it and give us your feedback, but there are things that haven't been finalized yet and you can expect some changes.
-
 Alfred
 ======
-[![Build Status](https://travis-ci.com/amilajack/alfred.svg?token=stGf151gAJ11ZUi8LyvG&branch=master)](https://travis-ci.com/amilajack/alfred)
 [![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/alfred)
+[![Build Status](https://dev.azure.com/amilajack/amilajack/_apis/build/status/amilajack.alfred?branchName=master)](https://dev.azure.com/amilajack/amilajack/_build/latest?definitionId=6&branchName=master)
 [![Twitter Follow](https://img.shields.io/twitter/follow/alfredpkg.svg?style=social)](https://twitter.com/alfredpkg)
+
+> ## 🛠 Status: In Development
+> Alfred is currently in development. It's on the fast track to a 1.0 release, so we encourage you to use it and give us your feedback, but there are things that haven't been finalized yet and you can expect some changes.
 
 ### Alfred is a Modular JS Toolchain with the following goals:
 
@@ -18,9 +18,9 @@ Alfred
 
 ```bash
 # NPM
-npm install --global @alfredpkg/alfred
+npm install --global @alfred/alfred
 # Yarn
-yarn global add @alfredpkg/alfred
+yarn global add @alfred/alfred
 ```
 
 ## Usage
@@ -52,11 +52,11 @@ alfred migrate
 alfred types
 
 # Learning skills
-alfred learn @alfredpkg/skill-parcel
+alfred learn @alfred/skill-parcel
 # Build using the new subcommand
 alfred build
 # Learning multiple skills
-alfred learn @alfredpkg/skill-angular @alfredpkg/skill-redux
+alfred learn @alfred/skill-angular @alfred/skill-redux
 ```
 
 ## Docs
@@ -95,8 +95,8 @@ export default {
   name: 'babel',
   // The (optional) interface that this skill will implement. A skill uses an interface
   // when it is able to replace an existing subcommand. For example, both the
-  // @alfredpkg/skill-parcel and @alfredpkg/skill-webpack skills, which both register a 'build'
-  // subcommand, will both implement @alfredpkg/interface-build. Implementing it will require
+  // @alfred/skill-parcel and @alfred/skill-webpack skills, which both register a 'build'
+  // subcommand, will both implement @alfred/interface-build. Implementing it will require
   // them to adhere to a shared set of calling conventions such as flags, subcommands, etc. In
   // the case of babel, no interface will be implemented because babel will not be invoked directly
   // as a subcommand. A bundler will always call babel.
@@ -155,7 +155,7 @@ export default {
 ```jsonc
 // package.json
 {
-  "name": "@alfredpkg/skill-parcel",
+  "name": "@alfred/skill-parcel",
   "peerDependencies": {
     "react": "0.15.0"
   }
@@ -200,13 +200,13 @@ type AlfredInterface = {
   "alfred": {
     // Skills that override the default skills
     "skills": [
-      "@alfredpkg/skill-parcel",
-      "@alfredpkg/skill-testcafe"
+      "@alfred/skill-parcel",
+      "@alfred/skill-testcafe"
     ],
     // Determine to install with NPM or Yarn (defaults to NPM)
     "npmClient": "yarn",
     // Write the configs to a './.configs' directory
-    "showConfigs" true,
+    "showConfigs": true,
     // Config for all app targets
     "app": {
       // Each target will have it's own build
@@ -217,7 +217,7 @@ type AlfredInterface = {
     },
     // Config for all lib targets
     "lib": {
-      "recommendSkills": ["@alfredpkg/skill-react"]
+      "recommendSkills": ["@alfred/skill-react"]
     },
     // Config only applied to browser libs
     "browser": {
@@ -239,8 +239,8 @@ Suppose you have the following Alfred config:
   // ...
   "alfred": {
     "skills": [
-      "@alfredpkg/skill-parcel",
-      ["@alfredpkg/skill-babel", {
+      "@alfred/skill-parcel",
+      ["@alfred/skill-babel", {
         // Config for Babel
         "presets": [
           "@babel-preset-env",
@@ -251,7 +251,7 @@ Suppose you have the following Alfred config:
           "@babel/plugin-proposal-class-properties"
         ]
       }],
-      ["@alfredpkg/skill-eslint", {
+      ["@alfred/skill-eslint", {
         // Config for ESLint
         "rules": {
           "no-console": "off"
@@ -277,15 +277,15 @@ This config can be extracted to an Alfred config like so:
 // alfred-config-my-app/index.json
 {
   "skills": [
-    "@alfredpkg/skill-parcel",
-    ["@alfredpkg/skill-babel", {
+    "@alfred/skill-parcel",
+    ["@alfred/skill-babel", {
       "presets": [
         "@babel-preset-env",
         "@babel-preset-flow",
         "@babel-preset-react"
       ],
     }],
-    ["@alfredpkg/skill-eslint", {
+    ["@alfred/skill-eslint", {
       "rules": {
         "no-console": "off"
       }
@@ -315,7 +315,7 @@ Assume `react` has the following `package.json`:
   "alfred": {
     // ...
     "lib": {
-      "recommendSkills": ["@alfredpkg/skill-react"]
+      "recommendSkills": ["@alfred/skill-react"]
     }
   }
 }
@@ -326,7 +326,7 @@ When a author of the app installs `react`, Alfred will recommend the skills `rec
 ```
 $ yarn add react
 
-`react` recommends installing the Alfred skill "@alfredpkg/skill-react".
+`react` recommends installing the Alfred skill "@alfred/skill-react".
 
 Would you like to install it? (Y/n)
 ```
@@ -385,13 +385,21 @@ Would you like to install it? (Y/n)
 * Simplicity
 * Reusability
 
-## Donate
-
-Please [donate to my Patreon](https://www.patreon.com/join/2181265/checkout)
-
 ## Community
 
 All feedback and suggestions are welcome!
 
 - 💬 Join the community on [Spectrum](https://spectrum.chat/alfred)
 - 📣 Stay up to date on new features and announcements on [@alfredpkg](https://twitter.com/alfredpkg).
+
+## Support
+
+If this project is saving you (or your team) time, please consider supporting it on Patreon 👍 thank you!
+
+<p>
+  <a href="https://www.patreon.com/amilajack">
+    <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
+  </a>
+</p>
+
+Please [donate to my Patreon](https://www.patreon.com/join/2181265/checkout)

@@ -6,8 +6,7 @@ import path from 'path';
 import os from 'os';
 import fs from 'fs';
 import parser from 'gitignore-parser';
-import type { AlfredConfig } from '@alfredpkg/core';
-import Es6ImportsProvider from './es6-imports-provider';
+import type { AlfredConfig } from '@alfred/core';
 import LebabProvider from './lebab-provider';
 import EslintProvider from './eslint-provider';
 import ParseInput from '../helpers/parse-input';
@@ -99,7 +98,7 @@ export default async function Providers(
   userInput: UserProviderInput,
   config: AlfredConfig
 ): ProvidersType | Array<string> {
-  const providers = [Es6ImportsProvider, LebabProvider, EslintProvider]
+  const providers = [LebabProvider, EslintProvider]
     .map(Provider => new Provider())
     // Sort the providers by priority.
     // @TODO Temporarily sort by priority number. Eventually we'll implement an listener pattern

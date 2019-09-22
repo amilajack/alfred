@@ -1,13 +1,13 @@
 {
-  "name": "@alfredpkg/skill-mocha",
-  "version": "0.0.1-alpha.0",
+  "name": "@alfred/skill-mocha",
+  "version": "0.0.2-alpha.0",
   "dependencies": {
     "mocha": "^5.2.0"
   },
   "peerDependencies": {
-    "@alfredpkg/core": "0.0.0",
-    "@alfredpkg/interface-test": "0.0.0",
+    "@alfred/core": "0.0.0",
+    "@alfred/interface-test": "0.0.0",
     "mocha": "^5.2.0"
   },
-  "gitHead": "7193c706eff460e2000586d8ba456d5ad4087ce2"
+  "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"
 }

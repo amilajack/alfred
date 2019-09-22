@@ -1,13 +1,13 @@
 {
-  "name": "@alfredpkg/skill-prettier",
-  "version": "0.0.1-alpha.0",
+  "name": "@alfred/skill-prettier",
+  "version": "0.0.2-alpha.0",
   "dependencies": {
-    "prettier": "^1.16.3"
+    "prettier": "^1.16.4"
   },
   "peerDependencies": {
-    "@alfredpkg/core": "0.0.0",
-    "@alfredpkg/interface-lint": "0.0.0",
-    "prettier": "^1.16.3"
+    "@alfred/core": "0.0.0",
+    "@alfred/interface-lint": "0.0.0",
+    "prettier": "^1.16.4"
   },
-  "gitHead": "7193c706eff460e2000586d8ba456d5ad4087ce2"
+  "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"
 }

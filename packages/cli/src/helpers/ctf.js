@@ -13,10 +13,10 @@ import CTF, {
   callCtfFnsInOrder,
   getConfigsBasePath,
   writeConfig
-} from '@alfredpkg/core';
-import mergeConfigs from '@alfredpkg/merge-configs';
+} from '@alfred/core';
+import mergeConfigs from '@alfred/merge-configs';
 import formatJson from 'format-package';
-import type { CtfMap, InterfaceState, AlfredConfig } from '@alfredpkg/core';
+import type { CtfMap, InterfaceState, AlfredConfig } from '@alfred/core';
 
 // Examples
 // 'lib.node.js',
@@ -233,11 +233,11 @@ export function addMissingStdSkillsToCtf(
     Object.entries({
       lint: CORE_CTFS.eslint,
       format: CORE_CTFS.prettier,
-      build: require('@alfredpkg/interface-build').resolveSkill(
+      build: require('@alfred/interface-build').resolveSkill(
         Object.values(CORE_CTFS),
         interfaceState
       ),
-      start: require('@alfredpkg/interface-start').resolveSkill(
+      start: require('@alfred/interface-start').resolveSkill(
         Object.values(CORE_CTFS),
         interfaceState
       ),

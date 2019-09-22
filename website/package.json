@@ -1,6 +1,6 @@
 {
-  "name": "@alfredpkg/website",
-  "version": "0.0.0",
+  "name": "@alfred/website",
+  "version": "0.0.1-alpha.5",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -15,7 +15,7 @@
   "devDependencies": {
     "docusaurus": "^1.7.2",
     "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-jsx-a11y": "^6.2.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4"
   },
   "eslintConfig": {

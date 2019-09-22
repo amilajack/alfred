@@ -6,7 +6,7 @@
     "tests/fixtures/*",
     "website"
   ],
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.2-alpha.0",
   "npmClient": "yarn",
   "useWorkspaces": true,
   "scripts": {
@@ -19,6 +19,7 @@
     }
   },
   "publishConfig": {
+    "access": "public",
     "registry": "http://localhost:4873"
   }
 }

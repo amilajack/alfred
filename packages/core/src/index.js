@@ -1,16 +1,16 @@
 /* eslint import/no-dynamic-require: off */
 import path from 'path';
 import childProcess from 'child_process';
-import jestCtf from '@alfredpkg/skill-jest';
-import babel from '@alfredpkg/skill-babel';
-import webpack from '@alfredpkg/skill-webpack';
-import eslint from '@alfredpkg/skill-eslint';
-import react from '@alfredpkg/skill-react';
-import prettier from '@alfredpkg/skill-prettier';
-import parcel from '@alfredpkg/skill-parcel';
-import rollup from '@alfredpkg/skill-rollup';
-import lodashCtf from '@alfredpkg/skill-lodash';
-import mergeConfigs from '@alfredpkg/merge-configs';
+import jestCtf from '@alfred/skill-jest';
+import babel from '@alfred/skill-babel';
+import webpack from '@alfred/skill-webpack';
+import eslint from '@alfred/skill-eslint';
+import react from '@alfred/skill-react';
+import prettier from '@alfred/skill-prettier';
+import parcel from '@alfred/skill-parcel';
+import rollup from '@alfred/skill-rollup';
+import lodashCtf from '@alfred/skill-lodash';
+import mergeConfigs from '@alfred/merge-configs';
 import pkgUp from 'pkg-up';
 import lodash from 'lodash';
 import topsort from 'toposort';
@@ -602,7 +602,7 @@ export function getExecuteWrittenConfigsMethods(
               flags,
               skillConfig
             }),
-          // @HACK: If interfaces were defined, we could import the @alfredpkg/interface-*
+          // @HACK: If interfaces were defined, we could import the @alfred/interface-*
           //        and use the `subcommand` property. This should be done after we have
           //        some interfaces to work with
           subcommand
