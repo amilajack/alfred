@@ -72,6 +72,29 @@ describe('CTF', () => {
 
       expect(orderedSelfTransforms).toMatchSnapshot();
     });
+
+    it('should allow cycles with non-conflicting ctf nodes', () => {
+      const ctfNode1 = {
+        name: 'ctf-node-1',
+        description: '',
+        ctfs: {
+          'ctf-node-2': () => {}
+        }
+      };
+      const ctfNode2 = {
+        name: 'ctf-node-2',
+        description: '',
+        ctfs: {
+          'ctf-node-1': () => {}
+        }
+      };
+      const ctf = CTF(
+        [ctfNode1, ctfNode2],
+        defaultAlfredConfig,
+        INTERFACE_STATES[0]
+      );
+      callCtfFnsInOrder(ctf, defaultAlfredConfig, INTERFACE_STATES[0]);
+    });
   });
 
   describe('interfaces', () => {

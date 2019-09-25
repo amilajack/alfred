@@ -289,8 +289,6 @@ export function addMissingStdSkillsToCtf(
   if (!ctf.has('babel')) {
     ctf.set('babel', { ...CORE_CTFS.babel, ...AddCtfHelpers });
   }
-  // @TODO
-  // ctf.set('lodash', { ...CORE_CTFS.lodash, ...AddCtfHelpers });
 
   callCtfFnsInOrder(ctf, alfredConfig, interfaceState);
   validateCtf(ctf, interfaceState);

@@ -1,5 +1,6 @@
 Alfred
 ======
+[![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/alfred)
 [![Build Status](https://dev.azure.com/amilajack/amilajack/_apis/build/status/amilajack.alfred?branchName=master)](https://dev.azure.com/amilajack/amilajack/_build/latest?definitionId=6&branchName=master)
 [![Twitter Follow](https://img.shields.io/twitter/follow/alfredpkg.svg?style=social)](https://twitter.com/alfredpkg)
 
@@ -343,20 +344,23 @@ Would you like to install it? (Y/n)
 
 ## Alfred Skills Implementation Status
 
-| Infrastructure     | Skills                   | Implemented  |
-| ---                | ---                      | ---          |
-| Bundlers           |  Webpack, Rollup, Parcel | ✅           |
-| Transpilers        |  Babel                   | ✅           |
-| Test Frameworks    |  Jest, Mocha, Jasmine    | ✅ ✅ ❌     |
-| Formatters         |  Prettier                | ✅           |
-| Libraries          |  Lodash, Moment          | ✅           |
-| Linters            |  ESLint                  | ✅           |
-| Front End          |  React, Angular, Vue     | ✅ ❌        |
-| State Managment    |  Redux, Mobx             | ❌           |
-| Routing            |  react-router            | ❌           |
-| Documentation      |  JSDoc, Typedoc          | ❌           |
-| Type Checkers      |  Flow, TypeScript        | ❌           |
-| End to End Testing |  TestCafe, Cypress       | ❌           |
+✅ Basic implementation finish
+❌ Planned but not started
+
+| Infrastructure     | Skills                     | Implemented  |
+| ---                | ---                        | ---          |
+| Bundlers           |  Webpack, Rollup, Parcel   | ✅           |
+| Transpilers        |  Babel                     | ✅           |
+| Test Frameworks    |  Jest, Mocha, Jasmine, Ava | ✅ ✅ ❌ ❌ |
+| Formatters         |  Prettier                  | ✅           |
+| Libraries          |  Lodash, Moment            | ✅           |
+| Linters            |  ESLint                    | ✅           |
+| Front End          |  React, Angular, Vue       | ✅ ❌        |
+| State Managment    |  Redux, Mobx               | ❌           |
+| Routing            |  react-router              | ❌           |
+| Documentation      |  JSDoc, Typedoc            | ❌           |
+| Type Checkers      |  Flow, TypeScript          | ❌           |
+| End to End Testing |  TestCafe, Cypress         | ❌           |
 
 ## Prior Art
 
@@ -381,6 +385,13 @@ Would you like to install it? (Y/n)
 * Simplicity
 * Reusability
 
+## Community
+
+All feedback and suggestions are welcome!
+
+- 💬 Join the community on [Spectrum](https://spectrum.chat/alfred)
+- 📣 Stay up to date on new features and announcements on [@alfredpkg](https://twitter.com/alfredpkg).
+
 ## Support
 
 If this project is saving you (or your team) time, please consider supporting it on Patreon 👍 thank you!
@@ -390,3 +401,5 @@ If this project is saving you (or your team) time, please consider supporting it
     <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
   </a>
 </p>
+
+Please [donate to my Patreon](https://www.patreon.com/join/2181265/checkout)
