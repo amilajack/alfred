@@ -12,7 +12,7 @@
     recast "^0.12.1"
 
 "@alfred/skill-mocha@file:packages/alfred-skill-mocha":
-  version "0.0.1"
+  version "0.0.2-alpha.0"
   dependencies:
     mocha "^5.2.0"
 
@@ -1051,10 +1051,10 @@
     to-fast-properties "^2.0.0"
 
 "@examples/alfred-config-example@file:examples/alfred-config-example":
-  version "0.0.1"
+  version "0.0.2-alpha.0"
   dependencies:
-    "@alfred/skill-lodash" "^0.0.1"
-    "@alfred/skill-parcel" "^0.0.1"
+    "@alfred/skill-lodash" "^0.0.2-alpha.0"
+    "@alfred/skill-parcel" "^0.0.2-alpha.0"
     "@babel/plugin-proposal-class-properties" "^7.3.0"
 
 "@iarna/toml@^2.2.0":
