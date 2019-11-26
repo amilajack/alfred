@@ -78,10 +78,21 @@ See our [examples directory](https://github.com/amilajack/alfred/tree/master/exa
 ## Local Setup
 
 ```bash
+# Installation
 git clone https://github.com/amilajack/alfred
 cd alfred
 yarn
+
+# Testing
 yarn test
+
+# Publishing
+yarn global add verdaccio
+verdaccio
+lerna publish --skip-git --registry http://localhost:4873
+
+# Misc
+To change verdaccio configs, see `~/.config/verdaccio/config.yaml`
 ```
 
 ## Alfred Skill Example
