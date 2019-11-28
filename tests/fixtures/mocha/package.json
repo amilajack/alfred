@@ -18,8 +18,8 @@
   "devDependencies": {
     "@alfred/cli": "^0.0.2-alpha.1",
     "@alfred/core": "^0.0.2-alpha.1",
-    "@alfred/skill-mocha": "file:../../../packages/alfred-skill-mocha",
-    "eslint-plugin-mocha": "^5.2.1"
+    "@alfred/skill-mocha": "^0.0.2-alpha.1",
+    "eslint-plugin-mocha": "^6.2.2"
   },
   "alfred": {
     "showConfigs": true,

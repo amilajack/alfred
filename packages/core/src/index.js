@@ -279,7 +279,7 @@ export function mapShortNameEnvToLongName(envName: string): string {
  */
 export async function getPkgBinPath(pkgName: string, binName: string) {
   const pkgPath = require.resolve(pkgName);
-  const pkgJsonPath = await pkgUp(pkgPath);
+  const pkgJsonPath = await pkgUp({ cwd: pkgPath });
 
   const { bin } = require(pkgJsonPath);
   if (!bin) {

@@ -5,8 +5,8 @@
     "prettier": "^1.16.4"
   },
   "peerDependencies": {
-    "@alfred/core": "0.0.0",
-    "@alfred/interface-lint": "0.0.0",
+    "@alfred/core": "^0.0.2-alpha.1",
+    "@alfred/interface-lint": "^0.0.2-alpha.1",
     "prettier": "^1.16.4"
   },
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"
