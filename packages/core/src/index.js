@@ -48,8 +48,30 @@ export const INTERFACE_STATES = [
   },
   {
     projectType: 'app',
+    target: 'browser',
+    env: 'development'
+  },
+  // @TODO
+  // {
+  //   projectType: 'app',
+  //   target: 'node',
+  //   env: 'production'
+  // },
+  // @TODO
+  // {
+  //   projectType: 'app',
+  //   target: 'node',
+  //   env: 'development'
+  // },
+  {
+    projectType: 'lib',
     target: 'node',
     env: 'production'
+  },
+  {
+    projectType: 'lib',
+    target: 'node',
+    env: 'development'
   },
   {
     projectType: 'lib',
@@ -57,28 +79,8 @@ export const INTERFACE_STATES = [
     env: 'production'
   },
   {
-    projectType: 'app',
-    target: 'node',
-    env: 'production'
-  },
-  {
-    projectType: 'app',
-    target: 'browser',
-    env: 'development'
-  },
-  {
-    projectType: 'app',
-    target: 'node',
-    env: 'development'
-  },
-  {
     projectType: 'lib',
     target: 'browser',
-    env: 'development'
-  },
-  {
-    projectType: 'app',
-    target: 'node',
     env: 'development'
   }
 ];
