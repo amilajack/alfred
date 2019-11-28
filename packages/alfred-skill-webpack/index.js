@@ -4,7 +4,6 @@ const { getConfigByConfigName } = require('@alfred/core');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 const { getProjectRoot } = require('@alfred/cli');
 const getPort = require('get-port');
-const { openInBrowser } = require('@alfred/helpers');
 
 function replaceProjectRoot(pathConfig, projectRoot) {
   return pathConfig.replace('<projectRoot>', projectRoot);
@@ -21,6 +20,9 @@ const interfaceConfig = {
     projectTypes: ['app']
   }
 };
+
+const shouldOpenInBrowser =
+  !('ALFRED_E2E_TEST' in process.env) || process.env.ALFRED_E2E_TEST !== 'true';
 
 module.exports = {
   name: 'webpack',
@@ -80,7 +82,7 @@ module.exports = {
           publicPath: 'http://localhost:1234/'
         },
         devServer: {
-          open: true,
+          open: shouldOpenInBrowser,
           port: 1234,
           publicPath: '/',
           compress: true,
@@ -210,7 +212,6 @@ module.exports = {
                   : 'unoptimized'
               } build on ${url}`
             );
-            await openInBrowser(url);
           });
         }
         case 'build': {

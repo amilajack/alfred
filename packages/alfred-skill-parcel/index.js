@@ -56,7 +56,13 @@ module.exports = {
               interfaceState.env === 'production' ? 'optimized' : 'unoptimized'
             } build on ${url}`
           );
-          await openInBrowser(url);
+          // Don't open in browser when running E2E tests
+          if (
+            !('ALFRED_E2E_TEST' in process.env) ||
+            process.env.ALFRED_E2E_TEST !== 'true'
+          ) {
+            await openInBrowser(url);
+          }
           return server;
         }
         case 'build': {

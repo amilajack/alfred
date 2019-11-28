@@ -12,7 +12,7 @@
     "e2e:clean": "rm -rf packages/cli/test/e2e/tmp",
     "flow-typed": "lerna run flow-typed",
     "lint": "eslint .",
-    "test": "yarn e2e:clean && yarn build && yarn lint && lerna run lint --parallel --ignore @fixtures/*,@examples/* && lerna run flow --parallel && lerna run test --parallel --ignore '{@fixtures/*,@examples/*}' && lerna run test-all --parallel",
+    "test": "yarn e2e:clean && yarn build && yarn lint && lerna run lint --parallel --ignore @fixtures/*,@examples/* && lerna run flow --parallel && lerna run test --parallel --ignore @fixtures/*,@examples/* && lerna run test-all --parallel",
     "version": "lerna run build:clean && yarn build",
     "website:build": "yarn workspace @alfred/website build",
     "website:clean": "yarn workspace @alfred/website clean",

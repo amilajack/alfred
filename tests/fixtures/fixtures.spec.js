@@ -1,30 +1,31 @@
 /* eslint no-restricted-syntax: off */
-import path from 'path';
-import fs from 'fs';
-import fetch from 'isomorphic-fetch';
-import { spawn } from 'child_process';
+const path = require('path');
+const fs = require('fs');
+const fetch = require('isomorphic-fetch');
+const { spawn } = require('child_process');
 
 jest.setTimeout(10 ** 4);
 
 const dirContents = fs.readdirSync(__dirname);
 const fixtureDirs = dirContents
-  .map(fixtureDir => path.join(__dirname, fixtureDir))
+  .map(fixtureDir => ({abs: path.join(__dirname, fixtureDir), rel: fixtureDir}))
   .filter(
-    fixtureDir =>
-      fs.statSync(fixtureDir).isDirectory() &&
-      fs.existsSync(path.join(fixtureDir, 'src/app.browser.js'))
+    ({abs}) =>
+      fs.statSync(abs).isDirectory() &&
+      fs.existsSync(path.join(abs, 'src/app.browser.js'))
   );
 
 describe('fixtures', () => {
   describe('apps', () => {
-    for (const fixtureDir of fixtureDirs) {
-      it(`should render html with expected text on ${fixtureDir}`, async () => {
+    for (const {abs, rel} of fixtureDirs) {
+      it(`should render html with expected text on ${rel}`, async () => {
         const cp = spawn('yarn', ['start'], {
-          cwd: fixtureDir
+          cwd: abs
         });
         const url = await new Promise(resolve => {
           cp.stdout.on('data', data => {
             // Wait for output to start serving
+            console.log(data.toString());
             if (data.toString().includes('http://localhost:')) {
               resolve(
                 data
@@ -35,6 +36,7 @@ describe('fixtures', () => {
             }
           });
         });
+        console.log(url)
         const responseText = await fetch(url)
           .then(res => res.text())
           .finally(() => {
