@@ -1,4 +1,3 @@
-// @flow
 /* eslint import/no-dynamic-require: off, no-param-reassign: off */
 import path from 'path';
 import fs from 'fs';
@@ -13,7 +12,7 @@ export type configType =
     };
 
 export type AlfredConfig = {
-  extends?: Array<string> | Array<[string, { [x: string]: any }]> | string,
+  extends?: Array<string> | string,
   npmClient: 'npm' | 'yarn',
   skills: Array<configType>,
   root: string,
@@ -52,7 +51,7 @@ export function getConfigs(config: AlfredConfig = {}): AlfredConfig {
   );
   // If nothing to extend then return the config itself without the extends
   // property
-  if (!config.extends.length) {
+  if (config.extends && !config.extends.length) {
     const newConfig = { ...config };
     delete newConfig.extends;
     return newConfig;
@@ -109,29 +108,27 @@ export default function Config(config: AlfredConfig): AlfredConfig {
   if (!mergedConfig.skills || !mergedConfig.skills.length) return mergedConfig;
 
   const skillsMap: ConfigMap = new Map();
-  mergedConfig.skills = Array.from(
-    mergedConfig.skills
-      .reduce((map: ConfigMap, skill: ConfigSkillType) => {
-        if (typeof skill === 'string') {
-          map.set(skill, {});
-          return map;
+  const mappedSkills: ConfigMap = mergedConfig.skills.reduce(
+    (map: ConfigMap, skill: ConfigSkillType) => {
+      if (typeof skill === 'string') {
+        map.set(skill, {});
+        return map;
+      }
+      if (Array.isArray(skill)) {
+        const [skillName, skillConfig] = skill;
+        if (map.has(skillName)) {
+          map.set(skillName, mergeConfigs({}, map.get(skillName), skillConfig));
+        } else {
+          map.set(skillName, skillConfig);
         }
-        if (Array.isArray(skill)) {
-          const [skillName, skillConfig] = skill;
-          if (map.has(skillName)) {
-            map.set(
-              skillName,
-              mergeConfigs({}, map.get(skillName), skillConfig)
-            );
-          } else {
-            map.set(skillName, skillConfig);
-          }
-          return map;
-        }
-        throw new Error(`Config type not supported: ${JSON.stringify(skill)}`);
-      }, skillsMap)
-      .entries()
+        return map;
+      }
+      throw new Error(`Config type not supported: ${JSON.stringify(skill)}`);
+    },
+    skillsMap
   );
+
+  mergedConfig.skills = Array.from(mappedSkills.entries());
 
   return mergedConfig;
 }
