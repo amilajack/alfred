@@ -4,18 +4,16 @@ import fs from 'fs';
 import fetch from 'isomorphic-fetch';
 import { spawn } from 'child_process';
 
+jest.setTimeout(10 ** 4);
+
 const dirContents = fs.readdirSync(__dirname);
 const fixtureDirs = dirContents
-  // @HACK: extend-config causes monorerpo installation issues with parcel's autoinstall
-  .filter(e => e !== 'extend-config')
   .map(fixtureDir => path.join(__dirname, fixtureDir))
   .filter(
     fixtureDir =>
       fs.statSync(fixtureDir).isDirectory() &&
       fs.existsSync(path.join(fixtureDir, 'src/app.browser.js'))
   );
-
-jest.setTimeout(10 ** 4);
 
 describe('fixtures', () => {
   describe('apps', () => {

@@ -1,9 +1,7 @@
 function app() {
-  console.log('hello world!');
+  const h1 = document.createElement('h1');
+  h1.innerText = 'Hello from parcel!';
+  document.body.appendChild(h1);
 }
-
-document.write('Hello from alfred!');
-
-console.log('Hello from alfred!');
 
 app();

@@ -1,7 +1,7 @@
-export default function app() {
-  console.log('hello world!');
+function app() {
+  const h1 = document.createElement('h1');
+  h1.innerText = 'Hello from parcel!';
+  document.body.appendChild(h1);
 }
-
-document.write('hello world!');
 
 app();
