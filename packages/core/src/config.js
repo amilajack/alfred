@@ -5,7 +5,20 @@ import fs from 'fs';
 import formatPkg from 'format-package';
 import mergeConfigs from '@alfred/merge-configs';
 import Validate from './validation';
-import type { AlfredConfig } from '.';
+
+export type configType =
+  | string
+  | {
+      [x: string]: any
+    };
+
+export type AlfredConfig = {
+  extends?: Array<string> | Array<[string, { [x: string]: any }]> | string,
+  npmClient: 'npm' | 'yarn',
+  skills: Array<configType>,
+  root: string,
+  showConfigs: boolean
+};
 
 export function requireConfig(configName: string): any {
   try {

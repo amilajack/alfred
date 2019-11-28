@@ -1,7 +1,6 @@
 // @flow
 import random from 'rndm';
 import git from 'simple-git/promise';
-import util from 'util';
 import path from 'path';
 import os from 'os';
 import fs from 'fs';
@@ -10,12 +9,9 @@ import type { AlfredConfig } from '@alfred/core';
 import LebabProvider from './lebab-provider';
 import EslintProvider from './eslint-provider';
 import ParseInput from '../helpers/parse-input';
+import { copyFileAsync, readFileAsync, writeFileAsync } from '../helpers/fs';
 import type { UserProviderInput, ProviderInput } from './provider-interface';
 
-export const copyFileAsync = util.promisify(fs.copyFile);
-export const writeFileAsync = util.promisify(fs.writeFile);
-export const statAsync = util.promisify(fs.stat);
-export const readFileAsync = util.promisify(fs.readFile);
 // const unlinkAsync = util.promisify(fs.unlink);
 
 function checkFileExists(filepath): Promise<boolean> {

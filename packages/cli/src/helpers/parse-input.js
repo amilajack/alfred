@@ -3,7 +3,7 @@
 import flatten from 'lodash.flatten';
 import uniq from 'uniq';
 import findit from 'findit';
-import { statAsync } from '../providers';
+import { statAsync } from './fs';
 
 export function findJsFiles(dir: string): Promise<Array<string>> {
   return new Promise((resolve, reject) => {

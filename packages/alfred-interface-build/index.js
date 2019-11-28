@@ -62,9 +62,7 @@ module.exports = {
         ).config;
         if (!supports) {
           throw new Error(
-            `Skill "${
-              sk.name
-            }" requires the "support" property, which is required by "@alfred/interface-build"`
+            `Skill "${sk.name}" requires the "support" property, which is required by "@alfred/interface-build"`
           );
         }
         return (
