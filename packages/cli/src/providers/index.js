@@ -12,8 +12,6 @@ import ParseInput from '../helpers/parse-input';
 import { copyFileAsync, readFileAsync, writeFileAsync } from '../helpers/fs';
 import type { UserProviderInput, ProviderInput } from './provider-interface';
 
-// const unlinkAsync = util.promisify(fs.unlink);
-
 function checkFileExists(filepath): Promise<boolean> {
   return new Promise(resolve => {
     fs.access(filepath, fs.F_OK, error => {
