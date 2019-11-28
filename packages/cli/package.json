@@ -61,9 +61,9 @@
     "validate-npm-package-name": "^3.0.0"
   },
   "peerDependencies": {
-    "@alfred/core": "0.0.0",
-    "@alfred/interface-build": "0.0.0",
-    "@alfred/interface-start": "0.0.0"
+    "@alfred/core": "^0.0.2-alpha.1",
+    "@alfred/interface-build": "^0.0.2-alpha.1",
+    "@alfred/interface-start": "^0.0.2-alpha.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",

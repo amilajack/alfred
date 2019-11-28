@@ -15,7 +15,8 @@ const interfaceConfig = {
     // Flag name and argument types
     env: ['production', 'development', 'test'],
     // All the supported targets a `build` skill should build
-    targets: ['browser', 'node'],
+    // @TODO: Add node to targets
+    targets: ['browser'],
     // Project type
     projectTypes: ['app']
   }
@@ -70,18 +71,18 @@ module.exports = {
         mode: 'development',
         entry: [
           // @TODO
-          // 'react-hot-loader/patch',
-          'webpack-dev-server/client?http://localhost:8080/',
+          'react-hot-loader/patch',
+          'webpack-dev-server/client?http://localhost:1234/',
           'webpack/hot/only-dev-server'
         ],
         output: {
           path: path.join('<projectRoot>', 'targets', 'dev'),
-          publicPath: 'http://localhost:8080/'
+          publicPath: 'http://localhost:1234/'
         },
         devServer: {
           open: true,
-          port: 8080,
-          publicPath: 'http://localhost:8080',
+          port: 1234,
+          publicPath: '/',
           compress: true,
           noInfo: true,
           stats: 'errors-only',
@@ -159,9 +160,18 @@ module.exports = {
       );
 
       const projectRoot = getProjectRoot();
+
+      // @HACK: The following lines should be replaced bn an algorithm that
+      //        recursively traverses and object and replaces each project root
       if (mergedConfig.output && mergedConfig.output.path) {
         mergedConfig.output.path = replaceProjectRoot(
           mergedConfig.output.path,
+          projectRoot
+        );
+      }
+      if (mergedConfig.devServer && mergedConfig.devServer.contentBase) {
+        mergedConfig.devServer.contentBase = replaceProjectRoot(
+          mergedConfig.devServer.contentBase,
           projectRoot
         );
       }
@@ -183,7 +193,7 @@ module.exports = {
           const Webpack = require('webpack');
           const WebpackDevServer = require('webpack-dev-server');
           WebpackDevServer.addDevServerEntrypoints(mergedConfig, {
-            contentBase: path.join('<projectRoot>', 'src'),
+            contentBase: path.join(projectRoot, 'src'),
             hot: true,
             host: 'localhost'
           });
@@ -191,14 +201,14 @@ module.exports = {
           const { devServer } = mergedConfig;
           const server = new WebpackDevServer(compiler, devServer);
           const port = await getPort({ port: 1234 });
-          return server.listen(port, '127.0.0.1', async () => {
+          return server.listen(port, 'localhost', async () => {
             const url = `http://localhost:${port}`;
             console.log(
               `Starting ${
-                interfaceState.env !== 'production'
-                  ? 'unoptimized'
-                  : 'optimized'
-              } build on ${url}...`
+                interfaceState.env === 'production'
+                  ? 'optimized'
+                  : 'unoptimized'
+              } build on ${url}`
             );
             await openInBrowser(url);
           });
@@ -206,8 +216,8 @@ module.exports = {
         case 'build': {
           console.log(
             `Building ${
-              interfaceState.env !== 'production' ? 'unoptimized' : 'optimized'
-            } build...`
+              interfaceState.env === 'production' ? 'optimized' : 'unoptimized'
+            } build`
           );
           return webpack(mergedConfig, (err, stats) => {
             if (err) {

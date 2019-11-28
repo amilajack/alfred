@@ -2,14 +2,10 @@ function app() {
   console.log('hello world!');
 }
 
-document.write('mr.rob and no');
-
-console.log('mr.rob but ho');
-
-function bar() {
-  return 1 + 1;
-}
-
 app();
 
-document.write(bar());
+if (module.hot) {
+  module.hot.accept('./app.browser.js', () => {
+    app();
+  });
+}

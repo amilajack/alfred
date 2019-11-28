@@ -11,10 +11,200 @@
     lodash "^4.17.4"
     recast "^0.12.1"
 
+"@alfred/cli@^0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "http://localhost:4873/@alfred%2fcli/-/cli-0.0.2-alpha.1.tgz#44c5209c1fcb49f369f7374e79803d72744eb672"
+  integrity sha512-o2Rk9bfS5AbofC9Uh24T898AsB8EXO9QM8hDBHna+m9qpXkvLkLFtuXKBz7r3dTb+sPyxy/TokPApivlm4iJag==
+  dependencies:
+    "5to6-codemod" "^1.7.1"
+    "@alfred/merge-configs" "^0.0.2-alpha.1"
+    "@amilajack/powerset" "^0.0.0"
+    "@babel/code-frame" "^7.0.0"
+    chalk "^2.4.2"
+    child-process-promise "^2.2.1"
+    cli-table3 "^0.5.1"
+    commander "^2.19.0"
+    eslint "^5.15.0"
+    eslint-config-bliss "^3.2.0"
+    eslint-plugin-flowtype-errors "^3.6.0"
+    findit "^2.0.0"
+    format-package "^4.5.0"
+    git-config "^0.0.7"
+    gitignore-parser "^0.0.2"
+    handlebars "^4.1.0"
+    inquirer "^6.2.2"
+    jscodeshift "^0.6.3"
+    lebab "^3.0.3"
+    lodash "^4.17.11"
+    lodash.flatten "^4.4.0"
+    microjob "^0.4.2"
+    npm "^6.8.0"
+    pkg-up "^2.0.0"
+    rimraf "^2.6.3"
+    rndm "^1.2.0"
+    signale "^1.3.0"
+    simple-git "^1.107.0"
+    uniq "^1.0.1"
+    update-notifier "^2.5.0"
+    validate-npm-package-license "^3.0.4"
+    validate-npm-package-name "^3.0.0"
+
+"@alfred/core@^0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "http://localhost:4873/@alfred%2fcore/-/core-0.0.2-alpha.1.tgz#4559bd445991f8ba72658ff23e95f19cc6ed5def"
+  integrity sha512-HyxYelncW+Plh2ge2FHgWne4kWdufEUIX3cnWFc+NWB6kyU0fxo6Xq38QdE5GtVODU5mIJX2RN4XegCOdAr6KQ==
+  dependencies:
+    "@alfred/interface-build" "^0.0.2-alpha.1"
+    "@alfred/interface-format" "^0.0.2-alpha.1"
+    "@alfred/interface-lint" "^0.0.2-alpha.1"
+    "@alfred/interface-start" "^0.0.2-alpha.1"
+    "@alfred/interface-test" "^0.0.2-alpha.1"
+    "@alfred/merge-configs" "^0.0.2-alpha.1"
+    "@alfred/skill-babel" "^0.0.2-alpha.1"
+    "@alfred/skill-eslint" "^0.0.2-alpha.1"
+    "@alfred/skill-jest" "^0.0.2-alpha.1"
+    "@alfred/skill-lodash" "^0.0.2-alpha.1"
+    "@alfred/skill-parcel" "^0.0.2-alpha.1"
+    "@alfred/skill-prettier" "^0.0.2-alpha.1"
+    "@alfred/skill-react" "^0.0.2-alpha.1"
+    "@alfred/skill-rollup" "^0.0.2-alpha.1"
+    "@alfred/skill-webpack" "^0.0.2-alpha.1"
+    debug "^4.1.1"
+    format-package "^4.5.0"
+    joi "^14.3.1"
+    lodash "^4.17.11"
+    pkg-up "^2.0.0"
+    rimraf "^2.6.2"
+    toposort "^2.0.2"
+
+"@alfred/helpers@^0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "http://localhost:4873/@alfred%2fhelpers/-/helpers-0.0.2-alpha.1.tgz#12ed668f739285e8a82540bd79c548033b27d080"
+  integrity sha512-2YuHn6USE72S85WX9OGlz0SnoqAmcr2E+UuoCAjnezXoLOb/TMz3YoOArts8N+wvn9k70TsahYnSrt0nmtw3DQ==
+  dependencies:
+    opn "^5.4.0"
+
+"@alfred/interface-build@^0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "http://localhost:4873/@alfred%2finterface-build/-/interface-build-0.0.2-alpha.1.tgz#63bdf10a74fe6b9b8978f319d89cf79721ed111c"
+  integrity sha512-pdOQxzf56z8krDbaA0yDUhR21TP+TAUHVYuN6SDVZ1TKyh6SOzKI070MytdU2p9vcVrwzHqUm9mi2lflJwviCw==
+  dependencies:
+    debug "^4.1.1"
+
+"@alfred/interface-format@^0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "http://localhost:4873/@alfred%2finterface-format/-/interface-format-0.0.2-alpha.1.tgz#d07c0dc4d15cbeb27512a9bbca9fe66d3ad0b19b"
+  integrity sha512-pz/ZoL0FgfAxpDZX6xRsv/wviF0gFsU2gCNmmx6qrzWtPRhv7eV6XRCW61Tv1JTzXypLCrCV4X3Twf9XJO197A==
+
+"@alfred/interface-lint@^0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "http://localhost:4873/@alfred%2finterface-lint/-/interface-lint-0.0.2-alpha.1.tgz#fd127756c9f5bfa2d4aa5b9ee75627e820ef0de1"
+  integrity sha512-Rz6ABXIHFOCV78Ryg5czZaDNq+xAlwBbfxF2yQNbHsLBRMx4Ty8ovyuazHnml7LApFHtqKu9at91AoBwQOh4vg==
+
+"@alfred/interface-start@^0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "http://localhost:4873/@alfred%2finterface-start/-/interface-start-0.0.2-alpha.1.tgz#0b749d454ee76a0d41f7fa3c4c98f4c2c4289049"
+  integrity sha512-MOTkdpbtOXvXfKl+ObHdFtuH84W+UqoqfA86PUUxadgAeEFTxJZxSV68UCbSxr2sVNFbvy1s0g0AmJUUaudvdg==
+  dependencies:
+    debug "^4.1.1"
+
+"@alfred/interface-test@^0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "http://localhost:4873/@alfred%2finterface-test/-/interface-test-0.0.2-alpha.1.tgz#e97e0b0a130e2adc86d08d53dc7249a1eb65dd86"
+  integrity sha512-oZd5NegGrXoqb70ZUjwgP09QYVmzD1ZNIoGcDC6sfR8ot8CYMnxWnbP45CbbeJtTgs99s3AGsaOZZBho7Llf+g==
+
+"@alfred/merge-configs@^0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "http://localhost:4873/@alfred%2fmerge-configs/-/merge-configs-0.0.2-alpha.1.tgz#f917c940222844de356f50d9ed80f578b7ddd9a8"
+  integrity sha512-mNKX1xp4kWyTFV4A7NRo7ftYkaIZh/6P4/G7fHW9pl3k5O/f8tFvuJnLcpR6Jjj1S8DiwBrHmuDY4e6u3zIxtg==
+  dependencies:
+    lodash "^4.17.11"
+
+"@alfred/skill-babel@^0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "http://localhost:4873/@alfred%2fskill-babel/-/skill-babel-0.0.2-alpha.1.tgz#dbdc3c4ae44429a2f523d710d607598fb38f94ed"
+  integrity sha512-Hs9o6B5BW8WENLj6aKItS/lyZZoijryFIcVYS/zljwolHTMMJOIW/3RrLp2k5+UzX/vMPWSgsSrzkMyVstI1LQ==
+  dependencies:
+    "@babel/cli" "^7.2.3"
+    "@babel/core" "^7.3.4"
+    "@babel/plugin-proposal-class-properties" "^7.3.4"
+    "@babel/preset-env" "^7.3.4"
+    "@babel/register" "^7.0.0"
+    babel-core "^7.0.0-bridge.0"
+    babel-loader "8.0.5"
+
+"@alfred/skill-eslint@^0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "http://localhost:4873/@alfred%2fskill-eslint/-/skill-eslint-0.0.2-alpha.1.tgz#3024cb199b17b74668baeb982ad59bfa19290a24"
+  integrity sha512-R6qkziRgES5Iot2oxhzegFc41CmIZ7qklpWvwuvXhR9VFzeFkKV9kPuwUgfm1CkzWX4a10TZxcr4sXv51b5OqQ==
+  dependencies:
+    eslint "^5.15.0"
+
+"@alfred/skill-jest@^0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "http://localhost:4873/@alfred%2fskill-jest/-/skill-jest-0.0.2-alpha.1.tgz#851f826ffa77613f3cd14b03024f3bfa664d0b35"
+  integrity sha512-bicibGQHks75pqrndtOlZGOrygp8vlXcXKypCj1FbxrYega5MenndtG3XCWqnq2w7eS3jdb9skZLPSZpK3jU/w==
+  dependencies:
+    crypto "^1.0.1"
+    jest "^24.0.0"
+
+"@alfred/skill-lodash@^0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "http://localhost:4873/@alfred%2fskill-lodash/-/skill-lodash-0.0.2-alpha.1.tgz#9bfa97cfaa0bcf96874a0d0fa40eb868c1b5ea7f"
+  integrity sha512-BlikGUdjC8Kf5NBCJo3qmAcrQ9hbQTf3Wyj1DsdS9jSTgXSxLrC7V2HHOxgBjXfOsPIN5jhJrHC+x+7bJeQBAg==
+  dependencies:
+    lodash-webpack-plugin "0.11.5"
+
 "@alfred/skill-mocha@file:packages/alfred-skill-mocha":
   version "0.0.2-alpha.0"
   dependencies:
     mocha "^5.2.0"
+
+"@alfred/skill-parcel@^0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "http://localhost:4873/@alfred%2fskill-parcel/-/skill-parcel-0.0.2-alpha.1.tgz#425d43de2abbc4e10a282754a5eceb32568ece36"
+  integrity sha512-NQ41t9XZQGat04mk0eU57FdmgBRnnQZBvukeucBu/GXdZatBvbKPzxkYQWKwioqG4zJc3wEgfDF2fSbM7ww9+g==
+  dependencies:
+    "@alfred/helpers" "^0.0.2-alpha.1"
+    parcel "^1.11.0"
+
+"@alfred/skill-prettier@^0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "http://localhost:4873/@alfred%2fskill-prettier/-/skill-prettier-0.0.2-alpha.1.tgz#eaa3346346ee3072990f6b4c30e82c1b081361ff"
+  integrity sha512-4owy5AyrHSC1wROaasl5w/wWjnPJS5GkrDkp061vkxsvqEuunfoMs0InbeBEF1eb7ZtkQKghzA0HH7UBOyQbFQ==
+  dependencies:
+    prettier "^1.16.4"
+
+"@alfred/skill-react@^0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "http://localhost:4873/@alfred%2fskill-react/-/skill-react-0.0.2-alpha.1.tgz#77150be23494efc3b344ebfe0fc748e1d03db718"
+  integrity sha512-cHvYrlzQT0C6tCOXPCKo0+oLboYDe4EwTs84BUqYIUIm7TmdXF+sKrSVQwNXB2Z9/WjWML0AeW837eWyhOgEsw==
+  dependencies:
+    "@babel/preset-env" "^7.3.4"
+    react-hot-loader "^4.6.3"
+
+"@alfred/skill-rollup@^0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "http://localhost:4873/@alfred%2fskill-rollup/-/skill-rollup-0.0.2-alpha.1.tgz#4d29aafcd5b521b7b882697671f0a4db41267733"
+  integrity sha512-VVAw1MZSUzoEQMgMDc5AsePuRlxZurFgwR90loqE/U5KKMs4EZ7iB0S+YbbhOoBStiZD6YXZNSCnzedmzQzY8A==
+  dependencies:
+    "@alfred/merge-configs" "^0.0.2-alpha.1"
+    rollup "1.1.2"
+    rollup-plugin-babel "^4.3.2"
+    rollup-plugin-commonjs "^9.2.0"
+    rollup-plugin-replace "2.1.0"
+
+"@alfred/skill-webpack@^0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "http://localhost:4873/@alfred%2fskill-webpack/-/skill-webpack-0.0.2-alpha.1.tgz#02d17e2fd6fdbd6d66f49afdcea3495fab0dfb5c"
+  integrity sha512-VB/rVvvA7lqajs5BFmNdEpRK9Gs6utWtguU1dIDXCawHXMzHYIMwBjgLs6aLaGLoRLZLsDBmJuPnfcdEIUhR0A==
+  dependencies:
+    "@alfred/helpers" "^0.0.2-alpha.1"
+    "@alfred/merge-configs" "^0.0.2-alpha.1"
+    get-port "^4.1.0"
+    webpack "^4.28.4"
+    webpack-cli "^3.2.1"
+    webpack-dev-server "^3.1.14"
 
 "@amilajack/powerset@^0.0.0":
   version "0.0.0"
@@ -1049,6 +1239,15 @@
     esutils "^2.0.2"
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
+
+"@examples/alfred-config-example@^0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "http://localhost:4873/@examples%2falfred-config-example/-/alfred-config-example-0.0.2-alpha.1.tgz#1ecc0159d43f9265e1588fb53ccf4b128668d10c"
+  integrity sha512-F54bP4fBTvfd+MBih/NExqco4ZcXXIG/txiszGehc++BIaINQ2bsb0lfkQCXuIj9+TU09qKZs+LvUmtffeOOFA==
+  dependencies:
+    "@alfred/skill-lodash" "^0.0.2-alpha.1"
+    "@alfred/skill-parcel" "^0.0.2-alpha.1"
+    "@babel/plugin-proposal-class-properties" "^7.3.0"
 
 "@examples/alfred-config-example@file:examples/alfred-config-example":
   version "0.0.2-alpha.0"
@@ -9080,7 +9279,7 @@ is-ssh@^1.3.0:
   dependencies:
     protocols "^1.1.0"
 
-is-stream@^1.0.0, is-stream@^1.1.0:
+is-stream@^1.0.0, is-stream@^1.0.1, is-stream@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/is-stream/-/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
   integrity sha1-EtSj3U5o4Lec6428hBc66A2RykQ=
@@ -9183,6 +9382,14 @@ isobject@^3.0.0, isobject@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
+
+isomorphic-fetch@^2.2.1:
+  version "2.2.1"
+  resolved "http://localhost:4873/isomorphic-fetch/-/isomorphic-fetch-2.2.1.tgz#611ae1acf14f5e81f729507472819fe9733558a9"
+  integrity sha1-YRrhrPFPXoH3KVB0coGf6XM1WKk=
+  dependencies:
+    node-fetch "^1.0.1"
+    whatwg-fetch ">=0.10.0"
 
 isstream@~0.1.2:
   version "0.1.2"
@@ -11250,6 +11457,14 @@ node-fetch-npm@^2.0.2:
     encoding "^0.1.11"
     json-parse-better-errors "^1.0.0"
     safe-buffer "^5.1.1"
+
+node-fetch@^1.0.1:
+  version "1.7.3"
+  resolved "http://localhost:4873/node-fetch/-/node-fetch-1.7.3.tgz#980f6f72d85211a5347c6b2bc18c5b84c3eb47ef"
+  integrity sha512-NhZ4CsKx7cYm2vSrBAr2PvFOe6sWDf0UYLRqA6svUYg7+/TSfVAu49jYC4BvQ4Sms9SZgdqGBgroqfDhJdTyKQ==
+  dependencies:
+    encoding "^0.1.11"
+    is-stream "^1.0.1"
 
 node-fetch@^2.1.1, node-fetch@^2.3.0:
   version "2.3.0"
@@ -16574,6 +16789,11 @@ whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3:
   integrity sha512-b5lim54JOPN9HtzvK9HFXvBma/rnfFeqsic0hSpjtDbVxR3dJKLc+KB4V6GgiGOvl7CY/KNh8rxSo9DKQrnUEw==
   dependencies:
     iconv-lite "0.4.24"
+
+whatwg-fetch@>=0.10.0:
+  version "3.0.0"
+  resolved "http://localhost:4873/whatwg-fetch/-/whatwg-fetch-3.0.0.tgz#fc804e458cc460009b1a2b966bc8817d2578aefb"
+  integrity sha512-9GSJUgz1D4MfyKU7KRqwOjXCXTqWdFNvEr7eUBYchQiVc744mqK/MzXPNR2WsPkmkOa4ywfg8C2n8h+13Bey1Q==
 
 whatwg-mimetype@^2.1.0, whatwg-mimetype@^2.2.0:
   version "2.3.0"

@@ -6,7 +6,8 @@ const interfaceConfig = {
     // Flag name and argument types
     env: ['production', 'development', 'test'],
     // All the supported targets a `build` skill should build
-    targets: ['browser', 'node'],
+    // @TODO: Add node to targets
+    targets: ['browser'],
     // Project type
     projectTypes: ['app']
   }
@@ -30,8 +31,7 @@ module.exports = {
       const entryFiles = [];
       if (interfaceState.target === 'browser') {
         entryFiles.push(path.join(src, 'index.html'));
-      }
-      if (interfaceState.target === 'node') {
+      } else if (interfaceState.target === 'node') {
         entryFiles.push(path.join(src, 'app.node.js'));
       }
       const { target } = interfaceState;
@@ -40,7 +40,7 @@ module.exports = {
         outFile: 'index.html',
         cacheDir: path.join(alfredConfig.root, 'node_modules', '.cache'),
         minify: interfaceState.env === 'production',
-        noAutoinstall: true,
+        autoInstall: false,
         target
       };
 
@@ -53,8 +53,8 @@ module.exports = {
           const url = `http://localhost:${server.address().port}`;
           console.log(
             `Starting ${
-              interfaceState.env !== 'production' ? 'unoptimized' : 'optimized'
-            } build on ${url}...`
+              interfaceState.env === 'production' ? 'optimized' : 'unoptimized'
+            } build on ${url}`
           );
           await openInBrowser(url);
           return server;
@@ -62,8 +62,8 @@ module.exports = {
         case 'build': {
           console.log(
             `Building ${
-              interfaceState.env !== 'production' ? 'unoptimized' : 'optimized'
-            } build...`
+              interfaceState.env === 'production' ? 'optimized' : 'unoptimized'
+            } build`
           );
           return new Bundler(entryFiles, {
             ...baseOptions,

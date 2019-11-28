@@ -123,8 +123,8 @@ module.exports = {
           // @TODO: Mention which port and host the server is running (see webpack skill)
           console.log(
             `Starting ${
-              interfaceState.env !== 'production' ? 'unoptimized' : 'optimized'
-            } build...`
+              interfaceState.env === 'production' ? 'optimized' : 'unoptimized'
+            } build`
           );
           return rollup.watch({
             ...watchConf.input,
@@ -134,8 +134,8 @@ module.exports = {
         case 'build': {
           console.log(
             `Building ${
-              interfaceState.env !== 'production' ? 'unoptimized' : 'optimized'
-            } build...`
+              interfaceState.env === 'production' ? 'optimized' : 'unoptimized'
+            } build`
           );
           const bundle = await rollup.rollup(
             interfaceState.env === 'production' ? prod : dev

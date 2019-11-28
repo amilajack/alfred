@@ -2,14 +2,8 @@ function app() {
   console.log('hello world!');
 }
 
-document.write('mr.rob and no');
+document.write('Hello from alfred!');
 
-console.log('mr.rob but ho');
-
-function bar() {
-  return 1 + 1;
-}
+console.log('Hello from alfred!');
 
 app();
-
-document.write(bar());
