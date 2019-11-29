@@ -25,7 +25,6 @@ describe('fixtures', () => {
         const url = await new Promise(resolve => {
           cp.stdout.on('data', data => {
             // Wait for output to start serving
-            console.log(data.toString());
             if (data.toString().includes('http://localhost:')) {
               resolve(
                 data
@@ -36,7 +35,6 @@ describe('fixtures', () => {
             }
           });
         });
-        console.log(url)
         const responseText = await fetch(url)
           .then(res => res.text())
           .finally(() => {

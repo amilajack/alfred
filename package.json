@@ -37,7 +37,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn test"
+      "pre-commit": "yarn test && cross-env ALFRED_E2E_TEST=true jest tests/fixtures/fixtures.spec.js"
     }
   },
   "keywords": [
