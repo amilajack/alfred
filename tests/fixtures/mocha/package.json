@@ -1,6 +1,6 @@
 {
   "name": "@fixtures/mocha",
-  "version": "0.0.2-alpha.3",
+  "version": "0.0.2-alpha.4",
   "private": true,
   "license": "MIT",
   "main": "./targets/lib.node.js",
@@ -16,9 +16,9 @@
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
   "devDependencies": {
-    "@alfred/cli": "^0.0.2-alpha.2",
-    "@alfred/core": "^0.0.2-alpha.2",
-    "@alfred/skill-mocha": "^0.0.2-alpha.2",
+    "@alfred/cli": "^0.0.2-alpha.4",
+    "@alfred/core": "^0.0.2-alpha.4",
+    "@alfred/skill-mocha": "^0.0.2-alpha.4",
     "eslint-plugin-mocha": "^6.2.2"
   },
   "alfred": {

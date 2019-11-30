@@ -1,6 +1,6 @@
 {
   "name": "@alfred/skill-mocha",
-  "version": "0.0.2-alpha.3",
+  "version": "0.0.2-alpha.4",
   "dependencies": {
     "mocha": "^6.2.2"
   },
