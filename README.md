@@ -86,10 +86,13 @@ yarn
 # Testing
 yarn test
 
-# Publishing
+# Local Publishing
 yarn global add verdaccio
 verdaccio
-lerna publish --skip-git --registry http://localhost:4873
+lerna publish --registry http://localhost:4873
+
+# Production Publishing
+lerna publish
 
 # Misc
 To change verdaccio configs, see `~/.config/verdaccio/config.yaml`
