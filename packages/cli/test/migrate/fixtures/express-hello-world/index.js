@@ -5,11 +5,9 @@
  * Released under the MIT license.
  */
 
-'use strict'
-
-module.exports = function expressHelloWorld () {
-  return function (req, res, next) {
-    res.send('Hello World')
-    next()
-  }
-}
+module.exports = function expressHelloWorld() {
+  return function(req, res, next) {
+    res.send('Hello World');
+    next();
+  };
+};

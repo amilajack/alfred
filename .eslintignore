@@ -3,7 +3,7 @@ build
 typings
 flow-typed
 lib
-fixtures
 targets
-examples
 tmp
+fixtures
+examples

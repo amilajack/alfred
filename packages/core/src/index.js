@@ -14,15 +14,7 @@ import mergeConfigs from '@alfred/merge-configs';
 import pkgUp from 'pkg-up';
 import lodash from 'lodash';
 import topsort from './topsort';
-import type { ConfigType } from './config';
-
-export type AlfredConfig = {
-  extends?: Array<string> | Array<[string, { [x: string]: any }]> | string,
-  npmClient: 'npm' | 'yarn',
-  skills: Array<ConfigType>,
-  root: string,
-  showConfigs: boolean
-};
+import type { AlfredConfig } from './config';
 
 export {
   default as Config,
@@ -48,8 +40,30 @@ export const INTERFACE_STATES = [
   },
   {
     projectType: 'app',
+    target: 'browser',
+    env: 'development'
+  },
+  // @TODO
+  // {
+  //   projectType: 'app',
+  //   target: 'node',
+  //   env: 'production'
+  // },
+  // @TODO
+  // {
+  //   projectType: 'app',
+  //   target: 'node',
+  //   env: 'development'
+  // },
+  {
+    projectType: 'lib',
     target: 'node',
     env: 'production'
+  },
+  {
+    projectType: 'lib',
+    target: 'node',
+    env: 'development'
   },
   {
     projectType: 'lib',
@@ -57,28 +71,8 @@ export const INTERFACE_STATES = [
     env: 'production'
   },
   {
-    projectType: 'app',
-    target: 'node',
-    env: 'production'
-  },
-  {
-    projectType: 'app',
-    target: 'browser',
-    env: 'development'
-  },
-  {
-    projectType: 'app',
-    target: 'node',
-    env: 'development'
-  },
-  {
     projectType: 'lib',
     target: 'browser',
-    env: 'development'
-  },
-  {
-    projectType: 'app',
-    target: 'node',
     env: 'development'
   }
 ];
@@ -291,7 +285,7 @@ export function mapShortNameEnvToLongName(envName: string): string {
  */
 export async function getPkgBinPath(pkgName: string, binName: string) {
   const pkgPath = require.resolve(pkgName);
-  const pkgJsonPath = await pkgUp(pkgPath);
+  const pkgJsonPath = await pkgUp({ cwd: pkgPath });
 
   const { bin } = require(pkgJsonPath);
   if (!bin) {
@@ -570,7 +564,7 @@ export function getExecuteWrittenConfigsMethods(
   config: AlfredConfig
 ) {
   const configsBasePath = getConfigsBasePath(config.root);
-  const skillsConfigMap: Map<string, ConfigType> = new Map(
+  const skillsConfigMap: Map<string, configType> = new Map(
     config.skills.map(([skillPkgName, skillConfig]) => [
       require(skillPkgName).name,
       skillConfig

@@ -4,7 +4,6 @@ const { getConfigByConfigName } = require('@alfred/core');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 const { getProjectRoot } = require('@alfred/cli');
 const getPort = require('get-port');
-const { openInBrowser } = require('@alfred/helpers');
 
 function replaceProjectRoot(pathConfig, projectRoot) {
   return pathConfig.replace('<projectRoot>', projectRoot);
@@ -15,11 +14,15 @@ const interfaceConfig = {
     // Flag name and argument types
     env: ['production', 'development', 'test'],
     // All the supported targets a `build` skill should build
-    targets: ['browser', 'node'],
+    // @TODO: Add node to targets
+    targets: ['browser'],
     // Project type
     projectTypes: ['app']
   }
 };
+
+const shouldOpenInBrowser =
+  !('ALFRED_E2E_TEST' in process.env) || process.env.ALFRED_E2E_TEST !== 'true';
 
 module.exports = {
   name: 'webpack',
@@ -38,6 +41,7 @@ module.exports = {
     {
       name: 'webpack.base',
       path: 'webpack.base.js',
+      configType: 'module',
       config: {
         mode: 'development',
         output: {
@@ -53,6 +57,7 @@ module.exports = {
     {
       name: 'webpack.prod',
       path: 'webpack.prod.js',
+      configType: 'module',
       config: {
         output: {
           path: path.join('<projectRoot>', 'targets', 'prod'),
@@ -65,23 +70,24 @@ module.exports = {
     {
       name: 'webpack.dev',
       path: 'webpack.dev.js',
+      configType: 'module',
       config: {
         // @TODO: wepack-dev-server, HMR, sass, css, etc
         mode: 'development',
         entry: [
           // @TODO
-          // 'react-hot-loader/patch',
-          'webpack-dev-server/client?http://localhost:8080/',
+          'react-hot-loader/patch',
+          'webpack-dev-server/client?http://localhost:1234/',
           'webpack/hot/only-dev-server'
         ],
         output: {
           path: path.join('<projectRoot>', 'targets', 'dev'),
-          publicPath: 'http://localhost:8080/'
+          publicPath: 'http://localhost:1234/'
         },
         devServer: {
-          open: true,
-          port: 8080,
-          publicPath: 'http://localhost:8080',
+          open: shouldOpenInBrowser,
+          port: 1234,
+          publicPath: '/',
           compress: true,
           noInfo: true,
           stats: 'errors-only',
@@ -110,6 +116,7 @@ module.exports = {
     {
       name: 'webpack.node',
       path: 'webpack.node.js',
+      configType: 'module',
       config: {
         entry: [path.join('<projectRoot>', 'src', 'app.node.js')],
         output: {
@@ -121,6 +128,7 @@ module.exports = {
     {
       name: 'webpack.browser',
       path: 'webpack.browser.js',
+      configType: 'module',
       config: {
         entry: [path.join('<projectRoot>', 'src', 'app.browser.js')],
         output: {
@@ -159,9 +167,18 @@ module.exports = {
       );
 
       const projectRoot = getProjectRoot();
+
+      // @HACK: The following lines should be replaced with an algorithm that
+      //        recursively traverses and object and replaces each project root
       if (mergedConfig.output && mergedConfig.output.path) {
         mergedConfig.output.path = replaceProjectRoot(
           mergedConfig.output.path,
+          projectRoot
+        );
+      }
+      if (mergedConfig.devServer && mergedConfig.devServer.contentBase) {
+        mergedConfig.devServer.contentBase = replaceProjectRoot(
+          mergedConfig.devServer.contentBase,
           projectRoot
         );
       }
@@ -183,7 +200,7 @@ module.exports = {
           const Webpack = require('webpack');
           const WebpackDevServer = require('webpack-dev-server');
           WebpackDevServer.addDevServerEntrypoints(mergedConfig, {
-            contentBase: path.join('<projectRoot>', 'src'),
+            contentBase: path.join(projectRoot, 'src'),
             hot: true,
             host: 'localhost'
           });
@@ -191,23 +208,22 @@ module.exports = {
           const { devServer } = mergedConfig;
           const server = new WebpackDevServer(compiler, devServer);
           const port = await getPort({ port: 1234 });
-          return server.listen(port, '127.0.0.1', async () => {
+          return server.listen(port, 'localhost', async () => {
             const url = `http://localhost:${port}`;
             console.log(
               `Starting ${
-                interfaceState.env !== 'production'
-                  ? 'unoptimized'
-                  : 'optimized'
-              } build on ${url}...`
+                interfaceState.env === 'production'
+                  ? 'optimized'
+                  : 'unoptimized'
+              } build on ${url}`
             );
-            await openInBrowser(url);
           });
         }
         case 'build': {
           console.log(
             `Building ${
-              interfaceState.env !== 'production' ? 'unoptimized' : 'optimized'
-            } build...`
+              interfaceState.env === 'production' ? 'optimized' : 'unoptimized'
+            } build`
           );
           return webpack(mergedConfig, (err, stats) => {
             if (err) {
@@ -233,19 +249,23 @@ module.exports = {
   },
   ctfs: {
     eslint: (config, ctfs, { alfredConfig }) =>
-      config.extendConfig('eslint', {
-        settings: {
-          'import/resolver': {
-            webpack: {
-              config: path.join(
-                alfredConfig.root,
-                '.configs',
-                'webpack.config.js'
-              )
+      config
+        .extendConfig('eslint', {
+          settings: {
+            'import/resolver': {
+              webpack: {
+                config: path.join(
+                  alfredConfig.root,
+                  '.configs',
+                  'webpack.browser.js'
+                )
+              }
             }
           }
-        }
-      }),
+        })
+        .addDevDependencies({
+          'eslint-import-resolver-webpack': '2.18.2'
+        }),
     jest: config =>
       config
         .extendConfig('jest', {

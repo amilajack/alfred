@@ -67,18 +67,16 @@ describe('Migrate', () => {
     parseCodeSnippets(result2);
   });
 
-  it('should fail on non-existent files', async () => {
-    try {
-      await Providers({
+  it('should fail on non-existent files', () => {
+    return expect(
+      Providers({
         ...defaultConfig,
         files: [
           path.join(__dirname, 'fixtures', 'foo-test.ts'),
           path.join(__dirname, 'fixtures', 'class-test.ts')
         ]
-      });
-    } catch (e) {
-      expect({ ...e, path: '' }).toMatchSnapshot();
-    }
+      }).then(e => ({ ...e, path: '' }))
+    ).resolves.toMatchSnapshot();
   });
 
   it('should run against directories', async () => {

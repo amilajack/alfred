@@ -1,15 +1,13 @@
 function app() {
-  console.log('hello world!');
-}
-
-document.write('mr.rob and no');
-
-console.log('mr.rob but ho');
-
-function bar() {
-  return 1 + 1;
+  const h1 = document.createElement('h1');
+  h1.innerText = 'Hello from webpack!';
+  document.body.appendChild(h1);
 }
 
 app();
 
-document.write(bar());
+if (module.hot) {
+  module.hot.accept('./app.browser.js', () => {
+    app();
+  });
+}

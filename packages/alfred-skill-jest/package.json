@@ -1,12 +1,12 @@
 {
   "name": "@alfred/skill-jest",
-  "version": "0.0.2-alpha.0",
+  "version": "0.0.2-alpha.1",
   "dependencies": {
     "crypto": "^1.0.1",
     "jest": "^24.0.0"
   },
   "peerDependencies": {
-    "@alfred/core": "0.0.0",
+    "@alfred/core": "^0.0.2-alpha.1",
     "@alfred/interface-test": "^0.0.0",
     "jest": "^24.0.0"
   },

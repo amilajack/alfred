@@ -1,6 +1,6 @@
 // @flow
 import lebab from 'lebab';
-import { readFileAsync, writeFileAsync } from '.';
+import { readFileAsync, writeFileAsync } from '../helpers/fs';
 import type { ProviderInput, ProviderInterface } from './provider-interface';
 
 export default class LebabProvider implements ProviderInterface {

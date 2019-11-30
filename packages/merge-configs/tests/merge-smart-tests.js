@@ -1,7 +1,7 @@
 /* eslint import/no-extraneous-dependencies: off */
 const assert = require('assert');
-const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
 const loadersKeys = require('./loaders-keys');
 
 function commonTests(merge) {
@@ -182,14 +182,14 @@ function commonTests(merge) {
       plugins: [new CopyWebpackPlugin()]
     };
     const b = {
-      plugins: [new webpack.optimize.UglifyJsPlugin()]
+      plugins: [new TerserWebpackPlugin()]
     };
     const merged = merge(a, b);
 
     assert.equal(merged.plugins.length, 2);
     // CopyWebpackPlugin is actually a function that gets applied above
     assert.ok(merged.plugins[0].apply);
-    assert.equal(merged.plugins[1].constructor.name, 'UglifyJsPlugin');
+    assert.equal(merged.plugins[1].constructor.name, 'TerserPlugin');
   });
 }
 

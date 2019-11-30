@@ -1,15 +1,15 @@
 {
   "name": "@alfred/skill-rollup",
-  "version": "0.0.2-alpha.0",
+  "version": "0.0.2-alpha.1",
   "dependencies": {
-    "@alfred/merge-configs": "^0.0.2-alpha.0",
-    "rollup": "1.1.2",
+    "@alfred/merge-configs": "^0.0.2-alpha.1",
+    "rollup": "1.27.5",
     "rollup-plugin-babel": "^4.3.2",
-    "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-replace": "2.1.0"
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-replace": "2.2.0"
   },
   "peerDependencies": {
-    "@alfred/core": "0.0.0",
+    "@alfred/core": "^0.0.2-alpha.1",
     "@alfred/interface-build": "^0.0.0",
     "@alfred/interface-start": "^0.0.0"
   },

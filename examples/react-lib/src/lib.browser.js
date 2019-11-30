@@ -19,24 +19,12 @@ export function classNames(classSet) {
 }
 
 export default class GitHubButton extends React.Component {
-  static displayName = 'GitHubButton';
-
-  static propTypes = {
-    className: PropTypes.string,
-    type: PropTypes.oneOf(['stargazers', 'watchers', 'forks']).isRequired,
-    namespace: PropTypes.string.isRequired,
-    repo: PropTypes.string.isRequired,
-    size: PropTypes.oneOf(['large'])
-  };
-
-  static defaultProps = {
-    className: '',
-    size: 'large'
-  };
-
-  state = {
-    count: null
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: null
+    };
+  }
 
   componentDidMount() {
     return fetch(this.getRequestUrl())
@@ -89,7 +77,7 @@ export default class GitHubButton extends React.Component {
     });
 
     return (
-      <span {...rest} className={buttonClassName}>
+      <span className={buttonClassName}>
         <a
           className="gh-btn"
           href={this.getRepoUrl()}
@@ -112,3 +100,16 @@ export default class GitHubButton extends React.Component {
     );
   }
 }
+
+GitHubButton.propTypes = {
+  className: PropTypes.string,
+  type: PropTypes.oneOf(['stargazers', 'watchers', 'forks']).isRequired,
+  namespace: PropTypes.string.isRequired,
+  repo: PropTypes.string.isRequired,
+  size: PropTypes.oneOf(['large'])
+};
+
+GitHubButton.defaultProps = {
+  className: '',
+  size: 'large'
+};

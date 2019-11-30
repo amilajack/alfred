@@ -112,12 +112,16 @@ export async function writeConfigsFromCtf(
       .reduce((prev, ctfNode) => prev.concat(ctfNode.configFiles), [])
       .map(async configFile => {
         const filePath = path.join(configsBasePath, configFile.path);
-        const convertedConfig =
+        const stringifiedConfig =
           typeof configFile.config === 'string'
             ? configFile.config
             : await formatJson(configFile.config);
         // Write sync to prevent data races when writing configs in parallel
-        fs.writeFileSync(filePath, convertedConfig);
+        const normalizedJsonOrModule =
+          configFile.configType === 'module'
+            ? `module.exports = ${stringifiedConfig};`
+            : stringifiedConfig;
+        fs.writeFileSync(filePath, normalizedJsonOrModule);
       })
   );
 

@@ -1,11 +1,17 @@
-// @flow
 /* eslint import/no-dynamic-require: off, no-param-reassign: off */
 import path from 'path';
 import fs from 'fs';
 import formatPkg from 'format-package';
 import mergeConfigs from '@alfred/merge-configs';
 import Validate from './validation';
-import type { AlfredConfig } from '.';
+
+export type AlfredConfig = {
+  extends?: Array<string> | string,
+  npmClient: 'npm' | 'yarn',
+  skills: Array<string | [string, Object]>,
+  root: string,
+  showConfigs: boolean
+};
 
 export function requireConfig(configName: string): any {
   try {
@@ -39,7 +45,7 @@ export function getConfigs(config: AlfredConfig = {}): AlfredConfig {
   );
   // If nothing to extend then return the config itself without the extends
   // property
-  if (!config.extends.length) {
+  if (config.extends && !config.extends.length) {
     const newConfig = { ...config };
     delete newConfig.extends;
     return newConfig;
@@ -96,29 +102,27 @@ export default function Config(config: AlfredConfig): AlfredConfig {
   if (!mergedConfig.skills || !mergedConfig.skills.length) return mergedConfig;
 
   const skillsMap: ConfigMap = new Map();
-  mergedConfig.skills = Array.from(
-    mergedConfig.skills
-      .reduce((map: ConfigMap, skill: ConfigSkillType) => {
-        if (typeof skill === 'string') {
-          map.set(skill, {});
-          return map;
+  const mappedSkills: ConfigMap = mergedConfig.skills.reduce(
+    (map: ConfigMap, skill: ConfigSkillType) => {
+      if (typeof skill === 'string') {
+        map.set(skill, {});
+        return map;
+      }
+      if (Array.isArray(skill)) {
+        const [skillName, skillConfig] = skill;
+        if (map.has(skillName)) {
+          map.set(skillName, mergeConfigs({}, map.get(skillName), skillConfig));
+        } else {
+          map.set(skillName, skillConfig);
         }
-        if (Array.isArray(skill)) {
-          const [skillName, skillConfig] = skill;
-          if (map.has(skillName)) {
-            map.set(
-              skillName,
-              mergeConfigs({}, map.get(skillName), skillConfig)
-            );
-          } else {
-            map.set(skillName, skillConfig);
-          }
-          return map;
-        }
-        throw new Error(`Config type not supported: ${JSON.stringify(skill)}`);
-      }, skillsMap)
-      .entries()
+        return map;
+      }
+      throw new Error(`Config type not supported: ${JSON.stringify(skill)}`);
+    },
+    skillsMap
   );
+
+  mergedConfig.skills = Array.from(mappedSkills.entries());
 
   return mergedConfig;
 }
@@ -225,7 +229,7 @@ export async function loadConfig(
     root: projectRoot
   };
 
-  const alfredConfig = Config(Object.assign({}, defaultOpts, rawAlfredConfig));
+  const alfredConfig = Config({ ...defaultOpts, ...rawAlfredConfig });
 
   return { pkg, pkgPath, alfredConfig };
 }

@@ -7,7 +7,7 @@ import { installDeps, diffCtfDepsOfAllInterfaceStates, init } from './helpers';
   const { args: skillsPkgNames } = args;
   const { alfredConfig, projectRoot, pkgPath, pkg: rawPkg } = await init();
 
-  const pkg = Object.assign({}, rawPkg, { alfred: { skills: [] } });
+  const pkg = { ...rawPkg, alfred: { skills: [] } };
 
   // Write the skills to the alfred config in the package.json
   await writeConfig(pkgPath, {
