@@ -1,6 +1,6 @@
 {
   "name": "@fixtures/skill-flags",
-  "version": "0.0.2-alpha.1",
+  "version": "0.0.2-alpha.2",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -18,8 +18,8 @@
     "@babel/preset-env": "^7.7.4"
   },
   "devDependencies": {
-    "@alfred/cli": "^0.0.2-alpha.1",
-    "@alfred/core": "^0.0.2-alpha.1",
+    "@alfred/cli": "^0.0.2-alpha.2",
+    "@alfred/core": "^0.0.2-alpha.2",
     "eslint-formatter-pretty": "^3.0.1"
   },
   "alfred": {
