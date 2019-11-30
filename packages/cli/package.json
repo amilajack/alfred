@@ -2,16 +2,16 @@
   "name": "@alfred/cli",
   "version": "0.0.2-alpha.4",
   "description": "A framework for upgrading JavaScript codebases",
-  "license": "MIT",
-  "engines": {
-    "node": ">=10"
-  },
   "repository": "git@github.com:amilajack/alfred.git",
+  "license": "MIT",
   "author": "Amila Welihinda <amilajack@gmail.com>",
+  "files": [
+    "lib"
+  ],
+  "main": "./lib/helpers",
   "bin": {
     "alfred": "./lib/alfred.js"
   },
-  "main": "./lib/helpers",
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps inline && cp -r src/providers/resources lib/providers && cp -r src/templates lib",
     "build-watch": "cross-env NODE_ENV=production babel src --out-dir lib --watch --source-maps inline",
@@ -21,11 +21,6 @@
     "test": "jest --color ./test/*.spec.js",
     "version": "rm -rf lib && yarn build"
   },
-  "engineStrict": true,
-  "files": [
-    "lib"
-  ],
-  "preferGlobal": true,
   "dependencies": {
     "5to6-codemod": "^1.7.1",
     "@alfred/merge-configs": "^0.0.2-alpha.4",
@@ -60,11 +55,6 @@
     "validate-npm-package-license": "^3.0.4",
     "validate-npm-package-name": "^3.0.0"
   },
-  "peerDependencies": {
-    "@alfred/core": "^0.0.2-alpha.1",
-    "@alfred/interface-build": "^0.0.2-alpha.1",
-    "@alfred/interface-start": "^0.0.2-alpha.1"
-  },
   "devDependencies": {
     "chai": "^4.2.0",
     "espree": "^6.1.2",
@@ -73,5 +63,15 @@
     "lodash.flatten": "^4.4.0",
     "signale": "^1.3.0"
   },
+  "peerDependencies": {
+    "@alfred/core": "^0.0.2-alpha.1",
+    "@alfred/interface-build": "^0.0.2-alpha.1",
+    "@alfred/interface-start": "^0.0.2-alpha.1"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "engineStrict": true,
+  "preferGlobal": true,
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"
 }

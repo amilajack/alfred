@@ -11,6 +11,9 @@ process.on('unhandledRejection', err => {
 
 updateNotifier({ pkg }).notify();
 
+// @TODO: Before running any subcommand (except for new), check if cwd is an Alfred project
+//        or if cwd is a subdirectory of an Alfred project
+
 program
   .version(pkg.version, '-v, --version')
   .description('A Modular JS Toolchain')
