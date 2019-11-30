@@ -5,16 +5,10 @@ import formatPkg from 'format-package';
 import mergeConfigs from '@alfred/merge-configs';
 import Validate from './validation';
 
-export type configType =
-  | string
-  | {
-      [x: string]: any
-    };
-
 export type AlfredConfig = {
   extends?: Array<string> | string,
   npmClient: 'npm' | 'yarn',
-  skills: Array<configType>,
+  skills: Array<string | [string, Object]>,
   root: string,
   showConfigs: boolean
 };
@@ -235,7 +229,7 @@ export async function loadConfig(
     root: projectRoot
   };
 
-  const alfredConfig = Config(Object.assign({}, defaultOpts, rawAlfredConfig));
+  const alfredConfig = Config({ ...defaultOpts, ...rawAlfredConfig });
 
   return { pkg, pkgPath, alfredConfig };
 }

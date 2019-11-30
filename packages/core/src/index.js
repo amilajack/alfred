@@ -14,7 +14,7 @@ import mergeConfigs from '@alfred/merge-configs';
 import pkgUp from 'pkg-up';
 import lodash from 'lodash';
 import topsort from './topsort';
-import type { configType, AlfredConfig } from './config';
+import type { AlfredConfig } from './config';
 
 export {
   default as Config,
@@ -150,6 +150,12 @@ export function normalizeInterfacesOfSkill(
     `".interfaces" property must be an array of strings or an array of arrays. Received "${interfaces}"`
   );
 }
+
+export type configType =
+  | string
+  | {
+      [x: string]: any
+    };
 
 export type configFileType = {
   // The "friendly name" of a file. This is the name that

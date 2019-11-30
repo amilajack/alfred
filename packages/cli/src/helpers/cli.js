@@ -149,9 +149,10 @@ export async function addEntrypoints(
       const isApp = projectType === 'app';
       const isBrowser = target === 'browser';
 
-      const templateData = Object.assign({}, rawTemplateData, {
+      const templateData = {
+        ...rawTemplateData,
         project: { projectType, target, isApp, isBrowser }
-      });
+      };
 
       const writeIndexHtml = () => {
         if (isApp && isBrowser) {

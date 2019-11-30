@@ -41,6 +41,7 @@ module.exports = {
     {
       name: 'webpack.base',
       path: 'webpack.base.js',
+      configType: 'module',
       config: {
         mode: 'development',
         output: {
@@ -56,6 +57,7 @@ module.exports = {
     {
       name: 'webpack.prod',
       path: 'webpack.prod.js',
+      configType: 'module',
       config: {
         output: {
           path: path.join('<projectRoot>', 'targets', 'prod'),
@@ -68,6 +70,7 @@ module.exports = {
     {
       name: 'webpack.dev',
       path: 'webpack.dev.js',
+      configType: 'module',
       config: {
         // @TODO: wepack-dev-server, HMR, sass, css, etc
         mode: 'development',
@@ -113,6 +116,7 @@ module.exports = {
     {
       name: 'webpack.node',
       path: 'webpack.node.js',
+      configType: 'module',
       config: {
         entry: [path.join('<projectRoot>', 'src', 'app.node.js')],
         output: {
@@ -124,6 +128,7 @@ module.exports = {
     {
       name: 'webpack.browser',
       path: 'webpack.browser.js',
+      configType: 'module',
       config: {
         entry: [path.join('<projectRoot>', 'src', 'app.browser.js')],
         output: {
@@ -163,7 +168,7 @@ module.exports = {
 
       const projectRoot = getProjectRoot();
 
-      // @HACK: The following lines should be replaced bn an algorithm that
+      // @HACK: The following lines should be replaced with an algorithm that
       //        recursively traverses and object and replaces each project root
       if (mergedConfig.output && mergedConfig.output.path) {
         mergedConfig.output.path = replaceProjectRoot(
@@ -244,19 +249,23 @@ module.exports = {
   },
   ctfs: {
     eslint: (config, ctfs, { alfredConfig }) =>
-      config.extendConfig('eslint', {
-        settings: {
-          'import/resolver': {
-            webpack: {
-              config: path.join(
-                alfredConfig.root,
-                '.configs',
-                'webpack.config.js'
-              )
+      config
+        .extendConfig('eslint', {
+          settings: {
+            'import/resolver': {
+              webpack: {
+                config: path.join(
+                  alfredConfig.root,
+                  '.configs',
+                  'webpack.browser.js'
+                )
+              }
             }
           }
-        }
-      }),
+        })
+        .addDevDependencies({
+          'eslint-import-resolver-webpack': '2.18.2'
+        }),
     jest: config =>
       config
         .extendConfig('jest', {
