@@ -222,8 +222,7 @@ type AlfredInterface = {
     "app": {
       // Each target will have it's own build
       "targets": {
-        "chrome": 50,
-        "node": 10
+        "chrome": 50
       }
     },
     // Config for all lib targets
