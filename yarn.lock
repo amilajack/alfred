@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"5to6-codemod@^1.7.1":
+"5to6-codemod@^1.8.0":
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/5to6-codemod/-/5to6-codemod-1.8.0.tgz#12f7639ff965efd23de3a5bff4787742a50260cf"
   integrity sha512-RUHjjwl9+p1d46USvmoKsmMaHODFUAESE1de/q0qQM+hwzgk/HssTwb1Nc5dbUpKEkJ7duLg6ggMIwScd+TRig==
