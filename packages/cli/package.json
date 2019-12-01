@@ -22,7 +22,7 @@
     "version": "rm -rf lib && yarn build"
   },
   "dependencies": {
-    "5to6-codemod": "^1.7.1",
+    "5to6-codemod": "^1.8.0",
     "@alfred/merge-configs": "^0.0.2-alpha.4",
     "@amilajack/powerset": "^0.0.0",
     "@babel/code-frame": "^7.0.0",
