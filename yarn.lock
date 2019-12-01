@@ -11,209 +11,12 @@
     lodash "^4.17.4"
     recast "^0.12.1"
 
-"@alfred/cli@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@alfred%2fcli/-/cli-0.0.2-alpha.2.tgz#6e966d4a787139f110e725e247a12071b1763af6"
-  integrity sha512-7+brsS1lOIYpry4b3hsjd77PVBLn7aA49nJ9kiB3IXbJ+BnwFMQzPB/3AAbB83Sxh68tsWM1gPkm2iHpzN9h9Q==
-  dependencies:
-    "5to6-codemod" "^1.7.1"
-    "@alfred/merge-configs" "^0.0.2-alpha.2"
-    "@amilajack/powerset" "^0.0.0"
-    "@babel/code-frame" "^7.0.0"
-    chalk "^3.0.0"
-    child-process-promise "^2.2.1"
-    cli-table3 "^0.5.1"
-    commander "^4.0.1"
-    eslint "^6.7.1"
-    eslint-config-bliss "^4.4.0"
-    eslint-plugin-flowtype-errors "^4.1.0"
-    findit "^2.0.0"
-    format-package "^5.2.0"
-    git-config "^0.0.7"
-    gitignore-parser "^0.0.2"
-    handlebars "^4.1.0"
-    inquirer "^7.0.0"
-    jscodeshift "^0.6.3"
-    lebab "^3.0.3"
-    lodash "^4.17.11"
-    lodash.flatten "^4.4.0"
-    microjob "^0.7.0"
-    npm "^6.8.0"
-    pkg-up "^3.1.0"
-    rimraf "^3.0.0"
-    rndm "^1.2.0"
-    signale "^1.3.0"
-    simple-git "^1.107.0"
-    uniq "^1.0.1"
-    update-notifier "^3.0.1"
-    validate-npm-package-license "^3.0.4"
-    validate-npm-package-name "^3.0.0"
-
-"@alfred/core@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@alfred%2fcore/-/core-0.0.2-alpha.2.tgz#a5f155a13eae45745dd7205ff8241a4c7d6f2fa8"
-  integrity sha512-EiUF3HoFYa5xIMb0s4x1Ac4JniGclj7bSCN+6CGRKjBt4Z/tCRF5Ct19wQemS098mycu14Qzmhzgb1xvr9JFoA==
-  dependencies:
-    "@alfred/interface-build" "^0.0.2-alpha.2"
-    "@alfred/interface-format" "^0.0.2-alpha.2"
-    "@alfred/interface-lint" "^0.0.2-alpha.2"
-    "@alfred/interface-start" "^0.0.2-alpha.2"
-    "@alfred/interface-test" "^0.0.2-alpha.2"
-    "@alfred/merge-configs" "^0.0.2-alpha.2"
-    "@alfred/skill-babel" "^0.0.2-alpha.2"
-    "@alfred/skill-eslint" "^0.0.2-alpha.2"
-    "@alfred/skill-jest" "^0.0.2-alpha.2"
-    "@alfred/skill-lodash" "^0.0.2-alpha.2"
-    "@alfred/skill-parcel" "^0.0.2-alpha.2"
-    "@alfred/skill-prettier" "^0.0.2-alpha.2"
-    "@alfred/skill-react" "^0.0.2-alpha.2"
-    "@alfred/skill-rollup" "^0.0.2-alpha.2"
-    "@alfred/skill-webpack" "^0.0.2-alpha.2"
-    debug "^4.1.1"
-    format-package "^5.2.0"
-    joi "^14.3.1"
-    lodash "^4.17.11"
-    pkg-up "^3.1.0"
-    rimraf "^3.0.0"
-    toposort "^2.0.2"
-
-"@alfred/helpers@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@alfred%2fhelpers/-/helpers-0.0.2-alpha.2.tgz#b2cf6c3da17f61c5651230d46e251e5d7d8b868d"
-  integrity sha512-1Hwb5ehxXALUMWLDIKzO7OSCI+AJC2t7y8wHVES2zNTVcnQwQCBHmgE233RAAeJZVfL4K45YwqlMFJWCaulvxQ==
-  dependencies:
-    opn "^6.0.0"
-
-"@alfred/interface-build@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@alfred%2finterface-build/-/interface-build-0.0.2-alpha.2.tgz#ab699dd7b051b406a9b15d3756f6829c54ec2933"
-  integrity sha512-YtAcGQKnyZR+cQSvcHGqBgfm4/h4wdIAEHVFLc3T343l2ndUHsPPeBaKWoEKKZ1Qn8tU5khTq1J774XonP1+xg==
-  dependencies:
-    debug "^4.1.1"
-
-"@alfred/interface-format@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@alfred%2finterface-format/-/interface-format-0.0.2-alpha.2.tgz#f735939c2d69d10a0c9b2bcaaf78ea73dc12dc67"
-  integrity sha512-Wrw7D0voUvvZgSYKMSx1aqkksFCA/+LkATU6fKrdxGhGJVQWUaaMQElWXlrvKetwLht66vSsh6p5u+3CRPVC6w==
-
-"@alfred/interface-lint@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@alfred%2finterface-lint/-/interface-lint-0.0.2-alpha.2.tgz#81a4ce8309000c9fe0145b94cc05bbf93ba273f6"
-  integrity sha512-+hXKpLc3tm1z9Od3hVcqWtpAEATUDV+NCHSRrmOEnLzka4+8d6szqPfKU69ykIb5W6WTm24EqkxvoJuX5dhSsw==
-
-"@alfred/interface-start@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@alfred%2finterface-start/-/interface-start-0.0.2-alpha.2.tgz#03f8dcf5723d84c785dea6b8b5d17b655644291c"
-  integrity sha512-xXQ9ftmQdkwmqe+cdANqgT/rFd/e9mEin6urZL6wCc4Plq7z/P36jPqE4vUmi6Sz5HR6IKvyBEGQE/UvkX/7JA==
-  dependencies:
-    debug "^4.1.1"
-
-"@alfred/interface-test@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@alfred%2finterface-test/-/interface-test-0.0.2-alpha.2.tgz#a370591a1737fcdce48c01e2ac41fe539e139554"
-  integrity sha512-r2lUREs7Y3eyxHaVDZaesaZouo9Wg56NK9f2sx3jip9d/x/jCv491U3YBSLT+4jm/FyASvYC36e5ryXQygaSnw==
-
-"@alfred/merge-configs@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@alfred%2fmerge-configs/-/merge-configs-0.0.2-alpha.2.tgz#58cdfe510b4683757b2d23da47dae8c16576e795"
-  integrity sha512-whFibK8FLEvgeuj575gYURQZh1k+UtOTuennIKvx5nf6dqzi6XNzsjjMLS+tdw4uDA42pKAts53vfMxc2lWtNw==
-  dependencies:
-    lodash "^4.17.11"
-
-"@alfred/skill-babel@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@alfred%2fskill-babel/-/skill-babel-0.0.2-alpha.2.tgz#2c7d16b62c2df9738af18f43170a3f5e2d9c020d"
-  integrity sha512-JKos3gRTXN67Pz+y+0ZZk8GT3F6/qamTS4GBKxj7IR6pBdDQCoKqkVG13Wu3JIudYKPOe28aSpx2ramEzDWyxw==
-  dependencies:
-    "@babel/cli" "^7.2.3"
-    "@babel/core" "^7.3.4"
-    "@babel/plugin-proposal-class-properties" "^7.3.4"
-    "@babel/preset-env" "^7.3.4"
-    "@babel/register" "^7.0.0"
-    babel-core "^7.0.0-bridge.0"
-    babel-loader "8.0.6"
-
-"@alfred/skill-eslint@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@alfred%2fskill-eslint/-/skill-eslint-0.0.2-alpha.2.tgz#b928a9f8f12b986b865b29278352abc966e17162"
-  integrity sha512-TiSyvZD8mez8QEOc7LgXPP1jyHjxrHEDnmGPUepr6o8me6L8AwQmK0Ajp2yQNyhllou4cesAvLJnpcK3/rPv+Q==
-  dependencies:
-    eslint "^6.7.1"
-
-"@alfred/skill-jest@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@alfred%2fskill-jest/-/skill-jest-0.0.2-alpha.2.tgz#3592abe2c6ae2a375bd5ef64d1a7d7783b7d647f"
-  integrity sha512-K9dX6mTe5+85PeFqmQMVFaO+rrb+KDMa9cVz4f2KM38fecTto6UmRvzO+vAh//NQQ8M08dKdOJ8Tv3r3bGra7A==
-  dependencies:
-    crypto "^1.0.1"
-    jest "^24.0.0"
-
-"@alfred/skill-lodash@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@alfred%2fskill-lodash/-/skill-lodash-0.0.2-alpha.2.tgz#694c269e9763b50327e2758e93814b455c2e9fdc"
-  integrity sha512-sfLR8b9hH14ameiVSp9E5s16gKcPuG2Cus4jGT/IYUzqiZqIhwdZoupCtShthZPvu3Orc47QfatdN5Q0WN9buQ==
-  dependencies:
-    lodash-webpack-plugin "0.11.5"
-
-"@alfred/skill-mocha@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@alfred%2fskill-mocha/-/skill-mocha-0.0.2-alpha.2.tgz#d13911c9de61b9b3770c90660338f990acd7397f"
-  integrity sha512-Ht0KMP4uL9RJtg13m+5Uc74cN99MnRhTurc3GHbMYG+JE28KhzXItgF9jOUEPAAjEmYvhZCr0sKwChcXwqirow==
-  dependencies:
-    mocha "^6.2.2"
-
-"@alfred/skill-parcel@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@alfred%2fskill-parcel/-/skill-parcel-0.0.2-alpha.2.tgz#836730e4156e6a9bdc49283403c315d70a6546d6"
-  integrity sha512-gut5tlFIlgbVXTITFeisdppK5aUUsD6+lTgAhpSbzpUXuhHdsOpbG62tEToaThe+QFXa0D/U0LCZXkGwOvI2Zg==
-  dependencies:
-    "@alfred/helpers" "^0.0.2-alpha.2"
-    parcel "^1.11.0"
-
-"@alfred/skill-prettier@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@alfred%2fskill-prettier/-/skill-prettier-0.0.2-alpha.2.tgz#64afb372d8c677a4be0ad3623ee8914a13602bd3"
-  integrity sha512-hgU0yvcs6sIH9ZHDKXmJYXRYnW7bArsLi6hUZb9CsvxK45t9OmuW9tzkp/Wii+mzRo5v0v271J/dGu//5Csp1g==
-  dependencies:
-    prettier "^1.16.4"
-
-"@alfred/skill-react@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@alfred%2fskill-react/-/skill-react-0.0.2-alpha.2.tgz#a49ba5f84618759176151d24bc484f4ffb14497f"
-  integrity sha512-NQLrn2odnk+Ozhmw+AgNSyWq5h/8i82M3p6eMGP9eTCfp7MqLX1f/KJ8YV/Du/BokYIbska1kpmch0cxFUVd1A==
-  dependencies:
-    "@babel/preset-env" "^7.3.4"
-    react-hot-loader "^4.6.3"
-
-"@alfred/skill-rollup@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@alfred%2fskill-rollup/-/skill-rollup-0.0.2-alpha.2.tgz#8f647be93e450755413f8135121f2e38860f9f70"
-  integrity sha512-ho3CtugP2bjOBTwhyIy0CxPn5LTka4fF8iorglNlGoHTkJJv08g0rIdfsMNYWwYsJRpWvL4tMihMHk0l9HwBPw==
-  dependencies:
-    "@alfred/merge-configs" "^0.0.2-alpha.2"
-    rollup "1.27.5"
-    rollup-plugin-babel "^4.3.2"
-    rollup-plugin-commonjs "^10.1.0"
-    rollup-plugin-replace "2.2.0"
-
-"@alfred/skill-webpack@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@alfred%2fskill-webpack/-/skill-webpack-0.0.2-alpha.2.tgz#0140410a70624aabfab499410f88e3c2ec38c5ec"
-  integrity sha512-iIj5jhrmqn3ogykMQMN43SEXkhmrqjFQrOPuFjRaVDTOM48v++7wccZTjLiDvUA+InBv/rKHATqC+QIvPOEFMw==
-  dependencies:
-    "@alfred/helpers" "^0.0.2-alpha.2"
-    "@alfred/merge-configs" "^0.0.2-alpha.2"
-    get-port "^5.0.0"
-    webpack "^4.28.4"
-    webpack-cli "^3.2.1"
-    webpack-dev-server "^3.1.14"
-
 "@amilajack/powerset@^0.0.0":
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/@amilajack/powerset/-/powerset-0.0.0.tgz#3322c7642ddad8d5ebccb43b05520c29e83699d5"
   integrity sha512-7l2qD/fBrGROYDGqPMFYn+xKKwWadKSpGkvYQ7Q7TESnw6ffQkKqe6o6knk5+yqzCNPlUgmAvLUaPH507UfJdQ==
 
-"@babel/cli@^7.2.3":
+"@babel/cli@^7.7.4":
   version "7.7.4"
   resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.7.4.tgz#38804334c8db40209f88c69a5c90998e60cca18b"
   integrity sha512-O7mmzaWdm+VabWQmxuM8hqNrWGGihN83KfhPUzp2lAW4kzIMwBxujXkZbD4fMwKMYY9FXTbDvXsJqU+5XHXi4A==
@@ -236,7 +39,7 @@
   dependencies:
     "@babel/highlight" "^7.0.0"
 
-"@babel/core@^7.1.0", "@babel/core@^7.1.6", "@babel/core@^7.2.2", "@babel/core@^7.3.4", "@babel/core@^7.4.4", "@babel/core@^7.7.2", "@babel/core@^7.7.4":
+"@babel/core@^7.1.0", "@babel/core@^7.1.6", "@babel/core@^7.2.2", "@babel/core@^7.4.4", "@babel/core@^7.7.2", "@babel/core@^7.7.4":
   version "7.7.4"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.7.4.tgz#37e864532200cb6b50ee9a4045f5f817840166ab"
   integrity sha512-+bYbx56j4nYBmpsWtnPUsKW3NdnYxbqyfrP2w9wILBuHzdfIKz9prieZK0DFPyIzkjYVUe4QkusGL07r5pXznQ==
@@ -481,7 +284,7 @@
     "@babel/helper-remap-async-to-generator" "^7.7.4"
     "@babel/plugin-syntax-async-generators" "^7.7.4"
 
-"@babel/plugin-proposal-class-properties@^7.1.0", "@babel/plugin-proposal-class-properties@^7.3.0", "@babel/plugin-proposal-class-properties@^7.3.4", "@babel/plugin-proposal-class-properties@^7.7.0":
+"@babel/plugin-proposal-class-properties@^7.1.0", "@babel/plugin-proposal-class-properties@^7.3.0", "@babel/plugin-proposal-class-properties@^7.7.0", "@babel/plugin-proposal-class-properties@^7.7.4":
   version "7.7.4"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-class-properties/-/plugin-proposal-class-properties-7.7.4.tgz#2f964f0cb18b948450362742e33e15211e77c2ba"
   integrity sha512-EcuXeV4Hv1X3+Q1TsuOmyyxeTRiSqurGJ26+I/FW1WbymmRRapVORm6x1Zl3iDIHyRxEs+VXWp6qnlcfcJSbbw==
@@ -497,7 +300,7 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-syntax-dynamic-import" "^7.7.4"
 
-"@babel/plugin-proposal-export-namespace-from@^7.2.0":
+"@babel/plugin-proposal-export-namespace-from@^7.7.4":
   version "7.7.4"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-export-namespace-from/-/plugin-proposal-export-namespace-from-7.7.4.tgz#9b32a9e3538ba4b0e2fa08942f0a8e5f60899dea"
   integrity sha512-3whN5U7iZjKdbwRSFwBOjGBgH7apXCzwielljxVH8D/iYcGRqPPw63vlIbG0GqQoT9bO0QYPcIUVkhQG5hcHtg==
@@ -544,7 +347,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-syntax-dynamic-import@^7.2.0", "@babel/plugin-syntax-dynamic-import@^7.7.4":
+"@babel/plugin-syntax-dynamic-import@^7.7.4":
   version "7.7.4"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-dynamic-import/-/plugin-syntax-dynamic-import-7.7.4.tgz#29ca3b4415abfe4a5ec381e903862ad1a54c3aec"
   integrity sha512-jHQW0vbRGvwQNgyVxwDh4yuXu4bH1f5/EICJLAhl1SblLs2CDhrsmCk+v5XLdE9wxtAFRyxx+P//Iw+a5L/tTg==
@@ -924,7 +727,7 @@
     core-js "^2.6.5"
     regenerator-runtime "^0.13.2"
 
-"@babel/preset-env@^7.1.6", "@babel/preset-env@^7.3.4", "@babel/preset-env@^7.4.4", "@babel/preset-env@^7.7.1", "@babel/preset-env@^7.7.4":
+"@babel/preset-env@^7.1.6", "@babel/preset-env@^7.4.4", "@babel/preset-env@^7.7.1", "@babel/preset-env@^7.7.4":
   version "7.7.4"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.7.4.tgz#ccaf309ae8d1ee2409c85a4e2b5e280ceee830f8"
   integrity sha512-Dg+ciGJjwvC1NIe/DGblMbcGq1HOtKbw8RLl4nIjlfcILKEOkWT/vRqPpumswABEBVudii6dnVwrBtzD7ibm4g==
@@ -981,7 +784,7 @@
     js-levenshtein "^1.1.3"
     semver "^5.5.0"
 
-"@babel/preset-flow@^7.0.0":
+"@babel/preset-flow@^7.0.0", "@babel/preset-flow@^7.7.4":
   version "7.7.4"
   resolved "https://registry.yarnpkg.com/@babel/preset-flow/-/preset-flow-7.7.4.tgz#99c1349b6fd7132783196de181e6b32d0949427e"
   integrity sha512-6LbUqcHD8BcRtXMOp5bc5nJeU8RlKh6q5U8TgZeCrf9ebBdW8Wyy5ujAUnbJfmzQ56Kkq5XtwErC/5+5RHyFYA==
@@ -1008,7 +811,7 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-transform-typescript" "^7.7.4"
 
-"@babel/register@^7.0.0", "@babel/register@^7.7.0":
+"@babel/register@^7.0.0", "@babel/register@^7.7.0", "@babel/register@^7.7.4":
   version "7.7.4"
   resolved "https://registry.yarnpkg.com/@babel/register/-/register-7.7.4.tgz#45a4956471a9df3b012b747f5781cc084ee8f128"
   integrity sha512-/fmONZqL6ZMl9KJUYajetCrID6m0xmL4odX7v+Xvoxcv0DdbP/oO0TWIeLUCHqczQ6L6njDMqmqHFy2cp3FFsA==
@@ -1140,15 +943,6 @@
     tar "^4.4.10"
     unique-filename "^1.1.1"
     which "^1.3.1"
-
-"@examples/alfred-config-example@^0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "http://localhost:4873/@examples%2falfred-config-example/-/alfred-config-example-0.0.2-alpha.2.tgz#a8cdc3d50a09f5a755dc1dec9e9871969910c319"
-  integrity sha512-2MUXfT97qCYuMJpq/NqRyAOJGHRkawyaFlFOH3KovCtIz2Jcx+ifLnQFuFJCMQjm7FZvgPawy/op82MO7XPbyA==
-  dependencies:
-    "@alfred/skill-lodash" "^0.0.2-alpha.2"
-    "@alfred/skill-parcel" "^0.0.2-alpha.2"
-    "@babel/plugin-proposal-class-properties" "^7.3.0"
 
 "@hapi/address@2.x.x":
   version "2.1.4"
@@ -3023,7 +2817,7 @@ babel-core@^7.0.0-bridge.0:
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-7.0.0-bridge.0.tgz#95a492ddd90f9b4e9a4a1da14eb335b87b634ece"
   integrity sha512-poPX9mZH/5CSanm50Q+1toVci6pv5KSRv/5TWCwtzQS5XEwn40BcCrgIeMFWP9CKKIniKXNxoIOnOq4VVlGXhg==
 
-babel-eslint@^10.0.1, babel-eslint@^10.0.3:
+babel-eslint@^10.0.3:
   version "10.0.3"
   resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-10.0.3.tgz#81a2c669be0f205e19462fed2482d33e4687a88a"
   integrity sha512-z3U7eMY6r/3f3/JB9mTsLjyxrv0Yb1zb8PCWCLpguxfCzBIZUwy23R1t/XKewP+8mEN2Ck8Dtr4q20z6ce6SoA==
@@ -3048,7 +2842,7 @@ babel-jest@^24.0.0, babel-jest@^24.9.0:
     chalk "^2.4.2"
     slash "^2.0.0"
 
-babel-loader@8.0.6, babel-loader@^8.0.5:
+babel-loader@8.0.6, babel-loader@^8.0.6:
   version "8.0.6"
   resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.0.6.tgz#e33bdb6f362b03f4bb141a0c21ab87c501b70dfb"
   integrity sha512-4BmWKtBOBm13uoUwd08UwjZlaw3O9GWf456R9j+5YykFZ6LUIjIKLc0zEZf+hauxPOJs96C8k6FvYD09vWzhYw==
