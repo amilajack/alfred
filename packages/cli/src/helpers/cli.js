@@ -108,7 +108,11 @@ export function checkIsAlfredProject(
 export function getProjectRoot() {
   const pkgPath = pkgUp.sync();
   if (!pkgPath) {
-    throw new Error(`Project root could not be found from "${process.cwd()}"`);
+    throw new Error(
+      `Alfred project root could not be found from "${process.cwd()}".
+
+      Make sure you are inside an Alfred project.`
+    );
   }
   return path.dirname(pkgPath);
 }
