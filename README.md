@@ -93,10 +93,9 @@ lerna publish --registry http://localhost:4873
 
 # Production Publishing
 lerna publish
-
-# Misc
-To change verdaccio configs, see `~/.config/verdaccio/config.yaml`
 ```
+
+To change verdaccio configs, see `~/.config/verdaccio/config.yaml`
 
 ## Alfred Skill Example
 
@@ -230,7 +229,15 @@ type AlfredInterface = {
     },
     // Config for all lib targets
     "lib": {
-      "recommendSkills": ["@alfred/skill-react"]
+      "recommendSkills": [
+        "@alfred/skill-react",
+        {
+          "oneOf": [
+            "@alfred/skill-parcel",
+            "@alfred/skill-webpack"
+          ]
+        }
+      ]
     },
     // Config only applied to browser libs
     "browser": {
@@ -398,16 +405,15 @@ Would you like to install it? (Y/n)
 * Simplicity
 * Reusability
 
-## Community
-
-All feedback and suggestions are welcome!
-
-- 💬 Join the community on [Spectrum](https://spectrum.chat/alfred)
-- 📣 Stay up to date on new features and announcements on [@alfredpkg](https://twitter.com/alfredpkg).
-
-## Support
+## Donations
 
 If this project is saving you (or your team) time, please consider supporting it on Patreon 👍 thank you!
+
+**Donations will ensure the following:**
+
+- 🔨 Long term maintenance of the project
+- 🛣 Progress on the [roadmap](https://electron-react-boilerplate.js.org/docs/roadmap)
+- 🐛 Quick responses to bug reports and help requests
 
 <p>
   <a href="https://www.patreon.com/amilajack">
@@ -415,4 +421,11 @@ If this project is saving you (or your team) time, please consider supporting it
   </a>
 </p>
 
-Please [donate to my Patreon](https://www.patreon.com/join/2181265/checkout)
+Please [donate to our Patreon](https://www.patreon.com/join/2181265/checkout) or [PayPal](https://paypal.me/amilajack)
+
+## Community
+
+All feedback and suggestions are welcome!
+
+- 💬 Join the community on [Spectrum](https://spectrum.chat/alfred)
+- 📣 Stay up to date on new features and announcements on [@alfredpkg](https://twitter.com/alfredpkg).
