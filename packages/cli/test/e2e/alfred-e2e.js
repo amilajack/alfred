@@ -10,7 +10,7 @@ import childProcess from 'child_process';
 import { INTERFACE_STATES } from '@alfred/core';
 import mergeConfigs from '@alfred/merge-configs';
 import assert from 'assert';
-import { addEntrypoints, fromEntrypoints, serial } from '../..';
+import { addEntrypoints, entrypointsToInterfaceStates, serial } from '../..';
 
 process.on('unhandledRejection', err => {
   throw err;
@@ -155,7 +155,9 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
           };
 
           // Generate interface states from the entrypoints
-          const interfaceStates = fromEntrypoints(entrypointCombination);
+          const interfaceStates = entrypointsToInterfaceStates(
+            entrypointCombination
+          );
           // Remove the existing entrypoints in ./src
           rimraf.sync(path.join(projectDir, 'src/*'));
           rimraf.sync(path.join(projectDir, 'tests/*'));

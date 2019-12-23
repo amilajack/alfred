@@ -32,9 +32,9 @@ export const ENTRYPOINTS = [
 ];
 
 /**
- * Return an interface state
+ * Convert entrypoints to interface states
  */
-export function fromEntrypoints(
+export function entrypointsToInterfaceStates(
   entrypoints: Array<string>
 ): Array<InterfaceState> {
   return entrypoints.map(entrypoint => {
@@ -66,27 +66,29 @@ export function generateInterfaceStatesFromProject(
 
 /**
  * Find all the dependencies that are different between two CTF's.
- * This is used to figure out which deps need to be installed
+ * This is used to figure out which deps need to be installed by
+ * finding which dependencies have changed in the package.json
+ *
+ * Find all the elements such that are (A ⩃ B) ⋂ B
+ * where A is old ctf and B is new ctf
  */
 export function diffCtfDeps(oldCtf: CtfMap, newCtf: CtfMap): Array<string> {
-  // Find the dependencies that have changed and install them
-  const t: Map<string, string> = new Map();
-  const s: Map<string, string> = new Map();
+  const oldCtfMap: Map<string, string> = new Map(
+    Object.entries(getDevDependencies(oldCtf))
+  );
+  const diffDeps = new Map();
 
-  Object.entries(getDevDependencies(oldCtf)).forEach(([dependency, semver]) => {
-    t.set(dependency, semver);
-  });
-  Object.entries(getDevDependencies(newCtf)).forEach(([dependency, semver]) => {
-    if (t.has(dependency)) {
-      if (t.get(dependency) !== semver) {
+  newCtf.forEach(([dependency, semver]) => {
+    if (oldCtfMap.has(dependency)) {
+      if (oldCtfMap.get(dependency) !== semver) {
         throw new Error('Cannot resolve diff deps');
       }
     } else {
-      s.set(dependency, semver);
+      diffDeps.set(dependency, semver);
     }
   });
 
-  return Array.from(s.entries()).map(([key, val]) => `${key}@${val}`);
+  return Array.from(newCtf.entries()).map(([key, val]) => `${key}@${val}`);
 }
 
 /**
