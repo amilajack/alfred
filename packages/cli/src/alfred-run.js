@@ -5,14 +5,15 @@ import childProcess from 'child_process';
 import program from 'commander';
 import {
   getExecuteWrittenConfigsMethods,
-  getInterfaceForSubcommand
+  getInterfaceForSubcommand,
+  generateCtfFromConfig
 } from '@alfred/core';
 import rimraf from 'rimraf';
-import generateCtfFromConfig, {
+import {
   generateInterfaceStatesFromProject,
   writeConfigsFromCtf
 } from './helpers/ctf';
-import { deleteConfigs, init, serial, getInstallCommmand } from './helpers';
+import { deleteConfigs, init, serial, getInstallCommmand } from '.';
 
 (async () => {
   const args = program.parse(process.argv);

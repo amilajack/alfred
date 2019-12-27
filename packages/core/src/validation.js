@@ -4,9 +4,6 @@ import Joi from 'joi';
 const skill = [Joi.string(), Joi.array()];
 const skills = [Joi.string(), Joi.array().items(skill)];
 
-/**
- * @TODO Move this to core/configs
- */
 export default function Validate(alfredPkg: { [x: string]: any }) {
   // @TODO Move to helpers
   const schema = Joi.object().keys({

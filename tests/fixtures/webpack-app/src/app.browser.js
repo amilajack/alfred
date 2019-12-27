@@ -11,4 +11,3 @@ if (module.hot) {
     app();
   });
 }
-

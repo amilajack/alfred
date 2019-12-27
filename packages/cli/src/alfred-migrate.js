@@ -2,7 +2,7 @@
 import path from 'path';
 import program from 'commander';
 import Providers from './providers';
-import { init } from './helpers';
+import { init } from '.';
 
 (async () => {
   const parsedArguments = program

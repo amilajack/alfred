@@ -8,7 +8,7 @@
   "files": [
     "lib"
   ],
-  "main": "./lib/helpers",
+  "main": "./lib/index.js",
   "bin": {
     "alfred": "./lib/alfred.js"
   },

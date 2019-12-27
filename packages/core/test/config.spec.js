@@ -1,4 +1,8 @@
-import config, { getConfigs, requireConfig } from '../src/config';
+import {
+  constructSkillsFromAlfredConfig,
+  getConfigs,
+  requireConfig
+} from '../src/config';
 
 describe('config', () => {
   describe('getConfig', () => {
@@ -36,7 +40,7 @@ describe('config', () => {
   describe('config', () => {
     it('should take plain object', () => {
       expect(
-        config({
+        constructSkillsFromAlfredConfig({
           bar: 'bar'
         })
       ).toEqual({
@@ -46,7 +50,7 @@ describe('config', () => {
 
     it('should take an object with empty extends', () => {
       expect(
-        config({
+        constructSkillsFromAlfredConfig({
           extends: [],
           bar: 'bar'
         })
@@ -74,7 +78,7 @@ describe('config', () => {
         { virtual: true }
       );
       expect(
-        config({
+        constructSkillsFromAlfredConfig({
           extends: 'module-1',
           bar: 'who',
           hello: 'jane'
@@ -85,7 +89,7 @@ describe('config', () => {
         hello: 'jane'
       });
       expect(
-        config({
+        constructSkillsFromAlfredConfig({
           extends: ['module-2'],
           hello: 'john'
         })
@@ -99,12 +103,12 @@ describe('config', () => {
 
     it('should throw if extends property is not a string or an array', () => {
       expect(() =>
-        config({
+        constructSkillsFromAlfredConfig({
           extends: [{ extends: '' }]
         })
       ).toThrowErrorMatchingSnapshot();
       expect(() =>
-        config({
+        constructSkillsFromAlfredConfig({
           extends: () => {}
         })
       ).toThrowErrorMatchingSnapshot();
@@ -120,7 +124,7 @@ describe('config', () => {
         { virtual: true }
       );
       expect(
-        config({
+        constructSkillsFromAlfredConfig({
           extends: ['bliss', 'bliss']
         })
       ).toEqual({
@@ -128,7 +132,7 @@ describe('config', () => {
         foo: 'foobar'
       });
       expect(
-        config({
+        constructSkillsFromAlfredConfig({
           extends: 'alfred-config-bliss'
         })
       ).toEqual({
@@ -156,7 +160,7 @@ describe('config', () => {
         { virtual: true }
       );
       expect(
-        config({
+        constructSkillsFromAlfredConfig({
           extends: 'alfred-config-test'
         })
       ).toEqual({
@@ -173,7 +177,7 @@ describe('config', () => {
         ]
       });
       expect(
-        config({
+        constructSkillsFromAlfredConfig({
           extends: 'alfred-config-test',
           skills: [
             '@alfred/skill-parcel',

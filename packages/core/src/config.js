@@ -4,14 +4,7 @@ import fs from 'fs';
 import formatPkg from 'format-package';
 import mergeConfigs from '@alfred/merge-configs';
 import Validate from './validation';
-
-export type AlfredConfig = {
-  extends?: Array<string> | string,
-  npmClient: 'npm' | 'yarn',
-  skills: Array<string | [string, Object]>,
-  root: string,
-  showConfigs: boolean
-};
+import type { AlfredConfig } from './types';
 
 export function requireConfig(configName: string): any {
   try {
@@ -92,10 +85,12 @@ export type ConfigSkillType = [string, any] | string;
 type ConfigMap = Map<string, any>;
 
 /**
- * @TODO @REFACTOR This function is not used outside of this module. Consider
- *                 not using it as the default export
+ * Given an Alfred config. This takes in Alfred configs with an array of strings for skills
+ * and updates thte skills property to be an array of CTF skill objects update the skills
  */
-export default function Config(config: AlfredConfig): AlfredConfig {
+export function constructSkillsFromAlfredConfig(
+  config: AlfredConfig
+): AlfredConfig {
   validate(config);
 
   const mergedConfig = getConfigs(config);
@@ -206,9 +201,10 @@ export async function writeConfig(pkgPath: string, pkg: Pkg): AlfredConfig {
 }
 
 /**
- * @TODO @REFACTOR Make this the default exported function and rename it to Configs
+ * Given the project root of an Alfred project, return the project's
+ * Alfred config and pkg info
  */
-export async function loadConfig(
+export default async function Config(
   projectRoot: string,
   pkgPath: string = path.join(projectRoot, 'package.json')
 ): Promise<{ pkg: Pkg, pkgPath: string, alfredConfig: AlfredConfig }> {
@@ -229,7 +225,10 @@ export async function loadConfig(
     root: projectRoot
   };
 
-  const alfredConfig = Config({ ...defaultOpts, ...rawAlfredConfig });
+  const alfredConfig = constructSkillsFromAlfredConfig({
+    ...defaultOpts,
+    ...rawAlfredConfig
+  });
 
   return { pkg, pkgPath, alfredConfig };
 }
