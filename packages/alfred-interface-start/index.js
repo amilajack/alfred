@@ -1,8 +1,6 @@
 /* eslint no-param-reassign: off */
-const {
-  normalizeInterfacesOfSkill,
-  mapShortNameEnvToLongName
-} = require('@alfred/core');
+const { mapShortNameEnvToLongName } = require('@alfred/core');
+const { normalizeInterfacesOfSkill } = require('@alfred/core/lib/interface');
 const debug = require('debug')('@alfred/interface-start');
 
 module.exports = {

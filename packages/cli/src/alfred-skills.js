@@ -1,8 +1,8 @@
 // @flow
 import Table from 'cli-table3';
 import chalk from 'chalk';
-import { generateCtfFromConfig } from '@alfred/core';
-import { generateInterfaceStatesFromProject } from './helpers/ctf';
+import { generateCtfFromConfig } from '@alfred/core/lib/ctf';
+import { generateInterfaceStatesFromProject } from '@alfred/core/lib/interface';
 import { init } from '.';
 
 (async () => {

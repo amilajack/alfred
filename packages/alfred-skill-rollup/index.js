@@ -1,6 +1,7 @@
 const replace = require('rollup-plugin-replace');
 const commonjs = require('rollup-plugin-commonjs');
-const { getConfigByConfigName, mapEnvToShortName } = require('@alfred/core');
+const { mapEnvToShortName } = require('@alfred/core');
+const { getConfigByConfigName } = require('@alfred/core/lib/config');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 
 const interfaceConfig = {

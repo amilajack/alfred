@@ -1,10 +1,9 @@
 const path = require('path');
+const { execCommand, getPkgBinPath } = require('@alfred/core');
 const {
   getConfigPathByConfigName,
-  getConfigByConfigName,
-  execCommand,
-  getPkgBinPath
-} = require('@alfred/core');
+  getConfigByConfigName
+} = require('@alfred/core/lib/config');
 
 module.exports = {
   name: 'eslint',

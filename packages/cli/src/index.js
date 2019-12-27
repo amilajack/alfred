@@ -3,14 +3,17 @@ import path from 'path';
 import fs from 'fs';
 import pkgUp from 'pkg-up';
 import rimraf from 'rimraf';
-import { getConfigsBasePath, formatPkgJson, Config } from '@alfred/core';
-import type { AlfredConfig, InterfaceState } from '@alfred/core';
+import initConfig, {
+  getConfigsBasePath,
+  formatPkgJson
+} from '@alfred/core/lib/config';
+import { ENTRYPOINTS } from '@alfred/core/lib/ctf';
+import { generateInterfaceStatesFromProject } from '@alfred/core/lib/interface';
 import handlebars from 'handlebars';
 import { Signale } from 'signale';
-import { ENTRYPOINTS, generateInterfaceStatesFromProject } from './helpers/ctf';
+import type { AlfredConfig, InterfaceState } from '@alfred/core';
 import PkgValidation from './pkg-validation';
 
-export * from './helpers/ctf';
 export * from './helpers/parse-input';
 
 export const getInstallCommmand = (alfredConfig: AlfredConfig): string => {
@@ -242,7 +245,7 @@ export async function addBoilerplate(templateData: Object, root: string) {
 
 export async function init() {
   const projectRoot = getProjectRoot();
-  const config = await Config(projectRoot);
+  const config = await initConfig(projectRoot);
   const { alfredConfig } = config;
   const interfaceStates = generateInterfaceStatesFromProject(alfredConfig);
   checkIsAlfredProject(alfredConfig, interfaceStates);

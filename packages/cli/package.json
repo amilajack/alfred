@@ -44,7 +44,6 @@
     "lodash": "^4.17.11",
     "lodash.flatten": "^4.4.0",
     "microjob": "^0.7.0",
-    "npm": "^6.8.0",
     "pkg-up": "^3.1.0",
     "rimraf": "^3.0.0",
     "rndm": "^1.2.0",
@@ -69,7 +68,7 @@
     "@alfred/interface-start": "^0.0.2-alpha.1"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=13"
   },
   "engineStrict": true,
   "preferGlobal": true,

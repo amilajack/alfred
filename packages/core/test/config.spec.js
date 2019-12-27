@@ -1,6 +1,6 @@
 import {
   constructSkillsFromAlfredConfig,
-  getConfigs,
+  normalizeConfig,
   requireConfig
 } from '../src/config';
 
@@ -8,7 +8,7 @@ describe('config', () => {
   describe('getConfig', () => {
     it('should take an object with ".extends" property', () => {
       expect(
-        getConfigs({
+        normalizeConfig({
           extends: [{ extends: [{ bar: 'zoo' }] }],
           bar: 'bar'
         })
@@ -16,7 +16,7 @@ describe('config', () => {
         bar: 'bar'
       });
       expect(
-        getConfigs({
+        normalizeConfig({
           extends: [{ extends: [{ bar: 'zoo' }, { bar: 'foo' }] }],
           bar: 'baz'
         })
@@ -25,7 +25,7 @@ describe('config', () => {
       });
 
       expect(
-        getConfigs({
+        normalizeConfig({
           extends: [{ extends: '' }]
         })
       ).toEqual({});

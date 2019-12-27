@@ -7,7 +7,7 @@ import Table from 'cli-table3';
 import chalk from 'chalk';
 import powerset from '@amilajack/powerset';
 import childProcess from 'child_process';
-import { INTERFACE_STATES } from '@alfred/core';
+import { INTERFACE_STATES } from '@alfred/core/lib/interface';
 import mergeConfigs from '@alfred/merge-configs';
 import assert from 'assert';
 import { addEntrypoints, entrypointsToInterfaceStates, serial } from '../..';

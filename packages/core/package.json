@@ -33,12 +33,13 @@
     "format-package": "^5.2.0",
     "joi": "^14.3.1",
     "lodash": "^4.17.11",
+    "npm": "^6.8.0",
     "pkg-up": "^3.1.0",
     "rimraf": "^3.0.0",
     "toposort": "^2.0.2"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=13"
   },
   "engineStrict": true,
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"

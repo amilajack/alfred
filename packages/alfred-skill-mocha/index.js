@@ -1,10 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const {
-  getPkgBinPath,
-  execCommand,
-  getConfigByConfigName
-} = require('@alfred/core');
+const { execCommand, getPkgBinPath } = require('@alfred/core');
+const { getConfigByConfigName } = require('@alfred/core/lib/config');
 
 module.exports = {
   name: 'mocha',

@@ -1,7 +1,11 @@
 import program from 'commander';
-import { diffCtfDepsOfAllInterfaceStates, Config } from '@alfred/core';
-import { writeConfig } from '@alfred/core/lib/config';
-import { installDeps, init } from '.';
+import { config, writeConfig } from '@alfred/core/lib/config';
+import {
+  diffCtfDepsOfAllInterfaceStates,
+  installDeps
+} from '@alfred/core/lib/ctf';
+
+import { init } from '.';
 
 (async () => {
   const args = program.parse(process.argv);
@@ -30,7 +34,7 @@ import { installDeps, init } from '.';
 
   // Find the name of the packages that were installed and add the package names to
   // the alfred skills array
-  const { alfredConfig: newAlfredConfig } = await Config(projectRoot);
+  const { alfredConfig: newAlfredConfig } = await config(projectRoot);
 
   // Find if any new deps need to be installed and install them
   const newSkills = await diffCtfDepsOfAllInterfaceStates(

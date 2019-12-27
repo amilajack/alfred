@@ -3,23 +3,23 @@ import os from 'os';
 import path from 'path';
 import powerset from '@amilajack/powerset';
 import parcel from '../../alfred-skill-parcel';
+import {
+  getExecuteWrittenConfigsMethods,
+  getInterfaceForSubcommand
+} from '../src';
 import CTF, {
   CORE_CTFS,
-  INTERFACE_STATES,
-  getConfigs,
   getDependencies,
   getDevDependencies,
   generateCtfFromConfig,
-  getExecuteWrittenConfigsMethods,
   diffCtfDepsOfAllInterfaceStates,
-  normalizeInterfacesOfSkill,
-  getInterfaceForSubcommand,
   diffCtfDeps,
   topsortCtfs,
   addMissingStdSkillsToCtf,
-  callCtfFnsInOrder,
-  Config
-} from '../src';
+  callCtfFnsInOrder
+} from '../src/ctf';
+import { normalizeInterfacesOfSkill, INTERFACE_STATES } from '../src/interface';
+import initConfig, { getConfigs } from '../src/config';
 
 const [defaultInterfaceState] = INTERFACE_STATES;
 
@@ -52,7 +52,7 @@ describe('CTF', () => {
           CTF(
             Object.values(CORE_CTFS),
             defaultAlfredConfig,
-            INTERFACE_STATES[0]
+            defaultInterfaceState
           )
         ).map(e => e.name);
         expect(sortedCtfs).toMatchSnapshot();
@@ -205,7 +205,7 @@ describe('CTF', () => {
 
     it('should add missing std skills to ctf', async () => {
       {
-        const { alfredConfig } = await Config(projectRoot);
+        const { alfredConfig } = await initConfig(projectRoot);
         const { webpack } = CORE_CTFS;
         const ctf = CTF([webpack], alfredConfig, defaultInterfaceState);
         expect(Array.from(ctf.keys())).toMatchSnapshot();
@@ -220,7 +220,7 @@ describe('CTF', () => {
         ).toMatchSnapshot();
       }
       {
-        const { alfredConfig } = await Config(projectRoot);
+        const { alfredConfig } = await initConfig(projectRoot);
         const interfaceState = {
           env: 'production',
           projectType: 'app',
@@ -237,7 +237,7 @@ describe('CTF', () => {
         expect(ctfSkillNames).not.toContain('webpack');
       }
       {
-        const { alfredConfig } = await Config(projectRoot);
+        const { alfredConfig } = await initConfig(projectRoot);
         const interfaceState = {
           env: 'production',
           projectType: 'lib',
@@ -263,7 +263,7 @@ describe('CTF', () => {
           skills: [['@alfred/skill-non-existent-skill', {}]]
         };
         await expect(generateCtfFromConfig(config, state)).rejects.toThrow(
-          "Cannot find module '@alfred/skill-non-existent-skill' from 'index.js'"
+          "Cannot find module '@alfred/skill-non-existent-skill' from 'ctf.js'"
         );
       });
 
@@ -274,13 +274,13 @@ describe('CTF', () => {
           skills: [['@alfred/skill-non-existent-skill', {}]]
         };
         await expect(generateCtfFromConfig(config, state)).rejects.toThrow(
-          "Cannot find module '@alfred/skill-non-existent-skill' from 'index.js'"
+          "Cannot find module '@alfred/skill-non-existent-skill' from 'ctf.js'"
         );
       });
     });
 
     it('should override core ctf skills that support same interface states', async () => {
-      const { alfredConfig } = await Config(projectRoot);
+      const { alfredConfig } = await initConfig(projectRoot);
       const interfaceState = {
         env: 'production',
         projectType: 'app',
@@ -299,7 +299,7 @@ describe('CTF', () => {
     });
 
     it('should not use CTF skills that do not support current interface state', async () => {
-      const { alfredConfig } = await Config(projectRoot);
+      const { alfredConfig } = await initConfig(projectRoot);
       const interfaceState = {
         env: 'production',
         projectType: 'lib',
@@ -321,7 +321,7 @@ describe('CTF', () => {
     const { root: projectRoot } = defaultAlfredConfig;
 
     it('should have diffs in deps after learning new skill', async () => {
-      const { alfredConfig } = await Config(projectRoot);
+      const { alfredConfig } = await initConfig(projectRoot);
       const { webpack, babel } = CORE_CTFS;
       const oldCtf = CTF([webpack], alfredConfig, defaultInterfaceState);
       const newCtf = CTF([webpack, babel], alfredConfig, defaultInterfaceState);
@@ -339,8 +339,8 @@ describe('CTF', () => {
       )} interface state ${JSON.stringify(defaultInterfaceState)}`, () => {
         expect(ctfCombination).toMatchSnapshot();
         // Get the CTFs for each combination
-        const filteredCtfs = ctfCombination.map(ctfName => CORE_CTFS[ctfName]);
-        const result = CTF(filteredCtfs, defaultAlfredConfig, interfaceState);
+        const ctfObjects = ctfCombination.map(ctfName => CORE_CTFS[ctfName]);
+        const result = CTF(ctfObjects, defaultAlfredConfig, interfaceState);
         expect(
           removePathsPropertiesFromObject(getConfigs(result))
         ).toMatchSnapshot();

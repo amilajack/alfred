@@ -1,11 +1,10 @@
 const fs = require('fs');
 const path = require('path');
+const { execCommand, getPkgBinPath } = require('@alfred/core');
 const {
   getConfigPathByConfigName,
-  getConfigByConfigName,
-  getPkgBinPath,
-  execCommand
-} = require('@alfred/core');
+  getConfigByConfigName
+} = require('@alfred/core/lib/config');
 
 module.exports = {
   name: 'jest',

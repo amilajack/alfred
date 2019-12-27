@@ -4,15 +4,16 @@ import path from 'path';
 import childProcess from 'child_process';
 import program from 'commander';
 import {
-  getExecuteWrittenConfigsMethods,
   getInterfaceForSubcommand,
-  generateCtfFromConfig
+  getExecuteWrittenConfigsMethods
 } from '@alfred/core';
-import rimraf from 'rimraf';
 import {
-  generateInterfaceStatesFromProject,
+  generateCtfFromConfig,
   writeConfigsFromCtf
-} from './helpers/ctf';
+} from '@alfred/core/lib/ctf';
+import { generateInterfaceStatesFromProject } from '@alfred/core/lib/interface';
+
+import rimraf from 'rimraf';
 import { deleteConfigs, init, serial, getInstallCommmand } from '.';
 
 (async () => {

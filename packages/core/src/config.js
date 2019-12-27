@@ -4,7 +4,39 @@ import fs from 'fs';
 import formatPkg from 'format-package';
 import mergeConfigs from '@alfred/merge-configs';
 import Validate from './validation';
-import type { AlfredConfig } from './types';
+import type { AlfredConfig, configFileType, configType, CtfMap } from './types';
+
+export function getConfigByConfigName(
+  configName: string,
+  configFiles: Array<configFileType>
+) {
+  const config = configFiles.find(e => e.name === configName);
+  if (!config) throw new Error(`Cannot find config by name "${configName}"`);
+  return config;
+}
+
+export function getConfigPathByConfigName(
+  configName: string,
+  configFiles: Array<configFileType>
+) {
+  const config = configFiles.find(e => e.name === configName);
+  if (!config) throw new Error(`Cannot find config by name "${configName}"`);
+  return config.path;
+}
+
+/*
+ * Intended to be used for testing purposes
+ */
+export function getConfigs(ctf: CtfMap): Array<configType> {
+  return Array.from(ctf.values())
+    .map(ctfNode => ctfNode.configFiles || [])
+    .reduce((p, c) => [...p, ...c], [])
+    .map(e => e.config);
+}
+
+export function getConfigsBasePath(projectRoot: string): string {
+  return path.join(projectRoot, '.configs');
+}
 
 export function requireConfig(configName: string): any {
   try {
@@ -22,7 +54,7 @@ export function requireConfig(configName: string): any {
   }
 }
 
-export function getConfigs(config: AlfredConfig = {}): AlfredConfig {
+export function normalizeConfig(config: AlfredConfig = {}): AlfredConfig {
   if (!config.extends) return config;
   if (!Array.isArray(config.extends) && typeof config.extends !== 'string') {
     throw new Error('.extends property must be an Array or a string');
@@ -46,7 +78,7 @@ export function getConfigs(config: AlfredConfig = {}): AlfredConfig {
 
   for (let i = 0; i < normalizedConfigs.length; i += 1) {
     // eslint-disable-next-line no-param-reassign
-    normalizedConfigs[i] = getConfigs(normalizedConfigs[i]);
+    normalizedConfigs[i] = normalizeConfig(normalizedConfigs[i]);
   }
 
   const mergedConfig = mergeConfigs(
@@ -93,7 +125,7 @@ export function constructSkillsFromAlfredConfig(
 ): AlfredConfig {
   validate(config);
 
-  const mergedConfig = getConfigs(config);
+  const mergedConfig = normalizeConfig(config);
   if (!mergedConfig.skills || !mergedConfig.skills.length) return mergedConfig;
 
   const skillsMap: ConfigMap = new Map();
@@ -204,7 +236,7 @@ export async function writeConfig(pkgPath: string, pkg: Pkg): AlfredConfig {
  * Given the project root of an Alfred project, return the project's
  * Alfred config and pkg info
  */
-export default async function Config(
+export default async function initConfig(
   projectRoot: string,
   pkgPath: string = path.join(projectRoot, 'package.json')
 ): Promise<{ pkg: Pkg, pkgPath: string, alfredConfig: AlfredConfig }> {

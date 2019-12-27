@@ -1,4 +1,4 @@
-const { getConfigByConfigName } = require('@alfred/core');
+const { getConfigByConfigName } = require('@alfred/core/lib/config');
 
 module.exports = {
   name: 'babel',
