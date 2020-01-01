@@ -15,7 +15,7 @@
   "devDependencies": {
     "docusaurus": "^1.14.2",
     "eslint-config-airbnb": "^18.0.1",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.17.0"
   },
   "eslintConfig": {
