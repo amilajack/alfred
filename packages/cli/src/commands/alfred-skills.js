@@ -1,35 +1,36 @@
 // @flow
+import alfred from '@alfred/core';
 import Table from 'cli-table3';
 import chalk from 'chalk';
 
 (async () => {
-  const alfred = await Alfred();
-  const { map, subcommandDict } = alfred;
+  const project = await alfred();
+  const { subCommandAndSkills, subCommandDict } = project.skills();
 
   const table = new Table({
     head: [
-      chalk.bold('Subcommand'),
+      chalk.bold('SubCommand'),
       chalk.bold('Skills'),
       chalk.bold('Description')
     ]
   });
 
-  Array.from(map.entries()).forEach(([subcommand, skills]) => {
+  Array.from(subCommandAndSkills.entries()).forEach(([subCommand, skills]) => {
     const description = (() => {
-      if (subcommandDict.has(subcommand)) {
-        const interfaceForSubcommand = subcommandDict.get(subcommand);
+      if (subCommandDict.has(subCommand)) {
+        const interfaceForSubCommand = subCommandDict.get(subCommand);
         if (
-          interfaceForSubcommand &&
-          interfaceForSubcommand.module &&
-          interfaceForSubcommand.module.description
+          interfaceForSubCommand &&
+          interfaceForSubCommand.module &&
+          interfaceForSubCommand.module.description
         ) {
-          return interfaceForSubcommand.module.description;
+          return interfaceForSubCommand.module.description;
         }
       }
       return '';
     })();
 
-    table.push([subcommand, Array.from(skills).join(', '), description]);
+    table.push([subCommand, Array.from(skills).join(', '), description]);
   });
 
   console.log(table.toString());

@@ -10,8 +10,7 @@
 ```js
 import alfred from '@alfred/core';
 
-const opts = {};
-const { config, run } = await Alfred('/path/to/alfred/project', { ...opts });
+const { config, run } = await alfred('/path/to/alfred/project');
 
 console.log(config.skills);
 
