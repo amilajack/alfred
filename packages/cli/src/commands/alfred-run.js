@@ -26,7 +26,5 @@ import alfred from '@alfred/core';
   );
 
   const project = await alfred();
-  return project.run(subcommand, {
-    flags: skillFlags
-  });
+  return project.run(subcommand, skillFlags);
 })();

@@ -1,9 +1,7 @@
 /* eslint import/no-dynamic-require: off */
 // @flow
-import path from 'path';
 import Joi from 'joi';
-import type { Pkg } from './config';
-import type { configFileType, configType, CtfMap } from './types';
+import type { Pkg } from './types';
 
 /* Parse the incoming string as JSON, validate it against the spec for package.json
  * See README for more details
@@ -387,54 +385,6 @@ export class PkgValidation {
     }
 
     return errors;
-  }
-}
-
-export function getConfigByConfigName(
-  configName: string,
-  configFiles: Array<configFileType>
-) {
-  const config = configFiles.find(e => e.name === configName);
-  if (!config) throw new Error(`Cannot find config by name "${configName}"`);
-  return config;
-}
-
-export function getConfigPathByConfigName(
-  configName: string,
-  configFiles: Array<configFileType>
-) {
-  const config = configFiles.find(e => e.name === configName);
-  if (!config) throw new Error(`Cannot find config by name "${configName}"`);
-  return config.path;
-}
-
-/*
- * Intended to be used for testing purposes
- */
-export function getConfigs(ctf: CtfMap): Array<configType> {
-  return Array.from(ctf.values())
-    .map(ctfNode => ctfNode.configFiles || [])
-    .reduce((p, c) => [...p, ...c], [])
-    .map(e => e.config);
-}
-
-export function getConfigsBasePath(projectRoot: string): string {
-  return path.join(projectRoot, '.configs');
-}
-
-export function requireConfig(configName: string): any {
-  try {
-    // $FlowFixMe
-    return require(`alfred-config-${configName}`);
-  } catch (e) {
-    try {
-      // $FlowFixMe
-      return require(configName);
-    } catch (_e) {
-      throw new Error(
-        `Could not resolve "${configName}" module or "eslint-config-${configName}" module`
-      );
-    }
   }
 }
 

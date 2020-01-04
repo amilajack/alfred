@@ -1,10 +1,11 @@
 import { generateCtfFromConfig } from '../ctf';
 import { generateInterfaceStatesFromProject } from '../interface';
+import Config from '../config';
 
-export default async function skills(alfredConfig) {
+export default async function skills(config: Config) {
   const interfaceStateCtfs = await Promise.all(
-    generateInterfaceStatesFromProject(alfredConfig).map(interfaceState =>
-      generateCtfFromConfig(alfredConfig, interfaceState).then(ctf =>
+    generateInterfaceStatesFromProject(config).map(interfaceState =>
+      generateCtfFromConfig(config.alfredConfig, interfaceState).then(ctf =>
         Array.from(ctf.values()).filter(
           ctfNode =>
             ctfNode.hooks && ctfNode.interfaces && ctfNode.interfaces.length

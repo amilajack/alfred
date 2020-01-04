@@ -2,7 +2,7 @@
 import path from 'path';
 import fs from 'fs';
 import { ENTRYPOINTS } from './entrypoints';
-import type { AlfredConfig } from './config';
+import Config from './config';
 import type {
   InterfaceState,
   RawInterfaceInputType,
@@ -103,7 +103,7 @@ export function normalizeInterfacesOfSkill(
 }
 
 export function generateInterfaceStatesFromProject(
-  config: AlfredConfig
+  config: Config
 ): Array<InterfaceState> {
   const envs = ['production', 'development', 'test'];
   // Default to development env if no config given

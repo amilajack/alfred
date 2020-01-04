@@ -3,8 +3,9 @@ import path from 'path';
 import fs from 'fs';
 import formatPkg from 'format-package';
 import mergeConfigs from '@alfred/merge-configs';
-import ValidateAlfredConfig, { requireConfig } from './validation';
-import type { AlfredConfig } from './types';
+import { requireConfig } from '@alfred/helpers';
+import ValidateAlfredConfig from './validation';
+import type { AlfredConfig, Pkg } from './types';
 
 const PKG_SORT_ORDER = [
   'name',
@@ -67,8 +68,6 @@ const PKG_SORT_ORDER = [
   '...rest'
 ];
 
-export type Pkg = { [x: string]: string };
-
 export type ConfigSkillType = [string, any] | string;
 
 type ConfigMap = Map<string, any>;
@@ -78,10 +77,31 @@ export function formatPkgJson(pkg: Pkg): Promise<string> {
 }
 
 export default class Config {
-  config: AlfredConfig;
+  alfredConfig: AlfredConfig;
 
-  constructor(config) {
-    this.config = config;
+  pkg: ?Pkg;
+
+  pkgPath: ?string;
+
+  root: ?string;
+
+  constructor(
+    config: AlfredConfig = {},
+    projectRoot: ?string,
+    pkg: ?Pkg,
+    pkgPath: ?string
+  ) {
+    ValidateAlfredConfig(config);
+    this.alfredConfig = config;
+    this.root = projectRoot;
+    this.pkg = pkg;
+    this.pkgPath = pkgPath;
+  }
+
+  static validatePkgPath(pkgPath) {
+    if (!fs.existsSync(pkgPath)) {
+      throw new Error('Current working directory does not have "package.json"');
+    }
   }
 
   /**
@@ -90,7 +110,8 @@ export default class Config {
    * @private
    */
   async write(pkgPath: string): AlfredConfig {
-    const formattedPkg = await formatPkgJson(this.config);
+    this.validatePkgPath(pkgPath);
+    const formattedPkg = await formatPkgJson(this.alfredConfig);
     await fs.promises.writeFile(pkgPath, formattedPkg);
     return formattedPkg;
   }
@@ -99,7 +120,7 @@ export default class Config {
    * @private
    */
   normalizeWithResolvedSkills(): AlfredConfig {
-    const { config } = this;
+    const { alfredConfig: config } = this;
     const normalizedConfig = this.normalizeWithResolvedConfigs(config);
     if (!normalizedConfig.skills || !normalizedConfig.skills.length)
       return normalizedConfig;
@@ -129,39 +150,22 @@ export default class Config {
     );
 
     normalizedConfig.skills = Array.from(mappedSkills.entries());
-    this.config = normalizedConfig;
+    this.alfredConfig = normalizedConfig;
 
     return normalizedConfig;
   }
 
-  async init(
-    projectRoot: string,
-    pkgPath: string = path.join(projectRoot, 'package.json')
-  ): Promise<{ pkg: Pkg, pkgPath: string, alfredConfig: AlfredConfig }> {
-    if (!fs.existsSync(pkgPath)) {
-      throw new Error('Current working directory does not have "package.json"');
-    }
+  /**
+   * Initialize a config from the root directory of an alfred project
+   */
+  static async initFromProjectRoot(projectRoot: string): Config {
+    const pkgPath: string = path.join(projectRoot, 'package.json');
+    this.validatePkgPath(pkgPath);
 
     // Read the package.json and validate the Alfred config
     const pkg = JSON.parse((await fs.promises.readFile(pkgPath)).toString());
-    const rawAlfredConfig = pkg.alfred;
-    ValidateAlfredConfig(rawAlfredConfig);
-    // Format the config
-    await this.write(pkgPath, pkg);
 
-    const defaultOpts = {
-      npmClient: 'npm',
-      skills: [],
-      root: projectRoot
-    };
-
-    this.config = {
-      ...defaultOpts,
-      ...rawAlfredConfig
-    };
-    const alfredConfig = this.normalizeWithResolvedSkills();
-
-    return { pkg, pkgPath, alfredConfig };
+    return new Config(pkg.alfred, projectRoot, pkg, pkgPath);
   }
 
   /**
@@ -199,6 +203,9 @@ export default class Config {
       config
     );
     delete mergedConfig.extends;
+
+    this.alfredConfig = mergedConfig;
+
     return mergedConfig;
   }
 }

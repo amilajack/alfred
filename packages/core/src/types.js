@@ -1,3 +1,5 @@
+export type Pkg = { [x: string]: string };
+
 export type AlfredConfig = {
   extends?: Array<string> | string,
   npmClient: 'npm' | 'yarn',

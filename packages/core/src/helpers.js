@@ -1,3 +1,5 @@
+/* eslint import/prefer-default-export: off */
+
 /**
  * Execute promises serially
  * @REFACTOR There's cleaner ways of implementing this

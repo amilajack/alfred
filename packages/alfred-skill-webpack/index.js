@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const { getConfigByConfigName } = require('@alfred/core/lib/config');
+const { getConfigByConfigName } = require('@alfred/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 const { searchProjectRoot } = require('@alfred/cli');
 const getPort = require('get-port');

@@ -1,6 +1,6 @@
 /* eslint import/no-dynamic-require: off */
 import path from 'path';
-import { getConfigsBasePath } from '../validation';
+import { getConfigsBasePath } from '@alfred/helpers';
 import type {
   AlfredConfig,
   CtfMap,
@@ -69,11 +69,11 @@ export function getInterfaceForSubcommand(ctf: CtfMap, subcommand: string) {
 export function getExecutableWrittenConfigsMethods(
   ctf: CtfMap,
   interfaceState: InterfaceState,
-  config: AlfredConfig
+  alfredConfig: AlfredConfig
 ) {
-  const configsBasePath = getConfigsBasePath(config.root);
+  const configsBasePath = getConfigsBasePath(alfredConfig.root);
   const skillsConfigMap: Map<string, configType> = new Map(
-    config.skills.map(([skillPkgName, skillConfig]) => [
+    alfredConfig.skills.map(([skillPkgName, skillConfig]) => [
       require(skillPkgName).name,
       skillConfig
     ])

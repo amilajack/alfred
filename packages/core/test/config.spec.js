@@ -1,30 +1,31 @@
+import { requireConfig } from '@alfred/helpers';
 import Config from '../src/config';
 
 describe('config', () => {
   describe('getConfig', () => {
     it('should take an object with ".extends" property', () => {
       expect(
-        normalizeConfig({
+        new Config({
           extends: [{ extends: [{ bar: 'zoo' }] }],
           bar: 'bar'
-        })
+        }).normalizeWithResolvedConfigs()
       ).toEqual({
         bar: 'bar'
       });
       expect(
-        normalizeConfig({
+        new Config({
           extends: [{ extends: [{ bar: 'zoo' }, { bar: 'foo' }] }],
           bar: 'baz'
-        })
+        }).normalizeWithResolvedConfigs()
       ).toEqual({
         bar: 'baz'
       });
 
       expect(
-        normalizeConfig({
+        new Config({
           extends: [{ extends: '' }]
         })
-      ).toEqual({});
+      ).toEqual({}.normalizeWithResolvedConfigs());
     });
 
     /**
@@ -36,9 +37,9 @@ describe('config', () => {
   describe('config', () => {
     it('should take plain object', () => {
       expect(
-        constructSkillsFromAlfredConfig({
+        new Config({
           bar: 'bar'
-        })
+        }).normalizeWithResolvedSkills()
       ).toEqual({
         bar: 'bar'
       });
@@ -46,10 +47,10 @@ describe('config', () => {
 
     it('should take an object with empty extends', () => {
       expect(
-        constructSkillsFromAlfredConfig({
+        new Config({
           extends: [],
           bar: 'bar'
-        })
+        }).normalizeWithResolvedSkills()
       ).toEqual({
         bar: 'bar'
       });
@@ -74,21 +75,21 @@ describe('config', () => {
         { virtual: true }
       );
       expect(
-        constructSkillsFromAlfredConfig({
+        new Config({
           extends: 'module-1',
           bar: 'who',
           hello: 'jane'
-        })
+        }).normalizeWithResolvedSkills()
       ).toEqual({
         bar: 'who',
         foo: 'foobar',
         hello: 'jane'
       });
       expect(
-        constructSkillsFromAlfredConfig({
+        new Config({
           extends: ['module-2'],
           hello: 'john'
-        })
+        }).normalizeWithResolvedSkills()
       ).toEqual({
         bar: 'baz',
         cow: 'bar',
@@ -99,14 +100,14 @@ describe('config', () => {
 
     it('should throw if extends property is not a string or an array', () => {
       expect(() =>
-        constructSkillsFromAlfredConfig({
+        new Config({
           extends: [{ extends: '' }]
-        })
+        }).normalizeWithResolvedSkills()
       ).toThrowErrorMatchingSnapshot();
       expect(() =>
-        constructSkillsFromAlfredConfig({
+        new Config({
           extends: () => {}
-        })
+        }).normalizeWithResolvedSkills()
       ).toThrowErrorMatchingSnapshot();
     });
 
@@ -120,17 +121,17 @@ describe('config', () => {
         { virtual: true }
       );
       expect(
-        constructSkillsFromAlfredConfig({
+        new Config({
           extends: ['bliss', 'bliss']
-        })
+        }).normalizeWithResolvedSkills()
       ).toEqual({
         bar: 'bar',
         foo: 'foobar'
       });
       expect(
-        constructSkillsFromAlfredConfig({
+        new Config({
           extends: 'alfred-config-bliss'
-        })
+        }).normalizeWithResolvedSkills()
       ).toEqual({
         bar: 'bar',
         foo: 'foobar'
@@ -156,9 +157,9 @@ describe('config', () => {
         { virtual: true }
       );
       expect(
-        constructSkillsFromAlfredConfig({
+        new Config({
           extends: 'alfred-config-test'
-        })
+        }).normalizeWithResolvedSkills()
       ).toEqual({
         bar: 'bar',
         foo: 'foobar',
@@ -173,7 +174,7 @@ describe('config', () => {
         ]
       });
       expect(
-        constructSkillsFromAlfredConfig({
+        new Config({
           extends: 'alfred-config-test',
           skills: [
             '@alfred/skill-parcel',
@@ -190,7 +191,7 @@ describe('config', () => {
               }
             ]
           ]
-        })
+        }).normalizeWithResolvedSkills()
       ).toEqual({
         bar: 'bar',
         foo: 'foobar',

@@ -4,7 +4,7 @@ const { execCommand, getPkgBinPath } = require('@alfred/core');
 const {
   getConfigPathByConfigName,
   getConfigByConfigName
-} = require('@alfred/core/lib/config');
+} = require('@alfred/helpers');
 
 module.exports = {
   name: 'jest',

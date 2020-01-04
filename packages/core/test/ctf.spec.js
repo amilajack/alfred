@@ -2,12 +2,12 @@
 import os from 'os';
 import path from 'path';
 import powerset from '@amilajack/powerset';
+import { getConfigs } from '@alfred/helpers';
 import parcel from '../../alfred-skill-parcel';
 import {
   getExecutableWrittenConfigsMethods,
   getInterfaceForSubcommand
 } from '../src/commands';
-import { getConfigs } from '../src/validation';
 import CTF, {
   CORE_CTFS,
   getDependencies,
@@ -206,7 +206,7 @@ describe('CTF', () => {
 
     it('should add missing std skills to ctf', async () => {
       {
-        const { alfredConfig } = await initConfig(projectRoot);
+        const { alfredConfig } = await Config.initFromProjectRoot(projectRoot);
         const { webpack } = CORE_CTFS;
         const ctf = CTF([webpack], alfredConfig, defaultInterfaceState);
         expect(Array.from(ctf.keys())).toMatchSnapshot();
@@ -221,7 +221,7 @@ describe('CTF', () => {
         ).toMatchSnapshot();
       }
       {
-        const { alfredConfig } = await initConfig(projectRoot);
+        const { alfredConfig } = await Config.initFromProjectRoot(projectRoot);
         const interfaceState = {
           env: 'production',
           projectType: 'app',
@@ -238,7 +238,7 @@ describe('CTF', () => {
         expect(ctfSkillNames).not.toContain('webpack');
       }
       {
-        const { alfredConfig } = await initConfig(projectRoot);
+        const { alfredConfig } = await Config.initFromProjectRoot(projectRoot);
         const interfaceState = {
           env: 'production',
           projectType: 'lib',
@@ -281,7 +281,7 @@ describe('CTF', () => {
     });
 
     it('should override core ctf skills that support same interface states', async () => {
-      const { alfredConfig } = await initConfig(projectRoot);
+      const { alfredConfig } = await Config.initFromProjectRoot(projectRoot);
       const interfaceState = {
         env: 'production',
         projectType: 'app',
@@ -300,7 +300,7 @@ describe('CTF', () => {
     });
 
     it('should not use CTF skills that do not support current interface state', async () => {
-      const { alfredConfig } = await initConfig(projectRoot);
+      const { alfredConfig } = await Config.initFromProjectRoot(projectRoot);
       const interfaceState = {
         env: 'production',
         projectType: 'lib',
@@ -322,7 +322,7 @@ describe('CTF', () => {
     const { root: projectRoot } = defaultAlfredConfig;
 
     it('should have diffs in deps after learning new skill', async () => {
-      const { alfredConfig } = await initConfig(projectRoot);
+      const { alfredConfig } = await Config.initFromProjectRoot(projectRoot);
       const { webpack, babel } = CORE_CTFS;
       const oldCtf = CTF([webpack], alfredConfig, defaultInterfaceState);
       const newCtf = CTF([webpack, babel], alfredConfig, defaultInterfaceState);

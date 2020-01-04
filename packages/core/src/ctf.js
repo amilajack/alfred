@@ -16,9 +16,9 @@ import prettier from '@alfred/skill-prettier';
 import parcel from '@alfred/skill-parcel';
 import rollup from '@alfred/skill-rollup';
 import lodashCtf from '@alfred/skill-lodash';
+import { getConfigsBasePath } from '@alfred/helpers';
 import topsort from './topsort';
 import Config from './config';
-import { getConfigsBasePath } from './validation';
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from './interface';
 import type { CtfMap, configType, CtfHelpers, CtfNode } from './types';
 
@@ -64,9 +64,10 @@ export function entrypointsToInterfaceStates(
  */
 export async function writeConfigsFromCtf(
   ctf: CtfMap,
-  config: AlfredConfig
+  config: Config
 ): Promise<CtfMap> {
-  if (!config.showConfigs) return ctf;
+  const { alfredConfig } = config;
+  if (!alfredConfig.showConfigs) return ctf;
   // Create a .configs dir if it doesn't exist
   const configsBasePath = getConfigsBasePath(config.root);
   if (!fs.existsSync(configsBasePath)) {

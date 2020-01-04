@@ -4,9 +4,10 @@ import fs from 'fs';
 import childProcess from 'child_process';
 import rimraf from 'rimraf';
 import pkgUp from 'pkg-up';
-import Signale from 'signale';
+import { Signale } from 'signale';
+import { getConfigsBasePath } from '@alfred/helpers';
 import Config from './config';
-import { PkgValidation, getConfigsBasePath } from './validation';
+import { PkgValidation } from './validation';
 import { ENTRYPOINTS } from './ctf';
 import { generateInterfaceStatesFromProject } from './interface';
 import run from './commands/run';
@@ -60,38 +61,39 @@ export class AlfredProject {
     return path.dirname(pkgPath);
   }
 
-  async init(projectDir) {
-    const projectRoot = this.searchProjectRoot(projectDir);
-    const config = new Config(projectRoot);
-    await config.init();
+  /**
+   * Given an directory, find the ancestor in the directory tree that is the project root
+   */
+  async init(projectRootOrSubDir: ?string) {
+    const projectRoot = this.searchProjectRoot(projectRootOrSubDir);
+    const config = await Config.initFromProjectRoot(projectRoot);
     this.config = config;
-    const { alfredConfig } = config;
-    const interfaceStates = generateInterfaceStatesFromProject(alfredConfig);
-    this.checkIsAlfredProject(alfredConfig, interfaceStates);
+    const interfaceStates = generateInterfaceStatesFromProject(config);
+    this.checkIsAlfredProject(config, interfaceStates);
     return { ...config, projectRoot, run: this.run.bind(this) };
   }
 
   async run(subcommand, skillFlags) {
-    const { config: alfredConfig } = this;
-    const nodeModulesPath = `${alfredConfig.root}/node_modules`;
+    const { config } = this;
+    const nodeModulesPath = `${config.root}/node_modules`;
     // Install the modules if they are not installed if autoInstall: true
     // @TODO @HACK Note that this might cause issues in monorepos
-    if (alfredConfig.autoInstall === true && !fs.existsSync(nodeModulesPath)) {
-      const installCommand = getInstallCommmand(alfredConfig);
+    if (config.autoInstall === true && !fs.existsSync(nodeModulesPath)) {
+      const installCommand = getInstallCommmand(config);
       childProcess.execSync(installCommand, {
-        cwd: alfredConfig.root,
+        cwd: config.root,
         stdio: 'inherit'
       });
     }
     // $FlowFixMe
     module.paths.push(nodeModulesPath);
 
-    await deleteConfigs(alfredConfig);
+    await this.deleteConfigs();
 
     // Built in, non-overridable skills are added here
     switch (subcommand) {
       case 'clean': {
-        const targetsPath = path.join(alfredConfig.root, 'targets');
+        const targetsPath = path.join(config.root, 'targets');
         if (fs.existsSync(targetsPath)) {
           await new Promise(resolve => {
             rimraf(targetsPath, () => {
@@ -102,7 +104,7 @@ export class AlfredProject {
         return Promise.resolve();
       }
       default: {
-        return run(alfredConfig, subcommand, skillFlags);
+        return run(config, subcommand, skillFlags);
       }
     }
   }
@@ -129,11 +131,10 @@ export class AlfredProject {
     }
   }
 
-  checkIsAlfredProject() {
-    const { config, interfaceStates } = this;
+  checkIsAlfredProject(config, interfaceStates) {
     const srcPath = path.join(config.root, 'src');
 
-    this.validatePkgJson();
+    this.validatePkgJson(config.pkgPath);
 
     if (!fs.existsSync(srcPath)) {
       throw new Error(
@@ -181,7 +182,7 @@ export class AlfredProject {
   }
 
   /**
-   * Delete .configs dir
+   * Delete .configs dir of an alfred project
    */
   deleteConfigs() {
     const configsBasePath = getConfigsBasePath(this.config.root);
@@ -196,6 +197,6 @@ export class AlfredProject {
   }
 }
 
-export default function Alfred(projectDir) {
-  return new AlfredConfig().init(projectDir);
+export default function alfred(projectDir: ?string) {
+  return new AlfredProject().init(projectDir);
 }
