@@ -1,27 +1,24 @@
-import program from 'commander';
-import { config, writeConfig } from '@alfred/core/lib/config';
-import {
-  diffCtfDepsOfAllInterfaceStates,
-  installDeps
-} from '@alfred/core/lib/ctf';
+import Config from '../config';
+import { installDeps, diffCtfDepsOfAllInterfaceStates } from '../ctf';
+import { AlfredProject } from '..';
 
-import { init } from '.';
-
-(async () => {
-  const args = program.parse(process.argv);
-  const { args: skillsPkgNames } = args;
-  const { alfredConfig, projectRoot, pkgPath, pkg: rawPkg } = await init();
-
+export default async function learn(
+  alfredProject: AlfredProject,
+  skillsPkgNames: Array<string>
+) {
+  const { alfredConfig, projectRoot, pkgPath, pkg: rawPkg } = alfredProject;
   const pkg = { ...rawPkg, alfred: { skills: [] } };
 
-  // Write the skills to the alfred config in the package.json
-  await writeConfig(pkgPath, {
+  const config = new Config({
     ...pkg,
     alfred: {
       ...pkg.alfred,
       skills: [...(pkg.alfred.skills || []), ...skillsPkgNames]
     }
   });
+
+  // Write the skills to the alfred config in the package.json
+  await config.write(pkgPath);
 
   // Install skills using NPM's API
   const npmClient = !process.env.IGNORE_INSTALL
@@ -44,4 +41,4 @@ import { init } from '.';
   if (newSkills.length) {
     await installDeps(newSkills, npmClient, alfredConfig);
   }
-})();
+}

@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const { getConfigByConfigName } = require('@alfred/core/lib/config');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
-const { getProjectRoot } = require('@alfred/cli');
+const { searchProjectRoot } = require('@alfred/cli');
 const getPort = require('get-port');
 
 function replaceProjectRoot(pathConfig, projectRoot) {
@@ -165,7 +165,7 @@ module.exports = {
         interfaceState.target === 'browser' ? browserConfig : nodeConfig
       );
 
-      const projectRoot = getProjectRoot();
+      const projectRoot = searchProjectRoot();
 
       // @HACK: The following lines should be replaced with an algorithm that
       //        recursively traverses and object and replaces each project root

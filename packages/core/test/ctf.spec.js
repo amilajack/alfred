@@ -4,9 +4,10 @@ import path from 'path';
 import powerset from '@amilajack/powerset';
 import parcel from '../../alfred-skill-parcel';
 import {
-  getExecuteWrittenConfigsMethods,
+  getExecutableWrittenConfigsMethods,
   getInterfaceForSubcommand
-} from '../src';
+} from '../src/commands';
+import { getConfigs } from '../src/validation';
 import CTF, {
   CORE_CTFS,
   getDependencies,
@@ -19,7 +20,7 @@ import CTF, {
   callCtfFnsInOrder
 } from '../src/ctf';
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from '../src/interface';
-import initConfig, { getConfigs } from '../src/config';
+import Config from '../src/config';
 
 const [defaultInterfaceState] = INTERFACE_STATES;
 
@@ -190,7 +191,7 @@ describe('CTF', () => {
           interfaceState
         );
         expect(
-          getExecuteWrittenConfigsMethods(
+          getExecutableWrittenConfigsMethods(
             ctf,
             interfaceState,
             defaultAlfredConfig

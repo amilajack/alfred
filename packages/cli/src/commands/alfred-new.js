@@ -8,7 +8,7 @@ import validateName from 'validate-npm-package-name';
 import program from 'commander';
 import git from 'git-config';
 import chalk from 'chalk';
-import getSingleSubcommandFromArgs, { addBoilerplate } from '.';
+import getSingleSubcommandFromArgs, { addBoilerplate } from '..';
 
 // @TODO @HARDCODE Remove hardcoding of versions
 const ALFRED_PKG_VERSION = '0.0.0';

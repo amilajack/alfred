@@ -1,130 +1,13 @@
 // @flow
 import path from 'path';
 import fs from 'fs';
-import pkgUp from 'pkg-up';
-import rimraf from 'rimraf';
-import initConfig, {
-  getConfigsBasePath,
-  formatPkgJson
-} from '@alfred/core/lib/config';
-import { ENTRYPOINTS } from '@alfred/core/lib/ctf';
-import { generateInterfaceStatesFromProject } from '@alfred/core/lib/interface';
+import { formatPkgJson } from '@alfred/core/lib/config';
 import handlebars from 'handlebars';
-import { Signale } from 'signale';
-import type { AlfredConfig, InterfaceState } from '@alfred/core';
-import PkgValidation from './pkg-validation';
-
-export * from './helpers/parse-input';
-
-export const getInstallCommmand = (alfredConfig: AlfredConfig): string => {
-  const { root, npmClient } = alfredConfig;
-  return npmClient.toLowerCase() === 'npm'
-    ? `npm install --prefix ${root}`
-    : 'yarn';
-};
-
-/**
- * Execute promises serially
- * @REFACTOR There's cleaner ways of implementing this
- */
-export const serial = (funcs: Array<() => Promise<any>>) =>
-  funcs.reduce(
-    (promise, func) =>
-      // eslint-disable-next-line promise/no-nesting
-      promise.then(result => func().then(Array.prototype.concat.bind(result))),
-    Promise.resolve([])
-  );
-
-export function validatePkg() {
-  const pkgPath = path.join(process.cwd(), 'package.json');
-  const result = PkgValidation.validate(fs.readFileSync(pkgPath).toString());
-
-  if (result.messagesCount) {
-    const signale = new Signale();
-    signale.note(pkgPath);
-    result.recommendations.forEach(warning => {
-      signale.warn(warning);
-    });
-    result.warnings.forEach(warning => {
-      signale.warn(warning);
-    });
-    result.errors.forEach(warning => {
-      signale.error(warning);
-    });
-  }
-}
-
-/**
- * Check if a directory contains an Alfred project
- */
-export function checkIsAlfredProject(
-  config: AlfredConfig,
-  interfaceStates: Array<InterfaceState>
-) {
-  const srcPath = path.join(config.root, 'src');
-  validatePkg();
-
-  if (!fs.existsSync(srcPath)) {
-    throw new Error(
-      '"./src" directory does not exist. This does not seem to be an Alfred project'
-    );
-  }
-
-  const hasEntrypoint = ENTRYPOINTS.some(e =>
-    fs.existsSync(path.join(srcPath, e))
-  );
-
-  if (!hasEntrypoint) {
-    throw new Error(
-      `You might be in the wrong directory or this is not an Alfred project. The project must have at least one entrypoint. Here are some examples of entrypoints:\n\n${ENTRYPOINTS.map(
-        e => `"./src/${e}"`
-      ).join('\n')}`
-    );
-  }
-
-  // Run validation that is specific to each interface state
-  interfaceStates
-    .map(interfaceState =>
-      [
-        interfaceState.projectType,
-        interfaceState.target,
-        interfaceState.env
-      ].join('.')
-    )
-    .forEach(interfaceStateString => {
-      switch (interfaceStateString) {
-        case 'app.browser.production':
-        case 'app.browser.development': {
-          const indexHtmlPath = path.join(srcPath, 'index.html');
-          if (!fs.existsSync(indexHtmlPath)) {
-            throw new Error(
-              'An "./src/index.html" file must exist when targeting a browser environment'
-            );
-          }
-          break;
-        }
-        default:
-          break;
-      }
-    });
-}
-
-/**
- * Get the root of a project from the current working directory
- */
-export function getProjectRoot() {
-  const pkgPath = pkgUp.sync();
-  if (!pkgPath) {
-    throw new Error(
-      `Alfred project root could not be found from "${process.cwd()}".
-
-      Make sure you are inside an Alfred project.`
-    );
-  }
-  return path.dirname(pkgPath);
-}
+import type { InterfaceState } from '@alfred/core';
 
 const TEMPLATES_DIR = path.resolve(__dirname, '../templates');
+
+export * from './helpers/parse-input';
 
 async function compileTemplate(templateFilename: string) {
   const source = await fs.promises.readFile(
@@ -241,30 +124,6 @@ export async function addBoilerplate(templateData: Object, root: string) {
   await addEntrypoints(templateData, root, [
     { projectType, target, env: 'production' }
   ]);
-}
-
-export async function init() {
-  const projectRoot = getProjectRoot();
-  const config = await initConfig(projectRoot);
-  const { alfredConfig } = config;
-  const interfaceStates = generateInterfaceStatesFromProject(alfredConfig);
-  checkIsAlfredProject(alfredConfig, interfaceStates);
-  return { ...config, projectRoot };
-}
-
-/**
- * Delete .configs dir
- */
-export function deleteConfigs(config: AlfredConfig): Promise<void> {
-  const configsBasePath = getConfigsBasePath(config.root);
-  if (fs.existsSync(configsBasePath)) {
-    return new Promise(resolve => {
-      rimraf(configsBasePath, () => {
-        resolve();
-      });
-    });
-  }
-  return Promise.resolve();
 }
 
 export default function getSingleSubcommandFromArgs(

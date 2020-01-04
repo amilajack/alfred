@@ -1,12 +1,16 @@
-/* eslint import/no-dynamic-require: off */
+// @flow
 import path from 'path';
+import fs from 'fs';
 import childProcess from 'child_process';
+import rimraf from 'rimraf';
 import pkgUp from 'pkg-up';
-import { getConfigsBasePath } from './config';
+import Signale from 'signale';
+import Config from './config';
+import { PkgValidation, getConfigsBasePath } from './validation';
+import { ENTRYPOINTS } from './ctf';
+import { generateInterfaceStatesFromProject } from './interface';
+import run from './commands/run';
 import type { AlfredConfig } from './types';
-import type { configType } from './config';
-import type { InterfaceState } from './interface';
-import type { CtfMap } from './ctf';
 
 // @TODO send the information to a crash reporting service (like sentry.io)
 process.on('unhandledRejection', err => {
@@ -14,140 +18,184 @@ process.on('unhandledRejection', err => {
 });
 
 /**
- * Map the environment name to a short name, which is one of ['dev', 'prod', 'test']
- * @TODO: Should be moved to CLI
+ * Get the root of a project from the current working directory
+ * @TODO @REFACTTOR Make this private by removing export
  */
-
-export function mapEnvToShortName(envName: string): string {
-  switch (envName) {
-    case 'production': {
-      return 'prod';
-    }
-    case 'development': {
-      return 'dev';
-    }
-    case 'test': {
-      return 'test';
-    }
-    default: {
-      throw new Error(`Unsupported environment "${envName}"`);
-    }
-  }
-}
-
-export function mapShortNameEnvToLongName(envName: string): string {
-  switch (envName) {
-    case 'prod': {
-      return 'production';
-    }
-    case 'dev': {
-      return 'development';
-    }
-    default: {
-      throw new Error(`Unsupported short name environment "${envName}"`);
-    }
-  }
-}
-
-/**
- * Get the name of the package JSON
- * @param {string} pkgName The name of the package
- * @param {string} binName The property of the bin object that we want
- */
-export async function getPkgBinPath(pkgName: string, binName: string) {
-  const pkgPath = require.resolve(pkgName);
-  const pkgJsonPath = await pkgUp({ cwd: pkgPath });
-
-  const { bin } = require(pkgJsonPath);
-  if (!bin) {
+export function searchProjectRoot() {
+  const pkgPath = pkgUp.sync();
+  if (!pkgPath) {
     throw new Error(
-      `Module "${pkgName}" does not have a binary because it does not have a "bin" property in it's package.json`
+      `Alfred project root could not be found from "${process.cwd()}".
+
+      Make sure you are inside an Alfred project.`
     );
   }
-
-  return path.join(
-    path.dirname(pkgJsonPath),
-    typeof bin === 'string' ? bin : bin[binName]
-  );
+  return path.dirname(pkgPath);
 }
 
-export function execCommand(cmd: string) {
-  return childProcess.execSync(cmd, { stdio: 'inherit' });
-}
+export const getInstallCommmand = (alfredConfig: AlfredConfig): string => {
+  const { root, npmClient } = alfredConfig;
+  return npmClient.toLowerCase() === 'npm'
+    ? `npm install --prefix ${root}`
+    : 'yarn';
+};
 
-export function getInterfaceForSubcommand(ctf: CtfMap, subcommand: string) {
-  const interfaceForSubcommand = Array.from(ctf.values())
-    .filter(
-      ctfNode =>
-        ctfNode.hooks && ctfNode.interfaces && ctfNode.interfaces.length
-    )
-    .reduce(
-      (arr, ctfNode) =>
-        arr.concat(ctfNode.interfaces.map(e => require(e.name))),
-      []
-    )
-    .find(ctfInterface => ctfInterface.subcommand === subcommand);
+export class AlfredProject {
+  config: AlfredConfig;
 
-  if (!interfaceForSubcommand) {
-    throw new Error(
-      `The subcommand "${subcommand}" does not have an interface or the subcommand does not exist`
-    );
+  /**
+   * Find the root of an Alfred project
+   */
+  searchProjectRoot(searchDir = process.cwd()) {
+    const pkgPath = pkgUp.sync({
+      cwd: searchDir
+    });
+    if (!pkgPath) {
+      throw new Error(
+        `Alfred project root could not be found from "${process.cwd()}".
+
+        Make sure you are inside an Alfred project.`
+      );
+    }
+    return path.dirname(pkgPath);
   }
 
-  return interfaceForSubcommand;
-}
+  async init(projectDir) {
+    const projectRoot = this.searchProjectRoot(projectDir);
+    const config = new Config(projectRoot);
+    await config.init();
+    this.config = config;
+    const { alfredConfig } = config;
+    const interfaceStates = generateInterfaceStatesFromProject(alfredConfig);
+    this.checkIsAlfredProject(alfredConfig, interfaceStates);
+    return { ...config, projectRoot, run: this.run.bind(this) };
+  }
 
-export function getExecuteWrittenConfigsMethods(
-  ctf: CtfMap,
-  interfaceState: InterfaceState,
-  config: AlfredConfig
-) {
-  const configsBasePath = getConfigsBasePath(config.root);
-  const skillsConfigMap: Map<string, configType> = new Map(
-    config.skills.map(([skillPkgName, skillConfig]) => [
-      require(skillPkgName).name,
-      skillConfig
-    ])
-  );
-
-  return Array.from(ctf.values())
-    .filter(
-      ctfNode =>
-        ctfNode.hooks && ctfNode.interfaces && ctfNode.interfaces.length
-    )
-    .reduce((prev, curr) => prev.concat(curr), [])
-    .map(ctfNode => {
-      const configFiles = ctfNode.configFiles.map(configFile => ({
-        ...configFile,
-        path: path.join(configsBasePath, configFile.path)
-      }));
-      return ctfNode.interfaces.map(e => {
-        const { subcommand } = require(e.name);
-        const skillConfig = skillsConfigMap.get(ctfNode.name);
-        return {
-          fn: (alfredConfig: AlfredConfig, flags: Array<string> = []) =>
-            ctfNode.hooks.call({
-              configFiles,
-              ctf,
-              alfredConfig,
-              interfaceState,
-              subcommand,
-              flags,
-              skillConfig
-            }),
-          // @HACK: If interfaces were defined, we could import the @alfred/interface-*
-          //        and use the `subcommand` property. This should be done after we have
-          //        some interfaces to work with
-          subcommand
-        };
+  async run(subcommand, skillFlags) {
+    const { config: alfredConfig } = this;
+    const nodeModulesPath = `${alfredConfig.root}/node_modules`;
+    // Install the modules if they are not installed if autoInstall: true
+    // @TODO @HACK Note that this might cause issues in monorepos
+    if (alfredConfig.autoInstall === true && !fs.existsSync(nodeModulesPath)) {
+      const installCommand = getInstallCommmand(alfredConfig);
+      childProcess.execSync(installCommand, {
+        cwd: alfredConfig.root,
+        stdio: 'inherit'
       });
-    })
-    .reduce((p, c) => p.concat(c), [])
-    .reduce(
-      (p, c) => ({
-        ...p,
-        [c.subcommand]: c.fn
-      }),
-      {}
+    }
+    // $FlowFixMe
+    module.paths.push(nodeModulesPath);
+
+    await deleteConfigs(alfredConfig);
+
+    // Built in, non-overridable skills are added here
+    switch (subcommand) {
+      case 'clean': {
+        const targetsPath = path.join(alfredConfig.root, 'targets');
+        if (fs.existsSync(targetsPath)) {
+          await new Promise(resolve => {
+            rimraf(targetsPath, () => {
+              resolve();
+            });
+          });
+        }
+        return Promise.resolve();
+      }
+      default: {
+        return run(alfredConfig, subcommand, skillFlags);
+      }
+    }
+  }
+
+  /**
+   * Validate the package.json of the Alfred project
+   */
+  validatePkgJson(pkgPath: string) {
+    const result = PkgValidation.validate(fs.readFileSync(pkgPath).toString());
+
+    // @TODO @REFACTOR: Move terminal coloring to cli
+    if (result.messagesCount) {
+      const signale = new Signale();
+      signale.note(pkgPath);
+      result.recommendations.forEach(warning => {
+        signale.warn(warning);
+      });
+      result.warnings.forEach(warning => {
+        signale.warn(warning);
+      });
+      result.errors.forEach(warning => {
+        signale.error(warning);
+      });
+    }
+  }
+
+  checkIsAlfredProject() {
+    const { config, interfaceStates } = this;
+    const srcPath = path.join(config.root, 'src');
+
+    this.validatePkgJson();
+
+    if (!fs.existsSync(srcPath)) {
+      throw new Error(
+        '"./src" directory does not exist. This does not seem to be an Alfred project'
+      );
+    }
+
+    const hasEntrypoint = ENTRYPOINTS.some(e =>
+      fs.existsSync(path.join(srcPath, e))
     );
+
+    if (!hasEntrypoint) {
+      throw new Error(
+        `You might be in the wrong directory or this is not an Alfred project. The project must have at least one entrypoint. Here are some examples of entrypoints:\n\n${ENTRYPOINTS.map(
+          e => `"./src/${e}"`
+        ).join('\n')}`
+      );
+    }
+
+    // Run validation that is specific to each interface state
+    interfaceStates
+      .map(interfaceState =>
+        [
+          interfaceState.projectType,
+          interfaceState.target,
+          interfaceState.env
+        ].join('.')
+      )
+      .forEach(interfaceStateString => {
+        switch (interfaceStateString) {
+          case 'app.browser.production':
+          case 'app.browser.development': {
+            const indexHtmlPath = path.join(srcPath, 'index.html');
+            if (!fs.existsSync(indexHtmlPath)) {
+              throw new Error(
+                'An "./src/index.html" file must exist when targeting a browser environment'
+              );
+            }
+            break;
+          }
+          default:
+            break;
+        }
+      });
+  }
+
+  /**
+   * Delete .configs dir
+   */
+  deleteConfigs() {
+    const configsBasePath = getConfigsBasePath(this.config.root);
+    if (fs.existsSync(configsBasePath)) {
+      return new Promise(resolve => {
+        rimraf(configsBasePath, () => {
+          resolve();
+        });
+      });
+    }
+    return Promise.resolve();
+  }
+}
+
+export default function Alfred(projectDir) {
+  return new AlfredConfig().init(projectDir);
 }

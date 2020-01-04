@@ -3,7 +3,8 @@ export type AlfredConfig = {
   npmClient: 'npm' | 'yarn',
   skills: Array<string | [string, Object]>,
   root: string,
-  showConfigs: boolean
+  showConfigs: boolean,
+  projectRoot: string
 };
 
 /* eslint import/prefer-default-export: off, import/no-dynamic-require: off */

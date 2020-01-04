@@ -1,4 +1,4 @@
-import PkgValidation from '../src/pkg-validation';
+import { PkgValidation } from '../src/validation';
 
 function getPackageJson(extra = {}) {
   return {

@@ -17,7 +17,8 @@ import parcel from '@alfred/skill-parcel';
 import rollup from '@alfred/skill-rollup';
 import lodashCtf from '@alfred/skill-lodash';
 import topsort from './topsort';
-import { getConfigsBasePath, writeConfig } from './config';
+import Config from './config';
+import { getConfigsBasePath } from './validation';
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from './interface';
 import type { CtfMap, configType, CtfHelpers, CtfNode } from './types';
 
@@ -156,10 +157,11 @@ export async function installDeps(
         ...currentDependencies,
         ...dependenciesAsObject
       };
-      return writeConfig(path.join(root, 'package.json'), {
+      const config = new Config({
         ...pkg,
         dependencies: newDependencies
       });
+      return config.write(path.join(root, 'package.json'));
     }
     default: {
       throw new Error('Unsupported npm client. Can only be "npm" or "yarn"');

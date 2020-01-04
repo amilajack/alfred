@@ -1,8 +1,9 @@
 ## @alfred/cli
 
 `@alfred/cli` has the the following responsibilities
-* Autocompletion
+* CLI Autocompletion
 * CLI coloring
+* Handling CLI arguments and commands
 
 ## Usage
 

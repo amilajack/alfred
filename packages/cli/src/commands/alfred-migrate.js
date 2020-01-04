@@ -1,8 +1,8 @@
 // @flow
 import path from 'path';
 import program from 'commander';
-import Providers from './providers';
-import { init } from '.';
+import Alfred from '@alfred/core';
+import Providers from '../providers';
 
 (async () => {
   const parsedArguments = program
@@ -11,7 +11,8 @@ import { init } from '.';
     .option('-d, --debug', 'show debugging output')
     .parse(process.argv);
 
-  const { projectRoot, alfredConfig } = await init();
+  const alfred = new Alfred();
+  const { projectRoot, alfredConfig } = await alfred.init();
 
   const filesPattern: Array<string> = parsedArguments.args.map(arg =>
     path.join(projectRoot, arg)

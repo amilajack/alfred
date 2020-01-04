@@ -10,7 +10,8 @@
     "build-watch": "yarn build --watch"
   },
   "dependencies": {
-    "opn": "^6.0.0"
+    "opn": "^6.0.0",
+    "pkg-up": "^3.1.0"
   },
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"
 }

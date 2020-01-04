@@ -1,8 +1,4 @@
-import {
-  constructSkillsFromAlfredConfig,
-  normalizeConfig,
-  requireConfig
-} from '../src/config';
+import Config from '../src/config';
 
 describe('config', () => {
   describe('getConfig', () => {

@@ -6,5 +6,4 @@
 
 [ignore]
 .*/node_modules/@parcel/watcher/test/tmp/.*
-
 suppress_comment= \\(.\\|\n\\)*\\$FlowFixMe

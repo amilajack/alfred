@@ -8,16 +8,17 @@
 ## Usage
 
 ```js
-import Alfred from '@alfred/core';
+import alfred from '@alfred/core';
 
-const { config, alfred } = await Alfred('/path/to/alfred/project');
+const opts = {};
+const { config, run } = await Alfred('/path/to/alfred/project', { ...opts });
 
 console.log(config.skills);
 
-await alfred.run('start', {
+await run('start', {
   env: 'production',
   options: {
-    pkgAutoFormatting: false
+    pkgAutoFormatting: true
   },
   flags: {
     openInBrowser: true

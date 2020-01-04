@@ -2,13 +2,14 @@
 // @flow
 import program from 'commander';
 import updateNotifier from 'update-notifier';
-import pkg from '../package.json';
+import pkg from '../../package.json';
 
 // @TODO Send the information to a crash reporting service (like sentry.io)
 process.on('unhandledRejection', err => {
   throw err;
 });
 
+// Notify the user if there are new versions of alfred available
 updateNotifier({ pkg }).notify();
 
 // @TODO: Before running any subcommand (except for new), check if cwd is an Alfred project
