@@ -3,11 +3,11 @@
   "version": "0.0.2-alpha.4",
   "dependencies": {
     "@alfred/helpers": "^0.0.2-alpha.4",
-    "@babel/cli": "^7.7.4",
-    "@babel/core": "^7.7.4",
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
-    "@babel/register": "^7.7.4",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/register": "^7.7.7",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "8.0.6"
   },
