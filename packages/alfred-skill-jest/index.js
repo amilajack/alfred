@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { execCommand, getPkgBinPath } = require('@alfred/core');
+const { execCommand, getPkgBinPath } = require('@alfred/helpers');
 const {
   getConfigPathByConfigName,
   getConfigByConfigName

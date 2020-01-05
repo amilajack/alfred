@@ -1,5 +1,8 @@
-const { execCommand, getPkgBinPath } = require('@alfred/core');
-const { getConfigPathByConfigName } = require('@alfred/helpers');
+const {
+  getConfigPathByConfigName,
+  execCommand,
+  getPkgBinPath
+} = require('@alfred/helpers');
 
 module.exports = {
   name: 'prettier',

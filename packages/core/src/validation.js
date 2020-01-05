@@ -1,7 +1,16 @@
 /* eslint import/no-dynamic-require: off */
-// @flow
 import Joi from 'joi';
 import type { Pkg } from './types';
+
+type ValidationResult = {
+  valid: boolean,
+  critical: boolean,
+  criticalMessage: string,
+  errors: Array<string>,
+  warnings: Array<string>,
+  recommendations: Array<string>,
+  messagesCount: number
+};
 
 /* Parse the incoming string as JSON, validate it against the spec for package.json
  * See README for more details
@@ -85,7 +94,7 @@ export class PkgValidation {
     };
   }
 
-  static parse(data: string | Object) {
+  static parse(data: string | Object): Object {
     if (typeof data !== 'string') {
       // It's just a string
       return 'Invalid data - Not a string';
@@ -108,7 +117,7 @@ export class PkgValidation {
     return parsed;
   }
 
-  static validate(data: string | Pkg, options: Object = {}) {
+  static validate(data: string | Pkg, options: Object = {}): ValidationResult {
     const parsed = PkgValidation.parse(data);
     const out = {
       valid: false,

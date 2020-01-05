@@ -1,8 +1,9 @@
 const path = require('path');
-const { execCommand, getPkgBinPath } = require('@alfred/core');
 const {
   getConfigPathByConfigName,
-  getConfigByConfigName
+  getConfigByConfigName,
+  getPkgBinPath,
+  execCommand
 } = require('@alfred/helpers');
 
 module.exports = {

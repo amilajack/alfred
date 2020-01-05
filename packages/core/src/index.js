@@ -11,6 +11,7 @@ import { PkgValidation } from './validation';
 import { ENTRYPOINTS } from './ctf';
 import { generateInterfaceStatesFromProject } from './interface';
 import run from './commands/run';
+import type { interfaceState as interfaceStateType } from './types';
 
 // @TODO send the information to a crash reporting service (like sentry.io)
 process.on('unhandledRejection', err => {
@@ -47,7 +48,7 @@ export class AlfredProject {
   /**
    * Find the root of an Alfred project
    */
-  searchProjectRoot(searchDir = process.cwd()) {
+  searchProjectRoot(searchDir?: string = process.cwd()) {
     const pkgPath = pkgUp.sync({
       cwd: searchDir
     });
@@ -64,7 +65,7 @@ export class AlfredProject {
   /**
    * Given an directory, find the ancestor in the directory tree that is the project root
    */
-  async init(projectRootOrSubDir: ?string) {
+  async init(projectRootOrSubDir?: string) {
     const projectRoot = this.searchProjectRoot(projectRootOrSubDir);
     const config = await Config.initFromProjectRoot(projectRoot);
     this.config = config;
@@ -73,7 +74,7 @@ export class AlfredProject {
     return { ...config, projectRoot, run: this.run.bind(this) };
   }
 
-  async run(subcommand, skillFlags) {
+  async run(subcommand: string, skillFlags: Array<string>) {
     const { config } = this;
     const nodeModulesPath = `${config.root}/node_modules`;
     // Install the modules if they are not installed if autoInstall: true
@@ -129,12 +130,16 @@ export class AlfredProject {
         signale.error(warning);
       });
     }
+
+    return result;
   }
 
-  checkIsAlfredProject(config, interfaceStates) {
+  checkIsAlfredProject(
+    config: Config,
+    interfaceStates: Array<interfaceStateType>
+  ) {
     const srcPath = path.join(config.root, 'src');
-
-    this.validatePkgJson(config.pkgPath);
+    const validationResult = this.validatePkgJson(config.pkgPath);
 
     if (!fs.existsSync(srcPath)) {
       throw new Error(
@@ -179,12 +184,14 @@ export class AlfredProject {
             break;
         }
       });
+
+    return validationResult;
   }
 
   /**
    * Delete .configs dir of an alfred project
    */
-  deleteConfigs() {
+  deleteConfigs(): Promise<void> {
     const configsBasePath = getConfigsBasePath(this.config.root);
     if (fs.existsSync(configsBasePath)) {
       return new Promise(resolve => {
@@ -203,6 +210,6 @@ export class AlfredProject {
   // uninstallDeps() {}
 }
 
-export default function alfred(projectDir: ?string) {
+export default function alfred(projectDir?: string) {
   return new AlfredProject().init(projectDir);
 }
