@@ -41,7 +41,7 @@ export default function run(
   // Run this serially because concurrently running parcel causes issues
   return serial(
     interfaceStates.map(interfaceState => () =>
-      generateCtfFromConfig(alfredConfig, interfaceState)
+      generateCtfFromConfig(config, interfaceState)
         .then(ctf =>
           alfredConfig.showConfigs ? writeConfigsFromCtf(ctf, config) : ctf
         )
@@ -60,9 +60,9 @@ export default function run(
               : skillFlags;
 
           const commands = getExecutableWrittenConfigsMethods(
+            config,
             ctf,
-            interfaceState,
-            alfredConfig
+            interfaceState
           );
 
           if (!subcommandInterface.runForAllTargets) {
@@ -78,7 +78,7 @@ export default function run(
             );
           }
 
-          return commands[subcommand](alfredConfig, filteredSkillFlags || []);
+          return commands[subcommand](config, filteredSkillFlags || []);
         })
     )
   );

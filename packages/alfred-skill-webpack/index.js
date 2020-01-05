@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const { getConfigByConfigName } = require('@alfred/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
-const { searchProjectRoot } = require('@alfred/cli');
+const { searchProjectRoot } = require('@alfred/core');
 const getPort = require('get-port');
 
 function replaceProjectRoot(pathConfig, projectRoot) {
@@ -247,17 +247,13 @@ module.exports = {
     }
   },
   ctfs: {
-    eslint: (config, ctfs, { alfredConfig }) =>
-      config
+    eslint: (_config, ctfs, { config }) =>
+      _config
         .extendConfig('eslint', {
           settings: {
             'import/resolver': {
               webpack: {
-                config: path.join(
-                  alfredConfig.root,
-                  '.configs',
-                  'webpack.browser.js'
-                )
+                config: path.join(config.root, '.configs', 'webpack.browser.js')
               }
             }
           }

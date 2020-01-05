@@ -6,7 +6,7 @@
     "react-hot-loader": "^4.6.3"
   },
   "peerDependencies": {
-    "@alfred/core": "^0.0.2-alpha.1",
+    "@alfred/core": "^0.0.2-alpha.4",
     "@alfred/interface-test": "^0.0.0",
     "webpack": "4.28.3",
     "webpack-cli": "3.2.1",

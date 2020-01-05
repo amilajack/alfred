@@ -1,48 +1,8 @@
 /* eslint import/no-dynamic-require: off */
 import path from 'path';
 import { getConfigsBasePath } from '@alfred/helpers';
-import type {
-  AlfredConfig,
-  CtfMap,
-  InterfaceState,
-  configType
-} from '../types';
-
-/**
- * Map the environment name to a short name, which is one of ['dev', 'prod', 'test']
- * @TODO: Should be moved to CLI
- */
-
-export function mapEnvToShortName(envName: string): string {
-  switch (envName) {
-    case 'production': {
-      return 'prod';
-    }
-    case 'development': {
-      return 'dev';
-    }
-    case 'test': {
-      return 'test';
-    }
-    default: {
-      throw new Error(`Unsupported environment "${envName}"`);
-    }
-  }
-}
-
-export function mapShortNameEnvToLongName(envName: string): string {
-  switch (envName) {
-    case 'prod': {
-      return 'production';
-    }
-    case 'dev': {
-      return 'development';
-    }
-    default: {
-      throw new Error(`Unsupported short name environment "${envName}"`);
-    }
-  }
-}
+import Config from '../config';
+import type { CtfMap, InterfaceState, configType } from '../types';
 
 export function getInterfaceForSubcommand(ctf: CtfMap, subcommand: string) {
   const interfaceForSubcommand = Array.from(ctf.values())
@@ -66,12 +26,17 @@ export function getInterfaceForSubcommand(ctf: CtfMap, subcommand: string) {
   return interfaceForSubcommand;
 }
 
+export type ExecutableSkillMethods = {
+  [subcommand: string]: (config: Config, flags: Array<string>) => void
+};
+
 export function getExecutableWrittenConfigsMethods(
+  config: Config,
   ctf: CtfMap,
-  interfaceState: InterfaceState,
-  alfredConfig: AlfredConfig
-) {
-  const configsBasePath = getConfigsBasePath(alfredConfig.root);
+  interfaceState: InterfaceState
+): ExecutableSkillMethods {
+  const { alfredConfig } = config;
+  const configsBasePath = getConfigsBasePath(config.root);
   const skillsConfigMap: Map<string, configType> = new Map(
     alfredConfig.skills.map(([skillPkgName, skillConfig]) => [
       require(skillPkgName).name,
@@ -94,10 +59,11 @@ export function getExecutableWrittenConfigsMethods(
         const { subcommand } = require(e.name);
         const skillConfig = skillsConfigMap.get(ctfNode.name);
         return {
-          fn: (alfredConfig: AlfredConfig, flags: Array<string> = []) =>
+          fn: (_config: Config, flags: Array<string> = []) =>
             ctfNode.hooks.call({
               configFiles,
               ctf,
+              config,
               alfredConfig,
               interfaceState,
               subcommand,

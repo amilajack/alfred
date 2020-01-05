@@ -100,12 +100,14 @@ export async function writeConfigsFromCtf(
 
 /**
  * @TODO Account for `devDependencies` and `dependencies`
+ * @TODO @REFACTOR Move to AlfredProject
  */
 export async function installDeps(
   dependencies: Array<string> = [],
   npmClient: 'npm' | 'yarn' | 'write' = 'npm',
-  alfredConfig: AlfredConfig
+  config: Config
 ): Promise<any> {
+  const { root } = config;
   if (!dependencies.length) return Promise.resolve();
 
   switch (npmClient) {
@@ -127,14 +129,13 @@ export async function installDeps(
     // Install dependencies with Yarn
     case 'yarn': {
       return childProcess.execSync(['yarn', 'add', ...dependencies].join(' '), {
-        cwd: alfredConfig.root,
+        cwd: root,
         stdio: 'inherit'
       });
     }
     // Write the package to the package.json but do not install them. This is intended
     // to be used for end to end testing
     case 'writeOnly': {
-      const { root } = alfredConfig;
       const rawPkg = await fs.promises.readFile(
         path.join(root, 'package.json')
       );
@@ -158,11 +159,10 @@ export async function installDeps(
         ...currentDependencies,
         ...dependenciesAsObject
       };
-      const config = new Config({
+      return new Config({
         ...pkg,
         dependencies: newDependencies
-      });
-      return config.write(path.join(root, 'package.json'));
+      }).write(path.join(root, 'package.json'));
     }
     default: {
       throw new Error('Unsupported npm client. Can only be "npm" or "yarn"');
@@ -244,10 +244,11 @@ export function topsortCtfs(ctfs: CtfMap): Array<string> {
 }
 
 export function callCtfFnsInOrder(
+  config: Config,
   ctf: CtfMap,
-  alfredConfig: AlfredConfig,
   interfaceState: InterfaceState
 ) {
+  const { alfredConfig } = config;
   const ordered = topsortCtfs(ctf);
   // All the ctfs Fns from other ctfNodes that transform each ctfNode
   const selfTransforms = new Map(topsortCtfs(ctf).map(e => [e, []]));
@@ -260,6 +261,7 @@ export function callCtfFnsInOrder(
           ctf.set(
             ctfName,
             ctfFn(correspondingCtfNode, ctf, {
+              config,
               alfredConfig,
               ...interfaceState
             })
@@ -360,7 +362,7 @@ export function addSubCommandsToCtfNodes(ctf: CtfMap): CtfMap {
  */
 export function addMissingStdSkillsToCtf(
   ctf: CtfMap,
-  alfredConfig: AlfredConfig,
+  config: Config,
   interfaceState: InterfaceState
 ): CtfMap {
   // Remove skills that do not support the current interfaceState
@@ -448,16 +450,17 @@ export function addMissingStdSkillsToCtf(
     ctf.set('babel', { ...CORE_CTFS.babel, ...addCtfHelpers });
   }
 
-  callCtfFnsInOrder(ctf, alfredConfig, interfaceState);
+  callCtfFnsInOrder(config, ctf, interfaceState);
   validateCtf(ctf, interfaceState);
 
   return ctf;
 }
 
 export async function generateCtfFromConfig(
-  alfredConfig: AlfredConfig,
+  config: Config,
   interfaceState: InterfaceState
 ): Promise<CtfMap> {
+  const { alfredConfig } = config;
   // Generate the CTF
   const tmpCtf: CtfMap = new Map();
   const { skills = [] } = alfredConfig;
@@ -480,7 +483,7 @@ export async function generateCtfFromConfig(
   });
 
   const ctf = CTF(Array.from(tmpCtf.values()), alfredConfig, interfaceState);
-  addMissingStdSkillsToCtf(ctf, alfredConfig, interfaceState);
+  addMissingStdSkillsToCtf(ctf, config, interfaceState);
 
   return ctf;
 }
@@ -536,8 +539,14 @@ export async function diffCtfDepsOfAllInterfaceStates(
   const stateWithDuplicateDeps = await Promise.all(
     INTERFACE_STATES.map(interfaceState =>
       Promise.all([
-        generateCtfFromConfig(prevAlfredConfig, interfaceState),
-        generateCtfFromConfig(currAlfredConfig, interfaceState)
+        generateCtfFromConfig(
+          { alfredConfig: prevAlfredConfig },
+          interfaceState
+        ),
+        generateCtfFromConfig(
+          { alfredConfig: currAlfredConfig },
+          interfaceState
+        )
       ])
     )
   );

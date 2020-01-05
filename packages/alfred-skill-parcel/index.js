@@ -26,9 +26,10 @@ module.exports = {
   default: true,
   configFiles: [],
   hooks: {
-    async call({ interfaceState, alfredConfig, subcommand }) {
+    async call({ interfaceState, config, subcommand }) {
+      const { root } = config;
       const Bundler = require('parcel');
-      const src = path.join(alfredConfig.root, 'src');
+      const src = path.join(root, 'src');
       const entryFiles = [];
       if (interfaceState.target === 'browser') {
         entryFiles.push(path.join(src, 'index.html'));
@@ -37,9 +38,9 @@ module.exports = {
       }
       const { target } = interfaceState;
       const baseOptions = {
-        outDir: path.join(alfredConfig.root, 'targets', 'prod'),
+        outDir: path.join(root, 'targets', 'prod'),
         outFile: 'index.html',
-        cacheDir: path.join(alfredConfig.root, 'node_modules', '.cache'),
+        cacheDir: path.join(root, 'node_modules', '.cache'),
         minify: interfaceState.env === 'production',
         autoInstall: false,
         target

@@ -6,10 +6,11 @@ export default async function learn(
   alfredProject: AlfredProject,
   skillsPkgNames: Array<string>
 ) {
-  const { alfredConfig, projectRoot, pkgPath, pkg: rawPkg } = alfredProject;
+  const { config, projectRoot, pkgPath, pkg: rawPkg } = alfredProject;
   const pkg = { ...rawPkg, alfred: { skills: [] } };
+  const { alfredConfig } = config;
 
-  const config = new Config({
+  const newConfig = new Config({
     ...pkg,
     alfred: {
       ...pkg.alfred,
@@ -18,20 +19,20 @@ export default async function learn(
   });
 
   // Write the skills to the alfred config in the package.json
-  await config.write(pkgPath);
+  await newConfig.write(pkgPath);
 
   // Install skills using NPM's API
   const npmClient = !process.env.IGNORE_INSTALL
-    ? alfredConfig.npmClient
+    ? config.alfredConfig.npmClient
     : 'writeOnly';
-  await installDeps(skillsPkgNames, npmClient, alfredConfig);
+  await installDeps(skillsPkgNames, npmClient, config);
 
   // Check if a skill with the same interface is already being used.
   // If so, uninstall it
 
   // Find the name of the packages that were installed and add the package names to
   // the alfred skills array
-  const { alfredConfig: newAlfredConfig } = await config(projectRoot);
+  const { alfredConfig: newAlfredConfig } = await newConfig(projectRoot);
 
   // Find if any new deps need to be installed and install them
   const newSkills = await diffCtfDepsOfAllInterfaceStates(

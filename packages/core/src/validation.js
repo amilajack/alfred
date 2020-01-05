@@ -391,7 +391,9 @@ export class PkgValidation {
 const skill = [Joi.string(), Joi.array()];
 const skills = [Joi.string(), Joi.array().items(skill)];
 
-export default function ValidateAlfredConfig(config: { [x: string]: any }) {
+export default function ValidateAlfredConfig(alfredConfig: {
+  [x: string]: any
+}) {
   // @TODO Move to helpers
   const schema = Joi.object().keys({
     npmClient: Joi.string().valid(['npm', 'yarn']),
@@ -406,24 +408,24 @@ export default function ValidateAlfredConfig(config: { [x: string]: any }) {
       recommendSkills: skills
     })
   });
-  if (!config.extends) return config;
+  if (!alfredConfig.extends) return alfredConfig;
   // Validate if each config in `.extends` is a string
-  if (Array.isArray(config.extends)) {
-    config.extends.forEach(_config => {
+  if (Array.isArray(alfredConfig.extends)) {
+    alfredConfig.extends.forEach(_config => {
       if (typeof _config !== 'string') {
         throw new Error(
           `Values in ".extends" property in Alfred config must be a string. Instead passed ${JSON.stringify(
-            config.extends
+            alfredConfig.extends
           )}`
         );
       }
     });
-  } else if (typeof config.extends !== 'string') {
+  } else if (typeof alfredConfig.extends !== 'string') {
     throw new Error(
       `Values in ".extends" property in Alfred config must be a string. Instead passed ${JSON.stringify(
-        config.extends
+        alfredConfig.extends
       )}`
     );
   }
-  return Joi.assert(config, schema);
+  return Joi.assert(alfredConfig, schema);
 }

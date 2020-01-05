@@ -25,7 +25,7 @@ module.exports = {
     }
   ],
   hooks: {
-    async call({ configFiles, alfredConfig, flags }) {
+    async call({ configFiles, config, alfredConfig, flags }) {
       const configPath = getConfigPathByConfigName('eslint', configFiles);
       const binPath = await getPkgBinPath('eslint', 'eslint');
       if (alfredConfig.showConfigs) {
@@ -33,12 +33,18 @@ module.exports = {
           [binPath, `--config ${configPath} src tests`, ...flags].join(' ')
         );
       }
-      const { config } = getConfigByConfigName('eslint', configFiles);
+      const { config: eslintConfig } = getConfigByConfigName(
+        'eslint',
+        configFiles
+      );
       const { CLIEngine } = require('eslint');
-      const cli = new CLIEngine({ baseConfig: config, useEslintrc: false });
+      const cli = new CLIEngine({
+        baseConfig: eslintConfig,
+        useEslintrc: false
+      });
       const report = cli.executeOnFiles([
-        path.join(alfredConfig.root, 'src'),
-        path.join(alfredConfig.root, 'tests')
+        path.join(config.root, 'src'),
+        path.join(config.root, 'tests')
       ]);
       const formatter = cli.getFormatter();
       if (report.errorCount) {

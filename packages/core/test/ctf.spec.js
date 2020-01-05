@@ -192,9 +192,9 @@ describe('CTF', () => {
         );
         expect(
           getExecutableWrittenConfigsMethods(
+            defaultAlfredConfig,
             ctf,
-            interfaceState,
-            defaultAlfredConfig
+            interfaceState
           )
         ).toMatchSnapshot();
       });
@@ -259,22 +259,26 @@ describe('CTF', () => {
     describe('skills', () => {
       it('should throw if skill does not exist', async () => {
         const [state] = INTERFACE_STATES;
-        const config = {
+        const alfredConfig = {
           ...defaultAlfredConfig,
           skills: [['@alfred/skill-non-existent-skill', {}]]
         };
-        await expect(generateCtfFromConfig(config, state)).rejects.toThrow(
+        await expect(
+          generateCtfFromConfig(alfredConfig, state)
+        ).rejects.toThrow(
           "Cannot find module '@alfred/skill-non-existent-skill' from 'ctf.js'"
         );
       });
 
       it('should throw if unsupported skill is used', async () => {
         const [state] = INTERFACE_STATES;
-        const config = {
+        const alfredConfig = {
           ...defaultAlfredConfig,
           skills: [['@alfred/skill-non-existent-skill', {}]]
         };
-        await expect(generateCtfFromConfig(config, state)).rejects.toThrow(
+        await expect(
+          generateCtfFromConfig(alfredConfig, state)
+        ).rejects.toThrow(
           "Cannot find module '@alfred/skill-non-existent-skill' from 'ctf.js'"
         );
       });

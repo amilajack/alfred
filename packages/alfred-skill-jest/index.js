@@ -20,16 +20,17 @@ module.exports = {
     }
   ],
   hooks: {
-    async call({ configFiles, ctf, alfredConfig, flags }) {
+    async call({ configFiles, ctf, config, alfredConfig, flags }) {
       const configPath = getConfigPathByConfigName('jest', configFiles);
       const binPath = await getPkgBinPath('jest-cli', 'jest');
-      const nodeModulesPath = path.join(alfredConfig.root, 'node_modules');
+      const { root } = config;
+      const nodeModulesPath = path.join(root, 'node_modules');
       if (!fs.existsSync(nodeModulesPath)) {
         await fs.promises.mkdir(nodeModulesPath);
       }
       // @TODO Create a hidden `./node_modules/.alfred` directory to put configs in
       const jestTransformerPath = path.join(
-        alfredConfig.root,
+        root,
         'node_modules',
         'jest-transformer.js'
       );
@@ -37,7 +38,7 @@ module.exports = {
         getConfigByConfigName('babel', ctf.get('babel').configFiles).config
       );
       const hiddenTmpConfigPath = path.join(
-        alfredConfig.root,
+        root,
         'node_modules',
         'jest.config.js'
       );
@@ -48,7 +49,7 @@ module.exports = {
           transform: {
             '^.+.jsx?$': '${jestTransformerPath}'
           },
-          rootDir: '${alfredConfig.root}'
+          rootDir: '${root}'
         };
         `
       );
@@ -63,8 +64,8 @@ module.exports = {
         [
           binPath,
           alfredConfig.showConfigs
-            ? `--config ${configPath} ${alfredConfig.root}`
-            : `--config ${hiddenTmpConfigPath} ${alfredConfig.root}`,
+            ? `--config ${configPath} ${root}`
+            : `--config ${hiddenTmpConfigPath} ${root}`,
           ...flags
         ].join(' ')
       );

@@ -11,7 +11,6 @@ import { PkgValidation } from './validation';
 import { ENTRYPOINTS } from './ctf';
 import { generateInterfaceStatesFromProject } from './interface';
 import run from './commands/run';
-import type { AlfredConfig } from './types';
 
 // @TODO send the information to a crash reporting service (like sentry.io)
 process.on('unhandledRejection', err => {
@@ -34,15 +33,16 @@ export function searchProjectRoot() {
   return path.dirname(pkgPath);
 }
 
-export const getInstallCommmand = (alfredConfig: AlfredConfig): string => {
-  const { root, npmClient } = alfredConfig;
+export const getInstallCommmand = (config: Config): string => {
+  const { root, alfredConfig } = config;
+  const { npmClient } = alfredConfig;
   return npmClient.toLowerCase() === 'npm'
     ? `npm install --prefix ${root}`
     : 'yarn';
 };
 
 export class AlfredProject {
-  config: AlfredConfig;
+  config: Config;
 
   /**
    * Find the root of an Alfred project
@@ -195,6 +195,12 @@ export class AlfredProject {
     }
     return Promise.resolve();
   }
+
+  // @TODO
+  // installDeps() {}
+
+  // @TODO
+  // uninstallDeps() {}
 }
 
 export default function alfred(projectDir: ?string) {

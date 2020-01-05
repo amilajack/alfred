@@ -85,14 +85,24 @@ export default class Config {
 
   root: ?string;
 
+  static DEFAULT_CONFIG = {
+    skills: [],
+    showConfigs: false
+  };
+
   constructor(
-    config: AlfredConfig = {},
+    alfredConfig = {},
     projectRoot: ?string,
     pkg: ?Pkg,
     pkgPath: ?string
   ) {
-    ValidateAlfredConfig(config);
-    this.alfredConfig = config;
+    const mergedAlfredConfig: AlfredConfig = {
+      ...Config.DEFAULT_CONFIG,
+      ...alfredConfig
+    };
+    ValidateAlfredConfig(mergedAlfredConfig);
+    this.alfredConfig = mergedAlfredConfig;
+    this.normalizeWithResolvedSkills();
     this.root = projectRoot;
     this.pkg = pkg;
     this.pkgPath = pkgPath;

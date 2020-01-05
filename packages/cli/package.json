@@ -61,9 +61,9 @@
     "lodash.flatten": "^4.4.0"
   },
   "peerDependencies": {
-    "@alfred/core": "^0.0.2-alpha.1",
-    "@alfred/interface-build": "^0.0.2-alpha.1",
-    "@alfred/interface-start": "^0.0.2-alpha.1"
+    "@alfred/core": "^0.0.2-alpha.4",
+    "@alfred/interface-build": "^0.0.2-alpha.4",
+    "@alfred/interface-start": "^0.0.2-alpha.4"
   },
   "engines": {
     "node": ">=13"

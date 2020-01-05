@@ -5,7 +5,7 @@ import Config from '../config';
 export default async function skills(config: Config) {
   const interfaceStateCtfs = await Promise.all(
     generateInterfaceStatesFromProject(config).map(interfaceState =>
-      generateCtfFromConfig(config.alfredConfig, interfaceState).then(ctf =>
+      generateCtfFromConfig(config, interfaceState).then(ctf =>
         Array.from(ctf.values()).filter(
           ctfNode =>
             ctfNode.hooks && ctfNode.interfaces && ctfNode.interfaces.length
