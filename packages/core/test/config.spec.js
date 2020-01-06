@@ -31,7 +31,7 @@ describe('config', () => {
     /**
      * @TODO
      */
-    it.skip('should not allow recursive deps', () => {});
+    it.skip('should not allow cyclic deps', () => {});
   });
 
   describe('config', () => {

@@ -132,8 +132,12 @@ export async function addBoilerplate(templateData: Object, root: string) {
   ]);
 }
 
-// @TODO @HARDCODE Remove hardcoding of versions
-const ALFRED_PKG_VERSION = '0.0.0';
+const alfredPkgPath = path.join(
+  require.resolve('@alfred/core'),
+  'package.json'
+);
+// eslint-disable-next-line import/no-dynamic-require
+const ALFRED_PKG_VERSION = require(alfredPkgPath).version;
 
 const gitConfig = () =>
   new Promise((resolve, reject) => {
@@ -265,7 +269,6 @@ async function createNewProject(cwd: string, name: string) {
       {
         name: 'target',
         type: 'list',
-        // @TODO @HARDCODE Dynamically get the targets
         choices: ['browser', 'node'],
         message: 'project type',
         default: 'browser'
@@ -326,7 +329,7 @@ async function createNewProject(cwd: string, name: string) {
   const buildCommand =
     answers.npmClient === 'NPM' ? 'npm run build' : 'yarn build';
   // @TODO Install the deps
-  if (!process.env.IGNORE_INSTALL) {
+  if (process.env.IGNORE_INSTALL !== 'true') {
     childProcess.execSync(installCommand, {
       cwd: root,
       stdio: 'inherit'

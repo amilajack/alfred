@@ -104,13 +104,11 @@ export default class Config {
   }
 
   /**
-   * @TODO Error message does not accurately discribe error
+   * @private
    */
   static validatePkgPath(pkgPath: string = this.pkgPath) {
     if (!fs.existsSync(pkgPath)) {
-      throw new Error(
-        'Current working directory does not have a "package.json"'
-      );
+      throw new Error(`"${pkgPath}" does not exist`);
     }
   }
 

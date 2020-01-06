@@ -29,7 +29,6 @@ import { Signale } from 'signale';
   const project = await alfred();
 
   const validation = project.validatePkgJson();
-  // @TODO @REFACTOR: Move terminal coloring to cli
   if (validation.messagesCount) {
     const signale = new Signale();
     signale.note(project.config.pkgPath);

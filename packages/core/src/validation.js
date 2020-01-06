@@ -403,7 +403,6 @@ const skills = [Joi.string(), Joi.array().items(skill)];
 export default function ValidateAlfredConfig(alfredConfig: {
   [x: string]: any
 }) {
-  // @TODO Move to helpers
   const schema = Joi.object().keys({
     npmClient: Joi.string().valid(['npm', 'yarn']),
     showConfigs: Joi.boolean(),
