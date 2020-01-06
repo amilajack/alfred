@@ -9,6 +9,17 @@ export type AlfredConfig = {
   projectRoot: string
 };
 
+export interface Config {
+  skills: Array<Object>;
+  showConfigs: boolean;
+}
+
+export interface Project {
+  config: Config;
+  pkg: Pkg;
+  pkgPath: string;
+}
+
 /* eslint import/prefer-default-export: off, import/no-dynamic-require: off */
 export type InterfaceState = {
   // Flag name and argument types

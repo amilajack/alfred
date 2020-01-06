@@ -24,10 +24,12 @@ import Config from '../src/config';
 
 const [defaultInterfaceState] = INTERFACE_STATES;
 
-const defaultAlfredConfig = {
+const defaultConfig = {
   root: path.join(__dirname, '../../../tests/fixtures/app'),
-  skills: [],
-  npmClient: 'npm'
+  alfredConfig: {
+    skills: [],
+    npmClient: 'npm'
+  }
 };
 
 function removePathsPropertiesFromObject(obj) {
@@ -50,18 +52,14 @@ describe('CTF', () => {
     it('should topsort', () => {
       {
         const sortedCtfs = topsortCtfs(
-          CTF(
-            Object.values(CORE_CTFS),
-            defaultAlfredConfig,
-            defaultInterfaceState
-          )
+          CTF(Object.values(CORE_CTFS), defaultInterfaceState)
         ).map(e => e.name);
         expect(sortedCtfs).toMatchSnapshot();
         expect(Object.keys(CORE_CTFS).length).toEqual(sortedCtfs.length);
       }
       {
         const sortedCtfs = topsortCtfs(
-          CTF([CORE_CTFS.react], defaultAlfredConfig, INTERFACE_STATES[0])
+          CTF([CORE_CTFS.react], INTERFACE_STATES[0])
         ).map(e => e.name);
         expect(sortedCtfs).toMatchSnapshot();
         expect(sortedCtfs.length).toEqual(1);
@@ -69,14 +67,10 @@ describe('CTF', () => {
     });
 
     it('should call ctfs in order', () => {
-      const ctf = CTF(
-        Object.values(CORE_CTFS),
-        defaultAlfredConfig,
-        INTERFACE_STATES[0]
-      );
+      const ctf = CTF(Object.values(CORE_CTFS), INTERFACE_STATES[0]);
       const { orderedSelfTransforms } = callCtfFnsInOrder(
+        defaultConfig,
         ctf,
-        defaultAlfredConfig,
         INTERFACE_STATES[0]
       );
 
@@ -98,27 +92,23 @@ describe('CTF', () => {
           'ctf-node-1': () => {}
         }
       };
-      const ctf = CTF(
-        [ctfNode1, ctfNode2],
-        defaultAlfredConfig,
-        INTERFACE_STATES[0]
-      );
-      callCtfFnsInOrder(ctf, defaultAlfredConfig, INTERFACE_STATES[0]);
+      const ctf = CTF([ctfNode1, ctfNode2], INTERFACE_STATES[0]);
+      callCtfFnsInOrder(defaultConfig, ctf, INTERFACE_STATES[0]);
     });
   });
 
   describe('interfaces', () => {
     it('should diff ctfs for all interface states', async () => {
       const skills = [
-        ...defaultAlfredConfig.skills,
+        ...defaultConfig.alfredConfig.skills,
         '@alfred/skill-mocha'
       ].map(e => [e, {}]);
       const currentAlfredConfig = {
-        ...defaultAlfredConfig,
+        ...defaultConfig.alfredConfig,
         skills
       };
       const result = await diffCtfDepsOfAllInterfaceStates(
-        defaultAlfredConfig,
+        defaultConfig.alfredConfig,
         currentAlfredConfig
       );
       expect(result).toEqual(['mocha@5.2.0']);
@@ -158,11 +148,7 @@ describe('CTF', () => {
         )}`, () => {
           expect(
             getInterfaceForSubcommand(
-              CTF(
-                Object.values(CORE_CTFS),
-                defaultAlfredConfig,
-                interfaceState
-              ),
+              CTF(Object.values(CORE_CTFS), interfaceState),
               'build'
             )
           ).toMatchSnapshot();
@@ -173,7 +159,7 @@ describe('CTF', () => {
         INTERFACE_STATES.forEach(interfaceState => {
           expect(() =>
             getInterfaceForSubcommand(
-              CTF([CORE_CTFS.babel], defaultAlfredConfig, interfaceState),
+              CTF([CORE_CTFS.babel], interfaceState),
               'build'
             )
           ).toThrow();
@@ -185,38 +171,26 @@ describe('CTF', () => {
   describe('executors', () => {
     it('should generate functions for scripts', () => {
       INTERFACE_STATES.forEach(interfaceState => {
-        const ctf = CTF(
-          [CORE_CTFS.webpack],
-          defaultAlfredConfig,
-          interfaceState
-        );
+        const ctf = CTF([CORE_CTFS.webpack], interfaceState);
         expect(
-          getExecutableWrittenConfigsMethods(
-            defaultAlfredConfig,
-            ctf,
-            interfaceState
-          )
+          getExecutableWrittenConfigsMethods(defaultConfig, ctf, interfaceState)
         ).toMatchSnapshot();
       });
     });
   });
 
   describe('alfred cli helpers', () => {
-    const { root: projectRoot } = defaultAlfredConfig;
+    const { root: projectRoot } = defaultConfig;
 
     it('should add missing std skills to ctf', async () => {
       {
-        const { alfredConfig } = await Config.initFromProjectRoot(projectRoot);
+        const config = await Config.initFromProjectRoot(projectRoot);
         const { webpack } = CORE_CTFS;
-        const ctf = CTF([webpack], alfredConfig, defaultInterfaceState);
+        const ctf = CTF([webpack], defaultInterfaceState);
         expect(Array.from(ctf.keys())).toMatchSnapshot();
         expect(
           Array.from(
-            addMissingStdSkillsToCtf(
-              ctf,
-              alfredConfig,
-              defaultInterfaceState
-            ).keys()
+            addMissingStdSkillsToCtf(ctf, config, defaultInterfaceState).keys()
           )
         ).toMatchSnapshot();
       }
@@ -227,7 +201,7 @@ describe('CTF', () => {
           projectType: 'app',
           target: 'browser'
         };
-        const ctf = CTF([parcel], alfredConfig, interfaceState);
+        const ctf = CTF([parcel], interfaceState);
         expect(Array.from(ctf.keys())).toMatchSnapshot();
         const ctfSkillNames = Array.from(
           addMissingStdSkillsToCtf(ctf, alfredConfig, interfaceState).keys()
@@ -244,7 +218,7 @@ describe('CTF', () => {
           projectType: 'lib',
           target: 'browser'
         };
-        const ctf = CTF([parcel], alfredConfig, interfaceState);
+        const ctf = CTF([parcel], interfaceState);
         expect(Array.from(ctf.keys())).toMatchSnapshot();
         const ctfSkillNames = Array.from(
           addMissingStdSkillsToCtf(ctf, alfredConfig, interfaceState).keys()
@@ -260,11 +234,11 @@ describe('CTF', () => {
       it('should throw if skill does not exist', async () => {
         const [state] = INTERFACE_STATES;
         const alfredConfig = {
-          ...defaultAlfredConfig,
+          ...defaultConfig.alfredConfig,
           skills: [['@alfred/skill-non-existent-skill', {}]]
         };
         await expect(
-          generateCtfFromConfig(alfredConfig, state)
+          generateCtfFromConfig({ alfredConfig }, state)
         ).rejects.toThrow(
           "Cannot find module '@alfred/skill-non-existent-skill' from 'ctf.js'"
         );
@@ -273,11 +247,11 @@ describe('CTF', () => {
       it('should throw if unsupported skill is used', async () => {
         const [state] = INTERFACE_STATES;
         const alfredConfig = {
-          ...defaultAlfredConfig,
+          ...defaultConfig,
           skills: [['@alfred/skill-non-existent-skill', {}]]
         };
         await expect(
-          generateCtfFromConfig(alfredConfig, state)
+          generateCtfFromConfig({ alfredConfig }, state)
         ).rejects.toThrow(
           "Cannot find module '@alfred/skill-non-existent-skill' from 'ctf.js'"
         );
@@ -291,7 +265,7 @@ describe('CTF', () => {
         projectType: 'app',
         target: 'browser'
       };
-      const ctf = CTF([parcel], alfredConfig, interfaceState);
+      const ctf = CTF([parcel], interfaceState);
 
       expect(Array.from(ctf.keys())).toMatchSnapshot();
       const ctfSkillNames = Array.from(
@@ -310,7 +284,7 @@ describe('CTF', () => {
         projectType: 'lib',
         target: 'browser'
       };
-      const ctf = CTF([parcel], alfredConfig, interfaceState);
+      const ctf = CTF([parcel], interfaceState);
       expect(Array.from(ctf.keys())).toEqual([]);
       const ctfSkillNames = Array.from(
         addMissingStdSkillsToCtf(ctf, alfredConfig, interfaceState).keys()
@@ -323,13 +297,10 @@ describe('CTF', () => {
   });
 
   describe('dependencies', () => {
-    const { root: projectRoot } = defaultAlfredConfig;
-
     it('should have diffs in deps after learning new skill', async () => {
-      const { alfredConfig } = await Config.initFromProjectRoot(projectRoot);
       const { webpack, babel } = CORE_CTFS;
-      const oldCtf = CTF([webpack], alfredConfig, defaultInterfaceState);
-      const newCtf = CTF([webpack, babel], alfredConfig, defaultInterfaceState);
+      const oldCtf = CTF([webpack], defaultInterfaceState);
+      const newCtf = CTF([webpack, babel], defaultInterfaceState);
       const ctf = diffCtfDeps(oldCtf, newCtf);
       expect(ctf).toMatchSnapshot();
     });
@@ -345,7 +316,7 @@ describe('CTF', () => {
         expect(ctfCombination).toMatchSnapshot();
         // Get the CTFs for each combination
         const ctfObjects = ctfCombination.map(ctfName => CORE_CTFS[ctfName]);
-        const result = CTF(ctfObjects, defaultAlfredConfig, interfaceState);
+        const result = CTF(ctfObjects, defaultConfig, interfaceState);
         expect(
           removePathsPropertiesFromObject(getConfigs(result))
         ).toMatchSnapshot();
@@ -361,7 +332,7 @@ describe('CTF', () => {
     )}`, () => {
       const { devDependencies } = CTF(
         Object.values(CORE_CTFS),
-        defaultAlfredConfig,
+        defaultConfig,
         interfaceState
       )
         .get('webpack')

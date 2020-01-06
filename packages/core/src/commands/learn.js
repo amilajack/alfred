@@ -1,12 +1,13 @@
 import Config from '../config';
 import { installDeps, diffCtfDepsOfAllInterfaceStates } from '../ctf';
-import { AlfredProject } from '..';
+import type { AlfredProject } from '../types';
 
 export default async function learn(
   alfredProject: AlfredProject,
   skillsPkgNames: Array<string>
 ) {
-  const { config, projectRoot, pkgPath, pkg: rawPkg } = alfredProject;
+  const { config } = alfredProject;
+  const { projectRoot, pkgPath, pkg: rawPkg } = config;
   const pkg = { ...rawPkg, alfred: { skills: [] } };
   const { alfredConfig } = config;
 

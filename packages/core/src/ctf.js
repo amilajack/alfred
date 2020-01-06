@@ -315,7 +315,6 @@ export function validateCtf(ctf: CtfMap, interfaceState: InterfaceState) {
 
 export default function CTF(
   ctfs: Array<CtfNode>,
-  alfredConfig: AlfredConfig,
   interfaceState: InterfaceState
 ): CtfMap {
   const ctf: CtfMap = new Map();
@@ -482,7 +481,7 @@ export async function generateCtfFromConfig(
     tmpCtf.set(ctfNode.name, ctfNode);
   });
 
-  const ctf = CTF(Array.from(tmpCtf.values()), alfredConfig, interfaceState);
+  const ctf = CTF(Array.from(tmpCtf.values()), interfaceState);
   addMissingStdSkillsToCtf(ctf, config, interfaceState);
 
   return ctf;

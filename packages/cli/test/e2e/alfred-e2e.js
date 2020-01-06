@@ -83,7 +83,7 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
     CLI_INPUT: JSON.stringify(CLI_INPUT),
     IGNORE_INSTALL: true
   };
-  const binPath = require.resolve('../../lib/alfred');
+  const binPath = require.resolve('../../lib/commands/alfred');
   childProcess.execSync(`${binPath} new ${folderName}`, {
     cwd: tmpDir,
     stdio: 'inherit',

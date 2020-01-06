@@ -5,6 +5,8 @@
 * Handling CTF transforms
 * Diffing dependencies (but not installing them)
 
+`@alfred/core` should be hidden from users by default. The `alfred` serves as a wrapper for it. Advanced users should be able to swap different versions of core that are used by `alfred`.
+
 ## Usage
 
 ```js

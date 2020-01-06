@@ -5,7 +5,7 @@ import {
 import { generateCtfFromConfig, writeConfigsFromCtf } from '../ctf';
 import { generateInterfaceStatesFromProject } from '../interface';
 import { serial } from '../helpers';
-import Config from '../config';
+import type { Project } from '../types';
 
 /**
  * Run an alfred subcommand given an alfred config
@@ -14,10 +14,11 @@ import Config from '../config';
  * @param {*} skillFlags
  */
 export default function run(
-  config: Config,
+  alfredProject: Project,
   subcommand: string,
   skillFlags: Array<string> = []
 ) {
+  const { config } = alfredProject;
   const { alfredConfig } = config;
   // @HACK This is not a very elegant solution.
   // @HACK @REFACTOR Certain subcommands do not rely on state (lint, test, etc). These

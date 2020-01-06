@@ -11,7 +11,9 @@ import { PkgValidation } from './validation';
 import { ENTRYPOINTS } from './ctf';
 import { generateInterfaceStatesFromProject } from './interface';
 import run from './commands/run';
-import type { interfaceState as interfaceStateType } from './types';
+import learn from './commands/learn';
+import clean from './commands/clean';
+import type { interfaceState as interfaceStateType, Project } from './types';
 
 // @TODO send the information to a crash reporting service (like sentry.io)
 process.on('unhandledRejection', err => {
@@ -42,7 +44,7 @@ export const getInstallCommmand = (config: Config): string => {
     : 'yarn';
 };
 
-export class AlfredProject {
+export class AlfredProject implements Project {
   config: Config;
 
   /**
@@ -74,7 +76,7 @@ export class AlfredProject {
     return { ...config, projectRoot, run: this.run.bind(this) };
   }
 
-  async run(subcommand: string, skillFlags: Array<string>) {
+  async run(subcommand: string, args: Array<string>) {
     const { config } = this;
     const nodeModulesPath = `${config.root}/node_modules`;
     // Install the modules if they are not installed if autoInstall: true
@@ -92,20 +94,17 @@ export class AlfredProject {
     await this.deleteConfigs();
 
     // Built in, non-overridable skills are added here
+    // 'start' subcommand is handled by run()
+    // @TODO: Make all skills overridable but warn before overriding them
     switch (subcommand) {
       case 'clean': {
-        const targetsPath = path.join(config.root, 'targets');
-        if (fs.existsSync(targetsPath)) {
-          await new Promise(resolve => {
-            rimraf(targetsPath, () => {
-              resolve();
-            });
-          });
-        }
-        return Promise.resolve();
+        return clean(this);
+      }
+      case 'learn': {
+        return learn(this, args);
       }
       default: {
-        return run(config, subcommand, skillFlags);
+        return run(this, subcommand, args);
       }
     }
   }

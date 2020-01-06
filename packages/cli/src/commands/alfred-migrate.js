@@ -11,21 +11,21 @@ import Providers from '../providers';
     .option('-d, --debug', 'show debugging output')
     .parse(process.argv);
 
-  const project = await alfred();
-  const { projectRoot, alfredConfig } = await project.init();
+  const { config } = await alfred();
+  const { root, alfredConfig, pkgPath } = config;
 
   const filesPattern: Array<string> = parsedArguments.args.map(arg =>
-    path.join(projectRoot, arg)
+    path.join(root, arg)
   );
 
   // @TODO Create backups from the files and pass the paths to the backups
   //        instead of the actual filenames. Preserve the original filenames
   //        if the migration was successful and we want to write to the original
   //        files
-  Providers(
+  return Providers(
     {
       files: filesPattern,
-      packageJsonPath: path.join(projectRoot, 'package.json'),
+      packageJsonPath: pkgPath,
       unsafe: parsedArguments.unsafe,
       verbose: parsedArguments.verbose,
       write: parsedArguments.write
