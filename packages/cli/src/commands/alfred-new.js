@@ -132,12 +132,9 @@ export async function addBoilerplate(templateData: Object, root: string) {
   ]);
 }
 
-const alfredPkgPath = path.join(
-  require.resolve('@alfred/core'),
-  'package.json'
-);
+const alfredPkgPath = require.resolve('@alfred/core/package.json');
 // eslint-disable-next-line import/no-dynamic-require
-const ALFRED_PKG_VERSION = require(alfredPkgPath).version;
+const { version: ALFRED_PKG_VERSION } = require(alfredPkgPath);
 
 const gitConfig = () =>
   new Promise((resolve, reject) => {

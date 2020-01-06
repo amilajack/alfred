@@ -33,7 +33,9 @@ class AlfredProject implements Project {
   /**
    * Given an directory, find the ancestor in the directory tree that is the project root
    */
-  async init(projectRootOrSubDir: string = process.cwd()): AlfredProject {
+  async init(
+    projectRootOrSubDir: string = process.cwd()
+  ): Promise<AlfredProject> {
     const projectRoot = searchProjectRoot(projectRootOrSubDir);
     this.config = await Config.initFromProjectRoot(projectRoot);
     const interfaceStates = generateInterfaceStatesFromProject(this.config);

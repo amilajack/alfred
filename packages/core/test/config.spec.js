@@ -2,44 +2,12 @@ import { requireConfig } from '@alfred/helpers';
 import Config from '../src/config';
 
 describe('config', () => {
-  describe('getConfig', () => {
-    it('should take an object with ".extends" property', () => {
-      expect(
-        new Config({
-          extends: [{ extends: [{ bar: 'zoo' }] }],
-          bar: 'bar'
-        }).normalizeWithResolvedConfigs()
-      ).toEqual({
-        bar: 'bar'
-      });
-      expect(
-        new Config({
-          extends: [{ extends: [{ bar: 'zoo' }, { bar: 'foo' }] }],
-          bar: 'baz'
-        }).normalizeWithResolvedConfigs()
-      ).toEqual({
-        bar: 'baz'
-      });
-
-      expect(
-        new Config({
-          extends: [{ extends: '' }]
-        })
-      ).toEqual({}.normalizeWithResolvedConfigs());
-    });
-
-    /**
-     * @TODO
-     */
-    it.skip('should not allow cyclic deps', () => {});
-  });
-
   describe('config', () => {
     it('should take plain object', () => {
       expect(
         new Config({
           bar: 'bar'
-        }).normalizeWithResolvedSkills()
+        }).alfredConfig
       ).toEqual({
         bar: 'bar'
       });
@@ -48,67 +16,59 @@ describe('config', () => {
     it('should take an object with empty extends', () => {
       expect(
         new Config({
-          extends: [],
-          bar: 'bar'
-        }).normalizeWithResolvedSkills()
-      ).toEqual({
-        bar: 'bar'
-      });
+          extends: []
+        }).alfredConfig
+      ).toEqual({ extends: [] });
     });
 
     it('should accept strings in ".extends" array', () => {
       jest.mock(
         'module-1',
         () => ({
-          bar: 'bar',
-          foo: 'foobar'
+          showConfigs: true
         }),
         { virtual: true }
       );
       jest.mock(
         'module-2',
         () => ({
-          bar: 'baz',
-          cow: 'bar',
-          extends: 'module-1'
+          showConfigs: false
         }),
         { virtual: true }
       );
       expect(
         new Config({
-          extends: 'module-1',
-          bar: 'who',
-          hello: 'jane'
-        }).normalizeWithResolvedSkills()
+          extends: 'module-1'
+        }).alfredConfig
       ).toEqual({
-        bar: 'who',
-        foo: 'foobar',
-        hello: 'jane'
+        showConfigs: true
       });
       expect(
         new Config({
           extends: ['module-2'],
-          hello: 'john'
-        }).normalizeWithResolvedSkills()
+          showConfigs: true
+        }).alfredConfig
       ).toEqual({
-        bar: 'baz',
-        cow: 'bar',
-        foo: 'foobar',
-        hello: 'john'
+        showConfigs: true
       });
     });
 
     it('should throw if extends property is not a string or an array', () => {
-      expect(() =>
-        new Config({
-          extends: [{ extends: '' }]
-        }).normalizeWithResolvedSkills()
+      expect(
+        () =>
+          new Config({
+            extends: () => {}
+          })
       ).toThrowErrorMatchingSnapshot();
-      expect(() =>
-        new Config({
-          extends: () => {}
-        }).normalizeWithResolvedSkills()
-      ).toThrowErrorMatchingSnapshot();
+    });
+
+    it('should not accept objects as input', () => {
+      expect(
+        () =>
+          new Config({
+            extends: [{ extends: {} }]
+          })
+      ).toThrow();
     });
 
     it('should require non-prefied modules', () => {
@@ -123,7 +83,7 @@ describe('config', () => {
       expect(
         new Config({
           extends: ['bliss', 'bliss']
-        }).normalizeWithResolvedSkills()
+        }).alfredConfig
       ).toEqual({
         bar: 'bar',
         foo: 'foobar'
@@ -131,7 +91,7 @@ describe('config', () => {
       expect(
         new Config({
           extends: 'alfred-config-bliss'
-        }).normalizeWithResolvedSkills()
+        }).alfredConfig
       ).toEqual({
         bar: 'bar',
         foo: 'foobar'
@@ -159,7 +119,7 @@ describe('config', () => {
       expect(
         new Config({
           extends: 'alfred-config-test'
-        }).normalizeWithResolvedSkills()
+        }).alfredConfig
       ).toEqual({
         bar: 'bar',
         foo: 'foobar',
@@ -191,7 +151,7 @@ describe('config', () => {
               }
             ]
           ]
-        }).normalizeWithResolvedSkills()
+        }).alfredConfig
       ).toEqual({
         bar: 'bar',
         foo: 'foobar',

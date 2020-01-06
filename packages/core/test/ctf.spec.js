@@ -24,13 +24,12 @@ import Config from '../src/config';
 
 const [defaultInterfaceState] = INTERFACE_STATES;
 
-const defaultConfig = {
-  root: path.join(__dirname, '../../../tests/fixtures/app'),
-  alfredConfig: {
-    skills: [],
-    npmClient: 'npm'
-  }
-};
+const defaultConfig = new Config({
+  skills: [],
+  npmClient: 'npm'
+});
+
+defaultConfig.root = path.join(__dirname, '../../../tests/fixtures/app');
 
 function removePathsPropertiesFromObject(obj) {
   for (const key in obj) {
@@ -316,7 +315,7 @@ describe('CTF', () => {
         expect(ctfCombination).toMatchSnapshot();
         // Get the CTFs for each combination
         const ctfObjects = ctfCombination.map(ctfName => CORE_CTFS[ctfName]);
-        const result = CTF(ctfObjects, defaultConfig, interfaceState);
+        const result = CTF(ctfObjects, interfaceState);
         expect(
           removePathsPropertiesFromObject(getConfigs(result))
         ).toMatchSnapshot();
@@ -330,11 +329,7 @@ describe('CTF', () => {
     it(`should add devDepencencies with interface state ${JSON.stringify(
       interfaceState
     )}`, () => {
-      const { devDependencies } = CTF(
-        Object.values(CORE_CTFS),
-        defaultConfig,
-        interfaceState
-      )
+      const { devDependencies } = CTF(Object.values(CORE_CTFS), interfaceState)
         .get('webpack')
         .addDevDependencies({
           foobar: '0.0.0'

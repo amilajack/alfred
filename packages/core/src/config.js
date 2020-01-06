@@ -91,16 +91,19 @@ export default class Config {
   };
 
   constructor(alfredConfig = {}, projectRoot: string = process.cwd()) {
-    const mergedAlfredConfig: AlfredConfig = {
-      ...Config.DEFAULT_CONFIG,
-      ...alfredConfig
-    };
-    ValidateAlfredConfig(mergedAlfredConfig);
-    this.alfredConfig = mergedAlfredConfig;
+    ValidateAlfredConfig(alfredConfig);
+    this.alfredConfig = alfredConfig;
     this.normalizeWithResolvedSkills();
     this.root = projectRoot;
     this.pkgPath = path.join(projectRoot, 'package.json');
     this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
+  }
+
+  getConfigWithDefaults() {
+    return {
+      ...Config.DEFAULT_CONFIG,
+      ...this.alfredConfig
+    };
   }
 
   /**
@@ -171,9 +174,11 @@ export default class Config {
     Config.validatePkgPath(pkgPath);
 
     // Read the package.json and validate the Alfred config
-    const pkg = JSON.parse((await fs.promises.readFile(pkgPath)).toString());
+    const { alfred } = JSON.parse(
+      (await fs.promises.readFile(pkgPath)).toString()
+    );
 
-    return new Config(pkg.alfred, projectRoot);
+    return new Config(alfred, projectRoot);
   }
 
   /**

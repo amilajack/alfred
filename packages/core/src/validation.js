@@ -406,7 +406,7 @@ export default function ValidateAlfredConfig(alfredConfig: {
   const schema = Joi.object().keys({
     npmClient: Joi.string().valid(['npm', 'yarn']),
     showConfigs: Joi.boolean(),
-    extends: [Joi.string(), Joi.array().items(Joi.string())],
+    extends: [Joi.string(), Joi.array()],
     autoInstall: Joi.bool(),
     skills,
     app: Joi.object().keys({
@@ -424,7 +424,7 @@ export default function ValidateAlfredConfig(alfredConfig: {
         throw new Error(
           `Values in ".extends" property in Alfred config must be a string. Instead passed ${JSON.stringify(
             alfredConfig.extends
-          )}`
+          ) || String(alfredConfig.extends)}`
         );
       }
     });
@@ -432,7 +432,7 @@ export default function ValidateAlfredConfig(alfredConfig: {
     throw new Error(
       `Values in ".extends" property in Alfred config must be a string. Instead passed ${JSON.stringify(
         alfredConfig.extends
-      )}`
+      ) || String(alfredConfig.extends)}`
     );
   }
   return Joi.assert(alfredConfig, schema);

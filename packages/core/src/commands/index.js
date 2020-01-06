@@ -35,7 +35,7 @@ export function getExecutableWrittenConfigsMethods(
   ctf: CtfMap,
   interfaceState: InterfaceState
 ): ExecutableSkillMethods {
-  const { alfredConfig } = config;
+  const alfredConfig = config.getConfigWithDefaults();
   const configsBasePath = getConfigsBasePath(config.root);
   const skillsConfigMap: Map<string, configType> = new Map(
     alfredConfig.skills.map(([skillPkgName, skillConfig]) => [
