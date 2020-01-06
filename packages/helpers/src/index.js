@@ -11,6 +11,23 @@ import type {
   CtfMap
 } from '@alfred/core/lib/types';
 
+/**
+ * Get the root of a project from the current working directory
+ */
+export function searchProjectRoot(startingSearchDir: string = process.cwd()) {
+  const pkgPath = pkgUp.sync({
+    cwd: startingSearchDir
+  });
+  if (!pkgPath) {
+    throw new Error(
+      `Alfred project root could not be found from "${startingSearchDir}".
+
+      Make sure you are inside an Alfred project.`
+    );
+  }
+  return path.dirname(pkgPath);
+}
+
 export function getConfigByConfigName(
   configName: string,
   configFiles: Array<configFileType>

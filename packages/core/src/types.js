@@ -6,12 +6,14 @@ export type AlfredConfig = {
   skills: Array<string | [string, Object]>,
   root: string,
   showConfigs: boolean,
-  projectRoot: string
+  root: string
 };
 
 export interface Config {
-  skills: Array<Object>;
+  extends?: Array<string> | string;
+  skills: Array<string | [string, Object]>;
   showConfigs: boolean;
+  npmClient: 'npm' | 'yarn';
 }
 
 export interface Project {

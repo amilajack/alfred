@@ -1,6 +1,7 @@
 // @flow
 import program from 'commander';
 import alfred from '@alfred/core';
+import { Signale } from 'signale';
 
 (async () => {
   const args = program.parse(process.argv);
@@ -26,5 +27,22 @@ import alfred from '@alfred/core';
   );
 
   const project = await alfred();
+
+  const validation = project.validatePkgJson();
+  // @TODO @REFACTOR: Move terminal coloring to cli
+  if (validation.messagesCount) {
+    const signale = new Signale();
+    signale.note(project.config.pkgPath);
+    validation.recommendations.forEach(warning => {
+      signale.warn(warning);
+    });
+    validation.warnings.forEach(warning => {
+      signale.warn(warning);
+    });
+    validation.errors.forEach(warning => {
+      signale.error(warning);
+    });
+  }
+
   return project.run(subcommand, skillFlags);
 })();

@@ -136,10 +136,7 @@ export async function installDeps(
     // Write the package to the package.json but do not install them. This is intended
     // to be used for end to end testing
     case 'writeOnly': {
-      const rawPkg = await fs.promises.readFile(
-        path.join(root, 'package.json')
-      );
-      const pkg = JSON.parse(rawPkg.toString());
+      const { pkg } = config;
       const { dependencies: currentDependencies = {} } = pkg;
       const dependenciesAsObject = dependencies
         .map(dependency => {
@@ -159,10 +156,13 @@ export async function installDeps(
         ...currentDependencies,
         ...dependenciesAsObject
       };
-      return new Config({
-        ...pkg,
-        dependencies: newDependencies
-      }).write(path.join(root, 'package.json'));
+      return new Config(
+        {
+          ...pkg,
+          dependencies: newDependencies
+        },
+        root
+      ).write();
     }
     default: {
       throw new Error('Unsupported npm client. Can only be "npm" or "yarn"');
@@ -538,14 +538,8 @@ export async function diffCtfDepsOfAllInterfaceStates(
   const stateWithDuplicateDeps = await Promise.all(
     INTERFACE_STATES.map(interfaceState =>
       Promise.all([
-        generateCtfFromConfig(
-          { alfredConfig: prevAlfredConfig },
-          interfaceState
-        ),
-        generateCtfFromConfig(
-          { alfredConfig: currAlfredConfig },
-          interfaceState
-        )
+        generateCtfFromConfig(new Config(prevAlfredConfig), interfaceState),
+        generateCtfFromConfig(new Config(currAlfredConfig), interfaceState)
       ])
     )
   );

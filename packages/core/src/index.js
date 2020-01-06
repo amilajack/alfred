@@ -3,9 +3,8 @@ import path from 'path';
 import fs from 'fs';
 import childProcess from 'child_process';
 import rimraf from 'rimraf';
-import pkgUp from 'pkg-up';
-import { Signale } from 'signale';
-import { getConfigsBasePath } from '@alfred/helpers';
+import { getConfigsBasePath, searchProjectRoot } from '@alfred/helpers';
+import { ValidationResult } from 'joi';
 import Config from './config';
 import { PkgValidation } from './validation';
 import { ENTRYPOINTS } from './ctf';
@@ -20,23 +19,7 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
-/**
- * Get the root of a project from the current working directory
- * @TODO @REFACTTOR Make this private by removing export
- */
-export function searchProjectRoot() {
-  const pkgPath = pkgUp.sync();
-  if (!pkgPath) {
-    throw new Error(
-      `Alfred project root could not be found from "${process.cwd()}".
-
-      Make sure you are inside an Alfred project.`
-    );
-  }
-  return path.dirname(pkgPath);
-}
-
-export const getInstallCommmand = (config: Config): string => {
+const getInstallCommmand = (config: Config): string => {
   const { root, alfredConfig } = config;
   const { npmClient } = alfredConfig;
   return npmClient.toLowerCase() === 'npm'
@@ -44,36 +27,23 @@ export const getInstallCommmand = (config: Config): string => {
     : 'yarn';
 };
 
-export class AlfredProject implements Project {
+class AlfredProject implements Project {
   config: Config;
-
-  /**
-   * Find the root of an Alfred project
-   */
-  searchProjectRoot(searchDir?: string = process.cwd()) {
-    const pkgPath = pkgUp.sync({
-      cwd: searchDir
-    });
-    if (!pkgPath) {
-      throw new Error(
-        `Alfred project root could not be found from "${process.cwd()}".
-
-        Make sure you are inside an Alfred project.`
-      );
-    }
-    return path.dirname(pkgPath);
-  }
 
   /**
    * Given an directory, find the ancestor in the directory tree that is the project root
    */
-  async init(projectRootOrSubDir?: string) {
-    const projectRoot = this.searchProjectRoot(projectRootOrSubDir);
-    const config = await Config.initFromProjectRoot(projectRoot);
+  async init(projectRootOrSubDir: string = process.cwd()): AlfredProject {
+    const projectRoot = searchProjectRoot(projectRootOrSubDir);
+    this.config = await Config.initFromProjectRoot(projectRoot);
+    const interfaceStates = generateInterfaceStatesFromProject(this.config);
+    this.checkIsAlfredProject(this.config, interfaceStates);
+    return this;
+  }
+
+  setConfig(config: Config): AlfredProject {
     this.config = config;
-    const interfaceStates = generateInterfaceStatesFromProject(config);
-    this.checkIsAlfredProject(config, interfaceStates);
-    return { ...config, projectRoot, run: this.run.bind(this) };
+    return this;
   }
 
   async run(subcommand: string, args: Array<string>) {
@@ -112,22 +82,12 @@ export class AlfredProject implements Project {
   /**
    * Validate the package.json of the Alfred project
    */
-  validatePkgJson(pkgPath: string) {
+  validatePkgJson(): ValidationResult {
+    const { pkgPath } = this.config;
     const result = PkgValidation.validate(fs.readFileSync(pkgPath).toString());
 
-    // @TODO @REFACTOR: Move terminal coloring to cli
-    if (result.messagesCount) {
-      const signale = new Signale();
-      signale.note(pkgPath);
-      result.recommendations.forEach(warning => {
-        signale.warn(warning);
-      });
-      result.warnings.forEach(warning => {
-        signale.warn(warning);
-      });
-      result.errors.forEach(warning => {
-        signale.error(warning);
-      });
+    if (result.errors.length) {
+      throw new Error(result.errors);
     }
 
     return result;
@@ -138,7 +98,7 @@ export class AlfredProject implements Project {
     interfaceStates: Array<interfaceStateType>
   ) {
     const srcPath = path.join(config.root, 'src');
-    const validationResult = this.validatePkgJson(config.pkgPath);
+    const validationResult = this.validatePkgJson();
 
     if (!fs.existsSync(srcPath)) {
       throw new Error(

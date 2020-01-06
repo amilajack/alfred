@@ -90,12 +90,7 @@ export default class Config {
     showConfigs: false
   };
 
-  constructor(
-    alfredConfig = {},
-    projectRoot: ?string,
-    pkg: ?Pkg,
-    pkgPath: ?string
-  ) {
+  constructor(alfredConfig = {}, projectRoot: string = process.cwd()) {
     const mergedAlfredConfig: AlfredConfig = {
       ...Config.DEFAULT_CONFIG,
       ...alfredConfig
@@ -104,13 +99,18 @@ export default class Config {
     this.alfredConfig = mergedAlfredConfig;
     this.normalizeWithResolvedSkills();
     this.root = projectRoot;
-    this.pkg = pkg;
-    this.pkgPath = pkgPath;
+    this.pkgPath = path.join(projectRoot, 'package.json');
+    this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
   }
 
-  static validatePkgPath(pkgPath) {
+  /**
+   * @TODO Error message does not accurately discribe error
+   */
+  static validatePkgPath(pkgPath: string = this.pkgPath) {
     if (!fs.existsSync(pkgPath)) {
-      throw new Error('Current working directory does not have "package.json"');
+      throw new Error(
+        'Current working directory does not have a "package.json"'
+      );
     }
   }
 
@@ -119,8 +119,8 @@ export default class Config {
    * @param {string} pkgPath - The path to the package.json file
    * @private
    */
-  async write(pkgPath: string): AlfredConfig {
-    this.validatePkgPath(pkgPath);
+  async write(pkgPath: string = this.pkgPath): AlfredConfig {
+    Config.validatePkgPath(pkgPath);
     const formattedPkg = await formatPkgJson(this.alfredConfig);
     await fs.promises.writeFile(pkgPath, formattedPkg);
     return formattedPkg;
@@ -169,13 +169,13 @@ export default class Config {
    * Initialize a config from the root directory of an alfred project
    */
   static async initFromProjectRoot(projectRoot: string): Config {
-    const pkgPath: string = path.join(projectRoot, 'package.json');
-    this.validatePkgPath(pkgPath);
+    const pkgPath = path.join(projectRoot, 'package.json');
+    Config.validatePkgPath(pkgPath);
 
     // Read the package.json and validate the Alfred config
     const pkg = JSON.parse((await fs.promises.readFile(pkgPath)).toString());
 
-    return new Config(pkg.alfred, projectRoot, pkg, pkgPath);
+    return new Config(pkg.alfred, projectRoot);
   }
 
   /**

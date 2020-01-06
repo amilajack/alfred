@@ -1,8 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
-const { getConfigByConfigName } = require('@alfred/helpers');
+const { getConfigByConfigName, searchProjectRoot } = require('@alfred/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
-const { searchProjectRoot } = require('@alfred/core');
 const getPort = require('get-port');
 
 function replaceProjectRoot(pathConfig, projectRoot) {

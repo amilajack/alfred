@@ -14,11 +14,11 @@ import type { Project } from '../types';
  * @param {*} skillFlags
  */
 export default function run(
-  alfredProject: Project,
+  project: Project,
   subcommand: string,
   skillFlags: Array<string> = []
 ) {
-  const { config } = alfredProject;
+  const { config } = project;
   const { alfredConfig } = config;
   // @HACK This is not a very elegant solution.
   // @HACK @REFACTOR Certain subcommands do not rely on state (lint, test, etc). These

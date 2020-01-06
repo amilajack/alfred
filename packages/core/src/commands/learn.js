@@ -1,46 +1,41 @@
+import mergeConfigs from '@alfred/merge-configs';
 import Config from '../config';
 import { installDeps, diffCtfDepsOfAllInterfaceStates } from '../ctf';
-import type { AlfredProject } from '../types';
+import type { Project } from '../types';
 
 export default async function learn(
-  alfredProject: AlfredProject,
+  project: Project,
   skillsPkgNames: Array<string>
 ) {
-  const { config } = alfredProject;
-  const { projectRoot, pkgPath, pkg: rawPkg } = config;
-  const pkg = { ...rawPkg, alfred: { skills: [] } };
+  const { config } = project;
   const { alfredConfig } = config;
 
-  const newConfig = new Config({
-    ...pkg,
-    alfred: {
-      ...pkg.alfred,
-      skills: [...(pkg.alfred.skills || []), ...skillsPkgNames]
-    }
-  });
-
+  // Create a alfred config with the new skills added
+  const newConfig = new Config(
+    mergeConfigs({}, alfredConfig, { skills: skillsPkgNames }),
+    config.root
+  );
   // Write the skills to the alfred config in the package.json
-  await newConfig.write(pkgPath);
+  await newConfig.write();
 
-  // Install skills using NPM's API
-  const npmClient = !process.env.IGNORE_INSTALL
-    ? config.alfredConfig.npmClient
-    : 'writeOnly';
-  await installDeps(skillsPkgNames, npmClient, config);
+  // First install the skills
+  const skillInstallationMethod = process.env.IGNORE_INSTALL
+    ? 'writeOnly'
+    : config.alfredConfig.npmClient;
+  project.setConfig(newConfig);
+  await installDeps(skillsPkgNames, skillInstallationMethod, newConfig);
 
   // Check if a skill with the same interface is already being used.
   // If so, uninstall it
 
   // Find the name of the packages that were installed and add the package names to
   // the alfred skills array
-  const { alfredConfig: newAlfredConfig } = await newConfig(projectRoot);
-
   // Find if any new deps need to be installed and install them
   const newSkills = await diffCtfDepsOfAllInterfaceStates(
     alfredConfig,
-    newAlfredConfig
+    newConfig.alfredConfig
   );
   if (newSkills.length) {
-    await installDeps(newSkills, npmClient, alfredConfig);
+    await installDeps(newSkills, skillInstallationMethod, newConfig);
   }
 }
