@@ -1,23 +1,15 @@
 // @TODO Use a proper JSON typing here
 export type Pkg = { [x: string]: string };
 
-export type AlfredConfig = {
-  extends: Array<string> | string,
-  npmClient: 'npm' | 'yarn',
-  skills: Array<string | [string, Object]>,
-  root: string,
-  showConfigs: boolean,
-  root: string
-};
-
 export interface ConfigInterface {
   extends: Array<string> | string;
+  npmClient: 'npm' | 'yarn';
   skills: Array<string | [string, Object]>;
   showConfigs: boolean;
-  npmClient: 'npm' | 'yarn';
 }
 
-export interface Project {
+export interface ProjectInterface {
+  root: string;
   config: ConfigInterface;
   pkg: Pkg;
   pkgPath: string;
@@ -73,7 +65,6 @@ type UsingInterface = {|
     call: ({
       configFiles: Array<ConfigFile>,
       config: ConfigInterface,
-      alfredConfig: AlfredConfig,
       interfaceState: InterfaceState,
       subcommand: string,
       skillConfig: ConfigValue
@@ -108,7 +99,6 @@ type RequiredCtfNodeParams = {|
       configFiles: Array<ConfigFile>,
       // eslint-disable-next-line no-use-before-define
       ctf: CtfMap,
-      alfredConfig: AlfredConfig,
       interfaceState: InterfaceState,
       subcommand: string,
       flags: Array<string>,

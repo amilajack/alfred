@@ -5,7 +5,7 @@ import path from 'path';
 import os from 'os';
 import fs from 'fs';
 import parser from 'gitignore-parser';
-import type { AlfredConfig } from '@alfred/core';
+import type { ConfigInterface } from '@alfred/core/lib/types';
 import LebabProvider from './lebab-provider';
 import EslintProvider from './eslint-provider';
 import ParseInput from '../helpers/parse-input';
@@ -62,7 +62,7 @@ Proceeding anyway.
 
 export function handleInput(
   userInput: UserProviderInput,
-  config: AlfredConfig
+  config: ConfigInterface
 ) {
   const { root } = config;
   return fs.existsSync(path.join(root, '.gitignore'))
@@ -88,7 +88,7 @@ export function handleInput(
 
 export default async function Providers(
   userInput: UserProviderInput,
-  config: AlfredConfig
+  config: ConfigInterface
 ): Promise<Array<string> | void> | Array<string> {
   const providers = [LebabProvider, EslintProvider]
     .map(Provider => new Provider())

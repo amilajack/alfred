@@ -2,6 +2,7 @@
 import path from 'path';
 import { getConfigsBasePath } from '@alfred/helpers';
 import type {
+  Project,
   CtfMap,
   ConfigInterface,
   InterfaceState,
@@ -35,14 +36,15 @@ export type ExecutableSkillMethods = {
 };
 
 export function getExecutableWrittenConfigsMethods(
-  config: ConfigInterface,
+  project: Project,
   ctf: CtfMap,
   interfaceState: InterfaceState
 ): ExecutableSkillMethods {
-  const alfredConfig = config.getConfigWithDefaults();
-  const configsBasePath = getConfigsBasePath(config.root);
+  const { config } = project;
+  const configWithDefaults = config.getConfigWithDefaults();
+  const configsBasePath = getConfigsBasePath(project.root);
   const skillsConfigMap: Map<string, ConfigValue> = new Map(
-    alfredConfig.skills.map(([skillPkgName, skillConfig]) => [
+    configWithDefaults.skills.map(([skillPkgName, skillConfig]) => [
       require(skillPkgName).name,
       skillConfig
     ])
@@ -65,10 +67,10 @@ export function getExecutableWrittenConfigsMethods(
         return {
           fn: (_config: ConfigInterface, flags: Array<string> = []) =>
             ctfNode.hooks.call({
+              project,
+              config,
               configFiles,
               ctf,
-              config,
-              alfredConfig,
               interfaceState,
               subcommand,
               flags,

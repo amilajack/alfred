@@ -68,7 +68,7 @@ module.exports = {
   ],
   hooks: {
     async call({ configFiles, interfaceState, subcommand }) {
-      // if (alfredConfig.showConfigs) {
+      // if (config.showConfigs) {
       //   const configPath = getConfigPathByConfigName(
       //     'rollup.base',
       //     configFiles
@@ -84,7 +84,7 @@ module.exports = {
       //     [
       //       binPath,
       //       cmd,
-      //       alfredConfig.showConfigs ? `--config ${configPath} .` : ''
+      //       config.showConfigs ? `--config ${configPath} .` : ''
       //     ].join(' ')
       //   );
       // }

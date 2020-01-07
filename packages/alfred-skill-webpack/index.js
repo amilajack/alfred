@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const { getConfigByConfigName, searchProjectRoot } = require('@alfred/helpers');
+const { getConfigByConfigName, findProjectRoot } = require('@alfred/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 const getPort = require('get-port');
 
@@ -164,7 +164,7 @@ module.exports = {
         interfaceState.target === 'browser' ? browserConfig : nodeConfig
       );
 
-      const projectRoot = searchProjectRoot();
+      const projectRoot = findProjectRoot();
 
       // @HACK: The following lines should be replaced with an algorithm that
       //        recursively traverses and object and replaces each project root
@@ -246,13 +246,17 @@ module.exports = {
     }
   },
   ctfs: {
-    eslint: (_config, ctfs, { config }) =>
+    eslint: (_config, ctfs, { project }) =>
       _config
         .extendConfig('eslint', {
           settings: {
             'import/resolver': {
               webpack: {
-                config: path.join(config.root, '.configs', 'webpack.browser.js')
+                config: path.join(
+                  project.root,
+                  '.configs',
+                  'webpack.browser.js'
+                )
               }
             }
           }

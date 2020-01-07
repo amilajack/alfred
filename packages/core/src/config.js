@@ -4,8 +4,8 @@ import fs from 'fs';
 import formatPkg from 'format-package';
 import mergeConfigs from '@alfred/merge-configs';
 import { requireConfig } from '@alfred/helpers';
-import ValidateAlfredConfig from './validation';
-import type { AlfredConfig, ConfigInterface, Pkg } from './types';
+import ValidateConfig from './validation';
+import type { ConfigInterface, Pkg } from './types';
 
 const PKG_SORT_ORDER = [
   'name',
@@ -77,8 +77,6 @@ export function formatPkgJson(pkg: Pkg): Promise<string> {
 }
 
 export default class Config implements ConfigInterface {
-  alfredConfig: AlfredConfig;
-
   pkg: Pkg;
 
   pkgPath: string;
@@ -90,19 +88,29 @@ export default class Config implements ConfigInterface {
     showConfigs: false
   };
 
-  constructor(alfredConfig = {}, projectRoot: string = process.cwd()) {
-    ValidateAlfredConfig(alfredConfig);
-    this.alfredConfig = alfredConfig;
+  constructor(config = {}) {
+    ValidateConfig(config);
     this.normalizeWithResolvedSkills();
-    this.root = projectRoot;
-    this.pkgPath = path.join(projectRoot, 'package.json');
-    this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
+
+    this.extends = config.extends;
+    this.skills = config.skills;
+    this.showConfigs = config.showConfigs;
+    this.npmClient = config.npmClient;
   }
 
   getConfigWithDefaults() {
     return {
       ...Config.DEFAULT_CONFIG,
-      ...this.alfredConfig
+      ...this.getConfigValues()
+    };
+  }
+
+  getConfigValues() {
+    return {
+      extends: this.extends,
+      skills: this.skills,
+      showConfigs: this.showConfigs,
+      npmClient: this.npmClient
     };
   }
 
@@ -120,9 +128,9 @@ export default class Config implements ConfigInterface {
    * @param {string} pkgPath - The path to the package.json file
    * @private
    */
-  async write(pkgPath: string = this.pkgPath): AlfredConfig {
+  async write(pkgPath: string = this.pkgPath): string {
     Config.validatePkgPath(pkgPath);
-    const formattedPkg = await formatPkgJson(this.alfredConfig);
+    const formattedPkg = await formatPkgJson(this);
     await fs.promises.writeFile(pkgPath, formattedPkg);
     return formattedPkg;
   }
@@ -130,9 +138,8 @@ export default class Config implements ConfigInterface {
   /**
    * @private
    */
-  normalizeWithResolvedSkills(): AlfredConfig {
-    const { alfredConfig: config } = this;
-    const normalizedConfig = this.normalizeWithResolvedConfigs(config);
+  normalizeWithResolvedSkills(): Config {
+    const normalizedConfig = this.normalizeWithResolvedConfigs(this);
     if (!normalizedConfig.skills || !normalizedConfig.skills.length)
       return normalizedConfig;
 
@@ -161,7 +168,6 @@ export default class Config implements ConfigInterface {
     );
 
     normalizedConfig.skills = Array.from(mappedSkills.entries());
-    this.alfredConfig = normalizedConfig;
 
     return normalizedConfig;
   }
@@ -178,13 +184,13 @@ export default class Config implements ConfigInterface {
       (await fs.promises.readFile(pkgPath)).toString()
     );
 
-    return new Config(alfred, projectRoot);
+    return new Config(alfred);
   }
 
   /**
    * @private
    */
-  normalizeWithResolvedConfigs(config: AlfredConfig = {}): AlfredConfig {
+  normalizeWithResolvedConfigs(config: Config = {}): Config {
     if (!config.extends) return config;
     // Convert extends: 'my-config' to extends: ['my-config']
     if (typeof config.extends === 'string') {
@@ -216,8 +222,6 @@ export default class Config implements ConfigInterface {
       config
     );
     delete mergedConfig.extends;
-
-    this.alfredConfig = mergedConfig;
 
     return mergedConfig;
   }

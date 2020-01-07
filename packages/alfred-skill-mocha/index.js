@@ -18,11 +18,11 @@ module.exports = {
     projectTypes: ['app', 'lib']
   },
   hooks: {
-    async call({ ctf, config, alfredConfig, flags }) {
+    async call({ project, config, ctf, flags }) {
       const binPath = await getPkgBinPath('mocha', 'mocha');
       const mochaBabelRegisterPath = path.join(
-        config.root,
-        alfredConfig.showConfigs ? '.configs' : 'node_modules',
+        project.root,
+        config.showConfigs ? '.configs' : 'node_modules',
         'mocha.js'
       );
       const { config: babelConfig } = getConfigByConfigName(

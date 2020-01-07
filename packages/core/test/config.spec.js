@@ -7,7 +7,7 @@ describe('config', () => {
       expect(
         new Config({
           bar: 'bar'
-        }).alfredConfig
+        })
       ).toEqual({
         bar: 'bar'
       });
@@ -17,7 +17,7 @@ describe('config', () => {
       expect(
         new Config({
           extends: []
-        }).alfredConfig
+        })
       ).toEqual({ extends: [] });
     });
 
@@ -39,7 +39,7 @@ describe('config', () => {
       expect(
         new Config({
           extends: 'module-1'
-        }).alfredConfig
+        })
       ).toEqual({
         showConfigs: true
       });
@@ -47,7 +47,7 @@ describe('config', () => {
         new Config({
           extends: ['module-2'],
           showConfigs: true
-        }).alfredConfig
+        })
       ).toEqual({
         showConfigs: true
       });
@@ -83,7 +83,7 @@ describe('config', () => {
       expect(
         new Config({
           extends: ['bliss', 'bliss']
-        }).alfredConfig
+        })
       ).toEqual({
         bar: 'bar',
         foo: 'foobar'
@@ -91,7 +91,7 @@ describe('config', () => {
       expect(
         new Config({
           extends: 'alfred-config-bliss'
-        }).alfredConfig
+        })
       ).toEqual({
         bar: 'bar',
         foo: 'foobar'
@@ -119,7 +119,7 @@ describe('config', () => {
       expect(
         new Config({
           extends: 'alfred-config-test'
-        }).alfredConfig
+        })
       ).toEqual({
         bar: 'bar',
         foo: 'foobar',
@@ -151,7 +151,7 @@ describe('config', () => {
               }
             ]
           ]
-        }).alfredConfig
+        })
       ).toEqual({
         bar: 'bar',
         foo: 'foobar',

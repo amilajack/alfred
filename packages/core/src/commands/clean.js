@@ -1,11 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import rimraf from 'rimraf';
-import type { Project } from '../types';
+import type { ProjectInterface } from '../types';
 
-export default async function clean(project: Project) {
-  const { config } = project;
-  const targetsPath = path.join(config.root, 'targets');
+export default async function clean(project: ProjectInterface) {
+  const targetsPath = path.join(project.root, 'targets');
   if (fs.existsSync(targetsPath)) {
     await new Promise(resolve => {
       rimraf(targetsPath, () => {

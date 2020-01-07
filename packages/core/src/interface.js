@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { ENTRYPOINTS } from './entrypoints';
 import type {
-  ConfigInterface,
+  ProjectInterface,
   InterfaceState,
   RawInterfaceInput,
   NormalizedInterfaces
@@ -103,7 +103,7 @@ export function normalizeInterfacesOfSkill(
 }
 
 export function generateInterfaceStatesFromProject(
-  config: ConfigInterface
+  project: ProjectInterface
 ): Array<InterfaceState> {
   const envs = ['production', 'development', 'test'];
   // Default to development env if no config given
@@ -112,7 +112,7 @@ export function generateInterfaceStatesFromProject(
     : 'development';
 
   return ENTRYPOINTS.filter(e =>
-    fs.existsSync(path.join(config.root, 'src', e))
+    fs.existsSync(path.join(project.root, 'src', e))
   ).map(e => {
     const [projectType, target] = e.split('.');
     return {

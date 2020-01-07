@@ -26,10 +26,10 @@ module.exports = {
     }
   ],
   hooks: {
-    async call({ configFiles, config, alfredConfig, flags }) {
+    async call({ project, config, configFiles, flags }) {
       const configPath = getConfigPathByConfigName('eslint', configFiles);
       const binPath = await getPkgBinPath('eslint', 'eslint');
-      if (alfredConfig.showConfigs) {
+      if (config.showConfigs) {
         return execCommand(
           [binPath, `--config ${configPath} src tests`, ...flags].join(' ')
         );
@@ -44,8 +44,8 @@ module.exports = {
         useEslintrc: false
       });
       const report = cli.executeOnFiles([
-        path.join(config.root, 'src'),
-        path.join(config.root, 'tests')
+        path.join(project.root, 'src'),
+        path.join(project.root, 'tests')
       ]);
       const formatter = cli.getFormatter();
       if (report.errorCount) {

@@ -5,7 +5,7 @@ import childProcess from 'child_process';
 import npm from 'npm';
 import formatJson from 'format-package';
 import lodash from 'lodash';
-import type { InterfaceState, AlfredConfig } from '@alfred/core';
+import type { InterfaceState } from '@alfred/core';
 import mergeConfigs from '@alfred/merge-configs';
 import jestCtf from '@alfred/skill-jest';
 import babel from '@alfred/skill-babel';
@@ -21,6 +21,7 @@ import topsort from './topsort';
 import Config from './config';
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from './interface';
 import type {
+  Project,
   ConfigInterface,
   CtfMap,
   ConfigValue,
@@ -69,13 +70,13 @@ export function entrypointsToInterfaceStates(
  * Write configs to a './.configs' directory
  */
 export async function writeConfigsFromCtf(
-  ctf: CtfMap,
-  config: ConfigInterface
+  project: Project,
+  ctf: CtfMap
 ): Promise<CtfMap> {
-  const { alfredConfig } = config;
-  if (!alfredConfig.showConfigs) return ctf;
+  const { config } = project;
+  if (!config.showConfigs) return ctf;
   // Create a .configs dir if it doesn't exist
-  const configsBasePath = getConfigsBasePath(config.root);
+  const configsBasePath = getConfigsBasePath(project.root);
   if (!fs.existsSync(configsBasePath)) {
     fs.mkdirSync(configsBasePath);
   }
@@ -254,7 +255,6 @@ export function callCtfFnsInOrder(
   ctf: CtfMap,
   interfaceState: InterfaceState
 ) {
-  const { alfredConfig } = config;
   const ordered = topsortCtfs(ctf);
   // All the ctfs Fns from other ctfNodes that transform each ctfNode
   const selfTransforms = new Map(topsortCtfs(ctf).map(e => [e, []]));
@@ -268,7 +268,6 @@ export function callCtfFnsInOrder(
             ctfName,
             ctfFn(correspondingCtfNode, ctf, {
               config,
-              alfredConfig,
               ...interfaceState
             })
           );
@@ -465,10 +464,9 @@ export async function generateCtfFromConfig(
   config: ConfigInterface,
   interfaceState: InterfaceState
 ): Promise<CtfMap> {
-  const { alfredConfig } = config;
   // Generate the CTF
   const tmpCtf: CtfMap = new Map();
-  const { skills = [] } = alfredConfig;
+  const { skills = [] } = config;
   skills.forEach(([skillPkgName, skillConfig]) => {
     // Add the skill config to the ctfNode
     const ctfNode = require(skillPkgName);
@@ -538,14 +536,14 @@ export function diffCtfDeps(oldCtf: CtfMap, newCtf: CtfMap): Array<string> {
 }
 
 export async function diffCtfDepsOfAllInterfaceStates(
-  prevAlfredConfig: AlfredConfig,
-  currAlfredConfig: AlfredConfig
+  prevConfig: ConfigInterface,
+  currConfig: ConfigInterface
 ): Array<string> {
   const stateWithDuplicateDeps = await Promise.all(
     INTERFACE_STATES.map(interfaceState =>
       Promise.all([
-        generateCtfFromConfig(new Config(prevAlfredConfig), interfaceState),
-        generateCtfFromConfig(new Config(currAlfredConfig), interfaceState)
+        generateCtfFromConfig(new Config(prevConfig), interfaceState),
+        generateCtfFromConfig(new Config(currConfig), interfaceState)
       ])
     )
   );

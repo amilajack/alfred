@@ -10,7 +10,7 @@ import type { ConfigFile, ConfigValue, CtfMap } from '@alfred/core/lib/types';
 /**
  * Get the root of a project from the current working directory
  */
-export function searchProjectRoot(startingSearchDir: string = process.cwd()) {
+export function findProjectRoot(startingSearchDir: string = process.cwd()) {
   const pkgPath = pkgUp.sync({
     cwd: startingSearchDir
   });

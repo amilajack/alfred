@@ -12,7 +12,7 @@ import Providers from '../providers';
     .parse(process.argv);
 
   const { config } = await alfred();
-  const { root, alfredConfig, pkgPath } = config;
+  const { root, pkgPath } = config;
 
   const filesPattern: Array<string> = parsedArguments.args.map(arg =>
     path.join(root, arg)
@@ -30,6 +30,6 @@ import Providers from '../providers';
       verbose: parsedArguments.verbose,
       write: parsedArguments.write
     },
-    alfredConfig
+    config
   );
 })();

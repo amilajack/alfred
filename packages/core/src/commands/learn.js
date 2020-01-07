@@ -1,19 +1,18 @@
 import mergeConfigs from '@alfred/merge-configs';
 import Config from '../config';
 import { installDeps, diffCtfDepsOfAllInterfaceStates } from '../ctf';
-import type { Project } from '../types';
+import type { ProjectInterface } from '../types';
 
 export default async function learn(
-  project: Project,
+  project: ProjectInterface,
   skillsPkgNames: Array<string>
 ) {
   const { config } = project;
-  const { alfredConfig } = config;
 
   // Create a alfred config with the new skills added
   const newConfig = new Config(
-    mergeConfigs({}, alfredConfig, { skills: skillsPkgNames }),
-    config.root
+    mergeConfigs({}, config, { skills: skillsPkgNames }),
+    project.root
   );
   // Write the skills to the alfred config in the package.json
   await newConfig.write();
@@ -21,7 +20,7 @@ export default async function learn(
   // First install the skills
   const skillInstallationMethod = process.env.IGNORE_INSTALL
     ? 'writeOnly'
-    : config.alfredConfig.npmClient;
+    : config.npmClient;
   project.setConfig(newConfig);
   await installDeps(skillsPkgNames, skillInstallationMethod, newConfig);
 
@@ -31,10 +30,7 @@ export default async function learn(
   // Find the name of the packages that were installed and add the package names to
   // the alfred skills array
   // Find if any new deps need to be installed and install them
-  const newSkills = await diffCtfDepsOfAllInterfaceStates(
-    alfredConfig,
-    newConfig.alfredConfig
-  );
+  const newSkills = await diffCtfDepsOfAllInterfaceStates(config, newConfig);
   if (newSkills.length) {
     await installDeps(newSkills, skillInstallationMethod, newConfig);
   }

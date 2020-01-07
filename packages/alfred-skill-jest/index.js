@@ -20,7 +20,7 @@ module.exports = {
     }
   ],
   hooks: {
-    async call({ configFiles, ctf, config, alfredConfig, flags }) {
+    async call({ configFiles, ctf, config, flags }) {
       const configPath = getConfigPathByConfigName('jest', configFiles);
       const binPath = await getPkgBinPath('jest-cli', 'jest');
       const { root } = config;
@@ -44,7 +44,7 @@ module.exports = {
       );
       await fs.promises.writeFile(
         // @TODO Write to ./node_modules/.alfred
-        alfredConfig.showConfigs ? configPath : hiddenTmpConfigPath,
+        config.showConfigs ? configPath : hiddenTmpConfigPath,
         `module.exports = {
           transform: {
             '^.+.jsx?$': '${jestTransformerPath}'
@@ -63,7 +63,7 @@ module.exports = {
       return execCommand(
         [
           binPath,
-          alfredConfig.showConfigs
+          config.showConfigs
             ? `--config ${configPath} ${root}`
             : `--config ${hiddenTmpConfigPath} ${root}`,
           ...flags

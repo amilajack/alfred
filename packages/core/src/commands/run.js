@@ -5,25 +5,21 @@ import {
 import { generateCtfFromConfig, writeConfigsFromCtf } from '../ctf';
 import { generateInterfaceStatesFromProject } from '../interface';
 import { serial } from '../helpers';
-import type { Project } from '../types';
+import type { ProjectInterface } from '../types';
 
 /**
  * Run an alfred subcommand given an alfred config
- * @param {*} alfredConfig
- * @param {*} subcommand
- * @param {*} skillFlags
  */
 export default function run(
-  project: Project,
+  project: ProjectInterface,
   subcommand: string,
   skillFlags: Array<string> = []
 ) {
   const { config } = project;
-  const { alfredConfig } = config;
   // @HACK This is not a very elegant solution.
   // @HACK @REFACTOR Certain subcommands do not rely on state (lint, test, etc). These
   //                 subcommands are run only once
-  const interfaceStates = generateInterfaceStatesFromProject(config);
+  const interfaceStates = generateInterfaceStatesFromProject(project);
   // Validate that “start” subcommand should only work for apps
   // @REFACTOR This validation logic should be handled by the @alfred/interface-start interface
   if (subcommand === 'start') {
@@ -44,7 +40,7 @@ export default function run(
     interfaceStates.map(interfaceState => () =>
       generateCtfFromConfig(config, interfaceState)
         .then(ctf =>
-          alfredConfig.showConfigs ? writeConfigsFromCtf(ctf, config) : ctf
+          config.showConfigs ? writeConfigsFromCtf(project, ctf) : ctf
         )
         .then(ctf => {
           const subcommandInterface = getInterfaceForSubcommand(
@@ -56,7 +52,7 @@ export default function run(
             'handleFlags' in subcommandInterface
               ? subcommandInterface.handleFlags(skillFlags, {
                   interfaceState,
-                  alfredConfig
+                  config
                 })
               : skillFlags;
 

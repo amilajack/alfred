@@ -22,11 +22,6 @@ async function compileTemplate(templateFilename: string) {
   return handlebars.compile(source.toString(), { noEscape: true });
 }
 
-/**
- * @param {*} templateData
- * @param {*} root
- * @param {*} entrypointInterfaceStates These come in the form of [['lib', 'node], ...etc]
- */
 export async function addEntrypoints(
   rawTemplateData: Object,
   root: string,
