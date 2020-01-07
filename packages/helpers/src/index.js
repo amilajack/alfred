@@ -5,11 +5,7 @@ import path from 'path';
 import opn from 'opn';
 import pkgUp from 'pkg-up';
 import childProcess from 'child_process';
-import type {
-  configFileType,
-  configType,
-  CtfMap
-} from '@alfred/core/lib/types';
+import type { ConfigFile, ConfigValue, CtfMap } from '@alfred/core/lib/types';
 
 /**
  * Get the root of a project from the current working directory
@@ -30,7 +26,7 @@ export function searchProjectRoot(startingSearchDir: string = process.cwd()) {
 
 export function getConfigByConfigName(
   configName: string,
-  configFiles: Array<configFileType>
+  configFiles: Array<ConfigFile>
 ) {
   const config = configFiles.find(e => e.name === configName);
   if (!config) throw new Error(`Cannot find config by name "${configName}"`);
@@ -39,7 +35,7 @@ export function getConfigByConfigName(
 
 export function getConfigPathByConfigName(
   configName: string,
-  configFiles: Array<configFileType>
+  configFiles: Array<ConfigFile>
 ) {
   const config = configFiles.find(e => e.name === configName);
   if (!config) throw new Error(`Cannot find config by name "${configName}"`);
@@ -83,7 +79,7 @@ export function mapShortNameEnvToLongName(envName: string): string {
 /*
  * Intended to be used for testing purposes
  */
-export function getConfigs(ctf: CtfMap): Array<configType> {
+export function getConfigs(ctf: CtfMap): Array<ConfigValue> {
   return Array.from(ctf.values())
     .map(ctfNode => ctfNode.configFiles || [])
     .reduce((p, c) => [...p, ...c], [])

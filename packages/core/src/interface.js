@@ -2,11 +2,11 @@
 import path from 'path';
 import fs from 'fs';
 import { ENTRYPOINTS } from './entrypoints';
-import Config from './config';
 import type {
+  ConfigInterface,
   InterfaceState,
-  RawInterfaceInputType,
-  NormalizedInterfacesType
+  RawInterfaceInput,
+  NormalizedInterfaces
 } from './types';
 
 // All the possible interface states
@@ -64,8 +64,8 @@ export const INTERFACE_STATES = [
 ];
 
 export function normalizeInterfacesOfSkill(
-  interfaces: RawInterfaceInputType
-): NormalizedInterfacesType {
+  interfaces: RawInterfaceInput
+): NormalizedInterfaces {
   if (!interfaces) return [];
   // `interfaces` is an array
   if (Array.isArray(interfaces)) {
@@ -103,7 +103,7 @@ export function normalizeInterfacesOfSkill(
 }
 
 export function generateInterfaceStatesFromProject(
-  config: Config
+  config: ConfigInterface
 ): Array<InterfaceState> {
   const envs = ['production', 'development', 'test'];
   // Default to development env if no config given

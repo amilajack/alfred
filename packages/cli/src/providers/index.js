@@ -60,8 +60,6 @@ Proceeding anyway.
   }
 }
 
-type ProvidersType = Promise<Array<string> | void>;
-
 export function handleInput(
   userInput: UserProviderInput,
   config: AlfredConfig
@@ -91,7 +89,7 @@ export function handleInput(
 export default async function Providers(
   userInput: UserProviderInput,
   config: AlfredConfig
-): ProvidersType | Array<string> {
+): Promise<Array<string> | void> | Array<string> {
   const providers = [LebabProvider, EslintProvider]
     .map(Provider => new Provider())
     // Sort the providers by priority.

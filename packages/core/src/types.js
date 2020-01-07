@@ -1,7 +1,8 @@
+// @TODO Use a proper JSON typing here
 export type Pkg = { [x: string]: string };
 
 export type AlfredConfig = {
-  extends?: Array<string> | string,
+  extends: Array<string> | string,
   npmClient: 'npm' | 'yarn',
   skills: Array<string | [string, Object]>,
   root: string,
@@ -9,20 +10,24 @@ export type AlfredConfig = {
   root: string
 };
 
-export interface Config {
-  extends?: Array<string> | string;
+export interface ConfigInterface {
+  extends: Array<string> | string;
   skills: Array<string | [string, Object]>;
   showConfigs: boolean;
   npmClient: 'npm' | 'yarn';
 }
 
 export interface Project {
-  config: Config;
+  config: ConfigInterface;
   pkg: Pkg;
   pkgPath: string;
+  installDeps: (
+    dependencies: Array<string>,
+    npmClient: 'npm' | 'yarn' | 'write',
+    config: ConfigInterface
+  ) => void;
 }
 
-/* eslint import/prefer-default-export: off, import/no-dynamic-require: off */
 export type InterfaceState = {
   // Flag name and argument types
   env: 'production' | 'development' | 'test',
@@ -32,29 +37,29 @@ export type InterfaceState = {
   projectType: 'lib' | 'app'
 };
 
-export type RawInterfaceInputType = Array<
+export type RawInterfaceInput = Array<
   string | [string, { [x: string]: string }]
 >;
-export type InterfaceInputType = Array<[string, { [x: string]: string }]>;
-export type NormalizedInterfacesType = Array<{
+export type InterfaceInput = Array<[string, { [x: string]: string }]>;
+export type NormalizedInterfaces = Array<{
   name: string,
   module: module
 }>;
 
-export type configType =
+export type ConfigValue =
   | string
   | {
       [x: string]: any
     };
 
-export type configFileType = {
+export type ConfigFile = {
   // The "friendly name" of a file. This is the name that
   // other CTFs will refer to config file by.
   name: string,
   // The relative path of the file the config should be written to
   path: string,
   // The value of the config
-  config: configType,
+  config: ConfigValue,
   // The type of the config file. Defaults to 'json'
   fileType: 'module' | 'string' | 'json',
   // Allow the config to be written to user's `./configs` directory
@@ -62,15 +67,16 @@ export type configFileType = {
 };
 
 type UsingInterface = {|
-  interfaces: InterfaceInputType,
+  interfaces: InterfaceInput,
   subcommand: string,
   hooks: {
     call: ({
-      configFiles: Array<configFileType>,
+      configFiles: Array<ConfigFile>,
+      config: ConfigInterface,
       alfredConfig: AlfredConfig,
       interfaceState: InterfaceState,
       subcommand: string,
-      skillConfig: any
+      skillConfig: ConfigValue
     }) => string,
     install?: () => void
   }
@@ -95,11 +101,11 @@ type RequiredCtfNodeParams = {|
     projectTypes: Array<'lib' | 'app'>
   },
   subcommands?: Array<string>,
-  configFiles: Array<configFileType>,
-  interfaces: InterfaceInputType,
+  configFiles: Array<ConfigFile>,
+  interfaces: InterfaceInput,
   hooks: {
     call: ({
-      configFiles: Array<configFileType>,
+      configFiles: Array<ConfigFile>,
       // eslint-disable-next-line no-use-before-define
       ctf: CtfMap,
       alfredConfig: AlfredConfig,
@@ -124,9 +130,9 @@ export type CtfNode =
 export type CtfMap = Map<string, CtfNode>;
 
 export type CtfHelpers = {
-  findConfig: (configName: string) => configFileType,
+  findConfig: (configName: string) => ConfigFile,
   addDependencies: ({ [x: string]: string }) => { [x: string]: string },
   addDevDependencies: ({ [x: string]: string }) => { [x: string]: string },
   extendConfig: (x: string) => CtfNode,
-  replaceConfig: (x: string, configReplacement: configType) => CtfNode
+  replaceConfig: (x: string, configReplacement: ConfigValue) => CtfNode
 };

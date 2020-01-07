@@ -20,7 +20,13 @@ import { getConfigsBasePath } from '@alfred/helpers';
 import topsort from './topsort';
 import Config from './config';
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from './interface';
-import type { CtfMap, configType, CtfHelpers, CtfNode } from './types';
+import type {
+  ConfigInterface,
+  CtfMap,
+  ConfigValue,
+  CtfHelpers,
+  CtfNode
+} from './types';
 
 export const CORE_CTFS = {
   babel,
@@ -64,7 +70,7 @@ export function entrypointsToInterfaceStates(
  */
 export async function writeConfigsFromCtf(
   ctf: CtfMap,
-  config: Config
+  config: ConfigInterface
 ): Promise<CtfMap> {
   const { alfredConfig } = config;
   if (!alfredConfig.showConfigs) return ctf;
@@ -88,7 +94,7 @@ export async function writeConfigsFromCtf(
             : await formatJson(configFile.config);
         // Write sync to prevent data races when writing configs in parallel
         const normalizedJsonOrModule =
-          configFile.configType === 'module'
+          configFile.configValue === 'module'
             ? `module.exports = ${stringifiedConfig};`
             : stringifiedConfig;
         fs.writeFileSync(filePath, normalizedJsonOrModule);
@@ -105,7 +111,7 @@ export async function writeConfigsFromCtf(
 export async function installDeps(
   dependencies: Array<string> = [],
   npmClient: 'npm' | 'yarn' | 'write' = 'npm',
-  config: Config
+  config: ConfigInterface
 ): Promise<any> {
   const { root } = config;
   if (!dependencies.length) return Promise.resolve();
@@ -195,7 +201,7 @@ export const addCtfHelpers: CtfHelpers = {
       configFiles
     });
   },
-  replaceConfig(configName: string, configReplacement: configType) {
+  replaceConfig(configName: string, configReplacement: ConfigValue) {
     const configFiles = this.configFiles.map(configFile =>
       configFile.name === configName ? configReplacement : configFile
     );
@@ -244,7 +250,7 @@ export function topsortCtfs(ctfs: CtfMap): Array<string> {
 }
 
 export function callCtfFnsInOrder(
-  config: Config,
+  config: ConfigInterface,
   ctf: CtfMap,
   interfaceState: InterfaceState
 ) {
@@ -361,7 +367,7 @@ export function addSubCommandsToCtfNodes(ctf: CtfMap): CtfMap {
  */
 export function addMissingStdSkillsToCtf(
   ctf: CtfMap,
-  config: Config,
+  config: ConfigInterface,
   interfaceState: InterfaceState
 ): CtfMap {
   // Remove skills that do not support the current interfaceState
@@ -456,7 +462,7 @@ export function addMissingStdSkillsToCtf(
 }
 
 export async function generateCtfFromConfig(
-  config: Config,
+  config: ConfigInterface,
   interfaceState: InterfaceState
 ): Promise<CtfMap> {
   const { alfredConfig } = config;

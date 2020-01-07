@@ -1,8 +1,8 @@
 import { generateCtfFromConfig } from '../ctf';
 import { generateInterfaceStatesFromProject } from '../interface';
-import Config from '../config';
+import { ConfigInterface } from '../types';
 
-export default async function skills(config: Config) {
+export default async function skills(config: ConfigInterface) {
   const interfaceStateCtfs = await Promise.all(
     generateInterfaceStatesFromProject(config).map(interfaceState =>
       generateCtfFromConfig(config, interfaceState).then(ctf =>

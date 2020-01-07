@@ -5,7 +5,7 @@ import formatPkg from 'format-package';
 import mergeConfigs from '@alfred/merge-configs';
 import { requireConfig } from '@alfred/helpers';
 import ValidateAlfredConfig from './validation';
-import type { AlfredConfig, Pkg } from './types';
+import type { AlfredConfig, ConfigInterface, Pkg } from './types';
 
 const PKG_SORT_ORDER = [
   'name',
@@ -68,7 +68,7 @@ const PKG_SORT_ORDER = [
   '...rest'
 ];
 
-export type ConfigSkillType = [string, any] | string;
+type ConfigSkill = [string, any] | string;
 
 type ConfigMap = Map<string, any>;
 
@@ -76,14 +76,14 @@ export function formatPkgJson(pkg: Pkg): Promise<string> {
   return formatPkg(pkg, { order: PKG_SORT_ORDER });
 }
 
-export default class Config {
+export default class Config implements ConfigInterface {
   alfredConfig: AlfredConfig;
 
-  pkg: ?Pkg;
+  pkg: Pkg;
 
-  pkgPath: ?string;
+  pkgPath: string;
 
-  root: ?string;
+  root: string;
 
   static DEFAULT_CONFIG = {
     skills: [],
@@ -138,7 +138,7 @@ export default class Config {
 
     const skillsMap: ConfigMap = new Map();
     const mappedSkills: ConfigMap = normalizedConfig.skills.reduce(
-      (map: ConfigMap, skill: ConfigSkillType) => {
+      (map: ConfigMap, skill: ConfigSkill) => {
         if (typeof skill === 'string') {
           map.set(skill, {});
           return map;

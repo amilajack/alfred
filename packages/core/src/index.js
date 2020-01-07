@@ -12,14 +12,14 @@ import { generateInterfaceStatesFromProject } from './interface';
 import run from './commands/run';
 import learn from './commands/learn';
 import clean from './commands/clean';
-import type { interfaceState as interfaceStateType, Project } from './types';
+import type { ConfigInterface, InterfaceState, Project } from './types';
 
 // @TODO send the information to a crash reporting service (like sentry.io)
 process.on('unhandledRejection', err => {
   throw err;
 });
 
-const getInstallCommmand = (config: Config): string => {
+const getInstallCommmand = (config: ConfigInterface): string => {
   const { root, alfredConfig } = config;
   const { npmClient } = alfredConfig;
   return npmClient.toLowerCase() === 'npm'
@@ -28,7 +28,7 @@ const getInstallCommmand = (config: Config): string => {
 };
 
 class AlfredProject implements Project {
-  config: Config;
+  config: ConfigInterface;
 
   /**
    * Given an directory, find the ancestor in the directory tree that is the project root
@@ -43,7 +43,7 @@ class AlfredProject implements Project {
     return this;
   }
 
-  setConfig(config: Config): AlfredProject {
+  setConfig(config: ConfigInterface): AlfredProject {
     this.config = config;
     return this;
   }
@@ -96,8 +96,8 @@ class AlfredProject implements Project {
   }
 
   checkIsAlfredProject(
-    config: Config,
-    interfaceStates: Array<interfaceStateType>
+    config: ConfigInterface,
+    interfaceStates: Array<InterfaceState>
   ) {
     const srcPath = path.join(config.root, 'src');
     const validationResult = this.validatePkgJson();
