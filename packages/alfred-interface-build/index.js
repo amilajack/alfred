@@ -1,15 +1,3 @@
-/* eslint no-param-reassign: off */
-// Example of a interfaceState object
-// Note how the property names are singular, unlike the 'supports' config
-//
-// interfaceState = {
-//   // Flag name and argument types
-//   env: 'production'
-//   // All the supported targets a `build` skill should build
-//   target: 'node',
-//   // Project type
-//   projectType: 'lib'
-// },
 const { mapShortNameEnvToLongName } = require('@alfred/helpers');
 const { normalizeInterfacesOfSkill } = require('@alfred/core/lib/interface');
 const debug = require('debug')('@alfred/interface-build');

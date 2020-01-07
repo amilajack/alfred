@@ -1,4 +1,3 @@
-// @flow
 import program from 'commander';
 import alfred from '@alfred/core';
 import { Signale } from 'signale';

@@ -1,11 +1,10 @@
 /* eslint import/no-dynamic-require: off */
-import path from 'path';
-import fs from 'fs';
-import childProcess from 'child_process';
+import * as path from 'path';
+import * as fs from 'fs';
+import * as childProcess from 'child_process';
 import npm from 'npm';
 import formatJson from 'format-package';
 import lodash from 'lodash';
-import type { InterfaceState } from '@alfred/core';
 import mergeConfigs from '@alfred/merge-configs';
 import jestCtf from '@alfred/skill-jest';
 import babel from '@alfred/skill-babel';
@@ -20,13 +19,18 @@ import { getConfigsBasePath } from '@alfred/helpers';
 import topsort from './topsort';
 import Config from './config';
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from './interface';
-import type {
-  Project,
+import {
   ConfigInterface,
   CtfMap,
   ConfigValue,
   CtfHelpers,
-  CtfNode
+  CtfNode,
+  ProjectInterface,
+  NpmClients,
+  InterfaceState,
+  UnresolvedConfigInterface,
+  StringPkg,
+  ResolvedConfigInterface
 } from './types';
 
 export const CORE_CTFS = {
@@ -70,7 +74,7 @@ export function entrypointsToInterfaceStates(
  * Write configs to a './.configs' directory
  */
 export async function writeConfigsFromCtf(
-  project: Project,
+  project: ProjectInterface,
   ctf: CtfMap
 ): Promise<CtfMap> {
   const { config } = project;
@@ -81,7 +85,7 @@ export async function writeConfigsFromCtf(
     fs.mkdirSync(configsBasePath);
   }
 
-  const ctfNodes = Array.from(ctf.values());
+  const ctfNodes: CtfNode[] = Array.from(ctf.values());
 
   await Promise.all(
     ctfNodes
@@ -111,10 +115,11 @@ export async function writeConfigsFromCtf(
  */
 export async function installDeps(
   dependencies: Array<string> = [],
-  npmClient: 'npm' | 'yarn' | 'write' = 'npm',
-  config: ConfigInterface
+  npmClient: NpmClients = 'npm',
+  config: ConfigInterface,
+  project: ProjectInterface
 ): Promise<any> {
-  const { root } = config;
+  const { root } = project;
   if (!dependencies.length) return Promise.resolve();
 
   switch (npmClient) {
@@ -169,7 +174,7 @@ export async function installDeps(
           dependencies: newDependencies
         },
         root
-      ).write();
+      ).write(project.pkgPath);
     }
     default: {
       throw new Error('Unsupported npm client. Can only be "npm" or "yarn"');
@@ -211,12 +216,12 @@ export const addCtfHelpers: CtfHelpers = {
       configFiles
     };
   },
-  addDependencies(dependencies) {
+  addDependencies(dependencies: StringPkg): StringPkg {
     return lodash.merge({}, this, {
       dependencies
     });
   },
-  addDevDependencies(devDependencies) {
+  addDevDependencies(devDependencies: StringPkg): StringPkg {
     return lodash.merge({}, this, {
       devDependencies
     });
@@ -227,7 +232,7 @@ export const addCtfHelpers: CtfHelpers = {
  * Topologically sort the CTFs
  */
 export function topsortCtfs(ctfs: CtfMap): Array<string> {
-  const topsortEntries = [];
+  const topsortEntries: Array<[string, string]> = [];
   const ctfNodeNames = new Set(ctfs.keys());
 
   ctfs.forEach(ctfNode => {
@@ -334,7 +339,7 @@ export default function CTF(
     );
     if (ctfWithHelpers.interfaces.length) {
       ctfWithHelpers.interfaces.forEach(e => {
-        if (e.module.resolveSkill) {
+        if ('resolveSkill' in e.module && typeof e.module.resolveSkill === 'function') {
           if (e.module.resolveSkill(ctfs, interfaceState) !== false) {
             ctf.set(ctfNode.name, ctfWithHelpers);
           }
@@ -370,7 +375,7 @@ export function addMissingStdSkillsToCtf(
   interfaceState: InterfaceState
 ): CtfMap {
   // Remove skills that do not support the current interfaceState
-  const ctfNodesToBeRemoved = [];
+  const ctfNodesToBeRemoved: Array<string> = [];
   ctf.forEach(ctfNode => {
     if (ctfNode && ctfNode.supports) {
       const supports = {
@@ -469,7 +474,7 @@ export async function generateCtfFromConfig(
   const { skills = [] } = config;
   skills.forEach(([skillPkgName, skillConfig]) => {
     // Add the skill config to the ctfNode
-    const ctfNode = require(skillPkgName);
+    const ctfNode: CtfNode = require(skillPkgName);
     ctfNode.config = skillConfig;
     if (ctfNode.configFiles) {
       ctfNode.configFiles = ctfNode.configFiles.map(configFile => ({
@@ -536,9 +541,9 @@ export function diffCtfDeps(oldCtf: CtfMap, newCtf: CtfMap): Array<string> {
 }
 
 export async function diffCtfDepsOfAllInterfaceStates(
-  prevConfig: ConfigInterface,
-  currConfig: ConfigInterface
-): Array<string> {
+  prevConfig: UnresolvedConfigInterface | ConfigInterface | ResolvedConfigInterface,
+  currConfig: UnresolvedConfigInterface | ConfigInterface | ResolvedConfigInterface
+): Promise<Array<string>> {
   const stateWithDuplicateDeps = await Promise.all(
     INTERFACE_STATES.map(interfaceState =>
       Promise.all([

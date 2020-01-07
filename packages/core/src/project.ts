@@ -1,8 +1,8 @@
-// @flow
 import path from 'path';
 import fs from 'fs';
 import childProcess from 'child_process';
 import rimraf from 'rimraf';
+import formatPkg from 'format-package';
 import { getConfigsBasePath, findProjectRoot } from '@alfred/helpers';
 import { ValidationResult } from 'joi';
 import Config from './config';
@@ -12,7 +12,8 @@ import { generateInterfaceStatesFromProject } from './interface';
 import run from './commands/run';
 import learn from './commands/learn';
 import clean from './commands/clean';
-import type {
+import {PKG_SORT_ORDER} from './constants';
+import {
   Pkg,
   ConfigInterface,
   InterfaceState,
@@ -25,11 +26,16 @@ process.on('unhandledRejection', err => {
 });
 
 const getInstallCommmand = (project: ProjectInterface): string => {
-  const { root, npmClient } = project.config;
+  const { root } = project;
+  const { npmClient } = project.config;
   return npmClient.toLowerCase() === 'npm'
     ? `npm install --prefix ${root}`
     : 'yarn';
 };
+
+export function formatPkgJson(pkg: Pkg): Promise<string> {
+  return formatPkg(pkg, { order: PKG_SORT_ORDER });
+}
 
 export default class Project implements ProjectInterface {
   config: ConfigInterface;
@@ -40,21 +46,24 @@ export default class Project implements ProjectInterface {
 
   root: string;
 
-  /**
-   * Given an directory, find the ancestor in the directory tree that is the project root
-   */
-  async init(projectRootOrSubDir: string = process.cwd()): Promise<Project> {
+  constructor(projectRootOrSubDir: string = process.cwd()) {
     const projectRoot = findProjectRoot(projectRootOrSubDir);
 
     this.root = projectRoot;
     this.pkgPath = path.join(projectRoot, 'package.json');
     this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
-    this.config = await Config.initFromProjectRoot(projectRoot);
+    this.config = Config.initFromProjectRoot(projectRoot);
 
     const interfaceStates = generateInterfaceStatesFromProject(this);
-    this.checkIsAlfredProject(this.config, interfaceStates);
+    this.checkIsAlfredProject(interfaceStates);
 
     return this;
+  }
+
+  static validatePkgPath(pkgPath: string) {
+    if (!fs.existsSync(pkgPath)) {
+      throw new Error(`"${pkgPath}" does not exist`);
+    }
   }
 
   setConfig(config: ConfigInterface): Project {
@@ -98,19 +107,18 @@ export default class Project implements ProjectInterface {
   /**
    * Validate the package.json of the Alfred project
    */
-  validatePkgJson(): ValidationResult {
-    const { pkgPath } = this.config;
+  validatePkgJson(): ValidationResult<string> {
+    const { pkgPath } = this;
     const result = PkgValidation.validate(fs.readFileSync(pkgPath).toString());
 
     if (result.errors.length) {
-      throw new Error(result.errors);
+      throw new Error(JSON.stringify(result.errors));
     }
 
     return result;
   }
 
   checkIsAlfredProject(
-    config: ConfigInterface,
     interfaceStates: Array<InterfaceState>
   ) {
     const srcPath = path.join(this.root, 'src');

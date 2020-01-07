@@ -27,15 +27,6 @@
       "git add"
     ]
   },
-  "eslintConfig": {
-    "extends": "bliss",
-    "rules": {
-      "class-methods-use-this": "off",
-      "flowtype-errors/show-errors": "off",
-      "global-require": "off",
-      "jest/no-export": "off"
-    }
-  },
   "husky": {
     "hooks": {
       "pre-commit": "yarn test && cross-env ALFRED_E2E_TEST=true jest tests/fixtures/fixtures.spec.js"
@@ -67,6 +58,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.7.4",
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-flow": "^7.7.4",
+    "@types/node": "^13.1.4",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.0.0",
@@ -83,6 +75,7 @@
     "lerna": "^3.13.2",
     "lint-staged": "^9.5.0",
     "shebang-loader": "^0.0.1",
+    "typescript": "^3.7.4",
     "yarn": "^1.13.0"
   },
   "jest": {

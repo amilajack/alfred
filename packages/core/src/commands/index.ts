@@ -1,22 +1,23 @@
 /* eslint import/no-dynamic-require: off */
 import path from 'path';
 import { getConfigsBasePath } from '@alfred/helpers';
-import type {
-  Project,
+import {
+  ProjectInterface,
   CtfMap,
   ConfigInterface,
   InterfaceState,
-  ConfigValue
+  ConfigValue,
+  SkillInterfaceModule,
+  CtfNode
 } from '../types';
 
 export function getInterfaceForSubcommand(ctf: CtfMap, subcommand: string) {
   const interfaceForSubcommand = Array.from(ctf.values())
-    .filter(
-      ctfNode =>
+    .filter((ctfNode: CtfNode) =>
         ctfNode.hooks && ctfNode.interfaces && ctfNode.interfaces.length
     )
     .reduce(
-      (arr, ctfNode) =>
+      (arr: SkillInterfaceModule[], ctfNode: CtfNode) =>
         arr.concat(ctfNode.interfaces.map(e => require(e.name))),
       []
     )
@@ -36,7 +37,7 @@ export type ExecutableSkillMethods = {
 };
 
 export function getExecutableWrittenConfigsMethods(
-  project: Project,
+  project: ProjectInterface,
   ctf: CtfMap,
   interfaceState: InterfaceState
 ): ExecutableSkillMethods {
@@ -55,7 +56,6 @@ export function getExecutableWrittenConfigsMethods(
       ctfNode =>
         ctfNode.hooks && ctfNode.interfaces && ctfNode.interfaces.length
     )
-    .reduce((prev, curr) => prev.concat(curr), [])
     .map(ctfNode => {
       const configFiles = ctfNode.configFiles.map(configFile => ({
         ...configFile,
@@ -63,7 +63,7 @@ export function getExecutableWrittenConfigsMethods(
       }));
       return ctfNode.interfaces.map(e => {
         const { subcommand } = require(e.name);
-        const skillConfig = skillsConfigMap.get(ctfNode.name);
+        const skillConfig = skillsConfigMap.get(ctfNode.name) as ConfigValue;
         return {
           fn: (_config: ConfigInterface, flags: Array<string> = []) =>
             ctfNode.hooks.call({

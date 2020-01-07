@@ -1,4 +1,3 @@
-// @flow
 export type ProviderInput = {
   packageJsonPath: string,
   files: Array<string>,
@@ -25,10 +24,10 @@ export interface ProviderInterface {
   /**
    * @private
    */
-  +transform: (files: Array<string>, input: ProviderInput) => Promise<void>;
+  transform: (files: Array<string>, input: ProviderInput) => Promise<void>;
 
   /**
    * This method allows providers to be used as monads
    */
-  +provide: (input: ProviderInput) => Promise<ProviderInput>;
+  provide: (input: ProviderInput) => Promise<ProviderInput>;
 }

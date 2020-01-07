@@ -6,9 +6,10 @@
   ],
   "main": "./lib/index.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps inline",
+    "build": "yarn ts && cross-env NODE_ENV=production babel src --out-dir lib --source-maps inline",
     "build-watch": "cross-env NODE_ENV=production babel src --out-dir lib --watch --source-maps inline",
-    "test": "jest --color"
+    "test": "jest --color",
+    "ts": "tsc"
   },
   "jest": {
     "testEnvironment": "node"
@@ -36,12 +37,17 @@
     "lodash": "^4.17.11",
     "npm": "^6.8.0",
     "pkg-up": "^3.1.0",
-    "rimraf": "^3.0.0",
-    "toposort": "^2.0.2"
+    "rimraf": "^3.0.0"
   },
   "engines": {
     "node": ">=13"
   },
   "engineStrict": true,
-  "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"
+  "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8",
+  "devDependencies": {
+    "@types/joi": "^14.3.4",
+    "@types/lodash": "^4.14.149",
+    "@types/npm": "^2.0.31",
+    "@types/rimraf": "^2.0.3"
+  }
 }

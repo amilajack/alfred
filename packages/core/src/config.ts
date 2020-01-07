@@ -1,126 +1,57 @@
 /* eslint import/no-dynamic-require: off, no-param-reassign: off */
-import path from 'path';
-import fs from 'fs';
-import formatPkg from 'format-package';
+import * as path from 'path';
+import * as fs from 'fs';
 import mergeConfigs from '@alfred/merge-configs';
 import { requireConfig } from '@alfred/helpers';
 import ValidateConfig from './validation';
-import type { ConfigInterface, Pkg } from './types';
-
-const PKG_SORT_ORDER = [
-  'name',
-  'version',
-  'private',
-  'description',
-  'keywords',
-  'homepage',
-  'bugs',
-  'repository',
-  'license',
-  'author',
-  'contributors',
-  'files',
-  'sideEffects',
-  'main',
-  'module',
-  'jsnext:main',
-  'browser',
-  'types',
-  'typings',
-  'style',
-  'example',
-  'examplestyle',
-  'assets',
-  'bin',
-  'man',
-  'directories',
-  'workspaces',
-  'scripts',
-  'dependencies',
-  'devDependencies',
-  'peerDependencies',
-  'bundledDependencies',
-  'bundleDependencies',
-  'optionalDependencies',
-  'resolutions',
-  'engines',
-  'engineStrict',
-  'os',
-  'cpu',
-  'preferGlobal',
-  'publishConfig',
-  'betterScripts',
-  'husky',
-  'pre-commit',
-  'commitlint',
-  'lint-staged',
-  'config',
-  'nodemonConfig',
-  'browserify',
-  'babel',
-  'browserslist',
-  'xo',
-  'prettier',
-  'eslintConfig',
-  'eslintIgnore',
-  'stylelint',
-  'jest',
-  '...rest'
-];
+import Project, {formatPkgJson} from './project';
+import { ConfigInterface, Skill, NpmClients, UnresolvedConfigInterface, ResolvedConfigInterface } from './types';
 
 type ConfigSkill = [string, any] | string;
 
 type ConfigMap = Map<string, any>;
 
-export function formatPkgJson(pkg: Pkg): Promise<string> {
-  return formatPkg(pkg, { order: PKG_SORT_ORDER });
-}
-
 export default class Config implements ConfigInterface {
-  pkg: Pkg;
+  extends: string | Array<string>;
 
-  pkgPath: string;
+  npmClient: NpmClients = 'npm';
 
-  root: string;
+  showConfigs: boolean;
+
+  skills: Array<Skill>;
+
+  autoInstall: boolean = false;
 
   static DEFAULT_CONFIG = {
     skills: [],
     showConfigs: false
   };
 
-  constructor(config = {}) {
+  constructor(config: UnresolvedConfigInterface | ResolvedConfigInterface | ConfigInterface) {
     ValidateConfig(config);
     this.normalizeWithResolvedSkills();
 
-    this.extends = config.extends;
+    this.extends = 'extends' in config ? config.extends : '';
     this.skills = config.skills;
     this.showConfigs = config.showConfigs;
     this.npmClient = config.npmClient;
   }
 
-  getConfigWithDefaults() {
+  getConfigWithDefaults(): UnresolvedConfigInterface {
     return {
       ...Config.DEFAULT_CONFIG,
       ...this.getConfigValues()
     };
   }
 
-  getConfigValues() {
+  getConfigValues(): UnresolvedConfigInterface {
     return {
       extends: this.extends,
       skills: this.skills,
       showConfigs: this.showConfigs,
-      npmClient: this.npmClient
+      npmClient: this.npmClient,
+      autoInstall: this.autoInstall
     };
-  }
-
-  /**
-   * @private
-   */
-  static validatePkgPath(pkgPath: string = this.pkgPath) {
-    if (!fs.existsSync(pkgPath)) {
-      throw new Error(`"${pkgPath}" does not exist`);
-    }
   }
 
   /**
@@ -128,9 +59,10 @@ export default class Config implements ConfigInterface {
    * @param {string} pkgPath - The path to the package.json file
    * @private
    */
-  async write(pkgPath: string = this.pkgPath): string {
-    Config.validatePkgPath(pkgPath);
-    const formattedPkg = await formatPkgJson(this);
+  async write(pkgPath: string): Promise<string> {
+    Project.validatePkgPath(pkgPath);
+    const pkg = JSON.parse((await fs.promises.readFile(pkgPath)).toString())
+    const formattedPkg = await formatPkgJson(pkg);
     await fs.promises.writeFile(pkgPath, formattedPkg);
     return formattedPkg;
   }
@@ -138,7 +70,7 @@ export default class Config implements ConfigInterface {
   /**
    * @private
    */
-  normalizeWithResolvedSkills(): Config {
+  normalizeWithResolvedSkills(): ResolvedConfigInterface {
     const normalizedConfig = this.normalizeWithResolvedConfigs(this);
     if (!normalizedConfig.skills || !normalizedConfig.skills.length)
       return normalizedConfig;
@@ -175,14 +107,12 @@ export default class Config implements ConfigInterface {
   /**
    * Initialize a config from the root directory of an alfred project
    */
-  static async initFromProjectRoot(projectRoot: string): Config {
+  static initFromProjectRoot(projectRoot: string): Config {
     const pkgPath = path.join(projectRoot, 'package.json');
-    Config.validatePkgPath(pkgPath);
+    Project.validatePkgPath(pkgPath);
 
     // Read the package.json and validate the Alfred config
-    const { alfred } = JSON.parse(
-      (await fs.promises.readFile(pkgPath)).toString()
-    );
+    const { alfred } = JSON.parse(fs.readFileSync(pkgPath).toString());
 
     return new Config(alfred);
   }
@@ -190,7 +120,7 @@ export default class Config implements ConfigInterface {
   /**
    * @private
    */
-  normalizeWithResolvedConfigs(config: Config = {}): Config {
+  normalizeWithResolvedConfigs(config: UnresolvedConfigInterface): ResolvedConfigInterface {
     if (!config.extends) return config;
     // Convert extends: 'my-config' to extends: ['my-config']
     if (typeof config.extends === 'string') {

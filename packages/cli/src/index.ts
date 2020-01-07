@@ -1,9 +1,8 @@
-// @flow
 import path from 'path';
 import fs from 'fs';
 import { formatPkgJson } from '@alfred/core/lib/config';
 import handlebars from 'handlebars';
-import type { InterfaceState } from '@alfred/core';
+import { InterfaceState } from '@alfred/core';
 
 const TEMPLATES_DIR = path.resolve(__dirname, '../templates');
 

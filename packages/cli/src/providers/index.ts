@@ -1,16 +1,15 @@
-// @flow
 import random from 'rndm';
 import git from 'simple-git/promise';
 import path from 'path';
 import os from 'os';
 import fs from 'fs';
 import parser from 'gitignore-parser';
-import type { ConfigInterface } from '@alfred/core/lib/types';
+import { ConfigInterface } from '@alfred/core/lib/types';
 import LebabProvider from './lebab-provider';
 import EslintProvider from './eslint-provider';
 import ParseInput from '../helpers/parse-input';
 import { copyFileAsync, readFileAsync, writeFileAsync } from '../helpers/fs';
-import type { UserProviderInput, ProviderInput } from './provider-interface';
+import { UserProviderInput, ProviderInput } from './provider-interface';
 
 function checkFileExists(filepath): Promise<boolean> {
   return new Promise(resolve => {
@@ -81,7 +80,7 @@ export function handleInput(
             gitignore.accepts(file.substring(root.length)) &&
             !file.includes('node_modules') &&
             !file.includes('bower_components')
-        ): Array<string>);
+        ) as Array<string>);
       })()
     : ParseInput(userInput.files);
 }

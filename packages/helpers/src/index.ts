@@ -1,11 +1,9 @@
-// @flow
-/* eslint import/prefer-default-export: off */
-/* eslint import/no-dynamic-require: off */
+/* eslint import/prefer-default-export: off, import/no-dynamic-require: off */
 import path from 'path';
 import opn from 'opn';
 import pkgUp from 'pkg-up';
 import childProcess from 'child_process';
-import type { ConfigFile, ConfigValue, CtfMap } from '@alfred/core/lib/types';
+import { ConfigFile, ConfigValue, CtfMap } from '@alfred/core';
 
 /**
  * Get the root of a project from the current working directory
@@ -114,6 +112,12 @@ export function requireConfig(configName: string): any {
 export async function getPkgBinPath(pkgName: string, binName: string) {
   const pkgPath = require.resolve(pkgName);
   const pkgJsonPath = await pkgUp({ cwd: pkgPath });
+
+  if (!pgkJsonPath) {
+    throw new Error(
+      `Module "${pkgName}" not found`
+    );
+  }
 
   const { bin } = require(pkgJsonPath);
   if (!bin) {

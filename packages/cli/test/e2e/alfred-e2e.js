@@ -1,4 +1,3 @@
-// @flow
 /* eslint import/no-dynamic-require: off, no-console: off */
 import fs from 'fs';
 import path from 'path';

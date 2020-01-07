@@ -1,12 +1,15 @@
 /* eslint import/no-dynamic-require: off */
-import path from 'path';
-import fs from 'fs';
-import { ENTRYPOINTS } from './entrypoints';
-import type {
+import * as path from 'path';
+import * as fs from 'fs';
+import {ENTRYPOINTS} from './constants';
+import {
   ProjectInterface,
   InterfaceState,
   RawInterfaceInput,
-  NormalizedInterfaces
+  NormalizedInterfaces,
+  Env,
+  ProjectEnum,
+  Target
 } from './types';
 
 // All the possible interface states
@@ -18,7 +21,7 @@ import type {
 // 'app.electron.renderer.js',
 // 'lib.react-native.js',
 // 'app.react-native.js'
-export const INTERFACE_STATES = [
+export const INTERFACE_STATES: Array<InterfaceState> = [
   {
     projectType: 'app',
     target: 'browser',
@@ -105,16 +108,16 @@ export function normalizeInterfacesOfSkill(
 export function generateInterfaceStatesFromProject(
   project: ProjectInterface
 ): Array<InterfaceState> {
-  const envs = ['production', 'development', 'test'];
+  const envs: Array<string> = ['production', 'development', 'test'];
   // Default to development env if no config given
-  const env = envs.includes(process.env.NODE_ENV)
-    ? process.env.NODE_ENV
+  const env: Env = envs.includes(process.env.NODE_ENV || 'development')
+    ? process.env.NODE_ENV as Env
     : 'development';
 
   return ENTRYPOINTS.filter(e =>
     fs.existsSync(path.join(project.root, 'src', e))
   ).map(e => {
-    const [projectType, target] = e.split('.');
+    const [projectType, target] = e.split('.') as [ProjectEnum, Target];
     return {
       env,
       target,

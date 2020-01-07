@@ -1,16 +1,7 @@
 /* eslint import/no-dynamic-require: off */
 import Joi from 'joi';
-import type { Pkg } from './types';
-
-type ValidationResult = {
-  valid: boolean,
-  critical: boolean,
-  criticalMessage: string,
-  errors: Array<string>,
-  warnings: Array<string>,
-  recommendations: Array<string>,
-  messagesCount: number
-};
+import { Pkg } from './types';
+import {ValidationResult} from 'joi';
 
 /* Parse the incoming string as JSON, validate it against the spec for package.json
  * See README for more details
@@ -303,8 +294,8 @@ export class PkgValidation {
 
   static validatePerson(
     person: Object | string,
-    name?: string,
-    errors?: Array<string> = []
+    name: string,
+    errors: Array<string> = []
   ) {
     /* jshint maxcomplexity: 10 */
     if (typeof person === 'string') {

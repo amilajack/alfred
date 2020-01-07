@@ -1,4 +1,3 @@
-// @flow
 import path from 'path';
 import fs from 'fs';
 import childProcess from 'child_process';
@@ -10,7 +9,7 @@ import git from 'git-config';
 import chalk from 'chalk';
 import { formatPkgJson } from '@alfred/core/lib/config';
 import handlebars from 'handlebars';
-import type { InterfaceState } from '@alfred/core';
+import { InterfaceState } from '@alfred/core';
 import getSingleSubcommandFromArgs from '..';
 
 const TEMPLATES_DIR = path.resolve(__dirname, '../templates');
