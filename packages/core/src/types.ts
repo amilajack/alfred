@@ -1,7 +1,17 @@
 // @TODO Use a proper JSON typing here
-export type Pkg = JSON;
 
-export type StringPkg = {
+export type Dependencies = {
+  [x: string]: string
+};
+
+export interface PkgJson extends JSON {
+  devDependencies?: Dependencies,
+  dependencies?: Dependencies
+}
+
+export type Pkg = PkgJson;
+
+export type StringPkgJson = {
   [x: string]: string
 }
 
@@ -67,10 +77,10 @@ export interface SkillInterface {
   module: SkillInterfaceModule;
 }
 
-export type RawInterfaceInput = Array<
+export type UnresolvedInterfaces = Array<
   string | [string, { [x: string]: string }]
 >;
-export type InterfaceInput = Array<[string, SkillInterface]>;
+export type ResolvedInterfaces = Array<[string, SkillInterface]>;
 export type NormalizedInterfaces = Array<{
   name: string,
   module: NodeJS.Module
@@ -92,6 +102,7 @@ export type ConfigFile = {
   config: ConfigValue,
   // The type of the config file. Defaults to 'json'
   fileType: 'module' | 'string' | 'json',
+  configValue: 'module' | 'string' | 'json',
   // Allow the config to be written to user's `./configs` directory
   write: boolean
 };
@@ -152,12 +163,20 @@ export type CtfNode =
   | RequiredCtfNodeParams
   | RequiredCtfNodeParams & UsingInterface
 
+export type CtfNodeWithInterface =  RequiredCtfNodeParams & UsingInterface;
+
 export type CtfMap = Map<string, CtfNode>;
 
 export interface CtfHelpers {
   findConfig: (configName: string) => ConfigFile;
-  addDependencies: (pkg: StringPkg) => StringPkg;
-  addDevDependencies: (pkg: StringPkg) => StringPkg;
-  extendConfig: (x: string) => CtfNode;
-  replaceConfig: (x: string, configReplacement: ConfigValue) => CtfNode
+  addDependencies: (pkg: StringPkgJson) => CtfNodeWithHelpers;
+  addDevDependencies: (pkg: StringPkgJson) => CtfNodeWithHelpers;
+  extendConfig: (x: string) => CtfNodeWithHelpers;
+  replaceConfig: (x: string, configReplacement: ConfigValue) => CtfNodeWithHelpers
+}
+
+export interface CtfNodeWithHelpers extends CtfNodeWithInterface, CtfHelpers {
+  configFiles: Array<ConfigFile>,
+  devDependencies: Dependencies,
+  dependencies: Dependencies
 }

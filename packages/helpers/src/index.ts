@@ -90,11 +90,9 @@ export function getConfigsBasePath(projectRoot: string): string {
 
 export function requireConfig(configName: string): any {
   try {
-    // $FlowFixMe
     return require(`alfred-config-${configName}`);
   } catch (e) {
     try {
-      // $FlowFixMe
       return require(configName);
     } catch (_e) {
       throw new Error(

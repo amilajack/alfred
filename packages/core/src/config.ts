@@ -128,7 +128,6 @@ export default class Config implements ConfigInterface {
     }
     // If a config is a string, require it
     const normalizedConfigs = config.extends.map(_config =>
-      // $FlowFixMe
       typeof _config === 'string' ? requireConfig(_config) : _config
     );
     // If nothing to extend then return the config itself without the extends

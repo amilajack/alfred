@@ -30,7 +30,12 @@ import {
   InterfaceState,
   UnresolvedConfigInterface,
   StringPkg,
-  ResolvedConfigInterface
+  ResolvedConfigInterface,
+  ConfigFile,
+  ProjectEnum,
+  Target,
+  Dependencies,
+  CtfNodeWithHelpers
 } from './types';
 
 export const CORE_CTFS = {
@@ -65,7 +70,7 @@ export function entrypointsToInterfaceStates(
   entrypoints: Array<string>
 ): Array<InterfaceState> {
   return entrypoints.map(entrypoint => {
-    const [projectType, target] = entrypoint.split('.');
+    const [projectType, target] = entrypoint.split('.') as [ProjectEnum, Target];
     return { projectType, target, env: 'production' };
   });
 }
@@ -90,7 +95,7 @@ export async function writeConfigsFromCtf(
   await Promise.all(
     ctfNodes
       .filter(ctfNode => ctfNode.configFiles && ctfNode.configFiles.length)
-      .reduce((prev, ctfNode) => prev.concat(ctfNode.configFiles), [])
+      .flatMap((ctfNode) => ctfNode.configFiles)
       .map(async configFile => {
         const filePath = path.join(configsBasePath, configFile.path);
         const stringifiedConfig =
@@ -148,7 +153,7 @@ export async function installDeps(
     // Write the package to the package.json but do not install them. This is intended
     // to be used for end to end testing
     case 'writeOnly': {
-      const { pkg } = config;
+      const { pkg } = project;
       const { dependencies: currentDependencies = {} } = pkg;
       const dependenciesAsObject = dependencies
         .map(dependency => {
@@ -168,12 +173,12 @@ export async function installDeps(
         ...currentDependencies,
         ...dependenciesAsObject
       };
+      // @TODO @HACK @BUG This is an incorrect usage of the Config API
       return new Config(
         {
           ...pkg,
           dependencies: newDependencies
-        },
-        root
+        }
       ).write(project.pkgPath);
     }
     default: {
@@ -182,8 +187,8 @@ export async function installDeps(
   }
 }
 
-export const addCtfHelpers: CtfHelpers = {
-  findConfig(configName: string) {
+export const addCtfHelpers: CtfNodeWithHelpers = {
+  findConfig(configName: string): ConfigFile {
     const config = this.configFiles.find(
       configFile => configFile.name === configName
     );
@@ -195,7 +200,7 @@ export const addCtfHelpers: CtfHelpers = {
   extendConfig(
     configName: string,
     configExtension: { [x: string]: string } = {}
-  ): CtfNode {
+  ): CtfNodeWithHelpers {
     const foundConfig = this.findConfig(configName);
     const mergedConfigFile = mergeConfigs({}, foundConfig, {
       config: configExtension
@@ -207,7 +212,7 @@ export const addCtfHelpers: CtfHelpers = {
       configFiles
     });
   },
-  replaceConfig(configName: string, configReplacement: ConfigValue) {
+  replaceConfig(configName: string, configReplacement: ConfigValue): CtfNodeWithHelpers {
     const configFiles = this.configFiles.map(configFile =>
       configFile.name === configName ? configReplacement : configFile
     );
@@ -216,12 +221,12 @@ export const addCtfHelpers: CtfHelpers = {
       configFiles
     };
   },
-  addDependencies(dependencies: StringPkg): StringPkg {
+  addDependencies(dependencies: StringPkg): CtfNodeWithHelpers {
     return lodash.merge({}, this, {
       dependencies
     });
   },
-  addDevDependencies(devDependencies: StringPkg): StringPkg {
+  addDevDependencies(devDependencies: StringPkg): CtfNodeWithHelpers {
     return lodash.merge({}, this, {
       devDependencies
     });
@@ -422,7 +427,7 @@ export function addMissingStdSkillsToCtf(
   const stdSubCommands: Set<string> = new Set(stdCtf.keys());
   // Create a set of subcommands that the given CTF has
   const ctfSubcommands: Set<string> = Array.from(ctf.values()).reduce(
-    (prev, ctfNode) => {
+    (prev: Set<string>, ctfNode: CtfNode) => {
       if (ctfNode.interfaces && ctfNode.interfaces.length) {
         ctfNode.interfaces.forEach(_interface => {
           const { subcommand } = _interface.module;

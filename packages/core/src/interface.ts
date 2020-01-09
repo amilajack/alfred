@@ -5,7 +5,7 @@ import {ENTRYPOINTS} from './constants';
 import {
   ProjectInterface,
   InterfaceState,
-  RawInterfaceInput,
+  UnresolvedInterfaces,
   NormalizedInterfaces,
   Env,
   ProjectEnum,
@@ -67,7 +67,7 @@ export const INTERFACE_STATES: Array<InterfaceState> = [
 ];
 
 export function normalizeInterfacesOfSkill(
-  interfaces: RawInterfaceInput
+  interfaces: UnresolvedInterfaces
 ): NormalizedInterfaces {
   if (!interfaces) return [];
   // `interfaces` is an array

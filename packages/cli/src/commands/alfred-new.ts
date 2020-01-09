@@ -7,7 +7,7 @@ import validateName from 'validate-npm-package-name';
 import program from 'commander';
 import git from 'git-config';
 import chalk from 'chalk';
-import { formatPkgJson } from '@alfred/core/lib/config';
+import { formatPkgJson } from '@alfred/core';
 import handlebars from 'handlebars';
 import { InterfaceState } from '@alfred/core';
 import getSingleSubcommandFromArgs from '..';
@@ -132,7 +132,7 @@ const { version: ALFRED_PKG_VERSION } = require(alfredPkgPath);
 
 const gitConfig = () =>
   new Promise((resolve, reject) => {
-    git((err, config) => {
+    git((err?: Error, config: Object) => {
       if (err) reject(err);
       resolve(config);
     });

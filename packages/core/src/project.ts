@@ -83,7 +83,6 @@ export default class Project implements ProjectInterface {
         stdio: 'inherit'
       });
     }
-    // $FlowFixMe
     module.paths.push(nodeModulesPath);
 
     await this.deleteConfigs();

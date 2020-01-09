@@ -164,7 +164,6 @@ async function generateTests(skillCombination: Array<string>, tmpDir: string) {
 
           await serial(
             [true, false].map(showConfigs => async () => {
-              // $FlowFixMe
               const pkg = require(path.join(projectDir, 'package.json'));
               const config = mergeConfigs({}, pkg, {
                 alfred: {

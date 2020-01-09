@@ -2203,6 +2203,11 @@
   resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
   integrity sha512-EaObqwIvayI5a8dCzhFrjKzVwKLxjoG9T6Ppd5CEo07LRKfQ8Yokw54r5+Wq7FaBQ+yXRvQAYPrHwya1/UFt9g==
 
+"@types/git-config@^0.0.29":
+  version "0.0.29"
+  resolved "https://registry.yarnpkg.com/@types/git-config/-/git-config-0.0.29.tgz#8bcf5a53688b8de5d4c5f151f0f7af2cd24b0897"
+  integrity sha1-i89aU2iLjeXUxfFR8PevLNJLCJc=
+
 "@types/glob@*", "@types/glob@^7.1.1":
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-7.1.1.tgz#aa59a1c6e3fbc421e07ccd31a944c30eba521575"
