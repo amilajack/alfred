@@ -9,8 +9,8 @@ import git from 'git-config';
 import chalk from 'chalk';
 import { formatPkgJson } from '@alfred/core';
 import handlebars from 'handlebars';
-import { InterfaceState } from '@alfred/core';
-import getSingleSubcommandFromArgs from '..';
+import { InterfaceState } from '@alfred/core/src/types';
+import getSingleSubcommandFromArgs, { TemplateData, GitConfig } from '..';
 
 const TEMPLATES_DIR = path.resolve(__dirname, '../templates');
 
@@ -80,7 +80,7 @@ export async function addEntrypoints(
 }
 
 // This function lives here because it is used in both tests and the cli
-export async function addBoilerplate(templateData: Object, root: string) {
+export async function addBoilerplate(templateData: TemplateData, root: string) {
   const [
     GITIGNORE_TEMPLATE,
     NPM_TEMPLATE,
@@ -126,24 +126,29 @@ export async function addBoilerplate(templateData: Object, root: string) {
   ]);
 }
 
-const alfredPkgPath = require.resolve('@alfred/core/package.json');
 // eslint-disable-next-line import/no-dynamic-require
-const { version: ALFRED_PKG_VERSION } = require(alfredPkgPath);
+const { version: ALFRED_PKG_VERSION } = require('@alfred/core/package.json');
 
-const gitConfig = () =>
-  new Promise((resolve, reject) => {
-    git((err?: Error, config: Object) => {
+function gitConfig(): Promise<GitConfig> {
+  return new Promise((resolve, reject) => {
+    git((err?: Error, config?: GitConfig) => {
       if (err) reject(err);
       resolve(config);
     });
   });
+}
 
 function escapeQuotes(str: string): string {
   return str.replace(/"/g, '\\"');
 }
 
 async function guessAuthor() {
-  const author = {
+  type Author = {
+    email?: string,
+    name?: string,
+  };
+
+  const author: Author = {
     name: process.env.USER || process.env.USERNAME,
     email: undefined
   };

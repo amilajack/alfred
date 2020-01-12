@@ -1,4 +1,4 @@
-/* eslint import/no-dynamic-require: off, no-console: off */
+/* eslint import/no-dynamic-require: off, no-console: off, global-require: off */
 import fs from 'fs';
 import path from 'path';
 import rimraf from 'rimraf';

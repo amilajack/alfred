@@ -15,11 +15,13 @@ module.exports = {
     return flags.reduce((prev, curr) => {
       const env = curr.slice('--'.length);
       if (shortNameSupportedFlags.has(curr)) {
+        // eslint-disable-next-line no-param-reassign
         interfaceState.env = mapShortNameEnvToLongName(env);
         debug(`Setting "process.env.NODE_ENV" to "${interfaceState.env}"`);
         return prev;
       }
       if (supportedFlags.has(curr)) {
+        // eslint-disable-next-line no-param-reassign
         interfaceState.env = env;
         debug(`Setting "process.env.NODE_ENV" to "${interfaceState.env}"`);
         return prev;

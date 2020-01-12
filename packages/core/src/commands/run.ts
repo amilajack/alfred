@@ -49,7 +49,7 @@ export default function run(
           );
 
           const filteredSkillFlags =
-            'handleFlags' in subcommandInterface
+            subcommandInterface.handleFlags
               ? subcommandInterface.handleFlags(skillFlags, {
                   interfaceState,
                   config
@@ -57,7 +57,7 @@ export default function run(
               : skillFlags;
 
           const commands = getExecutableWrittenConfigsMethods(
-            config,
+            project,
             ctf,
             interfaceState
           );

@@ -4,4 +4,5 @@ export default function alfred(projectDir?: string) {
   return new Project(projectDir);
 }
 
-export * from './types';
+// @TODO @REFACTOR Move this to another module
+export { formatPkgJson } from './project';

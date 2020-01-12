@@ -1,3 +1,4 @@
+/* eslint global-require: off */
 const webpack = require('webpack');
 const path = require('path');
 const { getConfigByConfigName, findProjectRoot } = require('@alfred/helpers');

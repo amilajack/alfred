@@ -1,10 +1,31 @@
 import path from 'path';
 import fs from 'fs';
-import { formatPkgJson } from '@alfred/core/lib/config';
+import { formatPkgJson } from '@alfred/core';
 import handlebars from 'handlebars';
-import { InterfaceState } from '@alfred/core';
+import { InterfaceState } from '@alfred/core/src/types';
 
 const TEMPLATES_DIR = path.resolve(__dirname, '../templates');
+
+export type ValidPkgNameResult = {
+  validForNewPackages: boolean,
+  validForOldPackages: boolean,
+  errors?: string[],
+  warnings?: string[]
+};
+
+export type TemplateData = {
+  project: InterfaceState,
+  'alfred-pkg': {
+    semver: string
+  }
+};
+
+export type GitConfig = {
+  user: {
+    name: string,
+    email: string
+  }
+};
 
 export * from './helpers/parse-input';
 
@@ -74,7 +95,7 @@ export async function addEntrypoints(
 }
 
 // This function lives here because it is used in both tests and the cli
-export async function addBoilerplate(templateData: Object, root: string) {
+export async function addBoilerplate(templateData: TemplateData, root: string) {
   const [
     GITIGNORE_TEMPLATE,
     NPM_TEMPLATE,

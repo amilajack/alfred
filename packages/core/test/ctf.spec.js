@@ -189,7 +189,11 @@ describe('CTF', () => {
         expect(Array.from(ctf.keys())).toMatchSnapshot();
         expect(
           Array.from(
-            addMissingStdSkillsToCtf(ctf, config, defaultInterfaceState).keys()
+            addMissingStdSkillsToCtf(
+              { config },
+              ctf,
+              defaultInterfaceState
+            ).keys()
           )
         ).toMatchSnapshot();
       }
@@ -203,7 +207,11 @@ describe('CTF', () => {
         const ctf = CTF([parcel], interfaceState);
         expect(Array.from(ctf.keys())).toMatchSnapshot();
         const ctfSkillNames = Array.from(
-          addMissingStdSkillsToCtf(ctf, alfredConfig, interfaceState).keys()
+          addMissingStdSkillsToCtf(
+            { config: alfredConfig },
+            ctf,
+            interfaceState
+          ).keys()
         );
         expect(ctfSkillNames).toMatchSnapshot();
         expect(ctfSkillNames).toContain('parcel');
@@ -220,7 +228,11 @@ describe('CTF', () => {
         const ctf = CTF([parcel], interfaceState);
         expect(Array.from(ctf.keys())).toMatchSnapshot();
         const ctfSkillNames = Array.from(
-          addMissingStdSkillsToCtf(ctf, alfredConfig, interfaceState).keys()
+          addMissingStdSkillsToCtf(
+            { config: alfredConfig },
+            ctf,
+            interfaceState
+          ).keys()
         );
         expect(ctfSkillNames).toMatchSnapshot();
         expect(ctfSkillNames).toContain('rollup');
@@ -268,7 +280,11 @@ describe('CTF', () => {
 
       expect(Array.from(ctf.keys())).toMatchSnapshot();
       const ctfSkillNames = Array.from(
-        addMissingStdSkillsToCtf(ctf, alfredConfig, interfaceState).keys()
+        addMissingStdSkillsToCtf(
+          { config: alfredConfig },
+          ctf,
+          interfaceState
+        ).keys()
       );
       expect(ctfSkillNames).toMatchSnapshot();
       expect(ctfSkillNames).toContain('parcel');
@@ -286,7 +302,11 @@ describe('CTF', () => {
       const ctf = CTF([parcel], interfaceState);
       expect(Array.from(ctf.keys())).toEqual([]);
       const ctfSkillNames = Array.from(
-        addMissingStdSkillsToCtf(ctf, alfredConfig, interfaceState).keys()
+        addMissingStdSkillsToCtf(
+          { config: alfredConfig },
+          ctf,
+          interfaceState
+        ).keys()
       );
       expect(ctfSkillNames).toMatchSnapshot();
       expect(ctfSkillNames).not.toContain('parcel');

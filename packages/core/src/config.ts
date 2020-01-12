@@ -4,8 +4,9 @@ import * as fs from 'fs';
 import mergeConfigs from '@alfred/merge-configs';
 import { requireConfig } from '@alfred/helpers';
 import ValidateConfig from './validation';
-import Project, {formatPkgJson} from './project';
-import { ConfigInterface, Skill, NpmClients, UnresolvedConfigInterface, ResolvedConfigInterface } from './types';
+import Project, { formatPkgJson } from './project';
+import CTF, {addMissingStdSkillsToCtf} from './ctf';
+import { ConfigInterface, Skill, NpmClients, UnresolvedConfigInterface, ResolvedConfigInterface, CtfNode, CtfMap, InterfaceState } from './types';
 
 type ConfigSkill = [string, any] | string;
 
@@ -57,20 +58,16 @@ export default class Config implements ConfigInterface {
   /**
    * Write the config to a package.json file
    * @param {string} pkgPath - The path to the package.json file
-   * @private
    */
   async write(pkgPath: string): Promise<string> {
     Project.validatePkgPath(pkgPath);
-    const pkg = JSON.parse((await fs.promises.readFile(pkgPath)).toString())
-    const formattedPkg = await formatPkgJson(pkg);
-    await fs.promises.writeFile(pkgPath, formattedPkg);
-    return formattedPkg;
+    return Config.writeToPkgJson(pkgPath, {
+      ...JSON.parse((await fs.promises.readFile(pkgPath)).toString()),
+      alfred: this.getConfigValues()
+    });
   }
 
-  /**
-   * @private
-   */
-  normalizeWithResolvedSkills(): ResolvedConfigInterface {
+  private normalizeWithResolvedSkills(): ResolvedConfigInterface {
     const normalizedConfig = this.normalizeWithResolvedConfigs(this);
     if (!normalizedConfig.skills || !normalizedConfig.skills.length)
       return normalizedConfig;
@@ -117,10 +114,7 @@ export default class Config implements ConfigInterface {
     return new Config(alfred);
   }
 
-  /**
-   * @private
-   */
-  normalizeWithResolvedConfigs(config: UnresolvedConfigInterface): ResolvedConfigInterface {
+  private normalizeWithResolvedConfigs(config: UnresolvedConfigInterface): ResolvedConfigInterface {
     if (!config.extends) return config;
     // Convert extends: 'my-config' to extends: ['my-config']
     if (typeof config.extends === 'string') {
@@ -153,5 +147,50 @@ export default class Config implements ConfigInterface {
     delete mergedConfig.extends;
 
     return mergedConfig;
+  }
+
+  /**
+   * Merge an object to the existing package.json and write it
+   */
+  static async writeToPkgJson(pkgPath: string, obj: Object): Promise<string> {
+    Project.validatePkgPath(pkgPath);
+    const pkg = {
+      ...JSON.parse((await fs.promises.readFile(pkgPath)).toString()),
+      ...obj
+    };
+    const formattedPkg = await formatPkgJson(pkg);
+    await fs.promises.writeFile(pkgPath, formattedPkg);
+    return formattedPkg;
+  }
+
+  /**
+   * @TODO Migrate to this API
+   */
+  generateCtf(interfaceState: InterfaceState) {
+    // Generate the CTF
+    const tmpCtf: CtfMap = new Map();
+    const { skills = [] } = this;
+    skills.forEach(([skillPkgName, skillConfig]) => {
+      // Add the skill config to the ctfNode
+      const ctfNode: CtfNode = require(skillPkgName);
+      ctfNode.config = skillConfig;
+      if (ctfNode.configFiles) {
+        ctfNode.configFiles = ctfNode.configFiles.map(configFile => ({
+          ...configFile,
+          config: mergeConfigs(
+            {},
+            configFile.config,
+            // Only apply config if skill has only one config file
+            ctfNode.configFiles.length === 1 ? skillConfig : {}
+          )
+        }));
+      }
+      tmpCtf.set(ctfNode.name, ctfNode);
+    });
+
+    const ctf = CTF(Array.from(tmpCtf.values()), interfaceState);
+    addMissingStdSkillsToCtf(this, ctf, interfaceState);
+
+    return ctf;
   }
 }

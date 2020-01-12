@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as childProcess from 'child_process';
 import npm from 'npm';
-import formatJson from 'format-package';
+import formatPkg from 'format-package';
 import lodash from 'lodash';
 import mergeConfigs from '@alfred/merge-configs';
 import jestCtf from '@alfred/skill-jest';
@@ -22,19 +22,16 @@ import { normalizeInterfacesOfSkill, INTERFACE_STATES } from './interface';
 import {
   ConfigInterface,
   CtfMap,
-  ConfigValue,
-  CtfHelpers,
   CtfNode,
   ProjectInterface,
   NpmClients,
   InterfaceState,
   UnresolvedConfigInterface,
-  StringPkg,
+  StringPkgJson,
   ResolvedConfigInterface,
   ConfigFile,
   ProjectEnum,
   Target,
-  Dependencies,
   CtfNodeWithHelpers
 } from './types';
 
@@ -101,7 +98,7 @@ export async function writeConfigsFromCtf(
         const stringifiedConfig =
           typeof configFile.config === 'string'
             ? configFile.config
-            : await formatJson(configFile.config);
+            : await formatPkg(configFile.config);
         // Write sync to prevent data races when writing configs in parallel
         const normalizedJsonOrModule =
           configFile.configValue === 'module'
@@ -121,7 +118,6 @@ export async function writeConfigsFromCtf(
 export async function installDeps(
   dependencies: Array<string> = [],
   npmClient: NpmClients = 'npm',
-  config: ConfigInterface,
   project: ProjectInterface
 ): Promise<any> {
   const { root } = project;
@@ -168,18 +164,15 @@ export async function installDeps(
           return [`@${pkgWithoutScope[0]}`, pkgWithoutScope[1]];
         })
         .map(([p, c]) => ({ [p]: c }))
-        .reduce((p, c) => ({ ...p, ...c }));
+        .reduce((p, c) => ({ ...p, ...c }), {});
       const newDependencies = {
         ...currentDependencies,
         ...dependenciesAsObject
       };
       // @TODO @HACK @BUG This is an incorrect usage of the Config API
-      return new Config(
-        {
-          ...pkg,
-          dependencies: newDependencies
-        }
-      ).write(project.pkgPath);
+      return Config.writeToPkgJson(project.pkgPath, {
+        dependencies: newDependencies
+      });
     }
     default: {
       throw new Error('Unsupported npm client. Can only be "npm" or "yarn"');
@@ -187,6 +180,9 @@ export async function installDeps(
   }
 }
 
+/**
+ * @TODO @REFACTOR This is messy and as a result the typing is complicated. Need to simplify this logic by rearchitecting
+ */
 export const addCtfHelpers: CtfNodeWithHelpers = {
   findConfig(configName: string): ConfigFile {
     const config = this.configFiles.find(
@@ -212,7 +208,7 @@ export const addCtfHelpers: CtfNodeWithHelpers = {
       configFiles
     });
   },
-  replaceConfig(configName: string, configReplacement: ConfigValue): CtfNodeWithHelpers {
+  replaceConfig(configName: string, configReplacement: ConfigFile): CtfNodeWithHelpers {
     const configFiles = this.configFiles.map(configFile =>
       configFile.name === configName ? configReplacement : configFile
     );
@@ -221,12 +217,12 @@ export const addCtfHelpers: CtfNodeWithHelpers = {
       configFiles
     };
   },
-  addDependencies(dependencies: StringPkg): CtfNodeWithHelpers {
+  addDependencies(dependencies: StringPkgJson): CtfNodeWithHelpers {
     return lodash.merge({}, this, {
       dependencies
     });
   },
-  addDevDependencies(devDependencies: StringPkg): CtfNodeWithHelpers {
+  addDevDependencies(devDependencies: StringPkgJson): CtfNodeWithHelpers {
     return lodash.merge({}, this, {
       devDependencies
     });
@@ -265,15 +261,15 @@ export function callCtfFnsInOrder(
   ctf: CtfMap,
   interfaceState: InterfaceState
 ) {
-  const ordered = topsortCtfs(ctf);
+  const topologicallyOrderedCtfs = topsortCtfs(ctf);
   // All the ctfs Fns from other ctfNodes that transform each ctfNode
-  const selfTransforms = new Map(topsortCtfs(ctf).map(e => [e, []]));
+  const selfTransforms: Map<string, Array<() => void>> = new Map(topsortCtfs(ctf).map(e => [e, []]));
 
   ctf.forEach(ctfNode => {
     Object.entries(ctfNode.ctfs || {}).forEach(([ctfName, ctfFn]) => {
       if (ctf.has(ctfName)) {
         const fn = () => {
-          const correspondingCtfNode = ctf.get(ctfName);
+          const correspondingCtfNode = ctf.get(ctfName) as CtfNode;
           ctf.set(
             ctfName,
             ctfFn(correspondingCtfNode, ctf, {
@@ -282,18 +278,16 @@ export function callCtfFnsInOrder(
             })
           );
         };
-        const ctfSelfTransforms = selfTransforms.get(ctfName);
-        ctfSelfTransforms.push(fn);
-        selfTransforms.set(ctfName, ctfSelfTransforms);
+        selfTransforms.get(ctfName)?.push(fn);
       }
     });
   });
 
-  const orderedSelfTransforms = ordered.map(e => selfTransforms.get(e));
+  const orderedSelfTransforms = topologicallyOrderedCtfs.map(e => selfTransforms.get(e));
 
   orderedSelfTransforms.forEach(selfTransform => {
-    selfTransform.forEach(_selfTransform => {
-      _selfTransform(ctf);
+    selfTransform?.forEach(_selfTransform => {
+      _selfTransform();
     });
   });
 
@@ -375,8 +369,8 @@ export function addSubCommandsToCtfNodes(ctf: CtfMap): CtfMap {
  * @REFACTOR Share logic between this and CTF(). Much duplication here
  */
 export function addMissingStdSkillsToCtf(
-  ctf: CtfMap,
   config: ConfigInterface,
+  ctf: CtfMap,
   interfaceState: InterfaceState
 ): CtfMap {
   // Remove skills that do not support the current interfaceState
@@ -470,6 +464,9 @@ export function addMissingStdSkillsToCtf(
   return ctf;
 }
 
+/**
+ * @DEPRECATE
+ */
 export async function generateCtfFromConfig(
   config: ConfigInterface,
   interfaceState: InterfaceState
@@ -496,7 +493,7 @@ export async function generateCtfFromConfig(
   });
 
   const ctf = CTF(Array.from(tmpCtf.values()), interfaceState);
-  addMissingStdSkillsToCtf(ctf, config, interfaceState);
+  addMissingStdSkillsToCtf(config, ctf, interfaceState);
 
   return ctf;
 }
@@ -562,7 +559,7 @@ export async function diffCtfDepsOfAllInterfaceStates(
     new Set(
       stateWithDuplicateDeps
         .map(([a, b]) => diffCtfDeps(a, b))
-        .reduce((prev, curr) => prev.concat(curr), [])
+        .flat()
     )
   );
 }

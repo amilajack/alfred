@@ -1,19 +1,19 @@
 import random from 'rndm';
 import git from 'simple-git/promise';
-import path from 'path';
-import os from 'os';
-import fs from 'fs';
+import * as path from 'path';
+import * as os from 'os';
+import * as fs from 'fs';
 import parser from 'gitignore-parser';
-import { ConfigInterface } from '@alfred/core/lib/types';
+import { ProjectInterface } from '@alfred/core/lib/types';
 import LebabProvider from './lebab-provider';
 import EslintProvider from './eslint-provider';
 import ParseInput from '../helpers/parse-input';
 import { copyFileAsync, readFileAsync, writeFileAsync } from '../helpers/fs';
 import { UserProviderInput, ProviderInput } from './provider-interface';
 
-function checkFileExists(filepath): Promise<boolean> {
+function checkFileExists(filepath: string): Promise<boolean> {
   return new Promise(resolve => {
-    fs.access(filepath, fs.F_OK, error => {
+    fs.access(filepath, fs.constants.F_OK, error => {
       resolve(!error);
     });
   });
@@ -61,9 +61,9 @@ Proceeding anyway.
 
 export function handleInput(
   userInput: UserProviderInput,
-  config: ConfigInterface
+  project: ProjectInterface
 ) {
-  const { root } = config;
+  const { root } = project;
   return fs.existsSync(path.join(root, '.gitignore'))
     ? (async () => {
         // Remove gitignored files
@@ -87,8 +87,8 @@ export function handleInput(
 
 export default async function Providers(
   userInput: UserProviderInput,
-  config: ConfigInterface
-): Promise<Array<string> | void> | Array<string> {
+  project: ProjectInterface
+): Promise<Array<string> | void | Array<string>> {
   const providers = [LebabProvider, EslintProvider]
     .map(Provider => new Provider())
     // Sort the providers by priority.
@@ -109,7 +109,7 @@ export default async function Providers(
 
   const parsedUserInput = {
     ...userInput,
-    files: await handleInput(userInput, config)
+    files: await handleInput(userInput, project)
   };
 
   // Validate files
@@ -119,7 +119,7 @@ export default async function Providers(
 
   // Check if files exist
   await Promise.all(
-    parsedUserInput.files.map(file =>
+    parsedUserInput.files.map((file: string) =>
       checkFileExists(file).then((exists: boolean) => {
         if (!exists) {
           throw new Error(`File "${file}" does not exist`);

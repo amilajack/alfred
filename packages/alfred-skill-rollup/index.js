@@ -1,3 +1,4 @@
+/* eslint global-require: off */
 const replace = require('rollup-plugin-replace');
 const commonjs = require('rollup-plugin-commonjs');
 const { getConfigByConfigName, mapEnvToShortName } = require('@alfred/helpers');

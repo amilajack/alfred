@@ -1,9 +1,9 @@
 /* eslint import/prefer-default-export: off, import/no-dynamic-require: off */
 import path from 'path';
-import opn from 'opn';
+import open from 'open';
 import pkgUp from 'pkg-up';
 import childProcess from 'child_process';
-import { ConfigFile, ConfigValue, CtfMap } from '@alfred/core';
+import { ConfigFile, ConfigValue, CtfMap } from '@alfred/core/src/types';
 
 /**
  * Get the root of a project from the current working directory
@@ -80,8 +80,8 @@ export function mapShortNameEnvToLongName(envName: string): string {
 export function getConfigs(ctf: CtfMap): Array<ConfigValue> {
   return Array.from(ctf.values())
     .map(ctfNode => ctfNode.configFiles || [])
-    .reduce((p, c) => [...p, ...c], [])
-    .map(e => e.config);
+    .flat()
+    .map(configFile => configFile.config);
 }
 
 export function getConfigsBasePath(projectRoot: string): string {
@@ -111,7 +111,7 @@ export async function getPkgBinPath(pkgName: string, binName: string) {
   const pkgPath = require.resolve(pkgName);
   const pkgJsonPath = await pkgUp({ cwd: pkgPath });
 
-  if (!pgkJsonPath) {
+  if (!pkgJsonPath) {
     throw new Error(
       `Module "${pkgName}" not found`
     );
@@ -141,7 +141,7 @@ export async function openInBrowser(url: string, browser: any) {
 
   try {
     const options = typeof browser === 'string' ? { app: browser } : undefined;
-    await opn(url, options);
+    await open(url, options);
   } catch (err) {
     console.error(`Unexpected error while opening in browser: ${browser}`);
     console.error(err);

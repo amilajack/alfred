@@ -1,3 +1,4 @@
+/* eslint global-require: off */
 const { getConfigByConfigName } = require('@alfred/helpers');
 
 module.exports = {

@@ -40,3 +40,4 @@ package-lock.json
 .configs
 tmp
 package-lock.json
+*.tsbuildinfo

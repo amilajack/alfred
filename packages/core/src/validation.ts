@@ -1,7 +1,22 @@
 /* eslint import/no-dynamic-require: off */
 import Joi from 'joi';
-import { Pkg } from './types';
-import {ValidationResult} from 'joi';
+import { Pkg, ValidationResult } from './types';
+
+type Person = {
+  name: string,
+  email: string,
+  url: string,
+  web?: string
+};
+
+type MailToObj = {
+  email: string,
+  mail: string,
+  url: string,
+  web: string
+}
+
+type Obj = {type: string, url: string};
 
 /* Parse the incoming string as JSON, validate it against the spec for package.json
  * See README for more details
@@ -108,7 +123,7 @@ export class PkgValidation {
     return parsed;
   }
 
-  static validate(data: string | Pkg, options: Object = {}): ValidationResult {
+  static validate(data: string | Pkg, options: {recommendations: boolean, warnings: boolean} = { recommendations: true, warnings: true }): ValidationResult {
     const parsed = PkgValidation.parse(data);
     const out = {
       valid: false,
@@ -116,7 +131,8 @@ export class PkgValidation {
       criticalMessage: '',
       warnings: [],
       recommendations: [],
-      errors: []
+      errors: [],
+      messagesCount: 0
     };
 
     if (typeof parsed === 'string') {
@@ -125,9 +141,9 @@ export class PkgValidation {
     }
 
     const map = PkgValidation.getSpecMap();
-    let errors = [];
-    const warnings = [];
-    const recommendations = [];
+    let errors: string[] = [];
+    const warnings: string[] = [];
+    const recommendations: string[] = [];
 
     Object.entries(map).forEach(([name, field]) => {
       if (
@@ -217,8 +233,8 @@ export class PkgValidation {
 
   // Validates dependencies, making sure the object is a set of key value pairs
   // with package names and versions
-  static validateDependencies(name: string, deps: { [dep: string]: string }) {
-    const errors = [];
+  static validateDependencies(name: string, deps: { [dep: string]: string }): string[] {
+    const errors: string[] = [];
     Object.entries(deps).forEach(([pkgName, pkgSemver]) => {
       if (!PkgValidation.packageFormat.test(pkgName)) {
         errors.push(`Invalid dependency package name: "${pkgName}"`);
@@ -259,7 +275,7 @@ export class PkgValidation {
   //   "mail": "dev@example.com",
   //   "web": "http://www.example.com/bugs"
   // }
-  static validateUrlOrMailto(name: string, obj: Object) {
+  static validateUrlOrMailto(name: string, obj: MailToObj) {
     /* jshint maxcomplexity: 10 */
     const errors = [];
     if (typeof obj === 'string') {
@@ -293,20 +309,19 @@ export class PkgValidation {
   }
 
   static validatePerson(
-    person: Object | string,
-    name: string,
-    errors: Array<string> = []
+    person: Person | string,
+    errors: Array<string> = [],
+    name?: string,
   ) {
-    /* jshint maxcomplexity: 10 */
     if (typeof person === 'string') {
       const authorRegex = /^([^<(\s]+[^<(]*)?(\s*<(.*?)>)?(\s*\((.*?)\))?/;
       const authorFields = authorRegex.exec(person);
       if (!authorFields) {
         throw new Error('failed on author fields');
       }
-      const authorName = authorFields[1];
-      const authorEmail = authorFields[3];
-      const authorUrl = authorFields[5];
+      const authorName = authorFields[1] as string;
+      const authorEmail = authorFields[3] as string;
+      const authorUrl = authorFields[5] as string;
       PkgValidation.validatePerson({
         name: authorName,
         email: authorEmail,
@@ -339,15 +354,15 @@ export class PkgValidation {
     "Barney Rubble <b@rubble.com> (http://barnyrubble.tumblr.com/)
     Or an array of either of the above.
     */
-  static validatePeople(name: string, obj: Object): Array<string> {
-    const errors = [];
+  static validatePeople(name: string, obj: Array<Person> | Person): Array<string> {
+    const errors: string[] = [];
 
     if (obj instanceof Array) {
       for (let i = 0; i < obj.length; i += 1) {
-        PkgValidation.validatePerson(obj[i], name, errors);
+        PkgValidation.validatePerson(obj[i], errors, name);
       }
     } else {
-      PkgValidation.validatePerson(obj, name, errors);
+      PkgValidation.validatePerson(obj, errors, name);
     }
     return errors;
   }
@@ -359,9 +374,9 @@ export class PkgValidation {
    * or
    * array of objects with "type" and "url"
    */
-  static validateUrlTypes(name: string, obj: Object) {
+  static validateUrlTypes(name: string, obj: string |  Obj | Obj[]) {
     const errors = [];
-    function validateUrlType({ type, url }) {
+    function validateUrlType({ type, url }: {type: string, url: string}) {
       if (!type) {
         errors.push(`${name} field should have type`);
       }

@@ -10,11 +10,10 @@ import Providers from '../providers';
     .option('-d, --debug', 'show debugging output')
     .parse(process.argv);
 
-  const { config } = await alfred();
-  const { root, pkgPath } = config;
+  const project = await alfred();
 
   const filesPattern: Array<string> = parsedArguments.args.map(arg =>
-    path.join(root, arg)
+    path.join(project.root, arg)
   );
 
   // @TODO Create backups from the files and pass the paths to the backups
@@ -24,11 +23,11 @@ import Providers from '../providers';
   return Providers(
     {
       files: filesPattern,
-      packageJsonPath: pkgPath,
+      packageJsonPath: project.pkgPath,
       unsafe: parsedArguments.unsafe,
       verbose: parsedArguments.verbose,
       write: parsedArguments.write
     },
-    config
+    project
   );
 })();

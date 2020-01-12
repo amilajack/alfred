@@ -4,10 +4,11 @@
  * Execute promises serially
  * @REFACTOR There's cleaner ways of implementing this
  */
-export const serial = (funcs: Array<() => Promise<any>>) =>
-  funcs.reduce(
-    (promise, func) =>
+export function serial(fns: Array<() => Promise<any>>): Promise<any> {
+  return fns.reduce(
+    (promise: Promise<any>, fn) =>
       // eslint-disable-next-line promise/no-nesting
-      promise.then(result => func().then(Array.prototype.concat.bind(result))),
+      promise.then(result => fn().then(Array.prototype.concat.bind(result))),
     Promise.resolve([])
   );
+}

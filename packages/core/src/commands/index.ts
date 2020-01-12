@@ -65,7 +65,7 @@ export function getExecutableWrittenConfigsMethods(
         const { subcommand } = require(e.name);
         const skillConfig = skillsConfigMap.get(ctfNode.name) as ConfigValue;
         return {
-          fn: (_config: ConfigInterface, flags: Array<string> = []) =>
+          fn: (flags: Array<string> = []) =>
             ctfNode.hooks.call({
               project,
               config,
@@ -83,7 +83,7 @@ export function getExecutableWrittenConfigsMethods(
         };
       });
     })
-    .reduce((p, c) => p.concat(c), [])
+    .flat()
     .reduce(
       (p, c) => ({
         ...p,

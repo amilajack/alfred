@@ -68,8 +68,9 @@ export interface SkillInterfaceModule extends NodeJS.Module {
   description: string;
   subcommand: string;
   runForAllTargets?: boolean;
+  // @TODO Take config in misc object
   resolveSkill?: (ctfs: Array<CtfNode>, interfaceState: InterfaceState) => CtfNode | false;
-  handleFlags?: (flags: Array<string>, interfaceState: InterfaceState) => Array<string>;
+  handleFlags?: (flags: Array<string>, misc: {interfaceState: InterfaceState, config: ConfigInterface}) => Array<string>;
 }
 
 export interface SkillInterface {
@@ -107,7 +108,7 @@ export type ConfigFile = {
   write: boolean
 };
 
-type HooksCallArgs = {
+export type HooksCallArgs = {
   project: ProjectInterface,
   configFiles: Array<ConfigFile>,
   config: ConfigInterface,
@@ -118,11 +119,13 @@ type HooksCallArgs = {
   flags: Array<string>
 };
 
+export type CallFn = (args: HooksCallArgs) => void;
+
 export type UsingInterface = {
   interfaces: Array<SkillInterface>,
   subcommand: string,
   hooks: {
-    call: (args: HooksCallArgs) => string;
+    call: CallFn;
     install?: () => void
   }
 };
@@ -149,12 +152,15 @@ type RequiredCtfNodeParams = {
   config: ConfigFile,
   interfaces: Array<SkillInterface>,
   hooks: {
-    call: (args: HooksCallArgs) => Promise<void>;
+    call: CallFn
   },
   ctfs: {
-    [x: string]: (
-      a: RequiredCtfNodeParams,
-      b: Map<string, RequiredCtfNodeParams>
+    [ctfName: string]: (
+      ownCtfNode: RequiredCtfNodeParams,
+      ctfMap: Map<string, RequiredCtfNodeParams>,
+      misc: {
+        config: ConfigInterface
+      } & InterfaceState
     ) => RequiredCtfNodeParams
   }
 };
@@ -172,11 +178,19 @@ export interface CtfHelpers {
   addDependencies: (pkg: StringPkgJson) => CtfNodeWithHelpers;
   addDevDependencies: (pkg: StringPkgJson) => CtfNodeWithHelpers;
   extendConfig: (x: string) => CtfNodeWithHelpers;
-  replaceConfig: (x: string, configReplacement: ConfigValue) => CtfNodeWithHelpers
+  replaceConfig: (x: string, configReplacement: ConfigFile) => CtfNodeWithHelpers
 }
 
 export interface CtfNodeWithHelpers extends CtfNodeWithInterface, CtfHelpers {
   configFiles: Array<ConfigFile>,
   devDependencies: Dependencies,
   dependencies: Dependencies
+}
+
+export type ValidationResult = {
+  warnings: string[],
+  errors: string[],
+  recommendations: string[],
+  messagesCount: number,
+  criticalMessage: string
 }

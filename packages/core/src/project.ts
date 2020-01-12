@@ -4,7 +4,6 @@ import childProcess from 'child_process';
 import rimraf from 'rimraf';
 import formatPkg from 'format-package';
 import { getConfigsBasePath, findProjectRoot } from '@alfred/helpers';
-import { ValidationResult } from 'joi';
 import Config from './config';
 import { PkgValidation } from './validation';
 import { ENTRYPOINTS } from './ctf';
@@ -17,7 +16,8 @@ import {
   Pkg,
   ConfigInterface,
   InterfaceState,
-  ProjectInterface
+  ProjectInterface,
+  ValidationResult
 } from './types';
 
 // @TODO send the information to a crash reporting service (like sentry.io)
@@ -106,7 +106,7 @@ export default class Project implements ProjectInterface {
   /**
    * Validate the package.json of the Alfred project
    */
-  validatePkgJson(): ValidationResult<string> {
+  validatePkgJson(): ValidationResult {
     const { pkgPath } = this;
     const result = PkgValidation.validate(fs.readFileSync(pkgPath).toString());
 

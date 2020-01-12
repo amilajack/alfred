@@ -1,3 +1,4 @@
+/* eslint global-require: off */
 const path = require('path');
 const {
   getConfigPathByConfigName,

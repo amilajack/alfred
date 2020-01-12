@@ -1,5 +1,12 @@
 module.exports = {
-  extends: 'bliss',
+  extends: [
+    'bliss',
+    'plugin:import/errors',
+    'plugin:import/typescript',
+    'prettier',
+    'prettier/flowtype'
+  ],
+  parser: 'babel-eslint',
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
@@ -19,5 +26,9 @@ module.exports = {
         'no-unused-vars': 'off',
       },
     },
-  ]
+  ],
+  rules: {
+    'flowtype-errors/show-errors': 'off',
+    'import/extensions': 'off'
+  }
 };

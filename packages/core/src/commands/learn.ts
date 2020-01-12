@@ -21,7 +21,7 @@ export default async function learn(
     ? 'writeOnly'
     : config.npmClient;
   project.setConfig(newConfig);
-  await installDeps(skillsPkgNames, skillInstallationMethod, newConfig, project);
+  await installDeps(skillsPkgNames, skillInstallationMethod, project);
 
   // Check if a skill with the same interface is already being used.
   // If so, uninstall it
@@ -31,6 +31,6 @@ export default async function learn(
   // Find if any new deps need to be installed and install them
   const newSkills = await diffCtfDepsOfAllInterfaceStates(config, newConfig);
   if (newSkills.length) {
-    await installDeps(newSkills, skillInstallationMethod, newConfig, project);
+    await installDeps(newSkills, skillInstallationMethod, project);
   }
 }
