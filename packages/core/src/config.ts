@@ -1,58 +1,77 @@
 /* eslint import/no-dynamic-require: off, no-param-reassign: off */
-import * as path from 'path';
-import * as fs from 'fs';
+import path from 'path';
+import fs from 'fs';
 import mergeConfigs from '@alfred/merge-configs';
 import { requireConfig } from '@alfred/helpers';
 import ValidateConfig from './validation';
 import Project, { formatPkgJson } from './project';
 import CTF, {addMissingStdSkillsToCtf} from './ctf';
-import { ConfigInterface, Skill, NpmClients, UnresolvedConfigInterface, ResolvedConfigInterface, CtfNode, CtfMap, InterfaceState } from './types';
-
-type ConfigSkill = [string, any] | string;
+import { ConfigInterface,
+  NpmClients,
+  ConfigWithResolvedSkills,
+  ConfigWithUnresolvedInterfaces,
+  CtfNode,
+  CtfMap,
+  InterfaceState,
+  Skills,
+  ConfigWithUnresolvedSkills,
+  RawSkillConfigValue,
+  ConfigWithDefaults
+} from '@alfred/types';
 
 type ConfigMap = Map<string, any>;
 
 export default class Config implements ConfigInterface {
-  extends: string | Array<string>;
+  extends: string | Array<string> | undefined;
 
   npmClient: NpmClients = 'npm';
 
   showConfigs: boolean;
 
-  skills: Array<Skill>;
+  skills: Skills;
+
+  private rawConfig: ConfigWithUnresolvedInterfaces;
 
   autoInstall: boolean = false;
 
   static DEFAULT_CONFIG = {
     skills: [],
-    showConfigs: false
+    showConfigs: false,
+    autoInstall: false,
+    npmClient: 'npm' as NpmClients
   };
 
-  constructor(config: UnresolvedConfigInterface | ResolvedConfigInterface | ConfigInterface) {
+  constructor(config: ConfigWithUnresolvedInterfaces) {
+    this.rawConfig = config;
     ValidateConfig(config);
-    this.normalizeWithResolvedSkills();
-
-    this.extends = 'extends' in config ? config.extends : '';
-    this.skills = config.skills;
-    this.showConfigs = config.showConfigs;
-    this.npmClient = config.npmClient;
+    const resolvedExtends = this.normalizeWithResolvedExtendedConfigs(config);
+    const resolvedSkills = {
+      ...Config.DEFAULT_CONFIG,
+      ...this.normalizeWithResolvedSkills(resolvedExtends)
+    };
+    this.skills = resolvedSkills.skills || [];
+    this.showConfigs = resolvedSkills.showConfigs;
+    this.npmClient = resolvedSkills.npmClient;
   }
 
-  getConfigWithDefaults(): UnresolvedConfigInterface {
+  getConfigWithDefaults(): ConfigWithDefaults {
     return {
       ...Config.DEFAULT_CONFIG,
       ...this.getConfigValues()
     };
   }
 
-  getConfigValues(): UnresolvedConfigInterface {
+  getConfigValues(): ConfigWithResolvedSkills {
     return {
-      extends: this.extends,
       skills: this.skills,
       showConfigs: this.showConfigs,
       npmClient: this.npmClient,
       autoInstall: this.autoInstall
     };
+  }
+
+  getRawPkg(): ConfigWithUnresolvedInterfaces {
+    return this.rawConfig;
   }
 
   /**
@@ -67,14 +86,13 @@ export default class Config implements ConfigInterface {
     });
   }
 
-  private normalizeWithResolvedSkills(): ResolvedConfigInterface {
-    const normalizedConfig = this.normalizeWithResolvedConfigs(this);
-    if (!normalizedConfig.skills || !normalizedConfig.skills.length)
-      return normalizedConfig;
+  private normalizeWithResolvedSkills(config: ConfigWithUnresolvedSkills): ConfigWithResolvedSkills {
+    if (!config.skills || !config.skills.length)
+      return config as ConfigWithResolvedSkills;
 
     const skillsMap: ConfigMap = new Map();
-    const mappedSkills: ConfigMap = normalizedConfig.skills.reduce(
-      (map: ConfigMap, skill: ConfigSkill) => {
+    const mappedSkills: ConfigMap = config.skills.reduce(
+      (map: ConfigMap, skill: RawSkillConfigValue) => {
         if (typeof skill === 'string') {
           map.set(skill, {});
           return map;
@@ -96,9 +114,10 @@ export default class Config implements ConfigInterface {
       skillsMap
     );
 
-    normalizedConfig.skills = Array.from(mappedSkills.entries());
-
-    return normalizedConfig;
+    return {
+      ...config,
+      skills: Array.from(mappedSkills.entries())
+    };
   }
 
   /**
@@ -109,12 +128,12 @@ export default class Config implements ConfigInterface {
     Project.validatePkgPath(pkgPath);
 
     // Read the package.json and validate the Alfred config
-    const { alfred } = JSON.parse(fs.readFileSync(pkgPath).toString());
+    const { alfred = {} } = JSON.parse(fs.readFileSync(pkgPath).toString());
 
     return new Config(alfred);
   }
 
-  private normalizeWithResolvedConfigs(config: UnresolvedConfigInterface): ResolvedConfigInterface {
+  private normalizeWithResolvedExtendedConfigs(config: ConfigWithUnresolvedInterfaces): ConfigWithUnresolvedSkills {
     if (!config.extends) return config;
     // Convert extends: 'my-config' to extends: ['my-config']
     if (typeof config.extends === 'string') {
@@ -134,7 +153,7 @@ export default class Config implements ConfigInterface {
 
     for (let i = 0; i < normalizedConfigs.length; i += 1) {
       // eslint-disable-next-line no-param-reassign
-      normalizedConfigs[i] = this.normalizeWithResolvedConfigs(
+      normalizedConfigs[i] = this.normalizeWithResolvedExtendedConfigs(
         normalizedConfigs[i]
       );
     }

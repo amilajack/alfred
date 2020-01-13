@@ -6,10 +6,11 @@
     "lib"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps inline && cp -f src/index.d.ts lib/index.d.ts",
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps inline",
     "test": "mocha tests/test-*",
     "watch": "npm-watch"
   },
+  "types": "index.d.ts",
   "dependencies": {
     "lodash": "^4.17.11"
   },

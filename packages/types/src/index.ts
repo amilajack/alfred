@@ -17,15 +17,17 @@ export type Target = 'node' | 'browser';
 
 export type ProjectEnum = 'app' | 'lib';
 
-export type Skill = [string, any] | string;
+export type Skill = [string, any];
+
+export type Skills = Skill[];
 
 export type NpmClients = 'yarn' | 'npm' | 'writeOnly';
 
-export type SubCommandAndSkills = Map<string, Set<string>>;
+export type SkillsForSubCommand = Map<string, Set<string>>;
 export type SubCommandDict = Map<string, SkillInterface>;
 
-export type Skills = {
-  subCommandAndSkills: SubCommandAndSkills,
+export type SkillsList = {
+  subCommandAndSkills: SkillsForSubCommand,
   subCommandDict: SubCommandDict
 };
 
@@ -34,7 +36,7 @@ export interface ProjectInterface {
   config: ConfigInterface;
   pkg: Pkg;
   pkgPath: string;
-  skills: () => Promise<Skills>;
+  skills: () => Promise<SkillsList>;
   setConfig: (config: ConfigInterface) => void
   // @TODO
   // installDeps: (
@@ -62,20 +64,40 @@ export interface SkillInterfaceModule extends NodeJS.Module {
   handleFlags?: (flags: Array<string>, misc: {interfaceState: InterfaceState, config: ConfigInterface}) => Array<string>;
 }
 
-export interface ResolvedConfigInterface {
+export type RawSkillConfigValue = [string, Object] | string;
+
+export type RawExtendsConfigValue = Array<string> | string;
+
+// Interface should be resolved before skills are resolved, so extends is not included
+export interface ConfigWithResolvedSkills {
+  skills?: Skills;
+  npmClient?: NpmClients;
+  showConfigs?: boolean;
+  autoInstall?: boolean;
+}
+
+// Interface should be resolved before skills are resolved, so extends is not included
+export interface ConfigWithUnresolvedSkills {
+  skills?: RawSkillConfigValue[];
+  npmClient?: NpmClients;
+  showConfigs?: boolean;
+  autoInstall?: boolean;
+}
+
+export interface ConfigWithUnresolvedInterfaces extends ConfigWithUnresolvedSkills {
+  extends?: RawExtendsConfigValue[];
+}
+
+export interface ConfigWithDefaults {
+  skills: Skills;
   npmClient: NpmClients;
-  skills: Array<Skill>;
   showConfigs: boolean;
   autoInstall: boolean;
 }
 
-export interface UnresolvedConfigInterface extends ResolvedConfigInterface {
-  extends: Array<string> | string;
-}
-
-export interface ConfigInterface extends ResolvedConfigInterface {
-  getConfigWithDefaults: () => UnresolvedConfigInterface
-  getConfigValues: () => UnresolvedConfigInterface
+export interface ConfigInterface extends ConfigWithDefaults {
+  getConfigWithDefaults: () => ConfigWithDefaults
+  getConfigValues: () => ConfigWithResolvedSkills
 }
 
 export interface SkillInterface {

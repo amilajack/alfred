@@ -1,7 +1,7 @@
 /* eslint import/no-dynamic-require: off */
-import * as path from 'path';
-import * as fs from 'fs';
-import * as childProcess from 'child_process';
+import path from 'path';
+import fs from 'fs';
+import childProcess from 'child_process';
 import npm from 'npm';
 import formatPkg from 'format-package';
 import lodash from 'lodash';
@@ -26,14 +26,14 @@ import {
   ProjectInterface,
   NpmClients,
   InterfaceState,
-  UnresolvedConfigInterface,
-  ResolvedConfigInterface,
+  ConfigWithResolvedSkills,
+  ConfigWithUnresolvedInterfaces,
   ConfigFile,
   ProjectEnum,
   Target,
   CtfWithHelpers,
   Dependencies
-} from './types';
+} from '@alfred/types';
 
 export const CORE_CTFS: {[ctf: string]: CtfWithHelpers} = {
   babel: addCtfHelpers(babel),
@@ -460,6 +460,7 @@ export async function generateCtfFromConfig(
   // Generate the CTF
   const tmpCtf: CtfMap = new Map();
   const { skills = [] } = config;
+
   skills.forEach(([skillPkgName, skillConfig]) => {
     // Add the skill config to the ctfNode
     const ctfNode: CtfNode = require(skillPkgName);
@@ -529,8 +530,8 @@ export function diffCtfDeps(oldCtf: CtfMap, newCtf: CtfMap): Array<string> {
 }
 
 export async function diffCtfDepsOfAllInterfaceStates(
-  prevConfig: UnresolvedConfigInterface | ConfigInterface | ResolvedConfigInterface,
-  currConfig: UnresolvedConfigInterface | ConfigInterface | ResolvedConfigInterface
+  prevConfig: ConfigWithResolvedSkills | ConfigInterface | ConfigWithUnresolvedInterfaces,
+  currConfig: ConfigWithResolvedSkills | ConfigInterface | ConfigWithUnresolvedInterfaces
 ): Promise<Array<string>> {
   const stateWithDuplicateDeps = await Promise.all(
     INTERFACE_STATES.map(interfaceState =>

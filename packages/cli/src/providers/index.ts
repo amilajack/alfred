@@ -1,10 +1,10 @@
 import random from 'rndm';
 import git from 'simple-git/promise';
-import * as path from 'path';
-import * as os from 'os';
-import * as fs from 'fs';
+import path from 'path';
+import os from 'os';
+import fs from 'fs';
 import parser from 'gitignore-parser';
-import { ProjectInterface } from '@alfred/core/lib/types';
+import { ProjectInterface } from '@alfred/types';
 import LebabProvider from './lebab-provider';
 import EslintProvider from './eslint-provider';
 import ParseInput from '../helpers/parse-input';

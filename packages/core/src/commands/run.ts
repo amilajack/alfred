@@ -5,7 +5,7 @@ import {
 import { generateCtfFromConfig, writeConfigsFromCtf } from '../ctf';
 import { generateInterfaceStatesFromProject } from '../interface';
 import { serial } from '../helpers';
-import { ProjectInterface } from '../types';
+import { ProjectInterface } from '@alfred/types';
 
 /**
  * Run an alfred subcommand given an alfred config

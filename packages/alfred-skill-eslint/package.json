@@ -3,6 +3,7 @@
   "version": "0.0.2-alpha.4",
   "dependencies": {
     "@alfred/helpers": "^0.0.2-alpha.4",
+    "@alfred/types": "^0.0.2-alpha.4",
     "eslint": "^6.8.0"
   },
   "peerDependencies": {

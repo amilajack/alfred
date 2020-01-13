@@ -1,8 +1,8 @@
 import { generateCtfFromConfig } from '../ctf';
 import { generateInterfaceStatesFromProject } from '../interface';
-import { ProjectInterface, Skills, SubCommandAndSkills, SubCommandDict } from '../types';
+import { ProjectInterface, SkillsList, SkillsForSubCommand, SubCommandDict } from '@alfred/types';
 
-export default async function skills(project: ProjectInterface): Promise<Skills> {
+export default async function skills(project: ProjectInterface): Promise<SkillsList> {
   const interfaceStateCtfs = await Promise.all(
     generateInterfaceStatesFromProject(project).map(interfaceState =>
       generateCtfFromConfig(project.config, interfaceState).then(ctf =>
@@ -14,7 +14,7 @@ export default async function skills(project: ProjectInterface): Promise<Skills>
     )
   );
 
-  const subCommandAndSkills: SubCommandAndSkills = new Map();
+  const subCommandAndSkills: SkillsForSubCommand = new Map();
   const subCommandDict: SubCommandDict = new Map();
 
   interfaceStateCtfs.forEach(interfaceStateCtf => {

@@ -1,7 +1,7 @@
 /* eslint import/no-dynamic-require: off */
 // @ts-nocheck
 import Joi from 'joi';
-import { Pkg, ValidationResult } from './types';
+import { Pkg, ValidationResult } from '@alfred/types';
 
 type Person = {
   name: string,
@@ -410,6 +410,8 @@ const skill = [Joi.string(), Joi.array()];
 const skills = [Joi.string(), Joi.array().items(skill)];
 
 export default function Validateconfig(config: { [x: string]: any }) {
+  if (!config) throw new Error('Config must be passed an object');
+
   const schema = Joi.object().keys({
     npmClient: Joi.string().valid(['npm', 'yarn']),
     showConfigs: Joi.boolean(),

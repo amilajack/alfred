@@ -19,8 +19,8 @@ import {
   InterfaceState,
   ProjectInterface,
   ValidationResult,
-  Skills
-} from './types';
+  SkillsList
+} from '@alfred/types';
 
 // @TODO send the information to a crash reporting service (like sentry.io)
 process.on('unhandledRejection', err => {
@@ -113,7 +113,7 @@ export default class Project implements ProjectInterface {
     return clean(this);
   }
 
-  skills(): Promise<Skills> {
+  skills(): Promise<SkillsList> {
     return skills(this);
   }
 
@@ -205,3 +205,5 @@ export default class Project implements ProjectInterface {
   // @TODO
   // uninstallDeps() {}
 }
+
+export * from '@alfred/types';

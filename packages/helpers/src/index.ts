@@ -3,7 +3,7 @@ import path from 'path';
 import open from 'open';
 import pkgUp from 'pkg-up';
 import childProcess from 'child_process';
-import { ConfigFile, ConfigValue, CtfMap } from '@alfred/core/src/types';
+import { ConfigFile, ConfigValue, CtfMap } from '@alfred/types';
 
 /**
  * Get the root of a project from the current working directory

@@ -6,8 +6,8 @@
   ],
   "main": "./lib/index.js",
   "scripts": {
-    "build": "yarn ts && cross-env NODE_ENV=production babel src --out-dir lib --source-maps inline",
-    "build-watch": "cross-env NODE_ENV=production babel src --out-dir lib --watch --source-maps inline",
+    "build": "yarn ts",
+    "build-watch": "tsc",
     "test": "jest --color",
     "ts": "tsc"
   },
@@ -31,6 +31,7 @@
     "@alfred/skill-react": "^0.0.2-alpha.4",
     "@alfred/skill-rollup": "^0.0.2-alpha.4",
     "@alfred/skill-webpack": "^0.0.2-alpha.4",
+    "@alfred/types": "^0.0.2-alpha.4",
     "debug": "^4.1.1",
     "format-package": "^5.2.0",
     "joi": "^14.3.1",

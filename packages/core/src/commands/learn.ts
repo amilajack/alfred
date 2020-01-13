@@ -1,7 +1,7 @@
 import mergeConfigs from '@alfred/merge-configs';
 import Config from '../config';
 import { installDeps, diffCtfDepsOfAllInterfaceStates } from '../ctf';
-import { ProjectInterface } from '../types';
+import { ProjectInterface } from '@alfred/types';
 
 export default async function learn(
   project: ProjectInterface,

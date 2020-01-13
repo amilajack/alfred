@@ -9,7 +9,7 @@ import git from 'git-config';
 import chalk from 'chalk';
 import { formatPkgJson } from '@alfred/core';
 import handlebars from 'handlebars';
-import { InterfaceState } from '@alfred/core/src/types';
+import { InterfaceState } from '@alfred/types';
 import getSingleSubcommandFromArgs, { TemplateData, GitConfig } from '..';
 
 const TEMPLATES_DIR = path.resolve(__dirname, '../templates');

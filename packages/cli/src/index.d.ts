@@ -1,4 +1,4 @@
-import { InterfaceState } from '@alfred/core/src/types';
+import { InterfaceState } from '@alfred/types';
 export declare type ValidPkgNameResult = {
     validForNewPackages: boolean;
     validForOldPackages: boolean;

@@ -3,10 +3,5 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "lib"
-  },
-  "references": [
-    {"path": "../cli"},
-    {"path": "../core"},
-    {"path": "../types"}
-  ]
+  }
 }

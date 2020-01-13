@@ -1,3 +1,3 @@
-import { SkillInterfaceModule } from '@alfred/core/src/types';
+import { SkillInterfaceModule } from '@alfred/types';
 
 export = SkillInterfaceModule;

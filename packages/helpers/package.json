@@ -3,11 +3,12 @@
   "version": "0.0.2-alpha.4",
   "main": "lib/index.js",
   "scripts": {
-    "ts": "tsc",
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps inline",
-    "build-watch": "yarn build --watch"
+    "build": "yarn ts",
+    "build-watch": "yarn build --watch",
+    "ts": "tsc"
   },
   "dependencies": {
+    "@alfred/types": "^0.0.2-alpha.4",
     "open": "^7.0.0",
     "pkg-up": "^3.1.0"
   },

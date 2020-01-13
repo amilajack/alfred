@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import { formatPkgJson } from '@alfred/core';
 import handlebars from 'handlebars';
-import { InterfaceState } from '@alfred/core/src/types';
+import { InterfaceState } from '@alfred/types';
 
 const TEMPLATES_DIR = path.resolve(__dirname, '../templates');
 

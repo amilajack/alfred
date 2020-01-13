@@ -13,8 +13,8 @@
     "alfred": "./lib/commands/alfred.js"
   },
   "scripts": {
-    "build": "yarn ts && cross-env NODE_ENV=production babel src --out-dir lib --source-maps inline && cp -r src/providers/resources lib/providers && cp -r src/templates lib",
-    "build-watch": "cross-env NODE_ENV=production babel src --out-dir lib --watch --source-maps inline",
+    "build": "yarn ts && cp -r src/providers/resources lib/providers && cp -r src/templates lib",
+    "build-watch": "yarn ts --watch",
     "e2e": "node -r @babel/register ./test/e2e/alfred-e2e.js",
     "test": "yarn e2e",
     "ts": "tsc",
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "5to6-codemod": "^1.8.0",
+    "@alfred/types": "^0.0.2-alpha.4",
     "@alfred/merge-configs": "^0.0.2-alpha.4",
     "@amilajack/powerset": "^0.0.0",
     "@babel/code-frame": "^7.5.5",

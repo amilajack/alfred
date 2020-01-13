@@ -4,6 +4,7 @@
   "dependencies": {
     "@alfred/helpers": "^0.0.2-alpha.4",
     "@alfred/merge-configs": "^0.0.2-alpha.4",
+    "@alfred/types": "^0.0.2-alpha.4",
     "rollup": "1.27.5",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^10.1.0",

@@ -9,7 +9,7 @@ import {
   ConfigValue,
   SkillInterfaceModule,
   CtfNode
-} from '../types';
+} from '@alfred/types';
 
 export function getInterfaceForSubcommand(ctf: CtfMap, subcommand: string) {
   const interfaceForSubcommand = Array.from(ctf.values())
