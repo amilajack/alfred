@@ -57,7 +57,7 @@ export default class Config implements ConfigInterface {
 
   /**
    * Write the config to a package.json file
-   * @param {string} pkgPath - The path to the package.json file
+   * @param pkgPath - The path to the package.json file
    */
   async write(pkgPath: string): Promise<string> {
     Project.validatePkgPath(pkgPath);

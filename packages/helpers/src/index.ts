@@ -104,8 +104,8 @@ export function requireConfig(configName: string): any {
 
 /**
  * Get the name of the package JSON
- * @param {string} pkgName The name of the package
- * @param {string} binName The property of the bin object that we want
+ * @param pkgName - The name of the package
+ * @param binName - The property of the bin object that we want
  */
 export async function getPkgBinPath(pkgName: string, binName: string) {
   const pkgPath = require.resolve(pkgName);

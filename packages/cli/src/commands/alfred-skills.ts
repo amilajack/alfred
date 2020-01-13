@@ -1,10 +1,11 @@
 import alfred from '@alfred/core';
-import Table from 'cli-table3';
+import Table, { HorizontalTable } from 'cli-table3';
 import chalk from 'chalk';
 
 (async () => {
   const project = await alfred();
-  const { subCommandAndSkills, subCommandDict } = project.skills();
+  // @ts-ignore
+  const { subCommandAndSkills, subCommandDict } = await project.skills();
 
   const table = new Table({
     head: [
@@ -12,8 +13,9 @@ import chalk from 'chalk';
       chalk.bold('Skills'),
       chalk.bold('Description')
     ]
-  });
+  }) as HorizontalTable;
 
+  // @ts-ignore
   Array.from(subCommandAndSkills.entries()).forEach(([subCommand, skills]) => {
     const description = (() => {
       if (subCommandDict.has(subCommand)) {

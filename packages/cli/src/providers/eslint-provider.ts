@@ -9,7 +9,7 @@ export default class EslintProvider implements ProviderInterface {
 
   safe = true;
 
-  transform(files: Array<string>, input: ProviderInput) {
+  transform(files: Array<string>) {
     const cli = new CLIEngine({
       configFile: path.join(__dirname, 'resources', 'alfred-eslintrc'),
       fix: true
@@ -17,7 +17,7 @@ export default class EslintProvider implements ProviderInterface {
 
     // Sometimes it takes multiple passes for all the ESLint errors to be autofixed
     for (let i = 0; i < 3; i += 1) {
-      const report = cli.executeOnFiles(input.files);
+      const report = cli.executeOnFiles(files);
       CLIEngine.outputFixes(report);
     }
 
@@ -25,7 +25,7 @@ export default class EslintProvider implements ProviderInterface {
   }
 
   async provide(input: ProviderInput): Promise<ProviderInput> {
-    await this.transform(input.files, input);
+    await this.transform(input.files);
     return input;
   }
 }

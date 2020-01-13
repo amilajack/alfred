@@ -1,6 +1,6 @@
 import program from 'commander';
-import alfred from '@alfred/core';
 import { Signale } from 'signale';
+import alfred from '@alfred/core';
 
 (async () => {
   const args = program.parse(process.argv);
@@ -22,7 +22,7 @@ import { Signale } from 'signale';
 
   // Get the flags that are passed to the skills
   const skillFlags = args.rawArgs.slice(
-    args.rawArgs.findIndex(curr => curr === subcommand) + 1
+    args.rawArgs.findIndex((curr: string) => curr === subcommand) + 1
   );
 
   const project = await alfred();
@@ -30,7 +30,7 @@ import { Signale } from 'signale';
   const validation = project.validatePkgJson();
   if (validation.messagesCount) {
     const signale = new Signale();
-    signale.note(project.config.pkgPath);
+    signale.note(project.pkgPath);
     validation.recommendations.forEach(warning => {
       signale.warn(warning);
     });

@@ -6,9 +6,9 @@ import { statAsync } from './fs';
 
 export function findJsFiles(dir: string): Promise<Array<string>> {
   return new Promise((resolve, reject) => {
-    const files = [];
+    const files: string[] = [];
     findit(dir)
-      .on('file', file => {
+      .on('file', (file: string) => {
         // only return files ending in .js
         if (/\.js$/.test(file)) {
           files.push(file);

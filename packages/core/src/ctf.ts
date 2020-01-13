@@ -6,15 +6,15 @@ import npm from 'npm';
 import formatPkg from 'format-package';
 import lodash from 'lodash';
 import mergeConfigs from '@alfred/merge-configs';
-import jestCtf from '@alfred/skill-jest';
-import babel from '@alfred/skill-babel';
-import webpack from '@alfred/skill-webpack';
-import eslint from '@alfred/skill-eslint';
-import react from '@alfred/skill-react';
-import prettier from '@alfred/skill-prettier';
-import parcel from '@alfred/skill-parcel';
-import rollup from '@alfred/skill-rollup';
-import lodashCtf from '@alfred/skill-lodash';
+const {default:jestCtf} = require('@alfred/skill-jest');
+const {default:babel} = require('@alfred/skill-babel');
+const {default:webpack} = require('@alfred/skill-webpack');
+const {default:eslint} = require('@alfred/skill-eslint');
+const {default:react} = require('@alfred/skill-react');
+const {default:prettier} = require('@alfred/skill-prettier');
+const {default:parcel} = require('@alfred/skill-parcel');
+const {default:rollup} = require('@alfred/skill-rollup');
+const {default:lodashCtf} = require('@alfred/skill-lodash');
 import { getConfigsBasePath } from '@alfred/helpers';
 import topsort from './topsort';
 import Config from './config';
@@ -27,24 +27,24 @@ import {
   NpmClients,
   InterfaceState,
   UnresolvedConfigInterface,
-  StringPkgJson,
   ResolvedConfigInterface,
   ConfigFile,
   ProjectEnum,
   Target,
-  CtfNodeWithHelpers
+  CtfWithHelpers,
+  Dependencies
 } from './types';
 
-export const CORE_CTFS = {
-  babel,
-  webpack,
-  parcel,
-  eslint,
-  prettier,
-  jest: jestCtf,
-  react,
-  rollup,
-  lodash: lodashCtf
+export const CORE_CTFS: {[ctf: string]: CtfWithHelpers} = {
+  babel: addCtfHelpers(babel),
+  webpack: addCtfHelpers(webpack),
+  parcel: addCtfHelpers(parcel),
+  eslint: addCtfHelpers(eslint),
+  prettier: addCtfHelpers(prettier),
+  jest: addCtfHelpers(jestCtf),
+  react: addCtfHelpers(react),
+  rollup: addCtfHelpers(rollup),
+  lodash: addCtfHelpers(lodashCtf)
 };
 
 // Examples
@@ -180,53 +180,53 @@ export async function installDeps(
   }
 }
 
-/**
- * @TODO @REFACTOR This is messy and as a result the typing is complicated. Need to simplify this logic by rearchitecting
- */
-export const addCtfHelpers: CtfNodeWithHelpers = {
-  findConfig(configName: string): ConfigFile {
-    const config = this.configFiles.find(
-      configFile => configFile.name === configName
-    );
-    if (!config) {
-      throw new Error(`Cannot find config with name "${configName}"`);
+function addCtfHelpers(ctf: CtfNode): CtfWithHelpers {
+  return {
+    ...ctf,
+    findConfig(configName: string): ConfigFile {
+      const config = this.configFiles.find(
+        configFile => configFile.name === configName
+      );
+      if (!config) {
+        throw new Error(`Cannot find config with name "${configName}"`);
+      }
+      return config;
+    },
+    extendConfig(
+      configName: string,
+      configExtension: { [x: string]: string } = {}
+    ): CtfWithHelpers {
+      const foundConfig = this.findConfig(configName);
+      const mergedConfigFile = mergeConfigs({}, foundConfig, {
+        config: configExtension
+      });
+      const configFiles = this.configFiles.map(configFile =>
+        configFile.name === configName ? mergedConfigFile : configFile
+      );
+      return lodash.merge({}, this, {
+        configFiles
+      });
+    },
+    replaceConfig(configName: string, configReplacement: ConfigFile): CtfWithHelpers {
+      const configFiles = this.configFiles.map(configFile =>
+        configFile.name === configName ? configReplacement : configFile
+      );
+      return {
+        ...this,
+        configFiles
+      };
+    },
+    addDependencies(dependencies: Dependencies): CtfWithHelpers {
+      return lodash.merge({}, this, {
+        dependencies
+      });
+    },
+    addDevDependencies(devDependencies: Dependencies): CtfWithHelpers {
+      return lodash.merge({}, this, {
+        devDependencies
+      });
     }
-    return config;
-  },
-  extendConfig(
-    configName: string,
-    configExtension: { [x: string]: string } = {}
-  ): CtfNodeWithHelpers {
-    const foundConfig = this.findConfig(configName);
-    const mergedConfigFile = mergeConfigs({}, foundConfig, {
-      config: configExtension
-    });
-    const configFiles = this.configFiles.map(configFile =>
-      configFile.name === configName ? mergedConfigFile : configFile
-    );
-    return lodash.merge({}, this, {
-      configFiles
-    });
-  },
-  replaceConfig(configName: string, configReplacement: ConfigFile): CtfNodeWithHelpers {
-    const configFiles = this.configFiles.map(configFile =>
-      configFile.name === configName ? configReplacement : configFile
-    );
-    return {
-      ...this,
-      configFiles
-    };
-  },
-  addDependencies(dependencies: StringPkgJson): CtfNodeWithHelpers {
-    return lodash.merge({}, this, {
-      dependencies
-    });
-  },
-  addDevDependencies(devDependencies: StringPkgJson): CtfNodeWithHelpers {
-    return lodash.merge({}, this, {
-      devDependencies
-    });
-  }
+  };
 };
 
 /**
@@ -326,41 +326,30 @@ export default function CTF(
   ctfs: Array<CtfNode>,
   interfaceState: InterfaceState
 ): CtfMap {
-  const ctf: CtfMap = new Map();
+  const ctfMap: CtfMap = new Map();
 
-  ctfs.forEach(ctfNode => {
-    const ctfWithHelpers = {
-      ...ctfNode,
-      ...addCtfHelpers
-    };
-    ctfWithHelpers.interfaces = normalizeInterfacesOfSkill(
-      ctfWithHelpers.interfaces
-    );
-    if (ctfWithHelpers.interfaces.length) {
-      ctfWithHelpers.interfaces.forEach(e => {
-        if ('resolveSkill' in e.module && typeof e.module.resolveSkill === 'function') {
-          if (e.module.resolveSkill(ctfs, interfaceState) !== false) {
-            ctf.set(ctfNode.name, ctfWithHelpers);
+  ctfs
+    .map(addCtfHelpers)
+    .forEach(ctfWithHelpers => {
+      ctfWithHelpers.interfaces = normalizeInterfacesOfSkill(
+        ctfWithHelpers.interfaces
+      );
+      if (ctfWithHelpers.interfaces.length) {
+        ctfWithHelpers.interfaces.forEach(e => {
+          if ('resolveSkill' in e.module && typeof e.module.resolveSkill === 'function') {
+            if (e.module.resolveSkill(ctfs, interfaceState) !== false) {
+              ctfMap.set(ctfWithHelpers.name, ctfWithHelpers);
+            }
+          } else {
+            ctfMap.set(ctfWithHelpers.name, ctfWithHelpers);
           }
-        } else {
-          ctf.set(ctfNode.name, ctfWithHelpers);
-        }
-      });
-    } else {
-      ctf.set(ctfNode.name, ctfWithHelpers);
-    }
-  });
+        });
+      } else {
+        ctfMap.set(ctfWithHelpers.name, ctfWithHelpers);
+      }
+    });
 
-  return ctf;
-}
-
-export function addSubCommandsToCtfNodes(ctf: CtfMap): CtfMap {
-  ctf.forEach(ctfNode => {
-    const subcommands = ctfNode.interfaces.map(e => require(e.name).subcommand);
-    // eslint-disable-next-line no-param-reassign
-    ctfNode.subcommands = subcommands;
-  });
-  return ctf;
+  return ctfMap;
 }
 
 /**
@@ -445,17 +434,14 @@ export function addMissingStdSkillsToCtf(
           stdCtfSkillToAdd.interfaces
         );
       }
-      ctf.set(stdCtfSkillToAdd.name, {
-        ...stdCtfSkillToAdd,
-        ...addCtfHelpers
-      });
+      ctf.set(stdCtfSkillToAdd.name, stdCtfSkillToAdd);
     }
   });
 
   // Add all the CORE_CTF's without subcommands
   // @HACK
   if (!ctf.has('babel')) {
-    ctf.set('babel', { ...CORE_CTFS.babel, ...addCtfHelpers });
+    ctf.set('babel', CORE_CTFS.babel);
   }
 
   callCtfFnsInOrder(config, ctf, interfaceState);
@@ -501,13 +487,13 @@ export async function generateCtfFromConfig(
 /**
  * Intended to be used for testing purposes
  */
-export function getDependencies(ctf: CtfMap): { [x: string]: string } {
+export function getDependencies(ctf: CtfMap): Dependencies {
   return Array.from(ctf.values())
     .map(ctfNode => ctfNode.dependencies || {})
     .reduce((p, c) => ({ ...p, ...c }), {});
 }
 
-export function getDevDependencies(ctf: CtfMap): { [x: string]: string } {
+export function getDevDependencies(ctf: CtfMap): Dependencies {
   return Array.from(ctf.values())
     .map(ctfNode => ctfNode.devDependencies || {})
     .reduce((p, c) => ({ ...p, ...c }), {});

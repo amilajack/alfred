@@ -1,4 +1,5 @@
 /* eslint import/no-dynamic-require: off */
+// @ts-nocheck
 import Joi from 'joi';
 import { Pkg, ValidationResult } from './types';
 
@@ -100,7 +101,7 @@ export class PkgValidation {
     };
   }
 
-  static parse(data: string | Object): Object {
+  static parse(data: string | Object): Object | string {
     if (typeof data !== 'string') {
       // It's just a string
       return 'Invalid data - Not a string';
@@ -144,6 +145,8 @@ export class PkgValidation {
     let errors: string[] = [];
     const warnings: string[] = [];
     const recommendations: string[] = [];
+
+    /*  */
 
     Object.entries(map).forEach(([name, field]) => {
       if (

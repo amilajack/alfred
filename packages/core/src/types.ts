@@ -11,10 +11,6 @@ export interface PkgJson extends JSON {
 
 export type Pkg = PkgJson;
 
-export type StringPkgJson = {
-  [x: string]: string
-}
-
 export type Env = 'production' | 'development' | 'test';
 
 export type Target = 'node' | 'browser';
@@ -25,27 +21,20 @@ export type Skill = [string, any] | string;
 
 export type NpmClients = 'yarn' | 'npm' | 'writeOnly';
 
-export interface ResolvedConfigInterface {
-  npmClient: NpmClients;
-  skills: Array<Skill>;
-  showConfigs: boolean;
-  autoInstall: boolean;
-}
+export type SubCommandAndSkills = Map<string, Set<string>>;
+export type SubCommandDict = Map<string, SkillInterface>;
 
-export interface UnresolvedConfigInterface extends ResolvedConfigInterface {
-  extends: Array<string> | string;
-}
-
-export interface ConfigInterface extends ResolvedConfigInterface {
-  getConfigWithDefaults: () => UnresolvedConfigInterface
-  getConfigValues: () => UnresolvedConfigInterface
-}
+export type Skills = {
+  subCommandAndSkills: SubCommandAndSkills,
+  subCommandDict: SubCommandDict
+};
 
 export interface ProjectInterface {
   root: string;
   config: ConfigInterface;
   pkg: Pkg;
   pkgPath: string;
+  skills: () => Promise<Skills>;
   setConfig: (config: ConfigInterface) => void
   // @TODO
   // installDeps: (
@@ -68,9 +57,25 @@ export interface SkillInterfaceModule extends NodeJS.Module {
   description: string;
   subcommand: string;
   runForAllTargets?: boolean;
-  // @TODO Take config in misc object
+  // @TODO Take config in misc object to allow for future additions to the API
   resolveSkill?: (ctfs: Array<CtfNode>, interfaceState: InterfaceState) => CtfNode | false;
   handleFlags?: (flags: Array<string>, misc: {interfaceState: InterfaceState, config: ConfigInterface}) => Array<string>;
+}
+
+export interface ResolvedConfigInterface {
+  npmClient: NpmClients;
+  skills: Array<Skill>;
+  showConfigs: boolean;
+  autoInstall: boolean;
+}
+
+export interface UnresolvedConfigInterface extends ResolvedConfigInterface {
+  extends: Array<string> | string;
+}
+
+export interface ConfigInterface extends ResolvedConfigInterface {
+  getConfigWithDefaults: () => UnresolvedConfigInterface
+  getConfigValues: () => UnresolvedConfigInterface
 }
 
 export interface SkillInterface {
@@ -81,11 +86,7 @@ export interface SkillInterface {
 export type UnresolvedInterfaces = Array<
   string | [string, { [x: string]: string }]
 >;
-export type ResolvedInterfaces = Array<[string, SkillInterface]>;
-export type NormalizedInterfaces = Array<{
-  name: string,
-  module: NodeJS.Module
-}>;
+export type ResolvedInterfaces = Array<SkillInterface>;
 
 export type ConfigValue =
   | string
@@ -121,23 +122,10 @@ export type HooksCallArgs = {
 
 export type CallFn = (args: HooksCallArgs) => void;
 
-export type UsingInterface = {
-  interfaces: Array<SkillInterface>,
-  subcommand: string,
-  hooks: {
-    call: CallFn;
-    install?: () => void
-  }
-};
-
-type RequiredCtfNodeParams = {
+interface Ctf {
   name: string,
-  dependencies: {
-    [x: string]: any
-  },
-  devDependencies: {
-    [x: string]: any
-  },
+  dependencies: Dependencies,
+  devDependencies: Dependencies,
   description: string,
   supports?: {
     // Flag name and argument types
@@ -156,35 +144,36 @@ type RequiredCtfNodeParams = {
   },
   ctfs: {
     [ctfName: string]: (
-      ownCtfNode: RequiredCtfNodeParams,
-      ctfMap: Map<string, RequiredCtfNodeParams>,
+      ownCtfNode: Ctf,
+      ctfMap: Map<string, Ctf>,
       misc: {
         config: ConfigInterface
       } & InterfaceState
-    ) => RequiredCtfNodeParams
+    ) => Ctf
+  },
+}
+
+interface CtfUsingInterface extends Ctf {
+  interfaces: Array<SkillInterface>,
+  subcommand: string,
+  hooks: {
+    call: CallFn;
+    install?: () => void
   }
-};
+}
 
 export type CtfNode =
-  | RequiredCtfNodeParams
-  | RequiredCtfNodeParams & UsingInterface
-
-export type CtfNodeWithInterface =  RequiredCtfNodeParams & UsingInterface;
+  | Ctf
+  | CtfUsingInterface
 
 export type CtfMap = Map<string, CtfNode>;
 
-export interface CtfHelpers {
+export interface CtfWithHelpers extends Ctf {
   findConfig: (configName: string) => ConfigFile;
-  addDependencies: (pkg: StringPkgJson) => CtfNodeWithHelpers;
-  addDevDependencies: (pkg: StringPkgJson) => CtfNodeWithHelpers;
-  extendConfig: (x: string) => CtfNodeWithHelpers;
-  replaceConfig: (x: string, configReplacement: ConfigFile) => CtfNodeWithHelpers
-}
-
-export interface CtfNodeWithHelpers extends CtfNodeWithInterface, CtfHelpers {
-  configFiles: Array<ConfigFile>,
-  devDependencies: Dependencies,
-  dependencies: Dependencies
+  addDependencies: (pkg: Dependencies) => CtfWithHelpers;
+  addDevDependencies: (pkg: Dependencies) => CtfWithHelpers;
+  extendConfig: (x: string) => CtfWithHelpers;
+  replaceConfig: (x: string, configReplacement: ConfigFile) => CtfWithHelpers
 }
 
 export type ValidationResult = {

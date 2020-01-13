@@ -29,6 +29,7 @@ module.exports = {
   ],
   rules: {
     'flowtype-errors/show-errors': 'off',
-    'import/extensions': 'off'
+    'import/extensions': 'off',
+    'import/default': 'off'
   }
 };

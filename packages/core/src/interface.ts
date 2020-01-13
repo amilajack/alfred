@@ -6,7 +6,7 @@ import {
   ProjectInterface,
   InterfaceState,
   UnresolvedInterfaces,
-  NormalizedInterfaces,
+  ResolvedInterfaces,
   Env,
   ProjectEnum,
   Target
@@ -67,17 +67,17 @@ export const INTERFACE_STATES: Array<InterfaceState> = [
 ];
 
 export function normalizeInterfacesOfSkill(
-  interfaces: UnresolvedInterfaces
-): NormalizedInterfaces {
+  interfaces: UnresolvedInterfaces | ResolvedInterfaces
+): ResolvedInterfaces {
   if (!interfaces) return [];
   // `interfaces` is an array
   if (Array.isArray(interfaces)) {
     // @HACK Check if the array is alread formatted with this function by
     //       checking if name property exists
-    if (interfaces[0] && interfaces[0].name) {
-      return interfaces;
+    if (interfaces[0] && Array.isArray(interfaces[0]) && 'name' in interfaces[0]) {
+      return interfaces as ResolvedInterfaces;
     }
-    return interfaces.map(e => {
+    return (interfaces as UnresolvedInterfaces).map(e => {
       if (typeof e === 'string') {
         return {
           name: e,

@@ -150,20 +150,16 @@
         "signature": "0c9ea8c2028047f39a3f66752682604f543c08be8806258c3d95c93e75a43255"
       },
       "./src/types.ts": {
-        "version": "fc36e2a1f8c606d0b0a5ff458899809e5f73fcf4209149d67e7d28a8cbbc3734",
-        "signature": "eacf80ceacff9b3c17f5a6ca422b9a02f102a85917239466137637885e3622ac"
+        "version": "0f746314bafe4c6fdf69b933e35a0505d0e3201903d0ca39afebf3d36e17dcb2",
+        "signature": "3dcdbdb72f505679d0809032819251a429b019e4d4e68932252d933c9c10e5d5"
       },
       "./index.d.ts": {
         "version": "b42d535c794251030828022716b5c1d526014d71a1b868679ecbe6599bb3fea1",
         "signature": "b42d535c794251030828022716b5c1d526014d71a1b868679ecbe6599bb3fea1"
       },
-      "../../node_modules/@types/joi/index.d.ts": {
-        "version": "629e989c3819bdf34ff5a3909236d2c00c276e5d84fef684114777ab7795807b",
-        "signature": "629e989c3819bdf34ff5a3909236d2c00c276e5d84fef684114777ab7795807b"
-      },
-      "./src/validation.ts": {
-        "version": "55882ef9b4aa1bcaf2f83a9bf9b5937c7636480c63bac9aed15f6e94674ec33e",
-        "signature": "9e6b35ecc6c0bd7d2dd9444c65b1df630d4fcfc3cc0c8bd2c3418570702ce8b6"
+      "../merge-configs/lib/index.d.ts": {
+        "version": "66d344f27df27924da88ef39278644048598b0d05acb53a89e5f6be7545018cf",
+        "signature": "66d344f27df27924da88ef39278644048598b0d05acb53a89e5f6be7545018cf"
       },
       "../../node_modules/@types/node/globals.d.ts": {
         "version": "05c42320698cb6eb4052d68ef35a0f3b88291b9275f13e9a188b96119844c5b6",
@@ -349,6 +345,18 @@
         "version": "7c7dabe6de2f88a1b4a4d9a15479c2a99b6f5864b434b9d960fc312ba9498c0a",
         "signature": "7c7dabe6de2f88a1b4a4d9a15479c2a99b6f5864b434b9d960fc312ba9498c0a"
       },
+      "../helpers/lib/index.d.ts": {
+        "version": "8c740e1002c0db81bd8abc443a40b1d30c0e7ff10a4c1e6fb9c2f014274e89da",
+        "signature": "8c740e1002c0db81bd8abc443a40b1d30c0e7ff10a4c1e6fb9c2f014274e89da"
+      },
+      "../../node_modules/@types/joi/index.d.ts": {
+        "version": "629e989c3819bdf34ff5a3909236d2c00c276e5d84fef684114777ab7795807b",
+        "signature": "629e989c3819bdf34ff5a3909236d2c00c276e5d84fef684114777ab7795807b"
+      },
+      "./src/validation.ts": {
+        "version": "6c2350697e05bfd7f3a259a85831b1ad1553a50308336a618dfbec57eb4cbb7b",
+        "signature": "0650d1dddf423a6aea6fbb5fd9cb47cafddec0a98fde753f004149eb199c9254"
+      },
       "../../node_modules/@types/minimatch/index.d.ts": {
         "version": "1d1e6bd176eee5970968423d7e215bfd66828b6db8d54d17afec05a831322633",
         "signature": "1d1e6bd176eee5970968423d7e215bfd66828b6db8d54d17afec05a831322633"
@@ -417,97 +425,61 @@
         "version": "bbf144d4354e2aaa6439f32761f3ee798cc68d1600adab6e2a596f25269f106d",
         "signature": "bbf144d4354e2aaa6439f32761f3ee798cc68d1600adab6e2a596f25269f106d"
       },
-      "../alfred-skill-jest/index.d.ts": {
-        "version": "1d3983025633448aaeeec1517ffd7c14723aed5a184b10494298f904140ea7e5",
-        "signature": "1d3983025633448aaeeec1517ffd7c14723aed5a184b10494298f904140ea7e5"
-      },
-      "../alfred-skill-babel/index.d.ts": {
-        "version": "1d3983025633448aaeeec1517ffd7c14723aed5a184b10494298f904140ea7e5",
-        "signature": "1d3983025633448aaeeec1517ffd7c14723aed5a184b10494298f904140ea7e5"
-      },
-      "../alfred-skill-webpack/index.d.ts": {
-        "version": "1d3983025633448aaeeec1517ffd7c14723aed5a184b10494298f904140ea7e5",
-        "signature": "1d3983025633448aaeeec1517ffd7c14723aed5a184b10494298f904140ea7e5"
-      },
-      "../alfred-skill-eslint/index.d.ts": {
-        "version": "1d3983025633448aaeeec1517ffd7c14723aed5a184b10494298f904140ea7e5",
-        "signature": "1d3983025633448aaeeec1517ffd7c14723aed5a184b10494298f904140ea7e5"
-      },
-      "../alfred-skill-react/index.d.ts": {
-        "version": "1d3983025633448aaeeec1517ffd7c14723aed5a184b10494298f904140ea7e5",
-        "signature": "1d3983025633448aaeeec1517ffd7c14723aed5a184b10494298f904140ea7e5"
-      },
-      "../alfred-skill-prettier/index.d.ts": {
-        "version": "1d3983025633448aaeeec1517ffd7c14723aed5a184b10494298f904140ea7e5",
-        "signature": "1d3983025633448aaeeec1517ffd7c14723aed5a184b10494298f904140ea7e5"
-      },
-      "../alfred-skill-parcel/index.d.ts": {
-        "version": "1d3983025633448aaeeec1517ffd7c14723aed5a184b10494298f904140ea7e5",
-        "signature": "1d3983025633448aaeeec1517ffd7c14723aed5a184b10494298f904140ea7e5"
-      },
-      "../alfred-skill-rollup/index.d.ts": {
-        "version": "1d3983025633448aaeeec1517ffd7c14723aed5a184b10494298f904140ea7e5",
-        "signature": "1d3983025633448aaeeec1517ffd7c14723aed5a184b10494298f904140ea7e5"
-      },
-      "../alfred-skill-lodash/index.d.ts": {
-        "version": "1b1d568ec4632681063a7f7c112f49ffd65f612247e508783e388e5693ef6b2f",
-        "signature": "1b1d568ec4632681063a7f7c112f49ffd65f612247e508783e388e5693ef6b2f"
-      },
       "./src/topsort.ts": {
-        "version": "96ac2fa072dcc1586503eda0fc9d9269f13d7289a4c9a9bea1c2a48e243ba949",
-        "signature": "a82a3c438d888cb3ddcbe93cb9c939f9eca92f5b75b56b05e6332431f44b5db4"
+        "version": "fa07e3c1216fa23d842b8bc91f0a0e352d7a3aee6b247c82c43dce346d893b03",
+        "signature": "164ceca47479bd773e68c9205678fb821ff3fa3ce84f85c17b988fa953c8b137"
       },
       "./src/constants.ts": {
         "version": "e26dd63c9e1532af60bd8fe59c95a26b80b73e5326ead52f838e54cdfd95b58f",
         "signature": "1c83faec263311c886d4da3e6e3bd1955c80b3092d2085cde53c752897d12375"
       },
       "./src/interface.ts": {
-        "version": "010a17852dfc578e656008265fd227883ebdcca935e00f36c411c318ef918ee3",
-        "signature": "9e38b15c36264cf3698c580245c6dfec6c8613d08d5acd2c638b54d5d31c2ce7"
+        "version": "0abb9b76594411ffa0a3404cb9ac665cd9038521b1095020d37ea43fe9a1d847",
+        "signature": "c654ef688503e3e8982eae8238bb5989d95593e11310315ef001978ad8db3539"
       },
       "./src/ctf.ts": {
-        "version": "297d010f4c9c00fe10037fe2a0b3c4b9fd6f1a6e336f3c734aae1ee4674c2437",
-        "signature": "f64f6f758a069505285263646f69df2e20b9296d60b5aab51ca884277cc7de4e"
+        "version": "2c5c8118c153e6b242e7dbb0dfa358cc516f10067cc5f7f088b3376520f4e777",
+        "signature": "c35a7fe931d3bbaf563848f32efe69919a574d2af7b6f39653bfeeee6d3e9466"
       },
       "./src/commands/index.ts": {
-        "version": "3f3b1b004dcb4a2e9fe6f2621d31daed0ebb8d8a63db5e81cb26328e6b37002a",
+        "version": "b1737b60763097b2e0ace15d285e370b6c2aef41454f8f1ce0f5b82801c04c15",
         "signature": "2e47c62512cdf4de98d43946ce274d3aafda77c8225885431d2ee05619ffe056"
       },
       "./src/helpers.ts": {
-        "version": "811805a226ee84b35ac2a3f2109dd6e2838427dbc80a9899ab2b51bd8b08bc0a",
-        "signature": "85c2ee0e1342b9ec8d08a86ec18dc6043ff9320705761381f5bc822b29f8ca65"
+        "version": "b23e64dae627a7ca614465cb004a55d45bb273c3a0351953e229dc1744543c7f",
+        "signature": "0663e4584c58cac6af1b5f614f8f6ff4cfaa1714f0c83131db487173cc3fd228"
       },
       "./src/commands/run.ts": {
-        "version": "ba3f69eb69b4cd4f677e53bfb3d82a7d9a78d6b2a872b45f4c16050c43b4ecca",
-        "signature": "91d91523e99cce19c9294a490a151dd6611000b02acb9c58297893452fe1efe1"
+        "version": "6cd799d9824652a60caa4cd5dada80e6e918a56d1113850febd8cab3d9c4146f",
+        "signature": "d07155f87f924026e3e80d43d4118b61eae7038f03dedff726d4327508fa873e"
       },
       "./src/commands/learn.ts": {
         "version": "f2223f56fceb539bedb4d59a27dc65054c8e8f1fcce3dd7a80471d2e8135bdb7",
         "signature": "94e0c25fd5c95f51573b0d30d2fb365a7261cf11956d231e48a0128f3bba9cc0"
+      },
+      "./src/commands/skills.ts": {
+        "version": "41234756ac6d7a336baa2a0fd2c6142ca015ac122e25630f8612c3469af76a30",
+        "signature": "d61874b9ce3cda88e07fe30ab4f65c0b6dcccae7d15a3ef6e545dc35484cec2e"
       },
       "./src/commands/clean.ts": {
         "version": "9536ad9abb76712096058d87c722665af416ffe1a055099dc9a0346ed4673531",
         "signature": "72d906a399d26f3d55bb6b63973382f2458040f4a89a9060570c2a9307a1feab"
       },
       "./src/project.ts": {
-        "version": "e8219ca7077524e22b08e9d259ec819cc972dacec311cddc176883fcccba3f74",
-        "signature": "73c262963fb0000304da3c08abafdb74c34345f184a09ee7017cc8534dc8d78d"
+        "version": "ffd7a587eccce529f6fa037449948305636776aadc943e55a397a2180bd04203",
+        "signature": "4a0b1ec5a553121079954c7dc37733dcc2a9071b651a6aa2cd375dfb7aae2a89"
       },
       "./src/config.ts": {
-        "version": "5068f30ed2a319473553c16aedf0cb75dfe2f93cc94b9a5bba8fe734a42f3592",
-        "signature": "e2023a8dacf98151fd46f3824fe71eafc359305be662194455767a1b042130fc"
+        "version": "943c6fc715fe4ded5b69cced55bdcd7c88f554ba921065850b8f37dcaa2d1c3e",
+        "signature": "1bf288a04c50c50968de8cc4320f8784e30881fd399c05c5c1426b03d42424d2"
       },
       "./src/format-package.d.ts": {
-        "version": "384dd88baa2111382786189fb706783de7d4837bce58bb8a6c7ad7dc291b133a",
-        "signature": "384dd88baa2111382786189fb706783de7d4837bce58bb8a6c7ad7dc291b133a"
+        "version": "cfcc56a45ebaa58114478674dc5334b8d66e3618e5900b422367f5154336ffe7",
+        "signature": "cfcc56a45ebaa58114478674dc5334b8d66e3618e5900b422367f5154336ffe7"
       },
       "./src/index.ts": {
-        "version": "a7425ce4c23f87b6e4633e370e542bcec49816e1e0de592620e590a8dd124d34",
-        "signature": "f08fedd26b7c15826206a78f0c24677d9cdbbb76985ff6a8d5f462a5f1dfc184"
-      },
-      "./src/commands/skills.ts": {
-        "version": "ef74bfca5488431b75ab48c1cfefe4d61453c555ee09959f1a0619de15a3dd76",
-        "signature": "678d8f15a1775438fa28d1b9687c292a3878660829e1a783e0930468778b5239"
+        "version": "0ca4b4daf080832ea16d6abcc01292e19ee43273a178117b354d081228bd932e",
+        "signature": "b26b74567da339637e20cf2a705d1123abd8d6f223eb9a49dbd055e663fbd8ad"
       },
       "../../node_modules/@babel/types/lib/index.d.ts": {
         "version": "9cebab89871446e2e9f2c8599cb22696c08207cf5bc21adb8f9752d582c5055e",
@@ -545,7 +517,7 @@
         "version": "c78a4fca6089b8b43293fd58f7a8182e3c09481ef42ce90cb907e13a95e38738",
         "signature": "c78a4fca6089b8b43293fd58f7a8182e3c09481ef42ce90cb907e13a95e38738"
       },
-      "../../node_modules/@types/json-schema/index.d.ts": {
+      "../../node_modules/@types/eslint/node_modules/@types/json-schema/index.d.ts": {
         "version": "92bc43ea5584457c9325a3d5b2ce5af77df6d2653be7e4c2e9a626f89293c3c1",
         "signature": "92bc43ea5584457c9325a3d5b2ce5af77df6d2653be7e4c2e9a626f89293c3c1"
       },
@@ -557,9 +529,9 @@
         "version": "3f62b9db9205a2fea0bf122e492d49deac5eca7aff512a71925399d00198fda8",
         "signature": "3f62b9db9205a2fea0bf122e492d49deac5eca7aff512a71925399d00198fda8"
       },
-      "../../node_modules/@types/git-config/index.d.ts": {
-        "version": "02737bf21e0f5c67300b9a135d15118eccc337e4e584ae4402fbd032ce302f05",
-        "signature": "02737bf21e0f5c67300b9a135d15118eccc337e4e584ae4402fbd032ce302f05"
+      "../../node_modules/@types/eslint-visitor-keys/index.d.ts": {
+        "version": "725d9be2fd48440256f4deb00649adffdbc5ecd282b09e89d4e200663792c34c",
+        "signature": "725d9be2fd48440256f4deb00649adffdbc5ecd282b09e89d4e200663792c34c"
       },
       "../../node_modules/rxjs/internal/subscription.d.ts": {
         "version": "6cb35d83d21a7e72bd00398c93302749bcd38349d0cc5e76ff3a90c6d1498a4d",
@@ -921,6 +893,14 @@
         "version": "93b59bc67329d5add033e3198583c39aa939cef891e6a2b763e0bea2b514ea9b",
         "signature": "93b59bc67329d5add033e3198583c39aa939cef891e6a2b763e0bea2b514ea9b"
       },
+      "../../node_modules/@types/json-schema/index.d.ts": {
+        "version": "751b8d5b85eee82bd38964a6ff43e89e61a586c64f653e3d1eb8fa7eb372ed30",
+        "signature": "751b8d5b85eee82bd38964a6ff43e89e61a586c64f653e3d1eb8fa7eb372ed30"
+      },
+      "../../node_modules/@types/lodash.flatten/index.d.ts": {
+        "version": "96b729b46007058fceb10567283275a023415f724af78e91cab3ac7073c19635",
+        "signature": "96b729b46007058fceb10567283275a023415f724af78e91cab3ac7073c19635"
+      },
       "../../node_modules/@types/normalize-package-data/index.d.ts": {
         "version": "c9ad058b2cc9ce6dc2ed92960d6d009e8c04bef46d3f5312283debca6869f613",
         "signature": "c9ad058b2cc9ce6dc2ed92960d6d009e8c04bef46d3f5312283debca6869f613"
@@ -929,9 +909,21 @@
         "version": "57427a9a368f8f0ee4ce03c36a762e19166756b95ab688948b29be553b24a78a",
         "signature": "57427a9a368f8f0ee4ce03c36a762e19166756b95ab688948b29be553b24a78a"
       },
+      "../../node_modules/@types/signale/index.d.ts": {
+        "version": "a91d647812f7c40832b9fb2498a4fa3adb8143eb6dcb78ef813e3de8677170ea",
+        "signature": "a91d647812f7c40832b9fb2498a4fa3adb8143eb6dcb78ef813e3de8677170ea"
+      },
       "../../node_modules/@types/stack-utils/index.d.ts": {
         "version": "41422586881bcd739b4e62d9b91cd29909f8572aa3e3cdf316b7c50f14708d49",
         "signature": "41422586881bcd739b4e62d9b91cd29909f8572aa3e3cdf316b7c50f14708d49"
+      },
+      "../../node_modules/@types/uniq/index.d.ts": {
+        "version": "d89ab08250043dbc1659dfd63833f9a7f4a33ba56d41f62ef3246f5426cbb2f4",
+        "signature": "d89ab08250043dbc1659dfd63833f9a7f4a33ba56d41f62ef3246f5426cbb2f4"
+      },
+      "../../node_modules/@types/update-notifier/index.d.ts": {
+        "version": "58ac41800dec52ca4b18df5fbe494f371d1dae601de2f67c302d8702cd0ce333",
+        "signature": "58ac41800dec52ca4b18df5fbe494f371d1dae601de2f67c302d8702cd0ce333"
       },
       "../../node_modules/@types/yargs-parser/index.d.ts": {
         "version": "e65fca93c26b09681d33dad7b3af32ae42bf0d114d859671ffed30a92691439c",
@@ -954,12 +946,14 @@
       "composite": true,
       "emitDeclarationOnly": true,
       "strict": true,
+      "pretty": true,
       "noUnusedLocals": true,
       "noUnusedParameters": true,
       "noImplicitReturns": true,
       "noFallthroughCasesInSwitch": true,
       "moduleResolution": 2,
       "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
       "resolveJsonModule": true,
       "rootDir": "./src",
       "outDir": "./lib",
@@ -1201,15 +1195,7 @@
         "../../node_modules/@types/node/util.d.ts",
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/joi/index.d.ts": [
-        "../../node_modules/@types/joi/index.d.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./src/validation.ts": [
-        "../../node_modules/@types/joi/index.d.ts",
+      "../merge-configs/lib/index.d.ts": [
         "./src/types.ts",
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -1579,6 +1565,29 @@
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/util.d.ts"
       ],
+      "../helpers/lib/index.d.ts": [
+        "./src/types.ts",
+        "../../node_modules/@types/node/ts3.2/index.d.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../node_modules/@types/joi/index.d.ts": [
+        "../../node_modules/@types/joi/index.d.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/validation.ts": [
+        "../../node_modules/@types/joi/index.d.ts",
+        "./src/types.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../../node_modules/@types/minimatch/index.d.ts": [
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -1843,68 +1852,6 @@
         "../../node_modules/@types/node/util.d.ts",
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../alfred-skill-jest/index.d.ts": [
-        "./src/types.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../alfred-skill-babel/index.d.ts": [
-        "./src/types.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../alfred-skill-webpack/index.d.ts": [
-        "./src/types.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../alfred-skill-eslint/index.d.ts": [
-        "./src/types.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../alfred-skill-react/index.d.ts": [
-        "./src/types.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../alfred-skill-prettier/index.d.ts": [
-        "./src/types.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../alfred-skill-parcel/index.d.ts": [
-        "./src/types.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../alfred-skill-rollup/index.d.ts": [
-        "./src/types.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../alfred-skill-lodash/index.d.ts": [
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "./src/topsort.ts": [
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -1933,15 +1880,8 @@
         "../../node_modules/@types/npm/index.d.ts",
         "./src/format-package.d.ts",
         "../../node_modules/@types/lodash/ts3.1/index.d.ts",
-        "../alfred-skill-jest/index.d.ts",
-        "../alfred-skill-babel/index.d.ts",
-        "../alfred-skill-webpack/index.d.ts",
-        "../alfred-skill-eslint/index.d.ts",
-        "../alfred-skill-react/index.d.ts",
-        "../alfred-skill-prettier/index.d.ts",
-        "../alfred-skill-parcel/index.d.ts",
-        "../alfred-skill-rollup/index.d.ts",
-        "../alfred-skill-lodash/index.d.ts",
+        "../merge-configs/lib/index.d.ts",
+        "../helpers/lib/index.d.ts",
         "./src/topsort.ts",
         "./src/config.ts",
         "./src/interface.ts",
@@ -1952,6 +1892,7 @@
       ],
       "./src/commands/index.ts": [
         "../../node_modules/@types/node/path.d.ts",
+        "../helpers/lib/index.d.ts",
         "./src/types.ts",
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -1976,8 +1917,18 @@
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/commands/learn.ts": [
+        "../merge-configs/lib/index.d.ts",
         "./src/config.ts",
         "./src/ctf.ts",
+        "./src/types.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/commands/skills.ts": [
+        "./src/ctf.ts",
+        "./src/interface.ts",
         "./src/types.ts",
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -1999,13 +1950,14 @@
         "../../node_modules/@types/node/child_process.d.ts",
         "../../node_modules/@types/rimraf/index.d.ts",
         "./src/format-package.d.ts",
-        "../../node_modules/@types/joi/index.d.ts",
+        "../helpers/lib/index.d.ts",
         "./src/config.ts",
         "./src/validation.ts",
         "./src/ctf.ts",
         "./src/interface.ts",
         "./src/commands/run.ts",
         "./src/commands/learn.ts",
+        "./src/commands/skills.ts",
         "./src/commands/clean.ts",
         "./src/constants.ts",
         "./src/types.ts",
@@ -2016,8 +1968,11 @@
       "./src/config.ts": [
         "../../node_modules/@types/node/path.d.ts",
         "../../node_modules/@types/node/fs.d.ts",
+        "../merge-configs/lib/index.d.ts",
+        "../helpers/lib/index.d.ts",
         "./src/validation.ts",
         "./src/project.ts",
+        "./src/ctf.ts",
         "./src/types.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
         "../../node_modules/@types/node/util.d.ts",
@@ -2031,15 +1986,6 @@
       ],
       "./src/index.ts": [
         "./src/project.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./src/commands/skills.ts": [
-        "./src/ctf.ts",
-        "./src/interface.ts",
-        "./src/types.ts",
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
         "../../node_modules/@types/node/util.d.ts",
@@ -2110,7 +2056,7 @@
         "../../node_modules/@types/node/util.d.ts",
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/json-schema/index.d.ts": [
+      "../../node_modules/@types/eslint/node_modules/@types/json-schema/index.d.ts": [
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
         "../../node_modules/@types/node/util.d.ts",
@@ -2123,7 +2069,7 @@
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../../node_modules/@types/eslint/ts3.1/index.d.ts": [
-        "../../node_modules/@types/json-schema/index.d.ts",
+        "../../node_modules/@types/eslint/node_modules/@types/json-schema/index.d.ts",
         "../../node_modules/@types/estree/index.d.ts",
         "../../node_modules/@types/eslint/ts3.1/helpers.d.ts",
         "../../node_modules/@types/node/fs.d.ts",
@@ -2131,7 +2077,7 @@
         "../../node_modules/@types/node/util.d.ts",
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/git-config/index.d.ts": [
+      "../../node_modules/@types/eslint-visitor-keys/index.d.ts": [
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
         "../../node_modules/@types/node/util.d.ts",
@@ -2950,6 +2896,19 @@
         "../../node_modules/@types/node/util.d.ts",
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../../node_modules/@types/json-schema/index.d.ts": [
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../node_modules/@types/lodash.flatten/index.d.ts": [
+        "../../node_modules/@types/lodash/ts3.1/index.d.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../../node_modules/@types/normalize-package-data/index.d.ts": [
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -2962,7 +2921,26 @@
         "../../node_modules/@types/node/util.d.ts",
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../../node_modules/@types/signale/index.d.ts": [
+        "../../node_modules/@types/node/ts3.2/index.d.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../../node_modules/@types/stack-utils/index.d.ts": [
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../node_modules/@types/uniq/index.d.ts": [
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../node_modules/@types/update-notifier/index.d.ts": [
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
         "../../node_modules/@types/node/util.d.ts",
@@ -3212,15 +3190,12 @@
         "../../node_modules/@types/node/util.d.ts",
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/joi/index.d.ts": [
-        "../../node_modules/@types/joi/index.d.ts",
+      "../merge-configs/lib/index.d.ts": [
+        "./src/types.ts",
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
         "../../node_modules/@types/node/util.d.ts",
         "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./src/validation.ts": [
-        "./src/types.ts"
       ],
       "../../node_modules/@types/node/globals.d.ts": [
         "../../node_modules/@types/node/fs.d.ts",
@@ -3585,6 +3560,24 @@
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/util.d.ts"
       ],
+      "../helpers/lib/index.d.ts": [
+        "./src/types.ts",
+        "../../node_modules/@types/node/ts3.2/index.d.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../node_modules/@types/joi/index.d.ts": [
+        "../../node_modules/@types/joi/index.d.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/validation.ts": [
+        "./src/types.ts"
+      ],
       "../../node_modules/@types/minimatch/index.d.ts": [
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -3849,73 +3842,10 @@
         "../../node_modules/@types/node/util.d.ts",
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../alfred-skill-jest/index.d.ts": [
-        "./src/types.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../alfred-skill-babel/index.d.ts": [
-        "./src/types.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../alfred-skill-webpack/index.d.ts": [
-        "./src/types.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../alfred-skill-eslint/index.d.ts": [
-        "./src/types.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../alfred-skill-react/index.d.ts": [
-        "./src/types.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../alfred-skill-prettier/index.d.ts": [
-        "./src/types.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../alfred-skill-parcel/index.d.ts": [
-        "./src/types.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../alfred-skill-rollup/index.d.ts": [
-        "./src/types.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../alfred-skill-lodash/index.d.ts": [
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "./src/interface.ts": [
         "./src/types.ts"
       ],
       "./src/ctf.ts": [
-        "../../node_modules/@types/babel__core/index.d.ts",
         "./src/types.ts"
       ],
       "./src/commands/index.ts": [
@@ -3927,12 +3857,14 @@
       "./src/commands/learn.ts": [
         "./src/types.ts"
       ],
+      "./src/commands/skills.ts": [
+        "./src/types.ts"
+      ],
       "./src/commands/clean.ts": [
         "./src/types.ts"
       ],
       "./src/project.ts": [
-        "./src/types.ts",
-        "../../node_modules/@types/joi/index.d.ts"
+        "./src/types.ts"
       ],
       "./src/config.ts": [
         "./src/types.ts"
@@ -3945,9 +3877,6 @@
       ],
       "./src/index.ts": [
         "./src/project.ts"
-      ],
-      "./src/commands/skills.ts": [
-        "./src/types.ts"
       ],
       "../../node_modules/@babel/types/lib/index.d.ts": [
         "../../node_modules/@types/node/fs.d.ts",
@@ -4014,7 +3943,7 @@
         "../../node_modules/@types/node/util.d.ts",
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/json-schema/index.d.ts": [
+      "../../node_modules/@types/eslint/node_modules/@types/json-schema/index.d.ts": [
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
         "../../node_modules/@types/node/util.d.ts",
@@ -4035,7 +3964,7 @@
         "../../node_modules/@types/node/util.d.ts",
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/git-config/index.d.ts": [
+      "../../node_modules/@types/eslint-visitor-keys/index.d.ts": [
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
         "../../node_modules/@types/node/util.d.ts",
@@ -4854,6 +4783,19 @@
         "../../node_modules/@types/node/util.d.ts",
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../../node_modules/@types/json-schema/index.d.ts": [
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../node_modules/@types/lodash.flatten/index.d.ts": [
+        "../../node_modules/@types/lodash/ts3.1/index.d.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../../node_modules/@types/normalize-package-data/index.d.ts": [
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -4866,7 +4808,26 @@
         "../../node_modules/@types/node/util.d.ts",
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../../node_modules/@types/signale/index.d.ts": [
+        "../../node_modules/@types/node/ts3.2/index.d.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../../node_modules/@types/stack-utils/index.d.ts": [
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../node_modules/@types/uniq/index.d.ts": [
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../node_modules/@types/update-notifier/index.d.ts": [
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
         "../../node_modules/@types/node/util.d.ts",
@@ -4887,447 +4848,44 @@
       ]
     },
     "semanticDiagnosticsPerFile": [
+      "../../node_modules/typescript/lib/lib.es5.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.d.ts",
+      "../../node_modules/typescript/lib/lib.es2016.d.ts",
+      "../../node_modules/typescript/lib/lib.es2017.d.ts",
+      "../../node_modules/typescript/lib/lib.es2018.d.ts",
+      "../../node_modules/typescript/lib/lib.es2019.d.ts",
+      "../../node_modules/typescript/lib/lib.es2020.d.ts",
+      "../../node_modules/typescript/lib/lib.esnext.d.ts",
+      "../../node_modules/typescript/lib/lib.dom.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.core.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.collection.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.generator.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.iterable.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.promise.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.proxy.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.reflect.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.symbol.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
+      "../../node_modules/typescript/lib/lib.es2016.array.include.d.ts",
+      "../../node_modules/typescript/lib/lib.es2017.object.d.ts",
+      "../../node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts",
+      "../../node_modules/typescript/lib/lib.es2017.string.d.ts",
+      "../../node_modules/typescript/lib/lib.es2017.intl.d.ts",
+      "../../node_modules/typescript/lib/lib.es2017.typedarrays.d.ts",
+      "../../node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts",
+      "../../node_modules/typescript/lib/lib.es2018.asynciterable.d.ts",
+      "../../node_modules/typescript/lib/lib.es2018.intl.d.ts",
+      "../../node_modules/typescript/lib/lib.es2018.promise.d.ts",
+      "../../node_modules/typescript/lib/lib.es2018.regexp.d.ts",
+      "../../node_modules/typescript/lib/lib.es2019.array.d.ts",
+      "../../node_modules/typescript/lib/lib.es2019.object.d.ts",
+      "../../node_modules/typescript/lib/lib.es2019.string.d.ts",
+      "../../node_modules/typescript/lib/lib.es2019.symbol.d.ts",
+      "../../node_modules/typescript/lib/lib.es2020.string.d.ts",
+      "../../node_modules/typescript/lib/lib.es2020.symbol.wellknown.d.ts",
+      "../../node_modules/typescript/lib/lib.esnext.intl.d.ts",
+      "../../node_modules/typescript/lib/lib.esnext.bigint.d.ts",
       "../../node_modules/@types/node/globals.d.ts",
-      "./src/types.ts",
-      "./index.d.ts",
-      "../../node_modules/@types/joi/index.d.ts",
-      [
-        "./src/validation.ts",
-        [
-          {
-            "file": "./src/validation.ts",
-            "start": 4251,
-            "length": 12,
-            "code": 7053,
-            "category": 1,
-            "messageText": {
-              "messageText": "Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Object'.",
-              "category": 1,
-              "code": 7053,
-              "next": [
-                {
-                  "messageText": "No index signature with a parameter of type 'string' was found on type 'Object'.",
-                  "category": 1,
-                  "code": 7054
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 4297,
-            "length": 2,
-            "code": 2339,
-            "category": 1,
-            "messageText": {
-              "messageText": "Property 'or' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; } | { type: string; } | { validate: (name: string, obj: Person | Person[]) => string[]; } | { ...; }'.",
-              "category": 1,
-              "code": 2339,
-              "next": [
-                {
-                  "messageText": "Property 'or' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; }'.",
-                  "category": 1,
-                  "code": 2339
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 4310,
-            "length": 2,
-            "code": 2339,
-            "category": 1,
-            "messageText": {
-              "messageText": "Property 'or' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; } | { type: string; } | { validate: (name: string, obj: Person | Person[]) => string[]; } | { ...; }'.",
-              "category": 1,
-              "code": 2339,
-              "next": [
-                {
-                  "messageText": "Property 'or' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; }'.",
-                  "category": 1,
-                  "code": 2339
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 4316,
-            "length": 16,
-            "code": 7053,
-            "category": 1,
-            "messageText": "Element implicitly has an 'any' type because expression of type 'any' can't be used to index type 'Object'."
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 4329,
-            "length": 2,
-            "code": 2339,
-            "category": 1,
-            "messageText": {
-              "messageText": "Property 'or' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; } | { type: string; } | { validate: (name: string, obj: Person | Person[]) => string[]; } | { ...; }'.",
-              "category": 1,
-              "code": 2339,
-              "next": [
-                {
-                  "messageText": "Property 'or' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; }'.",
-                  "category": 1,
-                  "code": 2339
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 4377,
-            "length": 8,
-            "code": 2339,
-            "category": 1,
-            "messageText": {
-              "messageText": "Property 'required' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; } | { type: string; } | { validate: (name: string, obj: Person | Person[]) => string[]; } | { ...; }'.",
-              "category": 1,
-              "code": 2339,
-              "next": [
-                {
-                  "messageText": "Property 'required' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; }'.",
-                  "category": 1,
-                  "code": 2339
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 4472,
-            "length": 7,
-            "code": 2339,
-            "category": 1,
-            "messageText": {
-              "messageText": "Property 'warning' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; } | { type: string; } | { validate: (name: string, obj: Person | Person[]) => string[]; } | { ...; }'.",
-              "category": 1,
-              "code": 2339,
-              "next": [
-                {
-                  "messageText": "Property 'warning' does not exist on type '{ type: string; }'.",
-                  "category": 1,
-                  "code": 2339
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 4571,
-            "length": 11,
-            "code": 2339,
-            "category": 1,
-            "messageText": {
-              "messageText": "Property 'recommended' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; } | { type: string; } | { validate: (name: string, obj: Person | Person[]) => string[]; } | { ...; }'.",
-              "category": 1,
-              "code": 2339,
-              "next": [
-                {
-                  "messageText": "Property 'recommended' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; }'.",
-                  "category": 1,
-                  "code": 2339
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 4698,
-            "length": 12,
-            "code": 7053,
-            "category": 1,
-            "messageText": {
-              "messageText": "Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Object'.",
-              "category": 1,
-              "code": 7053,
-              "next": [
-                {
-                  "messageText": "No index signature with a parameter of type 'string' was found on type 'Object'.",
-                  "category": 1,
-                  "code": 7054
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 4819,
-            "length": 5,
-            "code": 2339,
-            "category": 1,
-            "messageText": {
-              "messageText": "Property 'types' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; } | { type: string; } | { validate: (name: string, obj: Person | Person[]) => string[]; } | { ...; }'.",
-              "category": 1,
-              "code": 2339,
-              "next": [
-                {
-                  "messageText": "Property 'types' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; }'.",
-                  "category": 1,
-                  "code": 2339
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 4834,
-            "length": 4,
-            "code": 2339,
-            "category": 1,
-            "messageText": {
-              "messageText": "Property 'type' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; } | { type: string; } | { validate: (name: string, obj: Person | Person[]) => string[]; } | { ...; }'.",
-              "category": 1,
-              "code": 2339,
-              "next": [
-                {
-                  "messageText": "Property 'type' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; }'.",
-                  "category": 1,
-                  "code": 2339
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 4923,
-            "length": 5,
-            "code": 2345,
-            "category": 1,
-            "messageText": {
-              "messageText": "Argument of type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; } | { type: string; } | { validate: (name: string, obj: Person | Person[]) => string[]; } | { ...; }' is not assignable to parameter of type '{ types: string[]; type: string; }'.",
-              "category": 1,
-              "code": 2345,
-              "next": [
-                {
-                  "messageText": "Type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; }' is missing the following properties from type '{ types: string[]; type: string; }': types, type",
-                  "category": 1,
-                  "code": 2739
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 4940,
-            "length": 12,
-            "code": 7053,
-            "category": 1,
-            "messageText": {
-              "messageText": "Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Object'.",
-              "category": 1,
-              "code": 7053,
-              "next": [
-                {
-                  "messageText": "No index signature with a parameter of type 'string' was found on type 'Object'.",
-                  "category": 1,
-                  "code": 7054
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 5129,
-            "length": 6,
-            "code": 2339,
-            "category": 1,
-            "messageText": {
-              "messageText": "Property 'format' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; } | { type: string; } | { validate: (name: string, obj: Person | Person[]) => string[]; } | { ...; }'.",
-              "category": 1,
-              "code": 2339,
-              "next": [
-                {
-                  "messageText": "Property 'format' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; }'.",
-                  "category": 1,
-                  "code": 2339
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 5146,
-            "length": 6,
-            "code": 2339,
-            "category": 1,
-            "messageText": {
-              "messageText": "Property 'format' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; } | { type: string; } | { validate: (name: string, obj: Person | Person[]) => string[]; } | { ...; }'.",
-              "category": 1,
-              "code": 2339,
-              "next": [
-                {
-                  "messageText": "Property 'format' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; }'.",
-                  "category": 1,
-                  "code": 2339
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 5158,
-            "length": 12,
-            "code": 7053,
-            "category": 1,
-            "messageText": {
-              "messageText": "Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Object'.",
-              "category": 1,
-              "code": 7053,
-              "next": [
-                {
-                  "messageText": "No index signature with a parameter of type 'string' was found on type 'Object'.",
-                  "category": 1,
-                  "code": 7054
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 5247,
-            "length": 12,
-            "code": 7053,
-            "category": 1,
-            "messageText": {
-              "messageText": "Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Object'.",
-              "category": 1,
-              "code": 7053,
-              "next": [
-                {
-                  "messageText": "No index signature with a parameter of type 'string' was found on type 'Object'.",
-                  "category": 1,
-                  "code": 7054
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 5303,
-            "length": 6,
-            "code": 2339,
-            "category": 1,
-            "messageText": {
-              "messageText": "Property 'format' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; } | { type: string; } | { validate: (name: string, obj: Person | Person[]) => string[]; } | { ...; }'.",
-              "category": 1,
-              "code": 2339,
-              "next": [
-                {
-                  "messageText": "Property 'format' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; }'.",
-                  "category": 1,
-                  "code": 2339
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 5404,
-            "length": 8,
-            "code": 2339,
-            "category": 1,
-            "messageText": {
-              "messageText": "Property 'validate' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; } | { type: string; } | { validate: (name: string, obj: Person | Person[]) => string[]; } | { ...; }'.",
-              "category": 1,
-              "code": 2339,
-              "next": [
-                {
-                  "messageText": "Property 'validate' does not exist on type '{ type: string; }'.",
-                  "category": 1,
-                  "code": 2339
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 5558,
-            "length": 8,
-            "code": 2339,
-            "category": 1,
-            "messageText": {
-              "messageText": "Property 'validate' does not exist on type '{ warning: boolean; validate: (name: string, obj: MailToObj) => string[]; } | { type: string; } | { validate: (name: string, obj: Person | Person[]) => string[]; } | { ...; }'.",
-              "category": 1,
-              "code": 2339,
-              "next": [
-                {
-                  "messageText": "Property 'validate' does not exist on type '{ type: string; }'.",
-                  "category": 1,
-                  "code": 2339
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 5573,
-            "length": 12,
-            "code": 7053,
-            "category": 1,
-            "messageText": {
-              "messageText": "Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Object'.",
-              "category": 1,
-              "code": 7053,
-              "next": [
-                {
-                  "messageText": "No index signature with a parameter of type 'string' was found on type 'Object'.",
-                  "category": 1,
-                  "code": 7054
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 5679,
-            "length": 10,
-            "code": 2322,
-            "category": 1,
-            "messageText": {
-              "messageText": "Type 'string[]' is not assignable to type 'never[]'.",
-              "category": 1,
-              "code": 2322,
-              "next": [
-                {
-                  "messageText": "Type 'string' is not assignable to type 'never'.",
-                  "category": 1,
-                  "code": 2322
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 5773,
-            "length": 12,
-            "code": 2322,
-            "category": 1,
-            "messageText": "Type 'string[]' is not assignable to type 'never[]'."
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 5885,
-            "length": 19,
-            "code": 2322,
-            "category": 1,
-            "messageText": "Type 'string[]' is not assignable to type 'never[]'."
-          },
-          {
-            "file": "./src/validation.ts",
-            "start": 6730,
-            "length": 4,
-            "messageText": "'name' is declared but its value is never read.",
-            "category": 1,
-            "code": 6133,
-            "reportsUnnecessary": true
-          }
-        ]
-      ],
       "../../node_modules/@types/node/assert.d.ts",
       "../../node_modules/@types/node/async_hooks.d.ts",
       "../../node_modules/@types/node/buffer.d.ts",
@@ -5373,6 +4931,7 @@
       "../../node_modules/@types/node/ts3.2/util.d.ts",
       "../../node_modules/@types/node/ts3.2/globals.d.ts",
       "../../node_modules/@types/node/ts3.2/index.d.ts",
+      "../../node_modules/@types/joi/index.d.ts",
       "../../node_modules/@types/minimatch/index.d.ts",
       "../../node_modules/@types/glob/index.d.ts",
       "../../node_modules/@types/rimraf/index.d.ts",
@@ -5390,762 +4949,10 @@
       "../../node_modules/@types/lodash/ts3.1/common/string.d.ts",
       "../../node_modules/@types/lodash/ts3.1/common/util.d.ts",
       "../../node_modules/@types/lodash/ts3.1/index.d.ts",
-      "../alfred-skill-jest/index.d.ts",
-      "../alfred-skill-babel/index.d.ts",
-      "../alfred-skill-webpack/index.d.ts",
-      "../alfred-skill-eslint/index.d.ts",
-      "../alfred-skill-react/index.d.ts",
-      "../alfred-skill-prettier/index.d.ts",
-      "../alfred-skill-parcel/index.d.ts",
-      "../alfred-skill-rollup/index.d.ts",
-      "../alfred-skill-lodash/index.d.ts",
-      [
-        "./src/topsort.ts",
-        [
-          {
-            "file": "./src/topsort.ts",
-            "start": 43,
-            "length": 3,
-            "messageText": "Parameter 'arr' implicitly has an 'any' type.",
-            "category": 1,
-            "code": 7006
-          },
-          {
-            "file": "./src/topsort.ts",
-            "start": 259,
-            "length": 3,
-            "messageText": "Parameter 'arr' implicitly has an 'any' type.",
-            "category": 1,
-            "code": 7006
-          },
-          {
-            "file": "./src/topsort.ts",
-            "start": 576,
-            "length": 3,
-            "messageText": "Parameter 'arr' implicitly has an 'any' type.",
-            "category": 1,
-            "code": 7006
-          },
-          {
-            "file": "./src/topsort.ts",
-            "start": 814,
-            "length": 5,
-            "messageText": "Parameter 'nodes' implicitly has an 'any' type.",
-            "category": 1,
-            "code": 7006
-          },
-          {
-            "file": "./src/topsort.ts",
-            "start": 821,
-            "length": 5,
-            "messageText": "Parameter 'edges' implicitly has an 'any' type.",
-            "category": 1,
-            "code": 7006
-          },
-          {
-            "file": "./src/topsort.ts",
-            "start": 1138,
-            "length": 4,
-            "messageText": "Parameter 'edge' implicitly has an 'any' type.",
-            "category": 1,
-            "code": 7006
-          },
-          {
-            "file": "./src/topsort.ts",
-            "start": 1350,
-            "length": 10,
-            "code": 7053,
-            "category": 1,
-            "messageText": "Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'."
-          },
-          {
-            "file": "./src/topsort.ts",
-            "start": 1433,
-            "length": 4,
-            "messageText": "Parameter 'node' implicitly has an 'any' type.",
-            "category": 1,
-            "code": 7006
-          },
-          {
-            "file": "./src/topsort.ts",
-            "start": 1439,
-            "length": 1,
-            "messageText": "Parameter 'i' implicitly has an 'any' type.",
-            "category": 1,
-            "code": 7006
-          },
-          {
-            "file": "./src/topsort.ts",
-            "start": 1442,
-            "length": 12,
-            "messageText": "Parameter 'predecessors' implicitly has an 'any' type.",
-            "category": 1,
-            "code": 7006
-          },
-          {
-            "file": "./src/topsort.ts",
-            "start": 1896,
-            "length": 10,
-            "code": 7053,
-            "category": 1,
-            "messageText": "Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'."
-          },
-          {
-            "file": "./src/topsort.ts",
-            "start": 1920,
-            "length": 10,
-            "code": 7053,
-            "category": 1,
-            "messageText": "Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'."
-          },
-          {
-            "file": "./src/topsort.ts",
-            "start": 2323,
-            "length": 5,
-            "messageText": "Parameter 'edges' implicitly has an 'any' type.",
-            "category": 1,
-            "code": 7006
-          }
-        ]
-      ],
+      "./src/topsort.ts",
       "./src/constants.ts",
-      [
-        "./src/interface.ts",
-        [
-          {
-            "file": "./src/interface.ts",
-            "start": 1652,
-            "length": 4,
-            "code": 2339,
-            "category": 1,
-            "messageText": {
-              "messageText": "Property 'name' does not exist on type 'string | [string, { [x: string]: string; }]'.",
-              "category": 1,
-              "code": 2339,
-              "next": [
-                {
-                  "messageText": "Property 'name' does not exist on type 'string'.",
-                  "category": 1,
-                  "code": 2339
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/interface.ts",
-            "start": 1666,
-            "length": 18,
-            "code": 2322,
-            "category": 1,
-            "messageText": {
-              "messageText": "Type 'UnresolvedInterfaces' is not assignable to type 'NormalizedInterfaces'.",
-              "category": 1,
-              "code": 2322,
-              "next": [
-                {
-                  "messageText": "Type 'string | [string, { [x: string]: string; }]' is not assignable to type '{ name: string; module: Module; }'.",
-                  "category": 1,
-                  "code": 2322,
-                  "next": [
-                    {
-                      "messageText": "Type 'string' is not assignable to type '{ name: string; module: Module; }'.",
-                      "category": 1,
-                      "code": 2322
-                    }
-                  ]
-                }
-              ]
-            }
-          }
-        ]
-      ],
-      [
-        "./src/ctf.ts",
-        [
-          {
-            "file": "./src/ctf.ts",
-            "start": 264,
-            "length": 23,
-            "code": 7016,
-            "category": 1,
-            "messageText": {
-              "messageText": "Could not find a declaration file for module '@alfred/merge-configs'. '/Users/amila/Documents/Projects/alfred/packages/merge-configs/lib/index.js' implicitly has an 'any' type.",
-              "category": 1,
-              "code": 7016,
-              "next": [
-                {
-                  "messageText": "Try `npm install @types/alfred__merge-configs` if it exists or add a new declaration (.d.ts) file containing `declare module '@alfred/merge-configs';`",
-                  "category": 1,
-                  "code": 7035
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 289,
-            "length": 41,
-            "messageText": "'jestCtf' is declared but its value is never read.",
-            "category": 1,
-            "code": 6133,
-            "reportsUnnecessary": true
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 331,
-            "length": 40,
-            "messageText": "'babel' is declared but its value is never read.",
-            "category": 1,
-            "code": 6133,
-            "reportsUnnecessary": true
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 372,
-            "length": 44,
-            "messageText": "'webpack' is declared but its value is never read.",
-            "category": 1,
-            "code": 6133,
-            "reportsUnnecessary": true
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 417,
-            "length": 42,
-            "messageText": "'eslint' is declared but its value is never read.",
-            "category": 1,
-            "code": 6133,
-            "reportsUnnecessary": true
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 460,
-            "length": 40,
-            "messageText": "'react' is declared but its value is never read.",
-            "category": 1,
-            "code": 6133,
-            "reportsUnnecessary": true
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 501,
-            "length": 46,
-            "messageText": "'prettier' is declared but its value is never read.",
-            "category": 1,
-            "code": 6133,
-            "reportsUnnecessary": true
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 548,
-            "length": 42,
-            "messageText": "'parcel' is declared but its value is never read.",
-            "category": 1,
-            "code": 6133,
-            "reportsUnnecessary": true
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 591,
-            "length": 42,
-            "messageText": "'rollup' is declared but its value is never read.",
-            "category": 1,
-            "code": 6133,
-            "reportsUnnecessary": true
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 715,
-            "length": 17,
-            "code": 7016,
-            "category": 1,
-            "messageText": {
-              "messageText": "Could not find a declaration file for module '@alfred/helpers'. '/Users/amila/Documents/Projects/alfred/packages/helpers/lib/index.js' implicitly has an 'any' type.",
-              "category": 1,
-              "code": 7016,
-              "next": [
-                {
-                  "messageText": "Try `npm install @types/alfred__helpers` if it exists or add a new declaration (.d.ts) file containing `declare module '@alfred/helpers';`",
-                  "category": 1,
-                  "code": 7035
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 1156,
-            "length": 5,
-            "messageText": "'babel' refers to a UMD global, but the current file is a module. Consider adding an import instead.",
-            "category": 1,
-            "code": 2686
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 1165,
-            "length": 7,
-            "messageText": "'webpack' only refers to a type, but is being used as a value here.",
-            "category": 1,
-            "code": 2693
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 1176,
-            "length": 6,
-            "messageText": "'parcel' only refers to a type, but is being used as a value here.",
-            "category": 1,
-            "code": 2693
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 1186,
-            "length": 6,
-            "messageText": "'eslint' only refers to a type, but is being used as a value here.",
-            "category": 1,
-            "code": 2693
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 1196,
-            "length": 8,
-            "messageText": "'prettier' only refers to a type, but is being used as a value here.",
-            "category": 1,
-            "code": 2693
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 1214,
-            "length": 7,
-            "messageText": "'jestCtf' only refers to a type, but is being used as a value here.",
-            "category": 1,
-            "code": 2693
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 1225,
-            "length": 5,
-            "messageText": "'react' only refers to a type, but is being used as a value here.",
-            "category": 1,
-            "code": 2693
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 1234,
-            "length": 6,
-            "messageText": "'rollup' only refers to a type, but is being used as a value here.",
-            "category": 1,
-            "code": 2693
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 5208,
-            "length": 29,
-            "code": 2345,
-            "category": 1,
-            "messageText": {
-              "messageText": "Argument of type '{ dependencies: { [x: string]: string; }; devDependencies?: Dependencies | undefined; parse(text: string, reviver?: ((this: any, key: string, value: any) => any) | undefined): any; stringify(value: any, replacer?: ((this: any, key: string, value: any) => any) | undefined, space?: string | ... 1 more ... | undefined)...' is not assignable to parameter of type 'ResolvedConfigInterface | UnresolvedConfigInterface | ConfigInterface'.",
-              "category": 1,
-              "code": 2345,
-              "next": [
-                {
-                  "messageText": "Object literal may only specify known properties, and 'dependencies' does not exist in type 'ResolvedConfigInterface | UnresolvedConfigInterface | ConfigInterface'.",
-                  "category": 1,
-                  "code": 2353
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 5405,
-            "length": 13,
-            "code": 2740,
-            "category": 1,
-            "messageText": "Type '{ findConfig(configName: string): ConfigFile; extendConfig(configName: string, configExtension?: { [x: string]: string; }): CtfNodeWithHelpers; replaceConfig(configName: string, configReplacement: ConfigFile): CtfNodeWithHelpers; addDependencies(dependencies: StringPkgJson): CtfNodeWithHelpers; addDevDependencies(de...' is missing the following properties from type 'CtfNodeWithHelpers': configFiles, devDependencies, dependencies, name, and 6 more."
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 7992,
-            "length": 69,
-            "messageText": "Expected 2 arguments, but got 3.",
-            "category": 1,
-            "code": 2554
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 8216,
-            "length": 2,
-            "code": 2345,
-            "category": 1,
-            "messageText": {
-              "messageText": "Argument of type '() => void' is not assignable to parameter of type 'CtfNode'.",
-              "category": 1,
-              "code": 2345,
-              "next": [
-                {
-                  "messageText": "Type '() => void' is not assignable to type 'RequiredCtfNodeParams & UsingInterface'.",
-                  "category": 1,
-                  "code": 2322,
-                  "next": [
-                    {
-                      "messageText": "Type '() => void' is missing the following properties from type 'RequiredCtfNodeParams': dependencies, devDependencies, description, configFiles, and 4 more.",
-                      "category": 1,
-                      "code": 2740
-                    }
-                  ]
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 8444,
-            "length": 13,
-            "messageText": "Object is possibly 'undefined'.",
-            "category": 1,
-            "code": 2532
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 8492,
-            "length": 14,
-            "code": 2349,
-            "category": 1,
-            "messageText": {
-              "messageText": "This expression is not callable.",
-              "category": 1,
-              "code": 2349,
-              "next": [
-                {
-                  "messageText": "No constituent of type 'CtfNode' is callable.",
-                  "category": 1,
-                  "code": 2755
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 9805,
-            "length": 25,
-            "code": 2345,
-            "category": 1,
-            "messageText": {
-              "messageText": "Argument of type 'SkillInterface[]' is not assignable to parameter of type 'UnresolvedInterfaces'.",
-              "category": 1,
-              "code": 2345,
-              "next": [
-                {
-                  "messageText": "Type 'SkillInterface' is not assignable to type 'string | [string, { [x: string]: string; }]'.",
-                  "category": 1,
-                  "code": 2322,
-                  "next": [
-                    {
-                      "messageText": "Type 'SkillInterface' is not assignable to type '[string, { [x: string]: string; }]'.",
-                      "category": 1,
-                      "code": 2322
-                    }
-                  ]
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/ctf.ts",
-            "start": 12299,
-            "length": 18,
-            "code": 2345,
-            "category": 1,
-            "messageText": "Argument of type 'SkillInterface[]' is not assignable to parameter of type 'UnresolvedInterfaces'."
-          }
-        ]
-      ],
-      [
-        "./src/commands/index.ts",
-        [
-          {
-            "file": "./src/commands/index.ts",
-            "start": 104,
-            "length": 17,
-            "code": 7016,
-            "category": 1,
-            "messageText": {
-              "messageText": "Could not find a declaration file for module '@alfred/helpers'. '/Users/amila/Documents/Projects/alfred/packages/helpers/lib/index.js' implicitly has an 'any' type.",
-              "category": 1,
-              "code": 7016,
-              "next": [
-                {
-                  "messageText": "Try `npm install @types/alfred__helpers` if it exists or add a new declaration (.d.ts) file containing `declare module '@alfred/helpers';`",
-                  "category": 1,
-                  "code": 7035
-                }
-              ]
-            }
-          }
-        ]
-      ],
-      [
-        "./src/helpers.ts",
-        [
-          {
-            "file": "./src/helpers.ts",
-            "start": 298,
-            "length": 72,
-            "code": 2769,
-            "category": 1,
-            "messageText": {
-              "messageText": "No overload matches this call.",
-              "category": 1,
-              "code": 2769,
-              "next": [
-                {
-                  "messageText": "Overload 1 of 3, '(callbackfn: (previousValue: () => Promise<any>, currentValue: () => Promise<any>, currentIndex: number, array: (() => Promise<any>)[]) => () => Promise<any>, initialValue: () => Promise<...>): () => Promise<...>', gave the following error.",
-                  "category": 1,
-                  "code": 2772,
-                  "next": [
-                    {
-                      "messageText": "Type 'Promise<any[] | never[]>' is not assignable to type '() => Promise<any>'.",
-                      "category": 1,
-                      "code": 2322,
-                      "next": [
-                        {
-                          "messageText": "Type 'Promise<any[] | never[]>' provides no match for the signature '(): Promise<any>'.",
-                          "category": 1,
-                          "code": 2658
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "messageText": "Overload 2 of 3, '(callbackfn: (previousValue: Promise<never[]>, currentValue: () => Promise<any>, currentIndex: number, array: (() => Promise<any>)[]) => Promise<never[]>, initialValue: Promise<...>): Promise<...>', gave the following error.",
-                  "category": 1,
-                  "code": 2772,
-                  "next": [
-                    {
-                      "messageText": "Type 'Promise<any[] | never[]>' is not assignable to type 'Promise<never[]>'.",
-                      "category": 1,
-                      "code": 2322,
-                      "next": [
-                        {
-                          "messageText": "Type 'any[] | never[]' is not assignable to type 'never[]'.",
-                          "category": 1,
-                          "code": 2322,
-                          "next": [
-                            {
-                              "messageText": "Type 'any[]' is not assignable to type 'never[]'.",
-                              "category": 1,
-                              "code": 2322,
-                              "next": [
-                                {
-                                  "messageText": "Type 'any' is not assignable to type 'never'.",
-                                  "category": 1,
-                                  "code": 2322
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            "relatedInformation": [
-              {
-                "file": "../../node_modules/typescript/lib/lib.es5.d.ts",
-                "start": 61927,
-                "length": 74,
-                "messageText": "The expected type comes from the return type of this signature.",
-                "category": 3,
-                "code": 6502
-              },
-              {
-                "file": "../../node_modules/typescript/lib/lib.es5.d.ts",
-                "start": 62673,
-                "length": 74,
-                "messageText": "The expected type comes from the return type of this signature.",
-                "category": 3,
-                "code": 6502
-              }
-            ]
-          }
-        ]
-      ],
-      [
-        "./src/commands/run.ts",
-        [
-          {
-            "file": "./src/commands/run.ts",
-            "start": 1804,
-            "length": 31,
-            "messageText": "Cannot invoke an object which is possibly 'undefined'.",
-            "category": 1,
-            "code": 2722
-          },
-          {
-            "file": "./src/commands/run.ts",
-            "start": 1868,
-            "length": 14,
-            "code": 2345,
-            "category": 1,
-            "messageText": {
-              "messageText": "Argument of type '{ interfaceState: InterfaceState; config: ConfigInterface; }' is not assignable to parameter of type 'InterfaceState'.",
-              "category": 1,
-              "code": 2345,
-              "next": [
-                {
-                  "messageText": "Object literal may only specify known properties, and 'interfaceState' does not exist in type 'InterfaceState'.",
-                  "category": 1,
-                  "code": 2353
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/commands/run.ts",
-            "start": 2032,
-            "length": 6,
-            "code": 2345,
-            "category": 1,
-            "messageText": {
-              "messageText": "Argument of type 'ConfigInterface' is not assignable to parameter of type 'ProjectInterface'.",
-              "category": 1,
-              "code": 2345,
-              "next": [
-                {
-                  "messageText": "Type 'ConfigInterface' is missing the following properties from type 'ProjectInterface': root, config, pkg, pkgPath, setConfig",
-                  "category": 1,
-                  "code": 2739
-                }
-              ]
-            }
-          }
-        ]
-      ],
-      [
-        "./src/commands/learn.ts",
-        [
-          {
-            "file": "./src/commands/learn.ts",
-            "start": 25,
-            "length": 23,
-            "code": 7016,
-            "category": 1,
-            "messageText": {
-              "messageText": "Could not find a declaration file for module '@alfred/merge-configs'. '/Users/amila/Documents/Projects/alfred/packages/merge-configs/lib/index.js' implicitly has an 'any' type.",
-              "category": 1,
-              "code": 7016,
-              "next": [
-                {
-                  "messageText": "Try `npm install @types/alfred__merge-configs` if it exists or add a new declaration (.d.ts) file containing `declare module '@alfred/merge-configs';`",
-                  "category": 1,
-                  "code": 7035
-                }
-              ]
-            }
-          }
-        ]
-      ],
-      "./src/commands/clean.ts",
-      [
-        "./src/project.ts",
-        [
-          {
-            "file": "./src/project.ts",
-            "start": 209,
-            "length": 17,
-            "code": 7016,
-            "category": 1,
-            "messageText": {
-              "messageText": "Could not find a declaration file for module '@alfred/helpers'. '/Users/amila/Documents/Projects/alfred/packages/helpers/lib/index.js' implicitly has an 'any' type.",
-              "category": 1,
-              "code": 7016,
-              "next": [
-                {
-                  "messageText": "Try `npm install @types/alfred__helpers` if it exists or add a new declaration (.d.ts) file containing `declare module '@alfred/helpers';`",
-                  "category": 1,
-                  "code": 7035
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/project.ts",
-            "start": 1124,
-            "length": 49,
-            "code": 2322,
-            "category": 1,
-            "messageText": {
-              "messageText": "Type 'Promise<Object>' is not assignable to type 'Promise<string>'.",
-              "category": 1,
-              "code": 2322,
-              "next": [
-                {
-                  "messageText": "Type 'Object' is not assignable to type 'string'.",
-                  "category": 1,
-                  "code": 2322
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/project.ts",
-            "start": 3355,
-            "length": 14,
-            "code": 2739,
-            "category": 1,
-            "messageText": "Type 'ValidationResult' is missing the following properties from type 'ValidationResult<string>': error, value, then, catch"
-          }
-        ]
-      ],
-      [
-        "./src/config.ts",
-        [
-          {
-            "file": "./src/config.ts",
-            "start": 149,
-            "length": 23,
-            "code": 7016,
-            "category": 1,
-            "messageText": {
-              "messageText": "Could not find a declaration file for module '@alfred/merge-configs'. '/Users/amila/Documents/Projects/alfred/packages/merge-configs/lib/index.js' implicitly has an 'any' type.",
-              "category": 1,
-              "code": 7016,
-              "next": [
-                {
-                  "messageText": "Try `npm install @types/alfred__merge-configs` if it exists or add a new declaration (.d.ts) file containing `declare module '@alfred/merge-configs';`",
-                  "category": 1,
-                  "code": 7035
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/config.ts",
-            "start": 204,
-            "length": 17,
-            "code": 7016,
-            "category": 1,
-            "messageText": {
-              "messageText": "Could not find a declaration file for module '@alfred/helpers'. '/Users/amila/Documents/Projects/alfred/packages/helpers/lib/index.js' implicitly has an 'any' type.",
-              "category": 1,
-              "code": 7016,
-              "next": [
-                {
-                  "messageText": "Try `npm install @types/alfred__helpers` if it exists or add a new declaration (.d.ts) file containing `declare module '@alfred/helpers';`",
-                  "category": 1,
-                  "code": 7035
-                }
-              ]
-            }
-          }
-        ]
-      ],
+      "./src/helpers.ts",
       "./src/format-package.d.ts",
-      "./src/index.ts",
-      "./src/commands/skills.ts",
       "../../node_modules/@babel/types/lib/index.d.ts",
       "../../node_modules/@types/babel__generator/index.d.ts",
       "../../node_modules/@types/babel__traverse/index.d.ts",
@@ -6155,10 +4962,10 @@
       "../../node_modules/@types/cheerio/index.d.ts",
       "../../node_modules/@types/color-name/index.d.ts",
       "../../node_modules/@types/eslint/ts3.1/helpers.d.ts",
-      "../../node_modules/@types/json-schema/index.d.ts",
+      "../../node_modules/@types/eslint/node_modules/@types/json-schema/index.d.ts",
       "../../node_modules/@types/estree/index.d.ts",
       "../../node_modules/@types/eslint/ts3.1/index.d.ts",
-      "../../node_modules/@types/git-config/index.d.ts",
+      "../../node_modules/@types/eslint-visitor-keys/index.d.ts",
       "../../node_modules/rxjs/internal/subscription.d.ts",
       "../../node_modules/rxjs/internal/types.d.ts",
       "../../node_modules/rxjs/internal/subscriber.d.ts",
@@ -6249,48 +5056,31 @@
       "../../node_modules/@types/istanbul-lib-coverage/index.d.ts",
       "../../node_modules/@types/istanbul-lib-report/index.d.ts",
       "../../node_modules/@types/istanbul-reports/index.d.ts",
+      "../../node_modules/@types/json-schema/index.d.ts",
+      "../../node_modules/@types/lodash.flatten/index.d.ts",
       "../../node_modules/@types/normalize-package-data/index.d.ts",
       "../../node_modules/@types/q/index.d.ts",
+      "../../node_modules/@types/signale/index.d.ts",
       "../../node_modules/@types/stack-utils/index.d.ts",
+      "../../node_modules/@types/uniq/index.d.ts",
+      "../../node_modules/@types/update-notifier/index.d.ts",
       "../../node_modules/@types/yargs-parser/index.d.ts",
       "../../node_modules/@types/yargs/index.d.ts",
-      "../../node_modules/typescript/lib/lib.esnext.bigint.d.ts",
-      "../../node_modules/typescript/lib/lib.esnext.intl.d.ts",
-      "../../node_modules/typescript/lib/lib.es2020.symbol.wellknown.d.ts",
-      "../../node_modules/typescript/lib/lib.es2020.string.d.ts",
-      "../../node_modules/typescript/lib/lib.es2019.symbol.d.ts",
-      "../../node_modules/typescript/lib/lib.es2019.string.d.ts",
-      "../../node_modules/typescript/lib/lib.es2019.object.d.ts",
-      "../../node_modules/typescript/lib/lib.es2019.array.d.ts",
-      "../../node_modules/typescript/lib/lib.es2018.regexp.d.ts",
-      "../../node_modules/typescript/lib/lib.es2018.promise.d.ts",
-      "../../node_modules/typescript/lib/lib.es2018.intl.d.ts",
-      "../../node_modules/typescript/lib/lib.es2018.asynciterable.d.ts",
-      "../../node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts",
-      "../../node_modules/typescript/lib/lib.es2017.typedarrays.d.ts",
-      "../../node_modules/typescript/lib/lib.es2017.intl.d.ts",
-      "../../node_modules/typescript/lib/lib.es2017.string.d.ts",
-      "../../node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts",
-      "../../node_modules/typescript/lib/lib.es2017.object.d.ts",
-      "../../node_modules/typescript/lib/lib.es2016.array.include.d.ts",
-      "../../node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
-      "../../node_modules/typescript/lib/lib.es2015.symbol.d.ts",
-      "../../node_modules/typescript/lib/lib.es2015.reflect.d.ts",
-      "../../node_modules/typescript/lib/lib.es2015.proxy.d.ts",
-      "../../node_modules/typescript/lib/lib.es2015.promise.d.ts",
-      "../../node_modules/typescript/lib/lib.es2015.iterable.d.ts",
-      "../../node_modules/typescript/lib/lib.es2015.generator.d.ts",
-      "../../node_modules/typescript/lib/lib.es2015.collection.d.ts",
-      "../../node_modules/typescript/lib/lib.es2015.core.d.ts",
-      "../../node_modules/typescript/lib/lib.dom.d.ts",
-      "../../node_modules/typescript/lib/lib.esnext.d.ts",
-      "../../node_modules/typescript/lib/lib.es2020.d.ts",
-      "../../node_modules/typescript/lib/lib.es2019.d.ts",
-      "../../node_modules/typescript/lib/lib.es2018.d.ts",
-      "../../node_modules/typescript/lib/lib.es2017.d.ts",
-      "../../node_modules/typescript/lib/lib.es2016.d.ts",
-      "../../node_modules/typescript/lib/lib.es2015.d.ts",
-      "../../node_modules/typescript/lib/lib.es5.d.ts"
+      "./src/types.ts",
+      "./src/config.ts",
+      "./src/project.ts",
+      "./src/commands/clean.ts",
+      "./src/commands/skills.ts",
+      "./src/commands/learn.ts",
+      "./src/commands/run.ts",
+      "./src/commands/index.ts",
+      "./src/ctf.ts",
+      "./src/interface.ts",
+      "./src/validation.ts",
+      "../helpers/lib/index.d.ts",
+      "../merge-configs/lib/index.d.ts",
+      "./index.d.ts",
+      "./src/index.ts"
     ]
   },
   "version": "3.7.4"

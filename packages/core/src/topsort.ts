@@ -1,19 +1,20 @@
-/* eslint-disable */
+type Edge = [string, string];
+type Edges = Array<Edge>;
 
-function uniqueNodes(arr) {
-  const res = new Set();
-  for (let i = 0, len = arr.length; i < len; i += 1) {
-    const edge = arr[i];
+function uniqueNodes(graph: Edges): string[] {
+  const res: Set<string> = new Set();
+  for (let i = 0, len = graph.length; i < len; i += 1) {
+    const edge = graph[i];
     res.add(edge[0]);
     res.add(edge[1]);
   }
   return Array.from(res);
 }
 
-function makeOutgoingEdges(arr) {
+function makeOutgoingEdges(graph: Edges): Map<string, Set<string>> {
   const edges = new Map();
-  for (let i = 0, len = arr.length; i < len; i += 1) {
-    const edge = arr[i];
+  for (let i = 0, len = graph.length; i < len; i += 1) {
+    const edge = graph[i];
     if (!edges.has(edge[0])) edges.set(edge[0], new Set());
     if (!edges.has(edge[1])) edges.set(edge[1], new Set());
     edges.get(edge[0]).add(edge[1]);
@@ -21,7 +22,7 @@ function makeOutgoingEdges(arr) {
   return edges;
 }
 
-function makeNodesHash(arr) {
+function makeNodesHash(arr: string[]) {
   const res = new Map();
   for (let i = 0, len = arr.length; i < len; i += 1) {
     res.set(arr[i], i);
@@ -31,15 +32,11 @@ function makeNodesHash(arr) {
 
 /**
  * Topological sorting function
- *
- * @param {Array} edges
- * @returns {Array}
  */
-
-function toposort(nodes, edges) {
+function toposort(nodes: string[], edges: Edges) {
   let cursor = nodes.length;
   const sorted = new Array(cursor);
-  const visited = {};
+  const visited: { [x: number]: boolean } = {};
   let i = cursor;
   // Better data structures make algorithm much faster.
   const outgoingEdges = makeOutgoingEdges(edges);
@@ -60,7 +57,7 @@ function toposort(nodes, edges) {
 
   return sorted;
 
-  function visit(node, i, predecessors) {
+  function visit(node: string, i: number, predecessors: Set<string>) {
     if (predecessors.has(node)) {
       let nodeRep;
       try {
@@ -82,8 +79,7 @@ function toposort(nodes, edges) {
     if (visited[i]) return;
     visited[i] = true;
 
-    let outgoing = outgoingEdges.get(node) || new Set();
-    outgoing = Array.from(outgoing);
+    let outgoing: string[] = Array.from(outgoingEdges.get(node) || new Set());
 
     if ((i = outgoing.length)) {
       predecessors.add(node);
@@ -98,6 +94,6 @@ function toposort(nodes, edges) {
   }
 }
 
-export default function(edges) {
-  return toposort(uniqueNodes(edges), edges);
+export default function(graph: Edges) {
+  return toposort(uniqueNodes(graph), graph);
 }

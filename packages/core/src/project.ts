@@ -10,6 +10,7 @@ import { ENTRYPOINTS } from './ctf';
 import { generateInterfaceStatesFromProject } from './interface';
 import run from './commands/run';
 import learn from './commands/learn';
+import skills from './commands/skills';
 import clean from './commands/clean';
 import {PKG_SORT_ORDER} from './constants';
 import {
@@ -17,7 +18,8 @@ import {
   ConfigInterface,
   InterfaceState,
   ProjectInterface,
-  ValidationResult
+  ValidationResult,
+  Skills
 } from './types';
 
 // @TODO send the information to a crash reporting service (like sentry.io)
@@ -71,7 +73,7 @@ export default class Project implements ProjectInterface {
     return this;
   }
 
-  async run(subcommand: string, args: Array<string>) {
+  async run(subcommand: string, args: Array<string> = []) {
     const { config } = this;
     const nodeModulesPath = `${this.root}/node_modules`;
     // Install the modules if they are not installed if autoInstall: true
@@ -101,6 +103,18 @@ export default class Project implements ProjectInterface {
         return run(this, subcommand, args);
       }
     }
+  }
+
+  learn(args: string[]) {
+    return learn(this, args);
+  }
+
+  clean() {
+    return clean(this);
+  }
+
+  skills(): Promise<Skills> {
+    return skills(this);
   }
 
   /**

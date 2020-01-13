@@ -1,0 +1,1 @@
+{"version":3,"file":"alfred-new.d.ts","sourceRoot":"","sources":["alfred-new.ts"],"names":[],"mappings":"AAWA,OAAO,EAAE,cAAc,EAAE,MAAM,wBAAwB,CAAC;AACxD,OAAoC,EAAE,YAAY,EAAa,MAAM,IAAI,CAAC;AAW1E,wBAAsB,cAAc,CAClC,eAAe,EAAE,MAAM,EACvB,IAAI,EAAE,MAAM,EACZ,yBAAyB,EAAE,KAAK,CAAC,cAAc,CAAC,iBAqDjD;AAGD,wBAAsB,cAAc,CAAC,YAAY,EAAE,YAAY,EAAE,IAAI,EAAE,MAAM,iBA4C5E"}

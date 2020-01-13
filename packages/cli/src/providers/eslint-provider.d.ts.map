@@ -1,0 +1,1 @@
+{"version":3,"file":"eslint-provider.d.ts","sourceRoot":"","sources":["eslint-provider.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,aAAa,EAAE,iBAAiB,EAAE,MAAM,sBAAsB,CAAC;AAExE,MAAM,CAAC,OAAO,OAAO,cAAe,YAAW,iBAAiB;IAC9D,YAAY,SAAY;IAExB,QAAQ,SAAM;IAEd,IAAI,UAAQ;IAEZ,SAAS,CAAC,KAAK,EAAE,KAAK,CAAC,MAAM,CAAC;IAexB,OAAO,CAAC,KAAK,EAAE,aAAa,GAAG,OAAO,CAAC,aAAa,CAAC;CAI5D"}
