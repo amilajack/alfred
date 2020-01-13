@@ -1,9 +1,6 @@
 {
   "name": "@alfred/core",
   "version": "0.0.2-alpha.4",
-  "files": [
-    "lib"
-  ],
   "main": "./lib/index.js",
   "scripts": {
     "build": "yarn ts",
