@@ -12,7 +12,7 @@ import run from './commands/run';
 import learn from './commands/learn';
 import skills from './commands/skills';
 import clean from './commands/clean';
-import {PKG_SORT_ORDER} from './constants';
+import { PKG_SORT_ORDER } from './constants';
 import {
   Pkg,
   ConfigInterface,
@@ -109,7 +109,7 @@ export default class Project implements ProjectInterface {
     return learn(this, args);
   }
 
-  clean() {
+  clean(): Promise<void> {
     return clean(this);
   }
 
@@ -131,9 +131,7 @@ export default class Project implements ProjectInterface {
     return result;
   }
 
-  checkIsAlfredProject(
-    interfaceStates: Array<InterfaceState>
-  ) {
+  checkIsAlfredProject(interfaceStates: Array<InterfaceState>) {
     const srcPath = path.join(this.root, 'src');
     const validationResult = this.validatePkgJson();
 

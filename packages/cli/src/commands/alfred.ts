@@ -2,7 +2,7 @@
 import program from 'commander';
 import updateNotifier from 'update-notifier';
 
-const pkg = require('../../package.json')
+const pkg = require('../../package.json');
 
 // @TODO Send the information to a crash reporting service (like sentry.io)
 process.on('unhandledRejection', err => {

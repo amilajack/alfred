@@ -1,6 +1,7 @@
 {
   "name": "@alfred/types",
   "version": "0.0.2-alpha.4",
+  "main": "./lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc"

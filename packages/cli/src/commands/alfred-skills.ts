@@ -4,7 +4,6 @@ import chalk from 'chalk';
 
 (async () => {
   const project = await alfred();
-  // @ts-ignore
   const { subCommandAndSkills, subCommandDict } = await project.skills();
 
   const table = new Table({
@@ -15,7 +14,6 @@ import chalk from 'chalk';
     ]
   }) as HorizontalTable;
 
-  // @ts-ignore
   Array.from(subCommandAndSkills.entries()).forEach(([subCommand, skills]) => {
     const description = (() => {
       if (subCommandDict.has(subCommand)) {

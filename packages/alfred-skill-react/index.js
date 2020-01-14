@@ -35,6 +35,7 @@ module.exports = {
         });
     },
     webpack(config) {
+      // eslint-disable-next-line global-require
       const webpack = require('webpack');
       return config.extendConfig('webpack.base', {
         resolve: {

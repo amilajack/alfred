@@ -38,7 +38,8 @@
       "react/no-multi-comp": "off",
       "react/no-unescaped-entities": "off",
       "react/prefer-stateless-function": "off",
-      "react/prop-types": "off"
+      "react/prop-types": "off",
+      "flowtype-errors/show-errors": "off"
     }
   }
 }

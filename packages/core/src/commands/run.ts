@@ -14,7 +14,7 @@ export default function run(
   project: ProjectInterface,
   subcommand: string,
   skillFlags: Array<string> = []
-) {
+): Promise<any> {
   const { config } = project;
   // @HACK This is not a very elegant solution.
   // @HACK @REFACTOR Certain subcommands do not rely on state (lint, test, etc). These
@@ -48,13 +48,12 @@ export default function run(
             subcommand
           );
 
-          const filteredSkillFlags =
-            subcommandInterface.handleFlags
-              ? subcommandInterface.handleFlags(skillFlags, {
-                  interfaceState,
-                  config
-                })
-              : skillFlags;
+          const filteredSkillFlags = subcommandInterface.handleFlags
+            ? subcommandInterface.handleFlags(skillFlags, {
+                interfaceState,
+                config
+              })
+            : skillFlags;
 
           const commands = getExecutableWrittenConfigsMethods(
             project,
@@ -75,7 +74,7 @@ export default function run(
             );
           }
 
-          return commands[subcommand](config, filteredSkillFlags || []);
+          return commands[subcommand](filteredSkillFlags);
         })
     )
   );

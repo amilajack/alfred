@@ -5,8 +5,9 @@ import mergeConfigs from '@alfred/merge-configs';
 import { requireConfig } from '@alfred/helpers';
 import ValidateConfig from './validation';
 import Project, { formatPkgJson } from './project';
-import CTF, {addMissingStdSkillsToCtf} from './ctf';
-import { ConfigInterface,
+import CTF, { addMissingStdSkillsToCtf } from './ctf';
+import {
+  ConfigInterface,
   NpmClients,
   ConfigWithResolvedSkills,
   ConfigWithUnresolvedInterfaces,
@@ -30,9 +31,9 @@ export default class Config implements ConfigInterface {
 
   skills: Skills;
 
-  private rawConfig: ConfigWithUnresolvedInterfaces;
+  autoInstall = false;
 
-  autoInstall: boolean = false;
+  private rawConfig: ConfigWithUnresolvedInterfaces;
 
   static DEFAULT_CONFIG = {
     skills: [],
@@ -86,7 +87,9 @@ export default class Config implements ConfigInterface {
     });
   }
 
-  private normalizeWithResolvedSkills(config: ConfigWithUnresolvedSkills): ConfigWithResolvedSkills {
+  private normalizeWithResolvedSkills(
+    config: ConfigWithUnresolvedSkills
+  ): ConfigWithResolvedSkills {
     if (!config.skills || !config.skills.length)
       return config as ConfigWithResolvedSkills;
 
@@ -133,7 +136,9 @@ export default class Config implements ConfigInterface {
     return new Config(alfred);
   }
 
-  private normalizeWithResolvedExtendedConfigs(config: ConfigWithUnresolvedInterfaces): ConfigWithUnresolvedSkills {
+  private normalizeWithResolvedExtendedConfigs(
+    config: ConfigWithUnresolvedInterfaces
+  ): ConfigWithUnresolvedSkills {
     if (!config.extends) return config;
     // Convert extends: 'my-config' to extends: ['my-config']
     if (typeof config.extends === 'string') {
@@ -171,7 +176,10 @@ export default class Config implements ConfigInterface {
   /**
    * Merge an object to the existing package.json and write it
    */
-  static async writeToPkgJson(pkgPath: string, obj: Object): Promise<string> {
+  static async writeToPkgJson(
+    pkgPath: string,
+    obj: Record<string, any>
+  ): Promise<string> {
     Project.validatePkgPath(pkgPath);
     const pkg = {
       ...JSON.parse((await fs.promises.readFile(pkgPath)).toString()),

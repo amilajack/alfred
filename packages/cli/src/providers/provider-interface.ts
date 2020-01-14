@@ -1,17 +1,17 @@
 export type ProviderInput = {
-  packageJsonPath: string,
-  files: Array<string>,
-  unsafe: boolean,
-  verbose: boolean,
-  write: boolean
+  packageJsonPath: string;
+  files: Array<string>;
+  unsafe: boolean;
+  verbose: boolean;
+  write: boolean;
 };
 
 export type UserProviderInput = {
-  packageJsonPath: string,
-  files: Array<string>,
-  unsafe: boolean,
-  verbose: boolean,
-  write: boolean
+  packageJsonPath: string;
+  files: Array<string>;
+  unsafe: boolean;
+  verbose: boolean;
+  write: boolean;
 };
 
 export interface ProviderInterface {

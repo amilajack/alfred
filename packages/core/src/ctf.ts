@@ -35,9 +35,77 @@ import topsort from './topsort';
 import Config from './config';
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from './interface';
 
-type CORE_CTF = 'babel' | 'webpack' | 'parcel' | 'eslint' | 'prettier' | 'jest' | 'react' | 'rollup' | 'lodash';
+type CORE_CTF =
+  | 'babel'
+  | 'webpack'
+  | 'parcel'
+  | 'eslint'
+  | 'prettier'
+  | 'jest'
+  | 'react'
+  | 'rollup'
+  | 'lodash';
 
-export const CORE_CTFS: {[ctf in CORE_CTF]: CtfWithHelpers} = {
+function addCtfHelpers(ctf: CtfNode): CtfWithHelpers {
+  return {
+    ...ctf,
+    findConfig(configName: string): ConfigFile {
+      const config = this.configFiles.find(
+        configFile => configFile.name === configName
+      );
+      if (!config) {
+        throw new Error(`Cannot find config with name "${configName}"`);
+      }
+      return config;
+    },
+    extendConfig(
+      configName: string,
+      configExtension: { [x: string]: string } = {}
+    ): CtfWithHelpers {
+      const foundConfig = this.findConfig(configName);
+      const mergedConfigFile = mergeConfigs({}, foundConfig, {
+        config: configExtension
+      });
+      const configFiles = this.configFiles.map(configFile =>
+        configFile.name === configName ? mergedConfigFile : configFile
+      );
+      return lodash.merge({}, this, {
+        configFiles
+      });
+    },
+    replaceConfig(
+      configName: string,
+      configReplacement: ConfigFile
+    ): CtfWithHelpers {
+      const configFiles = this.configFiles.map(configFile =>
+        configFile.name === configName ? configReplacement : configFile
+      );
+      return {
+        ...this,
+        configFiles
+      };
+    },
+    addDependencies(dependencies: Dependencies): CtfWithHelpers {
+      return lodash.merge({}, this, {
+        dependencies
+      });
+    },
+    addDevDependencies(devDependencies: Dependencies): CtfWithHelpers {
+      return lodash.merge({}, this, {
+        devDependencies
+      });
+    }
+  };
+}
+
+function normalizeCtf(ctf: CtfNode): CtfWithHelpers {
+  return {
+    ...addCtfHelpers(ctf),
+    interfaces: normalizeInterfacesOfSkill(ctf.interfaces)
+  };
+}
+
+export const CORE_CTFS: { [ctf in CORE_CTF]: CtfWithHelpers } = {
   babel: normalizeCtf(babel),
   webpack: normalizeCtf(webpack),
   parcel: normalizeCtf(parcel),
@@ -69,7 +137,10 @@ export function entrypointsToInterfaceStates(
   entrypoints: Array<string>
 ): Array<InterfaceState> {
   return entrypoints.map(entrypoint => {
-    const [projectType, target] = entrypoint.split('.') as [ProjectEnum, Target];
+    const [projectType, target] = entrypoint.split('.') as [
+      ProjectEnum,
+      Target
+    ];
     return { projectType, target, env: 'production' };
   });
 }
@@ -94,7 +165,7 @@ export async function writeConfigsFromCtf(
   await Promise.all(
     ctfNodes
       .filter(ctfNode => ctfNode.configFiles && ctfNode.configFiles.length)
-      .flatMap((ctfNode) => ctfNode.configFiles)
+      .flatMap(ctfNode => ctfNode.configFiles)
       .map(async configFile => {
         const filePath = path.join(configsBasePath, configFile.path);
         const stringifiedConfig =
@@ -182,55 +253,6 @@ export async function installDeps(
   }
 }
 
-function addCtfHelpers(ctf: CtfNode): CtfWithHelpers {
-  return {
-    ...ctf,
-    findConfig(configName: string): ConfigFile {
-      const config = this.configFiles.find(
-        configFile => configFile.name === configName
-      );
-      if (!config) {
-        throw new Error(`Cannot find config with name "${configName}"`);
-      }
-      return config;
-    },
-    extendConfig(
-      configName: string,
-      configExtension: { [x: string]: string } = {}
-    ): CtfWithHelpers {
-      const foundConfig = this.findConfig(configName);
-      const mergedConfigFile = mergeConfigs({}, foundConfig, {
-        config: configExtension
-      });
-      const configFiles = this.configFiles.map(configFile =>
-        configFile.name === configName ? mergedConfigFile : configFile
-      );
-      return lodash.merge({}, this, {
-        configFiles
-      });
-    },
-    replaceConfig(configName: string, configReplacement: ConfigFile): CtfWithHelpers {
-      const configFiles = this.configFiles.map(configFile =>
-        configFile.name === configName ? configReplacement : configFile
-      );
-      return {
-        ...this,
-        configFiles
-      };
-    },
-    addDependencies(dependencies: Dependencies): CtfWithHelpers {
-      return lodash.merge({}, this, {
-        dependencies
-      });
-    },
-    addDevDependencies(devDependencies: Dependencies): CtfWithHelpers {
-      return lodash.merge({}, this, {
-        devDependencies
-      });
-    }
-  };
-};
-
 /**
  * Topologically sort the CTFs
  */
@@ -265,7 +287,9 @@ export function callCtfFnsInOrder(
 ) {
   const topologicallyOrderedCtfs = topsortCtfs(ctf);
   // All the ctfs Fns from other ctfNodes that transform each ctfNode
-  const selfTransforms: Map<string, Array<() => void>> = new Map(topsortCtfs(ctf).map(e => [e, []]));
+  const selfTransforms: Map<string, Array<() => void>> = new Map(
+    topsortCtfs(ctf).map(e => [e, []])
+  );
 
   ctf.forEach(ctfNode => {
     Object.entries(ctfNode.ctfs || {}).forEach(([ctfName, ctfFn]) => {
@@ -285,7 +309,9 @@ export function callCtfFnsInOrder(
     });
   });
 
-  const orderedSelfTransforms = topologicallyOrderedCtfs.map(e => selfTransforms.get(e));
+  const orderedSelfTransforms = topologicallyOrderedCtfs.map(e =>
+    selfTransforms.get(e)
+  );
 
   orderedSelfTransforms.forEach(selfTransform => {
     selfTransform?.forEach(_selfTransform => {
@@ -324,15 +350,6 @@ export function validateCtf(ctf: CtfMap, interfaceState: InterfaceState) {
   topsortCtfs(ctf);
 }
 
-function normalizeCtf(ctf: CtfNode): CtfWithHelpers {
-  return {
-    ...addCtfHelpers(ctf),
-    interfaces: normalizeInterfacesOfSkill(
-      ctf.interfaces
-    )
-  }
-}
-
 export default function CTF(
   ctfs: Array<CtfNode>,
   interfaceState: InterfaceState
@@ -341,21 +358,32 @@ export default function CTF(
 
   ctfs
     .map(normalizeCtf)
-    .forEach((ctfWithHelpers: CtfWithHelpers, i, ctfsWithHelpers: CtfWithHelpers[]) => {
-      if (ctfWithHelpers.interfaces.length) {
-        ctfWithHelpers.interfaces.forEach(e => {
-          if ('resolveSkill' in e.module && typeof e.module.resolveSkill === 'function') {
-            if (e.module.resolveSkill(ctfsWithHelpers, interfaceState) !== false) {
+    .forEach(
+      (
+        ctfWithHelpers: CtfWithHelpers,
+        _,
+        ctfsWithHelpers: CtfWithHelpers[]
+      ) => {
+        if (ctfWithHelpers.interfaces.length) {
+          ctfWithHelpers.interfaces.forEach(e => {
+            if (
+              'resolveSkill' in e.module &&
+              typeof e.module.resolveSkill === 'function'
+            ) {
+              if (
+                e.module.resolveSkill(ctfsWithHelpers, interfaceState) !== false
+              ) {
+                ctfMap.set(ctfWithHelpers.name, ctfWithHelpers);
+              }
+            } else {
               ctfMap.set(ctfWithHelpers.name, ctfWithHelpers);
             }
-          } else {
-            ctfMap.set(ctfWithHelpers.name, ctfWithHelpers);
-          }
-        });
-      } else {
-        ctfMap.set(ctfWithHelpers.name, ctfWithHelpers);
+          });
+        } else {
+          ctfMap.set(ctfWithHelpers.name, ctfWithHelpers);
+        }
       }
-    });
+    );
 
   return ctfMap;
 }
@@ -397,35 +425,43 @@ export function addMissingStdSkillsToCtf(
   const defaultCtfsMap = new Map([
     ['lint', CORE_CTFS.eslint],
     ['format', CORE_CTFS.prettier],
-    ['build', require('@alfred/interface-build').resolveSkill(
-      Object.values(CORE_CTFS),
-      interfaceState
-    )],
-    ['start', require('@alfred/interface-start').resolveSkill(
-      Object.values(CORE_CTFS),
-      interfaceState
-    )],
+    [
+      'build',
+      require('@alfred/interface-build').resolveSkill(
+        Object.values(CORE_CTFS),
+        interfaceState
+      )
+    ],
+    [
+      'start',
+      require('@alfred/interface-start').resolveSkill(
+        Object.values(CORE_CTFS),
+        interfaceState
+      )
+    ],
     ['test', CORE_CTFS.jest]
   ]);
 
   const defaultSubCommands: Set<string> = new Set(defaultCtfsMap.keys());
   // Create a set of subcommands that the given CTF has
-  const ctfSubcommands: Set<string> = Array.from(ctfMapWithMissingSkills.values()).reduce(
-    (prev: Set<string>, ctfNode: CtfNode) => {
-      if (ctfNode.interfaces && ctfNode.interfaces.length) {
-        ctfNode.interfaces.forEach(_interface => {
-          const { subcommand } = _interface.module;
-          prev.add(subcommand);
-        });
-      }
-      return prev;
-    },
-    new Set()
-  );
+  const ctfSubcommands: Set<string> = Array.from(
+    ctfMapWithMissingSkills.values()
+  ).reduce((prev: Set<string>, ctfNode: CtfNode) => {
+    if (ctfNode.interfaces && ctfNode.interfaces.length) {
+      ctfNode.interfaces.forEach(_interface => {
+        const { subcommand } = _interface.module;
+        prev.add(subcommand);
+      });
+    }
+    return prev;
+  }, new Set());
 
   defaultSubCommands.forEach(defaultSubCommand => {
     if (!ctfSubcommands.has(defaultSubCommand)) {
-      ctfMapWithMissingSkills.set(defaultSubCommand, defaultCtfsMap.get(defaultSubCommand));
+      ctfMapWithMissingSkills.set(
+        defaultSubCommand,
+        defaultCtfsMap.get(defaultSubCommand)
+      );
     }
   });
 
@@ -521,8 +557,14 @@ export function diffCtfDeps(oldCtf: CtfMap, newCtf: CtfMap): Array<string> {
 }
 
 export async function diffCtfDepsOfAllInterfaceStates(
-  prevConfig: ConfigWithResolvedSkills | ConfigInterface | ConfigWithUnresolvedInterfaces,
-  currConfig: ConfigWithResolvedSkills | ConfigInterface | ConfigWithUnresolvedInterfaces
+  prevConfig:
+    | ConfigWithResolvedSkills
+    | ConfigInterface
+    | ConfigWithUnresolvedInterfaces,
+  currConfig:
+    | ConfigWithResolvedSkills
+    | ConfigInterface
+    | ConfigWithUnresolvedInterfaces
 ): Promise<Array<string>> {
   const stateWithDuplicateDeps = await Promise.all(
     INTERFACE_STATES.map(interfaceState =>
@@ -534,10 +576,6 @@ export async function diffCtfDepsOfAllInterfaceStates(
   );
 
   return Array.from(
-    new Set(
-      stateWithDuplicateDeps
-        .map(([a, b]) => diffCtfDeps(a, b))
-        .flat()
-    )
+    new Set(stateWithDuplicateDeps.map(([a, b]) => diffCtfDeps(a, b)).flat())
   );
 }

@@ -22,7 +22,7 @@ async function compileTemplate(templateFilename: string) {
 }
 
 export async function addEntrypoints(
-  rawTemplateData: Object,
+  rawTemplateData: Record<string, any>,
   root: string,
   entrypointInterfaceStates: Array<InterfaceState>
 ) {
@@ -144,8 +144,8 @@ function escapeQuotes(str: string): string {
 
 async function guessAuthor() {
   type Author = {
-    email?: string,
-    name?: string,
+    email?: string;
+    name?: string;
   };
 
   const author: Author = {

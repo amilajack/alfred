@@ -1,7 +1,7 @@
 /* eslint import/no-dynamic-require: off */
 import path from 'path';
 import fs from 'fs';
-import {ENTRYPOINTS} from './constants';
+import { ENTRYPOINTS } from './constants';
 import {
   ProjectInterface,
   InterfaceState,
@@ -74,7 +74,11 @@ export function normalizeInterfacesOfSkill(
   if (Array.isArray(interfaces)) {
     // @HACK Check if the array is alread formatted with this function by
     //       checking if name property exists
-    if (interfaces[0] && Array.isArray(interfaces[0]) && 'name' in interfaces[0]) {
+    if (
+      interfaces[0] &&
+      Array.isArray(interfaces[0]) &&
+      'name' in interfaces[0]
+    ) {
       return interfaces as ResolvedInterfaces;
     }
     return (interfaces as UnresolvedInterfaces).map(e => {
@@ -97,7 +101,9 @@ export function normalizeInterfacesOfSkill(
           config
         };
       }
-      throw new Error(`Interface config must be either an array or a string. Received ${e}`);
+      throw new Error(
+        `Interface config must be either an array or a string. Received ${e}`
+      );
     });
   }
   throw new Error(
@@ -110,9 +116,8 @@ export function generateInterfaceStatesFromProject(
 ): Array<InterfaceState> {
   const envs: Array<string> = ['production', 'development', 'test'];
   // Default to development env if no config given
-  // @ts-ignore
-  const env: Env = envs.includes(process.env.NODE_ENV)
-    ? process.env.NODE_ENV as Env
+  const env: Env = envs.includes(process.env.NODE_ENV || '')
+    ? (process.env.NODE_ENV as Env)
     : 'development';
 
   return ENTRYPOINTS.filter(e =>

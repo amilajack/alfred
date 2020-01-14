@@ -52,6 +52,7 @@ function toposort(nodes: string[], edges: Edges) {
   });
 
   while (i--) {
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     if (!visited[i]) visit(nodes[i], i, new Set());
   }
 
@@ -79,7 +80,7 @@ function toposort(nodes: string[], edges: Edges) {
     if (visited[i]) return;
     visited[i] = true;
 
-    let outgoing: string[] = Array.from(outgoingEdges.get(node) || new Set());
+    const outgoing: string[] = Array.from(outgoingEdges.get(node) || new Set());
 
     if ((i = outgoing.length)) {
       predecessors.add(node);

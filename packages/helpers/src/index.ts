@@ -112,9 +112,7 @@ export async function getPkgBinPath(pkgName: string, binName: string) {
   const pkgJsonPath = await pkgUp({ cwd: pkgPath });
 
   if (!pkgJsonPath) {
-    throw new Error(
-      `Module "${pkgName}" not found`
-    );
+    throw new Error(`Module "${pkgName}" not found`);
   }
 
   const { bin } = require(pkgJsonPath);

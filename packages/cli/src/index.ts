@@ -7,24 +7,24 @@ import { InterfaceState } from '@alfred/types';
 const TEMPLATES_DIR = path.resolve(__dirname, '../templates');
 
 export type ValidPkgNameResult = {
-  validForNewPackages: boolean,
-  validForOldPackages: boolean,
-  errors?: string[],
-  warnings?: string[]
+  validForNewPackages: boolean;
+  validForOldPackages: boolean;
+  errors?: string[];
+  warnings?: string[];
 };
 
 export type TemplateData = {
-  project: InterfaceState,
+  project: InterfaceState;
   'alfred-pkg': {
-    semver: string
-  }
+    semver: string;
+  };
 };
 
 export type GitConfig = {
   user: {
-    name: string,
-    email: string
-  }
+    name: string;
+    email: string;
+  };
 };
 
 export * from './helpers/parse-input';
@@ -37,7 +37,7 @@ async function compileTemplate(templateFilename: string) {
 }
 
 export async function addEntrypoints(
-  rawTemplateData: Object,
+  rawTemplateData: Record<string, any>,
   root: string,
   entrypointInterfaceStates: Array<InterfaceState>
 ) {
