@@ -1,3 +1,4 @@
+import { ProjectInterface } from '@alfred/types';
 import {
   getExecutableWrittenConfigsMethods,
   getInterfaceForSubcommand
@@ -5,7 +6,6 @@ import {
 import { generateCtfFromConfig, writeConfigsFromCtf } from '../ctf';
 import { generateInterfaceStatesFromProject } from '../interface';
 import { serial } from '../helpers';
-import { ProjectInterface } from '@alfred/types';
 
 /**
  * Run an alfred subcommand given an alfred config
@@ -35,16 +35,16 @@ export default function run(
 
   let commandWasExceuted = false;
 
-  // Run this serially because concurrently running parcel causes issues
+  // @TODO @HACK Run this serially because concurrently running parcel causes issues
   return serial(
     interfaceStates.map(interfaceState => () =>
       generateCtfFromConfig(config, interfaceState)
-        .then(ctf =>
-          config.showConfigs ? writeConfigsFromCtf(project, ctf) : ctf
+        .then(ctfMap =>
+          config.showConfigs ? writeConfigsFromCtf(project, ctfMap) : ctfMap
         )
-        .then(ctf => {
+        .then(ctfMap => {
           const subcommandInterface = getInterfaceForSubcommand(
-            ctf,
+            ctfMap,
             subcommand
           );
 
@@ -58,7 +58,7 @@ export default function run(
 
           const commands = getExecutableWrittenConfigsMethods(
             project,
-            ctf,
+            ctfMap,
             interfaceState
           );
 

@@ -26,8 +26,8 @@ module.exports = {
   default: true,
   configFiles: [],
   hooks: {
-    async call({ interfaceState, config, subcommand }) {
-      const { root } = config;
+    async call({ interfaceState, project, subcommand }) {
+      const { root } = project;
       // eslint-disable-next-line global-require
       const Bundler = require('parcel');
       const src = path.join(root, 'src');

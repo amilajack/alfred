@@ -1,5 +1,4 @@
 const { mapShortNameEnvToLongName } = require('@alfred/helpers');
-const { normalizeInterfacesOfSkill } = require('@alfred/core/lib/interface');
 const debug = require('debug')('@alfred/interface-build');
 
 module.exports = {
@@ -35,22 +34,18 @@ module.exports = {
    * Given an array of CTF nodes, return the CTF which should be used based
    * on the current environment and current target
    */
-  resolveSkill(skills = [], interfaceState) {
-    const resolvedSkills = skills
-      .map(skill => ({
-        ...skill,
-        interfaces: normalizeInterfacesOfSkill(skill.interfaces)
-      }))
-      .filter(skill =>
-        skill.interfaces.find(e => e.module.subcommand === 'build')
+  resolveSkill(ctfNodes = [], interfaceState) {
+    const resolvedSkills = ctfNodes
+      .filter(ctfNode =>
+        ctfNode.interfaces.find(e => e.module.subcommand === 'build')
       )
-      .filter(sk => {
-        const { supports } = sk.interfaces.find(
+      .filter(ctfNode => {
+        const { supports } = ctfNode.interfaces.find(
           e => e.module.subcommand === 'build'
         ).config;
         if (!supports) {
           throw new Error(
-            `Skill "${sk.name}" requires the "support" property, which is required by "@alfred/interface-build"`
+            `Skill "${ctfNode.name}" requires the "support" property, which is required by "@alfred/interface-build"`
           );
         }
         return (

@@ -97,7 +97,7 @@ export function normalizeInterfacesOfSkill(
           config
         };
       }
-      throw new Error('Interface config must be either an array or a string');
+      throw new Error(`Interface config must be either an array or a string. Received ${e}`);
     });
   }
   throw new Error(
@@ -110,7 +110,8 @@ export function generateInterfaceStatesFromProject(
 ): Array<InterfaceState> {
   const envs: Array<string> = ['production', 'development', 'test'];
   // Default to development env if no config given
-  const env: Env = envs.includes(process.env.NODE_ENV || 'development')
+  // @ts-ignore
+  const env: Env = envs.includes(process.env.NODE_ENV)
     ? process.env.NODE_ENV as Env
     : 'development';
 

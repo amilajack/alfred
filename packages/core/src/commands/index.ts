@@ -11,17 +11,14 @@ import {
   CtfNode
 } from '@alfred/types';
 
-export function getInterfaceForSubcommand(ctf: CtfMap, subcommand: string) {
-  const interfaceForSubcommand = Array.from(ctf.values())
+export function getInterfaceForSubcommand(ctfMap: CtfMap, subcommand: string) {
+  const interfaceForSubcommand = Array.from(ctfMap.values())
     .filter((ctfNode: CtfNode) =>
-        ctfNode.hooks && ctfNode.interfaces && ctfNode.interfaces.length
+        ctfNode.interfaces && ctfNode.interfaces.length
     )
-    .reduce(
-      (arr: SkillInterfaceModule[], ctfNode: CtfNode) =>
-        arr.concat(ctfNode.interfaces.map(e => require(e.name))),
-      []
-    )
-    .find(ctfInterface => ctfInterface.subcommand === subcommand);
+    .map((ctfNode: CtfNode): SkillInterfaceModule[] => ctfNode.interfaces.map(e => require(e.name)))
+    .flat()
+    .find((ctfInterface: SkillInterfaceModule) => ctfInterface.subcommand === subcommand);
 
   if (!interfaceForSubcommand) {
     throw new Error(

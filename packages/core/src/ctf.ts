@@ -6,19 +6,16 @@ import npm from 'npm';
 import formatPkg from 'format-package';
 import lodash from 'lodash';
 import mergeConfigs from '@alfred/merge-configs';
-const {default:jestCtf} = require('@alfred/skill-jest');
-const {default:babel} = require('@alfred/skill-babel');
-const {default:webpack} = require('@alfred/skill-webpack');
-const {default:eslint} = require('@alfred/skill-eslint');
-const {default:react} = require('@alfred/skill-react');
-const {default:prettier} = require('@alfred/skill-prettier');
-const {default:parcel} = require('@alfred/skill-parcel');
-const {default:rollup} = require('@alfred/skill-rollup');
-const {default:lodashCtf} = require('@alfred/skill-lodash');
+const jestCtf = require('@alfred/skill-jest');
+const babel = require('@alfred/skill-babel');
+const webpack = require('@alfred/skill-webpack');
+const eslint = require('@alfred/skill-eslint');
+const react = require('@alfred/skill-react');
+const prettier = require('@alfred/skill-prettier');
+const parcel = require('@alfred/skill-parcel');
+const rollup = require('@alfred/skill-rollup');
+const lodashCtf = require('@alfred/skill-lodash');
 import { getConfigsBasePath } from '@alfred/helpers';
-import topsort from './topsort';
-import Config from './config';
-import { normalizeInterfacesOfSkill, INTERFACE_STATES } from './interface';
 import {
   ConfigInterface,
   CtfMap,
@@ -34,17 +31,22 @@ import {
   CtfWithHelpers,
   Dependencies
 } from '@alfred/types';
+import topsort from './topsort';
+import Config from './config';
+import { normalizeInterfacesOfSkill, INTERFACE_STATES } from './interface';
 
-export const CORE_CTFS: {[ctf: string]: CtfWithHelpers} = {
-  babel: addCtfHelpers(babel),
-  webpack: addCtfHelpers(webpack),
-  parcel: addCtfHelpers(parcel),
-  eslint: addCtfHelpers(eslint),
-  prettier: addCtfHelpers(prettier),
-  jest: addCtfHelpers(jestCtf),
-  react: addCtfHelpers(react),
-  rollup: addCtfHelpers(rollup),
-  lodash: addCtfHelpers(lodashCtf)
+type CORE_CTF = 'babel' | 'webpack' | 'parcel' | 'eslint' | 'prettier' | 'jest' | 'react' | 'rollup' | 'lodash';
+
+export const CORE_CTFS: {[ctf in CORE_CTF]: CtfWithHelpers} = {
+  babel: normalizeCtf(babel),
+  webpack: normalizeCtf(webpack),
+  parcel: normalizeCtf(parcel),
+  eslint: normalizeCtf(eslint),
+  prettier: normalizeCtf(prettier),
+  jest: normalizeCtf(jestCtf),
+  react: normalizeCtf(react),
+  rollup: normalizeCtf(rollup),
+  lodash: normalizeCtf(lodashCtf)
 };
 
 // Examples
@@ -322,22 +324,28 @@ export function validateCtf(ctf: CtfMap, interfaceState: InterfaceState) {
   topsortCtfs(ctf);
 }
 
+function normalizeCtf(ctf: CtfNode): CtfWithHelpers {
+  return {
+    ...addCtfHelpers(ctf),
+    interfaces: normalizeInterfacesOfSkill(
+      ctf.interfaces
+    )
+  }
+}
+
 export default function CTF(
   ctfs: Array<CtfNode>,
   interfaceState: InterfaceState
-): CtfMap {
-  const ctfMap: CtfMap = new Map();
+): Map<string, CtfWithHelpers> {
+  const ctfMap: Map<string, CtfWithHelpers> = new Map();
 
   ctfs
-    .map(addCtfHelpers)
-    .forEach(ctfWithHelpers => {
-      ctfWithHelpers.interfaces = normalizeInterfacesOfSkill(
-        ctfWithHelpers.interfaces
-      );
+    .map(normalizeCtf)
+    .forEach((ctfWithHelpers: CtfWithHelpers, i, ctfsWithHelpers: CtfWithHelpers[]) => {
       if (ctfWithHelpers.interfaces.length) {
         ctfWithHelpers.interfaces.forEach(e => {
           if ('resolveSkill' in e.module && typeof e.module.resolveSkill === 'function') {
-            if (e.module.resolveSkill(ctfs, interfaceState) !== false) {
+            if (e.module.resolveSkill(ctfsWithHelpers, interfaceState) !== false) {
               ctfMap.set(ctfWithHelpers.name, ctfWithHelpers);
             }
           } else {
@@ -359,12 +367,12 @@ export default function CTF(
  */
 export function addMissingStdSkillsToCtf(
   config: ConfigInterface,
-  ctf: CtfMap,
+  ctfMapWithMissingSkills: CtfMap,
   interfaceState: InterfaceState
 ): CtfMap {
   // Remove skills that do not support the current interfaceState
   const ctfNodesToBeRemoved: Array<string> = [];
-  ctf.forEach(ctfNode => {
+  ctfMapWithMissingSkills.forEach(ctfNode => {
     if (ctfNode && ctfNode.supports) {
       const supports = {
         env: ctfNode.supports.env.includes(interfaceState.env),
@@ -382,34 +390,27 @@ export function addMissingStdSkillsToCtf(
   });
 
   ctfNodesToBeRemoved.forEach(ctfNodeName => {
-    ctf.delete(ctfNodeName);
+    ctfMapWithMissingSkills.delete(ctfNodeName);
   });
 
   // Create a set of standard skills
-  const stdCtf = new Map(
-    Object.entries({
-      lint: CORE_CTFS.eslint,
-      format: CORE_CTFS.prettier,
-      build: require('@alfred/interface-build').resolveSkill(
-        Object.values(CORE_CTFS),
-        interfaceState
-      ),
-      start: require('@alfred/interface-start').resolveSkill(
-        Object.values(CORE_CTFS),
-        interfaceState
-      ),
-      test: CORE_CTFS.jest
-    })
-  );
+  const defaultCtfsMap = new Map([
+    ['lint', CORE_CTFS.eslint],
+    ['format', CORE_CTFS.prettier],
+    ['build', require('@alfred/interface-build').resolveSkill(
+      Object.values(CORE_CTFS),
+      interfaceState
+    )],
+    ['start', require('@alfred/interface-start').resolveSkill(
+      Object.values(CORE_CTFS),
+      interfaceState
+    )],
+    ['test', CORE_CTFS.jest]
+  ]);
 
-  ctf.forEach(ctfNode => {
-    /* eslint no-param-reassign: off */
-    ctfNode.interfaces = normalizeInterfacesOfSkill(ctfNode.interfaces);
-  });
-
-  const stdSubCommands: Set<string> = new Set(stdCtf.keys());
+  const defaultSubCommands: Set<string> = new Set(defaultCtfsMap.keys());
   // Create a set of subcommands that the given CTF has
-  const ctfSubcommands: Set<string> = Array.from(ctf.values()).reduce(
+  const ctfSubcommands: Set<string> = Array.from(ctfMapWithMissingSkills.values()).reduce(
     (prev: Set<string>, ctfNode: CtfNode) => {
       if (ctfNode.interfaces && ctfNode.interfaces.length) {
         ctfNode.interfaces.forEach(_interface => {
@@ -422,32 +423,22 @@ export function addMissingStdSkillsToCtf(
     new Set()
   );
 
-  stdSubCommands.forEach(stdSubCommand => {
-    if (!ctfSubcommands.has(stdSubCommand)) {
-      const stdCtfSkillToAdd = stdCtf.get(stdSubCommand);
-      if (
-        stdCtfSkillToAdd &&
-        stdCtfSkillToAdd.interfaces &&
-        stdCtfSkillToAdd.interfaces.length
-      ) {
-        stdCtfSkillToAdd.interfaces = normalizeInterfacesOfSkill(
-          stdCtfSkillToAdd.interfaces
-        );
-      }
-      ctf.set(stdCtfSkillToAdd.name, stdCtfSkillToAdd);
+  defaultSubCommands.forEach(defaultSubCommand => {
+    if (!ctfSubcommands.has(defaultSubCommand)) {
+      ctfMapWithMissingSkills.set(defaultSubCommand, defaultCtfsMap.get(defaultSubCommand));
     }
   });
 
   // Add all the CORE_CTF's without subcommands
   // @HACK
-  if (!ctf.has('babel')) {
-    ctf.set('babel', CORE_CTFS.babel);
+  if (!ctfMapWithMissingSkills.has('babel')) {
+    ctfMapWithMissingSkills.set('babel', CORE_CTFS.babel);
   }
 
-  callCtfFnsInOrder(config, ctf, interfaceState);
-  validateCtf(ctf, interfaceState);
+  callCtfFnsInOrder(config, ctfMapWithMissingSkills, interfaceState);
+  validateCtf(ctfMapWithMissingSkills, interfaceState);
 
-  return ctf;
+  return ctfMapWithMissingSkills;
 }
 
 /**
@@ -479,10 +470,10 @@ export async function generateCtfFromConfig(
     tmpCtf.set(ctfNode.name, ctfNode);
   });
 
-  const ctf = CTF(Array.from(tmpCtf.values()), interfaceState);
-  addMissingStdSkillsToCtf(config, ctf, interfaceState);
+  const ctfMap = CTF(Array.from(tmpCtf.values()), interfaceState);
+  addMissingStdSkillsToCtf(config, ctfMap, interfaceState);
 
-  return ctf;
+  return ctfMap;
 }
 
 /**

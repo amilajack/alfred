@@ -20,10 +20,10 @@ module.exports = {
     }
   ],
   hooks: {
-    async call({ configFiles, ctf, config, flags }) {
+    async call({ configFiles, ctf, config, project, flags }) {
       const configPath = getConfigPathByConfigName('jest', configFiles);
       const binPath = await getPkgBinPath('jest-cli', 'jest');
-      const { root } = config;
+      const { root } = project;
       const nodeModulesPath = path.join(root, 'node_modules');
       if (!fs.existsSync(nodeModulesPath)) {
         await fs.promises.mkdir(nodeModulesPath);

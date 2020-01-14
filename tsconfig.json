@@ -13,6 +13,8 @@
     "strict": true,
     "pretty": true,
 
+    "sourceMap": true,
+
     "noEmit": false,
 
     /* Additional Checks */

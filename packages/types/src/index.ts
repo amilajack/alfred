@@ -60,6 +60,7 @@ export interface SkillInterfaceModule extends NodeJS.Module {
   subcommand: string;
   runForAllTargets?: boolean;
   // @TODO Take config in misc object to allow for future additions to the API
+  // @TODO Swap order of interfaceState and ctfs
   resolveSkill?: (ctfs: Array<CtfNode>, interfaceState: InterfaceState) => CtfNode | false;
   handleFlags?: (flags: Array<string>, misc: {interfaceState: InterfaceState, config: ConfigInterface}) => Array<string>;
 }
