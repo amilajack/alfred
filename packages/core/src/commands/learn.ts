@@ -6,7 +6,7 @@ import { ProjectInterface } from '@alfred/types';
 export default async function learn(
   project: ProjectInterface,
   skillsPkgNames: Array<string>
-) {
+): Promise<void> {
   const { config } = project;
 
   // Create a alfred config with the new skills added
@@ -29,7 +29,11 @@ export default async function learn(
   // Find the name of the packages that were installed and add the package names to
   // the alfred skills array
   // Find if any new deps need to be installed and install them
-  const newSkills = await diffCtfDepsOfAllInterfaceStates(config, newConfig);
+  const newSkills = await diffCtfDepsOfAllInterfaceStates(
+    project,
+    config,
+    newConfig
+  );
   if (newSkills.length) {
     await installDeps(newSkills, skillInstallationMethod, project);
   }

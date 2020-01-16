@@ -3,6 +3,7 @@
     "jest": true
   },
   "rules": {
+    "flowtype-errors/show-errors": "off",
     "@typescript-eslint/ban-ts-ignore": "off",
     "@typescript-eslint/no-empty-function": "off"
   }

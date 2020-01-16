@@ -9,7 +9,7 @@ const childProcess = require('child_process');
 const { INTERFACE_STATES } = require('@alfred/core/lib/interface');
 const { entrypointsToInterfaceStates } = require('@alfred/core/lib/ctf');
 const { serial } = require('@alfred/core/lib/helpers');
-const mergeConfigs = require('@alfred/merge-configs');
+const { default: mergeConfigs } = require('@alfred/merge-configs');
 const assert = require('assert');
 const { addEntrypoints } = require('../../lib');
 

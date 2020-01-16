@@ -3,7 +3,7 @@ import {
   getExecutableWrittenConfigsMethods,
   getInterfaceForSubcommand
 } from '.';
-import { generateCtfFromProject, writeConfigsFromCtf } from '../ctf';
+import { generateCtfFromConfig, writeConfigsFromCtf } from '../ctf';
 import { generateInterfaceStatesFromProject } from '../interface';
 import { serial } from '../helpers';
 
@@ -38,7 +38,7 @@ export default function run(
   // @TODO @HACK Run this serially because concurrently running parcel causes issues
   return serial(
     interfaceStates.map(interfaceState => () =>
-      generateCtfFromProject(project.config, interfaceState)
+      generateCtfFromConfig(project, project.config, interfaceState)
         .then(ctfMap =>
           config.showConfigs ? writeConfigsFromCtf(project, ctfMap) : ctfMap
         )

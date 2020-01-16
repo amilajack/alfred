@@ -1,7 +1,7 @@
 /* eslint global-require: off */
 const webpack = require('webpack');
 const path = require('path');
-const { getConfigByConfigName, findProjectRoot } = require('@alfred/helpers');
+const { getConfigByConfigName } = require('@alfred/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 const getPort = require('get-port');
 
@@ -39,7 +39,7 @@ module.exports = {
   configFiles: [
     {
       name: 'webpack.base',
-      path: 'webpack.base.js',
+      path: 'webpack.base.json',
       configType: 'module',
       config: {
         mode: 'development',
@@ -55,7 +55,7 @@ module.exports = {
     },
     {
       name: 'webpack.prod',
-      path: 'webpack.prod.js',
+      path: 'webpack.prod.json',
       configType: 'module',
       config: {
         output: {
@@ -68,7 +68,7 @@ module.exports = {
     },
     {
       name: 'webpack.dev',
-      path: 'webpack.dev.js',
+      path: 'webpack.dev.json',
       configType: 'module',
       config: {
         // @TODO: wepack-dev-server, HMR, sass, css, etc
@@ -114,7 +114,7 @@ module.exports = {
     },
     {
       name: 'webpack.node',
-      path: 'webpack.node.js',
+      path: 'webpack.node.json',
       configType: 'module',
       config: {
         entry: [path.join('<projectRoot>', 'src', 'app.node.js')],
@@ -126,7 +126,7 @@ module.exports = {
     },
     {
       name: 'webpack.browser',
-      path: 'webpack.browser.js',
+      path: 'webpack.browser.json',
       configType: 'module',
       config: {
         entry: [path.join('<projectRoot>', 'src', 'app.browser.js')],
@@ -138,7 +138,7 @@ module.exports = {
     }
   ],
   hooks: {
-    async call({ configFiles, interfaceState, subcommand }) {
+    async call({ project, configFiles, interfaceState, subcommand }) {
       const { config: baseConfig } = getConfigByConfigName(
         'webpack.base',
         configFiles
@@ -165,31 +165,29 @@ module.exports = {
         interfaceState.target === 'browser' ? browserConfig : nodeConfig
       );
 
-      const projectRoot = findProjectRoot();
-
       // @HACK: The following lines should be replaced with an algorithm that
       //        recursively traverses and object and replaces each project root
       if (mergedConfig.output && mergedConfig.output.path) {
         mergedConfig.output.path = replaceProjectRoot(
           mergedConfig.output.path,
-          projectRoot
+          project.root
         );
       }
       if (mergedConfig.devServer && mergedConfig.devServer.contentBase) {
         mergedConfig.devServer.contentBase = replaceProjectRoot(
           mergedConfig.devServer.contentBase,
-          projectRoot
+          project.root
         );
       }
       if (mergedConfig.entry) {
         if (Array.isArray(mergedConfig.entry)) {
           mergedConfig.entry = mergedConfig.entry.map(e =>
-            replaceProjectRoot(e, projectRoot)
+            replaceProjectRoot(e, project.root)
           );
         } else {
           mergedConfig.entry = replaceProjectRoot(
             mergedConfig.entry,
-            projectRoot
+            project.root
           );
         }
       }
@@ -199,7 +197,7 @@ module.exports = {
           const Webpack = require('webpack');
           const WebpackDevServer = require('webpack-dev-server');
           WebpackDevServer.addDevServerEntrypoints(mergedConfig, {
-            contentBase: path.join(projectRoot, 'src'),
+            contentBase: path.join(project.root, 'src'),
             hot: true,
             host: 'localhost'
           });
@@ -256,7 +254,7 @@ module.exports = {
                 config: path.join(
                   project.root,
                   '.configs',
-                  'webpack.browser.js'
+                  'webpack.browser.json'
                 )
               }
             }

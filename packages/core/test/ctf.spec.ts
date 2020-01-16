@@ -11,32 +11,25 @@ import CTF, {
   CORE_CTFS,
   getDependencies,
   getDevDependencies,
-  generateCtfFromProject,
+  generateCtfFromConfig,
   diffCtfDepsOfAllInterfaceStates,
   diffCtfDeps,
   topsortCtfs,
   addMissingDefaultSkillsToCtf,
-  callCtfFnsInOrder
+  callCtfsInOrder
 } from '../src/ctf';
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from '../src/interface';
 import Config from '../src/config';
+import { InterfaceState } from '@alfred/types';
+import Project from '../src/project';
 
 const parcel = require('../../alfred-skill-parcel');
 
 const [defaultInterfaceState] = INTERFACE_STATES;
 
-const defaultProject = {
-  root: path.join(__dirname, '../../../tests/fixtures/app'),
-  pkgPath: path.join(__dirname, '../../../tests/fixtures/app/package.json'),
-  pkg: require(path.join(
-    __dirname,
-    '../../../tests/fixtures/app/package.json'
-  )),
-  config: new Config({
-    skills: [],
-    npmClient: 'npm'
-  })
-};
+const defaultProject = new Project(
+  path.join(__dirname, '../../../tests/fixtures/app')
+);
 
 function removePathsPropertiesFromObject(obj): Record<string, any> {
   for (const key in obj) {
@@ -74,7 +67,7 @@ describe('CTF', () => {
 
     it('should call ctfs in order', () => {
       const ctf = CTF(Object.values(CORE_CTFS), INTERFACE_STATES[0]);
-      const { orderedSelfTransforms } = callCtfFnsInOrder(
+      const { orderedSelfTransforms } = callCtfsInOrder(
         defaultProject,
         ctf,
         INTERFACE_STATES[0]
@@ -99,25 +92,24 @@ describe('CTF', () => {
         }
       };
       const ctf = CTF([ctfNode1, ctfNode2], INTERFACE_STATES[0]);
-      callCtfFnsInOrder(defaultProject.config, ctf, INTERFACE_STATES[0]);
+      callCtfsInOrder(defaultProject, ctf, INTERFACE_STATES[0]);
     });
   });
 
   describe('interfaces', () => {
     it('should diff ctfs for all interface states', async () => {
-      const skills = [
-        ...defaultProject.config.skills,
-        '@alfred/skill-react'
-      ].map(e => [e, {}]);
-      const currentConfig = {
-        ...defaultProject.config,
-        skills
-      };
       const result = await diffCtfDepsOfAllInterfaceStates(
-        defaultProject.config,
-        currentConfig
+        defaultProject,
+        {
+          ...defaultProject.config,
+          skills: []
+        },
+        {
+          ...defaultProject.config,
+          skills: ['@alfred/skill-react'].map(e => [e, {}])
+        }
       );
-      expect(result).toEqual(['react@16.7.0']);
+      expect(result).toMatchSnapshot();
     });
 
     it('should allow falsy inputs', () => {
@@ -190,15 +182,8 @@ describe('CTF', () => {
   });
 
   describe('alfred cli helpers', () => {
-    const { root: projectRoot } = defaultProject;
-
     it('should add missing std skills to ctf', async () => {
       {
-        const config = await Config.initFromProjectRoot(projectRoot);
-        const currentDefaultProject = {
-          ...defaultProject,
-          config
-        };
         const { webpack } = CORE_CTFS;
         const ctf = CTF([webpack], defaultInterfaceState);
         expect(Array.from(ctf.keys())).toMatchSnapshot();
@@ -209,12 +194,11 @@ describe('CTF', () => {
         ).toMatchSnapshot();
       }
       {
-        const config = await Config.initFromProjectRoot(projectRoot);
         const interfaceState = {
           env: 'production',
           projectType: 'app',
           target: 'browser'
-        };
+        } as InterfaceState;
         const ctf = CTF([parcel], interfaceState);
         expect(Array.from(ctf.keys())).toMatchSnapshot();
         const ctfSkillNames = Array.from(
@@ -226,12 +210,11 @@ describe('CTF', () => {
         expect(ctfSkillNames).not.toContain('webpack');
       }
       {
-        const config = await Config.initFromProjectRoot(projectRoot);
         const interfaceState = {
           env: 'production',
           projectType: 'lib',
           target: 'browser'
-        };
+        } as InterfaceState;
         const ctf = CTF([parcel], interfaceState);
         expect(Array.from(ctf.keys())).toMatchSnapshot();
         const ctfSkillNames = Array.from(
@@ -255,7 +238,7 @@ describe('CTF', () => {
           }
         };
         await expect(
-          generateCtfFromProject(project.config, state)
+          generateCtfFromConfig(project, project.config, state)
         ).rejects.toThrow(
           "Cannot find module '@alfred/skill-non-existent-skill' from 'ctf.ts'"
         );
@@ -270,7 +253,7 @@ describe('CTF', () => {
           }
         };
         await expect(
-          generateCtfFromProject(project.config, state)
+          generateCtfFromConfig(project, project.config, state)
         ).rejects.toThrow(
           "Cannot find module '@alfred/skill-non-existent-skill' from 'ctf.ts'"
         );
@@ -278,12 +261,11 @@ describe('CTF', () => {
     });
 
     it('should override core ctf skills that support same interface states', async () => {
-      const config = await Config.initFromProjectRoot(projectRoot);
       const interfaceState = {
         env: 'production',
         projectType: 'app',
         target: 'browser'
-      };
+      } as InterfaceState;
       const ctf = CTF([parcel], interfaceState);
 
       expect(Array.from(ctf.keys())).toMatchSnapshot();
@@ -297,12 +279,11 @@ describe('CTF', () => {
     });
 
     it('should not use CTF skills that do not support current interface state', async () => {
-      const config = await Config.initFromProjectRoot(projectRoot);
       const interfaceState = {
         env: 'production',
         projectType: 'lib',
         target: 'browser'
-      };
+      } as InterfaceState;
       const ctf = CTF([parcel], interfaceState);
       expect(Array.from(ctf.keys())).toEqual([]);
       const ctfSkillNames = Array.from(

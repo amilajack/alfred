@@ -5,20 +5,15 @@ import mergeConfigs from '@alfred/merge-configs';
 import { requireConfig } from '@alfred/helpers';
 import ValidateConfig from './validation';
 import Project, { formatPkgJson } from './project';
-import CTF, { addMissingDefaultSkillsToCtf } from './ctf';
 import {
   ConfigInterface,
   NpmClients,
   ConfigWithResolvedSkills,
   ConfigWithUnresolvedInterfaces,
-  CtfNode,
-  CtfMap,
-  InterfaceState,
   Skills,
   ConfigWithUnresolvedSkills,
   RawSkillConfigValue,
-  ConfigWithDefaults,
-  CtfWithHelpers
+  ConfigWithDefaults
 } from '@alfred/types';
 
 type ConfigMap = Map<string, any>;
@@ -196,31 +191,5 @@ export default class Config implements ConfigInterface {
   /**
    * @TODO Migrate to this API
    */
-  generateCtf(interfaceState: InterfaceState): Map<string, CtfWithHelpers> {
-    // Generate the CTF
-    const tmpCtf: CtfMap = new Map();
-    const { skills = [] } = this;
-    skills.forEach(([skillPkgName, skillConfig]) => {
-      // Add the skill config to the ctfNode
-      const ctfNode: CtfNode = require(skillPkgName);
-      ctfNode.config = skillConfig;
-      if (ctfNode.configFiles) {
-        ctfNode.configFiles = ctfNode.configFiles.map(configFile => ({
-          ...configFile,
-          config: mergeConfigs(
-            {},
-            configFile.config,
-            // Only apply config if skill has only one config file
-            ctfNode.configFiles.length === 1 ? skillConfig : {}
-          )
-        }));
-      }
-      tmpCtf.set(ctfNode.name, ctfNode);
-    });
-
-    const ctf = CTF(Array.from(tmpCtf.values()), interfaceState);
-    addMissingDefaultSkillsToCtf(ctf, interfaceState);
-
-    return ctf;
-  }
+  // generateCtf(interfaceState: InterfaceState): Map<string, CtfWithHelpers> {}
 }

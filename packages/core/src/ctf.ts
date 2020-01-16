@@ -20,7 +20,10 @@ import {
   ProjectEnum,
   Target,
   CtfWithHelpers,
-  Dependencies
+  Dependencies,
+  OrderedCtfTransforms,
+  OrderedCtfTransformsMap,
+  Transforms
 } from '@alfred/types';
 import topsort from './topsort';
 import Config from './config';
@@ -281,17 +284,14 @@ export function topsortCtfs(ctfs: CtfMap): Array<string> {
   return sortedCtfNames;
 }
 
-type Transforms = Array<() => void>;
-type OrderedCtfTransformsMap = Map<string, Transforms>;
-type OrderedCtfTransforms = Array<Transforms>;
-
-export function callCtfFnsInOrder(
+export function callCtfsInOrder(
   project: ProjectInterface,
   ctf: CtfMap,
   interfaceState: InterfaceState
 ): { ctf: CtfMap; orderedSelfTransforms: OrderedCtfTransforms } {
   const { config } = project;
   const topologicallyOrderedCtfs = topsortCtfs(ctf);
+
   // All the ctfs Fns from other ctfNodes that transform each ctfNode
   const selfTransforms: OrderedCtfTransformsMap = new Map(
     topsortCtfs(ctf).map(e => [e, []])
@@ -329,7 +329,10 @@ export function callCtfFnsInOrder(
   return { ctf, orderedSelfTransforms };
 }
 
-export function validateCtf(ctf: CtfMap, interfaceState: InterfaceState): void {
+export function validateCtf(
+  ctf: CtfMap,
+  interfaceState: InterfaceState
+): CtfMap {
   ctf.forEach(ctfNode => {
     if (ctfNode && ctfNode.supports) {
       const supports = {
@@ -353,8 +356,11 @@ export function validateCtf(ctf: CtfMap, interfaceState: InterfaceState): void {
       }
     }
   });
+
   // Check if the CTF's can be topsorted
   topsortCtfs(ctf);
+
+  return ctf;
 }
 
 export default function CTF(
@@ -485,12 +491,20 @@ export function addMissingDefaultSkillsToCtf(
 }
 
 /**
+ * 1. Add default skills to CTF
+ * 2. Validate CTF
+ * 3. Run CTF transformations
  * @DEPRECATE
- * @REFACTOR Move to Config and renaem to generateCtfFromInterface
+ * @REFACTOR Move to Config and rename to generateCtfFromInterface
  */
-export async function generateCtfFromProject(
+export async function generateCtfFromConfig(
+  project: ProjectInterface,
   config: ConfigInterface,
-  interfaceState: InterfaceState
+  interfaceState: InterfaceState,
+  opts: { addDefaultSkills?: boolean; runCtfs?: boolean } = {
+    addDefaultSkills: true,
+    runCtfs: true
+  }
 ): Promise<CtfMap> {
   // Generate the CTF
   const tmpCtf: CtfMap = new Map();
@@ -514,10 +528,18 @@ export async function generateCtfFromProject(
     tmpCtf.set(ctfNode.name, ctfNode);
   });
 
-  return addMissingDefaultSkillsToCtf(
-    CTF(Array.from(tmpCtf.values()), interfaceState),
-    interfaceState
-  );
+  const completeCtf = opts.addDefaultSkills
+    ? addMissingDefaultSkillsToCtf(
+        CTF(Array.from(tmpCtf.values()), interfaceState),
+        interfaceState
+      )
+    : CTF(Array.from(tmpCtf.values()), interfaceState);
+
+  if (opts.runCtfs) {
+    callCtfsInOrder(project, completeCtf, interfaceState);
+  }
+
+  return completeCtf;
 }
 
 /**
@@ -565,6 +587,7 @@ export function diffCtfDeps(oldCtf: CtfMap, newCtf: CtfMap): Array<string> {
 }
 
 export async function diffCtfDepsOfAllInterfaceStates(
+  project: ProjectInterface,
   prevConfig:
     | ConfigWithResolvedSkills
     | ConfigInterface
@@ -574,16 +597,18 @@ export async function diffCtfDepsOfAllInterfaceStates(
     | ConfigInterface
     | ConfigWithUnresolvedInterfaces
 ): Promise<Array<string>> {
-  const stateWithDuplicateDeps = await Promise.all(
+  const interfaceStatesWithDupeDeps = await Promise.all(
     INTERFACE_STATES.map(interfaceState =>
       Promise.all([
-        generateCtfFromProject(new Config(prevConfig), interfaceState),
-        generateCtfFromProject(new Config(currConfig), interfaceState)
+        generateCtfFromConfig(project, new Config(prevConfig), interfaceState),
+        generateCtfFromConfig(project, new Config(currConfig), interfaceState)
       ])
     )
   );
 
-  return Array.from(
-    new Set(stateWithDuplicateDeps.map(([a, b]) => diffCtfDeps(a, b)).flat())
-  );
+  const diffDeps = interfaceStatesWithDupeDeps
+    .map(([a, b]) => diffCtfDeps(a, b))
+    .flat();
+
+  return Array.from(new Set(diffDeps));
 }

@@ -12,11 +12,11 @@ import handlebars from 'handlebars';
 import { InterfaceState } from '@alfred/types';
 import getSingleSubcommandFromArgs, { TemplateData, GitConfig } from '..';
 
-const TEMPLATES_DIR = path.resolve(__dirname, '../templates');
+const TEMPLATES_DIR = path.resolve(__dirname, '../../templates');
 
 async function compileTemplate(templateFilename: string) {
   const source = await fs.promises.readFile(
-    path.resolve(TEMPLATES_DIR, templateFilename)
+    path.join(TEMPLATES_DIR, templateFilename)
   );
   return handlebars.compile(source.toString(), { noEscape: true });
 }
@@ -290,7 +290,7 @@ async function createNewProject(cwd: string, name: string) {
   answers.targetFile = targetFile;
   answers.module = targetFile;
 
-  const alfredFilePath = path.join(__dirname, '../../alfred');
+  const alfredDepFilePath = path.join(__dirname, '../../../alfred');
   const isApp = answers.projectType === 'app';
   const isBrowser = answers.target === 'browser';
   answers.isApp = isApp;
@@ -301,7 +301,7 @@ async function createNewProject(cwd: string, name: string) {
     project: answers,
     'alfred-pkg': {
       semver: process.env.E2E_CLI_TEST
-        ? `file:${alfredFilePath}`
+        ? `file:${alfredDepFilePath}`
         : `^${ALFRED_PKG_VERSION}`
     }
   };

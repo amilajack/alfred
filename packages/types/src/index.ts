@@ -203,6 +203,10 @@ export interface CtfWithHelpers extends Ctf {
   replaceConfig: (x: string, configReplacement: ConfigFile) => CtfWithHelpers;
 }
 
+export type Transforms = Array<() => void>;
+export type OrderedCtfTransformsMap = Map<string, Transforms>;
+export type OrderedCtfTransforms = Array<Transforms>;
+
 export type ValidationResult = {
   warnings: string[];
   errors: string[];
