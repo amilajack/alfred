@@ -62,7 +62,7 @@ export default class Project implements ProjectInterface {
     return this;
   }
 
-  static validatePkgPath(pkgPath: string) {
+  static validatePkgPath(pkgPath: string): void {
     if (!fs.existsSync(pkgPath)) {
       throw new Error(`"${pkgPath}" does not exist`);
     }
@@ -73,7 +73,10 @@ export default class Project implements ProjectInterface {
     return this;
   }
 
-  async run(subcommand: string, args: Array<string> = []) {
+  async run(
+    subcommand: string,
+    args: Array<string> = []
+  ): Promise<void | SkillsList> {
     const { config } = this;
     const nodeModulesPath = `${this.root}/node_modules`;
     // Install the modules if they are not installed if autoInstall: true
@@ -105,7 +108,7 @@ export default class Project implements ProjectInterface {
     }
   }
 
-  learn(args: string[]) {
+  learn(args: string[]): Promise<void> {
     return learn(this, args);
   }
 
@@ -131,7 +134,9 @@ export default class Project implements ProjectInterface {
     return result;
   }
 
-  checkIsAlfredProject(interfaceStates: Array<InterfaceState>) {
+  checkIsAlfredProject(
+    interfaceStates: Array<InterfaceState>
+  ): ValidationResult {
     const srcPath = path.join(this.root, 'src');
     const validationResult = this.validatePkgJson();
 

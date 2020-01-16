@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NPM should handle npm package properties 1`] = `
+Object {
+  "critical": true,
+  "criticalMessage": "",
+  "errors": Array [],
+  "messagesCount": 4,
+  "recommendations": Array [
+    "Missing optional field: homepage",
+    "Missing optional field: engines",
+  ],
+  "valid": true,
+  "warnings": Array [
+    "Missing recommended field: description",
+    "Missing recommended field: keywords",
+    "Missing recommended field: bugs",
+    "Missing recommended field: licenses",
+    "Missing recommended field: repository",
+  ],
+}
+`;
+
+exports[`NPM should handle npm package properties 2`] = `
+Object {
+  "critical": true,
+  "criticalMessage": "",
+  "errors": Array [],
+  "messagesCount": 4,
+  "recommendations": Array [
+    "Missing optional field: homepage",
+    "Missing optional field: engines",
+  ],
+  "valid": true,
+  "warnings": Array [
+    "Missing recommended field: description",
+    "Missing recommended field: keywords",
+    "Missing recommended field: bugs",
+    "Missing recommended field: licenses",
+    "Missing recommended field: repository",
+  ],
+}
+`;
+
+exports[`NPM should handle npm package properties 3`] = `
+Object {
+  "critical": true,
+  "criticalMessage": "",
+  "errors": Array [
+    "Type for field bin, was expected to be string or object, not object",
+  ],
+  "messagesCount": 5,
+  "recommendations": Array [
+    "Missing optional field: homepage",
+    "Missing optional field: engines",
+  ],
+  "valid": false,
+  "warnings": Array [
+    "Missing recommended field: description",
+    "Missing recommended field: keywords",
+    "Missing recommended field: bugs",
+    "Missing recommended field: licenses",
+    "Missing recommended field: repository",
+  ],
+}
+`;
+
+exports[`NPM should handle npm package properties 4`] = `
+Object {
+  "critical": true,
+  "criticalMessage": "",
+  "errors": Array [
+    "Invalid version range for dependency \\"{\\"bad\\":{\\"version\\":\\"3.3.3\\"}}",
+  ],
+  "messagesCount": 5,
+  "recommendations": Array [
+    "Missing optional field: homepage",
+    "Missing optional field: engines",
+  ],
+  "valid": false,
+  "warnings": Array [
+    "Missing recommended field: description",
+    "Missing recommended field: keywords",
+    "Missing recommended field: bugs",
+    "Missing recommended field: licenses",
+    "Missing recommended field: repository",
+  ],
+}
+`;

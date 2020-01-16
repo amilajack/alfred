@@ -5,7 +5,7 @@ import mergeConfigs from '@alfred/merge-configs';
 import { requireConfig } from '@alfred/helpers';
 import ValidateConfig from './validation';
 import Project, { formatPkgJson } from './project';
-import CTF, { addMissingStdSkillsToCtf } from './ctf';
+import CTF, { addMissingDefaultSkillsToCtf } from './ctf';
 import {
   ConfigInterface,
   NpmClients,
@@ -17,7 +17,9 @@ import {
   Skills,
   ConfigWithUnresolvedSkills,
   RawSkillConfigValue,
-  ConfigWithDefaults
+  ConfigWithDefaults,
+  CtfWithHelpers,
+  ProjectInterface
 } from '@alfred/types';
 
 type ConfigMap = Map<string, any>;
@@ -25,13 +27,13 @@ type ConfigMap = Map<string, any>;
 export default class Config implements ConfigInterface {
   extends: string | Array<string> | undefined;
 
-  npmClient: NpmClients = 'npm';
+  npmClient: NpmClients;
 
   showConfigs: boolean;
 
   skills: Skills;
 
-  autoInstall = false;
+  autoInstall: boolean;
 
   private rawConfig: ConfigWithUnresolvedInterfaces;
 
@@ -45,13 +47,15 @@ export default class Config implements ConfigInterface {
   constructor(config: ConfigWithUnresolvedInterfaces) {
     this.rawConfig = config;
     ValidateConfig(config);
-    const resolvedExtends = this.normalizeWithResolvedExtendedConfigs(config);
     const resolvedSkills = {
       ...Config.DEFAULT_CONFIG,
-      ...this.normalizeWithResolvedSkills(resolvedExtends)
+      ...this.normalizeWithResolvedSkills(
+        this.normalizeWithResolvedExtendedConfigs(config)
+      )
     };
     this.skills = resolvedSkills.skills || [];
     this.showConfigs = resolvedSkills.showConfigs;
+    this.autoInstall = resolvedSkills.autoInstall;
     this.npmClient = resolvedSkills.npmClient;
   }
 
@@ -71,7 +75,7 @@ export default class Config implements ConfigInterface {
     };
   }
 
-  getRawPkg(): ConfigWithUnresolvedInterfaces {
+  getRawConfig(): ConfigWithUnresolvedInterfaces {
     return this.rawConfig;
   }
 
@@ -193,7 +197,10 @@ export default class Config implements ConfigInterface {
   /**
    * @TODO Migrate to this API
    */
-  generateCtf(interfaceState: InterfaceState) {
+  generateCtf(
+    project: ProjectInterface,
+    interfaceState: InterfaceState
+  ): Map<string, CtfWithHelpers> {
     // Generate the CTF
     const tmpCtf: CtfMap = new Map();
     const { skills = [] } = this;
@@ -216,7 +223,7 @@ export default class Config implements ConfigInterface {
     });
 
     const ctf = CTF(Array.from(tmpCtf.values()), interfaceState);
-    addMissingStdSkillsToCtf(this, ctf, interfaceState);
+    addMissingDefaultSkillsToCtf(project, ctf, interfaceState);
 
     return ctf;
   }

@@ -81,28 +81,31 @@ export function normalizeInterfacesOfSkill(
     ) {
       return interfaces as ResolvedInterfaces;
     }
-    return (interfaces as UnresolvedInterfaces).map(e => {
-      if (typeof e === 'string') {
+    return (interfaces as UnresolvedInterfaces).map(skillInterface => {
+      if (typeof skillInterface === 'string') {
         return {
-          name: e,
-          module: require(e)
+          name: skillInterface,
+          module: require(skillInterface)
         };
       }
-      if (Array.isArray(e)) {
-        if (e.length !== 2) {
+      if (Array.isArray(skillInterface)) {
+        if (skillInterface.length !== 2) {
           throw new Error(
             'Interface tuple config must have exactly two elements'
           );
         }
-        const [name, config] = e;
+        const [name, config] = skillInterface;
         return {
           name,
           module: require(name),
           config
         };
       }
+      if (typeof skillInterface === 'object') {
+        return skillInterface;
+      }
       throw new Error(
-        `Interface config must be either an array or a string. Received ${e}`
+        `Interface config must be either an array or a string. Received ${skillInterface}`
       );
     });
   }

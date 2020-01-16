@@ -6,6 +6,7 @@
   },
   "references": [
     {"path": "../cli"},
-    {"path": "../helpers"}
+    {"path": "../helpers"},
+    {"path": "../types"}
   ]
 }

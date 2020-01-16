@@ -1,21 +1,12 @@
-/* eslint import/no-dynamic-require: off */
+/* eslint import/no-dynamic-require: off, @typescript-eslint/ban-ts-ignore: off */
 import path from 'path';
 import fs from 'fs';
 import childProcess from 'child_process';
 import npm from 'npm';
 import formatPkg from 'format-package';
 import lodash from 'lodash';
-import mergeConfigs from '@alfred/merge-configs';
-const jestCtf = require('@alfred/skill-jest');
-const babel = require('@alfred/skill-babel');
-const webpack = require('@alfred/skill-webpack');
-const eslint = require('@alfred/skill-eslint');
-const react = require('@alfred/skill-react');
-const prettier = require('@alfred/skill-prettier');
-const parcel = require('@alfred/skill-parcel');
-const rollup = require('@alfred/skill-rollup');
-const lodashCtf = require('@alfred/skill-lodash');
 import { getConfigsBasePath } from '@alfred/helpers';
+import mergeConfigs from '@alfred/merge-configs';
 import {
   ConfigInterface,
   CtfMap,
@@ -34,6 +25,16 @@ import {
 import topsort from './topsort';
 import Config from './config';
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from './interface';
+
+const jestCtf = require('@alfred/skill-jest');
+const babel = require('@alfred/skill-babel');
+const webpack = require('@alfred/skill-webpack');
+const eslint = require('@alfred/skill-eslint');
+const react = require('@alfred/skill-react');
+const prettier = require('@alfred/skill-prettier');
+const parcel = require('@alfred/skill-parcel');
+const rollup = require('@alfred/skill-rollup');
+const lodashCtf = require('@alfred/skill-lodash');
 
 type CORE_CTF =
   | 'babel'
@@ -280,25 +281,31 @@ export function topsortCtfs(ctfs: CtfMap): Array<string> {
   return sortedCtfNames;
 }
 
+type Transforms = Array<() => void>;
+type OrderedCtfTransformsMap = Map<string, Transforms>;
+type OrderedCtfTransforms = Array<Transforms>;
+
 export function callCtfFnsInOrder(
-  config: ConfigInterface,
+  project: ProjectInterface,
   ctf: CtfMap,
   interfaceState: InterfaceState
-) {
+): { ctf: CtfMap; orderedSelfTransforms: OrderedCtfTransforms } {
+  const { config } = project;
   const topologicallyOrderedCtfs = topsortCtfs(ctf);
   // All the ctfs Fns from other ctfNodes that transform each ctfNode
-  const selfTransforms: Map<string, Array<() => void>> = new Map(
+  const selfTransforms: OrderedCtfTransformsMap = new Map(
     topsortCtfs(ctf).map(e => [e, []])
   );
 
   ctf.forEach(ctfNode => {
     Object.entries(ctfNode.ctfs || {}).forEach(([ctfName, ctfFn]) => {
       if (ctf.has(ctfName)) {
-        const fn = () => {
+        const fn = (): void => {
           const correspondingCtfNode = ctf.get(ctfName) as CtfNode;
           ctf.set(
             ctfName,
             ctfFn(correspondingCtfNode, ctf, {
+              project,
               config,
               ...interfaceState
             })
@@ -309,8 +316,8 @@ export function callCtfFnsInOrder(
     });
   });
 
-  const orderedSelfTransforms = topologicallyOrderedCtfs.map(e =>
-    selfTransforms.get(e)
+  const orderedSelfTransforms: OrderedCtfTransforms = topologicallyOrderedCtfs.map(
+    e => selfTransforms.get(e) as Transforms
   );
 
   orderedSelfTransforms.forEach(selfTransform => {
@@ -322,7 +329,7 @@ export function callCtfFnsInOrder(
   return { ctf, orderedSelfTransforms };
 }
 
-export function validateCtf(ctf: CtfMap, interfaceState: InterfaceState) {
+export function validateCtf(ctf: CtfMap, interfaceState: InterfaceState): void {
   ctf.forEach(ctfNode => {
     if (ctfNode && ctfNode.supports) {
       const supports = {
@@ -392,9 +399,10 @@ export default function CTF(
  * Add skills to a given list of skills to ensure that the list has a complete set
  * of standard ctfs. Also remove skills that do not support the current interfaceState
  * @REFACTOR Share logic between this and CTF(). Much duplication here
+ * @TODO @REFACTOR Call this function inside of CTF and make this fuction private
  */
-export function addMissingStdSkillsToCtf(
-  config: ConfigInterface,
+export function addMissingDefaultSkillsToCtf(
+  project: ProjectInterface,
   ctfMapWithMissingSkills: CtfMap,
   interfaceState: InterfaceState
 ): CtfMap {
@@ -458,10 +466,8 @@ export function addMissingStdSkillsToCtf(
 
   defaultSubCommands.forEach(defaultSubCommand => {
     if (!ctfSubcommands.has(defaultSubCommand)) {
-      ctfMapWithMissingSkills.set(
-        defaultSubCommand,
-        defaultCtfsMap.get(defaultSubCommand)
-      );
+      const defaultCtfToAdd = defaultCtfsMap.get(defaultSubCommand);
+      ctfMapWithMissingSkills.set(defaultCtfToAdd.name, defaultCtfToAdd);
     }
   });
 
@@ -471,7 +477,7 @@ export function addMissingStdSkillsToCtf(
     ctfMapWithMissingSkills.set('babel', CORE_CTFS.babel);
   }
 
-  callCtfFnsInOrder(config, ctfMapWithMissingSkills, interfaceState);
+  callCtfFnsInOrder(project, ctfMapWithMissingSkills, interfaceState);
   validateCtf(ctfMapWithMissingSkills, interfaceState);
 
   return ctfMapWithMissingSkills;
@@ -479,14 +485,16 @@ export function addMissingStdSkillsToCtf(
 
 /**
  * @DEPRECATE
+ * @REFACTOR Move to Config and renaem to generateCtfFromInterface
  */
-export async function generateCtfFromConfig(
-  config: ConfigInterface,
+export async function generateCtfFromProject(
+  project: ProjectInterface,
   interfaceState: InterfaceState
 ): Promise<CtfMap> {
   // Generate the CTF
   const tmpCtf: CtfMap = new Map();
-  const { skills = [] } = config;
+  const { config } = project;
+  const { skills } = config;
 
   skills.forEach(([skillPkgName, skillConfig]) => {
     // Add the skill config to the ctfNode
@@ -507,7 +515,7 @@ export async function generateCtfFromConfig(
   });
 
   const ctfMap = CTF(Array.from(tmpCtf.values()), interfaceState);
-  addMissingStdSkillsToCtf(config, ctfMap, interfaceState);
+  addMissingDefaultSkillsToCtf(project, ctfMap, interfaceState);
 
   return ctfMap;
 }
@@ -569,8 +577,26 @@ export async function diffCtfDepsOfAllInterfaceStates(
   const stateWithDuplicateDeps = await Promise.all(
     INTERFACE_STATES.map(interfaceState =>
       Promise.all([
-        generateCtfFromConfig(new Config(prevConfig), interfaceState),
-        generateCtfFromConfig(new Config(currConfig), interfaceState)
+        generateCtfFromProject(
+          // @ts-ignore
+          {
+            root: '',
+            pkg: JSON.parse('{}'),
+            pkgPath: '',
+            config: new Config(prevConfig)
+          },
+          interfaceState
+        ),
+        generateCtfFromProject(
+          // @ts-ignore
+          {
+            root: '',
+            pkg: JSON.parse('{}'),
+            pkgPath: '',
+            config: new Config(currConfig)
+          },
+          interfaceState
+        )
       ])
     )
   );

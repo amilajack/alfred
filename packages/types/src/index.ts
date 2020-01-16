@@ -93,7 +93,7 @@ export interface ConfigWithUnresolvedSkills {
 
 export interface ConfigWithUnresolvedInterfaces
   extends ConfigWithUnresolvedSkills {
-  extends?: RawExtendsConfigValue[];
+  extends?: RawExtendsConfigValue;
 }
 
 export interface ConfigWithDefaults {
@@ -114,7 +114,7 @@ export interface SkillInterface {
 }
 
 export type UnresolvedInterfaces = Array<
-  string | [string, { [x: string]: string }]
+  string | [string, { [x: string]: string }] | SkillInterface
 >;
 export type ResolvedInterfaces = Array<SkillInterface>;
 
@@ -177,6 +177,7 @@ interface Ctf {
       ownCtfNode: Ctf,
       ctfMap: Map<string, Ctf>,
       misc: {
+        project: ProjectInterface;
         config: ConfigInterface;
       } & InterfaceState
     ) => Ctf;

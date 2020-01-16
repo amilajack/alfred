@@ -4,7 +4,6 @@ import path from 'path';
 import os from 'os';
 import fs from 'fs';
 import parser from 'gitignore-parser';
-import { ProjectInterface } from '@alfred/types';
 import LebabProvider from './lebab-provider';
 import EslintProvider from './eslint-provider';
 import ParseInput from '../helpers/parse-input';
@@ -59,13 +58,10 @@ Proceeding anyway.
   }
 }
 
-export function handleInput(
-  userInput: UserProviderInput,
-  project: ProjectInterface
-) {
-  const { root } = project;
+export function handleInput(userInput: UserProviderInput): Promise<string[]> {
+  const { root } = userInput;
   return fs.existsSync(path.join(root, '.gitignore'))
-    ? (async () => {
+    ? (async (): Promise<string[]> => {
         // Remove gitignored files
         const gitignoreFile = await readFileAsync(
           path.join(root, '.gitignore')
@@ -86,8 +82,7 @@ export function handleInput(
 }
 
 export default async function Providers(
-  userInput: UserProviderInput,
-  project: ProjectInterface
+  userInput: UserProviderInput
 ): Promise<Array<string> | void | Array<string>> {
   const providers = [LebabProvider, EslintProvider]
     .map(Provider => new Provider())
@@ -109,7 +104,7 @@ export default async function Providers(
 
   const parsedUserInput = {
     ...userInput,
-    files: await handleInput(userInput, project)
+    files: await handleInput(userInput)
   };
 
   // Validate files

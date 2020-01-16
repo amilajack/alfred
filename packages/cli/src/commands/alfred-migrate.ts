@@ -3,7 +3,7 @@ import program from 'commander';
 import alfred from '@alfred/core';
 import Providers from '../providers';
 
-(async () => {
+(async (): Promise<void | string[]> => {
   const parsedArguments = program
     .option('-u, --unsafe', 'allow unsafe transformations')
     .option('-v, --verbose', 'show verbose output')
@@ -20,14 +20,12 @@ import Providers from '../providers';
   //        instead of the actual filenames. Preserve the original filenames
   //        if the migration was successful and we want to write to the original
   //        files
-  return Providers(
-    {
-      files: filesPattern,
-      packageJsonPath: project.pkgPath,
-      unsafe: parsedArguments.unsafe,
-      verbose: parsedArguments.verbose,
-      write: parsedArguments.write
-    },
-    project
-  );
+  return Providers({
+    files: filesPattern,
+    root: project.pkgPath,
+    packageJsonPath: project.pkgPath,
+    unsafe: parsedArguments.unsafe,
+    verbose: parsedArguments.verbose,
+    write: parsedArguments.write
+  });
 })();

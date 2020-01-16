@@ -12,6 +12,7 @@ export type UserProviderInput = {
   unsafe: boolean;
   verbose: boolean;
   write: boolean;
+  root: string;
 };
 
 export interface ProviderInterface {

@@ -6,6 +6,7 @@
   },
   "references": [
     {"path":  "../core"},
-    {"path": "../helpers"}
+    {"path": "../helpers"},
+    {"path": "../types"}
   ]
 }

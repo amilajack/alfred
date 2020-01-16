@@ -17,6 +17,10 @@ type MailToObj = {
   web: string;
 };
 
+type Errors = string[];
+type Recommendations = string[];
+type Warnings = string[];
+
 type Obj = { type: string; url: string };
 
 /* Parse the incoming string as JSON, validate it against the spec for package.json
@@ -150,9 +154,9 @@ export class PkgValidation {
     }
 
     const map = PkgValidation.getSpecMap();
-    let errors: string[] = [];
-    const warnings: string[] = [];
-    const recommendations: string[] = [];
+    let errors: Errors = [];
+    const warnings: Warnings = [];
+    const recommendations: Recommendations = [];
 
     /*  */
 
@@ -227,7 +231,7 @@ export class PkgValidation {
     name: string,
     a: { types: Array<string>; type: string },
     value: any
-  ) {
+  ): Errors {
     const { types, type } = a;
     const errors = [];
     const validFieldTypes = types || [type];
@@ -247,8 +251,8 @@ export class PkgValidation {
   static validateDependencies(
     name: string,
     deps: { [dep: string]: string }
-  ): string[] {
-    const errors: string[] = [];
+  ): Errors {
+    const errors: Errors = [];
     Object.entries(deps).forEach(([pkgName, pkgSemver]) => {
       if (!PkgValidation.packageFormat.test(pkgName)) {
         errors.push(`Invalid dependency package name: "${pkgName}"`);
@@ -266,7 +270,7 @@ export class PkgValidation {
   }
 
   // Taken from https://github.com/isaacs/npm/blob/master/doc/cli/json.md#dependencies
-  static isValidVersionRange(version: string) {
+  static isValidVersionRange(version: string): boolean {
     return (
       /^[\^<>=~]{0,2}[0-9.x]+/.test(version) ||
       PkgValidation.urlFormat.test(version) ||
@@ -289,7 +293,7 @@ export class PkgValidation {
   //   "mail": "dev@example.com",
   //   "web": "http://www.example.com/bugs"
   // }
-  static validateUrlOrMailto(name: string, obj: MailToObj) {
+  static validateUrlOrMailto(name: string, obj: MailToObj): Errors {
     /* jshint maxcomplexity: 10 */
     const errors = [];
     if (typeof obj === 'string') {
@@ -326,7 +330,7 @@ export class PkgValidation {
     person: Person | string,
     errors: Array<string> = [],
     name?: string
-  ) {
+  ): void {
     if (typeof person === 'string') {
       const authorRegex = /^([^<(\s]+[^<(]*)?(\s*<(.*?)>)?(\s*\((.*?)\))?/;
       const authorFields = authorRegex.exec(person);
@@ -370,9 +374,9 @@ export class PkgValidation {
     */
   static validatePeople(
     name: string,
-    obj: Array<Person> | Person
+    obj: string | Array<Person> | Person
   ): Array<string> {
-    const errors: string[] = [];
+    const errors: Errors = [];
 
     if (obj instanceof Array) {
       for (let i = 0; i < obj.length; i += 1) {
@@ -391,9 +395,16 @@ export class PkgValidation {
    * or
    * array of objects with "type" and "url"
    */
-  static validateUrlTypes(name: string, obj: string | Obj | Obj[]) {
+  static validateUrlTypes(name: string, obj: string | Obj | Obj[]): Errors {
     const errors = [];
-    function validateUrlType({ type, url }: { type: string; url: string }) {
+
+    function validateUrlType({
+      type,
+      url
+    }: {
+      type: string;
+      url: string;
+    }): Errors {
       if (!type) {
         errors.push(`${name} field should have type`);
       }
@@ -420,10 +431,10 @@ export class PkgValidation {
   }
 }
 
-const skill = [Joi.string(), Joi.array()];
-const skills = [Joi.string(), Joi.array().items(skill)];
+export default function Validateconfig(config: { [x: string]: any }): void {
+  const skill = [Joi.string(), Joi.array()];
+  const skills = [Joi.string(), Joi.array().items(skill)];
 
-export default function Validateconfig(config: { [x: string]: any }) {
   if (!config) throw new Error('Config must be passed an object');
 
   const schema = Joi.object().keys({
