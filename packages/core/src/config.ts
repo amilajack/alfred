@@ -18,8 +18,7 @@ import {
   ConfigWithUnresolvedSkills,
   RawSkillConfigValue,
   ConfigWithDefaults,
-  CtfWithHelpers,
-  ProjectInterface
+  CtfWithHelpers
 } from '@alfred/types';
 
 type ConfigMap = Map<string, any>;
@@ -197,10 +196,7 @@ export default class Config implements ConfigInterface {
   /**
    * @TODO Migrate to this API
    */
-  generateCtf(
-    project: ProjectInterface,
-    interfaceState: InterfaceState
-  ): Map<string, CtfWithHelpers> {
+  generateCtf(interfaceState: InterfaceState): Map<string, CtfWithHelpers> {
     // Generate the CTF
     const tmpCtf: CtfMap = new Map();
     const { skills = [] } = this;
@@ -223,7 +219,7 @@ export default class Config implements ConfigInterface {
     });
 
     const ctf = CTF(Array.from(tmpCtf.values()), interfaceState);
-    addMissingDefaultSkillsToCtf(project, ctf, interfaceState);
+    addMissingDefaultSkillsToCtf(ctf, interfaceState);
 
     return ctf;
   }

@@ -392,6 +392,8 @@ export default function CTF(
       }
     );
 
+  validateCtf(ctfMap, interfaceState);
+
   return ctfMap;
 }
 
@@ -402,12 +404,12 @@ export default function CTF(
  * @TODO @REFACTOR Call this function inside of CTF and make this fuction private
  */
 export function addMissingDefaultSkillsToCtf(
-  project: ProjectInterface,
   ctfMapWithMissingSkills: CtfMap,
   interfaceState: InterfaceState
 ): CtfMap {
   // Remove skills that do not support the current interfaceState
   const ctfNodesToBeRemoved: Array<string> = [];
+
   ctfMapWithMissingSkills.forEach(ctfNode => {
     if (ctfNode && ctfNode.supports) {
       const supports = {
@@ -477,7 +479,6 @@ export function addMissingDefaultSkillsToCtf(
     ctfMapWithMissingSkills.set('babel', CORE_CTFS.babel);
   }
 
-  callCtfFnsInOrder(project, ctfMapWithMissingSkills, interfaceState);
   validateCtf(ctfMapWithMissingSkills, interfaceState);
 
   return ctfMapWithMissingSkills;
@@ -488,12 +489,11 @@ export function addMissingDefaultSkillsToCtf(
  * @REFACTOR Move to Config and renaem to generateCtfFromInterface
  */
 export async function generateCtfFromProject(
-  project: ProjectInterface,
+  config: ConfigInterface,
   interfaceState: InterfaceState
 ): Promise<CtfMap> {
   // Generate the CTF
   const tmpCtf: CtfMap = new Map();
-  const { config } = project;
   const { skills } = config;
 
   skills.forEach(([skillPkgName, skillConfig]) => {
@@ -514,10 +514,10 @@ export async function generateCtfFromProject(
     tmpCtf.set(ctfNode.name, ctfNode);
   });
 
-  const ctfMap = CTF(Array.from(tmpCtf.values()), interfaceState);
-  addMissingDefaultSkillsToCtf(project, ctfMap, interfaceState);
-
-  return ctfMap;
+  return addMissingDefaultSkillsToCtf(
+    CTF(Array.from(tmpCtf.values()), interfaceState),
+    interfaceState
+  );
 }
 
 /**
@@ -577,26 +577,8 @@ export async function diffCtfDepsOfAllInterfaceStates(
   const stateWithDuplicateDeps = await Promise.all(
     INTERFACE_STATES.map(interfaceState =>
       Promise.all([
-        generateCtfFromProject(
-          // @ts-ignore
-          {
-            root: '',
-            pkg: JSON.parse('{}'),
-            pkgPath: '',
-            config: new Config(prevConfig)
-          },
-          interfaceState
-        ),
-        generateCtfFromProject(
-          // @ts-ignore
-          {
-            root: '',
-            pkg: JSON.parse('{}'),
-            pkgPath: '',
-            config: new Config(currConfig)
-          },
-          interfaceState
-        )
+        generateCtfFromProject(new Config(prevConfig), interfaceState),
+        generateCtfFromProject(new Config(currConfig), interfaceState)
       ])
     )
   );

@@ -263,7 +263,7 @@ module.exports = {
           }
         })
         .addDevDependencies({
-          'eslint-import-resolver-webpack': '2.18.2'
+          'eslint-import-resolver-webpack': '0.12.1'
         }),
     jest: config =>
       config

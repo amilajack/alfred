@@ -12,7 +12,7 @@ export default async function skills(
 ): Promise<SkillsList> {
   const interfaceStateCtfs = await Promise.all(
     generateInterfaceStatesFromProject(project).map(interfaceState =>
-      generateCtfFromProject(project, interfaceState).then(ctf =>
+      generateCtfFromProject(project.config, interfaceState).then(ctf =>
         Array.from(ctf.values()).filter(
           ctfNode =>
             ctfNode.hooks && ctfNode.interfaces && ctfNode.interfaces.length

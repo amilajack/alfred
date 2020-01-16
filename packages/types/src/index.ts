@@ -165,7 +165,6 @@ interface Ctf {
     // Project type
     projectTypes: Array<'lib' | 'app'>;
   };
-  subcommands?: Array<string>;
   configFiles: Array<ConfigFile>;
   config: ConfigFile;
   interfaces: Array<SkillInterface>;
@@ -176,16 +175,15 @@ interface Ctf {
     [ctfName: string]: (
       ownCtfNode: Ctf,
       ctfMap: Map<string, Ctf>,
-      misc: {
+      misc: InterfaceState & {
         project: ProjectInterface;
         config: ConfigInterface;
-      } & InterfaceState
+      }
     ) => Ctf;
   };
 }
 
 interface CtfUsingInterface extends Ctf {
-  interfaces: Array<SkillInterface>;
   subcommand: string;
   hooks: {
     call: CallFn;

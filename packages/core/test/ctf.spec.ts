@@ -38,7 +38,7 @@ const defaultProject = {
   })
 };
 
-function removePathsPropertiesFromObject(obj) {
+function removePathsPropertiesFromObject(obj): Record<string, any> {
   for (const key in obj) {
     const value = obj[key];
 
@@ -107,7 +107,7 @@ describe('CTF', () => {
     it('should diff ctfs for all interface states', async () => {
       const skills = [
         ...defaultProject.config.skills,
-        '@alfred/skill-mocha'
+        '@alfred/skill-react'
       ].map(e => [e, {}]);
       const currentConfig = {
         ...defaultProject.config,
@@ -117,7 +117,7 @@ describe('CTF', () => {
         defaultProject.config,
         currentConfig
       );
-      expect(result).toEqual(['mocha@5.2.0']);
+      expect(result).toEqual(['react@16.7.0']);
     });
 
     it('should allow falsy inputs', () => {
@@ -204,11 +204,7 @@ describe('CTF', () => {
         expect(Array.from(ctf.keys())).toMatchSnapshot();
         expect(
           Array.from(
-            addMissingDefaultSkillsToCtf(
-              currentDefaultProject,
-              ctf,
-              defaultInterfaceState
-            ).keys()
+            addMissingDefaultSkillsToCtf(ctf, defaultInterfaceState).keys()
           )
         ).toMatchSnapshot();
       }
@@ -222,7 +218,7 @@ describe('CTF', () => {
         const ctf = CTF([parcel], interfaceState);
         expect(Array.from(ctf.keys())).toMatchSnapshot();
         const ctfSkillNames = Array.from(
-          addMissingDefaultSkillsToCtf({ config }, ctf, interfaceState).keys()
+          addMissingDefaultSkillsToCtf(ctf, interfaceState).keys()
         );
         expect(ctfSkillNames).toMatchSnapshot();
         expect(ctfSkillNames).toContain('parcel');
@@ -239,7 +235,7 @@ describe('CTF', () => {
         const ctf = CTF([parcel], interfaceState);
         expect(Array.from(ctf.keys())).toMatchSnapshot();
         const ctfSkillNames = Array.from(
-          addMissingDefaultSkillsToCtf({ config }, ctf, interfaceState).keys()
+          addMissingDefaultSkillsToCtf(ctf, interfaceState).keys()
         );
         expect(ctfSkillNames).toMatchSnapshot();
         expect(ctfSkillNames).toContain('rollup');
@@ -258,7 +254,9 @@ describe('CTF', () => {
             skills: [['@alfred/skill-non-existent-skill', {}]]
           }
         };
-        await expect(generateCtfFromProject(project, state)).rejects.toThrow(
+        await expect(
+          generateCtfFromProject(project.config, state)
+        ).rejects.toThrow(
           "Cannot find module '@alfred/skill-non-existent-skill' from 'ctf.ts'"
         );
       });
@@ -271,7 +269,9 @@ describe('CTF', () => {
             skills: [['@alfred/skill-non-existent-skill', {}]]
           }
         };
-        await expect(generateCtfFromProject(project, state)).rejects.toThrow(
+        await expect(
+          generateCtfFromProject(project.config, state)
+        ).rejects.toThrow(
           "Cannot find module '@alfred/skill-non-existent-skill' from 'ctf.ts'"
         );
       });
@@ -288,7 +288,7 @@ describe('CTF', () => {
 
       expect(Array.from(ctf.keys())).toMatchSnapshot();
       const ctfSkillNames = Array.from(
-        addMissingDefaultSkillsToCtf({ config }, ctf, interfaceState).keys()
+        addMissingDefaultSkillsToCtf(ctf, interfaceState).keys()
       );
       expect(ctfSkillNames).toMatchSnapshot();
       expect(ctfSkillNames).toContain('parcel');
@@ -306,7 +306,7 @@ describe('CTF', () => {
       const ctf = CTF([parcel], interfaceState);
       expect(Array.from(ctf.keys())).toEqual([]);
       const ctfSkillNames = Array.from(
-        addMissingDefaultSkillsToCtf({ config }, ctf, interfaceState).keys()
+        addMissingDefaultSkillsToCtf(ctf, interfaceState).keys()
       );
       expect(ctfSkillNames).toMatchSnapshot();
       expect(ctfSkillNames).not.toContain('parcel');

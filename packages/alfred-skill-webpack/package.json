@@ -5,10 +5,10 @@
     "@alfred/helpers": "^0.0.2-alpha.4",
     "@alfred/merge-configs": "^0.0.2-alpha.4",
     "@alfred/types": "^0.0.2-alpha.4",
-    "get-port": "^5.0.0",
-    "webpack": "^4.28.4",
+    "get-port": "^5.1.1",
+    "webpack": "^4.41.5",
     "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.10.1"
   },
   "peerDependencies": {
     "@alfred/cli": "^0.0.2-alpha.4",

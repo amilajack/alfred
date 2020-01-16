@@ -38,7 +38,7 @@ export default function run(
   // @TODO @HACK Run this serially because concurrently running parcel causes issues
   return serial(
     interfaceStates.map(interfaceState => () =>
-      generateCtfFromProject(project, interfaceState)
+      generateCtfFromProject(project.config, interfaceState)
         .then(ctfMap =>
           config.showConfigs ? writeConfigsFromCtf(project, ctfMap) : ctfMap
         )
