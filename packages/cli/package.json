@@ -13,7 +13,7 @@
     "alfred": "./lib/commands/alfred.js"
   },
   "scripts": {
-    "build": "yarn ts",
+    "build": "yarn ts && chmod -R +x lib",
     "build-watch": "yarn ts --watch",
     "e2e": "node -r @babel/register ./test/e2e/alfred-e2e.ts",
     "ts": "tsc",
