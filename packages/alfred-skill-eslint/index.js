@@ -22,7 +22,10 @@ module.exports = {
           browser: true,
           node: true
         },
-        extends: ['bliss']
+        extends: ['bliss'],
+        rules: {
+          'flowtype-errors/show-errors': 'off'
+        }
       }
     }
   ],

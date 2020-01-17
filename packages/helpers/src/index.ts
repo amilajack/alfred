@@ -3,12 +3,19 @@ import path from 'path';
 import open from 'open';
 import pkgUp from 'pkg-up';
 import childProcess from 'child_process';
-import { ConfigFile, ConfigValue, CtfMap } from '@alfred/types';
+import {
+  ConfigFile,
+  ConfigValue,
+  CtfMap,
+  ConfigWithUnresolvedInterfaces
+} from '@alfred/types';
 
 /**
  * Get the root of a project from the current working directory
  */
-export function findProjectRoot(startingSearchDir: string = process.cwd()) {
+export function findProjectRoot(
+  startingSearchDir: string = process.cwd()
+): string {
   const pkgPath = pkgUp.sync({
     cwd: startingSearchDir
   });
@@ -25,7 +32,7 @@ export function findProjectRoot(startingSearchDir: string = process.cwd()) {
 export function getConfigByConfigName(
   configName: string,
   configFiles: Array<ConfigFile>
-) {
+): ConfigValue {
   const config = configFiles.find(e => e.name === configName);
   if (!config) throw new Error(`Cannot find config by name "${configName}"`);
   return config;
@@ -34,7 +41,7 @@ export function getConfigByConfigName(
 export function getConfigPathByConfigName(
   configName: string,
   configFiles: Array<ConfigFile>
-) {
+): string {
   const config = configFiles.find(e => e.name === configName);
   if (!config) throw new Error(`Cannot find config by name "${configName}"`);
   return config.path;
@@ -88,7 +95,9 @@ export function getConfigsBasePath(projectRoot: string): string {
   return path.join(projectRoot, '.configs');
 }
 
-export function requireConfig(configName: string): any {
+export function requireConfig(
+  configName: string
+): ConfigWithUnresolvedInterfaces {
   try {
     return require(`alfred-config-${configName}`);
   } catch (e) {
@@ -107,7 +116,10 @@ export function requireConfig(configName: string): any {
  * @param pkgName - The name of the package
  * @param binName - The property of the bin object that we want
  */
-export async function getPkgBinPath(pkgName: string, binName: string) {
+export async function getPkgBinPath(
+  pkgName: string,
+  binName: string
+): Promise<string> {
   const pkgPath = require.resolve(pkgName);
   const pkgJsonPath = await pkgUp({ cwd: pkgPath });
 
@@ -128,11 +140,14 @@ export async function getPkgBinPath(pkgName: string, binName: string) {
   );
 }
 
-export function execCommand(cmd: string) {
+export function execCommand(cmd: string): Buffer {
   return childProcess.execSync(cmd, { stdio: 'inherit' });
 }
 
-export async function openInBrowser(url: string, browser: any) {
+export async function openInBrowser(
+  url: string,
+  browser: string
+): Promise<void> {
   // Don't open new tab when running end to end tests. This prevents hundreds
   // of tabs from being opened.
   if (process.env.E2E_CLI_TEST) return;

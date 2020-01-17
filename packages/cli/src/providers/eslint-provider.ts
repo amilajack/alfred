@@ -9,9 +9,9 @@ export default class EslintProvider implements ProviderInterface {
 
   safe = true;
 
-  transform(files: Array<string>) {
+  transform(files: Array<string>): Promise<void> {
     const cli = new CLIEngine({
-      configFile: path.join(__dirname, 'resources', 'alfred-eslintrc'),
+      configFile: path.join(__dirname, '../../resources/alfred-eslintrc'),
       fix: true
     });
 
