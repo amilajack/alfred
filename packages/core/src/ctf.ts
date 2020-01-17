@@ -1,18 +1,11 @@
 /* eslint import/no-dynamic-require: off, @typescript-eslint/ban-ts-ignore: off */
-import path from 'path';
-import fs from 'fs';
-import childProcess from 'child_process';
-import npm from 'npm';
-import formatPkg from 'format-package';
 import lodash from 'lodash';
-import { getConfigsBasePath } from '@alfred/helpers';
 import mergeConfigs from '@alfred/merge-configs';
 import {
   ConfigInterface,
   CtfMap,
   CtfNode,
   ProjectInterface,
-  NpmClients,
   InterfaceState,
   ConfigWithResolvedSkills,
   ConfigWithUnresolvedInterfaces,
@@ -150,132 +143,24 @@ export function entrypointsToInterfaceStates(
 }
 
 /**
- * Write configs to a './.configs' directory
- */
-export async function writeConfigsFromCtf(
-  project: ProjectInterface,
-  ctf: CtfMap
-): Promise<CtfMap> {
-  const { config } = project;
-  if (!config.showConfigs) return ctf;
-  // Create a .configs dir if it doesn't exist
-  const configsBasePath = getConfigsBasePath(project.root);
-  if (!fs.existsSync(configsBasePath)) {
-    fs.mkdirSync(configsBasePath);
-  }
-
-  const ctfNodes: CtfNode[] = Array.from(ctf.values());
-
-  await Promise.all(
-    ctfNodes
-      .filter(ctfNode => ctfNode.configFiles && ctfNode.configFiles.length)
-      .flatMap(ctfNode => ctfNode.configFiles)
-      .map(async configFile => {
-        const filePath = path.join(configsBasePath, configFile.path);
-        const stringifiedConfig =
-          typeof configFile.config === 'string'
-            ? configFile.config
-            : await formatPkg(configFile.config);
-        // Write sync to prevent data races when writing configs in parallel
-        const normalizedJsonOrModule =
-          configFile.configValue === 'module'
-            ? `module.exports = ${stringifiedConfig};`
-            : stringifiedConfig;
-        fs.writeFileSync(filePath, normalizedJsonOrModule);
-      })
-  );
-
-  return ctf;
-}
-
-/**
- * @TODO Account for `devDependencies` and `dependencies`
- * @TODO @REFACTOR Move to AlfredProject
- */
-export async function installDeps(
-  dependencies: Array<string> = [],
-  npmClient: NpmClients = 'npm',
-  project: ProjectInterface
-): Promise<any> {
-  const { root } = project;
-  if (!dependencies.length) return Promise.resolve();
-
-  switch (npmClient) {
-    // Install dependencies with NPM, which is the default
-    case 'npm': {
-      return new Promise((resolve, reject) => {
-        npm.load({ save: true }, err => {
-          if (err) reject(err);
-
-          npm.commands.install(dependencies, (_err, data) => {
-            if (_err) reject(_err);
-            resolve(data);
-          });
-
-          npm.on('log', console.log);
-        });
-      });
-    }
-    // Install dependencies with Yarn
-    case 'yarn': {
-      return childProcess.execSync(['yarn', 'add', ...dependencies].join(' '), {
-        cwd: root,
-        stdio: 'inherit'
-      });
-    }
-    // Write the package to the package.json but do not install them. This is intended
-    // to be used for end to end testing
-    case 'writeOnly': {
-      const { pkg } = project;
-      const { dependencies: currentDependencies = {} } = pkg;
-      const dependenciesAsObject = dependencies
-        .map(dependency => {
-          if (dependency[0] !== '@') {
-            return dependency.split('@');
-          }
-          // A temporary hack that handles scoped npm packages. A proper solution would be
-          // using a semver parser. Package names come in the following form: ['@a/b@1.2.3', 'a@latest', ...].
-          // Temporarily remove the scope so we can split the package name
-          const pkgWithoutScope = dependency.slice(1).split('@');
-          // Then add it back
-          return [`@${pkgWithoutScope[0]}`, pkgWithoutScope[1]];
-        })
-        .map(([p, c]) => ({ [p]: c }))
-        .reduce((p, c) => ({ ...p, ...c }), {});
-      const newDependencies = {
-        ...currentDependencies,
-        ...dependenciesAsObject
-      };
-      // @TODO @HACK @BUG This is an incorrect usage of the Config API
-      return Config.writeToPkgJson(project.pkgPath, {
-        dependencies: newDependencies
-      });
-    }
-    default: {
-      throw new Error('Unsupported npm client. Can only be "npm" or "yarn"');
-    }
-  }
-}
-
-/**
  * Topologically sort the CTFs
  */
-export function topsortCtfs(ctfs: CtfMap): Array<string> {
-  const topsortEntries: Array<[string, string]> = [];
-  const ctfNodeNames = new Set(ctfs.keys());
+export function topsortCtfMap(ctfMap: CtfMap): Array<string> {
+  const topsortGraphEdges: Array<[string, string]> = [];
+  const ctfNodeNames = new Set(ctfMap.keys());
 
-  ctfs.forEach(ctfNode => {
+  ctfMap.forEach(ctfNode => {
     if (ctfNode.ctfs) {
       Object.keys(ctfNode.ctfs).forEach(ctfFnName => {
         if (ctfNodeNames.has(ctfFnName)) {
-          topsortEntries.push([ctfNode.name, ctfFnName]);
+          topsortGraphEdges.push([ctfNode.name, ctfFnName]);
         }
       });
     }
   });
 
-  const sortedCtfNames = topsort(topsortEntries);
-  ctfs.forEach(e => {
+  const sortedCtfNames = topsort(topsortGraphEdges);
+  ctfMap.forEach(e => {
     if (!sortedCtfNames.includes(e.name)) {
       sortedCtfNames.push(e.name);
     }
@@ -290,11 +175,11 @@ export function callCtfsInOrder(
   interfaceState: InterfaceState
 ): { ctf: CtfMap; orderedSelfTransforms: OrderedCtfTransforms } {
   const { config } = project;
-  const topologicallyOrderedCtfs = topsortCtfs(ctf);
+  const topologicallyOrderedCtfs = topsortCtfMap(ctf);
 
   // All the ctfs Fns from other ctfNodes that transform each ctfNode
   const selfTransforms: OrderedCtfTransformsMap = new Map(
-    topsortCtfs(ctf).map(e => [e, []])
+    topsortCtfMap(ctf).map(e => [e, []])
   );
 
   ctf.forEach(ctfNode => {
@@ -358,12 +243,17 @@ export function validateCtf(
   });
 
   // Check if the CTF's can be topsorted
-  topsortCtfs(ctf);
+  topsortCtfMap(ctf);
 
   return ctf;
 }
 
-export default function CTF(
+/**
+ * Add skills to a given list of skills to ensure that the list has a complete set
+ * of standard ctfs. Also remove skills that do not support the current interfaceState
+ */
+export function CTF(
+  project: ProjectInterface,
   ctfs: Array<CtfNode>,
   interfaceState: InterfaceState
 ): Map<string, CtfWithHelpers> {
@@ -398,25 +288,9 @@ export default function CTF(
       }
     );
 
-  validateCtf(ctfMap, interfaceState);
-
-  return ctfMap;
-}
-
-/**
- * Add skills to a given list of skills to ensure that the list has a complete set
- * of standard ctfs. Also remove skills that do not support the current interfaceState
- * @REFACTOR Share logic between this and CTF(). Much duplication here
- * @TODO @REFACTOR Call this function inside of CTF and make this fuction private
- */
-export function addMissingDefaultSkillsToCtf(
-  ctfMapWithMissingSkills: CtfMap,
-  interfaceState: InterfaceState
-): CtfMap {
   // Remove skills that do not support the current interfaceState
   const ctfNodesToBeRemoved: Array<string> = [];
-
-  ctfMapWithMissingSkills.forEach(ctfNode => {
+  ctfMap.forEach(ctfNode => {
     if (ctfNode && ctfNode.supports) {
       const supports = {
         env: ctfNode.supports.env.includes(interfaceState.env),
@@ -432,9 +306,8 @@ export function addMissingDefaultSkillsToCtf(
       }
     }
   });
-
   ctfNodesToBeRemoved.forEach(ctfNodeName => {
-    ctfMapWithMissingSkills.delete(ctfNodeName);
+    ctfMap.delete(ctfNodeName);
   });
 
   // Create a set of standard skills
@@ -460,60 +333,56 @@ export function addMissingDefaultSkillsToCtf(
 
   const defaultSubCommands: Set<string> = new Set(defaultCtfsMap.keys());
   // Create a set of subcommands that the given CTF has
-  const ctfSubcommands: Set<string> = Array.from(
-    ctfMapWithMissingSkills.values()
-  ).reduce((prev: Set<string>, ctfNode: CtfNode) => {
-    if (ctfNode.interfaces && ctfNode.interfaces.length) {
-      ctfNode.interfaces.forEach(_interface => {
-        const { subcommand } = _interface.module;
-        prev.add(subcommand);
-      });
-    }
-    return prev;
-  }, new Set());
+  const ctfSubcommands: Set<string> = Array.from(ctfMap.values()).reduce(
+    (prev: Set<string>, ctfNode: CtfNode) => {
+      if (ctfNode.interfaces && ctfNode.interfaces.length) {
+        ctfNode.interfaces.forEach(_interface => {
+          const { subcommand } = _interface.module;
+          prev.add(subcommand);
+        });
+      }
+      return prev;
+    },
+    new Set()
+  );
 
   defaultSubCommands.forEach(defaultSubCommand => {
     if (!ctfSubcommands.has(defaultSubCommand)) {
       const defaultCtfToAdd = defaultCtfsMap.get(defaultSubCommand);
-      ctfMapWithMissingSkills.set(defaultCtfToAdd.name, defaultCtfToAdd);
+      ctfMap.set(defaultCtfToAdd.name, defaultCtfToAdd);
     }
   });
 
   // Add all the CORE_CTF's without subcommands
   // @HACK
-  if (!ctfMapWithMissingSkills.has('babel')) {
-    ctfMapWithMissingSkills.set('babel', CORE_CTFS.babel);
+  if (!ctfMap.has('babel')) {
+    ctfMap.set('babel', CORE_CTFS.babel);
   }
 
-  validateCtf(ctfMapWithMissingSkills, interfaceState);
+  callCtfsInOrder(project, ctfMap, interfaceState);
 
-  return ctfMapWithMissingSkills;
+  validateCtf(ctfMap, interfaceState);
+
+  return ctfMap;
 }
 
 /**
  * 1. Add default skills to CTF
  * 2. Validate CTF
  * 3. Run CTF transformations
- * @DEPRECATE
- * @REFACTOR Move to Config and rename to generateCtfFromInterface
  */
-export async function generateCtfFromConfig(
+export default async function ctfFromConfig(
   project: ProjectInterface,
-  config: ConfigInterface,
   interfaceState: InterfaceState,
-  opts: { addDefaultSkills?: boolean; runCtfs?: boolean } = {
-    addDefaultSkills: true,
-    runCtfs: true
-  }
+  config: ConfigInterface = project.config
 ): Promise<CtfMap> {
   // Generate the CTF
-  const tmpCtf: CtfMap = new Map();
-  const { skills } = config;
+  const ctfMapFromConfigSkills: CtfMap = new Map();
 
-  skills.forEach(([skillPkgName, skillConfig]) => {
+  config.skills.forEach(([skillPkgName, skillUserConfig]) => {
     // Add the skill config to the ctfNode
     const ctfNode: CtfNode = require(skillPkgName);
-    ctfNode.config = skillConfig;
+    ctfNode.config = skillUserConfig;
     if (ctfNode.configFiles) {
       ctfNode.configFiles = ctfNode.configFiles.map(configFile => ({
         ...configFile,
@@ -521,25 +390,18 @@ export async function generateCtfFromConfig(
           {},
           configFile.config,
           // Only apply config if skill has only one config file
-          ctfNode.configFiles.length === 1 ? skillConfig : {}
+          ctfNode.configFiles.length === 1 ? skillUserConfig : {}
         )
       }));
     }
-    tmpCtf.set(ctfNode.name, ctfNode);
+    ctfMapFromConfigSkills.set(ctfNode.name, ctfNode);
   });
 
-  const completeCtf = opts.addDefaultSkills
-    ? addMissingDefaultSkillsToCtf(
-        CTF(Array.from(tmpCtf.values()), interfaceState),
-        interfaceState
-      )
-    : CTF(Array.from(tmpCtf.values()), interfaceState);
-
-  if (opts.runCtfs) {
-    callCtfsInOrder(project, completeCtf, interfaceState);
-  }
-
-  return completeCtf;
+  return CTF(
+    project,
+    Array.from(ctfMapFromConfigSkills.values()),
+    interfaceState
+  );
 }
 
 /**
@@ -600,8 +462,8 @@ export async function diffCtfDepsOfAllInterfaceStates(
   const interfaceStatesWithDupeDeps = await Promise.all(
     INTERFACE_STATES.map(interfaceState =>
       Promise.all([
-        generateCtfFromConfig(project, new Config(prevConfig), interfaceState),
-        generateCtfFromConfig(project, new Config(currConfig), interfaceState)
+        ctfFromConfig(project, interfaceState, new Config(prevConfig)),
+        ctfFromConfig(project, interfaceState, new Config(currConfig))
       ])
     )
   );

@@ -1,7 +1,6 @@
 /* eslint import/no-dynamic-require: off */
 import path from 'path';
 import fs from 'fs';
-import { ENTRYPOINTS } from './constants';
 import {
   ProjectInterface,
   InterfaceState,
@@ -11,6 +10,7 @@ import {
   ProjectEnum,
   Target
 } from '@alfred/types';
+import { ENTRYPOINTS } from './constants';
 
 // All the possible interface states
 // @TODO Also allow .ts entrypoints

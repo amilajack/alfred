@@ -3,8 +3,6 @@ import path from 'path';
 import fs from 'fs';
 import mergeConfigs from '@alfred/merge-configs';
 import { requireConfig } from '@alfred/helpers';
-import ValidateConfig from './validation';
-import Project, { formatPkgJson } from './project';
 import {
   ConfigInterface,
   NpmClients,
@@ -15,6 +13,8 @@ import {
   RawSkillConfigValue,
   ConfigWithDefaults
 } from '@alfred/types';
+import ValidateConfig from './validation';
+import Project, { formatPkgJson } from './project';
 
 type ConfigMap = Map<string, any>;
 
@@ -187,9 +187,4 @@ export default class Config implements ConfigInterface {
     await fs.promises.writeFile(pkgPath, formattedPkg);
     return formattedPkg;
   }
-
-  /**
-   * @TODO Migrate to this API
-   */
-  // generateCtf(interfaceState: InterfaceState): Map<string, CtfWithHelpers> {}
 }

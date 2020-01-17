@@ -1,6 +1,6 @@
 import mergeConfigs from '@alfred/merge-configs';
 import Config from '../config';
-import { installDeps, diffCtfDepsOfAllInterfaceStates } from '../ctf';
+import { diffCtfDepsOfAllInterfaceStates } from '../ctf';
 import { ProjectInterface } from '@alfred/types';
 
 export default async function learn(
@@ -21,7 +21,7 @@ export default async function learn(
     ? 'writeOnly'
     : config.npmClient;
   project.setConfig(newConfig);
-  await installDeps(skillsPkgNames, skillInstallationMethod, project);
+  await project.installDeps(skillsPkgNames, skillInstallationMethod);
 
   // Check if a skill with the same interface is already being used.
   // If so, uninstall it
@@ -35,6 +35,6 @@ export default async function learn(
     newConfig
   );
   if (newSkills.length) {
-    await installDeps(newSkills, skillInstallationMethod, project);
+    await project.installDeps(newSkills, skillInstallationMethod);
   }
 }

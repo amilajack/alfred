@@ -3,24 +3,22 @@ import os from 'os';
 import path from 'path';
 import powerset from '@amilajack/powerset';
 import { getConfigs } from '@alfred/helpers';
+import { InterfaceState } from '@alfred/types';
 import {
   getExecutableWrittenConfigsMethods,
   getInterfaceForSubcommand
 } from '../src/commands';
-import CTF, {
+import ctfFromConfig, {
   CORE_CTFS,
   getDependencies,
   getDevDependencies,
-  generateCtfFromConfig,
+  CTF,
   diffCtfDepsOfAllInterfaceStates,
   diffCtfDeps,
-  topsortCtfs,
-  addMissingDefaultSkillsToCtf,
+  topsortCtfMap,
   callCtfsInOrder
 } from '../src/ctf';
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from '../src/interface';
-import Config from '../src/config';
-import { InterfaceState } from '@alfred/types';
 import Project from '../src/project';
 
 const parcel = require('../../alfred-skill-parcel');
@@ -50,23 +48,27 @@ describe('CTF', () => {
   describe('topological sort', () => {
     it('should topsort', () => {
       {
-        const sortedCtfs = topsortCtfs(
-          CTF(Object.values(CORE_CTFS), defaultInterfaceState)
+        const sortedCtfs = topsortCtfMap(
+          CTF(defaultProject, Object.values(CORE_CTFS), defaultInterfaceState)
         ).map(e => e.name);
         expect(sortedCtfs).toMatchSnapshot();
         expect(Object.keys(CORE_CTFS).length).toEqual(sortedCtfs.length);
       }
       {
-        const sortedCtfs = topsortCtfs(
-          CTF([CORE_CTFS.react], INTERFACE_STATES[0])
+        const sortedCtfs = topsortCtfMap(
+          CTF(defaultProject, [CORE_CTFS.react], INTERFACE_STATES[0])
         ).map(e => e.name);
         expect(sortedCtfs).toMatchSnapshot();
-        expect(sortedCtfs.length).toEqual(1);
+        expect(sortedCtfs.length).toEqual(6);
       }
     });
 
     it('should call ctfs in order', () => {
-      const ctf = CTF(Object.values(CORE_CTFS), INTERFACE_STATES[0]);
+      const ctf = CTF(
+        defaultProject,
+        Object.values(CORE_CTFS),
+        INTERFACE_STATES[0]
+      );
       const { orderedSelfTransforms } = callCtfsInOrder(
         defaultProject,
         ctf,
@@ -76,23 +78,22 @@ describe('CTF', () => {
       expect(orderedSelfTransforms).toMatchSnapshot();
     });
 
-    it('should allow cycles with non-conflicting ctf nodes', () => {
+    it.only('should allow cycles with non-conflicting ctf nodes', () => {
       const ctfNode1 = {
         name: 'ctf-node-1',
         description: '',
         ctfs: {
-          'ctf-node-2': () => {}
+          'ctf-node-1': ctf => ctf
         }
       };
       const ctfNode2 = {
         name: 'ctf-node-2',
         description: '',
         ctfs: {
-          'ctf-node-1': () => {}
+          'ctf-node-2': ctf => ctf
         }
       };
-      const ctf = CTF([ctfNode1, ctfNode2], INTERFACE_STATES[0]);
-      callCtfsInOrder(defaultProject, ctf, INTERFACE_STATES[0]);
+      CTF(defaultProject, [ctfNode1, ctfNode2], INTERFACE_STATES[0]);
     });
   });
 
@@ -146,7 +147,7 @@ describe('CTF', () => {
         )}`, () => {
           expect(
             getInterfaceForSubcommand(
-              CTF(Object.values(CORE_CTFS), interfaceState),
+              CTF(defaultProject, Object.values(CORE_CTFS), interfaceState),
               'build'
             )
           ).toMatchSnapshot();
@@ -157,8 +158,8 @@ describe('CTF', () => {
         INTERFACE_STATES.forEach(interfaceState => {
           expect(() =>
             getInterfaceForSubcommand(
-              CTF([CORE_CTFS.babel], interfaceState),
-              'build'
+              CTF(defaultProject, [CORE_CTFS.babel], interfaceState),
+              'foo'
             )
           ).toThrow();
         });
@@ -169,7 +170,7 @@ describe('CTF', () => {
   describe('executors', () => {
     it('should generate functions for scripts', () => {
       INTERFACE_STATES.forEach(interfaceState => {
-        const ctf = CTF([CORE_CTFS.webpack], interfaceState);
+        const ctf = CTF(defaultProject, [CORE_CTFS.webpack], interfaceState);
         expect(
           getExecutableWrittenConfigsMethods(
             defaultProject,
@@ -184,26 +185,13 @@ describe('CTF', () => {
   describe('alfred cli helpers', () => {
     it('should add missing std skills to ctf', async () => {
       {
-        const { webpack } = CORE_CTFS;
-        const ctf = CTF([webpack], defaultInterfaceState);
-        expect(Array.from(ctf.keys())).toMatchSnapshot();
-        expect(
-          Array.from(
-            addMissingDefaultSkillsToCtf(ctf, defaultInterfaceState).keys()
-          )
-        ).toMatchSnapshot();
-      }
-      {
         const interfaceState = {
           env: 'production',
           projectType: 'app',
           target: 'browser'
         } as InterfaceState;
-        const ctf = CTF([parcel], interfaceState);
-        expect(Array.from(ctf.keys())).toMatchSnapshot();
-        const ctfSkillNames = Array.from(
-          addMissingDefaultSkillsToCtf(ctf, interfaceState).keys()
-        );
+        const ctf = CTF(defaultProject, [parcel], interfaceState);
+        const ctfSkillNames = Array.from(ctf.keys());
         expect(ctfSkillNames).toMatchSnapshot();
         expect(ctfSkillNames).toContain('parcel');
         expect(ctfSkillNames).not.toContain('rollup');
@@ -215,11 +203,8 @@ describe('CTF', () => {
           projectType: 'lib',
           target: 'browser'
         } as InterfaceState;
-        const ctf = CTF([parcel], interfaceState);
-        expect(Array.from(ctf.keys())).toMatchSnapshot();
-        const ctfSkillNames = Array.from(
-          addMissingDefaultSkillsToCtf(ctf, interfaceState).keys()
-        );
+        const ctf = CTF(defaultProject, [parcel], interfaceState);
+        const ctfSkillNames = Array.from(ctf.keys());
         expect(ctfSkillNames).toMatchSnapshot();
         expect(ctfSkillNames).toContain('rollup');
         expect(ctfSkillNames).not.toContain('parcel');
@@ -238,7 +223,7 @@ describe('CTF', () => {
           }
         };
         await expect(
-          generateCtfFromConfig(project, project.config, state)
+          ctfFromConfig(project, state, project.config)
         ).rejects.toThrow(
           "Cannot find module '@alfred/skill-non-existent-skill' from 'ctf.ts'"
         );
@@ -253,7 +238,7 @@ describe('CTF', () => {
           }
         };
         await expect(
-          generateCtfFromConfig(project, project.config, state)
+          ctfFromConfig(project, state, project.config)
         ).rejects.toThrow(
           "Cannot find module '@alfred/skill-non-existent-skill' from 'ctf.ts'"
         );
@@ -266,12 +251,8 @@ describe('CTF', () => {
         projectType: 'app',
         target: 'browser'
       } as InterfaceState;
-      const ctf = CTF([parcel], interfaceState);
-
-      expect(Array.from(ctf.keys())).toMatchSnapshot();
-      const ctfSkillNames = Array.from(
-        addMissingDefaultSkillsToCtf(ctf, interfaceState).keys()
-      );
+      const ctf = CTF(defaultProject, [parcel], interfaceState);
+      const ctfSkillNames = Array.from(ctf.keys());
       expect(ctfSkillNames).toMatchSnapshot();
       expect(ctfSkillNames).toContain('parcel');
       expect(ctfSkillNames).not.toContain('rollup');
@@ -284,11 +265,8 @@ describe('CTF', () => {
         projectType: 'lib',
         target: 'browser'
       } as InterfaceState;
-      const ctf = CTF([parcel], interfaceState);
-      expect(Array.from(ctf.keys())).toEqual([]);
-      const ctfSkillNames = Array.from(
-        addMissingDefaultSkillsToCtf(ctf, interfaceState).keys()
-      );
+      const ctf = CTF(defaultProject, [parcel], interfaceState);
+      const ctfSkillNames = Array.from(ctf.keys());
       expect(ctfSkillNames).toMatchSnapshot();
       expect(ctfSkillNames).not.toContain('parcel');
       expect(ctfSkillNames).toContain('rollup');
@@ -299,8 +277,12 @@ describe('CTF', () => {
   describe('dependencies', () => {
     it('should have diffs in deps after learning new skill', async () => {
       const { webpack, babel } = CORE_CTFS;
-      const oldCtf = CTF([webpack], defaultInterfaceState);
-      const newCtf = CTF([webpack, babel], defaultInterfaceState);
+      const oldCtf = CTF(defaultProject, [webpack], defaultInterfaceState);
+      const newCtf = CTF(
+        defaultProject,
+        [webpack, babel],
+        defaultInterfaceState
+      );
       const ctf = diffCtfDeps(oldCtf, newCtf);
       expect(ctf).toMatchSnapshot();
     });
@@ -316,7 +298,7 @@ describe('CTF', () => {
         expect(ctfCombination).toMatchSnapshot();
         // Get the CTFs for each combination
         const ctfObjects = ctfCombination.map(ctfName => CORE_CTFS[ctfName]);
-        const result = CTF(ctfObjects, interfaceState);
+        const result = CTF(defaultProject, ctfObjects, interfaceState);
         expect(
           removePathsPropertiesFromObject(getConfigs(result))
         ).toMatchSnapshot();
@@ -330,7 +312,11 @@ describe('CTF', () => {
     it(`should add devDepencencies with interface state ${JSON.stringify(
       interfaceState
     )}`, () => {
-      const { devDependencies } = CTF(Object.values(CORE_CTFS), interfaceState)
+      const { devDependencies } = CTF(
+        defaultProject,
+        Object.values(CORE_CTFS),
+        interfaceState
+      )
         .get('webpack')
         .addDevDependencies({
           foobar: '0.0.0'

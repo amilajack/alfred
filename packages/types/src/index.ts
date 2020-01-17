@@ -1,5 +1,3 @@
-// @TODO Use a proper JSON typing here
-
 export type Dependencies = {
   [x: string]: string;
 };
@@ -38,12 +36,12 @@ export interface ProjectInterface {
   pkgPath: string;
   skills: () => Promise<SkillsList>;
   setConfig: (config: ConfigInterface) => void;
-  // @TODO
-  // installDeps: (
-  //   dependencies: Array<string>,
-  //   npmClient: 'npm' | 'yarn' | 'write',
-  //   config: ConfigInterface
-  // ) => void;
+  ctfFromInterfaceState: (i: InterfaceState) => Promise<CtfMap>;
+  writeConfigsFromCtf: (ctf: CtfMap) => Promise<CtfMap>;
+  installDeps: (
+    dependencies: string[],
+    npmClient?: NpmClients
+  ) => Promise<CtfMap>;
 }
 
 export type InterfaceState = {
@@ -62,9 +60,9 @@ export interface SkillInterfaceModule extends NodeJS.Module {
   // @TODO Take config in misc object to allow for future additions to the API
   // @TODO Swap order of interfaceState and ctfs
   resolveSkill?: (
-    ctfs: Array<CtfNode>,
+    ctfs: Array<CtfWithHelpers>,
     interfaceState: InterfaceState
-  ) => CtfNode | false;
+  ) => CtfWithHelpers | false;
   handleFlags?: (
     flags: Array<string>,
     misc: { interfaceState: InterfaceState; config: ConfigInterface }
