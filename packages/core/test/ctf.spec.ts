@@ -21,7 +21,7 @@ import ctfFromConfig, {
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from '../src/interface';
 import Project from '../src/project';
 
-const parcel = require('../../alfred-skill-parcel');
+const parcel = require('@alfred/skill-parcel');
 
 const [defaultInterfaceState] = INTERFACE_STATES;
 

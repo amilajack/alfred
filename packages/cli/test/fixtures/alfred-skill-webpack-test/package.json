@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "@alfred/skill-webpack": "file:../../../../alfred-skill-webpack",
+    "@alfred/skill-webpack": "file:../../../../skill-webpack",
     "webpack": "^4.28.3",
     "webpack-cli": "^3.2.0"
   },

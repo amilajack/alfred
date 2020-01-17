@@ -5,13 +5,13 @@
   "main": "index.js",
   "alfred": {
     "skills": [
-      "file:../../../../alfred-skill-prettier",
-      "file:../../../../alfred-skill-eslint"
+      "file:../../../../skill-prettier",
+      "file:../../../../skill-eslint"
     ]
   },
   "dependencies": {
-    "@alfred/skill-eslint": "file:../../../../alfred-skill-eslint",
-    "@alfred/skill-prettier": "file:../../../../alfred-skill-prettier",
+    "@alfred/skill-eslint": "file:../../../../skill-eslint",
+    "@alfred/skill-prettier": "file:../../../../skill-prettier",
     "prettier": "^1.15.3"
   },
   "devDependencies": {}

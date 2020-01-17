@@ -4,10 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "@alfred/skill-eslint": "file:../../../../alfred-skill-eslint",
-    "@alfred/skill-webpack": "file:../../../../alfred-skill-webpack",
-    "@alfred/interface-build": "file:../../../../alfred-interface-build",
-    "@alfred/interface-lint": "file:../../../../alfred-interface-lint",
+    "@alfred/skill-eslint": "file:../../../../skill-eslint",
+    "@alfred/skill-webpack": "file:../../../../skill-webpack",
+    "@alfred/interface-build": "file:../../../../interface-build",
+    "@alfred/interface-lint": "file:../../../../interface-lint",
     "eslint": "^5.10.0",
     "webpack": "^4.28.3",
     "webpack-cli": "^3.2.0"
