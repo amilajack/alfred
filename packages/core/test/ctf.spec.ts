@@ -29,7 +29,13 @@ const defaultProject = new Project(
   path.join(__dirname, '../../../tests/fixtures/app')
 );
 
-function removePathsPropertiesFromObject(obj): Record<string, any> {
+function removePathsPropertiesFromObject(
+  obj:
+    | Array<any>
+    | {
+        [x: string]: string | Record<string, any>;
+      }
+): Record<string, any> {
   for (const key in obj) {
     const value = obj[key];
 
@@ -78,7 +84,7 @@ describe('CTF', () => {
       expect(orderedSelfTransforms).toMatchSnapshot();
     });
 
-    it.only('should allow cycles with non-conflicting ctf nodes', () => {
+    it('should allow cycles with non-conflicting ctf nodes', () => {
       const ctfNode1 = {
         name: 'ctf-node-1',
         description: '',
@@ -136,8 +142,10 @@ describe('CTF', () => {
           '@alfred/interface-build': {},
           '@alfred/interface-start': {}
         })
-      ).toThrow();
-      expect(() => normalizeInterfacesOfSkill('incorrect-input')).toThrow();
+      ).toThrowErrorMatchingSnapshot();
+      expect(() =>
+        normalizeInterfacesOfSkill('incorrect-input')
+      ).toThrowErrorMatchingSnapshot();
     });
 
     describe('subcommand', () => {

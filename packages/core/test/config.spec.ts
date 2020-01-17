@@ -61,7 +61,8 @@ describe('config', () => {
         () =>
           new Config({
             // @ts-ignore
-            extends: () => {}
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
+            extends: (): void => {}
           })
       ).toThrowErrorMatchingSnapshot();
     });

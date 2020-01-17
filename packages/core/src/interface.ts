@@ -110,7 +110,9 @@ export function normalizeInterfacesOfSkill(
     });
   }
   throw new Error(
-    `".interfaces" property must be an array of strings or an array of arrays. Received "${interfaces}"`
+    `.interfaces property must be an array of skill interfaces. Received ${JSON.stringify(
+      interfaces
+    )}`
   );
 }
 

@@ -39,7 +39,7 @@ async function createBackupFiles(
   return mappings;
 }
 
-async function assertGitWorktreeClean() {
+async function assertGitWorktreeClean(): Promise<void> {
   const status = await git().status();
   if (status.files.length > status.not_added.length) {
     throw new Error(`
