@@ -1,9 +1,14 @@
+variables:
+  YARN_CACHE_FOLDER: $(Pipeline.Workspace)/.yarn
+
 strategy:
   matrix:
     linux:
       imageName: 'ubuntu-16.04'
+      nodeVersion: '13.x'
     mac:
       imageName: 'macos-10.13'
+      nodeVersion: '13.x'
     # Windows builds don't work at the moment
     # windows:
     #  imageName: 'windows-2019'
@@ -12,8 +17,15 @@ pool:
   vmImage: $(imageName)
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '13.x'
-
-- script: yarn && yarn test
+  - task: NodeTool@0
+    inputs:
+      versionSpec: $(nodeVersion)
+  - task: Cache@2
+    inputs:
+      key: 'yarn | "$(Agent.OS)" | yarn.lock'
+      restoreKeys: |
+        yarn | "$(Agent.OS)"
+        yarn
+      path: $(YARN_CACHE_FOLDER)
+    displayName: Cache Yarn packages
+  - script: yarn --frozen-lockfile && yarn test
