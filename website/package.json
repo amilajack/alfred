@@ -13,10 +13,10 @@
     "write-translations": "docusaurus-write-translations"
   },
   "devDependencies": {
-    "docusaurus": "^1.14.3",
+    "docusaurus": "^1.14.4",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.17.0"
+    "eslint-plugin-react": "^7.18.0"
   },
   "eslintConfig": {
     "extends": [
@@ -38,7 +38,8 @@
       "react/no-multi-comp": "off",
       "react/no-unescaped-entities": "off",
       "react/prefer-stateless-function": "off",
-      "react/prop-types": "off"
+      "react/prop-types": "off",
+      "flowtype-errors/show-errors": "off"
     }
   }
 }

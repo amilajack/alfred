@@ -1,6 +1,7 @@
+/* eslint global-require: off */
 const replace = require('rollup-plugin-replace');
 const commonjs = require('rollup-plugin-commonjs');
-const { getConfigByConfigName, mapEnvToShortName } = require('@alfred/core');
+const { getConfigByConfigName, mapEnvToShortName } = require('@alfred/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 
 const interfaceConfig = {
@@ -68,7 +69,7 @@ module.exports = {
   ],
   hooks: {
     async call({ configFiles, interfaceState, subcommand }) {
-      // if (alfredConfig.showConfigs) {
+      // if (config.showConfigs) {
       //   const configPath = getConfigPathByConfigName(
       //     'rollup.base',
       //     configFiles
@@ -84,7 +85,7 @@ module.exports = {
       //     [
       //       binPath,
       //       cmd,
-      //       alfredConfig.showConfigs ? `--config ${configPath} .` : ''
+      //       config.showConfigs ? `--config ${configPath} .` : ''
       //     ].join(' ')
       //   );
       // }

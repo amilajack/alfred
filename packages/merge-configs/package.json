@@ -10,14 +10,15 @@
     "test": "mocha tests/test-*",
     "watch": "npm-watch"
   },
+  "types": "index.d.ts",
   "dependencies": {
     "lodash": "^4.17.11"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^5.1.1",
-    "mocha": "^6.2.2",
-    "terser-webpack-plugin": "^2.2.1",
-    "webpack": "^4.41.2"
+    "mocha": "^7.0.0",
+    "terser-webpack-plugin": "^2.3.2",
+    "webpack": "^4.41.5"
   },
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"
 }

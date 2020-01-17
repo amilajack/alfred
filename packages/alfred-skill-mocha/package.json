@@ -2,11 +2,13 @@
   "name": "@alfred/skill-mocha",
   "version": "0.0.2-alpha.4",
   "dependencies": {
-    "mocha": "^6.2.2"
+    "@alfred/helpers": "^0.0.2-alpha.4",
+    "@alfred/types": "^0.0.2-alpha.4",
+    "mocha": "^7.0.0"
   },
   "peerDependencies": {
-    "@alfred/core": "^0.0.2-alpha.1",
-    "@alfred/interface-test": "^0.0.2-alpha.1",
+    "@alfred/core": "^0.0.2-alpha.4",
+    "@alfred/interface-test": "^0.0.2-alpha.4",
     "mocha": "^5.2.0"
   },
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"

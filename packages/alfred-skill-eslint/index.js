@@ -1,10 +1,11 @@
+/* eslint global-require: off */
 const path = require('path');
 const {
   getConfigPathByConfigName,
   getConfigByConfigName,
-  execCommand,
-  getPkgBinPath
-} = require('@alfred/core');
+  getPkgBinPath,
+  execCommand
+} = require('@alfred/helpers');
 
 module.exports = {
   name: 'eslint',
@@ -21,25 +22,34 @@ module.exports = {
           browser: true,
           node: true
         },
-        extends: ['bliss']
+        extends: ['bliss'],
+        rules: {
+          'flowtype-errors/show-errors': 'off'
+        }
       }
     }
   ],
   hooks: {
-    async call({ configFiles, alfredConfig, flags }) {
+    async call({ project, config, configFiles, flags }) {
       const configPath = getConfigPathByConfigName('eslint', configFiles);
       const binPath = await getPkgBinPath('eslint', 'eslint');
-      if (alfredConfig.showConfigs) {
+      if (config.showConfigs) {
         return execCommand(
           [binPath, `--config ${configPath} src tests`, ...flags].join(' ')
         );
       }
-      const { config } = getConfigByConfigName('eslint', configFiles);
+      const { config: eslintConfig } = getConfigByConfigName(
+        'eslint',
+        configFiles
+      );
       const { CLIEngine } = require('eslint');
-      const cli = new CLIEngine({ baseConfig: config, useEslintrc: false });
+      const cli = new CLIEngine({
+        baseConfig: eslintConfig,
+        useEslintrc: false
+      });
       const report = cli.executeOnFiles([
-        path.join(alfredConfig.root, 'src'),
-        path.join(alfredConfig.root, 'tests')
+        path.join(project.root, 'src'),
+        path.join(project.root, 'tests')
       ]);
       const formatter = cli.getFormatter();
       if (report.errorCount) {

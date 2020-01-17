@@ -1,8 +1,0 @@
-{
-  "env": {
-    "jest": true
-  },
-  "rules": {
-    "flowtype-errors/show-errors": "off"
-  }
-}

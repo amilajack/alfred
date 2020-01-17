@@ -1,8 +1,5 @@
 /* eslint no-param-reassign: off */
-const {
-  normalizeInterfacesOfSkill,
-  mapShortNameEnvToLongName
-} = require('@alfred/core');
+const { mapShortNameEnvToLongName } = require('@alfred/helpers');
 const debug = require('debug')('@alfred/interface-start');
 
 module.exports = {
@@ -38,10 +35,6 @@ module.exports = {
    */
   resolveSkill(skills = [], interfaceState) {
     const resolvedSkills = skills
-      .map(skill => ({
-        ...skill,
-        interfaces: normalizeInterfacesOfSkill(skill.interfaces)
-      }))
       .filter(skill =>
         skill.interfaces.find(e => e.module.subcommand === 'start')
       )

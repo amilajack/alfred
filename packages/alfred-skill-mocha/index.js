@@ -1,10 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 const {
-  getPkgBinPath,
+  getConfigByConfigName,
   execCommand,
-  getConfigByConfigName
-} = require('@alfred/core');
+  getPkgBinPath
+} = require('@alfred/helpers');
 
 module.exports = {
   name: 'mocha',
@@ -18,11 +18,11 @@ module.exports = {
     projectTypes: ['app', 'lib']
   },
   hooks: {
-    async call({ ctf, alfredConfig, flags }) {
+    async call({ project, config, ctf, flags }) {
       const binPath = await getPkgBinPath('mocha', 'mocha');
       const mochaBabelRegisterPath = path.join(
-        alfredConfig.root,
-        alfredConfig.showConfigs ? '.configs' : 'node_modules',
+        project.root,
+        config.showConfigs ? '.configs' : 'node_modules',
         'mocha.js'
       );
       const { config: babelConfig } = getConfigByConfigName(

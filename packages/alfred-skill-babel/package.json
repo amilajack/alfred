@@ -2,16 +2,18 @@
   "name": "@alfred/skill-babel",
   "version": "0.0.2-alpha.4",
   "dependencies": {
-    "@babel/cli": "^7.7.7",
-    "@babel/core": "^7.7.7",
-    "@babel/plugin-proposal-class-properties": "^7.7.4",
-    "@babel/preset-env": "^7.7.7",
-    "@babel/register": "^7.7.7",
+    "@alfred/helpers": "^0.0.2-alpha.4",
+    "@alfred/types": "^0.0.2-alpha.4",
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/register": "^7.8.3",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "8.0.6"
   },
   "peerDependencies": {
-    "@alfred/core": "^0.0.2-alpha.1"
+    "@alfred/core": "^0.0.2-alpha.4"
   },
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"
 }

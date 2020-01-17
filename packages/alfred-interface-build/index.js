@@ -1,19 +1,4 @@
-/* eslint no-param-reassign: off */
-// Example of a interfaceState object
-// Note how the property names are singular, unlike the 'supports' config
-//
-// interfaceState = {
-//   // Flag name and argument types
-//   env: 'production'
-//   // All the supported targets a `build` skill should build
-//   target: 'node',
-//   // Project type
-//   projectType: 'lib'
-// },
-const {
-  normalizeInterfacesOfSkill,
-  mapShortNameEnvToLongName
-} = require('@alfred/core');
+const { mapShortNameEnvToLongName } = require('@alfred/helpers');
 const debug = require('debug')('@alfred/interface-build');
 
 module.exports = {
@@ -29,11 +14,13 @@ module.exports = {
     return flags.reduce((prev, curr) => {
       const env = curr.slice('--'.length);
       if (shortNameSupportedFlags.has(curr)) {
+        // eslint-disable-next-line no-param-reassign
         interfaceState.env = mapShortNameEnvToLongName(env);
         debug(`Setting "process.env.NODE_ENV" to "${interfaceState.env}"`);
         return prev;
       }
       if (supportedFlags.has(curr)) {
+        // eslint-disable-next-line no-param-reassign
         interfaceState.env = env;
         debug(`Setting "process.env.NODE_ENV" to "${interfaceState.env}"`);
         return prev;
@@ -47,22 +34,18 @@ module.exports = {
    * Given an array of CTF nodes, return the CTF which should be used based
    * on the current environment and current target
    */
-  resolveSkill(skills = [], interfaceState) {
-    const resolvedSkills = skills
-      .map(skill => ({
-        ...skill,
-        interfaces: normalizeInterfacesOfSkill(skill.interfaces)
-      }))
-      .filter(skill =>
-        skill.interfaces.find(e => e.module.subcommand === 'build')
+  resolveSkill(ctfNodes = [], interfaceState) {
+    const resolvedSkills = ctfNodes
+      .filter(ctfNode =>
+        ctfNode.interfaces.find(e => e.module.subcommand === 'build')
       )
-      .filter(sk => {
-        const { supports } = sk.interfaces.find(
+      .filter(ctfNode => {
+        const { supports } = ctfNode.interfaces.find(
           e => e.module.subcommand === 'build'
         ).config;
         if (!supports) {
           throw new Error(
-            `Skill "${sk.name}" requires the "support" property, which is required by "@alfred/interface-build"`
+            `Skill "${ctfNode.name}" requires the "support" property, which is required by "@alfred/interface-build"`
           );
         }
         return (

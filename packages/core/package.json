@@ -1,19 +1,18 @@
 {
   "name": "@alfred/core",
   "version": "0.0.2-alpha.4",
-  "files": [
-    "lib"
-  ],
   "main": "./lib/index.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps inline",
-    "build-watch": "cross-env NODE_ENV=production babel src --out-dir lib --watch --source-maps inline",
-    "test": "jest --color"
+    "build": "yarn ts",
+    "build-watch": "tsc",
+    "test": "jest --color",
+    "ts": "tsc"
   },
   "jest": {
     "testEnvironment": "node"
   },
   "dependencies": {
+    "@alfred/helpers": "^0.0.2-alpha.4",
     "@alfred/interface-build": "^0.0.2-alpha.4",
     "@alfred/interface-format": "^0.0.2-alpha.4",
     "@alfred/interface-lint": "^0.0.2-alpha.4",
@@ -29,17 +28,25 @@
     "@alfred/skill-react": "^0.0.2-alpha.4",
     "@alfred/skill-rollup": "^0.0.2-alpha.4",
     "@alfred/skill-webpack": "^0.0.2-alpha.4",
+    "@alfred/types": "^0.0.2-alpha.4",
+    "@types/joi": "^14.3.4",
+    "@types/lodash": "^4.14.149",
+    "@types/npm": "^2.0.31",
+    "@types/rimraf": "^2.0.3",
     "debug": "^4.1.1",
     "format-package": "^5.2.0",
     "joi": "^14.3.1",
     "lodash": "^4.17.11",
+    "npm": "^6.13.6",
     "pkg-up": "^3.1.0",
-    "rimraf": "^3.0.0",
-    "toposort": "^2.0.2"
+    "rimraf": "^3.0.0"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=13"
   },
   "engineStrict": true,
-  "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"
+  "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8",
+  "devDependencies": {
+    "@types/jest": "^24.9.0"
+  }
 }

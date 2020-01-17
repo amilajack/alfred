@@ -5,7 +5,7 @@ module.exports = {
   configFiles: [],
   ctfs: {
     webpack(config) {
-      // eslint-disable-next-line import/no-unresolved
+      // eslint-disable-next-line global-require
       const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
       return config
         .addDevDependencies({
