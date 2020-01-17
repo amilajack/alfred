@@ -14,7 +14,9 @@ import getSingleSubcommandFromArgs, { TemplateData, GitConfig } from '..';
 
 const TEMPLATES_DIR = path.resolve(__dirname, '../../templates');
 
-async function compileTemplate(templateFilename: string) {
+async function compileTemplate(
+  templateFilename: string
+): Promise<HandlebarsTemplateDelegate> {
   const source = await fs.promises.readFile(
     path.join(TEMPLATES_DIR, templateFilename)
   );
@@ -25,7 +27,7 @@ export async function addEntrypoints(
   rawTemplateData: Record<string, any>,
   root: string,
   entrypointInterfaceStates: Array<InterfaceState>
-) {
+): Promise<void> {
   const [
     APP_TEMPLATE,
     LIB_TEMPLATE,

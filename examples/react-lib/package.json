@@ -4,8 +4,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "_build": "../../packages/cli/lib/commands/alfred.js run build",
-    "build": "echo skip",
+    "build": "../../packages/cli/lib/commands/alfred.js run build",
     "clean": "../../packages/cli/lib/commands/alfred.js run clean",
     "format": "../../packages/cli/lib/commands/alfred.js run format",
     "lint": "../../packages/cli/lib/commands/alfred.js run lint",
