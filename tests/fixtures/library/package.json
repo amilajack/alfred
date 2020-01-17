@@ -1,6 +1,6 @@
 {
   "name": "@fixtures/library",
-  "version": "0.0.2-alpha.4",
+  "version": "0.0.2-alpha.5",
   "private": true,
   "license": "MIT",
   "main": "./targets/lib.node.js",
@@ -16,8 +16,8 @@
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
   "devDependencies": {
-    "@alfred/cli": "^0.0.2-alpha.4",
-    "@alfred/core": "^0.0.2-alpha.4",
+    "@alfred/cli": "^0.0.2-alpha.5",
+    "@alfred/core": "^0.0.2-alpha.5",
     "@babel/core": "^7.8.3"
   }
 }
