@@ -16,7 +16,6 @@
     "build": "yarn ts",
     "build-watch": "yarn ts --watch",
     "e2e": "node -r @babel/register ./test/e2e/alfred-e2e.ts",
-    "test": "yarn e2e",
     "ts": "tsc",
     "version": "rm -rf lib && yarn build"
   },
