@@ -17,7 +17,7 @@
     "build-watch": "yarn ts --watch",
     "e2e": "node -r @babel/register ./test/e2e/alfred-e2e.ts",
     "ts": "tsc",
-    "version": "rm -rf lib && yarn build"
+    "version": "yarn build"
   },
   "dependencies": {
     "5to6-codemod": "^1.8.0",

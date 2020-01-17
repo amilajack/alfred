@@ -6,7 +6,8 @@
     "build": "yarn ts",
     "build-watch": "tsc",
     "test": "jest --color",
-    "ts": "tsc"
+    "ts": "tsc",
+    "version": "yarn build"
   },
   "jest": {
     "testEnvironment": "node"
