@@ -16,7 +16,7 @@ function parseCodeSnippets(codeSnippets: Array<string> | void): void {
   }
 }
 
-describe('Migrate', () => {
+describe.skip('Migrate', () => {
   const migrateOpts = {
     packageJsonPath: require.resolve(
       './fixtures/express-hello-world/package.json'
