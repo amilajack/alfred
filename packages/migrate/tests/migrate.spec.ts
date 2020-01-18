@@ -1,15 +1,16 @@
 import path from 'path';
 import espree from 'espree';
 import { expect as chaiExpect } from 'chai';
-import Providers, { handleInput } from '../../src/providers';
+import Providers, { handleInput } from '../src';
 
-jest.setTimeout(2000);
+jest.setTimeout(20000);
 
 function parseCodeSnippets(codeSnippets: Array<string> | void): void {
   if (codeSnippets) {
     codeSnippets.map(code =>
       espree.parse(code, {
-        sourceType: 'module'
+        sourceType: 'module',
+        ecmaVersion: 2018
       })
     );
   }
@@ -77,7 +78,7 @@ describe('Migrate', () => {
           path.join(__dirname, 'fixtures', 'class-test.ts')
         ]
       }).then(e => ({ ...e, path: '' }))
-    ).resolves.toMatchSnapshot();
+    ).rejects.toThrowError();
   });
 
   it('should run against directories', async () => {
@@ -98,8 +99,6 @@ describe('Migrate', () => {
       files: ['.'],
       packageJsonPath: path.join(__dirname, '..', 'package.json')
     });
-
-    console.log(files);
 
     files.forEach(file => {
       chaiExpect(file).to.not.include('node_modules');

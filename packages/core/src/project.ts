@@ -132,7 +132,12 @@ export default class Project implements ProjectInterface {
     const result = PkgValidation.validate(fs.readFileSync(pkgPath).toString());
 
     if (result.errors.length) {
-      throw new Error(JSON.stringify(result.errors));
+      throw new Error(`
+      The following errors were found in the package.json path:
+      ${pkgPath}:
+
+      ${JSON.stringify(result.errors)}
+      `);
     }
 
     return result;

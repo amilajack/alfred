@@ -1,5 +1,5 @@
 import path from 'path';
-import ParseInput from '../../src/helpers/parse-input';
+import ParseInput from '../src/helpers/parse-input';
 
 const testDir = path.join(__dirname, '..');
 
@@ -7,7 +7,7 @@ const testDir = path.join(__dirname, '..');
 // If the project runs on CI, the path to a file will be different
 // than on your local environment. This function helps normalize
 // file paths by stripping out parent directories from file paths
-function stripNonProjectPaths(filePath): string {
+function stripNonProjectPaths(filePath: string): string {
   return filePath.slice(testDir.length);
 }
 

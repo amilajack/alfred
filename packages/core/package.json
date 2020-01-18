@@ -4,7 +4,7 @@
   "main": "./lib/index.js",
   "scripts": {
     "build": "yarn ts",
-    "build-watch": "tsc",
+    "build-watch": "yarn build --watch",
     "test": "jest --color",
     "ts": "tsc",
     "version": "yarn build"

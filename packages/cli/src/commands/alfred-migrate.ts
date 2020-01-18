@@ -1,7 +1,7 @@
 import path from 'path';
 import program from 'commander';
 import alfred from '@alfred/core';
-import Providers from '../providers';
+import Providers from '@alfred/migrate';
 
 (async (): Promise<void | string[]> => {
   const parsedArguments = program

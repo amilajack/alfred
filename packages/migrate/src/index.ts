@@ -4,11 +4,14 @@ import path from 'path';
 import os from 'os';
 import fs from 'fs';
 import parser from 'gitignore-parser';
-import LebabProvider from './lebab-provider';
-import EslintProvider from './eslint-provider';
-import ParseInput from '../helpers/parse-input';
-import { copyFileAsync, readFileAsync, writeFileAsync } from '../helpers/fs';
-import { UserProviderInput, ProviderInput } from './provider-interface';
+import LebabProvider from './providers/lebab-provider';
+import EslintProvider from './providers/eslint-provider';
+import ParseInput from './helpers/parse-input';
+import { copyFileAsync, readFileAsync, writeFileAsync } from './helpers/fs';
+import {
+  UserProviderInput,
+  ProviderInput
+} from './providers/provider-interface';
 
 function checkFileExists(filepath: string): Promise<boolean> {
   return new Promise(resolve => {

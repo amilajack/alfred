@@ -26,7 +26,7 @@ const parcel = require('@alfred/skill-parcel');
 const [defaultInterfaceState] = INTERFACE_STATES;
 
 const defaultProject = new Project(
-  path.join(__dirname, '../../../tests/fixtures/app')
+  path.join(__dirname, '../../cli/tests/fixtures/app')
 );
 
 function removePathsPropertiesFromObject(

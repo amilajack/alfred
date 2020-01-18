@@ -20,7 +20,11 @@ describe('fixtures', () => {
     for (const {abs, rel} of fixtureDirs) {
       it(`should render html with expected text on ${rel}`, async () => {
         const cp = spawn('yarn', ['start'], {
-          cwd: abs
+          cwd: abs,
+          env: {
+            ...process.env,
+            ALFRED_E2E_TEST: 'true'
+          }
         });
         const url = await new Promise(resolve => {
           cp.stdout.on('data', data => {

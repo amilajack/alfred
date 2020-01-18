@@ -15,14 +15,14 @@
   "scripts": {
     "build": "yarn ts && chmod -R +x lib",
     "build-watch": "yarn ts --watch",
-    "e2e": "node -r @babel/register ./test/e2e/alfred-e2e.ts",
+    "e2e": "node -r @babel/register ./tests/e2e/alfred-e2e.ts",
     "ts": "tsc",
     "version": "yarn build"
   },
   "dependencies": {
-    "5to6-codemod": "^1.8.0",
     "@alfred/core": "^0.0.2-alpha.5",
     "@alfred/merge-configs": "^0.0.2-alpha.5",
+    "@alfred/migrate": "^0.0.2-alpha.5",
     "@alfred/types": "^0.0.2-alpha.5",
     "@amilajack/powerset": "^0.1.1",
     "@babel/code-frame": "^7.8.3",
@@ -32,25 +32,17 @@
     "@types/lodash": "^4.14.149",
     "@types/lodash.flatten": "^4.4.6",
     "@types/signale": "^1.2.1",
-    "@types/uniq": "^0.0.27",
     "@types/update-notifier": "^2.5.0",
     "chalk": "^3.0.0",
-    "child-process-promise": "^2.2.1",
     "cli-table3": "^0.5.1",
     "commander": "^4.1.0",
     "eslint": "^6.8.0",
-    "eslint-config-bliss": "^4.6.0",
-    "findit": "^2.0.0",
     "format-package": "^5.2.0",
     "git-config": "^0.0.7",
     "gitignore-parser": "^0.0.2",
     "handlebars": "^4.7.2",
-    "inquirer": "^7.0.3",
-    "jscodeshift": "^0.7.0",
-    "lebab": "^3.0.3",
     "lodash": "^4.17.11",
     "lodash.flatten": "^4.4.0",
-    "microjob": "^0.7.0",
     "pkg-up": "^3.1.0",
     "rimraf": "^3.0.0",
     "rndm": "^1.2.0",
@@ -63,9 +55,7 @@
   },
   "devDependencies": {
     "@types/jest": "^24.9.0",
-    "chai": "^4.2.0",
-    "espree": "^6.1.2",
-    "lodash.flatten": "^4.4.0"
+    "chai": "^4.2.0"
   },
   "peerDependencies": {
     "@alfred/interface-build": "^0.0.2-alpha.5",

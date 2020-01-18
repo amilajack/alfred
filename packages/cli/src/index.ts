@@ -27,9 +27,9 @@ export type GitConfig = {
   };
 };
 
-export * from './helpers/parse-input';
-
-async function compileTemplate(templateFilename: string) {
+async function compileTemplate(
+  templateFilename: string
+): Promise<HandlebarsTemplateDelegate> {
   const source = await fs.promises.readFile(
     path.resolve(TEMPLATES_DIR, templateFilename)
   );
@@ -40,7 +40,7 @@ export async function addEntrypoints(
   rawTemplateData: Record<string, any>,
   root: string,
   entrypointInterfaceStates: Array<InterfaceState>
-) {
+): Promise<void> {
   const [
     APP_TEMPLATE,
     LIB_TEMPLATE,
