@@ -1,8 +1,5 @@
-/* eslint-env mocha */
-const assert = require('assert');
-
 function multipleTests(merge) {
-  it('should override objects', () => {
+  test('should override objects', () => {
     const a = {
       client: {
         entry: './client.js'
@@ -19,10 +16,10 @@ function multipleTests(merge) {
       }
     ];
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 
-  it('should add new objects if not existing', () => {
+  test('should add new objects if not existing', () => {
     const a = {
       client: {
         entry: './client.js'
@@ -45,10 +42,10 @@ function multipleTests(merge) {
       }
     ];
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 
-  it('should add different configurations without merging', () => {
+  test('should add different configurations without merging', () => {
     const a = {
       client: {
         entry: './client.js'
@@ -68,10 +65,10 @@ function multipleTests(merge) {
       }
     ];
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 
-  it('should work with an array of objects', () => {
+  test('should work with an array of objects', () => {
     const a = {
       client: {
         entry: ['./client.js', './client2.js']
@@ -99,10 +96,10 @@ function multipleTests(merge) {
       }
     ];
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 
-  it('should deeply merge objects', () => {
+  test('should deeply merge objects', () => {
     const a = {
       client: {
         entry: {
@@ -135,10 +132,10 @@ function multipleTests(merge) {
       }
     ];
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 
-  it('should merge where keys exist and add where not', () => {
+  test('should merge where keys exist and add where not', () => {
     const a = {
       client: {
         entry: './client.js'
@@ -167,7 +164,7 @@ function multipleTests(merge) {
       }
     ];
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 }
 

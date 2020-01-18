@@ -1,7 +1,6 @@
-/* eslint-env mocha */
 const { smart } = require('..');
-const mergeTests = require('./merge-tests');
-const mergeSmartTests = require('./merge-smart-tests');
+const mergeTests = require('./merge');
+const mergeSmartTests = require('./merge-smart');
 
 describe('Smart merge', () => {
   const merge = smart;

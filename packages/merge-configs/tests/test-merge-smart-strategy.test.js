@@ -1,12 +1,10 @@
-/* eslint-env mocha */
-const assert = require('assert');
 const { smartStrategy } = require('..');
-const mergeTests = require('./merge-tests');
-const mergeSmartTests = require('./merge-smart-tests');
-const mergeStrategyTests = require('./merge-strategy-tests');
+const mergeTests = require('./merge');
+const mergeSmartTests = require('./merge-smart');
+const mergeStrategyTests = require('./merge-strategy');
 
 function mergeStrategySpecificTests(merge) {
-  it('should work with nested arrays and prepend', () => {
+  test('should work with nested arrays and prepend', () => {
     const a = {
       module: {
         loaders: [
@@ -41,15 +39,14 @@ function mergeStrategySpecificTests(merge) {
       }
     };
 
-    assert.deepEqual(
+    expect(
       merge({
         'module.loaders.loaders': 'prepend'
-      })(a, b),
-      result
-    );
+      })(a, b)
+    ).toEqual(result);
   });
 
-  it('should work with nested arrays and replace', () => {
+  test('should work with nested arrays and replace', () => {
     const a = {
       module: {
         loaders: [
@@ -84,15 +81,14 @@ function mergeStrategySpecificTests(merge) {
       }
     };
 
-    assert.deepEqual(
+    expect(
       merge({
         'module.loaders.loaders': 'replace'
-      })(a, b),
-      result
-    );
+      })(a, b)
+    ).toEqual(result);
   });
 
-  it('should work with nested arrays and replace with rules', () => {
+  test('should work with nested arrays and replace with rules', () => {
     const a = {
       module: {
         rules: [
@@ -127,15 +123,14 @@ function mergeStrategySpecificTests(merge) {
       }
     };
 
-    assert.deepEqual(
+    expect(
       merge({
         'module.rules.loaders': 'replace'
-      })(a, b),
-      result
-    );
+      })(a, b)
+    ).toEqual(result);
   });
 
-  it('should work with use and same types (#63)', () => {
+  test('should work with use and same types (#63)', () => {
     const a = {
       module: {
         rules: [
@@ -167,15 +162,14 @@ function mergeStrategySpecificTests(merge) {
       }
     };
 
-    assert.deepEqual(
+    expect(
       merge({
         'module.rules.use': 'replace'
-      })(a, b),
-      result
-    );
+      })(a, b)
+    ).toEqual(result);
   });
 
-  it('should work with two level nesting (#64)', () => {
+  test('should work with two level nesting (#64)', () => {
     const common = {
       module: {
         rules: [
@@ -251,15 +245,14 @@ function mergeStrategySpecificTests(merge) {
       }
     };
 
-    assert.deepEqual(
+    expect(
       merge({
         'module.rules.use': 'prepend'
-      })(common, prod),
-      expected
-    );
+      })(common, prod)
+    ).toEqual(expected);
   });
 
-  it('should work with nested arrays and replace (2)', () => {
+  test('should work with nested arrays and replace (2)', () => {
     const a = {
       module: {
         loaders: [
@@ -294,12 +287,11 @@ function mergeStrategySpecificTests(merge) {
       }
     };
 
-    assert.deepEqual(
+    expect(
       merge({
         'module.loaders': 'replace'
-      })(a, b),
-      result
-    );
+      })(a, b)
+    ).toEqual(result);
   });
 }
 

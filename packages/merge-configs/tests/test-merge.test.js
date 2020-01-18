@@ -1,12 +1,11 @@
 /* eslint import/no-extraneous-dependencies: off */
-const assert = require('assert');
 const webpack = require('webpack');
 const { default: webpackMerge } = require('..');
-const mergeTests = require('./merge-tests');
+const mergeTests = require('./merge');
 const loadersKeys = require('./loaders-keys');
 
 function normalMergeTest(merge, loadersKey) {
-  it(`should append recursive structures with ${loadersKey}`, () => {
+  test(`should append recursive structures with ${loadersKey}`, () => {
     const a = {
       module: {}
     };
@@ -55,10 +54,10 @@ function normalMergeTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 
-  it(`should not override loader string values with ${loadersKey}`, () => {
+  test(`should not override loader string values with ${loadersKey}`, () => {
     const a = {};
     a[loadersKey] = [
       {
@@ -93,10 +92,10 @@ function normalMergeTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 
-  it(`should not append loaders with ${loadersKey}`, () => {
+  test(`should not append loaders with ${loadersKey}`, () => {
     const a = {};
     a[loadersKey] = [
       {
@@ -131,10 +130,10 @@ function normalMergeTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 
-  it(`should duplicate loaders with ${loadersKey}`, () => {
+  test(`should duplicate loaders with ${loadersKey}`, () => {
     const a = {};
     a[loadersKey] = [
       {
@@ -161,10 +160,10 @@ function normalMergeTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 
-  it(`should not override query options for the same loader with ${loadersKey}`, () => {
+  test(`should not override query options for the same loader with ${loadersKey}`, () => {
     const a = {};
     a[loadersKey] = [
       {
@@ -202,10 +201,10 @@ function normalMergeTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(a, b, c), result);
+    expect(merge(a, b, c)).toEqual(result);
   });
 
-  it(`should not allow overriding with an empty array in ${loadersKey}`, () => {
+  test(`should not allow overriding with an empty array in ${loadersKey}`, () => {
     const a = {};
     a[loadersKey] = [
       {
@@ -216,7 +215,7 @@ function normalMergeTest(merge, loadersKey) {
     const b = {};
     b[loadersKey] = [];
 
-    assert.deepEqual(merge(a, b), a);
+    expect(merge(a, b)).toEqual(a);
   });
 }
 
@@ -227,7 +226,7 @@ function normalMergeTests(merge) {
 }
 
 function customizeMergeTests(merge) {
-  it('should allow overriding array behavior', () => {
+  test('should allow overriding array behavior', () => {
     const first = {
       entry: ['a']
     };
@@ -235,17 +234,16 @@ function customizeMergeTests(merge) {
       entry: ['b']
     };
 
-    assert.deepEqual(
+    expect(
       merge({
         customizeArray(a) {
           return a;
         }
-      })(first, second),
-      first
-    );
+      })(first, second)
+    ).toEqual(first);
   });
 
-  it('should pass key to array customizer', () => {
+  test('should pass key to array customizer', () => {
     let receivedKey;
     const first = {
       entry: ['a']
@@ -261,11 +259,11 @@ function customizeMergeTests(merge) {
       }
     })(first, second);
 
-    assert.equal(receivedKey, 'entry');
-    assert.deepEqual(result, first);
+    expect(receivedKey).toEqual('entry');
+    expect(result).toEqual(first);
   });
 
-  it('should allow overriding object behavior', () => {
+  test('should allow overriding object behavior', () => {
     const first = {
       entry: {
         a: 'foo'
@@ -277,17 +275,16 @@ function customizeMergeTests(merge) {
       }
     };
 
-    assert.deepEqual(
+    expect(
       merge({
         customizeObject(a) {
           return a;
         }
-      })(first, second),
-      first
-    );
+      })(first, second)
+    ).toEqual(first);
   });
 
-  it('should pass key to object customizer', () => {
+  test('should pass key to object customizer', () => {
     let receivedKey;
     const first = {
       entry: {
@@ -307,11 +304,11 @@ function customizeMergeTests(merge) {
       }
     })(first, second);
 
-    assert.equal(receivedKey, 'entry');
-    assert.deepEqual(result, first);
+    expect(receivedKey).toEqual('entry');
+    expect(result).toEqual(first);
   });
 
-  it('should customize plugins', () => {
+  test('should customize plugins', () => {
     let receivedKey;
     const config1 = {
       plugins: [
@@ -339,10 +336,10 @@ function customizeMergeTests(merge) {
       }
     })(config1, config2);
 
-    assert.equal(receivedKey, 'plugins');
+    expect(receivedKey).toEqual('plugins');
   });
 
-  it('should not mutate plugins #106', () => {
+  test('should not mutate plugins #106', () => {
     const config1 = {
       entry: {
         page1: 'src/page1',
@@ -370,13 +367,13 @@ function customizeMergeTests(merge) {
     const result1 = merge(config1, enhance);
     const result2 = merge(config2, enhance);
 
-    assert.equal(result1.plugins.length, 1);
-    assert.equal(result2.plugins.length, 1);
+    expect(result1.plugins.length).toEqual(1);
+    expect(result2.plugins.length).toEqual(1);
 
     result1.plugins.push(new webpack.HotModuleReplacementPlugin());
 
-    assert.equal(result1.plugins.length, 2);
-    assert.equal(result2.plugins.length, 1);
+    expect(result1.plugins.length).toEqual(2);
+    expect(result2.plugins.length).toEqual(1);
   });
 }
 

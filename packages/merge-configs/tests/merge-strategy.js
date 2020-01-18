@@ -1,8 +1,5 @@
-/* eslint-env mocha */
-const assert = require('assert');
-
 function mergeStrategyTests(merge) {
-  it('should allow setting to array append', () => {
+  test('should allow setting to array append', () => {
     const a = {
       entry: ['foo', 'bar', 'baz']
     };
@@ -13,15 +10,14 @@ function mergeStrategyTests(merge) {
       entry: ['foo', 'bar', 'baz', 'zoo']
     };
 
-    assert.deepEqual(
+    expect(
       merge({
         entry: 'append'
-      })(a, b),
-      result
-    );
+      })(a, b)
+    ).toEqual(result);
   });
 
-  it('should allow setting to array prepend', () => {
+  test('should allow setting to array prepend', () => {
     const a = {
       entry: ['foo', 'bar', 'baz']
     };
@@ -32,15 +28,14 @@ function mergeStrategyTests(merge) {
       entry: ['zoo', 'foo', 'bar', 'baz']
     };
 
-    assert.deepEqual(
+    expect(
       merge({
         entry: 'prepend'
-      })(a, b),
-      result
-    );
+      })(a, b)
+    ).toEqual(result);
   });
 
-  it('should allow setting to object append', () => {
+  test('should allow setting to object append', () => {
     const a = {
       entry: {
         foo: 'bar'
@@ -58,17 +53,16 @@ function mergeStrategyTests(merge) {
       }
     };
 
-    assert.deepEqual(
+    expect(
       Object.keys(
         merge({
           entry: 'append'
         })(a, b).entry
-      ),
-      Object.keys(result.entry)
-    );
+      )
+    ).toEqual(Object.keys(result.entry));
   });
 
-  it('should allow setting to object prepend', () => {
+  test('should allow setting to object prepend', () => {
     const a = {
       entry: {
         foo: 'bar'
@@ -86,17 +80,16 @@ function mergeStrategyTests(merge) {
       }
     };
 
-    assert.deepEqual(
+    expect(
       Object.keys(
         merge({
           entry: 'prepend'
         })(a, b).entry
-      ),
-      Object.keys(result.entry)
-    );
+      )
+    ).toEqual(Object.keys(result.entry));
   });
 
-  it('should allow replace strategy for arrays', () => {
+  test('should allow replace strategy for arrays', () => {
     const a = {
       entry: ['foo']
     };
@@ -107,17 +100,16 @@ function mergeStrategyTests(merge) {
       entry: ['bar']
     };
 
-    assert.deepEqual(
+    expect(
       Object.keys(
         merge({
           entry: 'replace'
         })(a, b).entry
-      ),
-      Object.keys(result.entry)
-    );
+      )
+    ).toEqual(Object.keys(result.entry));
   });
 
-  it('should allow replace strategy for objects', () => {
+  test('should allow replace strategy for objects', () => {
     const a = {
       entry: {
         foo: 'bar'
@@ -134,17 +126,16 @@ function mergeStrategyTests(merge) {
       }
     };
 
-    assert.deepEqual(
+    expect(
       Object.keys(
         merge({
           entry: 'replace'
         })(a, b).entry
-      ),
-      Object.keys(result.entry)
-    );
+      )
+    ).toEqual(Object.keys(result.entry));
   });
 
-  it('should merge functions returning arrays with prepend', () => {
+  test('should merge functions returning arrays with prepend', () => {
     const a = {
       postcss() {
         return ['a'];
@@ -157,15 +148,14 @@ function mergeStrategyTests(merge) {
     };
     const expected = ['b', 'a'];
 
-    assert.deepEqual(
+    expect(
       merge({
         postcss: 'prepend'
-      })(a, b).postcss(),
-      expected
-    );
+      })(a, b).postcss()
+    ).toEqual(expected);
   });
 
-  it('should merge functions returning objects with prepend', () => {
+  test('should merge functions returning objects with prepend', () => {
     const a = {
       postcss() {
         return {
@@ -189,17 +179,16 @@ function mergeStrategyTests(merge) {
       }
     };
 
-    assert.deepEqual(
+    expect(
       Object.keys(
         merge({
           postcss: 'prepend'
         })(a, b).postcss()
-      ),
-      Object.keys(result.postcss())
-    );
+      )
+    ).toEqual(Object.keys(result.postcss()));
   });
 
-  it('should merge functions returning arrays with replace', () => {
+  test('should merge functions returning arrays with replace', () => {
     const a = {
       postcss() {
         return ['a'];
@@ -212,15 +201,14 @@ function mergeStrategyTests(merge) {
     };
     const expected = ['b'];
 
-    assert.deepEqual(
+    expect(
       merge({
         postcss: 'replace'
-      })(a, b).postcss(),
-      expected
-    );
+      })(a, b).postcss()
+    ).toEqual(expected);
   });
 
-  it('should merge functions returning objects with replace', () => {
+  test('should merge functions returning objects with replace', () => {
     const a = {
       postcss() {
         return ['a'];
@@ -233,12 +221,11 @@ function mergeStrategyTests(merge) {
     };
     const expected = ['b'];
 
-    assert.deepEqual(
+    expect(
       merge({
         postcss: 'replace'
-      })(a, b).postcss(),
-      expected
-    );
+      })(a, b).postcss()
+    ).toEqual(expected);
   });
 }
 

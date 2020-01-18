@@ -1,12 +1,10 @@
-/* eslint-env mocha */
-const assert = require('assert');
 const { strategy } = require('..');
-const normalMergeTests = require('./test-merge');
-const mergeTests = require('./merge-tests');
-const mergeStrategyTests = require('./merge-strategy-tests');
+const normalMergeTests = require('./test-merge.test');
+const mergeTests = require('./merge');
+const mergeStrategyTests = require('./merge-strategy');
 
 function mergeStrategySpecificTests(merge) {
-  it('should work with nested arrays and prepend', () => {
+  test('should work with nested arrays and prepend', () => {
     const a = {
       module: {
         loaders: [
@@ -46,12 +44,11 @@ function mergeStrategySpecificTests(merge) {
       }
     };
 
-    assert.deepEqual(
+    expect(
       merge({
         'module.loaders': 'prepend'
-      })(a, b),
-      result
-    );
+      })(a, b)
+    ).toEqual(result);
   });
 }
 

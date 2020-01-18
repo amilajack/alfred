@@ -1,11 +1,10 @@
 /* eslint import/no-extraneous-dependencies: off */
-const assert = require('assert');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const loadersKeys = require('./loaders-keys');
 
 function commonTests(merge) {
-  it('should not merge if enforce rules are different (#65)', () => {
+  test('should not merge if enforce rules are different (#65)', () => {
     const a = {
       module: {
         rules: [
@@ -45,10 +44,10 @@ function commonTests(merge) {
       }
     };
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 
-  it('should not merge if enforce rules are different II (#65)', () => {
+  test('should not merge if enforce rules are different II (#65)', () => {
     const a = {
       module: {
         rules: [
@@ -88,10 +87,10 @@ function commonTests(merge) {
       }
     };
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 
-  it('should merge with matching exclude and loaders', () => {
+  test('should merge with matching exclude and loaders', () => {
     const a = {
       module: {
         loaders: [
@@ -126,10 +125,10 @@ function commonTests(merge) {
       }
     };
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 
-  it('in lists with matching `test` properties, should merge with matching exclude and loaders', () => {
+  test('in lists with matching `test` properties, should merge with matching exclude and loaders', () => {
     const a = {
       module: {
         loaders: [
@@ -174,10 +173,10 @@ function commonTests(merge) {
       }
     };
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 
-  it('should not lose CopyWebpackPlugin (#56)', () => {
+  test('should not lose CopyWebpackPlugin (#56)', () => {
     const a = {
       plugins: [new CopyWebpackPlugin()]
     };
@@ -186,15 +185,15 @@ function commonTests(merge) {
     };
     const merged = merge(a, b);
 
-    assert.equal(merged.plugins.length, 2);
+    expect(merged.plugins.length).toEqual(2);
     // CopyWebpackPlugin is actually a function that gets applied above
-    assert.ok(merged.plugins[0].apply);
-    assert.equal(merged.plugins[1].constructor.name, 'TerserPlugin');
+    expect(merged.plugins[0].apply).toBeTruthy();
+    expect(merged.plugins[1].constructor.name).toEqual('TerserPlugin');
   });
 }
 
 function mergeSmartTest(merge, loadersKey) {
-  it(`should override loader string values with ${loadersKey}`, () => {
+  test(`should override loader string values with ${loadersKey}`, () => {
     const a = {};
     a[loadersKey] = [
       {
@@ -214,10 +213,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(a, result), result);
+    expect(merge(a, result)).toEqual(result);
   });
 
-  it(`should not merge to parent if there is no include for ${loadersKey} #68`, () => {
+  test(`should not merge to parent if there is no include for ${loadersKey} #68`, () => {
     const common = {
       module: {}
     };
@@ -252,10 +251,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(common, strip), result);
+    expect(merge(common, strip)).toEqual(result);
   });
 
-  it(`should not merge to parent if there is no exclude for ${loadersKey} #68`, () => {
+  test(`should not merge to parent if there is no exclude for ${loadersKey} #68`, () => {
     const common = {
       module: {}
     };
@@ -290,10 +289,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(common, strip), result);
+    expect(merge(common, strip)).toEqual(result);
   });
 
-  it(`should append loaders with ${loadersKey}`, () => {
+  test(`should append loaders with ${loadersKey}`, () => {
     const a = {};
     a[loadersKey] = [
       {
@@ -328,10 +327,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 
-  it(`should compare loaders by their whole name with ${loadersKey}`, () => {
+  test(`should compare loaders by their whole name with ${loadersKey}`, () => {
     const a = {};
     a[loadersKey] = [
       {
@@ -354,10 +353,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 
-  it(`should be able to merge loaders referenced by path with ${loadersKey}`, () => {
+  test(`should be able to merge loaders referenced by path with ${loadersKey}`, () => {
     const a = {};
     a[loadersKey] = [
       {
@@ -382,10 +381,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 
-  it(`should append loader and loaders with ${loadersKey}`, () => {
+  test(`should append loader and loaders with ${loadersKey}`, () => {
     const a = {};
     a[loadersKey] = [
       {
@@ -418,10 +417,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 
-  it(`should not duplicate loaders with ${loadersKey}`, () => {
+  test(`should not duplicate loaders with ${loadersKey}`, () => {
     const a = {};
     a[loadersKey] = [
       {
@@ -444,10 +443,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 
-  it(`should not override loaders with props include ${loadersKey}`, () => {
+  test(`should not override loaders with props include ${loadersKey}`, () => {
     const a = {};
     a[loadersKey] = [
       {
@@ -476,10 +475,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(a, b), result);
+    expect(merge(a, b)).toEqual(result);
   });
 
-  it(`should override query options for the same loader with ${loadersKey}`, () => {
+  test(`should override query options for the same loader with ${loadersKey}`, () => {
     const a = {};
     a[loadersKey] = [
       {
@@ -509,10 +508,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(a, b, c), result);
+    expect(merge(a, b, c)).toEqual(result);
   });
 
-  it(`should merge module.loaders for ${loadersKey}`, () => {
+  test(`should merge module.loaders for ${loadersKey}`, () => {
     const common = {
       module: {}
     };
@@ -541,10 +540,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(common, isparta), result);
+    expect(merge(common, isparta)).toEqual(result);
   });
 
-  it(`should not merge if a loader has include for ${loadersKey}`, () => {
+  test(`should not merge if a loader has include for ${loadersKey}`, () => {
     // these shouldn't be merged because `include` is defined.
     // instead, it should prepend to guarantee sane evaluation order
     const common = {
@@ -583,10 +582,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(common, isparta), result);
+    expect(merge(common, isparta)).toEqual(result);
   });
 
-  it(`should not merge if a loader has include and string loader values for ${loadersKey}`, () => {
+  test(`should not merge if a loader has include and string loader values for ${loadersKey}`, () => {
     // these shouldn't be merged because `include` is defined.
     // instead, it should prepend to guarantee sane evaluation order
     const common = {
@@ -625,10 +624,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(common, isparta), result);
+    expect(merge(common, isparta)).toEqual(result);
   });
 
-  it(`should not merge if a loader has exclude for ${loadersKey}`, () => {
+  test(`should not merge if a loader has exclude for ${loadersKey}`, () => {
     // these shouldn't be merged because `exclude` is defined.
     // instead, it should prepend to guarantee sane evaluation order
     const common = {
@@ -667,10 +666,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(common, isparta), result);
+    expect(merge(common, isparta)).toEqual(result);
   });
 
-  it(`should not merge if a loader has exclude and string loader values for ${loadersKey}`, () => {
+  test(`should not merge if a loader has exclude and string loader values for ${loadersKey}`, () => {
     // these shouldn't be merged because `exclude` is defined.
     // instead, it should prepend to guarantee sane evaluation order
     const common = {
@@ -709,10 +708,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(common, isparta), result);
+    expect(merge(common, isparta)).toEqual(result);
   });
 
-  it(`should not use parent include/exclude for ${loadersKey}`, () => {
+  test(`should not use parent include/exclude for ${loadersKey}`, () => {
     const common = {
       module: {}
     };
@@ -749,10 +748,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(common, strip), result);
+    expect(merge(common, strip)).toEqual(result);
   });
 
-  it(`should not use parent include/exclude even if only loader string is specified for ${loadersKey}`, () => {
+  test(`should not use parent include/exclude even if only loader string is specified for ${loadersKey}`, () => {
     const common = {
       module: {}
     };
@@ -799,10 +798,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(common, eslint), result);
+    expect(merge(common, eslint)).toEqual(result);
   });
 
-  it(`should respect a new order for ${loadersKey}`, () => {
+  test(`should respect a new order for ${loadersKey}`, () => {
     const common = {
       module: {}
     };
@@ -831,10 +830,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(common, extractText), result);
+    expect(merge(common, extractText)).toEqual(result);
   });
 
-  it(`should respect the existing order for ${loadersKey}`, () => {
+  test(`should respect the existing order for ${loadersKey}`, () => {
     const common = {
       module: {}
     };
@@ -869,10 +868,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(common, extractText), result);
+    expect(merge(common, extractText)).toEqual(result);
   });
 
-  it(`should respect second order when existing/new have conflicting orders for ${loadersKey}`, () => {
+  test(`should respect second order when existing/new have conflicting orders for ${loadersKey}`, () => {
     const common = {
       module: {}
     };
@@ -906,10 +905,10 @@ function mergeSmartTest(merge, loadersKey) {
       }
     ];
 
-    assert.deepEqual(merge(common, extractText), result);
+    expect(merge(common, extractText)).toEqual(result);
   });
 
-  it(`should merge oneOf rules for ${loadersKey}`, () => {
+  test(`should merge oneOf rules for ${loadersKey}`, () => {
     const a = {
       [loadersKey]: [
         {
@@ -940,10 +939,10 @@ function mergeSmartTest(merge, loadersKey) {
       ]
     };
 
-    assert.deepEqual(merge(a, result), result);
+    expect(merge(a, result)).toEqual(result);
   });
 
-  it(`should overwrite with oneOf for ${loadersKey}`, () => {
+  test(`should overwrite with oneOf for ${loadersKey}`, () => {
     const a = {
       [loadersKey]: [
         {
@@ -970,7 +969,7 @@ function mergeSmartTest(merge, loadersKey) {
       ]
     };
 
-    assert.deepEqual(merge(a, b), b);
+    expect(merge(a, b)).toEqual(b);
   });
 }
 
