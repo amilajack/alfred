@@ -1,0 +1,16 @@
+{
+  "name": "alfred-skill-webpack-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@alfred/skill-webpack": "file:../../../../skill-webpack",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.2.0"
+  },
+  "alfred": {
+    "skills": [
+      "@alfred/skill-webpack"
+    ]
+  }
+}

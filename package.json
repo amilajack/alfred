@@ -9,9 +9,10 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production lerna run build --stream",
     "e2e": "lerna run e2e --stream",
-    "e2e:clean": "rm -rf packages/cli/test/e2e/tmp",
+    "e2e:clean": "rm -rf packages/cli/tests/e2e/tmp",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "test": "yarn e2e:clean && yarn build && yarn lint && lerna run lint --parallel --ignore @fixtures/*,@examples/* && lerna run ts --parallel && lerna run test --parallel --ignore @fixtures/*,@examples/* && lerna run test-all --parallel",
+    "spec": "jest",
+    "test": "yarn e2e:clean && yarn build && yarn lint && lerna run test --parallel --ignore @fixtures/*,@examples/* && lerna run test-all --parallel",
     "version": "lerna run build:clean && yarn build",
     "website:build": "yarn workspace @alfred/website build",
     "website:clean": "yarn workspace @alfred/website clean",
@@ -28,7 +29,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn test && cross-env ALFRED_E2E_TEST=true jest tests/fixtures/fixtures.spec.js"
+      "pre-commit": "yarn test"
     }
   },
   "keywords": [
@@ -45,7 +46,7 @@
   "workspaces": [
     "examples/*",
     "packages/*",
-    "packages/cli/test/e2e/tmp/*",
+    "packages/cli/tests/e2e/tmp/*",
     "tests/fixtures/*",
     "website"
   ],
@@ -78,6 +79,10 @@
     "yarn": "^1.21.1"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "<rootDir>/examples",
+      "<rootDir>/packages/cli/tests/fixtures"
+    ]
   }
 }

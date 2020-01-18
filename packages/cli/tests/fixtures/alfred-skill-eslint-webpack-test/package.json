@@ -1,0 +1,21 @@
+{
+  "name": "alfred-skill-eslint-webpack-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@alfred/skill-eslint": "file:../../../../skill-eslint",
+    "@alfred/skill-webpack": "file:../../../../skill-webpack",
+    "@alfred/interface-build": "file:../../../../interface-build",
+    "@alfred/interface-lint": "file:../../../../interface-lint",
+    "eslint": "^5.10.0",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.2.0"
+  },
+  "alfred": {
+    "skills": [
+      "@alfred/skill-eslint",
+      "@alfred/skill-webpack"
+    ]
+  }
+}

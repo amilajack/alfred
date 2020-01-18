@@ -33,6 +33,6 @@
   "exclude": [
     "targets",
     "**/lib/**/*",
-    "**/test/**"
+    "**/tests/**"
   ]
 }
