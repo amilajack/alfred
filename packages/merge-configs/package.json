@@ -19,5 +19,10 @@
     "terser-webpack-plugin": "^2.3.2",
     "webpack": "^4.41.5"
   },
-  "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"
+  "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8",
+  "eslintConfig": {
+    "rules": {
+      "jest/no-export": "off"
+    }
+  }
 }

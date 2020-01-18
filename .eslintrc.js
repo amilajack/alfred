@@ -41,7 +41,6 @@ module.exports = {
   ],
   rules: {
     'flowtype-errors/show-errors': 'off',
-    'jest/no-export': 'off',
     'prettier/prettier': ['error', { singleQuote: true }]
   }
 };
