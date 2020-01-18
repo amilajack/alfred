@@ -18,8 +18,10 @@ function parseCodeSnippets(codeSnippets: Array<string> | void): void {
 
 describe('Migrate', () => {
   const migrateOpts = {
-    packageJsonPath: __dirname,
-    root: __dirname,
+    packageJsonPath: require.resolve(
+      './fixtures/express-hello-world/package.json'
+    ),
+    root: path.join(__dirname, './fixtures/express-hello-world'),
     write: false,
     unsafe: false,
     verbose: false
@@ -96,8 +98,7 @@ describe('Migrate', () => {
   it("should not parse .gitignore'd files", async () => {
     const files = await handleInput({
       ...migrateOpts,
-      files: ['.'],
-      packageJsonPath: path.join(__dirname, '..', 'package.json')
+      files: [path.join(__dirname, './fixtures/express-hello-world')]
     });
 
     files.forEach(file => {

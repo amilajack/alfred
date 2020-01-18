@@ -78,11 +78,10 @@
     "yarn": "^1.21.1"
   },
   "jest": {
-    "projects": ["<rootDir>/packages/*"],
     "testEnvironment": "node",
     "testPathIgnorePatterns": [
-      "examples",
-      "packages/cli/tests/fixtures"
+      "<rootDir>/examples",
+      "<rootDir>/packages/cli/tests/fixtures"
     ]
   }
 }
