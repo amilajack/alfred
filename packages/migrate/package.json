@@ -5,7 +5,7 @@
   "scripts": {
     "build": "yarn ts",
     "build-watch": "yarn build --watch",
-    "test": "jest --color",
+    "test": "jest",
     "ts": "tsc",
     "version": "yarn build"
   },
