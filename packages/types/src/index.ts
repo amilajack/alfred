@@ -150,7 +150,7 @@ export type HooksCallArgs = {
 
 export type CallFn = (args: HooksCallArgs) => void;
 
-interface Ctf {
+export interface Ctf {
   name: string;
   dependencies: Dependencies;
   devDependencies: Dependencies;
@@ -183,10 +183,6 @@ interface Ctf {
 
 interface CtfUsingInterface extends Ctf {
   subcommand: string;
-  hooks: {
-    call: CallFn;
-    install?: () => void;
-  };
 }
 
 export type CtfNode = Ctf | CtfUsingInterface;

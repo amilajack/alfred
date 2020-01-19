@@ -1,3 +1,3 @@
-import { SkillInterfaceModule } from '@alfred/types';
+import { Ctf } from '@alfred/types';
 
-export = SkillInterfaceModule;
+export = Ctf;
