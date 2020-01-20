@@ -4,10 +4,10 @@ module.exports = {
   devDependencies: { 'lodash-es': '*' },
   configFiles: [],
   ctfs: {
-    webpack(config) {
+    webpack(ctf) {
       // eslint-disable-next-line global-require
       const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-      return config
+      return ctf
         .addDevDependencies({
           'lodash-webpack-plugin': '0.11.5'
         })
@@ -18,8 +18,8 @@ module.exports = {
     /**
      * @TODO Don't perform this transformation for library targets
      */
-    babel(config) {
-      return config
+    babel(ctf) {
+      return ctf
         .addDevDependencies({
           'babel-plugin-lodash': '3.3.4'
         })

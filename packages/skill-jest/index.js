@@ -72,8 +72,8 @@ module.exports = {
     }
   },
   ctfs: {
-    eslint: config =>
-      config
+    eslint: ctf =>
+      ctf
         .addDevDependencies({
           'eslint-plugin-jest': '8.0.0'
         })

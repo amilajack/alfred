@@ -42,8 +42,8 @@ module.exports = {
     }
   },
   ctfs: {
-    eslint: config =>
-      config
+    eslint: ctf =>
+      ctf
         .extendConfig('eslint', {
           plugins: ['mocha']
         })

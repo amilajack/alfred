@@ -34,8 +34,8 @@ module.exports = {
   ],
   hooks: {},
   ctfs: {
-    webpack(config, ctf) {
-      return config
+    webpack(ctf, ctfs) {
+      return ctf
         .extendConfig('webpack.base', {
           module: {
             rules: [
@@ -47,7 +47,7 @@ module.exports = {
                   options: {
                     ...getConfigByConfigName(
                       'babel',
-                      ctf.get('babel').configFiles
+                      ctfs.get('babel').configFiles
                     ).config,
                     cacheDirectory: true
                   }
@@ -58,14 +58,14 @@ module.exports = {
         })
         .addDevDependencies({ 'babel-loader': '5.0.0' });
     },
-    rollup(config, ctf) {
+    rollup(ctf, ctfs) {
       // eslint-disable-next-line import/no-extraneous-dependencies
       const babel = require('rollup-plugin-babel');
-      return config
+      return ctf
         .extendConfig('rollup.base', {
           plugins: [
             babel({
-              ...getConfigByConfigName('babel', ctf.get('babel').configFiles)
+              ...getConfigByConfigName('babel', ctfs.get('babel').configFiles)
                 .config,
               exclude: 'node_modules/**'
             })
@@ -75,15 +75,15 @@ module.exports = {
           'rollup-plugin-babel': '4.2.0'
         });
     },
-    jest(config) {
-      return config.extendConfig('jest', {
+    jest(ctf) {
+      return ctf.extendConfig('jest', {
         transform: {
           '^.+\\.jsx?$': './node_modules/jest-transformer.js'
         }
       });
     },
-    eslint(config) {
-      return config
+    eslint(ctf) {
+      return ctf
         .extendConfig('eslint', {
           parser: 'babel-eslint'
         })

@@ -36,8 +36,8 @@ module.exports = {
     }
   },
   ctfs: {
-    eslint: config =>
-      config
+    eslint: ctf =>
+      ctf
         .extendConfig('eslint', {
           extends: ['prettier'],
           plugins: ['prettier']

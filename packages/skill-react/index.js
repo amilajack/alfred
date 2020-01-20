@@ -34,10 +34,10 @@ module.exports = {
           'react-hot-loader': '^4.3.12'
         });
     },
-    webpack(config) {
+    webpack(ctf) {
       // eslint-disable-next-line global-require
       const webpack = require('webpack');
-      return config.extendConfig('webpack.base', {
+      return ctf.extendConfig('webpack.base', {
         resolve: {
           extensions: ['.jsx']
         },
@@ -47,8 +47,8 @@ module.exports = {
         plugins: [new webpack.HotModuleReplacementPlugin()]
       });
     },
-    eslint(config) {
-      return config
+    eslint(ctf) {
+      return ctf
         .extendConfig('eslint', {
           extends: ['eslint-config-airbnb']
         })
