@@ -1,6 +1,6 @@
 {
   "name": "foobar",
-  "version": "1.0.0",
+  "version": "0.0.2-alpha.6",
   "license": "MIT",
   "main": "index.js",
   "alfred": {
@@ -13,6 +13,5 @@
     "@alfred/skill-eslint": "file:../../../../skill-eslint",
     "@alfred/skill-prettier": "file:../../../../skill-prettier",
     "prettier": "^1.15.3"
-  },
-  "devDependencies": {}
+  }
 }
