@@ -173,7 +173,7 @@ export interface Ctf {
     [ctfName: string]: (
       ownCtfNode: Ctf,
       ctfMap: Map<string, Ctf>,
-      misc: InterfaceState & {
+      misc: {
         project: ProjectInterface;
         config: ConfigInterface;
       }

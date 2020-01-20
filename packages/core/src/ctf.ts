@@ -171,8 +171,7 @@ export function topsortCtfMap(ctfMap: CtfMap): Array<string> {
 
 export function callCtfsInOrder(
   project: ProjectInterface,
-  ctf: CtfMap,
-  interfaceState: InterfaceState
+  ctf: CtfMap
 ): { ctf: CtfMap; orderedSelfTransforms: OrderedCtfTransforms } {
   const { config } = project;
   const topologicallyOrderedCtfs = topsortCtfMap(ctf);
@@ -191,8 +190,7 @@ export function callCtfsInOrder(
             ctfName,
             ctfFn(correspondingCtfNode, ctf, {
               project,
-              config,
-              ...interfaceState
+              config
             })
           );
         };
@@ -359,7 +357,7 @@ export function CTF(
     ctfMap.set('babel', CORE_CTFS.babel);
   }
 
-  callCtfsInOrder(project, ctfMap, interfaceState);
+  callCtfsInOrder(project, ctfMap);
 
   validateCtf(ctfMap, interfaceState);
 
