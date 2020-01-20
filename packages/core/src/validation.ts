@@ -2,6 +2,7 @@
 // @ts-nocheck
 import Joi from 'joi';
 import { Pkg, ValidationResult } from '@alfred/types';
+import Config from './config';
 
 type Person = {
   name: string;
@@ -453,7 +454,11 @@ export default function Validateconfig(config: { [x: string]: any }): void {
     })
   });
 
-  if (config.showConfigs !== true && 'configsDir' in config) {
+  if (
+    config.showConfigs !== true &&
+    'configsDir' in config &&
+    config.configsDir !== Config.DEFAULT_CONFIG.configsDir
+  ) {
     throw new Error(
       'showConfigs must be true for configsDir property to be set'
     );

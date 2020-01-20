@@ -18,9 +18,9 @@ Alfred
 
 ```bash
 # NPM
-npm install --global @alfred/alfred
+npm install --global alfred
 # Yarn
-yarn global add @alfred/alfred
+yarn global add alfred
 ```
 
 ## Usage

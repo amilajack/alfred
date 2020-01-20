@@ -1,5 +1,5 @@
 {
-  "name": "@alfred/alfred",
+  "name": "alfred",
   "version": "0.0.2",
   "bin": {
     "alfred": "./node_modules/.bin/alfred"

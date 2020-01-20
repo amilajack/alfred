@@ -41,13 +41,13 @@ export default class Config implements ConfigInterface {
     npmClient: 'npm' as NpmClients
   };
 
-  constructor(config: ConfigWithUnresolvedInterfaces) {
-    this.rawConfig = config;
-    ValidateConfig(config);
+  constructor(rawConfig: ConfigWithUnresolvedInterfaces) {
+    this.rawConfig = rawConfig;
+    ValidateConfig(rawConfig);
     const resolvedSkills = {
       ...Config.DEFAULT_CONFIG,
       ...this.normalizeWithResolvedSkills(
-        this.normalizeWithResolvedExtendedConfigs(config)
+        this.normalizeWithResolvedExtendedConfigs(rawConfig)
       )
     };
     this.skills = resolvedSkills.skills || [];
