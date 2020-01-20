@@ -2,11 +2,10 @@ import path from 'path';
 import fs from 'fs';
 import npm from 'npm';
 import childProcess from 'child_process';
-import rimraf from 'rimraf';
 import formatPkg from 'format-package';
 import { getConfigsBasePath, findProjectRoot } from '@alfred/helpers';
 import {
-  Pkg,
+  PkgJson,
   ConfigInterface,
   InterfaceState,
   ProjectInterface,
@@ -39,7 +38,7 @@ const getInstallCommmand = (project: ProjectInterface): string => {
     : 'yarn';
 };
 
-export function formatPkgJson(pkg: Pkg): Promise<string> {
+export function formatPkgJson(pkg: PkgJson): Promise<string> {
   return formatPkg(pkg, { order: PKG_SORT_ORDER });
 }
 
@@ -48,7 +47,7 @@ export default class Project implements ProjectInterface {
 
   pkgPath: string;
 
-  pkg: Pkg;
+  pkg: PkgJson;
 
   root: string;
 
@@ -93,8 +92,6 @@ export default class Project implements ProjectInterface {
       });
     }
     module.paths.push(nodeModulesPath);
-
-    await this.deleteConfigs();
 
     // Built in, non-overridable skills are added here
     // 'start' subcommand is handled by run()
@@ -194,21 +191,6 @@ export default class Project implements ProjectInterface {
       });
 
     return validationResult;
-  }
-
-  /**
-   * Delete configs dir of an alfred project
-   */
-  deleteConfigs(): Promise<void> {
-    const configsBasePath = getConfigsBasePath(this, this.config);
-    if (fs.existsSync(configsBasePath)) {
-      return new Promise(resolve => {
-        rimraf(configsBasePath, () => {
-          resolve();
-        });
-      });
-    }
-    return Promise.resolve();
   }
 
   async installDeps(

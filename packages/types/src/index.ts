@@ -5,9 +5,8 @@ export type Dependencies = {
 export interface PkgJson extends JSON {
   devDependencies?: Dependencies;
   dependencies?: Dependencies;
+  alfred?: ConfigWithUnresolvedInterfaces;
 }
-
-export type Pkg = PkgJson;
 
 export type Env = 'production' | 'development' | 'test';
 
@@ -35,7 +34,7 @@ export interface ProjectInterface {
   // The `Config` that corresponds to the project
   config: ConfigInterface;
   // The value of the root package.json
-  pkg: Pkg;
+  pkg: PkgJson;
   // The path to the root package.json
   pkgPath: string;
   // Get the list of subcommands which correspond to which skills of a given alfred project

@@ -14,7 +14,14 @@ export default async function learn(
     mergeConfigs({}, config, { skills: skillsPkgNames })
   );
   // Write the skills to the alfred config in the package.json
-  await newConfig.write(project.pkgPath);
+  await newConfig.write(
+    project.pkgPath,
+    mergeConfigs({}, project.pkg.alfred || {}, {
+      alfred: {
+        skills: skillsPkgNames
+      }
+    })
+  );
 
   // First install the skills
   const skillInstallationMethod = process.env.IGNORE_INSTALL

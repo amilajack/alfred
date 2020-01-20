@@ -82,11 +82,19 @@ export default class Config implements ConfigInterface {
    * Write the config to a package.json file
    * @param pkgPath - The path to the package.json file
    */
-  async write(pkgPath: string): Promise<string> {
+  async write(
+    pkgPath: string,
+    pkgAlfredConfig: ConfigWithUnresolvedInterfaces
+  ): Promise<string> {
     Project.validatePkgPath(pkgPath);
+    ValidateConfig(pkgAlfredConfig);
+
+    const pkg = JSON.parse((await fs.promises.readFile(pkgPath)).toString());
+    this.rawConfig = pkg.alfred || {};
+
     return Config.writeToPkgJson(pkgPath, {
-      ...JSON.parse((await fs.promises.readFile(pkgPath)).toString()),
-      alfred: this.getConfigValues()
+      ...pkg,
+      alfred: pkgAlfredConfig
     });
   }
 
