@@ -17,9 +17,7 @@ export default async function learn(
   await newConfig.write(
     project.pkgPath,
     mergeConfigs({}, project.pkg.alfred || {}, {
-      alfred: {
-        skills: skillsPkgNames
-      }
+      skills: skillsPkgNames
     })
   );
 

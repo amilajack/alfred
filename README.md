@@ -86,6 +86,14 @@ yarn
 # Testing
 yarn test
 
+# Building
+yarn build
+# Watching the build
+yarn build-watch
+
+# Linking
+yarn workspace alfred link
+
 # Local Publishing
 yarn global add verdaccio
 verdaccio
@@ -319,18 +327,18 @@ This config can be imported like so:
 ```jsonc
 {
   "alfred": {
-    "extends": "my-app"
+    "extends": "my-app-config"
   }
 }
 ```
 
 ## Alfred Libraries Suggesting Skills
 
-Assume `react` has the following `package.json`:
+Suppose you're an author of a `react-button-library` which has the following `package.json`:
 
 ```jsonc
 {
-  "name": "react",
+  "name": "react-button-library",
   // ...
   "alfred": {
     // ...
@@ -341,7 +349,7 @@ Assume `react` has the following `package.json`:
 }
 ```
 
-When a author of the app installs `react`, Alfred will recommend the skills `recommendSkills` on `postinstall` of `react`. This translates to users of a library automatically having the infra they need to use an app 😲
+When a user of your library installs `react-button-library`, Alfred will recommend the skills `recommendSkills` on `postinstall` of `react-button-library`. This translates to users of a library automatically having the infra they need to use an app 😲
 
 ```
 $ yarn add react
