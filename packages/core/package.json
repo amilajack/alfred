@@ -9,6 +9,9 @@
     "ts": "tsc",
     "version": "yarn build"
   },
+  "files": [
+    "lib"
+  ],
   "jest": {
     "testEnvironment": "node"
   },

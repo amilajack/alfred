@@ -3,6 +3,9 @@
   "version": "0.0.2-alpha.6",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "build": "tsc",
     "ts": "tsc",
