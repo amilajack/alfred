@@ -30,14 +30,23 @@ export type SkillsList = {
 };
 
 export interface ProjectInterface {
+  // The path to the root directory of the project
   root: string;
+  // The `Config` that corresponds to the project
   config: ConfigInterface;
+  // The value of the root package.json
   pkg: Pkg;
+  // The path to the root package.json
   pkgPath: string;
+  // Get the list of subcommands which correspond to which skills of a given alfred project
   skills: () => Promise<SkillsList>;
+  // Config setter method
   setConfig: (config: ConfigInterface) => void;
+  // Create a CTF from a given interface state
   ctfFromInterfaceState: (i: InterfaceState) => Promise<CtfMap>;
+  // Write each config in .configFiles of each skill
   writeConfigsFromCtf: (ctf: CtfMap) => Promise<CtfMap>;
+  // Install dependencies to a given project
   installDeps: (
     dependencies: string[],
     npmClient?: NpmClients
@@ -77,6 +86,7 @@ export type RawExtendsConfigValue = Array<string> | string;
 export interface ConfigWithResolvedSkills {
   skills?: Skills;
   npmClient?: NpmClients;
+  configsDir?: string;
   showConfigs?: boolean;
   autoInstall?: boolean;
 }
@@ -86,6 +96,7 @@ export interface ConfigWithUnresolvedSkills {
   skills?: RawSkillConfigValue[];
   npmClient?: NpmClients;
   showConfigs?: boolean;
+  configsDir?: string;
   autoInstall?: boolean;
 }
 
@@ -97,6 +108,7 @@ export interface ConfigWithUnresolvedInterfaces
 export interface ConfigWithDefaults {
   skills: Skills;
   npmClient: NpmClients;
+  configsDir: string;
   showConfigs: boolean;
   autoInstall: boolean;
 }

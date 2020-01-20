@@ -197,10 +197,10 @@ export default class Project implements ProjectInterface {
   }
 
   /**
-   * Delete .configs dir of an alfred project
+   * Delete configs dir of an alfred project
    */
   deleteConfigs(): Promise<void> {
-    const configsBasePath = getConfigsBasePath(this.root);
+    const configsBasePath = getConfigsBasePath(this, this.config);
     if (fs.existsSync(configsBasePath)) {
       return new Promise(resolve => {
         rimraf(configsBasePath, () => {
@@ -292,7 +292,7 @@ export default class Project implements ProjectInterface {
     if (!this.config.showConfigs) return ctf;
 
     // Create a .configs dir if it doesn't exist
-    const configsBasePath = getConfigsBasePath(this.root);
+    const configsBasePath = getConfigsBasePath(this, this.config);
     if (!fs.existsSync(configsBasePath)) {
       fs.mkdirSync(configsBasePath);
     }

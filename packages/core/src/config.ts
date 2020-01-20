@@ -25,6 +25,8 @@ export default class Config implements ConfigInterface {
 
   showConfigs: boolean;
 
+  configsDir: string;
+
   skills: Skills;
 
   autoInstall: boolean;
@@ -35,6 +37,7 @@ export default class Config implements ConfigInterface {
     skills: [],
     showConfigs: false,
     autoInstall: false,
+    configsDir: '.configs',
     npmClient: 'npm' as NpmClients
   };
 
@@ -49,6 +52,7 @@ export default class Config implements ConfigInterface {
     };
     this.skills = resolvedSkills.skills || [];
     this.showConfigs = resolvedSkills.showConfigs;
+    this.configsDir = resolvedSkills.configsDir;
     this.autoInstall = resolvedSkills.autoInstall;
     this.npmClient = resolvedSkills.npmClient;
   }
@@ -60,10 +64,11 @@ export default class Config implements ConfigInterface {
     };
   }
 
-  getConfigValues(): ConfigWithResolvedSkills {
+  getConfigValues(): ConfigWithDefaults {
     return {
       skills: this.skills,
       showConfigs: this.showConfigs,
+      configsDir: this.configsDir,
       npmClient: this.npmClient,
       autoInstall: this.autoInstall
     };

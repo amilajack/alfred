@@ -218,7 +218,7 @@ type AlfredInterface = {
     ],
     // Determine to install with NPM or Yarn (defaults to NPM)
     "npmClient": "yarn",
-    // Write the configs to a './.configs' directory
+    // Determine if configs should be written to disk
     "showConfigs": true,
     // Config for all app targets
     "app": {

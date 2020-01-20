@@ -1,7 +1,10 @@
 /* eslint global-require: off */
 const webpack = require('webpack');
 const path = require('path');
-const { getConfigByConfigName } = require('@alfred/helpers');
+const {
+  getConfigByConfigName,
+  getConfigsBasePath
+} = require('@alfred/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 const getPort = require('get-port');
 
@@ -245,15 +248,14 @@ module.exports = {
     }
   },
   ctfs: {
-    eslint: (_config, ctfs, { project }) =>
-      _config
+    eslint: (ctf, ctfs, { project, config }) =>
+      ctf
         .extendConfig('eslint', {
           settings: {
             'import/resolver': {
               webpack: {
                 config: path.join(
-                  project.root,
-                  '.configs',
+                  getConfigsBasePath(project, config),
                   'webpack.browser.json'
                 )
               }
@@ -263,12 +265,11 @@ module.exports = {
         .addDevDependencies({
           'eslint-import-resolver-webpack': '0.12.1'
         }),
-    jest: config =>
-      config
+    jest: (ctf, ctfs, { config }) =>
+      ctf
         .extendConfig('jest', {
           moduleNameMapper: {
-            '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-              '<rootDir>/.configs/mocks/fileMock.js',
+            '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': `<rootDir>/${config.configsDir}/mocks/fileMock.js`,
             '\\.(css|less|sass|scss)$': 'identity-obj-proxy'
           }
         })

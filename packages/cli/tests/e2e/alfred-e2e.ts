@@ -12,6 +12,7 @@ const { serial } = require('@alfred/core/lib/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 const assert = require('assert');
 const { addEntrypoints } = require('../../lib');
+const Config = require('@alfred/core/lib/config');
 
 process.on('unhandledRejection', err => {
   throw err;
@@ -169,6 +170,7 @@ async function generateTests(skillCombination, tmpDir) {
               const pkg = require(path.join(projectDir, 'package.json'));
               const config = mergeConfigs({}, pkg, {
                 alfred: {
+                  ...Config.DEFAULT_CONFIG,
                   showConfigs
                 }
               });
@@ -230,7 +232,10 @@ async function generateTests(skillCombination, tmpDir) {
                         });
                       }
                       // Assert that the .configs dir should or should not exist
-                      const configsDir = path.join(projectDir, '.configs');
+                      const configsDir = path.join(
+                        projectDir,
+                        config.configsDir
+                      );
                       assert.strictEqual(
                         fs.existsSync(configsDir),
                         showConfigs

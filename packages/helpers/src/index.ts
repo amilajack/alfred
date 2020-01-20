@@ -7,7 +7,9 @@ import {
   ConfigFile,
   ConfigValue,
   CtfMap,
-  ConfigWithUnresolvedInterfaces
+  ConfigWithUnresolvedInterfaces,
+  ProjectInterface,
+  ConfigInterface
 } from '@alfred/types';
 
 /**
@@ -91,8 +93,11 @@ export function getConfigs(ctf: CtfMap): Array<ConfigValue> {
     .map(configFile => configFile.config);
 }
 
-export function getConfigsBasePath(projectRoot: string): string {
-  return path.join(projectRoot, '.configs');
+export function getConfigsBasePath(
+  project: ProjectInterface,
+  config: ConfigInterface
+): string {
+  return path.join(project.root, config.configsDir);
 }
 
 export function requireConfig(

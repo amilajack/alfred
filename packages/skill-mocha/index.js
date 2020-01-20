@@ -22,7 +22,7 @@ module.exports = {
       const binPath = await getPkgBinPath('mocha', 'mocha');
       const mochaBabelRegisterPath = path.join(
         project.root,
-        config.showConfigs ? '.configs' : 'node_modules',
+        config.showConfigs ? config.configsDir : 'node_modules',
         'mocha.js'
       );
       const { config: babelConfig } = getConfigByConfigName(
