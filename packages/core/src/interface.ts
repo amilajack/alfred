@@ -125,10 +125,13 @@ export function generateInterfaceStatesFromProject(
     ? (process.env.NODE_ENV as Env)
     : 'development';
 
-  return ENTRYPOINTS.filter(e =>
-    fs.existsSync(path.join(project.root, 'src', e))
-  ).map(e => {
-    const [projectType, target] = e.split('.') as [ProjectEnum, Target];
+  return ENTRYPOINTS.filter(entryPoint =>
+    fs.existsSync(path.join(project.root, 'src', entryPoint))
+  ).map(validEntryPoints => {
+    const [projectType, target] = validEntryPoints.split('.') as [
+      ProjectEnum,
+      Target
+    ];
     return {
       env,
       target,

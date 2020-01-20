@@ -155,8 +155,8 @@ export default class Project implements ProjectInterface {
       );
     }
 
-    const hasEntrypoint = ENTRYPOINTS.some(e =>
-      fs.existsSync(path.join(srcPath, e))
+    const hasEntrypoint = ENTRYPOINTS.some(entryPoint =>
+      fs.existsSync(path.join(srcPath, entryPoint))
     );
 
     if (!hasEntrypoint) {

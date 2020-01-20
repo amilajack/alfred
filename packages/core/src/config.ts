@@ -166,11 +166,7 @@ export default class Config implements ConfigInterface {
       );
     }
 
-    const mergedConfig = mergeConfigs(
-      {},
-      ...normalizedConfigs.map(e => e),
-      config
-    );
+    const mergedConfig = mergeConfigs({}, ...normalizedConfigs, config);
     delete mergedConfig.extends;
 
     return mergedConfig;

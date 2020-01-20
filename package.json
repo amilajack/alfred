@@ -47,7 +47,7 @@
     "examples/*",
     "packages/*",
     "packages/cli/tests/e2e/tmp/*",
-    "tests/fixtures/*",
+    "packages/cli/tests/fixtures/*",
     "website"
   ],
   "devDependencies": {

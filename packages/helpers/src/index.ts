@@ -35,7 +35,7 @@ export function getConfigByConfigName(
   configName: string,
   configFiles: Array<ConfigFile>
 ): ConfigValue {
-  const config = configFiles.find(e => e.name === configName);
+  const config = configFiles.find(configFile => configFile.name === configName);
   if (!config) throw new Error(`Cannot find config by name "${configName}"`);
   return config;
 }
@@ -44,7 +44,7 @@ export function getConfigPathByConfigName(
   configName: string,
   configFiles: Array<ConfigFile>
 ): string {
-  const config = configFiles.find(e => e.name === configName);
+  const config = configFiles.find(configFile => configFile.name === configName);
   if (!config) throw new Error(`Cannot find config by name "${configName}"`);
   return config.path;
 }

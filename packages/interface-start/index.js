@@ -36,7 +36,9 @@ module.exports = {
   resolveSkill(skills = [], interfaceState) {
     const resolvedSkills = skills
       .filter(skill =>
-        skill.interfaces.find(e => e.module.subcommand === 'start')
+        skill.interfaces.find(
+          skillInterface => skillInterface.module.subcommand === 'start'
+        )
       )
       .filter(sk => {
         const { supports } = sk.interfaces.find(

@@ -117,7 +117,7 @@ async function generateTests(skillCombination, tmpDir) {
       // @TODO Instead of each interface state, generate tests from entrypointCombinations
       .map(skillCombination => () => generateTests(skillCombination, tmpDir))
       .slice(0, parseInt(process.env.E2E_TEST_COUNT || '', 10) || undefined)
-      .map(e => e())
+      .map(test => test())
   );
 
   childProcess.execSync('yarn', {
@@ -134,7 +134,9 @@ async function generateTests(skillCombination, tmpDir) {
       const entrypointsCombinations = powerset(
         Array.from(
           new Set(
-            prodInterfaceStates.map(e => [e.projectType, e.target].join('.'))
+            prodInterfaceStates.map(interfaceState =>
+              [interfaceState.projectType, interfaceState.target].join('.')
+            )
           )
         )
       ).sort((a, b) => a.length - b.length);

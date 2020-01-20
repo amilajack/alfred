@@ -3,7 +3,7 @@
     "examples/*",
     "packages/*",
     "packages/cli/tests/e2e/tmp/*",
-    "tests/fixtures/*",
+    "packages/cli/tests/fixtures/*",
     "website"
   ],
   "version": "0.0.2-alpha.5",

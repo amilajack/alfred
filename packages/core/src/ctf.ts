@@ -160,9 +160,9 @@ export function topsortCtfMap(ctfMap: CtfMap): Array<string> {
   });
 
   const sortedCtfNames = topsort(topsortGraphEdges);
-  ctfMap.forEach(e => {
-    if (!sortedCtfNames.includes(e.name)) {
-      sortedCtfNames.push(e.name);
+  ctfMap.forEach(ctfNode => {
+    if (!sortedCtfNames.includes(ctfNode.name)) {
+      sortedCtfNames.push(ctfNode.name);
     }
   });
 
@@ -178,7 +178,7 @@ export function callCtfsInOrder(
 
   // All the ctfs Fns from other ctfNodes that transform each ctfNode
   const selfTransforms: OrderedCtfTransformsMap = new Map(
-    topsortCtfMap(ctf).map(e => [e, []])
+    topsortCtfMap(ctf).map(ctfName => [ctfName, []])
   );
 
   ctf.forEach(ctfNode => {
@@ -266,13 +266,16 @@ export function CTF(
         ctfsWithHelpers: CtfWithHelpers[]
       ) => {
         if (ctfWithHelpers.interfaces.length) {
-          ctfWithHelpers.interfaces.forEach(e => {
+          ctfWithHelpers.interfaces.forEach(ctfInterface => {
             if (
-              'resolveSkill' in e.module &&
-              typeof e.module.resolveSkill === 'function'
+              'resolveSkill' in ctfInterface.module &&
+              typeof ctfInterface.module.resolveSkill === 'function'
             ) {
               if (
-                e.module.resolveSkill(ctfsWithHelpers, interfaceState) !== false
+                ctfInterface.module.resolveSkill(
+                  ctfsWithHelpers,
+                  interfaceState
+                ) !== false
               ) {
                 ctfMap.set(ctfWithHelpers.name, ctfWithHelpers);
               }

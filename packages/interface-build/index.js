@@ -37,7 +37,9 @@ module.exports = {
   resolveSkill(ctfNodes = [], interfaceState) {
     const resolvedSkills = ctfNodes
       .filter(ctfNode =>
-        ctfNode.interfaces.find(e => e.module.subcommand === 'build')
+        ctfNode.interfaces.find(
+          ctfInterface => ctfInterface.module.subcommand === 'build'
+        )
       )
       .filter(ctfNode => {
         const { supports } = ctfNode.interfaces.find(

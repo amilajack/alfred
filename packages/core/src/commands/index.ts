@@ -19,7 +19,7 @@ export function getInterfaceForSubcommand(
       (ctfNode: CtfNode) => ctfNode.interfaces && ctfNode.interfaces.length
     )
     .map((ctfNode: CtfNode): SkillInterfaceModule[] =>
-      ctfNode.interfaces.map(e => require(e.name))
+      ctfNode.interfaces.map(ctfInterface => require(ctfInterface.name))
     )
     .flat()
     .find(

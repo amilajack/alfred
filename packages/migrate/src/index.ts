@@ -161,7 +161,7 @@ export default async function Providers(
       readFileAsync(file)
     );
     const fileBuffers = await Promise.all(filePromises);
-    return fileBuffers.map(e => e.toString()).sort();
+    return fileBuffers.map(fileBuffer => fileBuffer.toString()).sort();
   }
 
   // Write the temporary files to the original files

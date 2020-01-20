@@ -94,7 +94,9 @@ module.exports = {
         'rollup.base',
         'rollup.prod',
         'rollup.dev'
-      ].map(e => getConfigByConfigName(e, configFiles).config);
+      ].map(
+        configFile => getConfigByConfigName(configFile, configFiles).config
+      );
       const inputAndOutputConfigs = {
         input: `./src/lib.${interfaceState.target}.js`,
         output: {

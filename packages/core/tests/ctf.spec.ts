@@ -113,7 +113,7 @@ describe('CTF', () => {
         },
         {
           ...defaultProject.config,
-          skills: ['@alfred/skill-react'].map(e => [e, {}])
+          skills: ['@alfred/skill-react'].map(skill => [skill, {}])
         }
       );
       expect(result).toMatchSnapshot();

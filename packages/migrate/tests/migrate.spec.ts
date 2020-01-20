@@ -79,7 +79,7 @@ describe.skip('Migrate', () => {
           path.join(__dirname, 'fixtures', 'foo-test.ts'),
           path.join(__dirname, 'fixtures', 'class-test.ts')
         ]
-      }).then(e => ({ ...e, path: '' }))
+      }).then(providerResult => ({ ...providerResult, path: '' }))
     ).rejects.toThrowError();
   });
 

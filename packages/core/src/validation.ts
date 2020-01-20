@@ -439,7 +439,9 @@ export default function Validateconfig(config: { [x: string]: any }): void {
 
   const schema = Joi.object().keys({
     npmClient: Joi.string().valid(['npm', 'yarn']),
+    rawConfig: Joi.object(),
     showConfigs: Joi.boolean(),
+    configsDir: Joi.string(),
     extends: [Joi.string(), Joi.array()],
     autoInstall: Joi.bool(),
     skills,
@@ -450,24 +452,33 @@ export default function Validateconfig(config: { [x: string]: any }): void {
       recommendSkills: skills
     })
   });
-  if (!config.extends) return config;
-  // Validate if each config in `.extends` is a string
-  if (Array.isArray(config.extends)) {
-    config.extends.forEach(_config => {
-      if (typeof _config !== 'string') {
-        throw new Error(
-          `Values in ".extends" property in Alfred config must be a string. Instead passed ${JSON.stringify(
-            config.extends
-          ) || String(config.extends)}`
-        );
-      }
-    });
-  } else if (typeof config.extends !== 'string') {
+
+  if (config.showConfigs !== true && 'configsDir' in config) {
     throw new Error(
-      `Values in ".extends" property in Alfred config must be a string. Instead passed ${JSON.stringify(
-        config.extends
-      ) || String(config.extends)}`
+      'showConfigs must be true for configsDir property to be set'
     );
   }
+
+  if ('extends' in config) {
+    // Validate if each config in `.extends` is a string
+    if (Array.isArray(config.extends)) {
+      config.extends.forEach(extendConfigs => {
+        if (typeof extendConfigs !== 'string') {
+          throw new Error(
+            `Values in ".extends" property in Alfred config must be a string. Instead passed ${JSON.stringify(
+              config.extends
+            ) || String(config.extends)}`
+          );
+        }
+      });
+    } else if (typeof config.extends !== 'string') {
+      throw new Error(
+        `Values in ".extends" property in Alfred config must be a string. Instead passed ${JSON.stringify(
+          config.extends
+        ) || String(config.extends)}`
+      );
+    }
+  }
+
   return Joi.assert(config, schema);
 }

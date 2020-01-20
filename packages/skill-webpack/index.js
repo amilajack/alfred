@@ -184,8 +184,8 @@ module.exports = {
       }
       if (mergedConfig.entry) {
         if (Array.isArray(mergedConfig.entry)) {
-          mergedConfig.entry = mergedConfig.entry.map(e =>
-            replaceProjectRoot(e, project.root)
+          mergedConfig.entry = mergedConfig.entry.map(entry =>
+            replaceProjectRoot(entry, project.root)
           );
         } else {
           mergedConfig.entry = replaceProjectRoot(

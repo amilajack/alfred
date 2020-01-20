@@ -27,16 +27,21 @@ export default async function skills(
 
   interfaceStateCtfs.forEach(interfaceStateCtf => {
     interfaceStateCtf.forEach(result => {
-      result.interfaces.forEach(e => {
-        subCommandDict.set(e.module.subcommand, e);
-        if (subCommandAndSkills.has(e.module.subcommand)) {
-          const set = subCommandAndSkills.get(e.module.subcommand);
+      result.interfaces.forEach(resultInterface => {
+        subCommandDict.set(resultInterface.module.subcommand, resultInterface);
+        if (subCommandAndSkills.has(resultInterface.module.subcommand)) {
+          const set = subCommandAndSkills.get(
+            resultInterface.module.subcommand
+          );
           if (set) {
             set.add(result.name);
-            subCommandAndSkills.set(e.module.subcommand, set);
+            subCommandAndSkills.set(resultInterface.module.subcommand, set);
           }
         } else {
-          subCommandAndSkills.set(e.module.subcommand, new Set([result.name]));
+          subCommandAndSkills.set(
+            resultInterface.module.subcommand,
+            new Set([result.name])
+          );
         }
       });
     });

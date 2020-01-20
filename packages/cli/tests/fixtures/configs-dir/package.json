@@ -1,5 +1,5 @@
 {
-  "name": "@fixtures/extend-config",
+  "name": "@fixtures/configs-dir",
   "version": "0.0.2-alpha.5",
   "private": true,
   "license": "MIT",
@@ -15,12 +15,10 @@
   },
   "devDependencies": {
     "@alfred/cli": "^0.0.2-alpha.5",
-    "@alfred/core": "^0.0.2-alpha.5",
-    "@babel/core": "^7.8.3",
-    "@examples/alfred-config-example": "^0.0.2-alpha.5"
+    "@alfred/core": "^0.0.2-alpha.5"
   },
   "alfred": {
-    "extends": "@examples/alfred-config-example",
-    "showConfigs": true
+    "showConfigs": true,
+    "configsDir": ".configsDirTest"
   }
 }
