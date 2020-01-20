@@ -7,7 +7,6 @@
     "parcel": "^1.11.0"
   },
   "peerDependencies": {
-    "@alfred/core": "^0.0.2-alpha.5",
     "parcel": "^1.11.0"
   },
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"

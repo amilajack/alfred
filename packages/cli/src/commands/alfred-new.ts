@@ -82,7 +82,10 @@ export async function addEntrypoints(
 }
 
 // This function lives here because it is used in both tests and the cli
-export async function addBoilerplate(templateData: TemplateData, root: string) {
+export async function addBoilerplate(
+  templateData: TemplateData,
+  root: string
+): Promise<void> {
   const [
     GITIGNORE_TEMPLATE,
     NPM_TEMPLATE,
@@ -144,12 +147,12 @@ function escapeQuotes(str: string): string {
   return str.replace(/"/g, '\\"');
 }
 
-async function guessAuthor() {
-  type Author = {
-    email?: string;
-    name?: string;
-  };
+type Author = {
+  email?: string;
+  name?: string;
+};
 
+async function guessAuthor(): Promise<Author> {
   const author: Author = {
     name: process.env.USER || process.env.USERNAME,
     email: undefined
@@ -168,11 +171,11 @@ async function guessAuthor() {
   }
 }
 
-function renderLines(lines: Array<string>) {
+function renderLines(lines: Array<string>): void {
   console.log(lines.join('\n\n'));
 }
 
-async function createNewProject(cwd: string, name: string) {
+async function createNewProject(cwd: string, name: string): Promise<void> {
   const dirBasename = path.basename(cwd);
   const dirnameEqualsName = dirBasename === name;
   const root = dirnameEqualsName ? cwd : path.resolve(cwd, name);
@@ -241,7 +244,7 @@ async function createNewProject(cwd: string, name: string) {
         type: 'input',
         message: 'license',
         default: 'MIT',
-        validate(input) {
+        validate(input: string): string | true {
           const self = validateLicense(input);
           if (self.validForNewPackages) {
             return true;
@@ -253,9 +256,9 @@ async function createNewProject(cwd: string, name: string) {
       {
         name: 'npmClient',
         type: 'list',
-        choices: ['NPM', 'Yarn'],
+        choices: ['npm', 'yarn'],
         message: 'npm client',
-        default: 'NPM'
+        default: 'npm'
       },
       {
         name: 'projectType',
@@ -283,7 +286,7 @@ async function createNewProject(cwd: string, name: string) {
       full: name
     }
   };
-  answers.npmClient = escapeQuotes(answers.npmClient).toLowerCase();
+  answers.npmClient = escapeQuotes(answers.npmClient);
   answers.projectType = escapeQuotes(answers.projectType);
   answers.description = escapeQuotes(answers.description);
   answers.repository = encodeURI(answers.repository);
@@ -323,9 +326,9 @@ async function createNewProject(cwd: string, name: string) {
 
   renderLines(['I am now installing the dependencies for your app']);
   const installCommand =
-    answers.npmClient === 'NPM' ? `npm install --prefix ${root}` : 'yarn';
+    answers.npmClient === 'npm' ? `npm install --prefix ${root}` : 'yarn';
   const buildCommand =
-    answers.npmClient === 'NPM' ? 'npm run build' : 'yarn build';
+    answers.npmClient === 'npm' ? 'npm run build' : 'yarn build';
   // @TODO Install the deps
   if (process.env.IGNORE_INSTALL !== 'true') {
     childProcess.execSync(installCommand, {
@@ -347,7 +350,7 @@ async function createNewProject(cwd: string, name: string) {
   ]);
 }
 
-(async () => {
+(async (): Promise<void> => {
   const { args } = program.parse(process.argv);
   const name = getSingleSubcommandFromArgs(args);
   createNewProject(process.cwd(), name);

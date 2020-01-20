@@ -1,6 +1,6 @@
 /* eslint import/no-dynamic-require: off */
 // @ts-nocheck
-import Joi from 'joi';
+import Joi from '@hapi/joi';
 import { Pkg, ValidationResult } from '@alfred/types';
 import Config from './config';
 
@@ -434,12 +434,12 @@ export class PkgValidation {
 
 export default function Validateconfig(config: { [x: string]: any }): void {
   const skill = [Joi.string(), Joi.array()];
-  const skills = [Joi.string(), Joi.array().items(skill)];
+  const skills = [Joi.string(), Joi.array().items(...skill)];
 
   if (!config) throw new Error('Config must be passed an object');
 
   const schema = Joi.object().keys({
-    npmClient: Joi.string().valid(['npm', 'yarn']),
+    npmClient: Joi.string().valid('npm', 'yarn'),
     rawConfig: Joi.object(),
     showConfigs: Joi.boolean(),
     configsDir: Joi.string(),

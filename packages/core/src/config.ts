@@ -42,8 +42,8 @@ export default class Config implements ConfigInterface {
   };
 
   constructor(rawConfig: ConfigWithUnresolvedInterfaces) {
-    this.rawConfig = rawConfig;
     ValidateConfig(rawConfig);
+    this.rawConfig = rawConfig;
     const resolvedSkills = {
       ...Config.DEFAULT_CONFIG,
       ...this.normalizeWithResolvedSkills(

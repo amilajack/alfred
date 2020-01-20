@@ -11,8 +11,6 @@
     "webpack-dev-server": "^3.10.1"
   },
   "peerDependencies": {
-    "@alfred/cli": "^0.0.2-alpha.5",
-    "@alfred/core": "^0.0.2-alpha.5",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14"
