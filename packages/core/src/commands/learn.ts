@@ -13,20 +13,13 @@ export default async function learn(
   const newConfig = new Config(
     mergeConfigs({}, config, { skills: skillsPkgNames })
   );
-  // Write the skills to the alfred config in the package.json
-  await newConfig.write(
-    project.pkgPath,
-    mergeConfigs({}, project.pkg.alfred || {}, {
-      skills: skillsPkgNames
-    })
-  );
 
   // First install the skills
   const skillInstallationMethod = process.env.IGNORE_INSTALL
     ? 'writeOnly'
     : config.npmClient;
   project.setConfig(newConfig);
-  await project.installDeps(skillsPkgNames, skillInstallationMethod);
+  await project.installDeps(skillsPkgNames, 'dev', skillInstallationMethod);
 
   // Check if a skill with the same interface is already being used.
   // If so, uninstall it
@@ -34,12 +27,20 @@ export default async function learn(
   // Find the name of the packages that were installed and add the package names to
   // the alfred skills array
   // Find if any new deps need to be installed and install them
-  const newSkills = await diffCtfDepsOfAllInterfaceStates(
+  const { diffDeps, diffDevDeps } = await diffCtfDepsOfAllInterfaceStates(
     project,
     config,
     newConfig
   );
-  if (newSkills.length) {
-    await project.installDeps(newSkills, skillInstallationMethod);
-  }
+  await project.installDeps(diffDevDeps, 'dev', skillInstallationMethod);
+  await project.installDeps(diffDeps, 'dep', skillInstallationMethod);
+
+  // Write the skills to the alfred config in the package.json
+  // Run after all installations to preserve atomic behavior of npm and yarn
+  await newConfig.write(
+    project.pkgPath,
+    mergeConfigs({}, project.pkg.alfred || {}, {
+      skills: skillsPkgNames
+    })
+  );
 }

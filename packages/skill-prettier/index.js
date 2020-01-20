@@ -42,7 +42,7 @@ module.exports = {
           extends: ['prettier'],
           plugins: ['prettier']
         })
-        .addDependencies({
+        .addDevDependencies({
           'eslint-config-prettier': '3.3.0',
           'eslint-plugin-prettier': '3.0.1'
         })

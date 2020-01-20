@@ -2,6 +2,8 @@ export type Dependencies = {
   [x: string]: string;
 };
 
+export type DependencyType = 'dev' | 'dep';
+
 export interface PkgJson extends JSON {
   devDependencies?: Dependencies;
   dependencies?: Dependencies;
@@ -48,6 +50,7 @@ export interface ProjectInterface {
   // Install dependencies to a given project
   installDeps: (
     dependencies: string[],
+    type: DependencyType,
     npmClient?: NpmClients
   ) => Promise<CtfMap>;
 }
@@ -160,6 +163,8 @@ export type HooksCallArgs = {
 };
 
 export type CallFn = (args: HooksCallArgs) => void;
+
+export type DiffDeps = { diffDevDeps: string[]; diffDeps: string[] };
 
 export interface Ctf {
   name: string;

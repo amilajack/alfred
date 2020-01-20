@@ -104,7 +104,7 @@ describe('CTF', () => {
   });
 
   describe('interfaces', () => {
-    it.concurrent('should diff ctfs for all interface states', async () => {
+    it('should diff ctfs for all interface states', async () => {
       const result = await diffCtfDepsOfAllInterfaceStates(
         defaultProject,
         {
@@ -191,7 +191,7 @@ describe('CTF', () => {
   });
 
   describe('alfred cli helpers', () => {
-    it.concurrent('should add missing std skills to ctf', async () => {
+    it('should add missing std skills to ctf', async () => {
       {
         const interfaceState = {
           env: 'production',
@@ -221,7 +221,7 @@ describe('CTF', () => {
     });
 
     describe('skills', () => {
-      it.concurrent('should throw if skill does not exist', async () => {
+      it('should throw if skill does not exist', async () => {
         const [state] = INTERFACE_STATES;
         const project = {
           root: '',
@@ -237,7 +237,7 @@ describe('CTF', () => {
         );
       });
 
-      it.concurrent('should throw if unsupported skill is used', async () => {
+      it('should throw if unsupported skill is used', async () => {
         const [state] = INTERFACE_STATES;
         const project = {
           config: {
@@ -253,56 +253,57 @@ describe('CTF', () => {
       });
     });
 
-    it.concurrent(
-      'should override core ctf skills that support same interface states',
-      async () => {
-        const interfaceState = {
-          env: 'production',
-          projectType: 'app',
-          target: 'browser'
-        } as InterfaceState;
-        const ctf = CTF(defaultProject, [parcel], interfaceState);
-        const ctfSkillNames = Array.from(ctf.keys());
-        expect(ctfSkillNames).toMatchSnapshot();
-        expect(ctfSkillNames).toContain('parcel');
-        expect(ctfSkillNames).not.toContain('rollup');
-        expect(ctfSkillNames).not.toContain('webpack');
-      }
-    );
+    it('should override core ctf skills that support same interface states', async () => {
+      const interfaceState = {
+        env: 'production',
+        projectType: 'app',
+        target: 'browser'
+      } as InterfaceState;
+      const ctf = CTF(defaultProject, [parcel], interfaceState);
+      const ctfSkillNames = Array.from(ctf.keys());
+      expect(ctfSkillNames).toMatchSnapshot();
+      expect(ctfSkillNames).toContain('parcel');
+      expect(ctfSkillNames).not.toContain('rollup');
+      expect(ctfSkillNames).not.toContain('webpack');
+    });
 
-    it.concurrent(
-      'should not use CTF skills that do not support current interface state',
-      async () => {
-        const interfaceState = {
-          env: 'production',
-          projectType: 'lib',
-          target: 'browser'
-        } as InterfaceState;
-        const ctf = CTF(defaultProject, [parcel], interfaceState);
-        const ctfSkillNames = Array.from(ctf.keys());
-        expect(ctfSkillNames).toMatchSnapshot();
-        expect(ctfSkillNames).not.toContain('parcel');
-        expect(ctfSkillNames).toContain('rollup');
-        expect(ctfSkillNames).not.toContain('webpack');
-      }
-    );
+    it('should not use CTF skills that do not support current interface state', async () => {
+      const interfaceState = {
+        env: 'production',
+        projectType: 'lib',
+        target: 'browser'
+      } as InterfaceState;
+      const ctf = CTF(defaultProject, [parcel], interfaceState);
+      const ctfSkillNames = Array.from(ctf.keys());
+      expect(ctfSkillNames).toMatchSnapshot();
+      expect(ctfSkillNames).not.toContain('parcel');
+      expect(ctfSkillNames).toContain('rollup');
+      expect(ctfSkillNames).not.toContain('webpack');
+    });
   });
 
   describe('dependencies', () => {
-    it.concurrent(
-      'should have diffs in deps after learning new skill',
-      async () => {
-        const { webpack, babel } = CORE_CTFS;
-        const oldCtf = CTF(defaultProject, [webpack], defaultInterfaceState);
-        const newCtf = CTF(
-          defaultProject,
-          [webpack, babel],
-          defaultInterfaceState
-        );
-        const ctf = diffCtfDeps(oldCtf, newCtf);
-        expect(ctf).toMatchSnapshot();
-      }
-    );
+    it('should have same deps when adding default to ctfs', async () => {
+      const { webpack, babel } = CORE_CTFS;
+      const oldCtf = CTF(defaultProject, [webpack], defaultInterfaceState);
+      const newCtf = CTF(
+        defaultProject,
+        [webpack, babel],
+        defaultInterfaceState
+      );
+      const ctf = diffCtfDeps(oldCtf, newCtf);
+      expect(ctf).toEqual({
+        diffDeps: [],
+        diffDevDeps: []
+      });
+    });
+
+    it('should have different deps when adding default to ctfs', async () => {
+      const { webpack } = CORE_CTFS;
+      const oldCtf = CTF(defaultProject, [], defaultInterfaceState);
+      const newCtf = CTF(defaultProject, [webpack], defaultInterfaceState);
+      expect(diffCtfDeps(oldCtf, newCtf)).toMatchSnapshot();
+    });
   });
 
   // Generate tests for CTF combinations

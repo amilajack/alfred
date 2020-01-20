@@ -4,6 +4,7 @@ import npm from 'npm';
 import childProcess from 'child_process';
 import formatPkg from 'format-package';
 import { getConfigsBasePath, findProjectRoot } from '@alfred/helpers';
+import mergeConfigs from '@alfred/merge-configs';
 import {
   PkgJson,
   ConfigInterface,
@@ -13,7 +14,8 @@ import {
   SkillsList,
   CtfMap,
   CtfNode,
-  NpmClients
+  NpmClients,
+  DependencyType
 } from '@alfred/types';
 import Config from './config';
 import { PkgValidation } from './validation';
@@ -195,15 +197,18 @@ export default class Project implements ProjectInterface {
 
   async installDeps(
     dependencies: Array<string>,
+    dependenciesType: DependencyType,
     npmClient: NpmClients = this.config.npmClient
   ): Promise<any> {
     if (!dependencies.length) return;
 
+    this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
+
     switch (npmClient) {
       // Install dependencies with NPM, which is the default
       case 'npm': {
-        return new Promise((resolve, reject) => {
-          npm.load({ save: true }, err => {
+        await new Promise((resolve, reject) => {
+          npm.load({ save: true, dev: dependenciesType === 'dev' }, err => {
             if (err) reject(err);
 
             npm.commands.install(dependencies, (_err, data) => {
@@ -214,11 +219,13 @@ export default class Project implements ProjectInterface {
             npm.on('log', console.log);
           });
         });
+        break;
       }
       // Install dependencies with Yarn
       case 'yarn': {
+        const devFlag = dependenciesType === 'dev' ? '--dev' : '';
         return childProcess.execSync(
-          ['yarn', 'add', ...dependencies].join(' '),
+          ['yarn', 'add', devFlag, ...dependencies].join(' '),
           {
             cwd: this.root,
             stdio: 'inherit'
@@ -228,8 +235,7 @@ export default class Project implements ProjectInterface {
       // Write the package to the package.json but do not install them. This is intended
       // to be used for end to end testing
       case 'writeOnly': {
-        const { dependencies: currentDependencies = {} } = this.pkg;
-        const dependenciesAsObject = dependencies
+        const newDependencies = dependencies
           .map(dependency => {
             if (dependency[0] !== '@') {
               return dependency.split('@');
@@ -243,19 +249,24 @@ export default class Project implements ProjectInterface {
           })
           .map(([p, c]) => ({ [p]: c }))
           .reduce((p, c) => ({ ...p, ...c }), {});
-        const newDependencies = {
-          ...currentDependencies,
-          ...dependenciesAsObject
-        };
+
         // @TODO @HACK @BUG This is an incorrect usage of the Config API
-        return Config.writeToPkgJson(this.pkgPath, {
-          dependencies: newDependencies
-        });
+        await Config.writeToPkgJson(
+          this.pkgPath,
+          mergeConfigs({}, this.pkg, {
+            [dependenciesType === 'dev'
+              ? 'devDependencies'
+              : 'dependencies']: newDependencies
+          })
+        );
+        break;
       }
       default: {
         throw new Error('Unsupported npm client. Can only be "npm" or "yarn"');
       }
     }
+
+    this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
   }
 
   /**

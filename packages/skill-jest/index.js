@@ -82,7 +82,7 @@ module.exports = {
         })
     // This causes a cycle in the CTF graph, does not allow topsort
     // babel: config =>
-    //   config.addDependencies({
+    //   config.addDevDependencies({
     //     'babel-core': '^7.0.0-bridge.0'
     //   })
   }

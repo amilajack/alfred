@@ -47,7 +47,7 @@ module.exports = {
         .extendConfig('eslint', {
           plugins: ['mocha']
         })
-        .addDependencies({
+        .addDevDependencies({
           'eslint-plugin-mocha': '3.0.1'
         })
   }

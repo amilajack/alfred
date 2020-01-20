@@ -16,7 +16,8 @@ import {
   Dependencies,
   OrderedCtfTransforms,
   OrderedCtfTransformsMap,
-  Transforms
+  Transforms,
+  DiffDeps
 } from '@alfred/types';
 import topsort from './topsort';
 import Config from './config';
@@ -428,25 +429,35 @@ export function getDevDependencies(ctf: CtfMap): Dependencies {
  * Find all the elements such that are (A ⩃ B) ⋂ B
  * where A is old ctf and B is new ctf
  */
-export function diffCtfDeps(oldCtf: CtfMap, newCtf: CtfMap): Array<string> {
-  const oldCtfMap: Map<string, string> = new Map(
-    Object.entries(getDevDependencies(oldCtf))
-  );
-  const diffDeps = new Map();
+export function diffCtfDeps(oldCtf: CtfMap, newCtf: CtfMap): DiffDeps {
+  const [diffDevDeps, diffDeps] = [getDevDependencies, getDependencies].map(
+    getDepsFn => {
+      const oldCtfMap: Map<string, string> = new Map(
+        Object.entries(getDepsFn(oldCtf))
+      );
 
-  Object.entries(getDevDependencies(newCtf)).forEach(([dependency, semver]) => {
-    if (oldCtfMap.has(dependency)) {
-      if (oldCtfMap.get(dependency) !== semver) {
-        throw new Error('Cannot resolve diff deps');
-      }
-    } else {
-      diffDeps.set(dependency, semver);
+      const diffDepsMap = new Map();
+
+      Object.entries(getDepsFn(newCtf)).forEach(([dependency, semver]) => {
+        if (oldCtfMap.has(dependency)) {
+          if (oldCtfMap.get(dependency) !== semver) {
+            throw new Error('Cannot resolve diff deps');
+          }
+        } else {
+          diffDepsMap.set(dependency, semver);
+        }
+      });
+
+      return Array.from(diffDepsMap.entries()).map(
+        ([dependency, semver]) => `${dependency}@${semver}`
+      );
     }
-  });
-
-  return Array.from(diffDeps.entries()).map(
-    ([dependency, semver]) => `${dependency}@${semver}`
   );
+
+  return {
+    diffDevDeps,
+    diffDeps
+  };
 }
 
 export async function diffCtfDepsOfAllInterfaceStates(
@@ -459,7 +470,7 @@ export async function diffCtfDepsOfAllInterfaceStates(
     | ConfigWithResolvedSkills
     | ConfigInterface
     | ConfigWithUnresolvedInterfaces
-): Promise<Array<string>> {
+): Promise<DiffDeps> {
   const interfaceStatesWithDupeDeps = await Promise.all(
     INTERFACE_STATES.map(interfaceState =>
       Promise.all([
@@ -469,9 +480,7 @@ export async function diffCtfDepsOfAllInterfaceStates(
     )
   );
 
-  const diffDeps = interfaceStatesWithDupeDeps
+  return interfaceStatesWithDupeDeps
     .map(([a, b]) => diffCtfDeps(a, b))
-    .flat();
-
-  return Array.from(new Set(diffDeps));
+    .reduce((prev, curr) => lodash.merge({}, prev, curr));
 }
