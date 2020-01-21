@@ -1,18 +1,19 @@
 /* eslint import/no-dynamic-require: off, no-console: off, global-require: off */
 const fs = require('fs');
 const path = require('path');
+const assert = require('assert');
 const rimraf = require('rimraf');
 const Table = require('cli-table3');
 const chalk = require('chalk');
 const powerset = require('@amilajack/powerset');
 const childProcess = require('child_process');
 const { INTERFACE_STATES } = require('@alfred/core/lib/interface');
+const { formatPkgJson } = require('@alfred/core');
 const { entrypointsToInterfaceStates } = require('@alfred/core/lib/ctf');
 const { serial } = require('@alfred/core/lib/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
-const assert = require('assert');
 const { addEntrypoints } = require('../../lib');
-const Config = require('@alfred/core/lib/config');
+const { default: Config } = require('@alfred/core/lib/config');
 
 process.on('unhandledRejection', err => {
   throw err;
@@ -107,7 +108,19 @@ async function generateTests(skillCombination, tmpDir) {
 
 (async () => {
   const tmpDir = path.join(__dirname, 'tmp');
-  rimraf.sync(tmpDir);
+
+  function cleanTmpDir() {
+    rimraf.sync(tmpDir);
+  }
+
+  process.on('unhandledRejection', () => {
+    cleanTmpDir();
+  });
+  process.on('exit', () => {
+    cleanTmpDir();
+  });
+
+  cleanTmpDir();
   await fs.promises.mkdir(tmpDir);
 
   // Generate e2e tests for each combination of skills
@@ -120,7 +133,7 @@ async function generateTests(skillCombination, tmpDir) {
       .map(test => test())
   );
 
-  childProcess.execSync('yarn', {
+  childProcess.execSync('yarn --frozen-lockfile', {
     stdio: 'inherit'
   });
 
@@ -169,17 +182,23 @@ async function generateTests(skillCombination, tmpDir) {
 
           await serial(
             [true, false].map(showConfigs => async () => {
-              const pkg = require(path.join(projectDir, 'package.json'));
-              const config = mergeConfigs({}, pkg, {
-                alfred: {
-                  ...Config.DEFAULT_CONFIG,
-                  showConfigs
+              const pkg = mergeConfigs(
+                {},
+                require(path.join(projectDir, 'package.json')),
+                {
+                  alfred: {
+                    ...Config.DEFAULT_CONFIG,
+                    showConfigs
+                  }
                 }
-              });
+              );
+
               fs.writeFileSync(
                 path.join(projectDir, 'package.json'),
-                JSON.stringify(config)
+                await formatPkgJson(pkg)
               );
+
+              rimraf.sync(path.join(projectDir, pkg.alfred.configsDir));
 
               try {
                 command = 'skills';
@@ -234,12 +253,10 @@ async function generateTests(skillCombination, tmpDir) {
                         });
                       }
                       // Assert that the .configs dir should or should not exist
-                      const configsDir = path.join(
-                        projectDir,
-                        config.configsDir
-                      );
                       assert.strictEqual(
-                        fs.existsSync(configsDir),
+                        fs.existsSync(
+                          path.join(projectDir, pkg.alfred.configsDir)
+                        ),
                         showConfigs
                       );
                     } catch (e) {
@@ -308,6 +325,6 @@ async function generateTests(skillCombination, tmpDir) {
     );
   } else {
     console.log(`All ${totalTestsCount} e2e tests passed! Yayy 🎉 🎉 🎉`);
-    rimraf.sync(tmpDir);
+    cleanTmpDir();
   }
 })();
