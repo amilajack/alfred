@@ -28,7 +28,7 @@ steps:
         yarn
       path: $(YARN_CACHE_FOLDER)
     displayName: Cache Yarn packages
-  - script: yarn --frozen-lockfile && yarn test
+  - script: yarn --frozen-lockfile && yarn test && yarn workspace @alfred/cli run e2e
   - script: yarn spec --coverage --coverageReporters=cobertura
   - task: PublishCodeCoverageResults@1
     inputs:
