@@ -1,9 +1,8 @@
 import program from 'commander';
 import { Signale } from 'signale';
 import alfred from '@alfred/core';
-import { SkillsList } from '@alfred/types';
 
-(async (): Promise<void | SkillsList> => {
+(async (): Promise<void> => {
   const args = program.parse(process.argv);
   const { args: subCommands = [] } = args;
 
@@ -43,5 +42,5 @@ import { SkillsList } from '@alfred/types';
     });
   }
 
-  return project.run(subcommand, skillFlags);
+  await project.run(subcommand, skillFlags);
 })();

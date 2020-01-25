@@ -2,7 +2,7 @@ import alfred from '@alfred/core';
 import Table, { HorizontalTable } from 'cli-table3';
 import chalk from 'chalk';
 
-(async () => {
+(async (): Promise<void> => {
   const project = await alfred();
   const { subCommandAndSkills, subCommandDict } = await project.skills();
 
@@ -15,7 +15,7 @@ import chalk from 'chalk';
   }) as HorizontalTable;
 
   Array.from(subCommandAndSkills.entries()).forEach(([subCommand, skills]) => {
-    const description = (() => {
+    const description = ((): string => {
       if (subCommandDict.has(subCommand)) {
         const interfaceForSubCommand = subCommandDict.get(subCommand);
         if (

@@ -13,6 +13,13 @@ export type ValidPkgNameResult = {
   warnings?: string[];
 };
 
+export type RawTemplateData = {
+  project?: InterfaceState;
+  'alfred-pkg'?: {
+    semver: string;
+  };
+};
+
 export type TemplateData = {
   project: InterfaceState;
   'alfred-pkg': {
@@ -37,7 +44,7 @@ async function compileTemplate(
 }
 
 export async function addEntrypoints(
-  rawTemplateData: Record<string, any>,
+  rawTemplateData: RawTemplateData,
   root: string,
   entrypointInterfaceStates: Array<InterfaceState>
 ): Promise<void> {
@@ -63,7 +70,7 @@ export async function addEntrypoints(
         project: { projectType, target, isApp, isBrowser }
       };
 
-      const writeIndexHtml = () => {
+      const writeIndexHtml = (): Promise<void> => {
         if (isApp && isBrowser) {
           const content = APP_BROWSER_HTML_TEMPLATE(templateData);
           return fs.promises.writeFile(
@@ -95,7 +102,10 @@ export async function addEntrypoints(
 }
 
 // This function lives here because it is used in both tests and the cli
-export async function addBoilerplate(templateData: TemplateData, root: string) {
+export async function addBoilerplate(
+  templateData: TemplateData,
+  root: string
+): Promise<void> {
   const [
     GITIGNORE_TEMPLATE,
     NPM_TEMPLATE,
