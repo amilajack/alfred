@@ -1,8 +1,15 @@
 declare module 'format-package' {
+  import { PkgJson } from '@alfred/types';
   export default function formatPkg(
-    pkg: Record<string, any>,
-    opts?: Record<string, any>
-  ): Promise<Record<string, any>>;
+    pkg: PkgJson,
+    opts?: {
+      order?: string[];
+      transforms?: {
+        [fn: string]: Function;
+      };
+      formatter: (x: string) => string;
+    }
+  ): Promise<string>;
 }
 
 type ValidLicenseResult = {

@@ -1,29 +1,17 @@
 import program from 'commander';
 import { Signale } from 'signale';
 import alfred from '@alfred/core';
-import { SkillsList } from '@alfred/types';
+import { getSingleSubcommandFromArgs } from '..';
 
-(async (): Promise<void | SkillsList> => {
+(async (): Promise<void> => {
   const args = program.parse(process.argv);
   const { args: subCommands = [] } = args;
 
-  switch (subCommands.length) {
-    case 0: {
-      throw new Error('One subcommand must be passed');
-    }
-    case 1: {
-      break;
-    }
-    default: {
-      throw new Error('Only one subcommand can be passed');
-    }
-  }
-
-  const [subcommand] = subCommands;
+  const subCommand = getSingleSubcommandFromArgs(subCommands);
 
   // Get the flags that are passed to the skills
   const skillFlags = args.rawArgs.slice(
-    args.rawArgs.findIndex((curr: string) => curr === subcommand) + 1
+    args.rawArgs.findIndex((curr: string) => curr === subCommand) + 1
   );
 
   const project = await alfred();
@@ -43,5 +31,5 @@ import { SkillsList } from '@alfred/types';
     });
   }
 
-  return project.run(subcommand, skillFlags);
+  await project.run(subCommand, skillFlags);
 })();
