@@ -4,31 +4,14 @@ const { getConfigByConfigName } = require('@alfred/helpers');
 module.exports = {
   name: 'babel',
   description: 'Transpile JS from ESNext to the latest ES version',
-  devDependencies: {
-    '@babel/cli': '7.2.0',
-    '@babel/core': '7.2.0',
-    '@babel/preset-env': '7.2.0',
-    'babel-core': '^7.0.0-bridge.0',
-    'babel-loader': '8.0.5'
-  },
+  devDependencies: require('./package.json').devDependencies,
   configFiles: [
     {
       name: 'babel',
       path: '.babelrc.js',
       write: true,
       config: {
-        presets: [
-          '@babel/preset-env'
-          // [
-          //   '@babel/preset-env',
-          //   {
-          //     targets: {
-          //       esmodules: true
-          //     },
-          //     modules: false
-          //   }
-          // ]
-        ]
+        presets: ['@babel/preset-env']
       }
     }
   ],

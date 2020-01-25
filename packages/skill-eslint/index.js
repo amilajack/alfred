@@ -11,7 +11,7 @@ module.exports = {
   name: 'eslint',
   description: 'Lint all your JS files',
   interfaces: ['@alfred/interface-lint'],
-  devDependencies: { eslint: '5.10.0' },
+  devDependencies: require('./package.json').devDependencies,
   configFiles: [
     {
       name: 'eslint',

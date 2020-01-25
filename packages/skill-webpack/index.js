@@ -34,11 +34,7 @@ module.exports = {
     ['@alfred/interface-build', interfaceConfig],
     ['@alfred/interface-start', interfaceConfig]
   ],
-  devDependencies: {
-    webpack: '4.28.3',
-    'webpack-cli': '3.2.1',
-    'webpack-dev-server': '3.1.14'
-  },
+  devDependencies: require('./package.json').peerDependencies,
   configFiles: [
     {
       name: 'webpack.base',

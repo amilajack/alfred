@@ -3,7 +3,9 @@
   "version": "0.0.2-alpha.6",
   "dependencies": {
     "@alfred/helpers": "^0.0.2-alpha.6",
-    "@alfred/types": "^0.0.2-alpha.6",
+    "@alfred/types": "^0.0.2-alpha.6"
+  },
+  "devDependencies": {
     "jest": "^24.0.0"
   },
   "peerDependencies": {

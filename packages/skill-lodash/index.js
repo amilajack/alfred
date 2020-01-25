@@ -1,7 +1,7 @@
 module.exports = {
   name: 'lodash',
   description: 'lodash optimizations for your app',
-  devDependencies: { 'lodash-es': '*' },
+  devDependencies: require('./package.json').devDependencies,
   configFiles: [],
   ctfs: {
     webpack(ctf) {
