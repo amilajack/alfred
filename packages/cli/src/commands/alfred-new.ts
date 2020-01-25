@@ -7,7 +7,7 @@ import validateName from 'validate-npm-package-name';
 import program from 'commander';
 import git from 'git-config';
 import chalk from 'chalk';
-import getSingleSubcommandFromArgs, { GitConfig, addBoilerplate } from '..';
+import { getSingleSubcommandFromArgs, GitConfig, addBoilerplate } from '..';
 
 const { version: ALFRED_PKG_VERSION } = require('@alfred/core/package.json');
 

@@ -151,20 +151,8 @@ export async function addBoilerplate(
   ]);
 }
 
-export default function getSingleSubcommandFromArgs(
-  args: Array<string>
-): string {
-  switch (args.length) {
-    case 0: {
-      throw new Error('One subcommand must be passed');
-    }
-    case 1: {
-      break;
-    }
-    default: {
-      throw new Error('Only one subcommand can be passed');
-    }
-  }
-
+export function getSingleSubcommandFromArgs(args: Array<string>): string {
+  if (args.length === 0) throw new Error('One subcommand must be passed');
+  if (args.length > 1) throw new Error('Only one subcommand can be passed');
   return args[0];
 }
