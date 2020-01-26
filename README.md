@@ -228,13 +228,6 @@ type AlfredInterface = {
     "npmClient": "yarn",
     // Determine if configs should be written to disk
     "showConfigs": true,
-    // Config for all app targets
-    "app": {
-      // Each target will have it's own build
-      "targets": {
-        "chrome": 50
-      }
-    },
     // Config for all lib targets
     "lib": {
       "recommendSkills": [
