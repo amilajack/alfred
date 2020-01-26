@@ -17,7 +17,8 @@ import {
   OrderedCtfTransforms,
   OrderedCtfTransformsMap,
   Transforms,
-  DiffDeps
+  DiffDeps,
+  PkgJson
 } from '@alfred/types';
 import topsort from './topsort';
 import Config from './config';
@@ -419,6 +420,17 @@ export function getDevDependencies(ctf: CtfMap): Dependencies {
   return Array.from(ctf.values())
     .map(ctfNode => ctfNode.devDependencies || {})
     .reduce((p, c) => ({ ...p, ...c }), {});
+}
+
+/**
+ * Given an object with deps, return the deps as a list
+ * Example:
+ * pkgDepsToList({ react: 16 }) => ['react@16']
+ */
+export function pkgDepsToList(deps: PkgJson): string[] {
+  return Array.from(Object.entries(deps)).map(
+    ([dependency, semver]) => `${dependency}@${semver}`
+  );
 }
 
 /**
