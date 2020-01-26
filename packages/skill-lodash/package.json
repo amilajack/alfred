@@ -5,9 +5,11 @@
     "@alfred/types": "^0.0.2-alpha.6"
   },
   "devDependencies": {
+    "lodash-webpack-plugin": "0.11.5",
     "lodash-es": "4.17.15"
   },
   "peerDependencies": {
+    "lodash-webpack-plugin": "0.11.5",
     "lodash-es": "4.17.15"
   },
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"
