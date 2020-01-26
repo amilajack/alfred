@@ -8,7 +8,7 @@ module.exports = {
   configFiles: [
     {
       name: 'babel',
-      path: '.babelrc.js',
+      path: '.babelrc.json',
       write: true,
       config: {
         presets: ['@babel/preset-env']
