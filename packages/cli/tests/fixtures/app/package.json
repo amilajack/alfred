@@ -17,9 +17,11 @@
     "@alfred/cli": "^0.0.3",
     "@alfred/core": "^0.0.3",
     "@alfred/skill-react": "^0.0.3",
+    "react-dom": "16.7.0",
     "eslint-import-resolver-webpack": "^0.12.1"
   },
   "alfred": {
-    "showConfigs": true
+    "showConfigs": true,
+    "skills": ["@alfred/skill-react"]
   }
 }

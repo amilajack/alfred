@@ -1,4 +1,4 @@
-/* eslint import/no-dynamic-require: off, @typescript-eslint/ban-ts-ignore: off */
+/* eslint import/no-dynamic-require: off */
 import lodash from 'lodash';
 import mergeConfigs from '@alfred/merge-configs';
 import {
@@ -7,8 +7,6 @@ import {
   CtfNode,
   ProjectInterface,
   InterfaceState,
-  ConfigWithResolvedSkills,
-  ConfigWithUnresolvedInterfaces,
   ConfigFile,
   ProjectEnum,
   Target,
@@ -16,13 +14,10 @@ import {
   Dependencies,
   OrderedCtfTransforms,
   OrderedCtfTransformsMap,
-  Transforms,
-  DiffDeps,
-  PkgJson
+  Transforms
 } from '@alfred/types';
 import topsort from './topsort';
-import Config from './config';
-import { normalizeInterfacesOfSkill, INTERFACE_STATES } from './interface';
+import { normalizeInterfacesOfSkill } from './interface';
 
 const jestCtf = require('@alfred/skill-jest');
 const babel = require('@alfred/skill-babel');
@@ -405,94 +400,4 @@ export default async function ctfFromConfig(
     Array.from(ctfMapFromConfigSkills.values()),
     interfaceState
   );
-}
-
-/**
- * Intended to be used for testing purposes
- */
-export function getDependencies(ctf: CtfMap): Dependencies {
-  return Array.from(ctf.values())
-    .map(ctfNode => ctfNode.dependencies || {})
-    .reduce((p, c) => ({ ...p, ...c }), {});
-}
-
-export function getDevDependencies(ctf: CtfMap): Dependencies {
-  return Array.from(ctf.values())
-    .map(ctfNode => ctfNode.devDependencies || {})
-    .reduce((p, c) => ({ ...p, ...c }), {});
-}
-
-/**
- * Given an object with deps, return the deps as a list
- * Example:
- * pkgDepsToList({ react: 16 }) => ['react@16']
- */
-export function pkgDepsToList(deps: PkgJson): string[] {
-  return Array.from(Object.entries(deps)).map(
-    ([dependency, semver]) => `${dependency}@${semver}`
-  );
-}
-
-/**
- * Find all the dependencies that are different between two CTF's.
- * This is used to figure out which deps need to be installed by
- * finding which dependencies have changed in the package.json
- *
- * Find all the elements such that are (A ⩃ B) ⋂ B
- * where A is old ctf and B is new ctf
- */
-export function diffCtfDeps(oldCtf: CtfMap, newCtf: CtfMap): DiffDeps {
-  const [diffDevDeps, diffDeps] = [getDevDependencies, getDependencies].map(
-    getDepsFn => {
-      const oldCtfMap: Map<string, string> = new Map(
-        Object.entries(getDepsFn(oldCtf))
-      );
-
-      const diffDepsMap = new Map();
-
-      Object.entries(getDepsFn(newCtf)).forEach(([dependency, semver]) => {
-        if (oldCtfMap.has(dependency)) {
-          if (oldCtfMap.get(dependency) !== semver) {
-            throw new Error('Cannot resolve diff deps');
-          }
-        } else {
-          diffDepsMap.set(dependency, semver);
-        }
-      });
-
-      return Array.from(diffDepsMap.entries()).map(
-        ([dependency, semver]) => `${dependency}@${semver}`
-      );
-    }
-  );
-
-  return {
-    diffDevDeps,
-    diffDeps
-  };
-}
-
-export async function diffCtfDepsOfAllInterfaceStates(
-  project: ProjectInterface,
-  prevConfig:
-    | ConfigWithResolvedSkills
-    | ConfigInterface
-    | ConfigWithUnresolvedInterfaces,
-  currConfig:
-    | ConfigWithResolvedSkills
-    | ConfigInterface
-    | ConfigWithUnresolvedInterfaces
-): Promise<DiffDeps> {
-  const interfaceStatesWithDupeDeps = await Promise.all(
-    INTERFACE_STATES.map(interfaceState =>
-      Promise.all([
-        ctfFromConfig(project, interfaceState, new Config(prevConfig)),
-        ctfFromConfig(project, interfaceState, new Config(currConfig))
-      ])
-    )
-  );
-
-  return interfaceStatesWithDupeDeps
-    .map(([a, b]) => diffCtfDeps(a, b))
-    .reduce((prev, curr) => lodash.merge({}, prev, curr));
 }

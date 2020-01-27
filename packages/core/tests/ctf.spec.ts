@@ -3,23 +3,34 @@ import os from 'os';
 import path from 'path';
 import powerset from '@amilajack/powerset';
 import { getConfigs } from '@alfred/helpers';
-import { InterfaceState } from '@alfred/types';
+import { InterfaceState, CtfMap, Dependencies } from '@alfred/types';
 import {
   getExecutableWrittenConfigsMethods,
   getInterfaceForSubcommand
 } from '../src/commands';
 import ctfFromConfig, {
   CORE_CTFS,
-  getDependencies,
-  getDevDependencies,
   CTF,
-  diffCtfDepsOfAllInterfaceStates,
-  diffCtfDeps,
   topsortCtfMap,
   callCtfsInOrder
 } from '../src/ctf';
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from '../src/interface';
 import Project from '../src/project';
+
+/**
+ * Intended to be used for testing purposes
+ */
+function getDependencies(ctf: CtfMap): Dependencies {
+  return Array.from(ctf.values())
+    .map(ctfNode => ctfNode.dependencies || {})
+    .reduce((p, c) => ({ ...p, ...c }), {});
+}
+
+function getDevDependencies(ctf: CtfMap): Dependencies {
+  return Array.from(ctf.values())
+    .map(ctfNode => ctfNode.devDependencies || {})
+    .reduce((p, c) => ({ ...p, ...c }), {});
+}
 
 const parcel = require('@alfred/skill-parcel');
 
@@ -104,21 +115,6 @@ describe('CTF', () => {
   });
 
   describe('interfaces', () => {
-    it('should diff ctfs for all interface states', async () => {
-      const result = await diffCtfDepsOfAllInterfaceStates(
-        defaultProject,
-        {
-          ...defaultProject.config,
-          skills: []
-        },
-        {
-          ...defaultProject.config,
-          skills: ['@alfred/skill-react'].map(skill => [skill, {}])
-        }
-      );
-      expect(result).toMatchSnapshot();
-    });
-
     it('should allow falsy inputs', () => {
       expect(normalizeInterfacesOfSkill(undefined)).toEqual([]);
       expect(normalizeInterfacesOfSkill(undefined)).toEqual([]);
@@ -279,30 +275,6 @@ describe('CTF', () => {
       expect(ctfSkillNames).not.toContain('parcel');
       expect(ctfSkillNames).toContain('rollup');
       expect(ctfSkillNames).not.toContain('webpack');
-    });
-  });
-
-  describe('dependencies', () => {
-    it('should have same deps when adding default to ctfs', async () => {
-      const { webpack, babel } = CORE_CTFS;
-      const oldCtf = CTF(defaultProject, [webpack], defaultInterfaceState);
-      const newCtf = CTF(
-        defaultProject,
-        [webpack, babel],
-        defaultInterfaceState
-      );
-      const ctf = diffCtfDeps(oldCtf, newCtf);
-      expect(ctf).toEqual({
-        diffDeps: [],
-        diffDevDeps: []
-      });
-    });
-
-    it('should have different deps when adding default to ctfs', async () => {
-      const { webpack } = CORE_CTFS;
-      const oldCtf = CTF(defaultProject, [], defaultInterfaceState);
-      const newCtf = CTF(defaultProject, [webpack], defaultInterfaceState);
-      expect(diffCtfDeps(oldCtf, newCtf)).toMatchSnapshot();
     });
   });
 

@@ -14,7 +14,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "spec": "jest",
     "test": "yarn e2e:clean && yarn build && yarn lint && lerna run test --parallel --ignore @fixtures/*,@examples/* && lerna run test-all --parallel",
-    "version": "lerna run build:clean && yarn build",
+    "version": "yarn e2e:clean & lerna run build:clean && yarn build",
     "website:build": "yarn workspace @alfred/website build",
     "website:clean": "yarn workspace @alfred/website clean",
     "website:publish-gh-pages": "yarn workspace @alfred/website publish-gh-pages && yarn website:clean",

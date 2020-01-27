@@ -1,9 +1,7 @@
 module.exports = {
   name: 'react',
   description: 'A JavaScript library for building user interfaces',
-  devDependencies: {
-    react: '16.7.0'
-  },
+  devDependencies: require('./package.json').devDependencies,
   ctfs: {
     // @TODO Add React HMR support
     babel(config) {

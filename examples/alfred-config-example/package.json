@@ -2,6 +2,7 @@
   "name": "@examples/alfred-config-example",
   "version": "0.0.3",
   "main": "index.json",
+  "private": true,
   "dependencies": {
     "@alfred/skill-lodash": "^0.0.3",
     "@alfred/skill-parcel": "^0.0.3",

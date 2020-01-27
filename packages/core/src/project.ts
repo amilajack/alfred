@@ -15,12 +15,16 @@ import {
   CtfMap,
   CtfNode,
   NpmClients,
-  DependencyType
+  DependencyType,
+  Dependencies
 } from '@alfred/types';
 import Config from './config';
 import { PkgValidation } from './validation';
 import ctfFromConfig, { ENTRYPOINTS } from './ctf';
-import { generateInterfaceStatesFromProject } from './interface';
+import {
+  generateInterfaceStatesFromProject,
+  INTERFACE_STATES
+} from './interface';
 import run from './commands/run';
 import learn from './commands/learn';
 import skills from './commands/skills';
@@ -39,6 +43,17 @@ const getInstallCommmand = (project: ProjectInterface): string => {
     ? `npm install --prefix ${root}`
     : 'yarn';
 };
+
+/**
+ * Given an object with deps, return the deps as a list
+ * Example:
+ * pkgDepsToList({ react: 16 }) => ['react@16']
+ */
+export function pkgDepsToList(deps: Dependencies): string[] {
+  return Array.from(Object.entries(deps)).map(
+    ([dependency, semver]) => `${dependency}@${semver}`
+  );
+}
 
 export function formatPkgJson(pkg: PkgJson): Promise<string> {
   return formatPkg(pkg, { order: PKG_SORT_ORDER });
@@ -199,7 +214,7 @@ export default class Project implements ProjectInterface {
     dependencies: Array<string>,
     dependenciesType: DependencyType,
     npmClient: NpmClients = this.config.npmClient
-  ): Promise<any> {
+  ): Promise<void> {
     if (!dependencies.length) return;
 
     this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
@@ -224,13 +239,14 @@ export default class Project implements ProjectInterface {
       // Install dependencies with Yarn
       case 'yarn': {
         const devFlag = dependenciesType === 'dev' ? '--dev' : '';
-        return childProcess.execSync(
+        childProcess.execSync(
           ['yarn', 'add', devFlag, ...dependencies].join(' '),
           {
             cwd: this.root,
             stdio: 'inherit'
           }
         );
+        break;
       }
       // Write the package to the package.json but do not install them. This is intended
       // to be used for end to end testing
@@ -312,5 +328,45 @@ export default class Project implements ProjectInterface {
     );
 
     return ctf;
+  }
+
+  async findDepsToInstall(
+    additionalCtfs: Array<CtfNode> = []
+  ): Promise<{ dependencies: Dependencies; devDependencies: Dependencies }> {
+    const ctfMaps = await Promise.all(
+      INTERFACE_STATES.map(interfaceState =>
+        ctfFromConfig(this, interfaceState, this.config)
+      )
+    );
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
+    const mergedCtfMap: CtfMap = new Map(...ctfMaps);
+
+    const pkgDeps: {
+      dependencies: Dependencies;
+      devDependencies: Dependencies;
+    } = [...mergedCtfMap.values(), ...additionalCtfs].reduce(
+      (prev, curr) => ({
+        dependencies: { ...prev.dependencies, ...curr.dependencies },
+        devDependencies: { ...prev.devDependencies, ...curr.devDependencies }
+      }),
+      { dependencies: {}, devDependencies: {} }
+    );
+
+    const dependencies = Object.fromEntries(
+      Object.entries(pkgDeps.dependencies).filter(
+        ([dep]) => !(dep in (this.pkg.dependencies || {}))
+      )
+    );
+    const devDependencies = Object.fromEntries(
+      Object.entries(pkgDeps.devDependencies).filter(
+        ([dep]) => !(dep in (this.pkg.devDependencies || {}))
+      )
+    );
+
+    return {
+      dependencies,
+      devDependencies
+    };
   }
 }

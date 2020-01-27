@@ -122,7 +122,6 @@ export default {
   // the case of babel, no interface will be implemented because babel will not be invoked directly
   // as a subcommand. A bundler will always call babel.
   interfaces: [],
-  // ⚠️  Deprecated ️️⚠️
   devDependencies: {
     '@babel/cli': '7.2.0',
     '@babel/core': '7.2.0',

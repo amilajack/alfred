@@ -52,7 +52,10 @@ export interface ProjectInterface {
     dependencies: string[],
     type: DependencyType,
     npmClient?: NpmClients
-  ) => Promise<CtfMap>;
+  ) => Promise<void>;
+  findDepsToInstall: (
+    ctfNodes?: CtfNode[]
+  ) => Promise<{ dependencies: Dependencies; devDependencies: Dependencies }>;
 }
 
 export type InterfaceState = {
