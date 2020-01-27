@@ -20,9 +20,7 @@ module.exports = {
     ['@alfred/interface-build', interfaceConfig],
     ['@alfred/interface-start', interfaceConfig]
   ],
-  devDependencies: {
-    parcel: '^1.11.0'
-  },
+  devDependencies: require('./package.json').devDependencies,
   default: true,
   configFiles: [],
   hooks: {

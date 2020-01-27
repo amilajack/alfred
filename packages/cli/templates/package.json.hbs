@@ -23,19 +23,7 @@
   },
 {{#if project.isApp}}
   "alfred": {
-    "npmClient": "{{project.npmClient}}",
-    "app": {
-      "targets": [
-{{#if project.isBrowser}}
-        "last 1 version",
-        "> 1%",
-        "not dead"
-{{else}}
-        "maintained node versions",
-        "not dead"
-{{/if}}
-      ]
-    }
+    "npmClient": "{{project.npmClient}}"
   },
 {{/if}}
   "scripts": {

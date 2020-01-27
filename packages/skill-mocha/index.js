@@ -10,7 +10,7 @@ module.exports = {
   name: 'mocha',
   description: 'Run tests for your project',
   interfaces: ['@alfred/interface-test'],
-  devDependencies: { mocha: '5.2.0' },
+  devDependencies: require('./package.json').devDependencies,
   configFiles: [],
   supports: {
     env: ['production', 'development', 'test'],

@@ -3,8 +3,10 @@
   "version": "0.0.2-alpha.6",
   "dependencies": {
     "@alfred/helpers": "^0.0.2-alpha.6",
-    "@alfred/types": "^0.0.2-alpha.6",
-    "mocha": "^7.0.0"
+    "@alfred/types": "^0.0.2-alpha.6"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
   },
   "peerDependencies": {
     "mocha": "^5.2.0"

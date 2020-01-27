@@ -1,7 +1,7 @@
 module.exports = {
   name: 'lodash',
   description: 'lodash optimizations for your app',
-  devDependencies: { 'lodash-es': '*' },
+  devDependencies: require('./package.json').devDependencies,
   configFiles: [],
   ctfs: {
     webpack(ctf) {
@@ -9,7 +9,9 @@ module.exports = {
       const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
       return ctf
         .addDevDependencies({
-          'lodash-webpack-plugin': '0.11.5'
+          'lodash-webpack-plugin': require('./package.json').devDependencies[
+            'lodash-webpack-plugin'
+          ]
         })
         .extendConfig('webpack.prod', {
           plugins: [new LodashModuleReplacementPlugin()]

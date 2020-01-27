@@ -3,13 +3,22 @@
   "version": "0.0.2-alpha.6",
   "dependencies": {
     "@alfred/helpers": "^0.0.2-alpha.6",
-    "@alfred/types": "^0.0.2-alpha.6",
+    "@alfred/types": "^0.0.2-alpha.6"
+  },
+  "devDependencies": {
     "@babel/cli": "^7.8.3",
     "@babel/core": "^7.8.3",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "@babel/register": "^7.8.3",
-    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "8.0.6"
+  },
+  "peerDependencies": {
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/register": "^7.8.3",
     "babel-loader": "8.0.6"
   },
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"

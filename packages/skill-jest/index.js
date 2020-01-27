@@ -10,7 +10,7 @@ module.exports = {
   name: 'jest',
   description: 'Test your JS files',
   interfaces: ['@alfred/interface-test'],
-  devDependencies: { jest: '5.0.0' },
+  devDependencies: require('./package.json').devDependencies,
   configFiles: [
     {
       name: 'jest',

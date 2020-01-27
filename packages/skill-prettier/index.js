@@ -8,7 +8,7 @@ module.exports = {
   name: 'prettier',
   description: 'Format the source files in your project',
   interfaces: ['@alfred/interface-format'],
-  devDependencies: { prettier: '1.15.3' },
+  devDependencies: require('./package.json').devDependencies,
   configFiles: [
     {
       name: 'prettier',

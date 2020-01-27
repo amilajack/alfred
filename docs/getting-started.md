@@ -161,14 +161,6 @@ type AlfredInterface = {
     "configsDir": ".configs", // defaults to root
     // Write the configs to the configsDir directory
     "showConfigs": true,
-    // Config for all app targets
-    "app": {
-      // Each target will have it's own build
-      "targets": {
-        "chrome": 50,
-        "node": 10
-      }
-    },
     // Config for all lib targets
     "lib": {
       "recommendSkills": ["@alfred/skill-react"]
