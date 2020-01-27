@@ -39,7 +39,7 @@ module.exports = {
             ]
           }
         })
-        .addDevDependencies({ 'babel-loader': '5.0.0' });
+        .addDevDependencies({ 'babel-loader': '8.0.0' });
     },
     rollup(ctf, ctfs) {
       // eslint-disable-next-line import/no-extraneous-dependencies
@@ -70,7 +70,7 @@ module.exports = {
         .extendConfig('eslint', {
           parser: 'babel-eslint'
         })
-        .addDevDependencies({ 'babel-eslint': '5.0.0' });
+        .addDevDependencies({ 'babel-eslint': '10.0.0' });
     }
   }
 };

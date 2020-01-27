@@ -18,10 +18,11 @@ module.exports = {
     }
   ],
   hooks: {
-    async call({ configFiles, config, flags }) {
+    async call({ configFiles, project, config, flags }) {
       const binPath = await getPkgBinPath('prettier');
       const configPath = getConfigPathByConfigName('prettier', configFiles);
       return execCommand(
+        project,
         [
           binPath,
           '--ignore-path',
@@ -43,7 +44,7 @@ module.exports = {
           plugins: ['prettier']
         })
         .addDevDependencies({
-          'eslint-config-prettier': '3.3.0',
+          'eslint-config-prettier': '6.9.0',
           'eslint-plugin-prettier': '3.0.1'
         })
   }

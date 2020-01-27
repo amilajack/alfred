@@ -145,8 +145,8 @@ export async function getPkgBinPath(
   );
 }
 
-export function execCommand(cmd: string): Buffer {
-  return childProcess.execSync(cmd, { stdio: 'inherit' });
+export function execCommand(project: ProjectInterface, cmd: string): Buffer {
+  return childProcess.execSync(cmd, { stdio: 'inherit', cwd: project.root });
 }
 
 export async function openInBrowser(

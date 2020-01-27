@@ -50,7 +50,7 @@ module.exports = {
         .extendConfig('eslint', {
           extends: ['eslint-config-airbnb']
         })
-        .addDevDependencies({ 'eslint-config-airbnb': '17.1.0' });
+        .addDevDependencies({ 'eslint-config-airbnb': '18.0.0' });
     }
   }
 };

@@ -82,6 +82,7 @@ module.exports = {
       //       ? `./src/${filename} ${watchFlag} --format esm --file ./targets/prod/${filename}`
       //       : `./src/${filename} ${watchFlag} --format cjs --file ./targets/dev/${filename}`;
       //   return execCommand(
+      //     project,
       //     [
       //       binPath,
       //       cmd,

@@ -61,6 +61,7 @@ module.exports = {
       );
 
       return execCommand(
+        project,
         [
           binPath,
           config.showConfigs
@@ -75,7 +76,7 @@ module.exports = {
     eslint: ctf =>
       ctf
         .addDevDependencies({
-          'eslint-plugin-jest': '8.0.0'
+          'eslint-plugin-jest': '23.6.0'
         })
         .extendConfig('eslint', {
           plugins: ['jest']
