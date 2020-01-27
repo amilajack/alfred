@@ -174,7 +174,7 @@ describe('CTF', () => {
   describe('executors', () => {
     it('should generate functions for scripts', () => {
       INTERFACE_STATES.forEach(interfaceState => {
-        const ctf = CTF(defaultProject, [CORE_CTFS.webpack], interfaceState);
+        const ctf = CTF(defaultProject, [CORE_CTFS.parcel], interfaceState);
         expect(
           getExecutableWrittenConfigsMethods(
             defaultProject,
@@ -307,7 +307,7 @@ describe('CTF', () => {
         Object.values(CORE_CTFS),
         interfaceState
       )
-        .get('webpack')
+        .get('parcel')
         .addDevDependencies({
           foobar: '0.0.0'
         });

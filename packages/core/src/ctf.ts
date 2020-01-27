@@ -21,7 +21,6 @@ import { normalizeInterfacesOfSkill } from './interface';
 
 const jestCtf = require('@alfred/skill-jest');
 const babel = require('@alfred/skill-babel');
-const webpack = require('@alfred/skill-webpack');
 const eslint = require('@alfred/skill-eslint');
 const react = require('@alfred/skill-react');
 const prettier = require('@alfred/skill-prettier');
@@ -31,7 +30,6 @@ const lodashCtf = require('@alfred/skill-lodash');
 
 type CORE_CTF =
   | 'babel'
-  | 'webpack'
   | 'parcel'
   | 'eslint'
   | 'prettier'
@@ -101,7 +99,6 @@ function normalizeCtf(ctf: CtfNode): CtfWithHelpers {
 
 export const CORE_CTFS: { [ctf in CORE_CTF]: CtfWithHelpers } = {
   babel: normalizeCtf(babel),
-  webpack: normalizeCtf(webpack),
   parcel: normalizeCtf(parcel),
   eslint: normalizeCtf(eslint),
   prettier: normalizeCtf(prettier),
