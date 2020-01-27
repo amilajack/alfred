@@ -1,6 +1,6 @@
 {
   "name": "foobar",
-  "version": "0.0.2-alpha.6",
+  "version": "0.0.3",
   "license": "MIT",
   "main": "index.js",
   "alfred": {

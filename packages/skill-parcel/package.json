@@ -1,9 +1,9 @@
 {
   "name": "@alfred/skill-parcel",
-  "version": "0.0.2-alpha.6",
+  "version": "0.0.3",
   "dependencies": {
-    "@alfred/helpers": "^0.0.2-alpha.6",
-    "@alfred/types": "^0.0.2-alpha.6"
+    "@alfred/helpers": "^0.0.3",
+    "@alfred/types": "^0.0.3"
   },
   "devDependencies": {
     "parcel": "^1.11.0"

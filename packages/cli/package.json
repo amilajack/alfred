@@ -1,6 +1,6 @@
 {
   "name": "@alfred/cli",
-  "version": "0.0.3-alpha.0",
+  "version": "0.0.3",
   "description": "A framework for upgrading JavaScript codebases",
   "repository": "git@github.com:amilajack/alfred.git",
   "license": "MIT",
@@ -21,10 +21,10 @@
     "version": "yarn build"
   },
   "dependencies": {
-    "@alfred/core": "^0.0.3-alpha.0",
-    "@alfred/merge-configs": "^0.0.2",
-    "@alfred/migrate": "^0.0.2-alpha.6",
-    "@alfred/types": "^0.0.2-alpha.6",
+    "@alfred/core": "^0.0.3",
+    "@alfred/merge-configs": "^0.0.3",
+    "@alfred/migrate": "^0.0.3",
+    "@alfred/types": "^0.0.3",
     "@amilajack/powerset": "^0.1.1",
     "@babel/code-frame": "^7.8.3",
     "@types/eslint": "^6.1.3",
