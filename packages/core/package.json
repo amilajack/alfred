@@ -2,6 +2,7 @@
   "name": "@alfred/core",
   "version": "0.0.3",
   "main": "./lib/index.js",
+  "license": "MIT",
   "scripts": {
     "build": "yarn ts",
     "build-watch": "yarn build --watch",

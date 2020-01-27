@@ -16,7 +16,8 @@ import {
   CtfNode,
   NpmClients,
   DependencyType,
-  Dependencies
+  Dependencies,
+  PkgWithDeps
 } from '@alfred/types';
 import Config from './config';
 import { PkgValidation } from './validation';
@@ -211,11 +212,15 @@ export default class Project implements ProjectInterface {
   }
 
   async installDeps(
-    dependencies: Array<string>,
+    dependencies: string[] | Dependencies,
     dependenciesType: DependencyType,
     npmClient: NpmClients = this.config.npmClient
   ): Promise<void> {
-    if (!dependencies.length) return;
+    const normalizedDeps = Array.isArray(dependencies)
+      ? dependencies
+      : pkgDepsToList(dependencies);
+
+    if (!normalizedDeps.length) return;
 
     this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
 
@@ -226,7 +231,7 @@ export default class Project implements ProjectInterface {
           npm.load({ save: true, dev: dependenciesType === 'dev' }, err => {
             if (err) reject(err);
 
-            npm.commands.install(dependencies, (_err, data) => {
+            npm.commands.install(normalizedDeps, (_err, data) => {
               if (_err) reject(_err);
               resolve(data);
             });
@@ -240,7 +245,7 @@ export default class Project implements ProjectInterface {
       case 'yarn': {
         const devFlag = dependenciesType === 'dev' ? '--dev' : '';
         childProcess.execSync(
-          ['yarn', 'add', devFlag, ...dependencies].join(' '),
+          ['yarn', 'add', devFlag, ...normalizedDeps].join(' '),
           {
             cwd: this.root,
             stdio: 'inherit'
@@ -251,7 +256,7 @@ export default class Project implements ProjectInterface {
       // Write the package to the package.json but do not install them. This is intended
       // to be used for end to end testing
       case 'writeOnly': {
-        const newDependencies = dependencies
+        const newDependencies = normalizedDeps
           .map(dependency => {
             if (dependency[0] !== '@') {
               return dependency.split('@');
@@ -332,7 +337,7 @@ export default class Project implements ProjectInterface {
 
   async findDepsToInstall(
     additionalCtfs: Array<CtfNode> = []
-  ): Promise<{ dependencies: Dependencies; devDependencies: Dependencies }> {
+  ): Promise<PkgWithDeps> {
     const ctfMaps = await Promise.all(
       INTERFACE_STATES.map(interfaceState =>
         ctfFromConfig(this, interfaceState, this.config)
@@ -342,10 +347,10 @@ export default class Project implements ProjectInterface {
     // @ts-ignore
     const mergedCtfMap: CtfMap = new Map(...ctfMaps);
 
-    const pkgDeps: {
-      dependencies: Dependencies;
-      devDependencies: Dependencies;
-    } = [...mergedCtfMap.values(), ...additionalCtfs].reduce(
+    const pkgDeps: PkgWithDeps = [
+      ...mergedCtfMap.values(),
+      ...additionalCtfs
+    ].reduce(
       (prev, curr) => ({
         dependencies: { ...prev.dependencies, ...curr.dependencies },
         devDependencies: { ...prev.devDependencies, ...curr.devDependencies }

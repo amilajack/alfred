@@ -10,6 +10,11 @@ export interface PkgJson extends JSON {
   alfred?: ConfigWithUnresolvedInterfaces;
 }
 
+export interface PkgWithDeps {
+  devDependencies: Dependencies;
+  dependencies: Dependencies;
+}
+
 export type Env = 'production' | 'development' | 'test';
 
 export type Target = 'node' | 'browser';
@@ -49,13 +54,11 @@ export interface ProjectInterface {
   writeConfigsFromCtf: (ctf: CtfMap) => Promise<CtfMap>;
   // Install dependencies to a given project
   installDeps: (
-    dependencies: string[],
+    dependencies: string[] | Dependencies,
     type: DependencyType,
     npmClient?: NpmClients
   ) => Promise<void>;
-  findDepsToInstall: (
-    ctfNodes?: CtfNode[]
-  ) => Promise<{ dependencies: Dependencies; devDependencies: Dependencies }>;
+  findDepsToInstall: (ctfNodes?: CtfNode[]) => Promise<PkgWithDeps>;
 }
 
 export type InterfaceState = {
@@ -169,10 +172,8 @@ export type CallFn = (args: HooksCallArgs) => void;
 
 export type DiffDeps = { diffDevDeps: string[]; diffDeps: string[] };
 
-export interface Ctf {
+export interface Ctf extends PkgWithDeps {
   name: string;
-  dependencies: Dependencies;
-  devDependencies: Dependencies;
   description: string;
   supports?: {
     // Flag name and argument types

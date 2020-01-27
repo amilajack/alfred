@@ -1,7 +1,6 @@
 import { ProjectInterface } from '@alfred/types';
 import mergeConfigs from '@alfred/merge-configs';
 import Config from '../config';
-import { pkgDepsToList } from '../project';
 
 export default async function learn(
   project: ProjectInterface,
@@ -27,16 +26,8 @@ export default async function learn(
   );
 
   // @TODO Ideally there would be a way to install both devDeps and deps at the same time
-  await project.installDeps(
-    pkgDepsToList(dependencies),
-    'dep',
-    skillInstallationMethod
-  );
-  await project.installDeps(
-    pkgDepsToList(devDependencies),
-    'dev',
-    skillInstallationMethod
-  );
+  await project.installDeps(dependencies, 'dep', skillInstallationMethod);
+  await project.installDeps(devDependencies, 'dev', skillInstallationMethod);
 
   // Write the skills to the alfred config in the package.json
   // Run after all installations to preserve atomic behavior of npm and yarn
