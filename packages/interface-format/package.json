@@ -1,6 +1,7 @@
 {
   "name": "@alfred/interface-format",
   "version": "0.0.3",
+  "license": "MIT",
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8",
   "dependencies": {
     "@alfred/types": "^0.0.3"

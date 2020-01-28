@@ -1,6 +1,7 @@
 {
   "name": "@alfred/merge-configs",
   "version": "0.0.3",
+  "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps inline",

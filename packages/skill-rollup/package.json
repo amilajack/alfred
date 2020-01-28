@@ -1,6 +1,7 @@
 {
   "name": "@alfred/skill-rollup",
   "version": "0.0.3",
+  "license": "MIT",
   "dependencies": {
     "@alfred/helpers": "^0.0.3",
     "@alfred/merge-configs": "^0.0.3",
