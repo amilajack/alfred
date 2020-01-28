@@ -1,6 +1,7 @@
 {
   "name": "@alfred/skill-react",
   "version": "0.0.3",
+  "license": "MIT",
   "dependencies": {
     "@alfred/types": "^0.0.3",
     "@babel/preset-env": "^7.8.3"

@@ -1,6 +1,7 @@
 {
   "name": "@alfred/interface-start",
   "version": "0.0.3",
+  "license": "MIT",
   "dependencies": {
     "@alfred/helpers": "^0.0.3",
     "@alfred/types": "^0.0.3",
