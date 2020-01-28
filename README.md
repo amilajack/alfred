@@ -1,6 +1,6 @@
 Alfred
 ======
-[![Build Status](https://dev.azure.com/amilajack/amilajack/_apis/build/status/amilajack.alfred?branchName=master)](https://dev.azure.com/amilajack/amilajack/_build/latest?definitionId=6&branchName=master)
+![Github Actions](https://github.com/amilajack/alfred/workflows/Test/badge.svg?branch=master)
 [![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/alfred)
 [![Twitter Follow](https://img.shields.io/twitter/follow/alfredpkg.svg?style=social)](https://twitter.com/alfredpkg)
 
