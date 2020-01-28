@@ -197,7 +197,7 @@ For now, this **only works when `showConfigs` is set to `true`**.
 ```js
 // index.js
 export default {
-  subCommand: 'build',
+  subcommand: 'build',
   flags: {
     // Flag name and argument types
     env: ['production', 'development', 'test']
@@ -205,7 +205,7 @@ export default {
 };
 
 type AlfredInterface = {
-  subCommand: string,
+  subcommand: string,
   flags: {
     [x: string]: Array<string>
   }
