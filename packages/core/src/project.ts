@@ -224,7 +224,10 @@ export default class Project implements ProjectInterface {
 
     this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
 
-    switch (npmClient) {
+    const npmClientWithOverride =
+      process.env.ALFRED_IGNORE_INSTALL === 'true' ? 'writeOnly' : npmClient;
+
+    switch (npmClientWithOverride) {
       // Install dependencies with NPM, which is the default
       case 'npm': {
         await new Promise((resolve, reject) => {

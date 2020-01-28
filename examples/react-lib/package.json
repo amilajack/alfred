@@ -60,7 +60,12 @@
     "extends": "@examples/alfred-config-example",
     "showConfigs": true,
     "skills": [
-      "@alfred/skill-react"
+      "@alfred/skill-react",
+      ["@alfred/skill-eslint", {
+        "rules": {
+          "react/state-in-constructor": "off"
+        }
+      }]
     ]
   }
 }
