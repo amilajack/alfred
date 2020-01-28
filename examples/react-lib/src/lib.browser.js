@@ -19,9 +19,12 @@ export function classNames(classSet) {
 }
 
 export default class GitHubButton extends React.Component {
-  state = {
-    count: null
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: null
+    };
+  }
 
   componentDidMount() {
     return fetch(this.getRequestUrl())

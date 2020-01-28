@@ -157,14 +157,14 @@ export default {
             }
           }
         })
-        .addDevDependencies({ 'babel-loader': '10.0.0' });
+        .addDevDependencies({ 'babel-loader': '^10.0.0' });
     },
     eslint: (eslintCtf: CtfNode): CtfNode => {
       return eslintCtf
         .extendConfig('eslint', {
           'parser': 'babel-eslint'
         })
-        .addDevDependencies({ 'babel-eslint': '10.0.0' });
+        .addDevDependencies({ 'babel-eslint': '^10.0.0' });
     }
   }
 };
