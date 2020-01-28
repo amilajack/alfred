@@ -1,0 +1,19 @@
+{
+  "name": "alfred-test-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@alfred/cli": "^0.0.3",
+    "@alfred/core": "^0.0.3",
+    "@alfred/skill-react": "^0.0.3",
+    "react-dom": "16.0.0",
+    "webpack": "^4.28.3"
+  },
+  "alfred": {
+    "showConfigs": true,
+    "skills": [
+      "@alfred/skill-react"
+    ]
+  }
+}

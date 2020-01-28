@@ -4,6 +4,7 @@
     "packages/*",
     "packages/cli/tests/e2e/tmp/*",
     "packages/cli/tests/fixtures/*",
+    "packages/core/tests/fixtures/*",
     "website"
   ],
   "version": "0.0.3",

@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "main": "index.json",
   "private": true,
-  "dependencies": {
+  "peerDependencies": {
     "@alfred/skill-lodash": "^0.0.3",
     "@alfred/skill-parcel": "^0.0.3",
     "@babel/plugin-proposal-class-properties": "^7.8.3"

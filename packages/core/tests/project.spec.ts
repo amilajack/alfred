@@ -7,7 +7,7 @@ describe('Project', () => {
 
     beforeAll(async () => {
       const defaultProject = new Project(
-        path.join(__dirname, '../../cli/tests/fixtures/app')
+        path.join(__dirname, 'fixtures/react-app')
       );
       depsToInstall = await defaultProject.findDepsToInstall();
     });

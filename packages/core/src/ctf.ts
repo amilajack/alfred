@@ -402,11 +402,11 @@ export default async function ctfFromConfig(
   config.skills.forEach(([skillPkgName, skillUserConfig]) => {
     // Add the skill config to the ctfNode
     const ctfNode: CtfNode = require(skillPkgName);
-    ctfNode.config = skillUserConfig;
+    ctfNode.config = skillUserConfig || {};
     if (ctfNode.configFiles) {
       ctfNode.configFiles = ctfNode.configFiles.map(configFile => ({
         ...configFile,
-        config: mergeConfigs(
+        config: lodash.merge(
           {},
           configFile.config,
           // Only apply config if skill has only one config file
