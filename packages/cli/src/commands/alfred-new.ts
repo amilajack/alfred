@@ -98,8 +98,8 @@ async function createNewProject(cwd: string, name: string): Promise<void> {
 
   let answers;
 
-  if (process.env.E2E_CLI_TEST) {
-    answers = JSON.parse(process.env.CLI_INPUT || '{}');
+  if (process.env.ALFRED_E2E_CLI_TEST) {
+    answers = JSON.parse(process.env.ALFRED_CLI_INPUT_TEST || '{}');
   } else {
     answers = await prompt([
       { type: 'input', name: 'description', message: 'description' },
@@ -182,7 +182,7 @@ async function createNewProject(cwd: string, name: string): Promise<void> {
   const templateData = {
     project: answers,
     'alfred-pkg': {
-      semver: process.env.E2E_CLI_TEST
+      semver: process.env.ALFRED_E2E_CLI_TEST
         ? `file:${alfredDepFilePath}`
         : `^${ALFRED_PKG_VERSION}`
     }
@@ -207,7 +207,7 @@ async function createNewProject(cwd: string, name: string): Promise<void> {
   const buildCommand =
     answers.npmClient === 'npm' ? 'npm run build' : 'yarn build';
   // @TODO Install the deps
-  if (process.env.IGNORE_INSTALL !== 'true') {
+  if (process.env.ALFRED_IGNORE_INSTALL !== 'true') {
     childProcess.execSync(installCommand, {
       cwd: root,
       stdio: 'inherit'

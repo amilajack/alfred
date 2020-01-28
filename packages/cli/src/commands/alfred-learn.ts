@@ -5,5 +5,5 @@ import alfred from '@alfred/core';
   const args = program.parse(process.argv);
   const { args: skillsPkgNames } = args;
   const project = await alfred();
-  await project.run('learn', skillsPkgNames);
+  await project.learn(skillsPkgNames);
 })();

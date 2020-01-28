@@ -1,4 +1,4 @@
-/* eslint import/no-dynamic-require: off, @typescript-eslint/ban-ts-ignore: off */
+/* eslint import/no-dynamic-require: off */
 import lodash from 'lodash';
 import mergeConfigs from '@alfred/merge-configs';
 import {
@@ -7,8 +7,6 @@ import {
   CtfNode,
   ProjectInterface,
   InterfaceState,
-  ConfigWithResolvedSkills,
-  ConfigWithUnresolvedInterfaces,
   ConfigFile,
   ProjectEnum,
   Target,
@@ -17,16 +15,15 @@ import {
   OrderedCtfTransforms,
   OrderedCtfTransformsMap,
   Transforms,
-  DiffDeps,
+  DependencyType,
   PkgJson
 } from '@alfred/types';
+import { getDepsFromPkg, fromPkgTypeToFull } from '@alfred/helpers';
 import topsort from './topsort';
-import Config from './config';
-import { normalizeInterfacesOfSkill, INTERFACE_STATES } from './interface';
+import { normalizeInterfacesOfSkill } from './interface';
 
 const jestCtf = require('@alfred/skill-jest');
 const babel = require('@alfred/skill-babel');
-const webpack = require('@alfred/skill-webpack');
 const eslint = require('@alfred/skill-eslint');
 const react = require('@alfred/skill-react');
 const prettier = require('@alfred/skill-prettier');
@@ -36,7 +33,6 @@ const lodashCtf = require('@alfred/skill-lodash');
 
 type CORE_CTF =
   | 'babel'
-  | 'webpack'
   | 'parcel'
   | 'eslint'
   | 'prettier'
@@ -45,7 +41,7 @@ type CORE_CTF =
   | 'rollup'
   | 'lodash';
 
-function addCtfHelpers(ctf: CtfNode): CtfWithHelpers {
+export function addCtfHelpers(ctf: CtfNode): CtfWithHelpers {
   return {
     ...ctf,
     findConfig(configName: string): ConfigFile {
@@ -93,6 +89,27 @@ function addCtfHelpers(ctf: CtfNode): CtfWithHelpers {
       return lodash.merge({}, this, {
         devDependencies
       });
+    },
+    addDepsFromPkg(
+      pkgs: string | string[],
+      pkg: PkgJson | undefined = ctf.pkg,
+      fromPkgType: DependencyType = 'dev',
+      toPkgType: DependencyType = 'peer'
+    ): CtfWithHelpers {
+      const mergedPkg = lodash.merge(
+        {
+          dependencies: {},
+          devDependencies: {},
+          peerDependencies: {}
+        },
+        this.pkg || pkg || {}
+      );
+      const depsToAdd = getDepsFromPkg(pkgs, mergedPkg, fromPkgType);
+      const toPkgTypeFullName = fromPkgTypeToFull(toPkgType);
+
+      return lodash.merge({}, this, {
+        [toPkgTypeFullName]: depsToAdd
+      });
     }
   };
 }
@@ -106,7 +123,6 @@ function normalizeCtf(ctf: CtfNode): CtfWithHelpers {
 
 export const CORE_CTFS: { [ctf in CORE_CTF]: CtfWithHelpers } = {
   babel: normalizeCtf(babel),
-  webpack: normalizeCtf(webpack),
   parcel: normalizeCtf(parcel),
   eslint: normalizeCtf(eslint),
   prettier: normalizeCtf(prettier),
@@ -382,14 +398,14 @@ export default async function ctfFromConfig(
   // Generate the CTF
   const ctfMapFromConfigSkills: CtfMap = new Map();
 
-  config.skills.forEach(([skillPkgName, skillUserConfig]) => {
+  config.skills.forEach(([skillPkgName, skillUserConfig = {}]) => {
     // Add the skill config to the ctfNode
     const ctfNode: CtfNode = require(skillPkgName);
     ctfNode.config = skillUserConfig;
     if (ctfNode.configFiles) {
       ctfNode.configFiles = ctfNode.configFiles.map(configFile => ({
         ...configFile,
-        config: mergeConfigs(
+        config: lodash.merge(
           {},
           configFile.config,
           // Only apply config if skill has only one config file
@@ -405,94 +421,4 @@ export default async function ctfFromConfig(
     Array.from(ctfMapFromConfigSkills.values()),
     interfaceState
   );
-}
-
-/**
- * Intended to be used for testing purposes
- */
-export function getDependencies(ctf: CtfMap): Dependencies {
-  return Array.from(ctf.values())
-    .map(ctfNode => ctfNode.dependencies || {})
-    .reduce((p, c) => ({ ...p, ...c }), {});
-}
-
-export function getDevDependencies(ctf: CtfMap): Dependencies {
-  return Array.from(ctf.values())
-    .map(ctfNode => ctfNode.devDependencies || {})
-    .reduce((p, c) => ({ ...p, ...c }), {});
-}
-
-/**
- * Given an object with deps, return the deps as a list
- * Example:
- * pkgDepsToList({ react: 16 }) => ['react@16']
- */
-export function pkgDepsToList(deps: PkgJson): string[] {
-  return Array.from(Object.entries(deps)).map(
-    ([dependency, semver]) => `${dependency}@${semver}`
-  );
-}
-
-/**
- * Find all the dependencies that are different between two CTF's.
- * This is used to figure out which deps need to be installed by
- * finding which dependencies have changed in the package.json
- *
- * Find all the elements such that are (A ⩃ B) ⋂ B
- * where A is old ctf and B is new ctf
- */
-export function diffCtfDeps(oldCtf: CtfMap, newCtf: CtfMap): DiffDeps {
-  const [diffDevDeps, diffDeps] = [getDevDependencies, getDependencies].map(
-    getDepsFn => {
-      const oldCtfMap: Map<string, string> = new Map(
-        Object.entries(getDepsFn(oldCtf))
-      );
-
-      const diffDepsMap = new Map();
-
-      Object.entries(getDepsFn(newCtf)).forEach(([dependency, semver]) => {
-        if (oldCtfMap.has(dependency)) {
-          if (oldCtfMap.get(dependency) !== semver) {
-            throw new Error('Cannot resolve diff deps');
-          }
-        } else {
-          diffDepsMap.set(dependency, semver);
-        }
-      });
-
-      return Array.from(diffDepsMap.entries()).map(
-        ([dependency, semver]) => `${dependency}@${semver}`
-      );
-    }
-  );
-
-  return {
-    diffDevDeps,
-    diffDeps
-  };
-}
-
-export async function diffCtfDepsOfAllInterfaceStates(
-  project: ProjectInterface,
-  prevConfig:
-    | ConfigWithResolvedSkills
-    | ConfigInterface
-    | ConfigWithUnresolvedInterfaces,
-  currConfig:
-    | ConfigWithResolvedSkills
-    | ConfigInterface
-    | ConfigWithUnresolvedInterfaces
-): Promise<DiffDeps> {
-  const interfaceStatesWithDupeDeps = await Promise.all(
-    INTERFACE_STATES.map(interfaceState =>
-      Promise.all([
-        ctfFromConfig(project, interfaceState, new Config(prevConfig)),
-        ctfFromConfig(project, interfaceState, new Config(currConfig))
-      ])
-    )
-  );
-
-  return interfaceStatesWithDupeDeps
-    .map(([a, b]) => diffCtfDeps(a, b))
-    .reduce((prev, curr) => lodash.merge({}, prev, curr));
 }

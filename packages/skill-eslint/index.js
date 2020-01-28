@@ -18,6 +18,7 @@ module.exports = {
       path: '.eslintrc.json',
       write: true,
       config: {
+        root: true,
         env: {
           browser: true,
           node: true
@@ -35,6 +36,7 @@ module.exports = {
       const binPath = await getPkgBinPath('eslint', 'eslint');
       if (config.showConfigs) {
         return execCommand(
+          project,
           [binPath, `--config ${configPath} src tests`, ...flags].join(' ')
         );
       }
@@ -44,8 +46,10 @@ module.exports = {
       );
       const { CLIEngine } = require('eslint');
       const cli = new CLIEngine({
-        baseConfig: eslintConfig,
-        useEslintrc: false
+        cwd: project.root,
+        useEslintrc: false,
+        root: true,
+        baseConfig: eslintConfig
       });
       const report = cli.executeOnFiles([
         path.join(project.root, 'src'),

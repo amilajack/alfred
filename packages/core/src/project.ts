@@ -15,12 +15,17 @@ import {
   CtfMap,
   CtfNode,
   NpmClients,
-  DependencyType
+  DependencyType,
+  Dependencies,
+  PkgWithDeps
 } from '@alfred/types';
 import Config from './config';
 import { PkgValidation } from './validation';
 import ctfFromConfig, { ENTRYPOINTS } from './ctf';
-import { generateInterfaceStatesFromProject } from './interface';
+import {
+  generateInterfaceStatesFromProject,
+  INTERFACE_STATES
+} from './interface';
 import run from './commands/run';
 import learn from './commands/learn';
 import skills from './commands/skills';
@@ -32,13 +37,24 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
-const getInstallCommmand = (project: ProjectInterface): string => {
+function getInstallCommmand(project: ProjectInterface): string {
   const { root } = project;
   const { npmClient } = project.config;
   return npmClient.toLowerCase() === 'npm'
     ? `npm install --prefix ${root}`
     : 'yarn';
-};
+}
+
+/**
+ * Given an object with deps, return the deps as a list
+ * Example:
+ * pkgDepsToList({ react: 16 }) => ['react@16']
+ */
+export function pkgDepsToList(deps: Dependencies): string[] {
+  return Array.from(Object.entries(deps)).map(
+    ([dependency, semver]) => `${dependency}@${semver}`
+  );
+}
 
 export function formatPkgJson(pkg: PkgJson): Promise<string> {
   return formatPkg(pkg, { order: PKG_SORT_ORDER });
@@ -78,6 +94,16 @@ export default class Project implements ProjectInterface {
     return this;
   }
 
+  /**
+   * Find the dependencies that the user is missing in their package.json and write
+   * them to the package.json
+   */
+  private async writeMissingDeps(): Promise<void> {
+    const { dependencies, devDependencies } = await this.findDepsToInstall();
+    await this.installDeps(dependencies, 'dep', 'writeOnly');
+    await this.installDeps(devDependencies, 'dev', 'writeOnly');
+  }
+
   async run(
     subcommand: string,
     args: Array<string> = []
@@ -100,12 +126,16 @@ export default class Project implements ProjectInterface {
     // @TODO: Make all skills overridable but warn before overriding them
     switch (subcommand) {
       case 'clean': {
-        return clean(this);
+        return this.clean();
+      }
+      case 'skills': {
+        return this.skills();
       }
       case 'learn': {
-        return learn(this, args);
+        return this.learn(args);
       }
       default: {
+        await this.writeMissingDeps();
         return run(this, subcommand, args);
       }
     }
@@ -115,11 +145,13 @@ export default class Project implements ProjectInterface {
     return learn(this, args);
   }
 
-  clean(): Promise<void> {
+  async clean(): Promise<void> {
+    await this.writeMissingDeps();
     return clean(this);
   }
 
-  skills(): Promise<SkillsList> {
+  async skills(): Promise<SkillsList> {
+    await this.writeMissingDeps();
     return skills(this);
   }
 
@@ -142,7 +174,7 @@ export default class Project implements ProjectInterface {
     return result;
   }
 
-  checkIsAlfredProject(
+  private checkIsAlfredProject(
     interfaceStates: Array<InterfaceState>
   ): ValidationResult {
     const srcPath = path.join(this.root, 'src');
@@ -196,22 +228,29 @@ export default class Project implements ProjectInterface {
   }
 
   async installDeps(
-    dependencies: Array<string>,
+    dependencies: string[] | Dependencies,
     dependenciesType: DependencyType,
     npmClient: NpmClients = this.config.npmClient
-  ): Promise<any> {
-    if (!dependencies.length) return;
+  ): Promise<void> {
+    const normalizedDeps = Array.isArray(dependencies)
+      ? dependencies
+      : pkgDepsToList(dependencies);
+
+    if (!normalizedDeps.length) return;
 
     this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
 
-    switch (npmClient) {
+    const npmClientWithOverride =
+      process.env.ALFRED_IGNORE_INSTALL === 'true' ? 'writeOnly' : npmClient;
+
+    switch (npmClientWithOverride) {
       // Install dependencies with NPM, which is the default
       case 'npm': {
         await new Promise((resolve, reject) => {
           npm.load({ save: true, dev: dependenciesType === 'dev' }, err => {
             if (err) reject(err);
 
-            npm.commands.install(dependencies, (_err, data) => {
+            npm.commands.install(normalizedDeps, (_err, data) => {
               if (_err) reject(_err);
               resolve(data);
             });
@@ -224,18 +263,19 @@ export default class Project implements ProjectInterface {
       // Install dependencies with Yarn
       case 'yarn': {
         const devFlag = dependenciesType === 'dev' ? '--dev' : '';
-        return childProcess.execSync(
-          ['yarn', 'add', devFlag, ...dependencies].join(' '),
+        childProcess.execSync(
+          ['yarn', 'add', devFlag, ...normalizedDeps].join(' '),
           {
             cwd: this.root,
             stdio: 'inherit'
           }
         );
+        break;
       }
       // Write the package to the package.json but do not install them. This is intended
       // to be used for end to end testing
       case 'writeOnly': {
-        const newDependencies = dependencies
+        const newDependencies = normalizedDeps
           .map(dependency => {
             if (dependency[0] !== '@') {
               return dependency.split('@');
@@ -312,5 +352,45 @@ export default class Project implements ProjectInterface {
     );
 
     return ctf;
+  }
+
+  async findDepsToInstall(
+    additionalCtfs: Array<CtfNode> = []
+  ): Promise<PkgWithDeps> {
+    const ctfMaps = await Promise.all(
+      INTERFACE_STATES.map(interfaceState =>
+        ctfFromConfig(this, interfaceState, this.config)
+      )
+    );
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
+    const mergedCtfMap: CtfMap = new Map(...ctfMaps);
+
+    const pkgDeps: PkgWithDeps = [
+      ...mergedCtfMap.values(),
+      ...additionalCtfs
+    ].reduce(
+      (prev, curr) => ({
+        dependencies: { ...prev.dependencies, ...curr.dependencies },
+        devDependencies: { ...prev.devDependencies, ...curr.devDependencies }
+      }),
+      { dependencies: {}, devDependencies: {} }
+    );
+
+    const dependencies = Object.fromEntries(
+      Object.entries(pkgDeps.dependencies).filter(
+        ([dep]) => !(dep in (this.pkg.dependencies || {}))
+      )
+    );
+    const devDependencies = Object.fromEntries(
+      Object.entries(pkgDeps.devDependencies).filter(
+        ([dep]) => !(dep in (this.pkg.devDependencies || {}))
+      )
+    );
+
+    return {
+      dependencies,
+      devDependencies
+    };
   }
 }

@@ -23,7 +23,6 @@ module.exports = {
     ['@alfred/interface-build', interfaceConfig],
     ['@alfred/interface-start', interfaceConfig]
   ],
-  devDependencies: { rollup: '4.28.3', 'rollup-plugin-replace': '2.1.0' },
   configFiles: [
     {
       name: 'rollup.base',
@@ -83,6 +82,7 @@ module.exports = {
       //       ? `./src/${filename} ${watchFlag} --format esm --file ./targets/prod/${filename}`
       //       : `./src/${filename} ${watchFlag} --format cjs --file ./targets/dev/${filename}`;
       //   return execCommand(
+      //     project,
       //     [
       //       binPath,
       //       cmd,

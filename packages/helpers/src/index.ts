@@ -9,8 +9,53 @@ import {
   CtfMap,
   ConfigWithUnresolvedInterfaces,
   ProjectInterface,
-  ConfigInterface
+  ConfigInterface,
+  PkgWithAllDeps,
+  DependencyType,
+  DependencyTypeFull,
+  Dependencies
 } from '@alfred/types';
+
+export const fromPkgTypeToFull = (
+  fromPkgType: DependencyType
+): DependencyTypeFull => {
+  switch (fromPkgType) {
+    case 'peer':
+      return 'peerDependencies';
+    case 'dev':
+      return 'devDependencies';
+    case 'dep':
+      return 'dependencies';
+    default: {
+      throw new Error('Pkg type must be one of peer, dev, or dep');
+    }
+  }
+};
+
+export function getDepsFromPkg(
+  pkgs: string | string[],
+  pkg: PkgWithAllDeps,
+  fromPkgType: DependencyType = 'dev'
+): Dependencies {
+  const normalizedPkgNames = Array.isArray(pkgs) ? pkgs : [pkgs];
+  const fromPkgTypeFull = fromPkgTypeToFull(fromPkgType);
+
+  if (!(fromPkgTypeFull in pkg)) {
+    throw new Error(`Given package.json does not have ${fromPkgTypeFull}`);
+  }
+
+  normalizedPkgNames.forEach(pkgName => {
+    if (!(pkgName in pkg[fromPkgTypeFull])) {
+      throw new Error(
+        `Package "${pkgName}" does not exist in ${fromPkgTypeFull} of skill package.json`
+      );
+    }
+  });
+
+  return Object.fromEntries(
+    normalizedPkgNames.map(pkgName => [pkgName, pkg[fromPkgTypeFull][pkgName]])
+  );
+}
 
 /**
  * Get the root of a project from the current working directory
@@ -145,8 +190,8 @@ export async function getPkgBinPath(
   );
 }
 
-export function execCommand(cmd: string): Buffer {
-  return childProcess.execSync(cmd, { stdio: 'inherit' });
+export function execCommand(project: ProjectInterface, cmd: string): Buffer {
+  return childProcess.execSync(cmd, { stdio: 'inherit', cwd: project.root });
 }
 
 export async function openInBrowser(
@@ -155,7 +200,7 @@ export async function openInBrowser(
 ): Promise<void> {
   // Don't open new tab when running end to end tests. This prevents hundreds
   // of tabs from being opened.
-  if (process.env.E2E_CLI_TEST) return;
+  if (process.env.ALFRED_E2E_CLI_TEST) return;
 
   try {
     const options = typeof browser === 'string' ? { app: browser } : undefined;

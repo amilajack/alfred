@@ -2,12 +2,29 @@ export type Dependencies = {
   [x: string]: string;
 };
 
-export type DependencyType = 'dev' | 'dep';
+export type DependencyType = 'dev' | 'dep' | 'peer';
+
+export type DependencyTypeFull =
+  | 'peerDependencies'
+  | 'devDependencies'
+  | 'dependencies';
 
 export interface PkgJson extends JSON {
   devDependencies?: Dependencies;
   dependencies?: Dependencies;
+  peerDependencies?: Dependencies;
   alfred?: ConfigWithUnresolvedInterfaces;
+}
+
+export interface PkgWithDeps {
+  devDependencies: Dependencies;
+  dependencies: Dependencies;
+}
+
+export interface PkgWithAllDeps {
+  peerDependencies: Dependencies;
+  devDependencies: Dependencies;
+  dependencies: Dependencies;
 }
 
 export type Env = 'production' | 'development' | 'test';
@@ -49,10 +66,11 @@ export interface ProjectInterface {
   writeConfigsFromCtf: (ctf: CtfMap) => Promise<CtfMap>;
   // Install dependencies to a given project
   installDeps: (
-    dependencies: string[],
+    dependencies: string[] | Dependencies,
     type: DependencyType,
     npmClient?: NpmClients
-  ) => Promise<CtfMap>;
+  ) => Promise<void>;
+  findDepsToInstall: (ctfNodes?: CtfNode[]) => Promise<PkgWithDeps>;
 }
 
 export type InterfaceState = {
@@ -166,11 +184,10 @@ export type CallFn = (args: HooksCallArgs) => void;
 
 export type DiffDeps = { diffDevDeps: string[]; diffDeps: string[] };
 
-export interface Ctf {
+export interface Ctf extends PkgWithDeps {
   name: string;
-  dependencies: Dependencies;
-  devDependencies: Dependencies;
   description: string;
+  pkg?: PkgJson;
   supports?: {
     // Flag name and argument types
     env: Array<'production' | 'development' | 'test'>;
@@ -211,6 +228,12 @@ export interface CtfWithHelpers extends Ctf {
   addDevDependencies: (pkg: Dependencies) => CtfWithHelpers;
   extendConfig: (x: string) => CtfWithHelpers;
   replaceConfig: (x: string, configReplacement: ConfigFile) => CtfWithHelpers;
+  addDepsFromPkg: (
+    pkgs: string | string[],
+    pkg?: PkgJson,
+    fromPkgType?: DependencyType,
+    toPkgType?: DependencyType
+  ) => CtfWithHelpers;
 }
 
 export type Transforms = Array<() => void>;

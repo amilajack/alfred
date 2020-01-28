@@ -35,6 +35,7 @@ module.exports = {
         require("@babel/register")(${JSON.stringify(babelConfig)});`
       );
       return execCommand(
+        project,
         [binPath, `--require ${mochaBabelRegisterPath} tests`, ...flags].join(
           ' '
         )
@@ -48,7 +49,7 @@ module.exports = {
           plugins: ['mocha']
         })
         .addDevDependencies({
-          'eslint-plugin-mocha': '3.0.1'
+          'eslint-plugin-mocha': '6.2.2'
         })
   }
 };

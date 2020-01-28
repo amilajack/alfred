@@ -9,12 +9,13 @@ import { serial } from '../helpers';
 /**
  * Run an alfred subcommand given an alfred config
  */
-export default function run(
+export default async function run(
   project: ProjectInterface,
   subcommand: string,
   skillFlags: Array<string> = []
 ): Promise<any> {
   const { config } = project;
+
   // @HACK This is not a very elegant solution.
   // @HACK @REFACTOR Certain subcommands do not rely on state (lint, test, etc). These
   //                 subcommands are run only once
