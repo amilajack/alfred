@@ -12,7 +12,8 @@ import ctfFromConfig, {
   CORE_CTFS,
   CTF,
   topsortCtfMap,
-  callCtfsInOrder
+  callCtfsInOrder,
+  addCtfHelpers
 } from '../src/ctf';
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from '../src/interface';
 import Project from '../src/project';
@@ -182,6 +183,34 @@ describe('CTF', () => {
             interfaceState
           )
         ).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('ctf helpers', () => {
+    describe('adding deps from pkg', () => {
+      const pkg = {
+        devDependencies: {
+          foo: '1.1.1'
+        }
+      };
+
+      it('should add deps from pkg', () => {
+        expect(
+          addCtfHelpers(CORE_CTFS.babel).addDepsFromPkg('foo', pkg)
+        ).toHaveProperty('peerDependencies');
+        expect(
+          addCtfHelpers(CORE_CTFS.babel).addDepsFromPkg('foo', pkg)
+            .peerDependencies
+        ).toHaveProperty('foo', '1.1.1');
+      });
+
+      it('should throw on unresolved pkg', () => {
+        expect(() =>
+          addCtfHelpers(CORE_CTFS.babel).addDepsFromPkg('foo', {})
+        ).toThrow(
+          'Package "foo" does not exist in devDependencies of skill package.json'
+        );
       });
     });
   });

@@ -9,8 +9,53 @@ import {
   CtfMap,
   ConfigWithUnresolvedInterfaces,
   ProjectInterface,
-  ConfigInterface
+  ConfigInterface,
+  PkgWithAllDeps,
+  DependencyType,
+  DependencyTypeFull,
+  Dependencies
 } from '@alfred/types';
+
+export const fromPkgTypeToFull = (
+  fromPkgType: DependencyType
+): DependencyTypeFull => {
+  switch (fromPkgType) {
+    case 'peer':
+      return 'peerDependencies';
+    case 'dev':
+      return 'devDependencies';
+    case 'dep':
+      return 'dependencies';
+    default: {
+      throw new Error('Pkg type must be one of peer, dev, or dep');
+    }
+  }
+};
+
+export function getDepsFromPkg(
+  pkgs: string | string[],
+  pkg: PkgWithAllDeps,
+  fromPkgType: DependencyType = 'dev'
+): Dependencies {
+  const normalizedPkgNames = Array.isArray(pkgs) ? pkgs : [pkgs];
+  const fromPkgTypeFull = fromPkgTypeToFull(fromPkgType);
+
+  if (!(fromPkgTypeFull in pkg)) {
+    throw new Error(`Given package.json does not have ${fromPkgTypeFull}`);
+  }
+
+  normalizedPkgNames.forEach(pkgName => {
+    if (!(pkgName in pkg[fromPkgTypeFull])) {
+      throw new Error(
+        `Package "${pkgName}" does not exist in ${fromPkgTypeFull} of skill package.json`
+      );
+    }
+  });
+
+  return Object.fromEntries(
+    normalizedPkgNames.map(pkgName => [pkgName, pkg[fromPkgTypeFull][pkgName]])
+  );
+}
 
 /**
  * Get the root of a project from the current working directory

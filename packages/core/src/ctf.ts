@@ -14,8 +14,11 @@ import {
   Dependencies,
   OrderedCtfTransforms,
   OrderedCtfTransformsMap,
-  Transforms
+  Transforms,
+  DependencyType,
+  PkgJson
 } from '@alfred/types';
+import { getDepsFromPkg, fromPkgTypeToFull } from '@alfred/helpers';
 import topsort from './topsort';
 import { normalizeInterfacesOfSkill } from './interface';
 
@@ -38,7 +41,7 @@ type CORE_CTF =
   | 'rollup'
   | 'lodash';
 
-function addCtfHelpers(ctf: CtfNode): CtfWithHelpers {
+export function addCtfHelpers(ctf: CtfNode): CtfWithHelpers {
   return {
     ...ctf,
     findConfig(configName: string): ConfigFile {
@@ -85,6 +88,28 @@ function addCtfHelpers(ctf: CtfNode): CtfWithHelpers {
     addDevDependencies(devDependencies: Dependencies): CtfWithHelpers {
       return lodash.merge({}, this, {
         devDependencies
+      });
+    },
+    addDepsFromPkg(
+      pkgs: string | string[],
+      pkg: PkgJson | undefined = ctf.pkg,
+      fromPkgType: DependencyType = 'dev',
+      toPkgType: DependencyType = 'peer'
+    ): CtfWithHelpers {
+      console.log(this.pkg);
+      const mergedPkg = lodash.merge(
+        {
+          dependencies: {},
+          devDependencies: {},
+          peerDependencies: {}
+        },
+        this.pkg || pkg || {}
+      );
+      const depsToAdd = getDepsFromPkg(pkgs, mergedPkg, fromPkgType);
+      const toPkgTypeFullName = fromPkgTypeToFull(toPkgType);
+
+      return lodash.merge({}, this, {
+        [toPkgTypeFullName]: depsToAdd
       });
     }
   };
