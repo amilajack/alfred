@@ -455,7 +455,7 @@ export default function Validateconfig(config: { [x: string]: any }): void {
   });
 
   if (
-    config.showConfigs !== true &&
+    config.showConfigs === false &&
     'configsDir' in config &&
     config.configsDir !== Config.DEFAULT_CONFIG.configsDir
   ) {

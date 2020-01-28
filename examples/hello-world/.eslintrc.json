@@ -1,0 +1,19 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "extends": [
+    "bliss",
+    "prettier"
+  ],
+  "parser": "babel-eslint",
+  "plugins": [
+    "prettier",
+    "jest"
+  ],
+  "root": true,
+  "rules": {
+    "flowtype-errors/show-errors": "off"
+  }
+}
