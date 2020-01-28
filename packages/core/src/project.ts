@@ -104,14 +104,15 @@ export default class Project implements ProjectInterface {
     await this.installDeps(devDependencies, 'dev', 'writeOnly');
   }
 
-  async run(
-    subcommand: string,
-    args: Array<string> = []
-  ): Promise<void | SkillsList> {
+  /**
+   * Install the modules if they are not installed if autoInstall: true
+   * @TODO @HACK Note that this might cause issues in monorepos
+   */
+  private autoInstallDeps(): void {
     const { config } = this;
     const nodeModulesPath = `${this.root}/node_modules`;
-    // Install the modules if they are not installed if autoInstall: true
-    // @TODO @HACK Note that this might cause issues in monorepos
+    module.paths.push(nodeModulesPath);
+
     if (config.autoInstall === true && !fs.existsSync(nodeModulesPath)) {
       const installCommand = getInstallCommmand(this);
       childProcess.execSync(installCommand, {
@@ -119,8 +120,20 @@ export default class Project implements ProjectInterface {
         stdio: 'inherit'
       });
     }
-    module.paths.push(nodeModulesPath);
+  }
 
+  /**
+   * A list of things to do before running any command
+   */
+  async beforeCommand(): Promise<void> {
+    await this.writeMissingDeps();
+    this.autoInstallDeps();
+  }
+
+  async run(
+    subcommand: string,
+    args: Array<string> = []
+  ): Promise<void | SkillsList> {
     // Built in, non-overridable skills are added here
     // 'start' subcommand is handled by run()
     // @TODO: Make all skills overridable but warn before overriding them
@@ -135,7 +148,7 @@ export default class Project implements ProjectInterface {
         return this.learn(args);
       }
       default: {
-        await this.writeMissingDeps();
+        await this.beforeCommand();
         return run(this, subcommand, args);
       }
     }
@@ -146,12 +159,12 @@ export default class Project implements ProjectInterface {
   }
 
   async clean(): Promise<void> {
-    await this.writeMissingDeps();
+    await this.beforeCommand();
     return clean(this);
   }
 
   async skills(): Promise<SkillsList> {
-    await this.writeMissingDeps();
+    await this.beforeCommand();
     return skills(this);
   }
 

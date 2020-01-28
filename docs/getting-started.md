@@ -110,7 +110,7 @@ export default {
 {
   "name": "@alfred/skill-parcel",
   "peerDependencies": {
-    "react": "0.15.0"
+    "react": "^16.0.0"
   }
 }
 ```
@@ -153,23 +153,26 @@ type AlfredInterface = {
   "alfred": {
     // Skills that override the default skills
     "skills": [
-      "@alfred/skill-parcel",
-      "@alfred/skill-testcafe"
+      "@alfred/skill-webpack",
+      "@alfred/skill-testcafe",
+      ["@alfred/skill-eslint", {
+        "rules": {
+          "no-console": "off"
+        }
+      }]
     ],
-    // Determine to install with NPM or Yarn (defaults to NPM)
+    // Determine to install with NPM or Yarn
+    // Default: 'npm'
     "npmClient": "yarn",
-    "configsDir": ".configs", // defaults to root
+    // Where to write configs to
+    // Default: '.' (project root)
+    "configsDir": ".configs",
     // Write the configs to the configsDir directory
-    "showConfigs": true,
+    // Default: true
+    "showConfigs": false,
     // Config for all lib targets
     "lib": {
       "recommendSkills": ["@alfred/skill-react"]
-    },
-    // Config only applied to browser libs
-    "browser": {
-      "lib": {
-        // ...
-      }
     }
   }
 }

@@ -13,6 +13,7 @@
     "webpack-cli": "^3.2.0"
   },
   "alfred": {
+    "configsDir": ".configs",
     "skills": [
       "@alfred/skill-eslint",
       "@alfred/skill-webpack"

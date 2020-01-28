@@ -35,9 +35,9 @@ export default class Config implements ConfigInterface {
 
   static DEFAULT_CONFIG = {
     skills: [],
-    showConfigs: false,
+    showConfigs: true,
     autoInstall: false,
-    configsDir: '.configs',
+    configsDir: '.',
     npmClient: 'npm' as NpmClients
   };
 

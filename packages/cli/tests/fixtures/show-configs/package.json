@@ -36,6 +36,7 @@
     "prettier": "^1.16.4"
   },
   "alfred": {
-    "showConfigs": true
+    "showConfigs": true,
+    "configsDir": ".configs"
   }
 }

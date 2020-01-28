@@ -41,6 +41,7 @@
   },
   "alfred": {
     "showConfigs": true,
+    "configsDir": ".configs",
     "skills": [
       "@alfred/skill-mocha"
     ]

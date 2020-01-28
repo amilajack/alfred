@@ -51,6 +51,7 @@
     "react-hot-loader": "^4.3.12"
   },
   "alfred": {
+    "configsDir": ".configs",
     "showConfigs": true,
     "skills": [
       "@alfred/skill-react"
