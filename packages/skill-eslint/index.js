@@ -65,5 +65,67 @@ module.exports = {
       return true;
     }
   },
-  ctfs: {}
+  ctfs: {
+    babel(ctf) {
+      return ctf
+        .extendConfig('eslint', {
+          parser: 'babel-eslint'
+        })
+        .addDevDependencies({ 'babel-eslint': '10.0.0' });
+    },
+    jest(ctf) {
+      return ctf
+        .addDevDependencies({
+          'eslint-plugin-jest': '23.6.0'
+        })
+        .extendConfig('eslint', {
+          plugins: ['jest']
+        });
+    },
+    mocha(ctf) {
+      return ctf
+        .extendConfig('eslint', {
+          plugins: ['mocha']
+        })
+        .addDevDependencies({
+          'eslint-plugin-mocha': '6.2.2'
+        });
+    },
+    webpack(eslintCtf, { project, config }) {
+      return eslintCtf
+        .extendConfig('eslint', {
+          settings: {
+            'import/resolver': {
+              webpack: {
+                config: path.join(
+                  getConfigsBasePath(project, config),
+                  'webpack.browser.json'
+                )
+              }
+            }
+          }
+        })
+        .addDevDependencies({
+          'eslint-import-resolver-webpack': '0.12.1'
+        });
+    },
+    prettier(ctf) {
+      return ctf
+        .extendConfig('eslint', {
+          extends: ['prettier'],
+          plugins: ['prettier']
+        })
+        .addDevDependencies({
+          'eslint-config-prettier': '6.9.0',
+          'eslint-plugin-prettier': '3.0.1'
+        });
+    },
+    react(ctf) {
+      return ctf
+        .extendConfig('eslint', {
+          extends: ['eslint-config-airbnb']
+        })
+        .addDevDependencies({ 'eslint-config-airbnb': '18.0.0' });
+    }
+  }
 };

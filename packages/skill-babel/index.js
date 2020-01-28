@@ -17,60 +17,50 @@ module.exports = {
   ],
   hooks: {},
   ctfs: {
-    webpack(ctf, ctfs) {
-      return ctf
-        .extendConfig('webpack.base', {
-          module: {
-            rules: [
-              {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                use: {
-                  loader: 'babel-loader',
-                  options: {
-                    ...getConfigByConfigName(
-                      'babel',
-                      ctfs.get('babel').configFiles
-                    ).config,
-                    cacheDirectory: true
-                  }
-                }
-              }
-            ]
-          }
-        })
-        .addDevDependencies({ 'babel-loader': '8.0.0' });
-    },
-    rollup(ctf, ctfs) {
-      // eslint-disable-next-line import/no-extraneous-dependencies
-      const babel = require('rollup-plugin-babel');
-      return ctf
-        .extendConfig('rollup.base', {
-          plugins: [
-            babel({
-              ...getConfigByConfigName('babel', ctfs.get('babel').configFiles)
-                .config,
-              exclude: 'node_modules/**'
-            })
-          ]
-        })
+    /**
+     * @TODO Don't perform this transformation for library targets
+     */
+    lodash(ctfNode) {
+      return ctfNode
         .addDevDependencies({
-          'rollup-plugin-babel': '4.2.0'
+          'babel-plugin-lodash': '3.3.4'
+        })
+        .extendConfig('babel', {
+          env: {
+            production: {
+              plugins: ['babel-plugin-lodash']
+            }
+          }
         });
     },
-    jest(ctf) {
-      return ctf.extendConfig('jest', {
-        transform: {
-          '^.+\\.jsx?$': './node_modules/jest-transformer.js'
-        }
-      });
-    },
-    eslint(ctf) {
-      return ctf
-        .extendConfig('eslint', {
-          parser: 'babel-eslint'
+    // @TODO Add React HMR support
+    react(ctfNode) {
+      return ctfNode
+        .extendConfig('babel', {
+          presets: ['@babel/preset-react'],
+          env: {
+            production: {
+              plugins: [
+                'babel-plugin-dev-expression',
+                // babel-preset-react-optimize plugins extracted here
+                '@babel/plugin-transform-react-constant-elements',
+                '@babel/plugin-transform-react-inline-elements',
+                'babel-plugin-transform-react-remove-prop-types'
+              ]
+            },
+            development: {
+              plugins: ['react-hot-loader/babel']
+            }
+          }
         })
-        .addDevDependencies({ 'babel-eslint': '10.0.0' });
+        .addDevDependencies({
+          '@babel/preset-react': '7.0.0',
+          'babel-plugin-dev-expression': '^0.2.1',
+          'babel-plugin-transform-react-remove-prop-types': '^0.4.20',
+          '@babel/plugin-transform-react-constant-elements': '^7.0.0',
+          '@babel/plugin-transform-react-inline-elements': '^7.0.0',
+          'react-hot-loader': '^4.3.12'
+        });
     }
   }
 };

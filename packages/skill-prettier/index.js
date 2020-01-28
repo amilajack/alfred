@@ -35,17 +35,5 @@ module.exports = {
         ].join(' ')
       );
     }
-  },
-  ctfs: {
-    eslint: ctf =>
-      ctf
-        .extendConfig('eslint', {
-          extends: ['prettier'],
-          plugins: ['prettier']
-        })
-        .addDevDependencies({
-          'eslint-config-prettier': '6.9.0',
-          'eslint-plugin-prettier': '3.0.1'
-        })
   }
 };

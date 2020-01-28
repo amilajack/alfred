@@ -153,5 +153,24 @@ module.exports = {
           throw new Error(`Invalid subcommand: "${subcommand}"`);
       }
     }
+  },
+  ctfs: {
+    babel(ctf, { ctfs }) {
+      // eslint-disable-next-line import/no-extraneous-dependencies
+      const babel = require('rollup-plugin-babel');
+      return ctf
+        .extendConfig('rollup.base', {
+          plugins: [
+            babel({
+              ...getConfigByConfigName('babel', ctfs.get('babel').configFiles)
+                .config,
+              exclude: 'node_modules/**'
+            })
+          ]
+        })
+        .addDevDependencies({
+          'rollup-plugin-babel': '4.2.0'
+        });
+    }
   }
 };

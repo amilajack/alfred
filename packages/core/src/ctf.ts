@@ -169,15 +169,16 @@ export function topsortCtfMap(ctfMap: CtfMap): Array<string> {
 
   ctfMap.forEach(ctfNode => {
     if (ctfNode.ctfs) {
-      Object.keys(ctfNode.ctfs).forEach(ctfFnName => {
-        if (ctfNodeNames.has(ctfFnName)) {
-          topsortGraphEdges.push([ctfNode.name, ctfFnName]);
+      Object.keys(ctfNode.ctfs).forEach(toCtfFnName => {
+        if (ctfNodeNames.has(toCtfFnName)) {
+          topsortGraphEdges.push([toCtfFnName, ctfNode.name]);
         }
       });
     }
   });
 
   const sortedCtfNames = topsort(topsortGraphEdges);
+  // Add ctfs with no edges
   ctfMap.forEach(ctfNode => {
     if (!sortedCtfNames.includes(ctfNode.name)) {
       sortedCtfNames.push(ctfNode.name);
@@ -189,35 +190,36 @@ export function topsortCtfMap(ctfMap: CtfMap): Array<string> {
 
 export function callCtfsInOrder(
   project: ProjectInterface,
-  ctf: CtfMap
+  ctfMap: CtfMap
 ): { ctf: CtfMap; orderedSelfTransforms: OrderedCtfTransforms } {
   const { config } = project;
-  const topologicallyOrderedCtfs = topsortCtfMap(ctf);
+  const topSortedCtfNames = topsortCtfMap(ctfMap);
 
   // All the ctfs Fns from other ctfNodes that transform each ctfNode
   const selfTransforms: OrderedCtfTransformsMap = new Map(
-    topsortCtfMap(ctf).map(ctfName => [ctfName, []])
+    topSortedCtfNames.map(ctfName => [ctfName, []])
   );
 
-  ctf.forEach(ctfNode => {
-    Object.entries(ctfNode.ctfs || {}).forEach(([ctfName, ctfFn]) => {
-      if (ctf.has(ctfName)) {
+  ctfMap.forEach(ctfNode => {
+    Object.entries(ctfNode.ctfs || {}).forEach(([toCtfName, ctfFn]) => {
+      if (ctfMap.has(toCtfName)) {
         const fn = (): void => {
-          const correspondingCtfNode = ctf.get(ctfName) as CtfNode;
-          ctf.set(
-            ctfName,
-            ctfFn(correspondingCtfNode, ctf, {
+          ctfMap.set(
+            ctfNode.name,
+            ctfFn(ctfNode, {
+              toCtf: ctfMap.get(toCtfName) as CtfNode,
+              ctfs: ctfMap,
               project,
               config
             })
           );
         };
-        selfTransforms.get(ctfName)?.push(fn);
+        selfTransforms.get(toCtfName)?.push(fn);
       }
     });
   });
 
-  const orderedSelfTransforms: OrderedCtfTransforms = topologicallyOrderedCtfs.map(
+  const orderedSelfTransforms: OrderedCtfTransforms = topSortedCtfNames.map(
     e => selfTransforms.get(e) as Transforms
   );
 
@@ -227,7 +229,7 @@ export function callCtfsInOrder(
     });
   });
 
-  return { ctf, orderedSelfTransforms };
+  return { ctf: ctfMap, orderedSelfTransforms };
 }
 
 export function validateCtf(

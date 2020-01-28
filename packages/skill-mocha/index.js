@@ -41,15 +41,5 @@ module.exports = {
         )
       );
     }
-  },
-  ctfs: {
-    eslint: ctf =>
-      ctf
-        .extendConfig('eslint', {
-          plugins: ['mocha']
-        })
-        .addDevDependencies({
-          'eslint-plugin-mocha': '6.2.2'
-        })
   }
 };

@@ -205,8 +205,9 @@ export interface Ctf extends PkgWithDeps {
   ctfs: {
     [ctfName: string]: (
       ownCtfNode: Ctf,
-      ctfMap: Map<string, Ctf>,
       misc: {
+        toCtf: Ctf;
+        ctfs: Map<string, Ctf>;
         project: ProjectInterface;
         config: ConfigInterface;
       }

@@ -244,33 +244,52 @@ module.exports = {
     }
   },
   ctfs: {
-    eslint: (ctf, ctfs, { project, config }) =>
-      ctf
-        .extendConfig('eslint', {
-          settings: {
-            'import/resolver': {
-              webpack: {
-                config: path.join(
-                  getConfigsBasePath(project, config),
-                  'webpack.browser.json'
-                )
+    babel(ctf, { toCtf }) {
+      return ctf
+        .extendConfig('webpack.base', {
+          module: {
+            rules: [
+              {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                use: {
+                  loader: 'babel-loader',
+                  options: {
+                    ...getConfigByConfigName('babel', toCtf.configFiles).config,
+                    cacheDirectory: true
+                  }
+                }
               }
-            }
+            ]
           }
         })
+        .addDevDependencies({ 'babel-loader': '8.0.0' });
+    },
+    lodash(ctf) {
+      // eslint-disable-next-line global-require
+      const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+      return ctf
         .addDevDependencies({
-          'eslint-import-resolver-webpack': '0.12.1'
-        }),
-    jest: (ctf, ctfs, { config }) =>
-      ctf
-        .extendConfig('jest', {
-          moduleNameMapper: {
-            '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': `<rootDir>/${config.configsDir}/mocks/fileMock.js`,
-            '\\.(css|less|sass|scss)$': 'identity-obj-proxy'
-          }
+          'lodash-webpack-plugin': require('./package.json').devDependencies[
+            'lodash-webpack-plugin'
+          ]
         })
-        .addDevDependencies({
-          'identity-obj-proxy': '*'
-        })
+        .extendConfig('webpack.prod', {
+          plugins: [new LodashModuleReplacementPlugin()]
+        });
+    },
+    react(ctf) {
+      // eslint-disable-next-line global-require
+      const webpack = require('webpack');
+      return ctf.extendConfig('webpack.base', {
+        resolve: {
+          extensions: ['.jsx']
+        },
+        devServer: {
+          hot: true
+        },
+        plugins: [new webpack.HotModuleReplacementPlugin()]
+      });
+    }
   }
 };
