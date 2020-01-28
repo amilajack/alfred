@@ -10,14 +10,6 @@ import {
   CtfNode
 } from '@alfred/types';
 
-export async function writeMissingDeps(
-  project: ProjectInterface
-): Promise<void> {
-  const { dependencies, devDependencies } = await project.findDepsToInstall();
-  await project.installDeps(dependencies, 'dep', 'writeOnly');
-  await project.installDeps(devDependencies, 'dev', 'writeOnly');
-}
-
 export function getInterfaceForSubcommand(
   ctfMap: CtfMap,
   subcommand: string

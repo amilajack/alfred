@@ -5,13 +5,10 @@ import {
   SubCommandDict
 } from '@alfred/types';
 import { generateInterfaceStatesFromProject } from '../interface';
-import { writeMissingDeps } from '.';
 
 export default async function skills(
   project: ProjectInterface
 ): Promise<SkillsList> {
-  await writeMissingDeps(project);
-
   const interfaceStateCtfs = await Promise.all(
     generateInterfaceStatesFromProject(project).map(interfaceState =>
       project

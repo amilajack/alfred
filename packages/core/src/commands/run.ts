@@ -1,8 +1,7 @@
 import { ProjectInterface } from '@alfred/types';
 import {
   getExecutableWrittenConfigsMethods,
-  getInterfaceForSubcommand,
-  writeMissingDeps
+  getInterfaceForSubcommand
 } from '.';
 import { generateInterfaceStatesFromProject } from '../interface';
 import { serial } from '../helpers';
@@ -16,8 +15,6 @@ export default async function run(
   skillFlags: Array<string> = []
 ): Promise<any> {
   const { config } = project;
-
-  await writeMissingDeps(project);
 
   // @HACK This is not a very elegant solution.
   // @HACK @REFACTOR Certain subcommands do not rely on state (lint, test, etc). These

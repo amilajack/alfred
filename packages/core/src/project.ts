@@ -37,13 +37,13 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
-const getInstallCommmand = (project: ProjectInterface): string => {
+function getInstallCommmand(project: ProjectInterface): string {
   const { root } = project;
   const { npmClient } = project.config;
   return npmClient.toLowerCase() === 'npm'
     ? `npm install --prefix ${root}`
     : 'yarn';
-};
+}
 
 /**
  * Given an object with deps, return the deps as a list
@@ -94,6 +94,16 @@ export default class Project implements ProjectInterface {
     return this;
   }
 
+  /**
+   * Find the dependencies that the user is missing in their package.json and write
+   * them to the package.json
+   */
+  private async writeMissingDeps(): Promise<void> {
+    const { dependencies, devDependencies } = await this.findDepsToInstall();
+    await this.installDeps(dependencies, 'dep', 'writeOnly');
+    await this.installDeps(devDependencies, 'dev', 'writeOnly');
+  }
+
   async run(
     subcommand: string,
     args: Array<string> = []
@@ -116,12 +126,16 @@ export default class Project implements ProjectInterface {
     // @TODO: Make all skills overridable but warn before overriding them
     switch (subcommand) {
       case 'clean': {
-        return clean(this);
+        return this.clean();
+      }
+      case 'skills': {
+        return this.skills();
       }
       case 'learn': {
-        return learn(this, args);
+        return this.learn(args);
       }
       default: {
+        await this.writeMissingDeps();
         return run(this, subcommand, args);
       }
     }
@@ -131,11 +145,13 @@ export default class Project implements ProjectInterface {
     return learn(this, args);
   }
 
-  clean(): Promise<void> {
+  async clean(): Promise<void> {
+    await this.writeMissingDeps();
     return clean(this);
   }
 
-  skills(): Promise<SkillsList> {
+  async skills(): Promise<SkillsList> {
+    await this.writeMissingDeps();
     return skills(this);
   }
 
@@ -158,7 +174,7 @@ export default class Project implements ProjectInterface {
     return result;
   }
 
-  checkIsAlfredProject(
+  private checkIsAlfredProject(
     interfaceStates: Array<InterfaceState>
   ): ValidationResult {
     const srcPath = path.join(this.root, 'src');

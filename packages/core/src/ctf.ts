@@ -96,7 +96,6 @@ export function addCtfHelpers(ctf: CtfNode): CtfWithHelpers {
       fromPkgType: DependencyType = 'dev',
       toPkgType: DependencyType = 'peer'
     ): CtfWithHelpers {
-      console.log(this.pkg);
       const mergedPkg = lodash.merge(
         {
           dependencies: {},
@@ -399,10 +398,10 @@ export default async function ctfFromConfig(
   // Generate the CTF
   const ctfMapFromConfigSkills: CtfMap = new Map();
 
-  config.skills.forEach(([skillPkgName, skillUserConfig]) => {
+  config.skills.forEach(([skillPkgName, skillUserConfig = {}]) => {
     // Add the skill config to the ctfNode
     const ctfNode: CtfNode = require(skillPkgName);
-    ctfNode.config = skillUserConfig || {};
+    ctfNode.config = skillUserConfig;
     if (ctfNode.configFiles) {
       ctfNode.configFiles = ctfNode.configFiles.map(configFile => ({
         ...configFile,
