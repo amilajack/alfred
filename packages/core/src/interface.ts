@@ -116,7 +116,7 @@ export function normalizeInterfacesOfSkill(
   );
 }
 
-export function generateInterfaceStatesFromProject(
+export function getInterfaceStatesFromProject(
   project: ProjectInterface
 ): Array<InterfaceState> {
   const envs: Array<string> = ['production', 'development', 'test'];

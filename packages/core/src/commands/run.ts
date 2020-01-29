@@ -3,8 +3,20 @@ import {
   getExecutableWrittenConfigsMethods,
   getInterfaceForSubcommand
 } from '.';
-import { generateInterfaceStatesFromProject } from '../interface';
-import { serial } from '../helpers';
+import { getInterfaceStatesFromProject } from '../interface';
+
+/**
+ * Execute promises serially
+ * @REFACTOR There're cleaner ways of implementing this
+ */
+function serial(fns: Array<() => Promise<any>>): Promise<any> {
+  return fns.reduce(
+    (promise: Promise<any>, fn) =>
+      // eslint-disable-next-line promise/no-nesting
+      promise.then(result => fn().then(Array.prototype.concat.bind(result))),
+    Promise.resolve([])
+  );
+}
 
 /**
  * Run an alfred subcommand given an alfred config
@@ -19,7 +31,7 @@ export default async function run(
   // @HACK This is not a very elegant solution.
   // @HACK @REFACTOR Certain subcommands do not rely on state (lint, test, etc). These
   //                 subcommands are run only once
-  const interfaceStates = generateInterfaceStatesFromProject(project);
+  const interfaceStates = getInterfaceStatesFromProject(project);
   // Validate that “start” subcommand should only work for apps
   // @REFACTOR This validation logic should be handled by the @alfred/interface-start interface
   if (subcommand === 'start') {

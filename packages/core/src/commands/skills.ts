@@ -4,13 +4,13 @@ import {
   SkillsForSubCommand,
   SubCommandDict
 } from '@alfred/types';
-import { generateInterfaceStatesFromProject } from '../interface';
+import { getInterfaceStatesFromProject } from '../interface';
 
 export default async function skills(
   project: ProjectInterface
 ): Promise<SkillsList> {
   const interfaceStateSkills = await Promise.all(
-    generateInterfaceStatesFromProject(project).map(interfaceState =>
+    getInterfaceStatesFromProject(project).map(interfaceState =>
       project
         .skillMapFromInterfaceState(interfaceState)
         .then(skillMap =>

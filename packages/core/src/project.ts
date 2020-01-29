@@ -23,10 +23,7 @@ import {
 import Config from './config';
 import { PkgValidation } from './validation';
 import skillMapFromConfig, { ENTRYPOINTS } from './skill';
-import {
-  generateInterfaceStatesFromProject,
-  INTERFACE_STATES
-} from './interface';
+import { getInterfaceStatesFromProject, INTERFACE_STATES } from './interface';
 import run from './commands/run';
 import learn from './commands/learn';
 import skills from './commands/skills';
@@ -95,7 +92,7 @@ export default class Project implements ProjectInterface {
     this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
     this.config = Config.initFromProjectRoot(projectRoot);
 
-    const interfaceStates = generateInterfaceStatesFromProject(this);
+    const interfaceStates = getInterfaceStatesFromProject(this);
     this.checkIsAlfredProject(interfaceStates);
 
     return this;
