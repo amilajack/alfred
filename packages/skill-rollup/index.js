@@ -18,7 +18,6 @@ const interfaceConfig = {
 module.exports = {
   name: 'rollup',
   description: 'Build, optimize, and bundle assets in your app',
-  devDependencies: require('./package.json').peerDependencies,
   interfaces: [
     ['@alfred/interface-build', interfaceConfig],
     ['@alfred/interface-start', interfaceConfig]

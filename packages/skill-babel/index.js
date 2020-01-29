@@ -4,7 +4,6 @@ const { getConfigByConfigName } = require('@alfred/helpers');
 module.exports = {
   name: 'babel',
   description: 'Transpile JS from ESNext to the latest ES version',
-  devDependencies: require('./package.json').peerDependencies,
   configFiles: [
     {
       name: 'babel',

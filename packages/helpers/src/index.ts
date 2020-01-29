@@ -36,7 +36,8 @@ export const fromPkgTypeToFull = (
 export function requireCtf(ctfName: string): CtfNode {
   return {
     ...require(ctfName),
-    pkg: require(`${ctfName}/package.json`)
+    pkg: require(`${ctfName}/package.json`),
+    devDependencies: require(`${ctfName}/package.json`).peerDependencies
   };
 }
 

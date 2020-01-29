@@ -107,7 +107,7 @@ export function addCtfHelpers(ctf: CtfNode): CtfWithHelpers {
   };
 }
 
-function runCtfs(project: ProjectInterface, ctfMap: CtfMap): CtfMap {
+export function runCtfs(project: ProjectInterface, ctfMap: CtfMap): CtfMap {
   ctfMap.forEach(ctfNode => {
     Object.entries(ctfNode.ctfs || {}).forEach(([toCtfName, ctfFn]) => {
       if (ctfMap.has(toCtfName)) {

@@ -10,7 +10,6 @@ module.exports = {
   name: 'jest',
   description: 'Test your JS files',
   interfaces: ['@alfred/interface-test'],
-  devDependencies: require('./package.json').peerDependencies,
   configFiles: [
     {
       name: 'jest',

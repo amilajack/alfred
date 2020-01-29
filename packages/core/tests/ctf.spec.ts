@@ -8,7 +8,12 @@ import {
   getExecutableWrittenConfigsMethods,
   getInterfaceForSubcommand
 } from '../src/commands';
-import ctfFromConfig, { CORE_CTFS, CTF, addCtfHelpers } from '../src/ctf';
+import ctfFromConfig, {
+  CORE_CTFS,
+  CTF,
+  addCtfHelpers,
+  runCtfs
+} from '../src/ctf';
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from '../src/interface';
 import Project from '../src/project';
 
@@ -57,6 +62,56 @@ function removePathsPropertiesFromObject(
 }
 
 describe('CTF', () => {
+  describe('order', () => {
+    it('should run ctfs in order', () => {
+      const ctfMap = new Map([
+        [
+          'react',
+          {
+            name: 'react',
+            configFiles: [
+              {
+                name: 'eslint',
+                path: '.eslintrc.json',
+                write: true,
+                config: {
+                  plugins: []
+                }
+              }
+            ],
+            ctfs: {
+              babel(ctf) {
+                ctf.configFiles[0].config.plugins.push('a');
+                return ctf;
+              },
+              eslint(ctf) {
+                ctf.configFiles[0].config.plugins.push('b');
+                return ctf;
+              }
+            }
+          }
+        ],
+        [
+          'eslint',
+          {
+            name: 'eslint'
+          }
+        ],
+        [
+          'babel',
+          {
+            name: 'babel'
+          }
+        ]
+      ]);
+      expect(
+        runCtfs(defaultProject, ctfMap).get('react').configFiles[0].config
+      ).toEqual({
+        plugins: ['a', 'b']
+      });
+    });
+  });
+
   describe('interfaces', () => {
     it('should allow falsy inputs', () => {
       expect(normalizeInterfacesOfSkill(undefined)).toEqual([]);
