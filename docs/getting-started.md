@@ -54,7 +54,7 @@ export default {
   // the case of babel, no interface will be implemented because babel will not be invoked directly
   // as a subcommand. A bundler will always call babel.
   interfaces: [],
-  // ⚠️  Deprecated ️️⚠️
+  // The dependencies to add to the user's devDependencies
   devDependencies: {
     '@babel/cli': '7.2.0',
     '@babel/core': '7.2.0',
@@ -76,28 +76,26 @@ export default {
     }
   ],
   ctfs: {
-    webpack: (babelSkill: Skill): Skill => {
+    react(babelSkill) {
       return babelSkill
-        .extendConfig('webpack.base', {
-          module: {
-            devtool: 'source-map',
-            mode: 'production',
-            target: 'electron-main',
-            entry: './app/main.dev',
-            output: {
-              path: 'app',
-              filename: './app/main.prod.js'
+        .extendConfig('babel', {
+          presets: ['@babel/preset-react'],
+          env: {
+            production: {
+              plugins: [
+                '@babel/plugin-transform-react-inline-elements',
+              ]
+            },
+            development: {
+              plugins: ['react-hot-loader/babel']
             }
           }
         })
-        .addDevDependencies({ 'babel-loader': '10.0.0' });
-    },
-    eslint: (babelSkill: Skill): Skill => {
-      return babelSkill
-        .extendConfig('eslint', {
-          'parser': 'babel-eslint'
-        })
-        .addDevDependencies({ 'babel-eslint': '10.0.0' });
+        .addDevDeps({
+          '@babel/preset-react': '^7.8.3',
+          '@babel/plugin-transform-react-inline-elements': '^7.8.3',
+          'react-hot-loader': '^4.12.19'
+        });
     }
   }
 };

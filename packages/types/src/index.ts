@@ -226,10 +226,10 @@ export type SkillMap = Map<string, SkillNode>;
 
 export interface SkillWithHelpers extends Skill {
   findConfig: (configName: string) => ConfigFile;
-  addDependencies: (pkg: Dependencies) => SkillWithHelpers;
-  addDevDependencies: (pkg: Dependencies) => SkillWithHelpers;
   extendConfig: (x: string) => SkillWithHelpers;
   replaceConfig: (x: string, configReplacement: ConfigFile) => SkillWithHelpers;
+  addDeps: (pkg: Dependencies) => SkillWithHelpers;
+  addDevDeps: (pkg: Dependencies) => SkillWithHelpers;
   addDepsFromPkg: (
     pkgs: string | string[],
     pkg?: PkgJson,

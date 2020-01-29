@@ -64,7 +64,7 @@ function removePathsPropertiesFromObject(
 describe('Skills', () => {
   describe('order', () => {
     it('should run ctfs in order', () => {
-      const SkillMap = new Map([
+      const skillMap = new Map([
         [
           'react',
           {
@@ -105,7 +105,7 @@ describe('Skills', () => {
         ]
       ]);
       expect(
-        runCtfs(defaultProject, SkillMap).get('react').configFiles[0].config
+        runCtfs(defaultProject, skillMap).get('react').configFiles[0].config
       ).toEqual({
         plugins: ['a', 'b']
       });
@@ -192,7 +192,7 @@ describe('Skills', () => {
     });
   });
 
-  describe('ctf helpers', () => {
+  describe('skill helpers', () => {
     describe('adding deps from pkg', () => {
       const defaultPkg = {
         devDependencies: {
@@ -374,7 +374,7 @@ describe('Skills', () => {
         interfaceState
       )
         .get('parcel')
-        .addDevDependencies({
+        .addDevDeps({
           foobar: '0.0.0'
         });
       expect(devDependencies).toMatchSnapshot();

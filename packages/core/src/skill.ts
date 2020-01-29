@@ -73,12 +73,12 @@ export function addSkillHelpers(skill: SkillNode): SkillWithHelpers {
         configFiles
       };
     },
-    addDependencies(dependencies: Dependencies): SkillWithHelpers {
+    addDeps(dependencies: Dependencies): SkillWithHelpers {
       return lodash.merge({}, this, {
         dependencies
       });
     },
-    addDevDependencies(devDependencies: Dependencies): SkillWithHelpers {
+    addDevDeps(devDependencies: Dependencies): SkillWithHelpers {
       return lodash.merge({}, this, {
         devDependencies
       });
@@ -112,11 +112,11 @@ export function runCtfs(
   skillMap: SkillMap
 ): SkillMap {
   skillMap.forEach(skillNode => {
-    Object.entries(skillNode.ctfs || {}).forEach(([toskillName, ctfFn]) => {
+    Object.entries(skillNode.ctfs || {}).forEach(([toskillName, ctf]) => {
       if (skillMap.has(toskillName)) {
         skillMap.set(
           skillNode.name,
-          ctfFn(skillMap.get(skillNode.name) as SkillNode, {
+          ctf(skillMap.get(skillNode.name) as SkillNode, {
             toSkill: skillMap.get(toskillName) as SkillNode,
             skillMap: skillMap,
             config: project.config,
