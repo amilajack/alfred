@@ -151,7 +151,7 @@ module.exports = {
       }
     }
   },
-  ctfs: {
+  transforms: {
     babel(skill, { skillMap }) {
       // eslint-disable-next-line import/no-extraneous-dependencies
       const babel = require('rollup-plugin-babel');

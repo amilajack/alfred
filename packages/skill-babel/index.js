@@ -15,7 +15,7 @@ module.exports = {
     }
   ],
   hooks: {},
-  ctfs: {
+  transforms: {
     /**
      * @TODO Don't perform this transformation for library targets
      */

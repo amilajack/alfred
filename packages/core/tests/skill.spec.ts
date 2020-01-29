@@ -16,7 +16,7 @@ import skillMapFromConfig, {
   CORE_SKILLS,
   Skills,
   addSkillHelpers,
-  runCtfs
+  runTransforms
 } from '../src/skill';
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from '../src/interface';
 import Project from '../src/project';
@@ -71,7 +71,7 @@ function removePathsPropertiesFromObject(
 
 describe('Skills', () => {
   describe('order', () => {
-    it('should run ctfs in order', () => {
+    it('should run transforms in order', () => {
       const skillMap = new Map([
         [
           'react',
@@ -87,7 +87,7 @@ describe('Skills', () => {
                 }
               }
             ],
-            ctfs: {
+            transforms: {
               babel(skill) {
                 skill.configFiles[0].config.plugins.push('a');
                 return skill;
@@ -113,7 +113,8 @@ describe('Skills', () => {
         ]
       ]);
       expect(
-        runCtfs(defaultProject, skillMap).get('react').configFiles[0].config
+        runTransforms(defaultProject, skillMap).get('react').configFiles[0]
+          .config
       ).toEqual({
         plugins: ['a', 'b']
       });

@@ -107,25 +107,27 @@ export function addSkillHelpers(skill: SkillNode): SkillWithHelpers {
   };
 }
 
-export function runCtfs(
+export function runTransforms(
   project: ProjectInterface,
   skillMap: SkillMap
 ): SkillMap {
   skillMap.forEach(skillNode => {
-    Object.entries(skillNode.ctfs || {}).forEach(([toskillName, ctf]) => {
-      if (skillMap.has(toskillName)) {
-        skillMap.set(
-          skillNode.name,
-          ctf(skillMap.get(skillNode.name) as SkillNode, {
-            toSkill: skillMap.get(toskillName) as SkillNode,
-            skillMap: skillMap,
-            config: project.config,
-            project,
-            configsPath: getConfigsBasePath(project)
-          })
-        );
+    Object.entries(skillNode.transforms || {}).forEach(
+      ([toskillName, transform]) => {
+        if (skillMap.has(toskillName)) {
+          skillMap.set(
+            skillNode.name,
+            transform(skillMap.get(skillNode.name) as SkillNode, {
+              toSkill: skillMap.get(toskillName) as SkillNode,
+              skillMap: skillMap,
+              config: project.config,
+              project,
+              configsPath: getConfigsBasePath(project)
+            })
+          );
+        }
       }
-    });
+    );
   });
 
   return skillMap;
@@ -323,7 +325,7 @@ export function Skills(
     skillMap.set('babel', CORE_SKILLS.babel);
   }
 
-  runCtfs(project, skillMap);
+  runTransforms(project, skillMap);
 
   validateSkill(skillMap, interfaceState);
 

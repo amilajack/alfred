@@ -236,7 +236,7 @@ module.exports = {
       }
     }
   },
-  ctfs: {
+  transforms: {
     babel(skill, { toSkill }) {
       return skill
         .extendConfig('webpack.base', {

@@ -187,8 +187,8 @@ export type DiffDeps = { diffDevDeps: string[]; diffDeps: string[] };
 export interface Skill extends PkgWithDeps {
   name: string;
   description: string;
-  pkg?: PkgJson;
-  supports?: {
+  pkg: PkgJson;
+  supports: {
     // Flag name and argument types
     env: Array<'production' | 'development' | 'test'>;
     // All the supported targets a `build` skill should build
@@ -202,7 +202,7 @@ export interface Skill extends PkgWithDeps {
   hooks: {
     call: CallFn;
   };
-  ctfs: {
+  transforms: {
     [skillName: string]: (
       ownSkillNode: Skill,
       misc: {

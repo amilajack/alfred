@@ -61,7 +61,7 @@ module.exports = {
       return true;
     }
   },
-  ctfs: {
+  transforms: {
     babel(skill) {
       return skill
         .extendConfig('eslint', {
