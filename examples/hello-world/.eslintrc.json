@@ -9,8 +9,8 @@
   ],
   "parser": "babel-eslint",
   "plugins": [
-    "prettier",
-    "jest"
+    "jest",
+    "prettier"
   ],
   "root": true,
   "rules": {

@@ -4,7 +4,6 @@ const { getConfigByConfigName } = require('@alfred/helpers');
 module.exports = {
   name: 'babel',
   description: 'Transpile JS from ESNext to the latest ES version',
-  devDependencies: require('./package.json').devDependencies,
   configFiles: [
     {
       name: 'babel',
@@ -17,60 +16,48 @@ module.exports = {
   ],
   hooks: {},
   ctfs: {
-    webpack(ctf, ctfs) {
-      return ctf
-        .extendConfig('webpack.base', {
-          module: {
-            rules: [
-              {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                use: {
-                  loader: 'babel-loader',
-                  options: {
-                    ...getConfigByConfigName(
-                      'babel',
-                      ctfs.get('babel').configFiles
-                    ).config,
-                    cacheDirectory: true
-                  }
-                }
-              }
-            ]
+    /**
+     * @TODO Don't perform this transformation for library targets
+     */
+    lodash(ctfNode) {
+      return ctfNode
+        .addDepsFromPkg('babel-plugin-lodash')
+        .extendConfig('babel', {
+          env: {
+            production: {
+              plugins: ['babel-plugin-lodash']
+            }
           }
-        })
-        .addDevDependencies({ 'babel-loader': '8.0.0' });
-    },
-    rollup(ctf, ctfs) {
-      // eslint-disable-next-line import/no-extraneous-dependencies
-      const babel = require('rollup-plugin-babel');
-      return ctf
-        .extendConfig('rollup.base', {
-          plugins: [
-            babel({
-              ...getConfigByConfigName('babel', ctfs.get('babel').configFiles)
-                .config,
-              exclude: 'node_modules/**'
-            })
-          ]
-        })
-        .addDevDependencies({
-          'rollup-plugin-babel': '4.2.0'
         });
     },
-    jest(ctf) {
-      return ctf.extendConfig('jest', {
-        transform: {
-          '^.+\\.jsx?$': './node_modules/jest-transformer.js'
-        }
-      });
-    },
-    eslint(ctf) {
-      return ctf
-        .extendConfig('eslint', {
-          parser: 'babel-eslint'
+    // @TODO Add React HMR support
+    react(ctfNode) {
+      return ctfNode
+        .extendConfig('babel', {
+          presets: ['@babel/preset-react'],
+          env: {
+            production: {
+              plugins: [
+                'babel-plugin-dev-expression',
+                // babel-preset-react-optimize plugins extracted here
+                '@babel/plugin-transform-react-constant-elements',
+                '@babel/plugin-transform-react-inline-elements',
+                'babel-plugin-transform-react-remove-prop-types'
+              ]
+            },
+            development: {
+              plugins: ['react-hot-loader/babel']
+            }
+          }
         })
-        .addDevDependencies({ 'babel-eslint': '10.0.0' });
+        .addDepsFromPkg([
+          '@babel/preset-react',
+          'babel-plugin-dev-expression',
+          'babel-plugin-transform-react-remove-prop-types',
+          '@babel/plugin-transform-react-constant-elements',
+          '@babel/plugin-transform-react-inline-elements',
+          'react-hot-loader'
+        ]);
     }
   }
 };

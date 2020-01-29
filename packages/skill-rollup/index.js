@@ -18,7 +18,6 @@ const interfaceConfig = {
 module.exports = {
   name: 'rollup',
   description: 'Build, optimize, and bundle assets in your app',
-  devDependencies: require('./package.json').devDependencies,
   interfaces: [
     ['@alfred/interface-build', interfaceConfig],
     ['@alfred/interface-start', interfaceConfig]
@@ -152,6 +151,23 @@ module.exports = {
         default:
           throw new Error(`Invalid subcommand: "${subcommand}"`);
       }
+    }
+  },
+  ctfs: {
+    babel(ctf, { ctfs }) {
+      // eslint-disable-next-line import/no-extraneous-dependencies
+      const babel = require('rollup-plugin-babel');
+      return ctf
+        .extendConfig('rollup.base', {
+          plugins: [
+            babel({
+              ...getConfigByConfigName('babel', ctfs.get('babel').configFiles)
+                .config,
+              exclude: 'node_modules/**'
+            })
+          ]
+        })
+        .addDepsFromPkg('rollup-plugin-babel');
     }
   }
 };

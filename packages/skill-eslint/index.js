@@ -11,7 +11,6 @@ module.exports = {
   name: 'eslint',
   description: 'Lint all your JS files',
   interfaces: ['@alfred/interface-lint'],
-  devDependencies: require('./package.json').devDependencies,
   configFiles: [
     {
       name: 'eslint',
@@ -65,5 +64,53 @@ module.exports = {
       return true;
     }
   },
-  ctfs: {}
+  ctfs: {
+    babel(ctf) {
+      return ctf
+        .extendConfig('eslint', {
+          parser: 'babel-eslint'
+        })
+        .addDepsFromPkg('babel-eslint');
+    },
+    jest(ctf) {
+      return ctf.addDepsFromPkg('eslint-plugin-jest').extendConfig('eslint', {
+        plugins: ['jest']
+      });
+    },
+    mocha(ctf) {
+      return ctf
+        .extendConfig('eslint', {
+          plugins: ['mocha']
+        })
+        .addDepsFromPkg('eslint-plugin-mocha');
+    },
+    webpack(eslintCtf, { project, config, configsPath }) {
+      return eslintCtf
+        .extendConfig('eslint', {
+          settings: {
+            'import/resolver': {
+              webpack: {
+                config: path.join(configsPath, 'webpack.browser.json')
+              }
+            }
+          }
+        })
+        .addDepsFromPkg('eslint-import-resolver-webpack');
+    },
+    react(ctf) {
+      return ctf
+        .extendConfig('eslint', {
+          extends: ['airbnb']
+        })
+        .addDepsFromPkg('eslint-config-airbnb');
+    },
+    prettier(ctf) {
+      return ctf
+        .extendConfig('eslint', {
+          extends: ['prettier'],
+          plugins: ['prettier']
+        })
+        .addDepsFromPkg(['eslint-config-prettier', 'eslint-plugin-prettier']);
+    }
+  }
 };

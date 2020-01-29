@@ -10,7 +10,6 @@ module.exports = {
   name: 'jest',
   description: 'Test your JS files',
   interfaces: ['@alfred/interface-test'],
-  devDependencies: require('./package.json').devDependencies,
   configFiles: [
     {
       name: 'jest',
@@ -73,18 +72,22 @@ module.exports = {
     }
   },
   ctfs: {
-    eslint: ctf =>
-      ctf
-        .addDevDependencies({
-          'eslint-plugin-jest': '23.6.0'
+    babel(ctf) {
+      return ctf.extendConfig('jest', {
+        transform: {
+          '^.+\\.jsx?$': './node_modules/jest-transformer.js'
+        }
+      });
+    },
+    webpack(jestCtf, { config }) {
+      return jestCtf
+        .extendConfig('jest', {
+          moduleNameMapper: {
+            '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': `<rootDir>/${config.configsDir}/mocks/fileMock.js`,
+            '\\.(css|less|sass|scss)$': 'identity-obj-proxy'
+          }
         })
-        .extendConfig('eslint', {
-          plugins: ['jest']
-        })
-    // This causes a cycle in the CTF graph, does not allow topsort
-    // babel: config =>
-    //   config.addDevDependencies({
-    //     'babel-core': '^7.0.0-bridge.0'
-    //   })
+        .addDepsFromPkg('identity-obj-proxy');
+    }
   }
 };

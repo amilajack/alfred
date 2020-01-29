@@ -11,9 +11,8 @@ import {
 import ctfFromConfig, {
   CORE_CTFS,
   CTF,
-  topsortCtfMap,
-  callCtfsInOrder,
-  addCtfHelpers
+  addCtfHelpers,
+  runCtfs
 } from '../src/ctf';
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from '../src/interface';
 import Project from '../src/project';
@@ -63,55 +62,53 @@ function removePathsPropertiesFromObject(
 }
 
 describe('CTF', () => {
-  describe('topological sort', () => {
-    it('should topsort', () => {
-      {
-        const sortedCtfs = topsortCtfMap(
-          CTF(defaultProject, Object.values(CORE_CTFS), defaultInterfaceState)
-        );
-        expect(sortedCtfs).toMatchSnapshot();
-        expect(Object.keys(CORE_CTFS).length).toEqual(sortedCtfs.length);
-      }
-      {
-        const sortedCtfs = topsortCtfMap(
-          CTF(defaultProject, [CORE_CTFS.react], INTERFACE_STATES[0])
-        );
-        expect(sortedCtfs).toMatchSnapshot();
-        expect(sortedCtfs.length).toEqual(6);
-      }
-    });
-
-    it('should call ctfs in order', () => {
-      const ctf = CTF(
-        defaultProject,
-        Object.values(CORE_CTFS),
-        INTERFACE_STATES[0]
-      );
-      const { orderedSelfTransforms } = callCtfsInOrder(
-        defaultProject,
-        ctf,
-        INTERFACE_STATES[0]
-      );
-
-      expect(orderedSelfTransforms).toMatchSnapshot();
-    });
-
-    it('should allow cycles with non-conflicting ctf nodes', () => {
-      const ctfNode1 = {
-        name: 'ctf-node-1',
-        description: '',
-        ctfs: {
-          'ctf-node-1': ctf => ctf
-        }
-      };
-      const ctfNode2 = {
-        name: 'ctf-node-2',
-        description: '',
-        ctfs: {
-          'ctf-node-2': ctf => ctf
-        }
-      };
-      CTF(defaultProject, [ctfNode1, ctfNode2], INTERFACE_STATES[0]);
+  describe('order', () => {
+    it('should run ctfs in order', () => {
+      const ctfMap = new Map([
+        [
+          'react',
+          {
+            name: 'react',
+            configFiles: [
+              {
+                name: 'eslint',
+                path: '.eslintrc.json',
+                write: true,
+                config: {
+                  plugins: []
+                }
+              }
+            ],
+            ctfs: {
+              babel(ctf) {
+                ctf.configFiles[0].config.plugins.push('a');
+                return ctf;
+              },
+              eslint(ctf) {
+                ctf.configFiles[0].config.plugins.push('b');
+                return ctf;
+              }
+            }
+          }
+        ],
+        [
+          'eslint',
+          {
+            name: 'eslint'
+          }
+        ],
+        [
+          'babel',
+          {
+            name: 'babel'
+          }
+        ]
+      ]);
+      expect(
+        runCtfs(defaultProject, ctfMap).get('react').configFiles[0].config
+      ).toEqual({
+        plugins: ['a', 'b']
+      });
     });
   });
 
@@ -189,19 +186,49 @@ describe('CTF', () => {
 
   describe('ctf helpers', () => {
     describe('adding deps from pkg', () => {
-      const pkg = {
+      const defaultPkg = {
         devDependencies: {
           foo: '1.1.1'
         }
       };
-
       it('should add deps from pkg', () => {
         expect(
-          addCtfHelpers(CORE_CTFS.babel).addDepsFromPkg('foo', pkg)
+          addCtfHelpers(CORE_CTFS.babel).addDepsFromPkg('foo', defaultPkg)
+        ).toHaveProperty('devDependencies');
+        expect(
+          addCtfHelpers(CORE_CTFS.babel).addDepsFromPkg('foo', defaultPkg)
+            .devDependencies
+        ).toHaveProperty('foo', '1.1.1');
+      });
+
+      it('should support different deps types', () => {
+        const pkg = {
+          peerDependencies: {
+            foo: '1.1.1'
+          }
+        };
+        expect(
+          addCtfHelpers(CORE_CTFS.babel).addDepsFromPkg('foo', pkg, 'peer')
+        ).toHaveProperty('devDependencies');
+        expect(
+          addCtfHelpers(CORE_CTFS.babel).addDepsFromPkg('foo', pkg, 'peer')
+            .devDependencies
+        ).toHaveProperty('foo', '1.1.1');
+        expect(
+          addCtfHelpers(CORE_CTFS.babel).addDepsFromPkg(
+            'foo',
+            defaultPkg,
+            'dev',
+            'peer'
+          )
         ).toHaveProperty('peerDependencies');
         expect(
-          addCtfHelpers(CORE_CTFS.babel).addDepsFromPkg('foo', pkg)
-            .peerDependencies
+          addCtfHelpers(CORE_CTFS.babel).addDepsFromPkg(
+            'foo',
+            defaultPkg,
+            'dev',
+            'peer'
+          ).peerDependencies
         ).toHaveProperty('foo', '1.1.1');
       });
 
@@ -258,7 +285,7 @@ describe('CTF', () => {
         await expect(
           ctfFromConfig(project, state, project.config)
         ).rejects.toThrow(
-          "Cannot find module '@alfred/skill-non-existent-skill' from 'ctf.ts'"
+          "Cannot find module '@alfred/skill-non-existent-skill' from 'index.js'"
         );
       });
 
@@ -273,7 +300,7 @@ describe('CTF', () => {
         await expect(
           ctfFromConfig(project, state, project.config)
         ).rejects.toThrow(
-          "Cannot find module '@alfred/skill-non-existent-skill' from 'ctf.ts'"
+          "Cannot find module '@alfred/skill-non-existent-skill' from 'index.js'"
         );
       });
     });
@@ -317,12 +344,12 @@ describe('CTF', () => {
         expect(ctfCombination).toMatchSnapshot();
         // Get the CTFs for each combination
         const ctfObjects = ctfCombination.map(ctfName => CORE_CTFS[ctfName]);
-        const result = CTF(defaultProject, ctfObjects, interfaceState);
+        const ctfMap = CTF(defaultProject, ctfObjects, interfaceState);
         expect(
-          removePathsPropertiesFromObject(getConfigs(result))
+          removePathsPropertiesFromObject(getConfigs(ctfMap))
         ).toMatchSnapshot();
-        expect(getDependencies(result)).toMatchSnapshot();
-        expect(getDevDependencies(result)).toMatchSnapshot();
+        expect(getDependencies(ctfMap)).toMatchSnapshot();
+        expect(getDevDependencies(ctfMap)).toMatchSnapshot();
       });
     });
   }

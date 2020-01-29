@@ -1,10 +1,7 @@
 /* eslint global-require: off */
 const webpack = require('webpack');
 const path = require('path');
-const {
-  getConfigByConfigName,
-  getConfigsBasePath
-} = require('@alfred/helpers');
+const { getConfigByConfigName } = require('@alfred/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 const getPort = require('get-port');
 
@@ -34,7 +31,6 @@ module.exports = {
     ['@alfred/interface-build', interfaceConfig],
     ['@alfred/interface-start', interfaceConfig]
   ],
-  devDependencies: require('./package.json').peerDependencies,
   configFiles: [
     {
       name: 'webpack.base',
@@ -244,33 +240,48 @@ module.exports = {
     }
   },
   ctfs: {
-    eslint: (ctf, ctfs, { project, config }) =>
-      ctf
-        .extendConfig('eslint', {
-          settings: {
-            'import/resolver': {
-              webpack: {
-                config: path.join(
-                  getConfigsBasePath(project, config),
-                  'webpack.browser.json'
-                )
+    babel(ctf, { toCtf }) {
+      return ctf
+        .extendConfig('webpack.base', {
+          module: {
+            rules: [
+              {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                use: {
+                  loader: 'babel-loader',
+                  options: {
+                    ...getConfigByConfigName('babel', toCtf.configFiles).config,
+                    cacheDirectory: true
+                  }
+                }
               }
-            }
+            ]
           }
         })
-        .addDevDependencies({
-          'eslint-import-resolver-webpack': '0.12.1'
-        }),
-    jest: (ctf, ctfs, { config }) =>
-      ctf
-        .extendConfig('jest', {
-          moduleNameMapper: {
-            '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': `<rootDir>/${config.configsDir}/mocks/fileMock.js`,
-            '\\.(css|less|sass|scss)$': 'identity-obj-proxy'
-          }
+        .addDepsFromPkg('babel-loader');
+    },
+    lodash(ctf) {
+      // eslint-disable-next-line global-require
+      const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+      return ctf
+        .extendConfig('webpack.prod', {
+          plugins: [new LodashModuleReplacementPlugin()]
         })
-        .addDevDependencies({
-          'identity-obj-proxy': '*'
-        })
+        .addDepsFromPkg('lodash-webpack-plugin');
+    },
+    react(ctf) {
+      // eslint-disable-next-line global-require
+      const webpack = require('webpack');
+      return ctf.extendConfig('webpack.base', {
+        resolve: {
+          extensions: ['.jsx']
+        },
+        devServer: {
+          hot: true
+        },
+        plugins: [new webpack.HotModuleReplacementPlugin()]
+      });
+    }
   }
 };

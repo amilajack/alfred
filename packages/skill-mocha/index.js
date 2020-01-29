@@ -10,7 +10,6 @@ module.exports = {
   name: 'mocha',
   description: 'Run tests for your project',
   interfaces: ['@alfred/interface-test'],
-  devDependencies: require('./package.json').devDependencies,
   configFiles: [],
   supports: {
     env: ['production', 'development', 'test'],
@@ -41,15 +40,5 @@ module.exports = {
         )
       );
     }
-  },
-  ctfs: {
-    eslint: ctf =>
-      ctf
-        .extendConfig('eslint', {
-          plugins: ['mocha']
-        })
-        .addDevDependencies({
-          'eslint-plugin-mocha': '6.2.2'
-        })
   }
 };

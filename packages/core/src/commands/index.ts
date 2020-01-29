@@ -49,7 +49,7 @@ export function getExecutableWrittenConfigsMethods(
 ): ExecutableSkillMethods {
   const { config } = project;
   const configWithDefaults = config.getConfigWithDefaults();
-  const configsBasePath = getConfigsBasePath(project, config);
+  const configsBasePath = getConfigsBasePath(project);
   const skillsConfigMap: Map<string, ConfigValue> = new Map(
     configWithDefaults.skills.map(([skillPkgName, skillConfig]) => [
       require(skillPkgName).name,

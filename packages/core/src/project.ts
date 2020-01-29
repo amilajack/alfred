@@ -338,7 +338,7 @@ export default class Project implements ProjectInterface {
     if (!this.config.showConfigs) return ctf;
 
     // Create a .configs dir if it doesn't exist
-    const configsBasePath = getConfigsBasePath(this, this.config);
+    const configsBasePath = getConfigsBasePath(this);
     if (!fs.existsSync(configsBasePath)) {
       fs.mkdirSync(configsBasePath);
     }

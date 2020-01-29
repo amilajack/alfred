@@ -205,10 +205,12 @@ export interface Ctf extends PkgWithDeps {
   ctfs: {
     [ctfName: string]: (
       ownCtfNode: Ctf,
-      ctfMap: Map<string, Ctf>,
       misc: {
+        toCtf: Ctf;
+        ctfs: Map<string, Ctf>;
         project: ProjectInterface;
         config: ConfigInterface;
+        configsPath: string;
       }
     ) => Ctf;
   };
@@ -235,10 +237,6 @@ export interface CtfWithHelpers extends Ctf {
     toPkgType?: DependencyType
   ) => CtfWithHelpers;
 }
-
-export type Transforms = Array<() => void>;
-export type OrderedCtfTransformsMap = Map<string, Transforms>;
-export type OrderedCtfTransforms = Array<Transforms>;
 
 export type ValidationResult = {
   warnings: string[];

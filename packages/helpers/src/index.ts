@@ -13,7 +13,8 @@ import {
   PkgWithAllDeps,
   DependencyType,
   DependencyTypeFull,
-  Dependencies
+  Dependencies,
+  CtfNode
 } from '@alfred/types';
 
 export const fromPkgTypeToFull = (
@@ -31,6 +32,14 @@ export const fromPkgTypeToFull = (
     }
   }
 };
+
+export function requireCtf(ctfName: string): CtfNode {
+  return {
+    ...require(ctfName),
+    pkg: require(`${ctfName}/package.json`),
+    devDependencies: require(`${ctfName}/package.json`).peerDependencies
+  };
+}
 
 export function getDepsFromPkg(
   pkgs: string | string[],
@@ -140,7 +149,7 @@ export function getConfigs(ctf: CtfMap): Array<ConfigValue> {
 
 export function getConfigsBasePath(
   project: ProjectInterface,
-  config: ConfigInterface
+  config: ConfigInterface = project.config
 ): string {
   return path.join(project.root, config.configsDir);
 }

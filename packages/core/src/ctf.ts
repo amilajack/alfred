@@ -12,26 +12,19 @@ import {
   Target,
   CtfWithHelpers,
   Dependencies,
-  OrderedCtfTransforms,
-  OrderedCtfTransformsMap,
-  Transforms,
   DependencyType,
   PkgJson
 } from '@alfred/types';
-import { getDepsFromPkg, fromPkgTypeToFull } from '@alfred/helpers';
-import topsort from './topsort';
+import {
+  getDepsFromPkg,
+  fromPkgTypeToFull,
+  getConfigsBasePath,
+  requireCtf
+} from '@alfred/helpers';
 import { normalizeInterfacesOfSkill } from './interface';
 
-const jestCtf = require('@alfred/skill-jest');
-const babel = require('@alfred/skill-babel');
-const eslint = require('@alfred/skill-eslint');
-const react = require('@alfred/skill-react');
-const prettier = require('@alfred/skill-prettier');
-const parcel = require('@alfred/skill-parcel');
-const rollup = require('@alfred/skill-rollup');
-const lodashCtf = require('@alfred/skill-lodash');
-
 type CORE_CTF =
+  | 'webpack'
   | 'babel'
   | 'parcel'
   | 'eslint'
@@ -94,7 +87,7 @@ export function addCtfHelpers(ctf: CtfNode): CtfWithHelpers {
       pkgs: string | string[],
       pkg: PkgJson | undefined = ctf.pkg,
       fromPkgType: DependencyType = 'dev',
-      toPkgType: DependencyType = 'peer'
+      toPkgType: DependencyType = 'dev'
     ): CtfWithHelpers {
       const mergedPkg = lodash.merge(
         {
@@ -102,7 +95,7 @@ export function addCtfHelpers(ctf: CtfNode): CtfWithHelpers {
           devDependencies: {},
           peerDependencies: {}
         },
-        this.pkg || pkg || {}
+        pkg || {}
       );
       const depsToAdd = getDepsFromPkg(pkgs, mergedPkg, fromPkgType);
       const toPkgTypeFullName = fromPkgTypeToFull(toPkgType);
@@ -114,6 +107,27 @@ export function addCtfHelpers(ctf: CtfNode): CtfWithHelpers {
   };
 }
 
+export function runCtfs(project: ProjectInterface, ctfMap: CtfMap): CtfMap {
+  ctfMap.forEach(ctfNode => {
+    Object.entries(ctfNode.ctfs || {}).forEach(([toCtfName, ctfFn]) => {
+      if (ctfMap.has(toCtfName)) {
+        ctfMap.set(
+          ctfNode.name,
+          ctfFn(ctfMap.get(ctfNode.name) as CtfNode, {
+            toCtf: ctfMap.get(toCtfName) as CtfNode,
+            ctfs: ctfMap,
+            config: project.config,
+            project,
+            configsPath: getConfigsBasePath(project)
+          })
+        );
+      }
+    });
+  });
+
+  return ctfMap;
+}
+
 function normalizeCtf(ctf: CtfNode): CtfWithHelpers {
   return {
     ...addCtfHelpers(ctf),
@@ -122,14 +136,15 @@ function normalizeCtf(ctf: CtfNode): CtfWithHelpers {
 }
 
 export const CORE_CTFS: { [ctf in CORE_CTF]: CtfWithHelpers } = {
-  babel: normalizeCtf(babel),
-  parcel: normalizeCtf(parcel),
-  eslint: normalizeCtf(eslint),
-  prettier: normalizeCtf(prettier),
-  jest: normalizeCtf(jestCtf),
-  react: normalizeCtf(react),
-  rollup: normalizeCtf(rollup),
-  lodash: normalizeCtf(lodashCtf)
+  webpack: normalizeCtf(requireCtf('@alfred/skill-webpack')),
+  babel: normalizeCtf(requireCtf('@alfred/skill-babel')),
+  parcel: normalizeCtf(requireCtf('@alfred/skill-parcel')),
+  eslint: normalizeCtf(requireCtf('@alfred/skill-eslint')),
+  prettier: normalizeCtf(requireCtf('@alfred/skill-prettier')),
+  jest: normalizeCtf(requireCtf('@alfred/skill-jest')),
+  react: normalizeCtf(requireCtf('@alfred/skill-react')),
+  rollup: normalizeCtf(requireCtf('@alfred/skill-rollup')),
+  lodash: normalizeCtf(requireCtf('@alfred/skill-lodash'))
 };
 
 // Examples
@@ -160,76 +175,6 @@ export function entrypointsToInterfaceStates(
   });
 }
 
-/**
- * Topologically sort the CTFs
- */
-export function topsortCtfMap(ctfMap: CtfMap): Array<string> {
-  const topsortGraphEdges: Array<[string, string]> = [];
-  const ctfNodeNames = new Set(ctfMap.keys());
-
-  ctfMap.forEach(ctfNode => {
-    if (ctfNode.ctfs) {
-      Object.keys(ctfNode.ctfs).forEach(ctfFnName => {
-        if (ctfNodeNames.has(ctfFnName)) {
-          topsortGraphEdges.push([ctfNode.name, ctfFnName]);
-        }
-      });
-    }
-  });
-
-  const sortedCtfNames = topsort(topsortGraphEdges);
-  ctfMap.forEach(ctfNode => {
-    if (!sortedCtfNames.includes(ctfNode.name)) {
-      sortedCtfNames.push(ctfNode.name);
-    }
-  });
-
-  return sortedCtfNames;
-}
-
-export function callCtfsInOrder(
-  project: ProjectInterface,
-  ctf: CtfMap
-): { ctf: CtfMap; orderedSelfTransforms: OrderedCtfTransforms } {
-  const { config } = project;
-  const topologicallyOrderedCtfs = topsortCtfMap(ctf);
-
-  // All the ctfs Fns from other ctfNodes that transform each ctfNode
-  const selfTransforms: OrderedCtfTransformsMap = new Map(
-    topsortCtfMap(ctf).map(ctfName => [ctfName, []])
-  );
-
-  ctf.forEach(ctfNode => {
-    Object.entries(ctfNode.ctfs || {}).forEach(([ctfName, ctfFn]) => {
-      if (ctf.has(ctfName)) {
-        const fn = (): void => {
-          const correspondingCtfNode = ctf.get(ctfName) as CtfNode;
-          ctf.set(
-            ctfName,
-            ctfFn(correspondingCtfNode, ctf, {
-              project,
-              config
-            })
-          );
-        };
-        selfTransforms.get(ctfName)?.push(fn);
-      }
-    });
-  });
-
-  const orderedSelfTransforms: OrderedCtfTransforms = topologicallyOrderedCtfs.map(
-    e => selfTransforms.get(e) as Transforms
-  );
-
-  orderedSelfTransforms.forEach(selfTransform => {
-    selfTransform?.forEach(_selfTransform => {
-      _selfTransform();
-    });
-  });
-
-  return { ctf, orderedSelfTransforms };
-}
-
 export function validateCtf(
   ctf: CtfMap,
   interfaceState: InterfaceState
@@ -257,9 +202,6 @@ export function validateCtf(
       }
     }
   });
-
-  // Check if the CTF's can be topsorted
-  topsortCtfMap(ctf);
 
   return ctf;
 }
@@ -378,7 +320,7 @@ export function CTF(
     ctfMap.set('babel', CORE_CTFS.babel);
   }
 
-  callCtfsInOrder(project, ctfMap);
+  runCtfs(project, ctfMap);
 
   validateCtf(ctfMap, interfaceState);
 
@@ -400,7 +342,7 @@ export default async function ctfFromConfig(
 
   config.skills.forEach(([skillPkgName, skillUserConfig = {}]) => {
     // Add the skill config to the ctfNode
-    const ctfNode: CtfNode = require(skillPkgName);
+    const ctfNode: CtfNode = requireCtf(skillPkgName);
     ctfNode.config = skillUserConfig;
     if (ctfNode.configFiles) {
       ctfNode.configFiles = ctfNode.configFiles.map(configFile => ({

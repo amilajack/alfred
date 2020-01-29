@@ -20,7 +20,6 @@ module.exports = {
     ['@alfred/interface-build', interfaceConfig],
     ['@alfred/interface-start', interfaceConfig]
   ],
-  devDependencies: require('./package.json').devDependencies,
   default: true,
   configFiles: [],
   hooks: {
