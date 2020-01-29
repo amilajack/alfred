@@ -67,31 +67,31 @@ module.exports = {
         project,
         [
           binPath,
-          config.showConfigs
-            ? `--config ${configPath} ${root}`
-            : `--config ${hiddenTmpConfigPath} ${root}`,
+          // config.showConfigs
+          //   ? `--config ${configPath}`
+          //   : `--config ${hiddenTmpConfigPath}`,
           ...flags
         ].join(' ')
       );
     }
   },
-  transforms: {
-    babel(skill) {
-      return skill.extendConfig('jest', {
-        transform: {
-          '^.+\\.jsx?$': './node_modules/jest-transformer.js'
-        }
-      });
-    },
-    webpack(skill, { config }) {
-      return skill
-        .extendConfig('jest', {
-          moduleNameMapper: {
-            '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': `<rootDir>/${config.configsDir}/mocks/fileMock.js`,
-            '\\.(css|less|sass|scss)$': 'identity-obj-proxy'
-          }
-        })
-        .addDepsFromPkg('identity-obj-proxy');
-    }
-  }
+  // transforms: {
+  //   babel(skill) {
+  //     return skill.extendConfig('jest', {
+  //       transform: {
+  //         '^.+\\.jsx?$': './node_modules/jest-transformer.js'
+  //       }
+  //     });
+  //   },
+  //   webpack(skill, { config }) {
+  //     return skill
+  //       .extendConfig('jest', {
+  //         moduleNameMapper: {
+  //           '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': `<rootDir>/${config.configsDir}/mocks/fileMock.js`,
+  //           '\\.(css|less|sass|scss)$': 'identity-obj-proxy'
+  //         }
+  //       })
+  //       .addDepsFromPkg('identity-obj-proxy');
+  //   }
+  // }
 };

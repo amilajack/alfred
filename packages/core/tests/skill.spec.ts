@@ -62,8 +62,10 @@ function removePathsPropertiesFromObject(
       removePathsPropertiesFromObject(value);
     }
 
-    if (typeof value === 'string' && value.includes(os.homedir())) {
-      obj[key] = '/';
+    if (typeof value === 'string') {
+      if (value.includes(os.homedir()) || value[0] === '/') {
+        obj[key] = '/';
+      }
     }
   }
   return obj;

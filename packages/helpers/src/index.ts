@@ -1,5 +1,6 @@
 /* eslint import/prefer-default-export: off, import/no-dynamic-require: off */
 import path from 'path';
+// import fs from 'fs';
 import open from 'open';
 import pkgUp from 'pkg-up';
 import childProcess from 'child_process';
@@ -138,10 +139,29 @@ export async function getPkgBinPath(
     );
   }
 
-  return path.join(
-    path.dirname(pkgJsonPath),
-    typeof bin === 'string' ? bin : bin[binName]
-  );
+  // let binPath = (() => {
+  //   if (typeof bin === 'string') return bin;
+  //   return bin[binName];
+  // })();
+
+  // if (process.platform === 'win32') {
+  //   binPath = path.format({
+  //     name: bin[binName],
+  //     ext: 'cmd'
+  //   })
+  //   console.log(binPath)
+  // }
+
+  // let a = path.join(path.dirname(pkgJsonPath), binPath);
+
+  // if (fs.existsSync(a)) {
+  //   console.log(a)
+  //   return a
+  // }
+
+  const f = childProcess.execSync(`yarn bin ${binName || pkgName}`).toString();
+  console.log(f)
+  return f;
 }
 
 export function execCmdInProject(

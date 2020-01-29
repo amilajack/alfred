@@ -10,7 +10,9 @@ process.on('unhandledRejection', err => {
 });
 
 // Notify the user if there are new versions of alfred available
-updateNotifier({ pkg }).notify();
+if (process.env.ALFRED_E2E_CLI_TEST !== 'true') {
+  updateNotifier({ pkg }).notify();
+}
 
 program
   .version(pkg.version, '-v, --version')
