@@ -317,12 +317,12 @@ describe('CTF', () => {
         expect(ctfCombination).toMatchSnapshot();
         // Get the CTFs for each combination
         const ctfObjects = ctfCombination.map(ctfName => CORE_CTFS[ctfName]);
-        const result = CTF(defaultProject, ctfObjects, interfaceState);
+        const ctfMap = CTF(defaultProject, ctfObjects, interfaceState);
         expect(
-          removePathsPropertiesFromObject(getConfigs(result))
+          removePathsPropertiesFromObject(getConfigs(ctfMap))
         ).toMatchSnapshot();
-        expect(getDependencies(result)).toMatchSnapshot();
-        expect(getDevDependencies(result)).toMatchSnapshot();
+        expect(getDependencies(ctfMap)).toMatchSnapshot();
+        expect(getDevDependencies(ctfMap)).toMatchSnapshot();
       });
     });
   }

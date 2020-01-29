@@ -210,6 +210,7 @@ export interface Ctf extends PkgWithDeps {
         ctfs: Map<string, Ctf>;
         project: ProjectInterface;
         config: ConfigInterface;
+        configsPath: string;
       }
     ) => Ctf;
   };

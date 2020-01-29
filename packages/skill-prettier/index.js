@@ -35,5 +35,6 @@ module.exports = {
         ].join(' ')
       );
     }
-  }
+  },
+  ctfs: {}
 };

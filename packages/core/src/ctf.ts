@@ -18,7 +18,11 @@ import {
   DependencyType,
   PkgJson
 } from '@alfred/types';
-import { getDepsFromPkg, fromPkgTypeToFull } from '@alfred/helpers';
+import {
+  getDepsFromPkg,
+  fromPkgTypeToFull,
+  getConfigsBasePath
+} from '@alfred/helpers';
 import topsort from './topsort';
 import { normalizeInterfacesOfSkill } from './interface';
 
@@ -165,25 +169,22 @@ export function entrypointsToInterfaceStates(
  */
 export function topsortCtfMap(ctfMap: CtfMap): Array<string> {
   const topsortGraphEdges: Array<[string, string]> = [];
-  const ctfNodeNames = new Set(ctfMap.keys());
+
+  const emptyCtfs: string[] = [];
 
   ctfMap.forEach(ctfNode => {
     if (ctfNode.ctfs) {
       Object.keys(ctfNode.ctfs).forEach(toCtfFnName => {
-        if (ctfNodeNames.has(toCtfFnName)) {
-          topsortGraphEdges.push([toCtfFnName, ctfNode.name]);
+        if (ctfMap.has(toCtfFnName)) {
+          topsortGraphEdges.push([ctfNode.name, toCtfFnName]);
         }
       });
+    } else {
+      emptyCtfs.push(ctfNode.name);
     }
   });
 
-  const sortedCtfNames = topsort(topsortGraphEdges);
-  // Add ctfs with no edges
-  ctfMap.forEach(ctfNode => {
-    if (!sortedCtfNames.includes(ctfNode.name)) {
-      sortedCtfNames.push(ctfNode.name);
-    }
-  });
+  const sortedCtfNames = [...emptyCtfs, ...topsort(topsortGraphEdges)];
 
   return sortedCtfNames;
 }
@@ -192,7 +193,6 @@ export function callCtfsInOrder(
   project: ProjectInterface,
   ctfMap: CtfMap
 ): { ctf: CtfMap; orderedSelfTransforms: OrderedCtfTransforms } {
-  const { config } = project;
   const topSortedCtfNames = topsortCtfMap(ctfMap);
 
   // All the ctfs Fns from other ctfNodes that transform each ctfNode
@@ -203,24 +203,24 @@ export function callCtfsInOrder(
   ctfMap.forEach(ctfNode => {
     Object.entries(ctfNode.ctfs || {}).forEach(([toCtfName, ctfFn]) => {
       if (ctfMap.has(toCtfName)) {
-        const fn = (): void => {
+        selfTransforms.get(ctfNode.name)?.push((): void => {
           ctfMap.set(
             ctfNode.name,
-            ctfFn(ctfNode, {
+            ctfFn(ctfMap.get(ctfNode.name) as CtfNode, {
               toCtf: ctfMap.get(toCtfName) as CtfNode,
               ctfs: ctfMap,
+              config: project.config,
               project,
-              config
+              configsPath: getConfigsBasePath(project)
             })
           );
-        };
-        selfTransforms.get(toCtfName)?.push(fn);
+        });
       }
     });
   });
 
   const orderedSelfTransforms: OrderedCtfTransforms = topSortedCtfNames.map(
-    e => selfTransforms.get(e) as Transforms
+    ctfName => selfTransforms.get(ctfName) as Transforms
   );
 
   orderedSelfTransforms.forEach(selfTransform => {

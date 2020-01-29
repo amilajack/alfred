@@ -140,7 +140,7 @@ export function getConfigs(ctf: CtfMap): Array<ConfigValue> {
 
 export function getConfigsBasePath(
   project: ProjectInterface,
-  config: ConfigInterface
+  config: ConfigInterface = project.config
 ): string {
   return path.join(project.root, config.configsDir);
 }

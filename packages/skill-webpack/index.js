@@ -1,10 +1,7 @@
 /* eslint global-require: off */
 const webpack = require('webpack');
 const path = require('path');
-const {
-  getConfigByConfigName,
-  getConfigsBasePath
-} = require('@alfred/helpers');
+const { getConfigByConfigName } = require('@alfred/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 const getPort = require('get-port');
 
