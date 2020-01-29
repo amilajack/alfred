@@ -39,7 +39,7 @@ alfred learn @alfred/skill-angular @alfred/skill-redux
 
 ## Alfred Skill Example
 
-The following is an example of an Alfred skill (Config Transformer Function) for babel
+The following is an example of an Alfred skill for Babel
 
 ```js
 // index.js
@@ -75,7 +75,7 @@ export default {
       }
     }
   ],
-  ctfs: {
+  transforms: {
     react(babelSkill) {
       return babelSkill
         .extendConfig('babel', {

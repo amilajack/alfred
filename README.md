@@ -107,7 +107,7 @@ To change verdaccio configs, see `~/.config/verdaccio/config.yaml`
 
 ## Alfred Skill Example
 
-The following is an example of an Alfred skill (Config Transformer Function) for babel
+The following is an example of an Alfred skill for Babel
 
 ```js
 // index.js
@@ -142,7 +142,7 @@ export default {
       }
     }
   ],
-  ctfs: {
+  transforms: {
     react(babelSkill) {
       return babelSkill
         .extendConfig('babel', {

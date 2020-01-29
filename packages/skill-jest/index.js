@@ -71,7 +71,7 @@ module.exports = {
       );
     }
   },
-  ctfs: {
+  transforms: {
     babel(skill) {
       return skill.extendConfig('jest', {
         transform: {
