@@ -9,14 +9,16 @@ import { generateInterfaceStatesFromProject } from '../interface';
 export default async function skills(
   project: ProjectInterface
 ): Promise<SkillsList> {
-  const interfaceStateCtfs = await Promise.all(
+  const interfaceStateSkills = await Promise.all(
     generateInterfaceStatesFromProject(project).map(interfaceState =>
       project
-        .ctfFromInterfaceState(interfaceState)
-        .then(ctf =>
-          Array.from(ctf.values()).filter(
-            ctfNode =>
-              ctfNode.hooks && ctfNode.interfaces && ctfNode.interfaces.length
+        .skillMapFromInterfaceState(interfaceState)
+        .then(skillMap =>
+          Array.from(skillMap.values()).filter(
+            skillNode =>
+              skillNode.hooks &&
+              skillNode.interfaces &&
+              skillNode.interfaces.length
           )
         )
     )
@@ -25,8 +27,8 @@ export default async function skills(
   const subCommandAndSkills: SkillsForSubCommand = new Map();
   const subCommandDict: SubCommandDict = new Map();
 
-  interfaceStateCtfs.forEach(interfaceStateCtf => {
-    interfaceStateCtf.forEach(result => {
+  interfaceStateSkills.forEach(interfaceStateSkill => {
+    interfaceStateSkill.forEach(result => {
       result.interfaces.forEach(resultInterface => {
         subCommandDict.set(resultInterface.module.subcommand, resultInterface);
         if (subCommandAndSkills.has(resultInterface.module.subcommand)) {

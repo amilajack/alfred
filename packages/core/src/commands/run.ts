@@ -39,13 +39,15 @@ export default async function run(
   return serial(
     interfaceStates.map(interfaceState => () =>
       project
-        .ctfFromInterfaceState(interfaceState)
-        .then(ctfMap =>
-          config.showConfigs ? project.writeConfigsFromCtf(ctfMap) : ctfMap
+        .skillMapFromInterfaceState(interfaceState)
+        .then(skillMap =>
+          config.showConfigs
+            ? project.writeConfigsFromSkillMap(skillMap)
+            : skillMap
         )
-        .then(ctfMap => {
+        .then(skillMap => {
           const subcommandInterface = getInterfaceForSubcommand(
-            ctfMap,
+            skillMap,
             subcommand
           );
 
@@ -58,7 +60,7 @@ export default async function run(
 
           const commands = getExecutableWrittenConfigsMethods(
             project,
-            ctfMap,
+            skillMap,
             interfaceState
           );
 

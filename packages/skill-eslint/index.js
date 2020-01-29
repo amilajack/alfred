@@ -65,27 +65,27 @@ module.exports = {
     }
   },
   ctfs: {
-    babel(ctf) {
-      return ctf
+    babel(skill) {
+      return skill
         .extendConfig('eslint', {
           parser: 'babel-eslint'
         })
         .addDepsFromPkg('babel-eslint');
     },
-    jest(ctf) {
-      return ctf.addDepsFromPkg('eslint-plugin-jest').extendConfig('eslint', {
+    jest(skill) {
+      return skill.addDepsFromPkg('eslint-plugin-jest').extendConfig('eslint', {
         plugins: ['jest']
       });
     },
-    mocha(ctf) {
-      return ctf
+    mocha(skill) {
+      return skill
         .extendConfig('eslint', {
           plugins: ['mocha']
         })
         .addDepsFromPkg('eslint-plugin-mocha');
     },
-    webpack(eslintCtf, { project, config, configsPath }) {
-      return eslintCtf
+    webpack(skill, { project, config, configsPath }) {
+      return skill
         .extendConfig('eslint', {
           settings: {
             'import/resolver': {
@@ -97,15 +97,15 @@ module.exports = {
         })
         .addDepsFromPkg('eslint-import-resolver-webpack');
     },
-    react(ctf) {
-      return ctf
+    react(skill) {
+      return skill
         .extendConfig('eslint', {
           extends: ['airbnb']
         })
         .addDepsFromPkg('eslint-config-airbnb');
     },
-    prettier(ctf) {
-      return ctf
+    prettier(skill) {
+      return skill
         .extendConfig('eslint', {
           extends: ['prettier'],
           plugins: ['prettier']

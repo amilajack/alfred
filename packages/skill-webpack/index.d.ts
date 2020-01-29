@@ -1,3 +1,3 @@
-import { Ctf } from '@alfred/types';
+import { Skill } from '@alfred/types';
 
-export = Ctf;
+export = Skill;

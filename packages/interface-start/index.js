@@ -29,10 +29,6 @@ module.exports = {
     }, []);
   },
 
-  /**
-   * Given an array of CTF nodes, return the CTF which should be used based
-   * on the current environment and current target
-   */
   resolveSkill(skills = [], interfaceState) {
     const resolvedSkills = skills
       .filter(skill =>

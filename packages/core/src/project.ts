@@ -12,8 +12,8 @@ import {
   ProjectInterface,
   ValidationResult,
   SkillsList,
-  CtfMap,
-  CtfNode,
+  SkillMap,
+  SkillNode,
   NpmClients,
   DependencyType,
   Dependencies,
@@ -21,7 +21,7 @@ import {
 } from '@alfred/types';
 import Config from './config';
 import { PkgValidation } from './validation';
-import ctfFromConfig, { ENTRYPOINTS } from './ctf';
+import skillMapFromConfig, { ENTRYPOINTS } from './skill';
 import {
   generateInterfaceStatesFromProject,
   INTERFACE_STATES
@@ -327,15 +327,15 @@ export default class Project implements ProjectInterface {
    */
   // uninstallDeps() {}
 
-  ctfFromInterfaceState(
+  skillMapFromInterfaceState(
     interfaceState: InterfaceState,
     config: ConfigInterface = this.config
-  ): Promise<CtfMap> {
-    return ctfFromConfig(this, interfaceState, config);
+  ): Promise<SkillMap> {
+    return skillMapFromConfig(this, interfaceState, config);
   }
 
-  async writeConfigsFromCtf(ctf: CtfMap): Promise<CtfMap> {
-    if (!this.config.showConfigs) return ctf;
+  async writeConfigsFromSkillMap(skillMap: SkillMap): Promise<SkillMap> {
+    if (!this.config.showConfigs) return skillMap;
 
     // Create a .configs dir if it doesn't exist
     const configsBasePath = getConfigsBasePath(this);
@@ -343,12 +343,12 @@ export default class Project implements ProjectInterface {
       fs.mkdirSync(configsBasePath);
     }
 
-    const ctfNodes: CtfNode[] = Array.from(ctf.values());
+    const skills: SkillNode[] = Array.from(skillMap.values());
 
     await Promise.all(
-      ctfNodes
-        .filter(ctfNode => ctfNode.configFiles && ctfNode.configFiles.length)
-        .flatMap(ctfNode => ctfNode.configFiles)
+      skills
+        .filter(skill => skill.configFiles && skill.configFiles.length)
+        .flatMap(skill => skill.configFiles)
         .map(async configFile => {
           const filePath = path.join(configsBasePath, configFile.path);
           const stringifiedConfig =
@@ -364,24 +364,24 @@ export default class Project implements ProjectInterface {
         })
     );
 
-    return ctf;
+    return skillMap;
   }
 
   async findDepsToInstall(
-    additionalCtfs: Array<CtfNode> = []
+    additionalSkills: Array<SkillNode> = []
   ): Promise<PkgWithDeps> {
-    const ctfMaps = await Promise.all(
+    const skillMaps = await Promise.all(
       INTERFACE_STATES.map(interfaceState =>
-        ctfFromConfig(this, interfaceState, this.config)
+        skillMapFromConfig(this, interfaceState, this.config)
       )
     );
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
-    const mergedCtfMap: CtfMap = new Map(...ctfMaps);
+    const mergedSkillMap: SkillMap = new Map(...skillMaps);
 
     const pkgDeps: PkgWithDeps = [
-      ...mergedCtfMap.values(),
-      ...additionalCtfs
+      ...mergedSkillMap.values(),
+      ...additionalSkills
     ].reduce(
       (prev, curr) => ({
         dependencies: { ...prev.dependencies, ...curr.dependencies },

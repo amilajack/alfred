@@ -76,8 +76,8 @@ export default {
     }
   ],
   ctfs: {
-    webpack: (webpackCtf: CtfNode): CtfNode => {
-      return webpackCtf
+    webpack: (babelSkill: Skill): Skill => {
+      return babelSkill
         .extendConfig('webpack.base', {
           module: {
             devtool: 'source-map',
@@ -92,8 +92,8 @@ export default {
         })
         .addDevDependencies({ 'babel-loader': '10.0.0' });
     },
-    eslint: (eslintCtf: CtfNode): CtfNode => {
-      return eslintCtf
+    eslint: (babelSkill: Skill): Skill => {
+      return babelSkill
         .extendConfig('eslint', {
           'parser': 'babel-eslint'
         })
@@ -103,7 +103,7 @@ export default {
 };
 ```
 
-`peerDependencies` are specified in the `package.json` of a skill. They are not `dependencies` because by determining dependencies in CTFs, they can be extended. Users can write their own CTFs to customize which dependencies they want installed. Customizing dependencies, however, should be considered an antipattern because they use versions of a dependency that may not be supported by a skill.
+`peerDependencies` are specified in the `package.json` of a skill. They are not `dependencies` because by determining dependencies in skills, they can be extended. Users can write their own skills to customize which dependencies they want installed. Customizing dependencies, however, should be considered an antipattern because they use versions of a dependency that may not be supported by a skill.
 
 ```jsonc
 // package.json
@@ -169,7 +169,7 @@ type AlfredInterface = {
     "configsDir": ".configs",
     // Write the configs to the configsDir directory
     // Default: true
-    "showConfigs": false,
+    "showConfigs": true,
     // Config for all lib targets
     "lib": {
       "recommendSkills": ["@alfred/skill-react"]

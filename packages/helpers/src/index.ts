@@ -6,7 +6,7 @@ import childProcess from 'child_process';
 import {
   ConfigFile,
   ConfigValue,
-  CtfMap,
+  SkillMap,
   ConfigWithUnresolvedInterfaces,
   ProjectInterface,
   ConfigInterface,
@@ -14,7 +14,7 @@ import {
   DependencyType,
   DependencyTypeFull,
   Dependencies,
-  CtfNode
+  SkillNode
 } from '@alfred/types';
 
 export const fromPkgTypeToFull = (
@@ -33,11 +33,11 @@ export const fromPkgTypeToFull = (
   }
 };
 
-export function requireCtf(ctfName: string): CtfNode {
+export function requireSkill(skillName: string): SkillNode {
   return {
-    ...require(ctfName),
-    pkg: require(`${ctfName}/package.json`),
-    devDependencies: require(`${ctfName}/package.json`).peerDependencies
+    ...require(skillName),
+    pkg: require(`${skillName}/package.json`),
+    devDependencies: require(`${skillName}/package.json`).peerDependencies
   };
 }
 
@@ -140,9 +140,9 @@ export function mapShortNameEnvToLongName(envName: string): string {
 /*
  * Intended to be used for testing purposes
  */
-export function getConfigs(ctf: CtfMap): Array<ConfigValue> {
-  return Array.from(ctf.values())
-    .map(ctfNode => ctfNode.configFiles || [])
+export function getConfigs(skillMap: SkillMap): Array<ConfigValue> {
+  return Array.from(skillMap.values())
+    .map(skill => skill.configFiles || [])
     .flat()
     .map(configFile => configFile.config);
 }

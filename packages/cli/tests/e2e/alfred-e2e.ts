@@ -9,7 +9,7 @@ const powerset = require('@amilajack/powerset');
 const childProcess = require('child_process');
 const { INTERFACE_STATES } = require('@alfred/core/lib/interface');
 const { formatPkgJson } = require('@alfred/core');
-const { entrypointsToInterfaceStates } = require('@alfred/core/lib/ctf');
+const { entrypointsToInterfaceStates } = require('@alfred/core/lib/skill');
 const { serial } = require('@alfred/core/lib/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 const { addEntrypoints } = require('../../lib');
@@ -22,8 +22,8 @@ process.on('unhandledRejection', err => {
 // Goal: Test subcommands for all combinations of entrypoints and skills
 // Create a ./tmp directory
 // Start by having all the packages for the skills installed
-// For each combination c[] of CTFs
-//  consider c[] to be the skills. Add c[] to the ctf
+// For each combination c[] of skills
+//  consider c[] to be the skills. Add c[] to the skill
 //    for each interfaceState in interfaceStates[9] (include all targets)
 //      Default skills will automatically be added
 //      Install the necessary deps
@@ -197,8 +197,6 @@ async function generateTests(skillCombination, tmpDir) {
                 await formatPkgJson(pkg)
               );
 
-              rimraf.sync(path.join(projectDir, pkg.alfred.configsDir));
-
               try {
                 command = 'skills';
                 childProcess.execSync(`${binPath} skills`, {
@@ -252,12 +250,17 @@ async function generateTests(skillCombination, tmpDir) {
                         });
                       }
                       // Assert that the .configs dir should or should not exist
-                      assert.strictEqual(
-                        fs.existsSync(
-                          path.join(projectDir, pkg.alfred.configsDir)
-                        ),
-                        showConfigs
-                      );
+                      if (
+                        path.join(projectDir, pkg.alfred.configsDir) !==
+                        projectDir
+                      ) {
+                        assert.strictEqual(
+                          fs.existsSync(
+                            path.join(projectDir, pkg.alfred.configsDir)
+                          ),
+                          showConfigs
+                        );
+                      }
                     } catch (e) {
                       issues.push([
                         skillCombination.join(', '),

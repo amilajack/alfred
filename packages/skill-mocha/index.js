@@ -17,7 +17,7 @@ module.exports = {
     projectTypes: ['app', 'lib']
   },
   hooks: {
-    async call({ project, config, ctf, flags }) {
+    async call({ project, config, skillMap, flags }) {
       const binPath = await getPkgBinPath('mocha', 'mocha');
       const mochaBabelRegisterPath = path.join(
         project.root,
@@ -26,7 +26,7 @@ module.exports = {
       );
       const { config: babelConfig } = getConfigByConfigName(
         'babel',
-        ctf.get('babel').configFiles
+        skillMap.get('babel').configFiles
       );
       await fs.promises.writeFile(
         mochaBabelRegisterPath,

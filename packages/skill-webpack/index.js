@@ -240,8 +240,8 @@ module.exports = {
     }
   },
   ctfs: {
-    babel(ctf, { toCtf }) {
-      return ctf
+    babel(skill, { toSkill }) {
+      return skill
         .extendConfig('webpack.base', {
           module: {
             rules: [
@@ -251,7 +251,8 @@ module.exports = {
                 use: {
                   loader: 'babel-loader',
                   options: {
-                    ...getConfigByConfigName('babel', toCtf.configFiles).config,
+                    ...getConfigByConfigName('babel', toSkill.configFiles)
+                      .config,
                     cacheDirectory: true
                   }
                 }
@@ -261,19 +262,19 @@ module.exports = {
         })
         .addDepsFromPkg('babel-loader');
     },
-    lodash(ctf) {
+    lodash(skill) {
       // eslint-disable-next-line global-require
       const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-      return ctf
+      return skill
         .extendConfig('webpack.prod', {
           plugins: [new LodashModuleReplacementPlugin()]
         })
         .addDepsFromPkg('lodash-webpack-plugin');
     },
-    react(ctf) {
+    react(skill) {
       // eslint-disable-next-line global-require
       const webpack = require('webpack');
-      return ctf.extendConfig('webpack.base', {
+      return skill.extendConfig('webpack.base', {
         resolve: {
           extensions: ['.jsx']
         },

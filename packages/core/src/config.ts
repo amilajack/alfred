@@ -8,7 +8,7 @@ import {
   NpmClients,
   ConfigWithResolvedSkills,
   ConfigWithUnresolvedInterfaces,
-  Skills,
+  ConfigSkills,
   ConfigWithUnresolvedSkills,
   RawSkillConfigValue,
   ConfigWithDefaults
@@ -27,7 +27,7 @@ export default class Config implements ConfigInterface {
 
   configsDir: string;
 
-  skills: Skills;
+  skills: ConfigSkills;
 
   autoInstall: boolean;
 

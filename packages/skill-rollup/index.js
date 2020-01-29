@@ -154,15 +154,17 @@ module.exports = {
     }
   },
   ctfs: {
-    babel(ctf, { ctfs }) {
+    babel(skill, { skillMap }) {
       // eslint-disable-next-line import/no-extraneous-dependencies
       const babel = require('rollup-plugin-babel');
-      return ctf
+      return skill
         .extendConfig('rollup.base', {
           plugins: [
             babel({
-              ...getConfigByConfigName('babel', ctfs.get('babel').configFiles)
-                .config,
+              ...getConfigByConfigName(
+                'babel',
+                skillMap.get('babel').configFiles
+              ).config,
               exclude: 'node_modules/**'
             })
           ]

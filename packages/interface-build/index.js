@@ -30,24 +30,20 @@ module.exports = {
     }, []);
   },
 
-  /**
-   * Given an array of CTF nodes, return the CTF which should be used based
-   * on the current environment and current target
-   */
-  resolveSkill(ctfNodes = [], interfaceState) {
-    const resolvedSkills = ctfNodes
-      .filter(ctfNode =>
-        ctfNode.interfaces.find(
-          ctfInterface => ctfInterface.module.subcommand === 'build'
+  resolveSkill(skillNodes = [], interfaceState) {
+    const resolvedSkills = skillNodes
+      .filter(skillNode =>
+        skillNode.interfaces.find(
+          skillInterface => skillInterface.module.subcommand === 'build'
         )
       )
-      .filter(ctfNode => {
-        const { supports } = ctfNode.interfaces.find(
+      .filter(skillNode => {
+        const { supports } = skillNode.interfaces.find(
           e => e.module.subcommand === 'build'
         ).config;
         if (!supports) {
           throw new Error(
-            `Skill "${ctfNode.name}" requires the "support" property, which is required by "@alfred/interface-build"`
+            `Skill "${skillNode.name}" requires the "support" property, which is required by "@alfred/interface-build"`
           );
         }
         return (
