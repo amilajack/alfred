@@ -8,13 +8,7 @@ import {
   getExecutableWrittenConfigsMethods,
   getInterfaceForSubcommand
 } from '../src/commands';
-import ctfFromConfig, {
-  CORE_CTFS,
-  CTF,
-  topsortCtfMap,
-  callCtfsInOrder,
-  addCtfHelpers
-} from '../src/ctf';
+import ctfFromConfig, { CORE_CTFS, CTF, addCtfHelpers } from '../src/ctf';
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from '../src/interface';
 import Project from '../src/project';
 
@@ -63,58 +57,6 @@ function removePathsPropertiesFromObject(
 }
 
 describe('CTF', () => {
-  describe('topological sort', () => {
-    it('should topsort', () => {
-      {
-        const sortedCtfs = topsortCtfMap(
-          CTF(defaultProject, Object.values(CORE_CTFS), defaultInterfaceState)
-        );
-        expect(sortedCtfs).toMatchSnapshot();
-        expect(Object.keys(CORE_CTFS).length).toEqual(sortedCtfs.length);
-      }
-      {
-        const sortedCtfs = topsortCtfMap(
-          CTF(defaultProject, [CORE_CTFS.react], INTERFACE_STATES[0])
-        );
-        expect(sortedCtfs).toMatchSnapshot();
-        expect(sortedCtfs.length).toEqual(6);
-      }
-    });
-
-    it('should call ctfs in order', () => {
-      const ctf = CTF(
-        defaultProject,
-        Object.values(CORE_CTFS),
-        INTERFACE_STATES[0]
-      );
-      const { orderedSelfTransforms } = callCtfsInOrder(
-        defaultProject,
-        ctf,
-        INTERFACE_STATES[0]
-      );
-
-      expect(orderedSelfTransforms).toMatchSnapshot();
-    });
-
-    it('should allow cycles with non-conflicting ctf nodes', () => {
-      const ctfNode1 = {
-        name: 'ctf-node-1',
-        description: '',
-        ctfs: {
-          'ctf-node-1': ctf => ctf
-        }
-      };
-      const ctfNode2 = {
-        name: 'ctf-node-2',
-        description: '',
-        ctfs: {
-          'ctf-node-2': ctf => ctf
-        }
-      };
-      CTF(defaultProject, [ctfNode1, ctfNode2], INTERFACE_STATES[0]);
-    });
-  });
-
   describe('interfaces', () => {
     it('should allow falsy inputs', () => {
       expect(normalizeInterfacesOfSkill(undefined)).toEqual([]);

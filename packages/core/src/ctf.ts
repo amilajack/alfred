@@ -12,9 +12,6 @@ import {
   Target,
   CtfWithHelpers,
   Dependencies,
-  OrderedCtfTransforms,
-  OrderedCtfTransformsMap,
-  Transforms,
   DependencyType,
   PkgJson
 } from '@alfred/types';
@@ -24,7 +21,6 @@ import {
   getConfigsBasePath,
   requireCtf
 } from '@alfred/helpers';
-import topsort from './topsort';
 import { normalizeInterfacesOfSkill } from './interface';
 
 type CORE_CTF =
@@ -111,6 +107,27 @@ export function addCtfHelpers(ctf: CtfNode): CtfWithHelpers {
   };
 }
 
+function runCtfs(project: ProjectInterface, ctfMap: CtfMap): CtfMap {
+  ctfMap.forEach(ctfNode => {
+    Object.entries(ctfNode.ctfs || {}).forEach(([toCtfName, ctfFn]) => {
+      if (ctfMap.has(toCtfName)) {
+        ctfMap.set(
+          ctfNode.name,
+          ctfFn(ctfMap.get(ctfNode.name) as CtfNode, {
+            toCtf: ctfMap.get(toCtfName) as CtfNode,
+            ctfs: ctfMap,
+            config: project.config,
+            project,
+            configsPath: getConfigsBasePath(project)
+          })
+        );
+      }
+    });
+  });
+
+  return ctfMap;
+}
+
 function normalizeCtf(ctf: CtfNode): CtfWithHelpers {
   return {
     ...addCtfHelpers(ctf),
@@ -158,74 +175,6 @@ export function entrypointsToInterfaceStates(
   });
 }
 
-/**
- * Topologically sort the CTFs
- */
-export function topsortCtfMap(ctfMap: CtfMap): Array<string> {
-  const topsortGraphEdges: Array<[string, string]> = [];
-
-  const emptyCtfs: string[] = [];
-
-  ctfMap.forEach(ctfNode => {
-    if (ctfNode.ctfs) {
-      Object.keys(ctfNode.ctfs).forEach(toCtfFnName => {
-        if (ctfMap.has(toCtfFnName)) {
-          topsortGraphEdges.push([ctfNode.name, toCtfFnName]);
-        }
-      });
-    } else {
-      emptyCtfs.push(ctfNode.name);
-    }
-  });
-
-  const sortedCtfNames = [...emptyCtfs, ...topsort(topsortGraphEdges)];
-
-  return sortedCtfNames;
-}
-
-export function callCtfsInOrder(
-  project: ProjectInterface,
-  ctfMap: CtfMap
-): { ctf: CtfMap; orderedSelfTransforms: OrderedCtfTransforms } {
-  const topSortedCtfNames = topsortCtfMap(ctfMap);
-
-  // All the ctfs Fns from other ctfNodes that transform each ctfNode
-  const selfTransforms: OrderedCtfTransformsMap = new Map(
-    topSortedCtfNames.map(ctfName => [ctfName, []])
-  );
-
-  ctfMap.forEach(ctfNode => {
-    Object.entries(ctfNode.ctfs || {}).forEach(([toCtfName, ctfFn]) => {
-      if (ctfMap.has(toCtfName)) {
-        selfTransforms.get(ctfNode.name)?.push((): void => {
-          ctfMap.set(
-            ctfNode.name,
-            ctfFn(ctfMap.get(ctfNode.name) as CtfNode, {
-              toCtf: ctfMap.get(toCtfName) as CtfNode,
-              ctfs: ctfMap,
-              config: project.config,
-              project,
-              configsPath: getConfigsBasePath(project)
-            })
-          );
-        });
-      }
-    });
-  });
-
-  const orderedSelfTransforms: OrderedCtfTransforms = topSortedCtfNames.map(
-    ctfName => selfTransforms.get(ctfName) as Transforms
-  );
-
-  orderedSelfTransforms.forEach(selfTransform => {
-    selfTransform?.forEach(_selfTransform => {
-      _selfTransform();
-    });
-  });
-
-  return { ctf: ctfMap, orderedSelfTransforms };
-}
-
 export function validateCtf(
   ctf: CtfMap,
   interfaceState: InterfaceState
@@ -253,9 +202,6 @@ export function validateCtf(
       }
     }
   });
-
-  // Check if the CTF's can be topsorted
-  topsortCtfMap(ctf);
 
   return ctf;
 }
@@ -374,7 +320,7 @@ export function CTF(
     ctfMap.set('babel', CORE_CTFS.babel);
   }
 
-  callCtfsInOrder(project, ctfMap);
+  runCtfs(project, ctfMap);
 
   validateCtf(ctfMap, interfaceState);
 
