@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const {
-  getConfigByConfigName,
-  execCommand,
+  getConfigByName,
+  execCmdInProject,
   getPkgBinPath
 } = require('@alfred/helpers');
 
@@ -24,7 +24,7 @@ module.exports = {
         config.showConfigs ? config.configsDir : 'node_modules',
         'mocha.js'
       );
-      const { config: babelConfig } = getConfigByConfigName(
+      const { config: babelConfig } = getConfigByName(
         'babel',
         skillMap.get('babel').configFiles
       );
@@ -33,7 +33,7 @@ module.exports = {
         `const babelRegister = require('@babel/register');
         require("@babel/register")(${JSON.stringify(babelConfig)});`
       );
-      return execCommand(
+      return execCmdInProject(
         project,
         [binPath, `--require ${mochaBabelRegisterPath} tests`, ...flags].join(
           ' '

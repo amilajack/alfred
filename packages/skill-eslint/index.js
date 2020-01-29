@@ -2,9 +2,9 @@
 const path = require('path');
 const {
   getConfigPathByConfigName,
-  getConfigByConfigName,
+  getConfigByName,
   getPkgBinPath,
-  execCommand
+  execCmdInProject
 } = require('@alfred/helpers');
 
 module.exports = {
@@ -34,15 +34,12 @@ module.exports = {
       const configPath = getConfigPathByConfigName('eslint', configFiles);
       const binPath = await getPkgBinPath('eslint', 'eslint');
       if (config.showConfigs) {
-        return execCommand(
+        return execCmdInProject(
           project,
           [binPath, `--config ${configPath} src tests`, ...flags].join(' ')
         );
       }
-      const { config: eslintConfig } = getConfigByConfigName(
-        'eslint',
-        configFiles
-      );
+      const { config: eslintConfig } = getConfigByName('eslint', configFiles);
       const { CLIEngine } = require('eslint');
       const cli = new CLIEngine({
         cwd: project.root,

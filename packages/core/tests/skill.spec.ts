@@ -2,8 +2,12 @@
 import os from 'os';
 import path from 'path';
 import powerset from '@amilajack/powerset';
-import { getConfigs } from '@alfred/helpers';
-import { InterfaceState, SkillMap, Dependencies } from '@alfred/types';
+import {
+  InterfaceState,
+  SkillMap,
+  Dependencies,
+  ConfigValue
+} from '@alfred/types';
 import {
   getExecutableWrittenConfigsMethods,
   getInterfaceForSubcommand
@@ -17,9 +21,13 @@ import skillMapFromConfig, {
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from '../src/interface';
 import Project from '../src/project';
 
-/**
- * Intended to be used for testing purposes
- */
+function getConfigs(skillMap: SkillMap): Array<ConfigValue> {
+  return Array.from(skillMap.values())
+    .map(skill => skill.configFiles || [])
+    .flat()
+    .map(configFile => configFile.config);
+}
+
 function getDependencies(skillMap: SkillMap): Dependencies {
   return Array.from(skillMap.values())
     .map(skillNode => skillNode.dependencies || {})

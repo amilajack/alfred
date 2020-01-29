@@ -3,7 +3,8 @@ import fs from 'fs';
 import npm from 'npm';
 import childProcess from 'child_process';
 import formatPkg from 'format-package';
-import { getConfigsBasePath, findProjectRoot } from '@alfred/helpers';
+import pkgUp from 'pkg-up';
+import { getConfigsBasePath } from '@alfred/helpers';
 import mergeConfigs from '@alfred/merge-configs';
 import {
   PkgJson,
@@ -36,6 +37,23 @@ import { PKG_SORT_ORDER } from './constants';
 process.on('unhandledRejection', err => {
   throw err;
 });
+
+/**
+ * Get the root of a project from the current working directory
+ */
+function findProjectRoot(startingSearchDir: string = process.cwd()): string {
+  const pkgPath = pkgUp.sync({
+    cwd: startingSearchDir
+  });
+  if (!pkgPath) {
+    throw new Error(
+      `Alfred project root could not be found from "${startingSearchDir}".
+
+      Make sure you are inside an Alfred project.`
+    );
+  }
+  return path.dirname(pkgPath);
+}
 
 function getInstallCommmand(project: ProjectInterface): string {
   const { root } = project;

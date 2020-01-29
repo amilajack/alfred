@@ -1,5 +1,5 @@
 const path = require('path');
-const { openInBrowser } = require('@alfred/helpers');
+const { openUrlInBrowser } = require('@alfred/helpers');
 
 const interfaceConfig = {
   supports: {
@@ -61,7 +61,7 @@ module.exports = {
             !('ALFRED_E2E_TEST' in process.env) ||
             process.env.ALFRED_E2E_TEST !== 'true'
           ) {
-            await openInBrowser(url);
+            await openUrlInBrowser(url);
           }
           return server;
         }

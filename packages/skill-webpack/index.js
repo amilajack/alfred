@@ -1,7 +1,7 @@
 /* eslint global-require: off */
 const webpack = require('webpack');
 const path = require('path');
-const { getConfigByConfigName } = require('@alfred/helpers');
+const { getConfigByName } = require('@alfred/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 const getPort = require('get-port');
 
@@ -134,23 +134,20 @@ module.exports = {
   ],
   hooks: {
     async call({ project, configFiles, interfaceState, subcommand }) {
-      const { config: baseConfig } = getConfigByConfigName(
+      const { config: baseConfig } = getConfigByName(
         'webpack.base',
         configFiles
       );
-      const { config: prodConfig } = getConfigByConfigName(
+      const { config: prodConfig } = getConfigByName(
         'webpack.prod',
         configFiles
       );
-      const { config: devConfig } = getConfigByConfigName(
-        'webpack.dev',
-        configFiles
-      );
-      const { config: nodeConfig } = getConfigByConfigName(
+      const { config: devConfig } = getConfigByName('webpack.dev', configFiles);
+      const { config: nodeConfig } = getConfigByName(
         'webpack.node',
         configFiles
       );
-      const { config: browserConfig } = getConfigByConfigName(
+      const { config: browserConfig } = getConfigByName(
         'webpack.browser',
         configFiles
       );
@@ -251,8 +248,7 @@ module.exports = {
                 use: {
                   loader: 'babel-loader',
                   options: {
-                    ...getConfigByConfigName('babel', toSkill.configFiles)
-                      .config,
+                    ...getConfigByName('babel', toSkill.configFiles).config,
                     cacheDirectory: true
                   }
                 }

@@ -1,6 +1,6 @@
 const {
   getConfigPathByConfigName,
-  execCommand,
+  execCmdInProject,
   getPkgBinPath
 } = require('@alfred/helpers');
 
@@ -20,7 +20,7 @@ module.exports = {
     async call({ configFiles, project, config, flags }) {
       const binPath = await getPkgBinPath('prettier');
       const configPath = getConfigPathByConfigName('prettier', configFiles);
-      return execCommand(
+      return execCmdInProject(
         project,
         [
           binPath,

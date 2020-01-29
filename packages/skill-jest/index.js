@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
-const { execCommand, getPkgBinPath } = require('@alfred/helpers');
+const { execCmdInProject, getPkgBinPath } = require('@alfred/helpers');
 const {
   getConfigPathByConfigName,
-  getConfigByConfigName
+  getConfigByName
 } = require('@alfred/helpers');
 
 module.exports = {
@@ -34,7 +34,7 @@ module.exports = {
         'jest-transformer.js'
       );
       const babelConfig = JSON.stringify(
-        getConfigByConfigName('babel', skillMap.get('babel').configFiles).config
+        getConfigByName('babel', skillMap.get('babel').configFiles).config
       );
       const hiddenTmpConfigPath = path.join(
         root,
@@ -59,7 +59,7 @@ module.exports = {
         module.exports = babelJestTransform.createTransformer(${babelConfig});`
       );
 
-      return execCommand(
+      return execCmdInProject(
         project,
         [
           binPath,

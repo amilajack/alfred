@@ -1,5 +1,5 @@
 /* eslint global-require: off */
-const { getConfigByConfigName } = require('@alfred/helpers');
+const { getConfigByName } = require('@alfred/helpers');
 
 module.exports = {
   name: 'babel',
