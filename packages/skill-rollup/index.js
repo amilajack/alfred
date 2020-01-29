@@ -18,7 +18,7 @@ const interfaceConfig = {
 module.exports = {
   name: 'rollup',
   description: 'Build, optimize, and bundle assets in your app',
-  devDependencies: require('./package.json').devDependencies,
+  devDependencies: require('./package.json').peerDependencies,
   interfaces: [
     ['@alfred/interface-build', interfaceConfig],
     ['@alfred/interface-start', interfaceConfig]
@@ -168,9 +168,7 @@ module.exports = {
             })
           ]
         })
-        .addDevDependencies({
-          'rollup-plugin-babel': '4.2.0'
-        });
+        .addDepsFromPkg('rollup-plugin-babel');
     }
   }
 };

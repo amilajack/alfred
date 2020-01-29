@@ -4,7 +4,7 @@ const { getConfigByConfigName } = require('@alfred/helpers');
 module.exports = {
   name: 'babel',
   description: 'Transpile JS from ESNext to the latest ES version',
-  devDependencies: require('./package.json').devDependencies,
+  devDependencies: require('./package.json').peerDependencies,
   configFiles: [
     {
       name: 'babel',
@@ -22,9 +22,7 @@ module.exports = {
      */
     lodash(ctfNode) {
       return ctfNode
-        .addDevDependencies({
-          'babel-plugin-lodash': '3.3.4'
-        })
+        .addDepsFromPkg('babel-plugin-lodash')
         .extendConfig('babel', {
           env: {
             production: {
@@ -53,14 +51,14 @@ module.exports = {
             }
           }
         })
-        .addDevDependencies({
-          '@babel/preset-react': '7.0.0',
-          'babel-plugin-dev-expression': '^0.2.1',
-          'babel-plugin-transform-react-remove-prop-types': '^0.4.20',
-          '@babel/plugin-transform-react-constant-elements': '^7.0.0',
-          '@babel/plugin-transform-react-inline-elements': '^7.0.0',
-          'react-hot-loader': '^4.3.12'
-        });
+        .addDepsFromPkg([
+          '@babel/preset-react',
+          'babel-plugin-dev-expression',
+          'babel-plugin-transform-react-remove-prop-types',
+          '@babel/plugin-transform-react-constant-elements',
+          '@babel/plugin-transform-react-inline-elements',
+          'react-hot-loader'
+        ]);
     }
   }
 };

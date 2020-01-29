@@ -260,20 +260,16 @@ module.exports = {
             ]
           }
         })
-        .addDevDependencies({ 'babel-loader': '8.0.0' });
+        .addDepsFromPkg('babel-loader');
     },
     lodash(ctf) {
       // eslint-disable-next-line global-require
       const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
       return ctf
-        .addDevDependencies({
-          'lodash-webpack-plugin': require('./package.json').devDependencies[
-            'lodash-webpack-plugin'
-          ]
-        })
         .extendConfig('webpack.prod', {
           plugins: [new LodashModuleReplacementPlugin()]
-        });
+        })
+        .addDepsFromPkg('lodash-webpack-plugin');
     },
     react(ctf) {
       // eslint-disable-next-line global-require

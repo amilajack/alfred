@@ -11,7 +11,7 @@ module.exports = {
   name: 'eslint',
   description: 'Lint all your JS files',
   interfaces: ['@alfred/interface-lint'],
-  devDependencies: require('./package.json').devDependencies,
+  devDependencies: require('./package.json').peerDependencies,
   configFiles: [
     {
       name: 'eslint',
@@ -71,25 +71,19 @@ module.exports = {
         .extendConfig('eslint', {
           parser: 'babel-eslint'
         })
-        .addDevDependencies({ 'babel-eslint': '10.0.0' });
+        .addDepsFromPkg('babel-eslint');
     },
     jest(ctf) {
-      return ctf
-        .addDevDependencies({
-          'eslint-plugin-jest': '23.6.0'
-        })
-        .extendConfig('eslint', {
-          plugins: ['jest']
-        });
+      return ctf.addDepsFromPkg('eslint-plugin-jest').extendConfig('eslint', {
+        plugins: ['jest']
+      });
     },
     mocha(ctf) {
       return ctf
         .extendConfig('eslint', {
           plugins: ['mocha']
         })
-        .addDevDependencies({
-          'eslint-plugin-mocha': '6.2.2'
-        });
+        .addDepsFromPkg('eslint-plugin-mocha');
     },
     webpack(eslintCtf, { project, config, configsPath }) {
       return eslintCtf
@@ -102,16 +96,14 @@ module.exports = {
             }
           }
         })
-        .addDevDependencies({
-          'eslint-import-resolver-webpack': '0.12.1'
-        });
+        .addDepsFromPkg('eslint-import-resolver-webpack');
     },
     react(ctf) {
       return ctf
         .extendConfig('eslint', {
           extends: ['airbnb']
         })
-        .addDevDependencies({ 'eslint-config-airbnb': '18.0.0' });
+        .addDepsFromPkg('eslint-config-airbnb');
     },
     prettier(ctf) {
       return ctf
@@ -119,10 +111,7 @@ module.exports = {
           extends: ['prettier'],
           plugins: ['prettier']
         })
-        .addDevDependencies({
-          'eslint-config-prettier': '6.9.0',
-          'eslint-plugin-prettier': '3.0.1'
-        });
+        .addDepsFromPkg(['eslint-config-prettier', 'eslint-plugin-prettier']);
     }
   }
 };

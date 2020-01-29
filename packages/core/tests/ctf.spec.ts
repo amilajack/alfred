@@ -189,19 +189,49 @@ describe('CTF', () => {
 
   describe('ctf helpers', () => {
     describe('adding deps from pkg', () => {
-      const pkg = {
+      const defaultPkg = {
         devDependencies: {
           foo: '1.1.1'
         }
       };
-
       it('should add deps from pkg', () => {
         expect(
-          addCtfHelpers(CORE_CTFS.babel).addDepsFromPkg('foo', pkg)
+          addCtfHelpers(CORE_CTFS.babel).addDepsFromPkg('foo', defaultPkg)
+        ).toHaveProperty('devDependencies');
+        expect(
+          addCtfHelpers(CORE_CTFS.babel).addDepsFromPkg('foo', defaultPkg)
+            .devDependencies
+        ).toHaveProperty('foo', '1.1.1');
+      });
+
+      it('should support different deps types', () => {
+        const pkg = {
+          peerDependencies: {
+            foo: '1.1.1'
+          }
+        };
+        expect(
+          addCtfHelpers(CORE_CTFS.babel).addDepsFromPkg('foo', pkg, 'peer')
+        ).toHaveProperty('devDependencies');
+        expect(
+          addCtfHelpers(CORE_CTFS.babel).addDepsFromPkg('foo', pkg, 'peer')
+            .devDependencies
+        ).toHaveProperty('foo', '1.1.1');
+        expect(
+          addCtfHelpers(CORE_CTFS.babel).addDepsFromPkg(
+            'foo',
+            defaultPkg,
+            'dev',
+            'peer'
+          )
         ).toHaveProperty('peerDependencies');
         expect(
-          addCtfHelpers(CORE_CTFS.babel).addDepsFromPkg('foo', pkg)
-            .peerDependencies
+          addCtfHelpers(CORE_CTFS.babel).addDepsFromPkg(
+            'foo',
+            defaultPkg,
+            'dev',
+            'peer'
+          ).peerDependencies
         ).toHaveProperty('foo', '1.1.1');
       });
 
@@ -258,7 +288,7 @@ describe('CTF', () => {
         await expect(
           ctfFromConfig(project, state, project.config)
         ).rejects.toThrow(
-          "Cannot find module '@alfred/skill-non-existent-skill' from 'ctf.ts'"
+          "Cannot find module '@alfred/skill-non-existent-skill' from 'index.js'"
         );
       });
 
@@ -273,7 +303,7 @@ describe('CTF', () => {
         await expect(
           ctfFromConfig(project, state, project.config)
         ).rejects.toThrow(
-          "Cannot find module '@alfred/skill-non-existent-skill' from 'ctf.ts'"
+          "Cannot find module '@alfred/skill-non-existent-skill' from 'index.js'"
         );
       });
     });

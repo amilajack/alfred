@@ -13,7 +13,8 @@ import {
   PkgWithAllDeps,
   DependencyType,
   DependencyTypeFull,
-  Dependencies
+  Dependencies,
+  CtfNode
 } from '@alfred/types';
 
 export const fromPkgTypeToFull = (
@@ -31,6 +32,13 @@ export const fromPkgTypeToFull = (
     }
   }
 };
+
+export function requireCtf(ctfName: string): CtfNode {
+  return {
+    ...require(ctfName),
+    pkg: require(`${ctfName}/package.json`)
+  };
+}
 
 export function getDepsFromPkg(
   pkgs: string | string[],

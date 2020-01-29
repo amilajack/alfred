@@ -21,21 +21,14 @@ import {
 import {
   getDepsFromPkg,
   fromPkgTypeToFull,
-  getConfigsBasePath
+  getConfigsBasePath,
+  requireCtf
 } from '@alfred/helpers';
 import topsort from './topsort';
 import { normalizeInterfacesOfSkill } from './interface';
 
-const jestCtf = require('@alfred/skill-jest');
-const babel = require('@alfred/skill-babel');
-const eslint = require('@alfred/skill-eslint');
-const react = require('@alfred/skill-react');
-const prettier = require('@alfred/skill-prettier');
-const parcel = require('@alfred/skill-parcel');
-const rollup = require('@alfred/skill-rollup');
-const lodashCtf = require('@alfred/skill-lodash');
-
 type CORE_CTF =
+  | 'webpack'
   | 'babel'
   | 'parcel'
   | 'eslint'
@@ -98,7 +91,7 @@ export function addCtfHelpers(ctf: CtfNode): CtfWithHelpers {
       pkgs: string | string[],
       pkg: PkgJson | undefined = ctf.pkg,
       fromPkgType: DependencyType = 'dev',
-      toPkgType: DependencyType = 'peer'
+      toPkgType: DependencyType = 'dev'
     ): CtfWithHelpers {
       const mergedPkg = lodash.merge(
         {
@@ -106,7 +99,7 @@ export function addCtfHelpers(ctf: CtfNode): CtfWithHelpers {
           devDependencies: {},
           peerDependencies: {}
         },
-        this.pkg || pkg || {}
+        pkg || {}
       );
       const depsToAdd = getDepsFromPkg(pkgs, mergedPkg, fromPkgType);
       const toPkgTypeFullName = fromPkgTypeToFull(toPkgType);
@@ -126,14 +119,15 @@ function normalizeCtf(ctf: CtfNode): CtfWithHelpers {
 }
 
 export const CORE_CTFS: { [ctf in CORE_CTF]: CtfWithHelpers } = {
-  babel: normalizeCtf(babel),
-  parcel: normalizeCtf(parcel),
-  eslint: normalizeCtf(eslint),
-  prettier: normalizeCtf(prettier),
-  jest: normalizeCtf(jestCtf),
-  react: normalizeCtf(react),
-  rollup: normalizeCtf(rollup),
-  lodash: normalizeCtf(lodashCtf)
+  webpack: normalizeCtf(requireCtf('@alfred/skill-webpack')),
+  babel: normalizeCtf(requireCtf('@alfred/skill-babel')),
+  parcel: normalizeCtf(requireCtf('@alfred/skill-parcel')),
+  eslint: normalizeCtf(requireCtf('@alfred/skill-eslint')),
+  prettier: normalizeCtf(requireCtf('@alfred/skill-prettier')),
+  jest: normalizeCtf(requireCtf('@alfred/skill-jest')),
+  react: normalizeCtf(requireCtf('@alfred/skill-react')),
+  rollup: normalizeCtf(requireCtf('@alfred/skill-rollup')),
+  lodash: normalizeCtf(requireCtf('@alfred/skill-lodash'))
 };
 
 // Examples
@@ -402,7 +396,7 @@ export default async function ctfFromConfig(
 
   config.skills.forEach(([skillPkgName, skillUserConfig = {}]) => {
     // Add the skill config to the ctfNode
-    const ctfNode: CtfNode = require(skillPkgName);
+    const ctfNode: CtfNode = requireCtf(skillPkgName);
     ctfNode.config = skillUserConfig;
     if (ctfNode.configFiles) {
       ctfNode.configFiles = ctfNode.configFiles.map(configFile => ({
