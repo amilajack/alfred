@@ -6,7 +6,6 @@ import childProcess from 'child_process';
 import {
   ConfigFile,
   ConfigValue,
-  CtfMap,
   ConfigWithUnresolvedInterfaces,
   ProjectInterface,
   ConfigInterface,
@@ -14,78 +13,18 @@ import {
   DependencyType,
   DependencyTypeFull,
   Dependencies,
-  CtfNode
+  SkillNode
 } from '@alfred/types';
 
-export const fromPkgTypeToFull = (
-  fromPkgType: DependencyType
-): DependencyTypeFull => {
-  switch (fromPkgType) {
-    case 'peer':
-      return 'peerDependencies';
-    case 'dev':
-      return 'devDependencies';
-    case 'dep':
-      return 'dependencies';
-    default: {
-      throw new Error('Pkg type must be one of peer, dev, or dep');
-    }
-  }
-};
-
-export function requireCtf(ctfName: string): CtfNode {
+export function requireSkill(skillName: string): SkillNode {
   return {
-    ...require(ctfName),
-    pkg: require(`${ctfName}/package.json`),
-    devDependencies: require(`${ctfName}/package.json`).peerDependencies
+    ...require(skillName),
+    pkg: require(`${skillName}/package.json`),
+    devDependencies: require(`${skillName}/package.json`).peerDependencies
   };
 }
 
-export function getDepsFromPkg(
-  pkgs: string | string[],
-  pkg: PkgWithAllDeps,
-  fromPkgType: DependencyType = 'dev'
-): Dependencies {
-  const normalizedPkgNames = Array.isArray(pkgs) ? pkgs : [pkgs];
-  const fromPkgTypeFull = fromPkgTypeToFull(fromPkgType);
-
-  if (!(fromPkgTypeFull in pkg)) {
-    throw new Error(`Given package.json does not have ${fromPkgTypeFull}`);
-  }
-
-  normalizedPkgNames.forEach(pkgName => {
-    if (!(pkgName in pkg[fromPkgTypeFull])) {
-      throw new Error(
-        `Package "${pkgName}" does not exist in ${fromPkgTypeFull} of skill package.json`
-      );
-    }
-  });
-
-  return Object.fromEntries(
-    normalizedPkgNames.map(pkgName => [pkgName, pkg[fromPkgTypeFull][pkgName]])
-  );
-}
-
-/**
- * Get the root of a project from the current working directory
- */
-export function findProjectRoot(
-  startingSearchDir: string = process.cwd()
-): string {
-  const pkgPath = pkgUp.sync({
-    cwd: startingSearchDir
-  });
-  if (!pkgPath) {
-    throw new Error(
-      `Alfred project root could not be found from "${startingSearchDir}".
-
-      Make sure you are inside an Alfred project.`
-    );
-  }
-  return path.dirname(pkgPath);
-}
-
-export function getConfigByConfigName(
+export function getConfigByName(
   configName: string,
   configFiles: Array<ConfigFile>
 ): ConfigValue {
@@ -101,6 +40,22 @@ export function getConfigPathByConfigName(
   const config = configFiles.find(configFile => configFile.name === configName);
   if (!config) throw new Error(`Cannot find config by name "${configName}"`);
   return config.path;
+}
+
+export function fromPkgTypeToFull(
+  fromPkgType: DependencyType
+): DependencyTypeFull {
+  switch (fromPkgType) {
+    case 'peer':
+      return 'peerDependencies';
+    case 'dev':
+      return 'devDependencies';
+    case 'dep':
+      return 'dependencies';
+    default: {
+      throw new Error('Pkg type must be one of peer, dev, or dep');
+    }
+  }
 }
 
 /**
@@ -135,16 +90,6 @@ export function mapShortNameEnvToLongName(envName: string): string {
       throw new Error(`Unsupported short name environment "${envName}"`);
     }
   }
-}
-
-/*
- * Intended to be used for testing purposes
- */
-export function getConfigs(ctf: CtfMap): Array<ConfigValue> {
-  return Array.from(ctf.values())
-    .map(ctfNode => ctfNode.configFiles || [])
-    .flat()
-    .map(configFile => configFile.config);
 }
 
 export function getConfigsBasePath(
@@ -199,11 +144,14 @@ export async function getPkgBinPath(
   );
 }
 
-export function execCommand(project: ProjectInterface, cmd: string): Buffer {
+export function execCmdInProject(
+  project: ProjectInterface,
+  cmd: string
+): Buffer {
   return childProcess.execSync(cmd, { stdio: 'inherit', cwd: project.root });
 }
 
-export async function openInBrowser(
+export async function openUrlInBrowser(
   url: string,
   browser: string
 ): Promise<void> {
@@ -218,4 +166,29 @@ export async function openInBrowser(
     console.error(`Unexpected error while opening in browser: ${browser}`);
     console.error(err);
   }
+}
+
+export function getDepsFromPkg(
+  pkgs: string | string[],
+  pkg: PkgWithAllDeps,
+  fromPkgType: DependencyType = 'dev'
+): Dependencies {
+  const normalizedPkgNames = Array.isArray(pkgs) ? pkgs : [pkgs];
+  const fromPkgTypeFull = fromPkgTypeToFull(fromPkgType);
+
+  if (!(fromPkgTypeFull in pkg)) {
+    throw new Error(`Given package.json does not have ${fromPkgTypeFull}`);
+  }
+
+  normalizedPkgNames.forEach(pkgName => {
+    if (!(pkgName in pkg[fromPkgTypeFull])) {
+      throw new Error(
+        `Package "${pkgName}" does not exist in ${fromPkgTypeFull} of skill package.json`
+      );
+    }
+  });
+
+  return Object.fromEntries(
+    normalizedPkgNames.map(pkgName => [pkgName, pkg[fromPkgTypeFull][pkgName]])
+  );
 }

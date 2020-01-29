@@ -1,7 +1,7 @@
 /* eslint global-require: off */
 const webpack = require('webpack');
 const path = require('path');
-const { getConfigByConfigName } = require('@alfred/helpers');
+const { getConfigByName } = require('@alfred/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 const getPort = require('get-port');
 
@@ -134,23 +134,20 @@ module.exports = {
   ],
   hooks: {
     async call({ project, configFiles, interfaceState, subcommand }) {
-      const { config: baseConfig } = getConfigByConfigName(
+      const { config: baseConfig } = getConfigByName(
         'webpack.base',
         configFiles
       );
-      const { config: prodConfig } = getConfigByConfigName(
+      const { config: prodConfig } = getConfigByName(
         'webpack.prod',
         configFiles
       );
-      const { config: devConfig } = getConfigByConfigName(
-        'webpack.dev',
-        configFiles
-      );
-      const { config: nodeConfig } = getConfigByConfigName(
+      const { config: devConfig } = getConfigByName('webpack.dev', configFiles);
+      const { config: nodeConfig } = getConfigByName(
         'webpack.node',
         configFiles
       );
-      const { config: browserConfig } = getConfigByConfigName(
+      const { config: browserConfig } = getConfigByName(
         'webpack.browser',
         configFiles
       );
@@ -240,8 +237,8 @@ module.exports = {
     }
   },
   ctfs: {
-    babel(ctf, { toCtf }) {
-      return ctf
+    babel(skill, { toSkill }) {
+      return skill
         .extendConfig('webpack.base', {
           module: {
             rules: [
@@ -251,7 +248,7 @@ module.exports = {
                 use: {
                   loader: 'babel-loader',
                   options: {
-                    ...getConfigByConfigName('babel', toCtf.configFiles).config,
+                    ...getConfigByName('babel', toSkill.configFiles).config,
                     cacheDirectory: true
                   }
                 }
@@ -261,19 +258,19 @@ module.exports = {
         })
         .addDepsFromPkg('babel-loader');
     },
-    lodash(ctf) {
+    lodash(skill) {
       // eslint-disable-next-line global-require
       const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-      return ctf
+      return skill
         .extendConfig('webpack.prod', {
           plugins: [new LodashModuleReplacementPlugin()]
         })
         .addDepsFromPkg('lodash-webpack-plugin');
     },
-    react(ctf) {
+    react(skill) {
       // eslint-disable-next-line global-require
       const webpack = require('webpack');
-      return ctf.extendConfig('webpack.base', {
+      return skill.extendConfig('webpack.base', {
         resolve: {
           extensions: ['.jsx']
         },

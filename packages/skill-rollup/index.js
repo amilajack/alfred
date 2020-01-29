@@ -1,7 +1,7 @@
 /* eslint global-require: off */
 const replace = require('@rollup/plugin-replace');
 const commonjs = require('@rollup/plugin-commonjs');
-const { getConfigByConfigName, mapEnvToShortName } = require('@alfred/helpers');
+const { getConfigByName, mapEnvToShortName } = require('@alfred/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 
 const interfaceConfig = {
@@ -80,7 +80,7 @@ module.exports = {
       //     interfaceState.env === 'production'
       //       ? `./src/${filename} ${watchFlag} --format esm --file ./targets/prod/${filename}`
       //       : `./src/${filename} ${watchFlag} --format cjs --file ./targets/dev/${filename}`;
-      //   return execCommand(
+      //   return execCmdInProject(
       //     project,
       //     [
       //       binPath,
@@ -94,9 +94,7 @@ module.exports = {
         'rollup.base',
         'rollup.prod',
         'rollup.dev'
-      ].map(
-        configFile => getConfigByConfigName(configFile, configFiles).config
-      );
+      ].map(configFile => getConfigByName(configFile, configFiles).config);
       const inputAndOutputConfigs = {
         input: `./src/lib.${interfaceState.target}.js`,
         output: {
@@ -154,14 +152,14 @@ module.exports = {
     }
   },
   ctfs: {
-    babel(ctf, { ctfs }) {
+    babel(skill, { skillMap }) {
       // eslint-disable-next-line import/no-extraneous-dependencies
       const babel = require('rollup-plugin-babel');
-      return ctf
+      return skill
         .extendConfig('rollup.base', {
           plugins: [
             babel({
-              ...getConfigByConfigName('babel', ctfs.get('babel').configFiles)
+              ...getConfigByName('babel', skillMap.get('babel').configFiles)
                 .config,
               exclude: 'node_modules/**'
             })

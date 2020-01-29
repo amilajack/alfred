@@ -1,5 +1,5 @@
 /* eslint global-require: off */
-const { getConfigByConfigName } = require('@alfred/helpers');
+const { getConfigByName } = require('@alfred/helpers');
 
 module.exports = {
   name: 'babel',
@@ -19,8 +19,8 @@ module.exports = {
     /**
      * @TODO Don't perform this transformation for library targets
      */
-    lodash(ctfNode) {
-      return ctfNode
+    lodash(skillNode) {
+      return skillNode
         .addDepsFromPkg('babel-plugin-lodash')
         .extendConfig('babel', {
           env: {
@@ -31,8 +31,8 @@ module.exports = {
         });
     },
     // @TODO Add React HMR support
-    react(ctfNode) {
-      return ctfNode
+    react(skillNode) {
+      return skillNode
         .extendConfig('babel', {
           presets: ['@babel/preset-react'],
           env: {

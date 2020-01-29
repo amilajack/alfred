@@ -33,9 +33,9 @@ export type Target = 'node' | 'browser';
 
 export type ProjectEnum = 'app' | 'lib';
 
-export type Skill = [string, any];
+export type ConfigSkill = [string, any];
 
-export type Skills = Skill[];
+export type ConfigSkills = ConfigSkill[];
 
 export type NpmClients = 'yarn' | 'npm' | 'writeOnly';
 
@@ -60,17 +60,17 @@ export interface ProjectInterface {
   skills: () => Promise<SkillsList>;
   // Config setter method
   setConfig: (config: ConfigInterface) => void;
-  // Create a CTF from a given interface state
-  ctfFromInterfaceState: (i: InterfaceState) => Promise<CtfMap>;
+  // Create a skill from a given interface state
+  skillMapFromInterfaceState: (i: InterfaceState) => Promise<SkillMap>;
   // Write each config in .configFiles of each skill
-  writeConfigsFromCtf: (ctf: CtfMap) => Promise<CtfMap>;
+  writeConfigsFromSkillMap: (skillMap: SkillMap) => Promise<SkillMap>;
   // Install dependencies to a given project
   installDeps: (
     dependencies: string[] | Dependencies,
     type: DependencyType,
     npmClient?: NpmClients
   ) => Promise<void>;
-  findDepsToInstall: (ctfNodes?: CtfNode[]) => Promise<PkgWithDeps>;
+  findDepsToInstall: (skillNodes?: SkillNode[]) => Promise<PkgWithDeps>;
 }
 
 export type InterfaceState = {
@@ -87,11 +87,11 @@ export interface SkillInterfaceModule extends NodeJS.Module {
   subcommand: string;
   runForAllTargets?: boolean;
   // @TODO Take config in misc object to allow for future additions to the API
-  // @TODO Swap order of interfaceState and ctfs
+  // @TODO Swap order of interfaceState and skills
   resolveSkill?: (
-    ctfs: Array<CtfWithHelpers>,
+    skills: Array<SkillWithHelpers>,
     interfaceState: InterfaceState
-  ) => CtfWithHelpers | false;
+  ) => SkillWithHelpers | false;
   handleFlags?: (
     flags: Array<string>,
     misc: { interfaceState: InterfaceState; config: ConfigInterface }
@@ -104,7 +104,7 @@ export type RawExtendsConfigValue = Array<string> | string;
 
 // Interface should be resolved before skills are resolved, so extends is not included
 export interface ConfigWithResolvedSkills {
-  skills?: Skills;
+  skills?: ConfigSkills;
   npmClient?: NpmClients;
   configsDir?: string;
   showConfigs?: boolean;
@@ -126,7 +126,7 @@ export interface ConfigWithUnresolvedInterfaces
 }
 
 export interface ConfigWithDefaults {
-  skills: Skills;
+  skills: ConfigSkills;
   npmClient: NpmClients;
   configsDir: string;
   showConfigs: boolean;
@@ -156,7 +156,7 @@ export type ConfigValue =
 
 export type ConfigFile = {
   // The "friendly name" of a file. This is the name that
-  // other CTFs will refer to config file by.
+  // other skills will refer to config file by.
   name: string;
   // The relative path of the file the config should be written to
   path: string;
@@ -176,7 +176,7 @@ export type HooksCallArgs = {
   interfaceState: InterfaceState;
   subcommand: string;
   skillConfig: ConfigValue;
-  ctf: CtfMap;
+  skillMap: SkillMap;
   flags: Array<string>;
 };
 
@@ -184,7 +184,7 @@ export type CallFn = (args: HooksCallArgs) => void;
 
 export type DiffDeps = { diffDevDeps: string[]; diffDeps: string[] };
 
-export interface Ctf extends PkgWithDeps {
+export interface Skill extends PkgWithDeps {
   name: string;
   description: string;
   pkg?: PkgJson;
@@ -203,39 +203,39 @@ export interface Ctf extends PkgWithDeps {
     call: CallFn;
   };
   ctfs: {
-    [ctfName: string]: (
-      ownCtfNode: Ctf,
+    [skillName: string]: (
+      ownSkillNode: Skill,
       misc: {
-        toCtf: Ctf;
-        ctfs: Map<string, Ctf>;
+        toSkill: Skill;
+        skillMap: SkillMap;
         project: ProjectInterface;
         config: ConfigInterface;
         configsPath: string;
       }
-    ) => Ctf;
+    ) => Skill;
   };
 }
 
-interface CtfUsingInterface extends Ctf {
+interface SkillUsingInterface extends Skill {
   subcommand: string;
 }
 
-export type CtfNode = Ctf | CtfUsingInterface;
+export type SkillNode = Skill | SkillUsingInterface;
 
-export type CtfMap = Map<string, CtfNode>;
+export type SkillMap = Map<string, SkillNode>;
 
-export interface CtfWithHelpers extends Ctf {
+export interface SkillWithHelpers extends Skill {
   findConfig: (configName: string) => ConfigFile;
-  addDependencies: (pkg: Dependencies) => CtfWithHelpers;
-  addDevDependencies: (pkg: Dependencies) => CtfWithHelpers;
-  extendConfig: (x: string) => CtfWithHelpers;
-  replaceConfig: (x: string, configReplacement: ConfigFile) => CtfWithHelpers;
+  extendConfig: (x: string) => SkillWithHelpers;
+  replaceConfig: (x: string, configReplacement: ConfigFile) => SkillWithHelpers;
+  addDeps: (pkg: Dependencies) => SkillWithHelpers;
+  addDevDeps: (pkg: Dependencies) => SkillWithHelpers;
   addDepsFromPkg: (
     pkgs: string | string[],
     pkg?: PkgJson,
     fromPkgType?: DependencyType,
     toPkgType?: DependencyType
-  ) => CtfWithHelpers;
+  ) => SkillWithHelpers;
 }
 
 export type ValidationResult = {

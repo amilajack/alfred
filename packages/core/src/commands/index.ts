@@ -3,28 +3,29 @@ import path from 'path';
 import { getConfigsBasePath } from '@alfred/helpers';
 import {
   ProjectInterface,
-  CtfMap,
+  SkillMap,
   InterfaceState,
   ConfigValue,
   SkillInterfaceModule,
-  CtfNode
+  SkillNode
 } from '@alfred/types';
 
 export function getInterfaceForSubcommand(
-  ctfMap: CtfMap,
+  skillMap: SkillMap,
   subcommand: string
 ): SkillInterfaceModule {
-  const interfaceForSubcommand = Array.from(ctfMap.values())
+  const interfaceForSubcommand = Array.from(skillMap.values())
     .filter(
-      (ctfNode: CtfNode) => ctfNode.interfaces && ctfNode.interfaces.length
+      (skillNode: SkillNode) =>
+        skillNode.interfaces && skillNode.interfaces.length
     )
-    .map((ctfNode: CtfNode): SkillInterfaceModule[] =>
-      ctfNode.interfaces.map(ctfInterface => require(ctfInterface.name))
+    .map((skillNode: SkillNode): SkillInterfaceModule[] =>
+      skillNode.interfaces.map(skillInterface => require(skillInterface.name))
     )
     .flat()
     .find(
-      (ctfInterface: SkillInterfaceModule) =>
-        ctfInterface.subcommand === subcommand
+      (skillInterface: SkillInterfaceModule) =>
+        skillInterface.subcommand === subcommand
     );
 
   if (!interfaceForSubcommand) {
@@ -44,7 +45,7 @@ export type ExecutableSkillMethods = {
 
 export function getExecutableWrittenConfigsMethods(
   project: ProjectInterface,
-  ctf: CtfMap,
+  skillMap: SkillMap,
   interfaceState: InterfaceState
 ): ExecutableSkillMethods {
   const { config } = project;
@@ -58,26 +59,28 @@ export function getExecutableWrittenConfigsMethods(
   );
 
   return (
-    Array.from(ctf.values())
+    Array.from(skillMap.values())
       .filter(
-        ctfNode =>
-          ctfNode.hooks && ctfNode.interfaces && ctfNode.interfaces.length
+        skillNode =>
+          skillNode.hooks && skillNode.interfaces && skillNode.interfaces.length
       )
-      .map(ctfNode => {
-        const configFiles = ctfNode.configFiles.map(configFile => ({
+      .map(skillNode => {
+        const configFiles = skillNode.configFiles.map(configFile => ({
           ...configFile,
           path: path.join(configsBasePath, configFile.path)
         }));
-        return ctfNode.interfaces.map(ctfInterface => {
-          const { subcommand } = require(ctfInterface.name);
-          const skillConfig = skillsConfigMap.get(ctfNode.name) as ConfigValue;
+        return skillNode.interfaces.map(skillInterface => {
+          const { subcommand } = require(skillInterface.name);
+          const skillConfig = skillsConfigMap.get(
+            skillNode.name
+          ) as ConfigValue;
           return {
             fn: (flags: Array<string> = []): void =>
-              ctfNode.hooks.call({
+              skillNode.hooks.call({
                 project,
                 config,
                 configFiles,
-                ctf,
+                skillMap,
                 interfaceState,
                 subcommand,
                 flags,

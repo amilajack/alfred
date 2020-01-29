@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
-const { execCommand, getPkgBinPath } = require('@alfred/helpers');
+const { execCmdInProject, getPkgBinPath } = require('@alfred/helpers');
 const {
   getConfigPathByConfigName,
-  getConfigByConfigName
+  getConfigByName
 } = require('@alfred/helpers');
 
 module.exports = {
@@ -19,7 +19,7 @@ module.exports = {
     }
   ],
   hooks: {
-    async call({ configFiles, ctf, config, project, flags }) {
+    async call({ configFiles, skillMap, config, project, flags }) {
       const configPath = getConfigPathByConfigName('jest', configFiles);
       const binPath = await getPkgBinPath('jest-cli', 'jest');
       const { root } = project;
@@ -34,7 +34,7 @@ module.exports = {
         'jest-transformer.js'
       );
       const babelConfig = JSON.stringify(
-        getConfigByConfigName('babel', ctf.get('babel').configFiles).config
+        getConfigByName('babel', skillMap.get('babel').configFiles).config
       );
       const hiddenTmpConfigPath = path.join(
         root,
@@ -59,7 +59,7 @@ module.exports = {
         module.exports = babelJestTransform.createTransformer(${babelConfig});`
       );
 
-      return execCommand(
+      return execCmdInProject(
         project,
         [
           binPath,
@@ -72,15 +72,15 @@ module.exports = {
     }
   },
   ctfs: {
-    babel(ctf) {
-      return ctf.extendConfig('jest', {
+    babel(skill) {
+      return skill.extendConfig('jest', {
         transform: {
           '^.+\\.jsx?$': './node_modules/jest-transformer.js'
         }
       });
     },
-    webpack(jestCtf, { config }) {
-      return jestCtf
+    webpack(skill, { config }) {
+      return skill
         .extendConfig('jest', {
           moduleNameMapper: {
             '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': `<rootDir>/${config.configsDir}/mocks/fileMock.js`,
