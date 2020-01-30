@@ -61,11 +61,14 @@
     "showConfigs": true,
     "skills": [
       "@alfred/skill-react",
-      ["@alfred/skill-eslint", {
-        "rules": {
-          "react/state-in-constructor": "off"
+      [
+        "@alfred/skill-eslint",
+        {
+          "rules": {
+            "react/state-in-constructor": "off"
+          }
         }
-      }]
+      ]
     ]
   }
 }

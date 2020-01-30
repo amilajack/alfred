@@ -184,36 +184,62 @@ export type CallFn = (args: HooksCallArgs) => void;
 
 export type DiffDeps = { diffDevDeps: string[]; diffDeps: string[] };
 
+type Supports = {
+  // Flag name and argument types
+  env: Array<'production' | 'development' | 'test'>;
+  // All the supported targets a `build` skill should build
+  targets: Array<'browser' | 'node' | 'electron' | 'react-native'>;
+  // Project type
+  projectTypes: Array<'lib' | 'app'>;
+};
+
+type Transforms = {
+  [skillName: string]: (
+    ownSkillNode: Skill,
+    misc: {
+      toSkill: Skill;
+      skillMap: SkillMap;
+      project: ProjectInterface;
+      config: ConfigInterface;
+      configsPath: string;
+    }
+  ) => Skill;
+};
+
+export interface FileInterface {
+  write(contents: string): Promise<FileInterface>;
+  move(filename: string): Promise<FileInterface>;
+  delete(): Promise<void>;
+  rename(filename: string): Promise<FileInterface>;
+  append(contents: string): Promise<FileInterface>;
+}
+
+export interface RawSkill extends PkgWithDeps {
+  name: string;
+  description: string;
+  supports?: Supports;
+  configFiles?: Array<ConfigFile>;
+  config?: ConfigFile;
+  interfaces?: Array<SkillInterface>;
+  hooks?: {
+    call: CallFn;
+  };
+  transforms?: Transforms;
+}
+
 export interface Skill extends PkgWithDeps {
   name: string;
   description: string;
   pkg: PkgJson;
-  supports: {
-    // Flag name and argument types
-    env: Array<'production' | 'development' | 'test'>;
-    // All the supported targets a `build` skill should build
-    targets: Array<'browser' | 'node' | 'electron' | 'react-native'>;
-    // Project type
-    projectTypes: Array<'lib' | 'app'>;
-  };
+  supports: Supports;
+  files: FileInterface[];
   configFiles: Array<ConfigFile>;
   config: ConfigFile;
   interfaces: Array<SkillInterface>;
   hooks: {
     call: CallFn;
   };
-  transforms: {
-    [skillName: string]: (
-      ownSkillNode: Skill,
-      misc: {
-        toSkill: Skill;
-        skillMap: SkillMap;
-        project: ProjectInterface;
-        config: ConfigInterface;
-        configsPath: string;
-      }
-    ) => Skill;
-  };
+  transforms: Transforms;
 }
 
 interface SkillUsingInterface extends Skill {
