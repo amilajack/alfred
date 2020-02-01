@@ -6,26 +6,13 @@ import {
 import { getInterfaceStatesFromProject } from '../interface';
 
 /**
- * Execute promises serially
- * @REFACTOR There're cleaner ways of implementing this
- */
-function serial(fns: Array<() => Promise<any>>): Promise<any> {
-  return fns.reduce(
-    (promise: Promise<any>, fn) =>
-      // eslint-disable-next-line promise/no-nesting
-      promise.then(result => fn().then(Array.prototype.concat.bind(result))),
-    Promise.resolve([])
-  );
-}
-
-/**
  * Run an alfred subcommand given an alfred config
  */
 export default async function run(
   project: ProjectInterface,
   subcommand: string,
   skillFlags: Array<string> = []
-): Promise<any> {
+): Promise<void> {
   const { config } = project;
 
   // @HACK This is not a very elegant solution.
@@ -47,9 +34,8 @@ export default async function run(
 
   let commandWasExceuted = false;
 
-  // @TODO @HACK Run this serially because concurrently running parcel causes issues
-  return serial(
-    interfaceStates.map(interfaceState => () =>
+  await Promise.all(
+    interfaceStates.map(interfaceState =>
       project
         .skillMapFromInterfaceState(interfaceState)
         .then(skillMap =>
@@ -78,7 +64,7 @@ export default async function run(
 
           if (!subcommandInterface.runForAllTargets) {
             if (commandWasExceuted) {
-              return true;
+              return;
             }
             commandWasExceuted = true;
           }
