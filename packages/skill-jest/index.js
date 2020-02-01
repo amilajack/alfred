@@ -14,7 +14,7 @@ module.exports = {
     {
       name: 'jest',
       path: 'jest.config.js',
-      configValue: 'module',
+      configType: 'module',
       write: true,
       config: {}
     }

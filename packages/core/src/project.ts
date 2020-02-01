@@ -372,7 +372,7 @@ export default class Project implements ProjectInterface {
               : await formatPkg(configFile.config);
           // Write sync to prevent data races when writing configs in parallel
           const normalizedJsonOrModule =
-            configFile.configValue === 'module'
+            configFile.configType === 'module'
               ? `module.exports = ${stringifiedConfig}`
               : stringifiedConfig;
           fs.writeFileSync(filePath, normalizedJsonOrModule);
