@@ -30,7 +30,9 @@ module.exports = {
           }
         });
     },
-    // @TODO Add React HMR support
+    /**
+     * @TODO Add React HMR support
+     */
     react(skillNode) {
       return skillNode
         .extendConfig('babel', {

@@ -14,6 +14,7 @@ module.exports = {
     {
       name: 'jest',
       path: 'jest.config.js',
+      configValue: 'module',
       write: true,
       config: {}
     }
@@ -52,6 +53,9 @@ module.exports = {
         };
         `
       );
+      if (!config.showConfigs && fs.existsSync(configPath)) {
+        await fs.promises.unlink(configPath);
+      }
       const babelJestPath = require.resolve('./babel-jest');
       await fs.promises.writeFile(
         jestTransformerPath,

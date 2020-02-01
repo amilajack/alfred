@@ -16,10 +16,12 @@ import Providers from '@alfred/migrate';
     path.join(project.root, arg)
   );
 
-  // @TODO Create backups from the files and pass the paths to the backups
-  //        instead of the actual filenames. Preserve the original filenames
-  //        if the migration was successful and we want to write to the original
-  //        files
+  /**
+   * @TODO Create backups from the files and pass the paths to the backups
+   *       instead of the actual filenames. Preserve the original filenames
+   *       if the migration was successful and we want to write to the original
+   *       files
+   */
   await Providers({
     files: filesPattern,
     root: project.pkgPath,

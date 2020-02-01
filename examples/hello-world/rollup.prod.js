@@ -1,4 +1,4 @@
-{
+module.exports = {
   "output": {
     "format": "es"
   },
@@ -8,3 +8,4 @@
     }
   ]
 }
+;

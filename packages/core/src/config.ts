@@ -81,7 +81,8 @@ export default class Config implements ConfigInterface {
   }
 
   /**
-   * Write the config to a package.json file
+   * Write the config to a package.json file that replaces the existing
+   * config
    * @param pkgPath - The path to the package.json file
    */
   async write(
@@ -94,7 +95,7 @@ export default class Config implements ConfigInterface {
     const pkg = JSON.parse((await fs.promises.readFile(pkgPath)).toString());
     this.rawConfig = pkg.alfred || {};
 
-    return Config.writeToPkgJson(pkgPath, {
+    return Config.writeObjToPkgJsonConfig(pkgPath, {
       ...pkg,
       alfred: pkgAlfredConfig
     });
@@ -183,9 +184,9 @@ export default class Config implements ConfigInterface {
   }
 
   /**
-   * Merge an object to the existing package.json and write it
+   * Merge an object to the existing Alfred package.json config and write the merged config
    */
-  static async writeToPkgJson(
+  static async writeObjToPkgJsonConfig(
     pkgPath: string,
     obj: Record<string, any>
   ): Promise<string> {

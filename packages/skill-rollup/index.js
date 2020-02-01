@@ -26,6 +26,7 @@ module.exports = {
     {
       name: 'rollup.base',
       path: 'rollup.base.js',
+      configValue: 'module',
       applySkillConfig: true,
       write: true,
       config: {
@@ -37,6 +38,7 @@ module.exports = {
     {
       name: 'rollup.prod',
       path: 'rollup.prod.js',
+      configValue: 'module',
       config: {
         output: {
           format: 'es'
@@ -52,6 +54,7 @@ module.exports = {
     {
       name: 'rollup.dev',
       path: 'rollup.dev.js',
+      configValue: 'module',
       config: {
         output: {
           format: 'cjs'

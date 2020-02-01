@@ -319,7 +319,7 @@ export default class Project implements ProjectInterface {
           .reduce((p, c) => ({ ...p, ...c }), {});
 
         // @TODO @HACK @BUG This is an incorrect usage of the Config API
-        await Config.writeToPkgJson(
+        await Config.writeObjToPkgJsonConfig(
           this.pkgPath,
           mergeConfigs({}, this.pkg, {
             [dependenciesType === 'dev'
@@ -373,7 +373,7 @@ export default class Project implements ProjectInterface {
           // Write sync to prevent data races when writing configs in parallel
           const normalizedJsonOrModule =
             configFile.configValue === 'module'
-              ? `module.exports = ${stringifiedConfig};`
+              ? `module.exports = ${stringifiedConfig}`
               : stringifiedConfig;
           fs.writeFileSync(filePath, normalizedJsonOrModule);
         })

@@ -1,4 +1,4 @@
-{
+module.exports = {
   "output": {
     "format": "cjs"
   },
@@ -11,3 +11,4 @@
     }
   ]
 }
+;
