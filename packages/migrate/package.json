@@ -21,7 +21,7 @@
     "lebab": "^3.0.3"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.7",
+    "@types/chai": "^4.2.8",
     "chai": "^4.2.0"
   }
 }
