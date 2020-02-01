@@ -163,7 +163,6 @@ export type ConfigFile = {
   // The value of the config
   config: ConfigValue;
   // The type of the config file. Defaults to 'json'
-  fileType: 'module' | 'string' | 'json';
   configType: 'module' | 'string' | 'json';
   // Allow the config to be written to user's `./configs` directory
   write: boolean;
