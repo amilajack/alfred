@@ -215,7 +215,7 @@ export type Transforms = {
   ) => Skill;
 };
 
-export interface VirtualFileInterface {
+export interface VirtualFileInterface extends SkillFile {
   write(content: string): VirtualFileInterface;
   move(filename: string): VirtualFileInterface;
   delete(): void;

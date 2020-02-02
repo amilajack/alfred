@@ -6,7 +6,7 @@ import {
   SkillFile
 } from '@alfred/types';
 
-export class VirtualFile implements VirtualFileInterface, SkillFile {
+export class VirtualFile implements VirtualFileInterface {
   public path: string;
 
   public content = '';
