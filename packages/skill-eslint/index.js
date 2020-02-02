@@ -87,7 +87,7 @@ module.exports = {
           settings: {
             'import/resolver': {
               webpack: {
-                config: path.join(configsPath, 'webpack.browser.json')
+                config: path.join(configsPath, 'webpack.browser.js')
               }
             }
           }

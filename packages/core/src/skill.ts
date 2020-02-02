@@ -187,7 +187,7 @@ export function validateSkill(
   skillMap.forEach(skillNode => {
     if (skillNode && skillNode.supports) {
       const supports = {
-        env: skillNode.supports.env.includes(interfaceState.env),
+        env: skillNode.supports.envs.includes(interfaceState.env),
         target: skillNode.supports.targets.includes(interfaceState.target),
         projectType: skillNode.supports.projectTypes.includes(
           interfaceState.projectType
@@ -259,7 +259,7 @@ export function Skills(
   skillMap.forEach(skillNode => {
     if (skillNode && skillNode.supports) {
       const supports = {
-        env: skillNode.supports.env.includes(interfaceState.env),
+        env: skillNode.supports.envs.includes(interfaceState.env),
         target: skillNode.supports.targets.includes(interfaceState.target),
         projectType: skillNode.supports.projectTypes.includes(
           interfaceState.projectType

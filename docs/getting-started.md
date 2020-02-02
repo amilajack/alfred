@@ -131,7 +131,7 @@ export default {
   subcommand: 'build',
   flags: {
     // Flag name and argument types
-    env: ['production', 'development', 'test']
+    envs: ['production', 'development', 'test']
   }
 };
 

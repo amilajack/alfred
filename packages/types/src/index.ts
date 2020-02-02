@@ -185,7 +185,7 @@ export type DiffDeps = { diffDevDeps: string[]; diffDeps: string[] };
 
 type Supports = {
   // Flag name and argument types
-  env: Array<'production' | 'development' | 'test'>;
+  envs: Array<'production' | 'development' | 'test'>;
   // All the supported targets a `build` skill should build
   targets: Array<'browser' | 'node' | 'electron' | 'react-native'>;
   // Project type

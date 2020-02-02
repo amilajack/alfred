@@ -12,7 +12,7 @@ module.exports = {
   interfaces: ['@alfred/interface-test'],
   configFiles: [],
   supports: {
-    env: ['production', 'development', 'test'],
+    envs: ['production', 'development', 'test'],
     targets: ['node'],
     projectTypes: ['app', 'lib']
   },

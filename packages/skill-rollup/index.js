@@ -7,7 +7,7 @@ const { default: mergeConfigs } = require('@alfred/merge-configs');
 const interfaceConfig = {
   supports: {
     // Flag name and argument types
-    env: ['production', 'development', 'test'],
+    envs: ['production', 'development', 'test'],
     // All the supported targets a `build` skill should build
     targets: ['browser', 'node'],
     // Project type
