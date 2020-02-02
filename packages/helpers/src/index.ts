@@ -4,9 +4,9 @@ import open from 'open';
 import pkgUp from 'pkg-up';
 import childProcess from 'child_process';
 import {
-  ConfigFile,
+  SkillConfigFile,
   ConfigValue,
-  ConfigWithUnresolvedInterfaces,
+  AlfredConfigWithUnresolvedInterfaces,
   ProjectInterface,
   ConfigInterface,
   PkgWithAllDeps,
@@ -26,7 +26,7 @@ export function requireSkill(skillName: string): SkillNode {
 
 export function getConfigByName(
   configName: string,
-  configFiles: Array<ConfigFile>
+  configFiles: Array<SkillConfigFile>
 ): ConfigValue {
   const config = configFiles.find(configFile => configFile.name === configName);
   if (!config) throw new Error(`Cannot find config by name "${configName}"`);
@@ -35,7 +35,7 @@ export function getConfigByName(
 
 export function getConfigPathByConfigName(
   configName: string,
-  configFiles: Array<ConfigFile>
+  configFiles: Array<SkillConfigFile>
 ): string {
   const config = configFiles.find(configFile => configFile.name === configName);
   if (!config) throw new Error(`Cannot find config by name "${configName}"`);
@@ -101,7 +101,7 @@ export function getConfigsBasePath(
 
 export function requireConfig(
   configName: string
-): ConfigWithUnresolvedInterfaces {
+): AlfredConfigWithUnresolvedInterfaces {
   try {
     return require(`alfred-config-${configName}`);
   } catch (e) {

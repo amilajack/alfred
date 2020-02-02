@@ -1,7 +1,7 @@
-import { ConfigWithUnresolvedInterfaces } from '@alfred/types';
+import { AlfredConfigWithUnresolvedInterfaces } from '@alfred/types';
 
 declare function mergeConfigs(
-  ...objs: Array<ConfigWithUnresolvedInterfaces | {}>
-): ConfigWithUnresolvedInterfaces;
+  ...objs: Array<AlfredConfigWithUnresolvedInterfaces | {}>
+): AlfredConfigWithUnresolvedInterfaces;
 
 export = mergeConfigs;

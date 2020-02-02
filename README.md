@@ -227,7 +227,7 @@ export default {
     {
       name: 'redux-routes',
       path: 'src/routes.js',
-      contents: `
+      content: `
         import { createStore, applyMiddleware } from 'redux';
         import thunk from 'redux-thunk';
         import { createHashHistory } from 'history';
