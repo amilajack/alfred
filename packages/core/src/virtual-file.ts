@@ -6,15 +6,19 @@ import {
   SkillFile
 } from '@alfred/types';
 
-export default class VirtualFile implements VirtualFileInterface {
+export class VirtualFile implements VirtualFileInterface, SkillFile {
   public path: string;
 
   public content = '';
+
+  public name = '';
 
   private fs: VirtualFileSystem;
 
   constructor(fs: VirtualFileSystem, file: SkillFile) {
     this.path = file.path;
+    this.name = file.name;
+    this.content = file.content || '';
     this.fs = fs;
   }
 
@@ -44,21 +48,21 @@ export default class VirtualFile implements VirtualFileInterface {
   }
 }
 
-export class VirtualFileSystem extends Set {
+export default class VirtualFileSystem extends Map<string, SkillFile> {
   private project: ProjectInterface;
 
-  private files: Map<string, VirtualFile>;
-
   constructor(project: ProjectInterface, files: SkillFile[] = []) {
-    super();
+    super(files.map(file => [file.name, new VirtualFile(this, file)]));
     this.project = project;
-    this.files = new Map(
-      files.map(file => [file.name, new VirtualFile(this, file)])
-    );
+  }
+
+  add(file: SkillFile): VirtualFileSystem {
+    this.set(file.name, new VirtualFile(this, file));
+    return this;
   }
 
   async writeAllFiles(): Promise<void> {
-    const writeFiles = Array.from(this.files.values()).map(file =>
+    const writeFiles = Array.from(this.values()).map(file =>
       fs.promises.writeFile(
         path.join(this.project.root, this.project.config.configsDir, file.path),
         file.content

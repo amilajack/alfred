@@ -160,8 +160,6 @@ export type SkillFile = {
   name: string;
   // The relative path of the file the config should be written to
   path: string;
-  // The value of the config
-  config: ConfigValue;
   // The content of the file
   content: string;
 };
