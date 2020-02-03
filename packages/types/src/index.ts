@@ -215,6 +215,11 @@ export type Transforms = {
   ) => Skill;
 };
 
+export interface VirtualFileSystemInterface extends Map<string, SkillFile> {
+  add(file: SkillFile): VirtualFileSystemInterface;
+  writeAllFiles(): Promise<void>;
+}
+
 export interface VirtualFileInterface extends SkillFile {
   write(content: string): VirtualFileInterface;
   move(filename: string): VirtualFileInterface;
@@ -243,7 +248,7 @@ export interface Skill extends PkgWithDeps {
   description: string;
   pkg: PkgJson;
   supports: Supports;
-  files: VirtualFileInterface[];
+  files: VirtualFileSystemInterface;
   configFiles: Array<SkillConfigFile>;
   config: SkillConfigFile;
   interfaces: Array<SkillInterface>;

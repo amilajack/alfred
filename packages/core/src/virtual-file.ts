@@ -3,6 +3,7 @@ import fs from 'fs';
 import {
   ProjectInterface,
   VirtualFileInterface,
+  VirtualFileSystemInterface,
   SkillFile
 } from '@alfred/types';
 
@@ -48,7 +49,8 @@ export class VirtualFile implements VirtualFileInterface {
   }
 }
 
-export default class VirtualFileSystem extends Map<string, SkillFile> {
+export default class VirtualFileSystem extends Map<string, SkillFile>
+  implements VirtualFileSystemInterface {
   private project: ProjectInterface;
 
   constructor(project: ProjectInterface, files: SkillFile[] = []) {
