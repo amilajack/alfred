@@ -76,7 +76,7 @@ module.exports = {
       //     'rollup.base',
       //     configFiles
       //   );
-      //   const binPath = await getPkgBinPath('rollup', 'rollup');
+      //   const binPath = await getPkgBinPath(project, 'rollup');
       //   const filename = [interfaceState.projectType, interfaceState.target, 'js'].join('.');
       //   const watchFlag = subcommand === 'start' ? '--watch' : '';
       //   const cmd =

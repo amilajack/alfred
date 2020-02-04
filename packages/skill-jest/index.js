@@ -22,7 +22,7 @@ module.exports = {
   hooks: {
     async call({ configFiles, skillMap, config, project, flags }) {
       const configPath = getConfigPathByConfigName('jest', configFiles);
-      const binPath = await getPkgBinPath('jest-cli', 'jest');
+      const binPath = await getPkgBinPath(project, 'jest');
       const { root } = project;
       const nodeModulesPath = path.join(root, 'node_modules');
       if (!fs.existsSync(nodeModulesPath)) {
@@ -47,9 +47,9 @@ module.exports = {
         config.showConfigs ? configPath : hiddenTmpConfigPath,
         `module.exports = {
           transform: {
-            '^.+.jsx?$': '${jestTransformerPath}'
+            '^.+.jsx?$': '${JSON.stringify(jestTransformerPath)}'
           },
-          rootDir: '${root}'
+          rootDir: '${JSON.stringify(root)}'
         };
         `
       );
@@ -59,7 +59,7 @@ module.exports = {
       const babelJestPath = require.resolve('./babel-jest');
       await fs.promises.writeFile(
         jestTransformerPath,
-        `const babelJestTransform = require('${babelJestPath}');
+        `const babelJestTransform = require('${JSON.stringify(babelJestPath)}');
         module.exports = babelJestTransform.createTransformer(${babelConfig});`
       );
 
@@ -67,31 +67,31 @@ module.exports = {
         project,
         [
           binPath,
-          // config.showConfigs
-          //   ? `--config ${configPath}`
-          //   : `--config ${hiddenTmpConfigPath}`,
+          config.showConfigs
+            ? `--config ${JSON.stringify(configPath)} ${JSON.stringify(root)}`
+            : `--config ${hiddenTmpConfigPath} ${JSON.stringify(root)}`,
           ...flags
         ].join(' ')
       );
     }
   },
-  // transforms: {
-  //   babel(skill) {
-  //     return skill.extendConfig('jest', {
-  //       transform: {
-  //         '^.+\\.jsx?$': './node_modules/jest-transformer.js'
-  //       }
-  //     });
-  //   },
-  //   webpack(skill, { config }) {
-  //     return skill
-  //       .extendConfig('jest', {
-  //         moduleNameMapper: {
-  //           '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': `<rootDir>/${config.configsDir}/mocks/fileMock.js`,
-  //           '\\.(css|less|sass|scss)$': 'identity-obj-proxy'
-  //         }
-  //       })
-  //       .addDepsFromPkg('identity-obj-proxy');
-  //   }
-  // }
+  transforms: {
+    babel(skill) {
+      return skill.extendConfig('jest', {
+        transform: {
+          '^.+\\.jsx?$': './node_modules/jest-transformer.js'
+        }
+      });
+    },
+    webpack(skill, { config }) {
+      return skill
+        .extendConfig('jest', {
+          moduleNameMapper: {
+            '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': `<rootDir>/${config.configsDir}/mocks/fileMock.js`,
+            '\\.(css|less|sass|scss)$': 'identity-obj-proxy'
+          }
+        })
+        .addDepsFromPkg('identity-obj-proxy');
+    }
+  }
 };

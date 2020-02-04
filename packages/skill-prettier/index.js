@@ -18,7 +18,7 @@ module.exports = {
   ],
   hooks: {
     async call({ configFiles, project, config, flags }) {
-      const binPath = await getPkgBinPath('prettier');
+      const binPath = await getPkgBinPath(project, 'prettier');
       const configPath = getConfigPathByConfigName('prettier', configFiles);
       return execCmdInProject(
         project,

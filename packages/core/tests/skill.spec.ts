@@ -2,6 +2,7 @@
 import os from 'os';
 import path from 'path';
 import powerset from '@amilajack/powerset';
+import slash from 'slash';
 import {
   InterfaceState,
   SkillMap,
@@ -65,6 +66,9 @@ function removePathsPropertiesFromObject(
     if (typeof value === 'string') {
       if (value.includes(os.homedir()) || value[0] === '/') {
         obj[key] = '/';
+      }
+      if (obj[key].includes('\\')) {
+        obj[key] = slash(obj[key]);
       }
     }
   }

@@ -52,6 +52,7 @@
   "engineStrict": true,
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8",
   "devDependencies": {
-    "@types/jest": "^24.9.1"
+    "@types/jest": "^24.9.0",
+    "slash": "^3.0.0"
   }
 }

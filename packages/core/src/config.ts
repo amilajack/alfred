@@ -38,7 +38,7 @@ export default class Config implements ConfigInterface {
     showConfigs: true,
     autoInstall: false,
     configsDir: '.',
-    npmClient: 'npm' as NpmClients
+    npmClient: 'yarn' as NpmClients
   };
 
   constructor(rawConfig: AlfredConfigWithUnresolvedInterfaces) {

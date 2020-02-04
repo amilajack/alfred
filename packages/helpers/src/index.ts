@@ -1,8 +1,6 @@
 /* eslint import/prefer-default-export: off, import/no-dynamic-require: off */
 import path from 'path';
-// import fs from 'fs';
 import open from 'open';
-import pkgUp from 'pkg-up';
 import childProcess from 'child_process';
 import {
   SkillConfigFile,
@@ -116,59 +114,42 @@ export function requireConfig(
   }
 }
 
+export function execCmdInProject(
+  project: ProjectInterface,
+  cmd: string,
+  opts: Record<string, any> = {}
+): Buffer {
+  return childProcess.execSync(cmd, {
+    stdio: 'inherit',
+    cwd: project.root,
+    ...opts
+  });
+}
+
 /**
  * Get the name of the package JSON
  * @param pkgName - The name of the package
  * @param binName - The property of the bin object that we want
  */
 export async function getPkgBinPath(
-  pkgName: string,
-  binName: string
-): Promise<string> {
-  const pkgPath = require.resolve(pkgName);
-  const pkgJsonPath = await pkgUp({ cwd: pkgPath });
-
-  if (!pkgJsonPath) {
-    throw new Error(`Module "${pkgName}" not found`);
-  }
-
-  const { bin } = require(pkgJsonPath);
-  if (!bin) {
-    throw new Error(
-      `Module "${pkgName}" does not have a binary because it does not have a "bin" property in it's package.json`
-    );
-  }
-
-  // let binPath = (() => {
-  //   if (typeof bin === 'string') return bin;
-  //   return bin[binName];
-  // })();
-
-  // if (process.platform === 'win32') {
-  //   binPath = path.format({
-  //     name: bin[binName],
-  //     ext: 'cmd'
-  //   })
-  //   console.log(binPath)
-  // }
-
-  // let a = path.join(path.dirname(pkgJsonPath), binPath);
-
-  // if (fs.existsSync(a)) {
-  //   console.log(a)
-  //   return a
-  // }
-
-  const f = childProcess.execSync(`yarn bin ${binName || pkgName}`).toString();
-  console.log(f)
-  return f;
-}
-
-export function execCmdInProject(
   project: ProjectInterface,
-  cmd: string
-): Buffer {
-  return childProcess.execSync(cmd, { stdio: 'inherit', cwd: project.root });
+  pkgName: string
+): Promise<string> {
+  switch (project.config.npmClient) {
+    case 'npm': {
+      return execCmdInProject(project, `npm bin ${pkgName}`, { stdio: 'pipe' })
+        .toString()
+        .trim();
+    }
+    case 'yarn': {
+      return execCmdInProject(project, `yarn bin ${pkgName}`, { stdio: 'pipe' })
+        .toString()
+        .trim();
+    }
+    default: {
+      throw new Error(`Unsupported npmClient "${project.config.npmClient}"`);
+    }
+  }
 }
 
 export async function openUrlInBrowser(

@@ -53,14 +53,22 @@
   "renovate": {
     "extends": "bliss"
   },
-  "workspaces": [
-    "examples/*",
-    "packages/*",
-    "packages/cli/tests/e2e/tmp/*",
-    "packages/cli/tests/fixtures/*",
-    "packages/core/tests/fixtures/*",
-    "website"
-  ],
+  "workspaces": {
+    "packages": [
+      "examples/*",
+      "packages/*",
+      "packages/cli/tests/e2e/tmp/*",
+      "packages/cli/tests/fixtures/*",
+      "packages/core/tests/fixtures/*",
+      "website"
+    ],
+    "nohoist": [
+      "examples/*/@alfred/cli",
+      "packages/cli/tests/e2e/tmp/*/*",
+      "packages/cli/tests/fixtures/*/*",
+      "packages/core/tests/fixtures/*/*"
+    ]
+  },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.4",
