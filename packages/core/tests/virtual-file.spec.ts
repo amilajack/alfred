@@ -1,4 +1,5 @@
 import path from 'path';
+import slash from 'slash';
 import VirtualFileSystem from '../src/virtual-file';
 import Project from '../src/project';
 
@@ -27,14 +28,14 @@ describe('virtual file system', () => {
     fs.add(file)
       .get('routes')
       .rename('routes.ts');
-    expect(fs.get('routes')).toHaveProperty('path', 'src/routes.ts');
+    expect(slash(fs.get('routes').path)).toEqual('src/routes.ts');
   });
 
   it('should rename files', () => {
     fs.add(file)
       .get('routes')
       .rename('routes.ts');
-    expect(fs.get('routes')).toHaveProperty('path', 'src/routes.ts');
+    expect(slash(fs.get('routes').path)).toEqual('src/routes.ts');
   });
 
   it('should write to file', () => {

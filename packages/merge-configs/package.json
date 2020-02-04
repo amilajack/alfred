@@ -18,7 +18,7 @@
   "devDependencies": {
     "copy-webpack-plugin": "^5.1.1",
     "mocha": "^7.0.0",
-    "terser-webpack-plugin": "^2.3.2",
+    "terser-webpack-plugin": "^2.3.4",
     "webpack": "^4.41.5"
   },
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8",

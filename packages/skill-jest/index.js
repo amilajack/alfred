@@ -47,9 +47,9 @@ module.exports = {
         config.showConfigs ? configPath : hiddenTmpConfigPath,
         `module.exports = {
           transform: {
-            '^.+.jsx?$': '${JSON.stringify(jestTransformerPath)}'
+            '^.+.jsx?$': ${JSON.stringify(jestTransformerPath)}
           },
-          rootDir: '${JSON.stringify(root)}'
+          rootDir: ${JSON.stringify(root)}
         };
         `
       );
@@ -59,7 +59,7 @@ module.exports = {
       const babelJestPath = require.resolve('./babel-jest');
       await fs.promises.writeFile(
         jestTransformerPath,
-        `const babelJestTransform = require('${JSON.stringify(babelJestPath)}');
+        `const babelJestTransform = require(${JSON.stringify(babelJestPath)});
         module.exports = babelJestTransform.createTransformer(${babelConfig});`
       );
 

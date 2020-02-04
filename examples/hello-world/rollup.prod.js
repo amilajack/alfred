@@ -1,10 +1,10 @@
 module.exports = {
-  "output": {
-    "format": "es"
+  output: {
+    format: 'es'
   },
-  "plugins": [
+  plugins: [
     {
-      "name": "replace"
+      name: 'replace'
     }
   ]
-}
+};

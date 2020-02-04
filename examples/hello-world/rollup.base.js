@@ -1,7 +1,7 @@
 module.exports = {
-  "plugins": [
+  plugins: [
     {
-      "name": "babel"
+      name: 'babel'
     }
   ]
-}
+};

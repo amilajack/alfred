@@ -1,13 +1,13 @@
 module.exports = {
-  "output": {
-    "format": "cjs"
+  output: {
+    format: 'cjs'
   },
-  "plugins": [
+  plugins: [
     {
-      "name": "replace"
+      name: 'replace'
     },
     {
-      "name": "commonjs"
+      name: 'commonjs'
     }
   ]
-}
+};

@@ -7,8 +7,8 @@
     "@babel/preset-env": "^7.8.4"
   },
   "devDependencies": {
-    "react": "16.0.0",
-    "react-dom": "16.0.0",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
     "react-hot-loader": "^4.6.3"
   },
   "peerDependencies": {
