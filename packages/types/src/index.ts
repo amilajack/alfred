@@ -173,7 +173,7 @@ export type SkillConfigFile = {
   // The value of the config
   config: ConfigValue;
   // The type of the config file. Defaults to 'json'
-  configType: 'module' | 'string' | 'json';
+  configType: 'commonjs' | 'module' | 'json';
   // Allow the config to be written to user's `./configs` directory
   write: boolean;
 };

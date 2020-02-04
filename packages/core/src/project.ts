@@ -1,10 +1,9 @@
 import path from 'path';
 import fs from 'fs';
 import npm from 'npm';
-import childProcess from 'child_process';
 import formatPkg from 'format-package';
 import pkgUp from 'pkg-up';
-import { getConfigsBasePath } from '@alfred/helpers';
+import { getConfigsBasePath, execCmdInProject } from '@alfred/helpers';
 import mergeConfigs from '@alfred/merge-configs';
 import {
   PkgJson,
@@ -30,7 +29,8 @@ import skills from './commands/skills';
 import clean from './commands/clean';
 import { PKG_SORT_ORDER } from './constants';
 
-// @TODO send the information to a crash reporting service (like sentry.io)
+// @TODO Send the information to a crash reporting service (like sentry.io)
+// @TODO Install sourcemaps
 process.on('unhandledRejection', err => {
   throw err;
 });
@@ -130,10 +130,7 @@ export default class Project implements ProjectInterface {
 
     if (config.autoInstall === true && !fs.existsSync(nodeModulesPath)) {
       const installCommand = getInstallCommmand(this);
-      childProcess.execSync(installCommand, {
-        cwd: this.root,
-        stdio: 'inherit'
-      });
+      execCmdInProject(this, installCommand);
     }
   }
 
@@ -291,12 +288,9 @@ export default class Project implements ProjectInterface {
       // Install dependencies with Yarn
       case 'yarn': {
         const devFlag = dependenciesType === 'dev' ? '--dev' : '';
-        childProcess.execSync(
-          ['yarn', 'add', devFlag, ...normalizedDeps].join(' '),
-          {
-            cwd: this.root,
-            stdio: 'inherit'
-          }
+        execCmdInProject(
+          this,
+          ['yarn', 'add', devFlag, ...normalizedDeps].join(' ')
         );
         break;
       }
@@ -371,11 +365,17 @@ export default class Project implements ProjectInterface {
               ? configFile.config
               : await formatPkg(configFile.config);
           // Write sync to prevent data races when writing configs in parallel
-          const normalizedJsonOrModule =
-            configFile.configType === 'module'
-              ? `module.exports = ${stringifiedConfig}`
-              : stringifiedConfig;
-          fs.writeFileSync(filePath, normalizedJsonOrModule);
+          const configInConfigFileFormat = ((): string => {
+            switch (configFile.configType) {
+              case 'commonjs':
+                return `module.exports = ${stringifiedConfig}`;
+              case 'module':
+                return `export default ${stringifiedConfig}`;
+              default:
+                return stringifiedConfig;
+            }
+          })();
+          return fs.promises.writeFile(filePath, configInConfigFileFormat);
         })
     );
 

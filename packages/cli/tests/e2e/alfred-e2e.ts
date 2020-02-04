@@ -1,19 +1,27 @@
 /* eslint import/no-dynamic-require: off, no-console: off, global-require: off */
-const fs = require('fs');
-const path = require('path');
-const assert = require('assert');
-const rimraf = require('rimraf');
-const Table = require('cli-table3');
-const chalk = require('chalk');
-const powerset = require('@amilajack/powerset');
-const childProcess = require('child_process');
-const { INTERFACE_STATES } = require('@alfred/core/lib/interface');
-const { formatPkgJson } = require('@alfred/core');
-const { entrypointsToInterfaceStates } = require('@alfred/core/lib/skill');
-const { serial } = require('@alfred/core/lib/helpers');
-const { default: mergeConfigs } = require('@alfred/merge-configs');
-const { addEntrypoints } = require('../../lib');
-const { default: Config } = require('@alfred/core/lib/config');
+import fs from 'fs';
+import path from 'path';
+import assert from 'assert';
+import rimraf from 'rimraf';
+import Table from 'cli-table3';
+import chalk from 'chalk';
+import powerset from '@amilajack/powerset';
+import childProcess from 'child_process';
+import { INTERFACE_STATES } from '@alfred/core/lib/interface';
+import { formatPkgJson } from '@alfred/core';
+import { entrypointsToInterfaceStates } from '@alfred/core/lib/skill';
+import mergeConfigs from '@alfred/merge-configs';
+import { addEntrypoints } from '../../lib';
+import Config from '@alfred/core/lib/config';
+
+function serialPromises(fns: Array<() => Promise<any>>): Promise<any> {
+  return fns.reduce(
+    (promise: Promise<any>, fn) =>
+      // eslint-disable-next-line promise/no-nesting
+      promise.then(result => fn().then(Array.prototype.concat.bind(result))),
+    Promise.resolve([])
+  );
+}
 
 process.on('unhandledRejection', err => {
   throw err;
@@ -179,7 +187,7 @@ async function generateTests(skillCombination, tmpDir) {
           rimraf.sync(path.join(projectDir, 'tests/*'));
           await addEntrypoints(templateData, projectDir, interfaceStates);
 
-          await serial(
+          await serialPromises(
             [true, false].map(showConfigs => async () => {
               const pkg = mergeConfigs(
                 {},

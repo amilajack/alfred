@@ -35,7 +35,7 @@ module.exports = {
     {
       name: 'webpack.base',
       path: 'webpack.base.js',
-      configType: 'module',
+      configType: 'commonjs',
       config: {
         mode: 'development',
         output: {
@@ -51,7 +51,7 @@ module.exports = {
     {
       name: 'webpack.prod',
       path: 'webpack.prod.js',
-      configType: 'module',
+      configType: 'commonjs',
       config: {
         output: {
           path: path.join('<projectRoot>', 'targets', 'prod'),
@@ -64,7 +64,7 @@ module.exports = {
     {
       name: 'webpack.dev',
       path: 'webpack.dev.js',
-      configType: 'module',
+      configType: 'commonjs',
       config: {
         // @TODO: wepack-dev-server, HMR, sass, css, etc
         mode: 'development',
@@ -110,7 +110,7 @@ module.exports = {
     {
       name: 'webpack.node',
       path: 'webpack.node.js',
-      configType: 'module',
+      configType: 'commonjs',
       config: {
         entry: [path.join('<projectRoot>', 'src', 'app.node.js')],
         output: {
@@ -122,7 +122,7 @@ module.exports = {
     {
       name: 'webpack.browser',
       path: 'webpack.browser.js',
-      configType: 'module',
+      configType: 'commonjs',
       config: {
         entry: [path.join('<projectRoot>', 'src', 'app.browser.js')],
         output: {
