@@ -42,3 +42,12 @@ tmp
 package-lock.json
 *.tsbuildinfo
 *.map
+
+examples/**/*.config.js
+examples/**/webpack*
+examples/**/rollup*
+examples/**/.eslint*
+examples/**/.babel*
+examples/**/.prettierrc
+
+!examples/.eslintrc.json

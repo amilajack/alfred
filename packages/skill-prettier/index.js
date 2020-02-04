@@ -13,7 +13,9 @@ module.exports = {
       name: 'prettier',
       path: '.prettierrc',
       write: true,
-      config: {}
+      config: {
+        singleQuote: true
+      }
     }
   ],
   hooks: {
@@ -28,7 +30,7 @@ module.exports = {
           '.gitignore',
           '--single-quote',
           '--write',
-          '**/*',
+          '**/*.js',
           ...flags,
           config.showConfigs ? `--config ${configPath}` : ''
         ].join(' ')
