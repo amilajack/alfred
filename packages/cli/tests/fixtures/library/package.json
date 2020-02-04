@@ -6,13 +6,13 @@
   "main": "./targets/lib.node.js",
   "module": "./targets/lib.node.js",
   "scripts": {
-    "build": "../../../../../node_modules/.bin/alfred run build",
-    "clean": "../../../../../node_modules/.bin/alfred run clean",
-    "format": "../../../../../node_modules/.bin/alfred run format",
-    "lint": "../../../../../node_modules/.bin/alfred run lint",
-    "skills": "../../../../../node_modules/.bin/alfred skills",
-    "start": "../../../../../node_modules/.bin/alfred run start",
-    "test": "../../../../../node_modules/.bin/alfred run test",
+    "build": "node ../../../../cli/lib/commands/alfred.js run build",
+    "clean": "node ../../../../cli/lib/commands/alfred.js run clean",
+    "format": "node ../../../../cli/lib/commands/alfred.js run format",
+    "lint": "node ../../../../cli/lib/commands/alfred.js run lint",
+    "skills": "node ../../../../cli/lib/commands/alfred.js skills",
+    "start": "node ../../../../cli/lib/commands/alfred.js run start",
+    "test": "node ../../../../cli/lib/commands/alfred.js run test",
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
   "devDependencies": {
