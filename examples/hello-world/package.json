@@ -6,13 +6,13 @@
   "main": "./targets/lib.node.js",
   "module": "./targets/lib.node.js",
   "scripts": {
-    "build": "alfred run build",
-    "clean": "alfred run clean",
-    "format": "alfred run format",
-    "lint": "alfred run lint",
-    "skills": "alfred skills",
-    "start": "alfred run start",
-    "test": "alfred run test",
+    "build": "../../node_modules/.bin/alfred run build",
+    "clean": "../../node_modules/.bin/alfred run clean",
+    "format": "../../node_modules/.bin/alfred run format",
+    "lint": "../../node_modules/.bin/alfred run lint",
+    "skills": "../../node_modules/.bin/alfred skills",
+    "start": "../../node_modules/.bin/alfred run start",
+    "test": "../../node_modules/.bin/alfred run test",
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
   "devDependencies": {

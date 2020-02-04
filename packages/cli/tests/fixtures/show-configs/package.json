@@ -4,13 +4,13 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "../../../../cli/lib/commands/alfred.js run build",
-    "clean": "../../../../cli/lib/commands/alfred.js run clean",
-    "format": "../../../../cli/lib/commands/alfred.js run format",
-    "lint": "../../../../cli/lib/commands/alfred.js run lint",
-    "skills": "../../../../cli/lib/commands/alfred.js skills",
-    "start": "../../../../cli/lib/commands/alfred.js run start",
-    "test": "../../../../cli/lib/commands/alfred.js run test",
+    "build": "../../../../../node_modules/.bin/alfred run build",
+    "clean": "../../../../../node_modules/.bin/alfred run clean",
+    "format": "../../../../../node_modules/.bin/alfred run format",
+    "lint": "../../../../../node_modules/.bin/alfred run lint",
+    "skills": "../../../../../node_modules/.bin/alfred skills",
+    "start": "../../../../../node_modules/.bin/alfred run start",
+    "test": "../../../../../node_modules/.bin/alfred run test",
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
   "devDependencies": {
