@@ -81,13 +81,20 @@ module.exports = {
         })
         .addDepsFromPkg('eslint-plugin-mocha');
     },
-    webpack(skill, { project, config, configsPath }) {
+    webpack(skill, { project, config, skillMap, configsDir }) {
       return skill
         .extendConfig('eslint', {
           settings: {
             'import/resolver': {
               webpack: {
-                config: path.join(configsPath, 'webpack.browser.json')
+                config: path.join(
+                  project.root,
+                  config.configsDir,
+                  getConfigPathByConfigName(
+                    'webpack.base',
+                    skillMap.get('webpack').configFiles
+                  )
+                )
               }
             }
           }

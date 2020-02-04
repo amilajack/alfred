@@ -168,7 +168,7 @@ export default {
   subcommand: 'build',
   flags: {
     // Flag name and argument types
-    env: ['production', 'development', 'test']
+    envs: ['production', 'development', 'test']
   }
 };
 
@@ -215,6 +215,72 @@ type AlfredInterface = {
     }
   }
 }
+```
+
+## Skill Diffs
+
+```js
+// redux skill example
+export default {
+  name: 'redux',
+  files: [
+    {
+      name: 'redux-routes',
+      path: 'src/routes.js',
+      content: `
+        import { createStore, applyMiddleware } from 'redux';
+        import thunk from 'redux-thunk';
+        import { createHashHistory } from 'history';
+        import { routerMiddleware } from 'connected-react-router';
+        import createRootReducer from '../reducers';
+        import type { counterStateType } from '../reducers/types';
+        import { Store, counterStateType } from '../reducers/types';
+
+        const history = createHashHistory();
+        const rootReducer = createRootReducer(history);
+        const router = routerMiddleware(history);
+        const enhancer = applyMiddleware(thunk, router);
+
+        function configureStore(initialState) {
+         return createStore(
+           rootReducer,
+           initialState,
+           enhancer
+         );
+        }
+
+        export default { configureStore, history };
+        `
+    }
+  ],
+
+  // ...
+
+  transforms: {
+    typescript(skill) {
+      return skill
+        .applyDiff('redux-routes', `
+            diff --git app/routes.js app/routes.js
+            @@ -3,7 +3,7 @@ import { execSync } from 'child_process';
+            + function configureStore(initialState?: counterStateType) {
+            +  return createStore<*, counterStateType, *>(
+            +    rootReducer,
+            +    initialState,
+            +    enhancer
+            +  );
+            + }
+            - function configureStore(initialState) {
+            -  return createStore(
+            -    rootReducer,
+            -    initialState,
+            -    enhancer
+            -  );
+            - }
+        `)
+        .rename('redux-routes', 'routes.ts')
+    }
+  }
+};
 ```
 
 ## Extending Alfred Configs

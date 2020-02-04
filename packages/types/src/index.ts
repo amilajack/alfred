@@ -13,7 +13,7 @@ export interface PkgJson extends JSON {
   devDependencies?: Dependencies;
   dependencies?: Dependencies;
   peerDependencies?: Dependencies;
-  alfred?: ConfigWithUnresolvedInterfaces;
+  alfred?: AlfredConfigWithUnresolvedInterfaces;
 }
 
 export interface PkgWithDeps {
@@ -103,7 +103,7 @@ export type RawSkillConfigValue = [string, Record<string, any>] | string;
 export type RawExtendsConfigValue = Array<string> | string;
 
 // Interface should be resolved before skills are resolved, so extends is not included
-export interface ConfigWithResolvedSkills {
+export interface AlfredConfigWithResolvedSkills {
   skills?: ConfigSkills;
   npmClient?: NpmClients;
   configsDir?: string;
@@ -112,7 +112,7 @@ export interface ConfigWithResolvedSkills {
 }
 
 // Interface should be resolved before skills are resolved, so extends is not included
-export interface ConfigWithUnresolvedSkills {
+export interface AlfredConfigWithUnresolvedSkills {
   skills?: RawSkillConfigValue[];
   npmClient?: NpmClients;
   showConfigs?: boolean;
@@ -120,12 +120,12 @@ export interface ConfigWithUnresolvedSkills {
   autoInstall?: boolean;
 }
 
-export interface ConfigWithUnresolvedInterfaces
-  extends ConfigWithUnresolvedSkills {
+export interface AlfredConfigWithUnresolvedInterfaces
+  extends AlfredConfigWithUnresolvedSkills {
   extends?: RawExtendsConfigValue;
 }
 
-export interface ConfigWithDefaults {
+export interface AlfredConfigWithDefaults {
   skills: ConfigSkills;
   npmClient: NpmClients;
   configsDir: string;
@@ -133,9 +133,9 @@ export interface ConfigWithDefaults {
   autoInstall: boolean;
 }
 
-export interface ConfigInterface extends ConfigWithDefaults {
-  getConfigWithDefaults: () => ConfigWithDefaults;
-  getConfigValues: () => ConfigWithResolvedSkills;
+export interface ConfigInterface extends AlfredConfigWithDefaults {
+  getConfigWithDefaults: () => AlfredConfigWithDefaults;
+  getConfigValues: () => AlfredConfigWithResolvedSkills;
 }
 
 export interface SkillInterface {
@@ -154,7 +154,17 @@ export type ConfigValue =
       [x: string]: any;
     };
 
-export type ConfigFile = {
+export type SkillFile = {
+  // The "friendly name" of a file. This is the name that
+  // other skills will refer to config file by.
+  name: string;
+  // The relative path of the file the config should be written to
+  path: string;
+  // The content of the file
+  content: string;
+};
+
+export type SkillConfigFile = {
   // The "friendly name" of a file. This is the name that
   // other skills will refer to config file by.
   name: string;
@@ -163,15 +173,14 @@ export type ConfigFile = {
   // The value of the config
   config: ConfigValue;
   // The type of the config file. Defaults to 'json'
-  fileType: 'module' | 'string' | 'json';
-  configValue: 'module' | 'string' | 'json';
+  configType: 'module' | 'string' | 'json';
   // Allow the config to be written to user's `./configs` directory
   write: boolean;
 };
 
 export type HooksCallArgs = {
   project: ProjectInterface;
-  configFiles: Array<ConfigFile>;
+  configFiles: Array<SkillConfigFile>;
   config: ConfigInterface;
   interfaceState: InterfaceState;
   subcommand: string;
@@ -184,16 +193,16 @@ export type CallFn = (args: HooksCallArgs) => void;
 
 export type DiffDeps = { diffDevDeps: string[]; diffDeps: string[] };
 
-type Supports = {
+export type Supports = {
   // Flag name and argument types
-  env: Array<'production' | 'development' | 'test'>;
+  envs: Array<'production' | 'development' | 'test'>;
   // All the supported targets a `build` skill should build
   targets: Array<'browser' | 'node' | 'electron' | 'react-native'>;
   // Project type
   projectTypes: Array<'lib' | 'app'>;
 };
 
-type Transforms = {
+export type Transforms = {
   [skillName: string]: (
     ownSkillNode: Skill,
     misc: {
@@ -206,20 +215,27 @@ type Transforms = {
   ) => Skill;
 };
 
-export interface FileInterface {
-  write(contents: string): Promise<FileInterface>;
-  move(filename: string): Promise<FileInterface>;
-  delete(): Promise<void>;
-  rename(filename: string): Promise<FileInterface>;
-  append(contents: string): Promise<FileInterface>;
+export interface VirtualFileSystemInterface extends Map<string, SkillFile> {
+  add(file: SkillFile): VirtualFileSystemInterface;
+  writeAllFiles(): Promise<void>;
+}
+
+export interface VirtualFileInterface extends SkillFile {
+  write(content: string): VirtualFileInterface;
+  move(filename: string): VirtualFileInterface;
+  delete(): void;
+  rename(filename: string): VirtualFileInterface;
+  replace(content: string): VirtualFileInterface;
+  // @TODO
+  // applyDiff(diff: string): VirtualFileInterface;
 }
 
 export interface RawSkill extends PkgWithDeps {
   name: string;
   description: string;
   supports?: Supports;
-  configFiles?: Array<ConfigFile>;
-  config?: ConfigFile;
+  configFiles?: Array<SkillConfigFile>;
+  config?: SkillConfigFile;
   interfaces?: Array<SkillInterface>;
   hooks?: {
     call: CallFn;
@@ -232,9 +248,9 @@ export interface Skill extends PkgWithDeps {
   description: string;
   pkg: PkgJson;
   supports: Supports;
-  files: FileInterface[];
-  configFiles: Array<ConfigFile>;
-  config: ConfigFile;
+  files: VirtualFileSystemInterface;
+  configFiles: Array<SkillConfigFile>;
+  config: SkillConfigFile;
   interfaces: Array<SkillInterface>;
   hooks: {
     call: CallFn;
@@ -242,7 +258,7 @@ export interface Skill extends PkgWithDeps {
   transforms: Transforms;
 }
 
-interface SkillUsingInterface extends Skill {
+export interface SkillUsingInterface extends Skill {
   subcommand: string;
 }
 
@@ -251,9 +267,12 @@ export type SkillNode = Skill | SkillUsingInterface;
 export type SkillMap = Map<string, SkillNode>;
 
 export interface SkillWithHelpers extends Skill {
-  findConfig: (configName: string) => ConfigFile;
+  findConfig: (configName: string) => SkillConfigFile;
   extendConfig: (x: string) => SkillWithHelpers;
-  replaceConfig: (x: string, configReplacement: ConfigFile) => SkillWithHelpers;
+  replaceConfig: (
+    x: string,
+    configReplacement: SkillConfigFile
+  ) => SkillWithHelpers;
   addDeps: (pkg: Dependencies) => SkillWithHelpers;
   addDevDeps: (pkg: Dependencies) => SkillWithHelpers;
   addDepsFromPkg: (

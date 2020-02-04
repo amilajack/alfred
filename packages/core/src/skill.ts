@@ -7,7 +7,7 @@ import {
   SkillNode,
   ProjectInterface,
   InterfaceState,
-  ConfigFile,
+  SkillConfigFile,
   ProjectEnum,
   Target,
   SkillWithHelpers,
@@ -37,7 +37,7 @@ type CORE_SKILL =
 export function addSkillHelpers(skill: SkillNode): SkillWithHelpers {
   return {
     ...skill,
-    findConfig(configName: string): ConfigFile {
+    findConfig(configName: string): SkillConfigFile {
       const config = this.configFiles.find(
         configFile => configFile.name === configName
       );
@@ -63,7 +63,7 @@ export function addSkillHelpers(skill: SkillNode): SkillWithHelpers {
     },
     replaceConfig(
       configName: string,
-      configReplacement: ConfigFile
+      configReplacement: SkillConfigFile
     ): SkillWithHelpers {
       const configFiles = this.configFiles.map(configFile =>
         configFile.name === configName ? configReplacement : configFile
@@ -187,7 +187,7 @@ export function validateSkill(
   skillMap.forEach(skillNode => {
     if (skillNode && skillNode.supports) {
       const supports = {
-        env: skillNode.supports.env.includes(interfaceState.env),
+        env: skillNode.supports.envs.includes(interfaceState.env),
         target: skillNode.supports.targets.includes(interfaceState.target),
         projectType: skillNode.supports.projectTypes.includes(
           interfaceState.projectType
@@ -259,7 +259,7 @@ export function Skills(
   skillMap.forEach(skillNode => {
     if (skillNode && skillNode.supports) {
       const supports = {
-        env: skillNode.supports.env.includes(interfaceState.env),
+        env: skillNode.supports.envs.includes(interfaceState.env),
         target: skillNode.supports.targets.includes(interfaceState.target),
         projectType: skillNode.supports.projectTypes.includes(
           interfaceState.projectType

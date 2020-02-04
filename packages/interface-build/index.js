@@ -47,7 +47,7 @@ module.exports = {
           );
         }
         return (
-          supports.env.includes(interfaceState.env) &&
+          supports.envs.includes(interfaceState.env) &&
           supports.targets.includes(interfaceState.target) &&
           supports.projectTypes.includes(interfaceState.projectType)
         );

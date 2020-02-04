@@ -7,7 +7,7 @@ const { default: mergeConfigs } = require('@alfred/merge-configs');
 const interfaceConfig = {
   supports: {
     // Flag name and argument types
-    env: ['production', 'development', 'test'],
+    envs: ['production', 'development', 'test'],
     // All the supported targets a `build` skill should build
     targets: ['browser', 'node'],
     // Project type
@@ -26,6 +26,7 @@ module.exports = {
     {
       name: 'rollup.base',
       path: 'rollup.base.js',
+      configType: 'module',
       applySkillConfig: true,
       write: true,
       config: {
@@ -37,6 +38,7 @@ module.exports = {
     {
       name: 'rollup.prod',
       path: 'rollup.prod.js',
+      configType: 'module',
       config: {
         output: {
           format: 'es'
@@ -52,6 +54,7 @@ module.exports = {
     {
       name: 'rollup.dev',
       path: 'rollup.dev.js',
+      configType: 'module',
       config: {
         output: {
           format: 'cjs'

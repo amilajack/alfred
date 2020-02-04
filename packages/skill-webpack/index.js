@@ -12,7 +12,7 @@ function replaceProjectRoot(pathConfig, projectRoot) {
 const interfaceConfig = {
   supports: {
     // Flag name and argument types
-    env: ['production', 'development', 'test'],
+    envs: ['production', 'development', 'test'],
     // All the supported targets a `build` skill should build
     // @TODO: Add node to targets
     targets: ['browser'],
@@ -34,7 +34,7 @@ module.exports = {
   configFiles: [
     {
       name: 'webpack.base',
-      path: 'webpack.base.json',
+      path: 'webpack.base.js',
       configType: 'module',
       config: {
         mode: 'development',
@@ -50,7 +50,7 @@ module.exports = {
     },
     {
       name: 'webpack.prod',
-      path: 'webpack.prod.json',
+      path: 'webpack.prod.js',
       configType: 'module',
       config: {
         output: {
@@ -63,7 +63,7 @@ module.exports = {
     },
     {
       name: 'webpack.dev',
-      path: 'webpack.dev.json',
+      path: 'webpack.dev.js',
       configType: 'module',
       config: {
         // @TODO: wepack-dev-server, HMR, sass, css, etc
@@ -109,7 +109,7 @@ module.exports = {
     },
     {
       name: 'webpack.node',
-      path: 'webpack.node.json',
+      path: 'webpack.node.js',
       configType: 'module',
       config: {
         entry: [path.join('<projectRoot>', 'src', 'app.node.js')],
@@ -121,7 +121,7 @@ module.exports = {
     },
     {
       name: 'webpack.browser',
-      path: 'webpack.browser.json',
+      path: 'webpack.browser.js',
       configType: 'module',
       config: {
         entry: [path.join('<projectRoot>', 'src', 'app.browser.js')],

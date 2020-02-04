@@ -97,11 +97,11 @@ export function getExecutableWrittenConfigsMethods(
       // @TODO @REFACTOR This is messy
       .reduce(
         (
-          p: ExecutableSkillMethods,
-          c: { subcommand: string; fn: SubcommandFn }
+          prevSkill: ExecutableSkillMethods,
+          currSkill: { subcommand: string; fn: SubcommandFn }
         ): ExecutableSkillMethods => ({
-          ...p,
-          [c.subcommand]: c.fn
+          ...prevSkill,
+          [currSkill.subcommand]: currSkill.fn
         }),
         {}
       )

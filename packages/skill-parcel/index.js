@@ -4,7 +4,7 @@ const { openUrlInBrowser } = require('@alfred/helpers');
 const interfaceConfig = {
   supports: {
     // Flag name and argument types
-    env: ['production', 'development', 'test'],
+    envs: ['production', 'development', 'test'],
     // All the supported targets a `build` skill should build
     // @TODO: Add node to targets
     targets: ['browser'],
