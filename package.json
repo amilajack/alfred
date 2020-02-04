@@ -63,10 +63,10 @@
       "website"
     ],
     "nohoist": [
-      "examples/*/@alfred/cli",
-      "packages/cli/tests/e2e/tmp/*/*",
-      "packages/cli/tests/fixtures/*/*",
-      "packages/core/tests/fixtures/*/*"
+      "examples/*/alfred",
+      "packages/cli/tests/e2e/tmp/*/alfred",
+      "packages/cli/tests/fixtures/*/alfred",
+      "packages/core/tests/fixtures/*/alfred"
     ]
   },
   "devDependencies": {
