@@ -28,7 +28,7 @@ describe('Helpers', () => {
         ]
       };
       expect(configToEvalString(configSerialize(config))).toEqual(
-        '{"plugins":[new webpack.Plugin(),new webpack.Plugin()]}'
+        '{"plugins":[             new webpack.Plugin()           ]}'
       );
     });
   });

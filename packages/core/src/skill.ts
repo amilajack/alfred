@@ -99,10 +99,15 @@ export function addSkillHelpers(skill: SkillNode): SkillWithHelpers {
   };
 }
 
-export function runTransforms(
+/**
+ * This function is kept async in order to allow transforms to be async in the future. Keeping
+ * it async now will allow for easier migration to async skill transforms in the future without
+ * the need for breaking changes.
+ */
+export async function runTransforms(
   project: ProjectInterface,
   skillMap: SkillMap
-): SkillMap {
+): Promise<SkillMap> {
   skillMap.forEach(skillNode => {
     Object.entries(skillNode.transforms || {}).forEach(
       ([toskillName, transform]) => {
@@ -227,11 +232,11 @@ export function validateSkill(
  * Add skills to a given list of skills to ensure that the list has a complete set
  * of standard skills. Also remove skills that do not support the current interfaceState
  */
-export function Skills(
+export async function Skills(
   project: ProjectInterface,
   skills: Array<SkillNode>,
   interfaceState: InterfaceState
-): Map<string, SkillWithHelpers> {
+): Promise<Map<string, SkillWithHelpers>> {
   const skillMap: Map<string, SkillWithHelpers> = new Map();
 
   skills
@@ -337,7 +342,7 @@ export function Skills(
     skillMap.set('babel', CORE_SKILLS.babel);
   }
 
-  runTransforms(project, skillMap);
+  await runTransforms(project, skillMap);
 
   validateSkill(skillMap, interfaceState);
 

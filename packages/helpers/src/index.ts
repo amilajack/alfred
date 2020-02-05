@@ -21,7 +21,10 @@ export function configSerialize(config: string | Record<string, any>): string {
 }
 
 export function configStringify(configStr: TemplateStringsArray): string {
-  return ['[alfred]', configStr, '[alfred]'].join('').replace(/\n/g, ' ');
+  return ['[alfred]', configStr, '[alfred]']
+    .join('')
+    .trim()
+    .replace(/\n/g, ' ');
 }
 
 export function configToEvalString(serializedConfig: string): string {
@@ -206,5 +209,14 @@ export function getDepsFromPkg(
 
   return Object.fromEntries(
     normalizedPkgNames.map(pkgName => [pkgName, pkg[fromPkgTypeFull][pkgName]])
+  );
+}
+
+export function serialPromises(fns: Array<() => Promise<any>>): Promise<any> {
+  return fns.reduce(
+    (promise: Promise<any>, fn) =>
+      // eslint-disable-next-line promise/no-nesting
+      promise.then(result => fn().then(Array.prototype.concat.bind(result))),
+    Promise.resolve([])
   );
 }

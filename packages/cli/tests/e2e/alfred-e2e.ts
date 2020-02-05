@@ -14,15 +14,7 @@ import mergeConfigs from '@alfred/merge-configs';
 import { addEntrypoints } from '../../lib';
 import Config from '@alfred/core/lib/config';
 import { Env, ProjectEnum, Target } from '@alfred/types';
-
-function serialPromises(fns: Array<() => Promise<any>>): Promise<any> {
-  return fns.reduce(
-    (promise: Promise<any>, fn) =>
-      // eslint-disable-next-line promise/no-nesting
-      promise.then(result => fn().then(Array.prototype.concat.bind(result))),
-    Promise.resolve([])
-  );
-}
+import { serialPromises } from '@alfred/helpers/lib';
 
 process.on('unhandledRejection', err => {
   throw err;
