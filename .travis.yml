@@ -3,6 +3,14 @@ language: node_js
 node_js:
   - node
 
+env:
+  - YARN_GPG=no
+
+os:
+  - linux
+  - osx
+  - windows
+
 cache: yarn
 
 install: yarn --frozen-lockfile

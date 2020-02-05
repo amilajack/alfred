@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@alfred/types": "^0.0.3",
-    "open": "^7.0.0",
+    "open": "^7.0.2",
     "pkg-up": "^3.1.0"
   },
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"

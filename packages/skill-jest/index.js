@@ -22,7 +22,7 @@ module.exports = {
   hooks: {
     async call({ configFiles, skillMap, config, project, flags }) {
       const configPath = getConfigPathByConfigName('jest', configFiles);
-      const binPath = await getPkgBinPath('jest-cli', 'jest');
+      const binPath = await getPkgBinPath(project, 'jest');
       const { root } = project;
       const nodeModulesPath = path.join(root, 'node_modules');
       if (!fs.existsSync(nodeModulesPath)) {
@@ -47,9 +47,9 @@ module.exports = {
         config.showConfigs ? configPath : hiddenTmpConfigPath,
         `module.exports = {
           transform: {
-            '^.+.jsx?$': '${jestTransformerPath}'
+            '^.+.jsx?$': ${JSON.stringify(jestTransformerPath)}
           },
-          rootDir: '${root}'
+          rootDir: ${JSON.stringify(root)}
         };
         `
       );
@@ -59,7 +59,7 @@ module.exports = {
       const babelJestPath = require.resolve('./babel-jest');
       await fs.promises.writeFile(
         jestTransformerPath,
-        `const babelJestTransform = require('${babelJestPath}');
+        `const babelJestTransform = require(${JSON.stringify(babelJestPath)});
         module.exports = babelJestTransform.createTransformer(${babelConfig});`
       );
 
@@ -68,8 +68,8 @@ module.exports = {
         [
           binPath,
           config.showConfigs
-            ? `--config ${configPath} ${root}`
-            : `--config ${hiddenTmpConfigPath} ${root}`,
+            ? `--config ${JSON.stringify(configPath)} ${JSON.stringify(root)}`
+            : `--config ${hiddenTmpConfigPath} ${JSON.stringify(root)}`,
           ...flags
         ].join(' ')
       );
