@@ -9,7 +9,7 @@ export type DependencyTypeFull =
   | 'devDependencies'
   | 'dependencies';
 
-export interface PkgJson extends JSON {
+export interface PkgJson {
   devDependencies?: Dependencies;
   dependencies?: Dependencies;
   peerDependencies?: Dependencies;

@@ -71,7 +71,7 @@ export function pkgDepsToList(deps: Dependencies): string[] {
   );
 }
 
-export function formatPkgJson(pkg: PkgJson): Promise<string> {
+export function formatPkgJson(pkg: Record<string, any>): Promise<string> {
   return formatPkg(pkg, { order: PKG_SORT_ORDER });
 }
 
