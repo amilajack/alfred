@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import childProcess from 'child_process';
+import slash from 'slash';
 import { prompt } from 'inquirer';
 import validateLicense from 'validate-npm-package-license';
 import validateName from 'validate-npm-package-name';
@@ -172,7 +173,7 @@ async function createNewProject(cwd: string, name: string): Promise<void> {
   answers.targetFile = targetFile;
   answers.module = targetFile;
 
-  const alfredDepFilePath = path.join(__dirname, '../../../alfred');
+  const alfredDepFilePath = slash(path.join(__dirname, '../../../alfred'));
   const isApp = answers.projectType === 'app';
   const isBrowser = answers.target === 'browser';
   answers.isApp = isApp;
