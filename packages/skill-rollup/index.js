@@ -66,28 +66,6 @@ module.exports = {
   ],
   hooks: {
     async call({ configFiles, interfaceState, subcommand }) {
-      // if (config.showConfigs) {
-      //   const configPath = getConfigPathByConfigName(
-      //     'rollup.base',
-      //     configFiles
-      //   );
-      //   const binPath = await getPkgBinPath(project, 'rollup');
-      //   const filename = [interfaceState.projectType, interfaceState.target, 'js'].join('.');
-      //   const watchFlag = subcommand === 'start' ? '--watch' : '';
-      //   const cmd =
-      //     interfaceState.env === 'production'
-      //       ? `./src/${filename} ${watchFlag} --format esm --file ./targets/prod/${filename}`
-      //       : `./src/${filename} ${watchFlag} --format cjs --file ./targets/dev/${filename}`;
-      //   return execCmdInProject(
-      //     project,
-      //     [
-      //       binPath,
-      //       cmd,
-      //       config.showConfigs ? `--config ${configPath} .` : ''
-      //     ].join(' ')
-      //   );
-      // }
-
       const [baseConfig, prodConfig, devConfig] = [
         'rollup.base',
         'rollup.prod',

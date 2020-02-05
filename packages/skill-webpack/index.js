@@ -4,7 +4,9 @@ const path = require('path');
 const {
   getConfigByName,
   configStringify,
-  configParse
+  configSerialize,
+  configDeserialize,
+  configToEvalString
 } = require('@alfred/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 const getPort = require('get-port');
@@ -102,7 +104,11 @@ module.exports = {
           }
         },
         plugins: [
-          configStringify`new webpack.HotModuleReplacementPlugin({multiStep: true})`
+          configStringify`
+            new webpack.HotModuleReplacementPlugin({
+              multiStep: true
+            })
+          `
         ]
       }
     },
@@ -154,7 +160,9 @@ module.exports = {
         interfaceState.target === 'browser' ? browserConfig : nodeConfig
       );
 
-      eval(`mergedConfig = ${configParse(mergedConfig)}`);
+      mergedConfig = eval(
+        `(${configToEvalString(configSerialize(mergedConfig))})`
+      );
 
       // @HACK: The following lines should be replaced with an algorithm that
       //        recursively traverses and object and replaces each project root
@@ -261,7 +269,10 @@ module.exports = {
       return skill
         .extendConfig('webpack.prod', {
           plugins: [
-            configStringify`(() => {const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');return new LodashModuleReplacementPlugin()})();`
+            configStringify`(() => {
+              const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+              return new LodashModuleReplacementPlugin()
+            })();`
           ]
         })
         .addDepsFromPkg('lodash-webpack-plugin');

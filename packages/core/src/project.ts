@@ -7,7 +7,7 @@ import pkgUp from 'pkg-up';
 import {
   getConfigsBasePath,
   execCmdInProject,
-  configParse
+  configToEvalString
 } from '@alfred/helpers';
 import mergeConfigs from '@alfred/merge-configs';
 import {
@@ -365,9 +365,9 @@ export default class Project implements ProjectInterface {
         .flatMap(skill => skill.configFiles)
         .map(async configFile => {
           const filePath = path.join(configsBasePath, configFile.path);
-          // Write sync to prevent data races when writing configs in parallel
           const stringifiedConfig = JSON.stringify(configFile.config);
           let parser: 'babel' | 'json' = 'babel';
+
           const configInConfigFileFormat = ((): string => {
             switch (configFile.configType) {
               case 'commonjs':
@@ -384,12 +384,14 @@ export default class Project implements ProjectInterface {
                 return `module.exports = ${stringifiedConfig}`;
             }
           })();
-          return fs.promises.writeFile(
-            filePath,
-            prettier.format(configParse(configInConfigFileFormat), {
+          const formattedConfig = prettier.format(
+            configToEvalString(configInConfigFileFormat),
+            {
               parser
-            })
+            }
           );
+
+          return fs.promises.writeFile(filePath, formattedConfig);
         })
     );
 

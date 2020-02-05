@@ -1,4 +1,9 @@
-import { getDepsFromPkg, configStringify, configParse } from '../src';
+import {
+  getDepsFromPkg,
+  configStringify,
+  configToEvalString,
+  configSerialize
+} from '../src';
 
 describe('Helpers', () => {
   describe('stringify', () => {
@@ -9,7 +14,7 @@ describe('Helpers', () => {
           configStringify`new webpack.Plugin()`
         ]
       };
-      expect(configParse(config)).toEqual(
+      expect(configToEvalString(configSerialize(config))).toEqual(
         '{"plugins":[new webpack.Plugin(),new webpack.Plugin()]}'
       );
     });
@@ -22,7 +27,7 @@ describe('Helpers', () => {
           `
         ]
       };
-      expect(configParse(config)).toEqual(
+      expect(configToEvalString(configSerialize(config))).toEqual(
         '{"plugins":[new webpack.Plugin(),new webpack.Plugin()]}'
       );
     });

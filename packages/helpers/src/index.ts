@@ -2,6 +2,7 @@
 import path from 'path';
 import open from 'open';
 import childProcess from 'child_process';
+import serialize from 'serialize-javascript';
 import {
   SkillConfigFile,
   ConfigValue,
@@ -15,15 +16,18 @@ import {
   SkillNode
 } from '@alfred/types';
 
-export function configStringify(configStr: TemplateStringsArray): string {
-  return ['[alfred]', configStr, '[alfred]'].join('');
+export function configSerialize(config: string | Record<string, any>): string {
+  return serialize(config, { unsafe: true });
 }
 
-export function configParse(config: string | Record<string, any>): string {
-  return (typeof config === 'string' ? config : JSON.stringify(config))
+export function configStringify(configStr: TemplateStringsArray): string {
+  return ['[alfred]', configStr, '[alfred]'].join('').replace(/\n/g, ' ');
+}
+
+export function configToEvalString(serializedConfig: string): string {
+  return serializedConfig
     .replace(/"\[alfred\]/g, '')
-    .replace(/\[alfred\]"/g, '')
-    .replace(/\n/g, ' ');
+    .replace(/\[alfred\]"/g, '');
 }
 
 export function requireSkill(skillName: string): SkillNode {
