@@ -44,6 +44,7 @@
     "lodash": "^4.17.11",
     "npm": "^6.13.6",
     "pkg-up": "^3.1.0",
+    "prettier": "^1.19.1",
     "rimraf": "^3.0.0"
   },
   "engines": {
@@ -53,6 +54,7 @@
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8",
   "devDependencies": {
     "@types/jest": "^25.1.1",
+    "@types/prettier": "^1.19.0",
     "slash": "^3.0.0"
   }
 }

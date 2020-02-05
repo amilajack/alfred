@@ -14,8 +14,7 @@ module.exports = {
   configFiles: [
     {
       name: 'eslint',
-      path: '.eslintrc.json',
-      write: true,
+      path: '.eslintrc.js',
       config: {
         root: true,
         env: {

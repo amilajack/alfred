@@ -164,6 +164,8 @@ export type SkillFile = {
   content: string;
 };
 
+export type ConfigType = 'commonjs' | 'module' | 'json';
+
 export type SkillConfigFile = {
   // The "friendly name" of a file. This is the name that
   // other skills will refer to config file by.
@@ -172,10 +174,8 @@ export type SkillConfigFile = {
   path: string;
   // The value of the config
   config: ConfigValue;
-  // The type of the config file. Defaults to 'json'
-  configType: 'commonjs' | 'module' | 'json';
-  // Allow the config to be written to user's `./configs` directory
-  write: boolean;
+  // The type of the config file. This is inferred by alfred by the file extension of .path
+  configType?: ConfigType;
 };
 
 export type HooksCallArgs = {
@@ -229,6 +229,17 @@ export interface VirtualFileInterface extends SkillFile {
   // @TODO
   // applyDiff(diff: string): VirtualFileInterface;
 }
+
+export type CORE_SKILL =
+  | 'webpack'
+  | 'babel'
+  | 'parcel'
+  | 'eslint'
+  | 'prettier'
+  | 'jest'
+  | 'react'
+  | 'rollup'
+  | 'lodash';
 
 export interface RawSkill extends PkgWithDeps {
   name: string;

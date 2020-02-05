@@ -26,9 +26,6 @@ module.exports = {
     {
       name: 'rollup.base',
       path: 'rollup.base.js',
-      configType: 'commonjs',
-      applySkillConfig: true,
-      write: true,
       config: {
         external(id) {
           return id.includes('node_modules');
@@ -38,7 +35,6 @@ module.exports = {
     {
       name: 'rollup.prod',
       path: 'rollup.prod.js',
-      configType: 'commonjs',
       config: {
         output: {
           format: 'es'
@@ -54,7 +50,6 @@ module.exports = {
     {
       name: 'rollup.dev',
       path: 'rollup.dev.js',
-      configType: 'commonjs',
       config: {
         output: {
           format: 'cjs'
@@ -71,28 +66,6 @@ module.exports = {
   ],
   hooks: {
     async call({ configFiles, interfaceState, subcommand }) {
-      // if (config.showConfigs) {
-      //   const configPath = getConfigPathByConfigName(
-      //     'rollup.base',
-      //     configFiles
-      //   );
-      //   const binPath = await getPkgBinPath(project, 'rollup');
-      //   const filename = [interfaceState.projectType, interfaceState.target, 'js'].join('.');
-      //   const watchFlag = subcommand === 'start' ? '--watch' : '';
-      //   const cmd =
-      //     interfaceState.env === 'production'
-      //       ? `./src/${filename} ${watchFlag} --format esm --file ./targets/prod/${filename}`
-      //       : `./src/${filename} ${watchFlag} --format cjs --file ./targets/dev/${filename}`;
-      //   return execCmdInProject(
-      //     project,
-      //     [
-      //       binPath,
-      //       cmd,
-      //       config.showConfigs ? `--config ${configPath} .` : ''
-      //     ].join(' ')
-      //   );
-      // }
-
       const [baseConfig, prodConfig, devConfig] = [
         'rollup.base',
         'rollup.prod',

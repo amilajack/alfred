@@ -2,8 +2,13 @@ import path from 'path';
 import fs from 'fs';
 import npm from 'npm';
 import formatPkg from 'format-package';
+import prettier from 'prettier';
 import pkgUp from 'pkg-up';
-import { getConfigsBasePath, execCmdInProject } from '@alfred/helpers';
+import {
+  getConfigsBasePath,
+  execCmdInProject,
+  configToEvalString
+} from '@alfred/helpers';
 import mergeConfigs from '@alfred/merge-configs';
 import {
   PkgJson,
@@ -360,22 +365,33 @@ export default class Project implements ProjectInterface {
         .flatMap(skill => skill.configFiles)
         .map(async configFile => {
           const filePath = path.join(configsBasePath, configFile.path);
-          const stringifiedConfig =
-            typeof configFile.config === 'string'
-              ? configFile.config
-              : await formatPkg(configFile.config);
-          // Write sync to prevent data races when writing configs in parallel
+          const stringifiedConfig = JSON.stringify(configFile.config);
+          let parser: 'babel' | 'json' = 'babel';
+
           const configInConfigFileFormat = ((): string => {
             switch (configFile.configType) {
               case 'commonjs':
+                parser = 'babel';
                 return `module.exports = ${stringifiedConfig}`;
               case 'module':
+                parser = 'babel';
                 return `export default ${stringifiedConfig}`;
-              default:
+              case 'json':
+                parser = 'json';
                 return stringifiedConfig;
+              default:
+                parser = 'babel';
+                return `module.exports = ${stringifiedConfig}`;
             }
           })();
-          return fs.promises.writeFile(filePath, configInConfigFileFormat);
+          const formattedConfig = prettier.format(
+            configToEvalString(configInConfigFileFormat),
+            {
+              parser
+            }
+          );
+
+          return fs.promises.writeFile(filePath, formattedConfig);
         })
     );
 

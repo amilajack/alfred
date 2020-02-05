@@ -1,6 +1,38 @@
-import { getDepsFromPkg } from '../src';
+import {
+  getDepsFromPkg,
+  configStringify,
+  configToEvalString,
+  configSerialize
+} from '../src';
 
 describe('Helpers', () => {
+  describe('stringify', () => {
+    it('should stringify configs', () => {
+      const config = {
+        plugins: [
+          configStringify`new webpack.Plugin()`,
+          configStringify`new webpack.Plugin()`
+        ]
+      };
+      expect(configToEvalString(configSerialize(config))).toEqual(
+        '{"plugins":[new webpack.Plugin(),new webpack.Plugin()]}'
+      );
+    });
+
+    it('should allow new line chars in configs', () => {
+      const config = {
+        plugins: [
+          configStringify`
+            new webpack.Plugin()
+          `
+        ]
+      };
+      expect(configToEvalString(configSerialize(config))).toEqual(
+        '{"plugins":[new webpack.Plugin(),new webpack.Plugin()]}'
+      );
+    });
+  });
+
   describe('getDepsFromPkg', () => {
     it('should add dev deps from pkg deps with default arg', () => {
       expect(

@@ -1,4 +1,5 @@
 /* eslint import/no-dynamic-require: off */
+import path from 'path';
 import lodash from 'lodash';
 import mergeConfigs from '@alfred/merge-configs';
 import {
@@ -13,7 +14,9 @@ import {
   SkillWithHelpers,
   Dependencies,
   DependencyType,
-  PkgJson
+  PkgJson,
+  CORE_SKILL,
+  ConfigType
 } from '@alfred/types';
 import {
   getDepsFromPkg,
@@ -22,17 +25,6 @@ import {
   requireSkill
 } from '@alfred/helpers';
 import { normalizeInterfacesOfSkill } from './interface';
-
-type CORE_SKILL =
-  | 'webpack'
-  | 'babel'
-  | 'parcel'
-  | 'eslint'
-  | 'prettier'
-  | 'jest'
-  | 'react'
-  | 'rollup'
-  | 'lodash';
 
 export function addSkillHelpers(skill: SkillNode): SkillWithHelpers {
   return {
@@ -133,10 +125,30 @@ export function runTransforms(
   return skillMap;
 }
 
+function getConfigTypeFromFile(file: string): ConfigType {
+  const { ext } = path.parse(file);
+  switch (ext) {
+    case '.json':
+      return 'json';
+    case '.js':
+      return 'commonjs';
+    default:
+      console.warn(
+        `configType could not be inferred for config path "${file}"`
+      );
+      return 'json';
+  }
+}
+
 function normalizeSkill(skill: SkillNode): SkillWithHelpers {
   return {
     ...addSkillHelpers(skill),
-    interfaces: normalizeInterfacesOfSkill(skill.interfaces)
+    interfaces: normalizeInterfacesOfSkill(skill.interfaces),
+    configFiles: (skill.configFiles || []).map(configFile => ({
+      ...configFile,
+      configType:
+        configFile.configType || getConfigTypeFromFile(configFile.path)
+    }))
   };
 }
 
