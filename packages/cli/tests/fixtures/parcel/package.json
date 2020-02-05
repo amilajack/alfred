@@ -40,6 +40,7 @@
   },
   "alfred": {
     "configsDir": ".configs",
+    "npmClient": "yarn",
     "skills": [
       "@alfred/skill-parcel"
     ]

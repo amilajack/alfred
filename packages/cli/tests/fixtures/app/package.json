@@ -49,6 +49,7 @@
   "alfred": {
     "showConfigs": true,
     "configsDir": ".configs",
+    "npmClient": "yarn",
     "skills": [
       "@alfred/skill-react"
     ]

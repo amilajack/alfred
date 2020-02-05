@@ -41,6 +41,7 @@
   },
   "alfred": {
     "showConfigs": true,
+    "npmClient": "yarn",
     "configsDir": ".configs",
     "skills": [
       "@alfred/skill-mocha"

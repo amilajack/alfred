@@ -37,6 +37,7 @@
   },
   "alfred": {
     "showConfigs": true,
+    "npmClient": "yarn",
     "configsDir": ".configsDirTest"
   }
 }

@@ -38,6 +38,7 @@
     "prettier": "^1.16.4"
   },
   "alfred": {
-    "configsDir": ".configs"
+    "configsDir": ".configs",
+    "npmClient": "yarn"
   }
 }

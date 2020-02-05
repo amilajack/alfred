@@ -59,6 +59,7 @@
   "alfred": {
     "extends": "@examples/alfred-config-example",
     "showConfigs": true,
+    "npmClient": "yarn",
     "skills": [
       "@alfred/skill-react",
       [
