@@ -3,6 +3,9 @@ language: node_js
 node_js:
   - node
 
+env:
+  - YARN_GPG=no
+
 os:
   - linux
   - osx
