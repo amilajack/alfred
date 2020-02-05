@@ -26,9 +26,6 @@ module.exports = {
     {
       name: 'rollup.base',
       path: 'rollup.base.js',
-      configType: 'commonjs',
-      applySkillConfig: true,
-      write: true,
       config: {
         external(id) {
           return id.includes('node_modules');
@@ -38,7 +35,6 @@ module.exports = {
     {
       name: 'rollup.prod',
       path: 'rollup.prod.js',
-      configType: 'commonjs',
       config: {
         output: {
           format: 'es'
@@ -54,7 +50,6 @@ module.exports = {
     {
       name: 'rollup.dev',
       path: 'rollup.dev.js',
-      configType: 'commonjs',
       config: {
         output: {
           format: 'cjs'

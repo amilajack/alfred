@@ -1,7 +1,11 @@
 /* eslint global-require: off */
 const webpack = require('webpack');
 const path = require('path');
-const { getConfigByName } = require('@alfred/helpers');
+const {
+  getConfigByName,
+  configStringify,
+  configParse
+} = require('@alfred/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 const getPort = require('get-port');
 
@@ -35,7 +39,6 @@ module.exports = {
     {
       name: 'webpack.base',
       path: 'webpack.base.js',
-      configType: 'commonjs',
       config: {
         mode: 'development',
         output: {
@@ -51,7 +54,6 @@ module.exports = {
     {
       name: 'webpack.prod',
       path: 'webpack.prod.js',
-      configType: 'commonjs',
       config: {
         output: {
           path: path.join('<projectRoot>', 'targets', 'prod'),
@@ -64,7 +66,6 @@ module.exports = {
     {
       name: 'webpack.dev',
       path: 'webpack.dev.js',
-      configType: 'commonjs',
       config: {
         // @TODO: wepack-dev-server, HMR, sass, css, etc
         mode: 'development',
@@ -101,16 +102,13 @@ module.exports = {
           }
         },
         plugins: [
-          new webpack.HotModuleReplacementPlugin({
-            multiStep: true
-          })
+          configStringify`new webpack.HotModuleReplacementPlugin({multiStep: true})`
         ]
       }
     },
     {
       name: 'webpack.node',
       path: 'webpack.node.js',
-      configType: 'commonjs',
       config: {
         entry: [path.join('<projectRoot>', 'src', 'app.node.js')],
         output: {
@@ -122,7 +120,6 @@ module.exports = {
     {
       name: 'webpack.browser',
       path: 'webpack.browser.js',
-      configType: 'commonjs',
       config: {
         entry: [path.join('<projectRoot>', 'src', 'app.browser.js')],
         output: {
@@ -151,11 +148,13 @@ module.exports = {
         'webpack.browser',
         configFiles
       );
-      const mergedConfig = mergeConfigs(
+      let mergedConfig = mergeConfigs(
         baseConfig,
         interfaceState.env === 'production' ? prodConfig : devConfig,
         interfaceState.target === 'browser' ? browserConfig : nodeConfig
       );
+
+      eval(`mergedConfig = ${configParse(mergedConfig)}`);
 
       // @HACK: The following lines should be replaced with an algorithm that
       //        recursively traverses and object and replaces each project root
@@ -243,8 +242,8 @@ module.exports = {
           module: {
             rules: [
               {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
+                test: configStringify`/\.jsx?$/`,
+                exclude: configStringify`/node_modules/`,
                 use: {
                   loader: 'babel-loader',
                   options: {
@@ -259,11 +258,11 @@ module.exports = {
         .addDepsFromPkg('babel-loader');
     },
     lodash(skill) {
-      // eslint-disable-next-line global-require
-      const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
       return skill
         .extendConfig('webpack.prod', {
-          plugins: [new LodashModuleReplacementPlugin()]
+          plugins: [
+            configStringify`(() => {const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');return new LodashModuleReplacementPlugin()})();`
+          ]
         })
         .addDepsFromPkg('lodash-webpack-plugin');
     },
@@ -277,7 +276,7 @@ module.exports = {
         devServer: {
           hot: true
         },
-        plugins: [new webpack.HotModuleReplacementPlugin()]
+        plugins: [configStringify`new webpack.HotModuleReplacementPlugin()`]
       });
     }
   }

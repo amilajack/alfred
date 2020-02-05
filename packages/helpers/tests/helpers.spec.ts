@@ -1,16 +1,29 @@
-import { getDepsFromPkg, configStringify, escapeStringify } from '../src';
+import { getDepsFromPkg, configStringify, configParse } from '../src';
 
 describe('Helpers', () => {
   describe('stringify', () => {
     it('should stringify configs', () => {
       const config = {
         plugins: [
-          configStringify`new webpack.plugins()`,
-          configStringify`new webpack.plugins()`
+          configStringify`new webpack.Plugin()`,
+          configStringify`new webpack.Plugin()`
         ]
       };
-      expect(escapeStringify(config)).toEqual(
-        '{"plugins":[new webpack.plugins(),new webpack.plugins()]}'
+      expect(configParse(config)).toEqual(
+        '{"plugins":[new webpack.Plugin(),new webpack.Plugin()]}'
+      );
+    });
+
+    it('should allow new line chars in configs', () => {
+      const config = {
+        plugins: [
+          configStringify`
+            new webpack.Plugin()
+          `
+        ]
+      };
+      expect(configParse(config)).toEqual(
+        '{"plugins":[new webpack.Plugin(),new webpack.Plugin()]}'
       );
     });
   });

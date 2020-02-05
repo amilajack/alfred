@@ -19,10 +19,11 @@ export function configStringify(configStr: TemplateStringsArray): string {
   return ['[alfred]', configStr, '[alfred]'].join('');
 }
 
-export function escapeStringify(obj: Record<string, any>): string {
-  return JSON.stringify(obj)
+export function configParse(config: string | Record<string, any>): string {
+  return (typeof config === 'string' ? config : JSON.stringify(config))
     .replace(/"\[alfred\]/g, '')
-    .replace(/\[alfred\]"/g, '');
+    .replace(/\[alfred\]"/g, '')
+    .replace(/\n/g, ' ');
 }
 
 export function requireSkill(skillName: string): SkillNode {

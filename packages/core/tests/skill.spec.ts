@@ -87,7 +87,6 @@ describe('Skills', () => {
               {
                 name: 'eslint',
                 path: '.eslintrc.json',
-                write: true,
                 config: {
                   plugins: []
                 }
