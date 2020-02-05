@@ -15,6 +15,16 @@ import {
   SkillNode
 } from '@alfred/types';
 
+export function configStringify(configStr: TemplateStringsArray): string {
+  return ['[alfred]', configStr, '[alfred]'].join('');
+}
+
+export function escapeStringify(obj: Record<string, any>): string {
+  return JSON.stringify(obj)
+    .replace(/"\[alfred\]/g, '')
+    .replace(/\[alfred\]"/g, '');
+}
+
 export function requireSkill(skillName: string): SkillNode {
   return {
     ...require(skillName),

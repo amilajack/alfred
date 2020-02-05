@@ -96,6 +96,7 @@
     "testEnvironment": "node",
     "testPathIgnorePatterns": [
       "<rootDir>/examples",
+      "<rootDir>/packages/cli/tests/e2e",
       "<rootDir>/packages/cli/tests/fixtures"
     ]
   }

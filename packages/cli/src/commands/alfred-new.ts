@@ -8,9 +8,8 @@ import validateName from 'validate-npm-package-name';
 import program from 'commander';
 import git from 'git-config';
 import chalk from 'chalk';
+import { version as ALFRED_CORE_VERSION } from '@alfred/core/package.json';
 import { getSingleSubcommandFromArgs, GitConfig, addBoilerplate } from '..';
-
-const { version: ALFRED_PKG_VERSION } = require('@alfred/core/package.json');
 
 function gitConfig(): Promise<GitConfig> {
   return new Promise((resolve, reject) => {
@@ -185,7 +184,7 @@ async function createNewProject(cwd: string, name: string): Promise<void> {
     'alfred-pkg': {
       semver: process.env.ALFRED_E2E_CLI_TEST
         ? `file:${alfredDepFilePath}`
-        : `^${ALFRED_PKG_VERSION}`
+        : `^${ALFRED_CORE_VERSION}`
     }
   };
 

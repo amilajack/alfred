@@ -1,6 +1,20 @@
-import { getDepsFromPkg } from '../src';
+import { getDepsFromPkg, configStringify, escapeStringify } from '../src';
 
 describe('Helpers', () => {
+  describe('stringify', () => {
+    it('should stringify configs', () => {
+      const config = {
+        plugins: [
+          configStringify`new webpack.plugins()`,
+          configStringify`new webpack.plugins()`
+        ]
+      };
+      expect(escapeStringify(config)).toEqual(
+        '{"plugins":[new webpack.plugins(),new webpack.plugins()]}'
+      );
+    });
+  });
+
   describe('getDepsFromPkg', () => {
     it('should add dev deps from pkg deps with default arg', () => {
       expect(
