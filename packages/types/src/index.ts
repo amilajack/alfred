@@ -184,6 +184,7 @@ export type HooksCallArgs = {
   config: ConfigInterface;
   interfaceState: InterfaceState;
   subcommand: string;
+  skill: SkillNode;
   skillConfig: ConfigValue;
   skillMap: SkillMap;
   flags: Array<string>;
@@ -217,7 +218,7 @@ export type Transforms = {
 
 export interface VirtualFileSystemInterface extends Map<string, SkillFile> {
   add(file: SkillFile): VirtualFileSystemInterface;
-  writeAllFiles(): Promise<void>;
+  writeAllFiles(project: ProjectInterface): Promise<void>;
 }
 
 export interface VirtualFileInterface extends SkillFile {
@@ -226,8 +227,7 @@ export interface VirtualFileInterface extends SkillFile {
   delete(): void;
   rename(filename: string): VirtualFileInterface;
   replace(content: string): VirtualFileInterface;
-  // @TODO
-  // applyDiff(diff: string): VirtualFileInterface;
+  applyDiff(diff: string): VirtualFileInterface;
 }
 
 export type CORE_SKILL =
@@ -244,7 +244,9 @@ export type CORE_SKILL =
 export interface RawSkill extends PkgWithDeps {
   name: string;
   description: string;
-  supports?: Supports;
+  supports: Supports;
+  pkg: PkgJson;
+  files: Array<SkillFile>;
   configFiles?: Array<SkillConfigFile>;
   config?: SkillConfigFile;
   interfaces?: Array<SkillInterface>;
@@ -277,22 +279,24 @@ export type SkillNode = Skill | SkillUsingInterface;
 
 export type SkillMap = Map<string, SkillNode>;
 
-export interface SkillWithHelpers extends Skill {
+export interface Helpers<T> {
   findConfig: (configName: string) => SkillConfigFile;
-  extendConfig: (x: string) => SkillWithHelpers;
-  replaceConfig: (
-    x: string,
-    configReplacement: SkillConfigFile
-  ) => SkillWithHelpers;
-  addDeps: (pkg: Dependencies) => SkillWithHelpers;
-  addDevDeps: (pkg: Dependencies) => SkillWithHelpers;
+  extendConfig: (x: string) => T;
+  replaceConfig: (x: string, configReplacement: SkillConfigFile) => T;
+  addDeps: (pkg: Dependencies) => T;
+  addDevDeps: (pkg: Dependencies) => T;
   addDepsFromPkg: (
     pkgs: string | string[],
     pkg?: PkgJson,
     fromPkgType?: DependencyType,
     toPkgType?: DependencyType
-  ) => SkillWithHelpers;
+  ) => T;
 }
+
+export interface RawSkillWithHelpers
+  extends Helpers<RawSkillWithHelpers>,
+    RawSkill {}
+export interface SkillWithHelpers extends Helpers<SkillWithHelpers>, Skill {}
 
 export type ValidationResult = {
   warnings: string[];

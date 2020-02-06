@@ -1,7 +1,11 @@
 import path from 'path';
 import slash from 'slash';
+import { requireSkill } from '@alfred/helpers';
+import { Skills } from '../src/skill';
 import VirtualFileSystem from '../src/virtual-file';
 import Project from '../src/project';
+
+const reduxSkill = requireSkill('@alfred/skill-redux');
 
 describe('virtual file system', () => {
   let fs;
@@ -14,7 +18,7 @@ describe('virtual file system', () => {
   };
 
   beforeEach(() => {
-    fs = new VirtualFileSystem(project);
+    fs = new VirtualFileSystem();
   });
 
   it('should delete files', () => {
@@ -48,5 +52,43 @@ describe('virtual file system', () => {
       'content',
       'console.log(1);alert(2);'
     );
+  });
+
+  describe('diffs', () => {
+    it('should apply diffs', async () => {
+      const typescriptSkill = {
+        name: 'typescript'
+      };
+      const skillMap = await Skills(project, [reduxSkill, typescriptSkill], {
+        projectType: 'app',
+        env: 'development',
+        target: 'browser'
+      });
+      expect(skillMap.get('redux').files.get('routes').content).toEqual(
+        `import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { createHashHistory } from 'history';
+import { routerMiddleware } from 'connected-react-router';
+import createRootReducer from '../reducers';
+import type { counterStateType } from '../reducers/types';
+import { Store, counterStateType } from '../reducers/types';
+
+const history = createHashHistory();
+const rootReducer = createRootReducer(history);
+const router = routerMiddleware(history);
+const enhancer = applyMiddleware(thunk, router);
+
+function configureStore(initialState?: counterStateType) {
+ return createStore<*, counterStateType, *>(
+    rootReducer,
+    initialState,
+    enhancer
+  );
+}
+
+export default { configureStore, history };
+`
+      );
+    });
   });
 });

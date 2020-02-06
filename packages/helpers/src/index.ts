@@ -13,7 +13,7 @@ import {
   DependencyType,
   DependencyTypeFull,
   Dependencies,
-  SkillNode
+  Skill
 } from '@alfred/types';
 
 export function configSerialize(config: string | Record<string, any>): string {
@@ -33,7 +33,7 @@ export function configToEvalString(serializedConfig: string): string {
     .replace(/\[alfred\]"/g, '');
 }
 
-export function requireSkill(skillName: string): SkillNode {
+export function requireSkill(skillName: string): Skill {
   return {
     ...require(skillName),
     pkg: require(`${skillName}/package.json`),

@@ -359,6 +359,14 @@ export default class Project implements ProjectInterface {
 
     const skills: SkillNode[] = Array.from(skillMap.values());
 
+    // Write all files
+    await Promise.all(
+      skills
+        .filter(skill => skill.files && skill.files.size)
+        .map(skill => skill.files.writeAllFiles(this))
+    );
+
+    // Write all configFiles
     await Promise.all(
       skills
         .filter(skill => skill.configFiles && skill.configFiles.length)

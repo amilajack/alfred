@@ -25,8 +25,7 @@ import Project from '../src/project';
 
 function getConfigs(skillMap: SkillMap): Array<ConfigValue> {
   return Array.from(skillMap.values())
-    .map(skill => skill.configFiles || [])
-    .flat()
+    .flatMap(skill => skill.configFiles || [])
     .map(configFile => configFile.config);
 }
 

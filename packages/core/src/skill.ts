@@ -16,7 +16,9 @@ import {
   DependencyType,
   PkgJson,
   CORE_SKILL,
-  ConfigType
+  ConfigType,
+  Skill,
+  RawSkill
 } from '@alfred/types';
 import {
   getDepsFromPkg,
@@ -24,13 +26,14 @@ import {
   getConfigsBasePath,
   requireSkill
 } from '@alfred/helpers';
+import VirtualFileSystem from './virtual-file';
 import { normalizeInterfacesOfSkill } from './interface';
 
-export function addSkillHelpers(skill: SkillNode): SkillWithHelpers {
+export function addSkillHelpers(skill: Skill): SkillWithHelpers {
   return {
     ...skill,
     findConfig(configName: string): SkillConfigFile {
-      const config = this.configFiles.find(
+      const config = (this.configFiles || []).find(
         configFile => configFile.name === configName
       );
       if (!config) {
@@ -46,7 +49,7 @@ export function addSkillHelpers(skill: SkillNode): SkillWithHelpers {
       const mergedConfigFile = mergeConfigs({}, foundConfig, {
         config: configExtension
       });
-      const configFiles = this.configFiles.map(configFile =>
+      const configFiles = (this.configFiles || []).map(configFile =>
         configFile.name === configName ? mergedConfigFile : configFile
       );
       return lodash.merge({}, this, {
@@ -57,7 +60,7 @@ export function addSkillHelpers(skill: SkillNode): SkillWithHelpers {
       configName: string,
       configReplacement: SkillConfigFile
     ): SkillWithHelpers {
-      const configFiles = this.configFiles.map(configFile =>
+      const configFiles = (this.configFiles || []).map(configFile =>
         configFile.name === configName ? configReplacement : configFile
       );
       return {
@@ -145,10 +148,11 @@ function getConfigTypeFromFile(file: string): ConfigType {
   }
 }
 
-function normalizeSkill(skill: SkillNode): SkillWithHelpers {
+function normalizeSkill(skill: Skill | RawSkill): SkillWithHelpers {
   return {
-    ...addSkillHelpers(skill),
-    interfaces: normalizeInterfacesOfSkill(skill.interfaces),
+    ...addSkillHelpers(skill as Skill),
+    interfaces: normalizeInterfacesOfSkill((skill as Skill).interfaces),
+    files: new VirtualFileSystem((skill as RawSkill).files || []),
     configFiles: (skill.configFiles || []).map(configFile => ({
       ...configFile,
       configType:
