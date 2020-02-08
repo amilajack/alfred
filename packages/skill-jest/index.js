@@ -18,7 +18,7 @@ module.exports = {
     }
   ],
   hooks: {
-    async call({ configFiles, skillMap, config, project, flags }) {
+    async run({ configFiles, skillMap, config, project, flags }) {
       const configPath = getConfigPathByConfigName('jest', configFiles);
       const binPath = await getPkgBinPath(project, 'jest');
       const { root } = project;

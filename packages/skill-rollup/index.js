@@ -65,7 +65,7 @@ module.exports = {
     }
   ],
   hooks: {
-    async call({ configFiles, interfaceState, subcommand }) {
+    async run({ configFiles, interfaceState, subcommand }) {
       const [baseConfig, prodConfig, devConfig] = [
         'rollup.base',
         'rollup.prod',

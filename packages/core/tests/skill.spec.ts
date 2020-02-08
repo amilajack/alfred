@@ -25,8 +25,7 @@ import Project from '../src/project';
 
 function getConfigs(skillMap: SkillMap): Array<ConfigValue> {
   return Array.from(skillMap.values())
-    .map(skill => skill.configFiles || [])
-    .flat()
+    .flatMap(skill => skill.configFiles || [])
     .map(configFile => configFile.config);
 }
 
@@ -350,7 +349,7 @@ describe('Skills', () => {
         await expect(
           skillMapFromConfig(project, state, project.config)
         ).rejects.toThrow(
-          "Cannot find module '@alfred/skill-non-existent-skill' from 'index.js'"
+          "Cannot find module '@alfred/skill-non-existent-skill'"
         );
       });
 
@@ -365,7 +364,7 @@ describe('Skills', () => {
         await expect(
           skillMapFromConfig(project, state, project.config)
         ).rejects.toThrow(
-          "Cannot find module '@alfred/skill-non-existent-skill' from 'index.js'"
+          "Cannot find module '@alfred/skill-non-existent-skill'"
         );
       });
     });

@@ -7,7 +7,8 @@ import {
   InterfaceState,
   ConfigValue,
   SkillInterfaceModule,
-  SkillNode
+  SkillNode,
+  HookFn
 } from '@alfred/types';
 
 export function getInterfaceForSubcommand(
@@ -19,10 +20,9 @@ export function getInterfaceForSubcommand(
       (skillNode: SkillNode) =>
         skillNode.interfaces && skillNode.interfaces.length
     )
-    .map((skillNode: SkillNode): SkillInterfaceModule[] =>
+    .flatMap((skillNode: SkillNode): SkillInterfaceModule[] =>
       skillNode.interfaces.map(skillInterface => require(skillInterface.name))
     )
-    .flat()
     .find(
       (skillInterface: SkillInterfaceModule) =>
         skillInterface.subcommand === subcommand
@@ -62,9 +62,12 @@ export function getExecutableWrittenConfigsMethods(
     Array.from(skillMap.values())
       .filter(
         skillNode =>
-          skillNode.hooks && skillNode.interfaces && skillNode.interfaces.length
+          skillNode.hooks &&
+          skillNode.hooks.run &&
+          skillNode.interfaces &&
+          skillNode.interfaces.length
       )
-      .map(skillNode => {
+      .flatMap(skillNode => {
         const configFiles = skillNode.configFiles.map(configFile => ({
           ...configFile,
           path: path.join(configsBasePath, configFile.path)
@@ -76,7 +79,8 @@ export function getExecutableWrittenConfigsMethods(
           ) as ConfigValue;
           return {
             fn: (flags: Array<string> = []): void =>
-              skillNode.hooks.call({
+              (skillNode.hooks.run as HookFn)({
+                skill: skillNode,
                 project,
                 config,
                 configFiles,
@@ -93,7 +97,6 @@ export function getExecutableWrittenConfigsMethods(
           };
         });
       })
-      .flat()
       // @TODO @REFACTOR This is messy
       .reduce(
         (

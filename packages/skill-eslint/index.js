@@ -29,7 +29,7 @@ module.exports = {
     }
   ],
   hooks: {
-    async call({ project, config, configFiles, flags }) {
+    async run({ project, config, configFiles, flags }) {
       const configPath = getConfigPathByConfigName('eslint', configFiles);
       const binPath = await getPkgBinPath(project, 'eslint');
       if (config.showConfigs) {

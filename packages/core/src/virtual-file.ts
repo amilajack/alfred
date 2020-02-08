@@ -1,5 +1,8 @@
 import path from 'path';
 import fs from 'fs';
+import emphasize from 'emphasize/lib/core';
+import diffLang from 'highlight.js/lib/languages/diff';
+import { applyPatch } from 'diff';
 import {
   ProjectInterface,
   VirtualFileInterface,
@@ -47,15 +50,30 @@ export class VirtualFile implements VirtualFileInterface {
     this.content = content;
     return this;
   }
+
+  applyDiff(patch: string): VirtualFileInterface {
+    emphasize.registerLanguage('diff', diffLang);
+    const syntaxHighlightedPatch = emphasize.highlight('diff', patch).value;
+
+    const patchResult = applyPatch(this.content, patch);
+    if (!patchResult) {
+      throw new Error(
+        `The following patch could not be applied to "${this.path}". Check the line numbers of the patch: \n\n ${syntaxHighlightedPatch}`
+      );
+    }
+    this.content = patchResult;
+
+    return this;
+  }
 }
 
 export default class VirtualFileSystem extends Map<string, SkillFile>
   implements VirtualFileSystemInterface {
-  private project: ProjectInterface;
-
-  constructor(project: ProjectInterface, files: SkillFile[] = []) {
-    super(files.map(file => [file.name, new VirtualFile(this, file)]));
-    this.project = project;
+  constructor(files: SkillFile[] = []) {
+    super();
+    files.forEach(file => {
+      this.add(file);
+    });
   }
 
   add(file: SkillFile): VirtualFileSystem {
@@ -63,10 +81,10 @@ export default class VirtualFileSystem extends Map<string, SkillFile>
     return this;
   }
 
-  async writeAllFiles(): Promise<void> {
+  async writeAllFiles(project: ProjectInterface): Promise<void> {
     const writeFiles = Array.from(this.values()).map(file =>
       fs.promises.writeFile(
-        path.join(this.project.root, this.project.config.configsDir, file.path),
+        path.join(project.root, project.config.configsDir, file.path),
         file.content
       )
     );

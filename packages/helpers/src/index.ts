@@ -12,8 +12,7 @@ import {
   PkgWithAllDeps,
   DependencyType,
   DependencyTypeFull,
-  Dependencies,
-  SkillNode
+  Dependencies
 } from '@alfred/types';
 
 export function configSerialize(config: string | Record<string, any>): string {
@@ -31,14 +30,6 @@ export function configToEvalString(serializedConfig: string): string {
   return serializedConfig
     .replace(/"\[alfred\]/g, '')
     .replace(/\[alfred\]"/g, '');
-}
-
-export function requireSkill(skillName: string): SkillNode {
-  return {
-    ...require(skillName),
-    pkg: require(`${skillName}/package.json`),
-    devDependencies: require(`${skillName}/package.json`).peerDependencies
-  };
 }
 
 export function getConfigByName(

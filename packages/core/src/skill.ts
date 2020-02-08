@@ -16,21 +16,23 @@ import {
   DependencyType,
   PkgJson,
   CORE_SKILL,
-  ConfigType
+  ConfigType,
+  Skill,
+  RawSkill
 } from '@alfred/types';
 import {
   getDepsFromPkg,
   fromPkgTypeToFull,
-  getConfigsBasePath,
-  requireSkill
+  getConfigsBasePath
 } from '@alfred/helpers';
+import VirtualFileSystem from './virtual-file';
 import { normalizeInterfacesOfSkill } from './interface';
 
-export function addSkillHelpers(skill: SkillNode): SkillWithHelpers {
+export function addSkillHelpers(skill: Skill): SkillWithHelpers {
   return {
     ...skill,
     findConfig(configName: string): SkillConfigFile {
-      const config = this.configFiles.find(
+      const config = (this.configFiles || []).find(
         configFile => configFile.name === configName
       );
       if (!config) {
@@ -46,7 +48,7 @@ export function addSkillHelpers(skill: SkillNode): SkillWithHelpers {
       const mergedConfigFile = mergeConfigs({}, foundConfig, {
         config: configExtension
       });
-      const configFiles = this.configFiles.map(configFile =>
+      const configFiles = (this.configFiles || []).map(configFile =>
         configFile.name === configName ? mergedConfigFile : configFile
       );
       return lodash.merge({}, this, {
@@ -57,7 +59,7 @@ export function addSkillHelpers(skill: SkillNode): SkillWithHelpers {
       configName: string,
       configReplacement: SkillConfigFile
     ): SkillWithHelpers {
-      const configFiles = this.configFiles.map(configFile =>
+      const configFiles = (this.configFiles || []).map(configFile =>
         configFile.name === configName ? configReplacement : configFile
       );
       return {
@@ -145,10 +147,14 @@ function getConfigTypeFromFile(file: string): ConfigType {
   }
 }
 
-function normalizeSkill(skill: SkillNode): SkillWithHelpers {
+/**
+ * @TODO Change skill param to be RawSkill instead of Skill | RawSkill
+ */
+function normalizeSkill(skill: Skill | RawSkill): SkillWithHelpers {
   return {
-    ...addSkillHelpers(skill),
-    interfaces: normalizeInterfacesOfSkill(skill.interfaces),
+    ...addSkillHelpers(skill as Skill),
+    interfaces: normalizeInterfacesOfSkill((skill as Skill).interfaces),
+    files: new VirtualFileSystem((skill as RawSkill).files || []),
     configFiles: (skill.configFiles || []).map(configFile => ({
       ...configFile,
       configType:
@@ -157,16 +163,32 @@ function normalizeSkill(skill: SkillNode): SkillWithHelpers {
   };
 }
 
+export function requireSkill(skillName: string): SkillWithHelpers {
+  try {
+    const requiredSkill = {
+      ...require(skillName),
+      pkg: require(`${skillName}/package.json`),
+      devDependencies: require(`${skillName}/package.json`).peerDependencies
+    };
+    return {
+      ...requiredSkill,
+      ...normalizeSkill(requiredSkill)
+    };
+  } catch (e) {
+    throw new Error(`Cannot find module '${skillName}'`);
+  }
+}
+
 export const CORE_SKILLS: { [skill in CORE_SKILL]: SkillWithHelpers } = {
-  webpack: normalizeSkill(requireSkill('@alfred/skill-webpack')),
-  babel: normalizeSkill(requireSkill('@alfred/skill-babel')),
-  parcel: normalizeSkill(requireSkill('@alfred/skill-parcel')),
-  eslint: normalizeSkill(requireSkill('@alfred/skill-eslint')),
-  prettier: normalizeSkill(requireSkill('@alfred/skill-prettier')),
-  jest: normalizeSkill(requireSkill('@alfred/skill-jest')),
-  react: normalizeSkill(requireSkill('@alfred/skill-react')),
-  rollup: normalizeSkill(requireSkill('@alfred/skill-rollup')),
-  lodash: normalizeSkill(requireSkill('@alfred/skill-lodash'))
+  webpack: requireSkill('@alfred/skill-webpack'),
+  babel: requireSkill('@alfred/skill-babel'),
+  parcel: requireSkill('@alfred/skill-parcel'),
+  eslint: requireSkill('@alfred/skill-eslint'),
+  prettier: requireSkill('@alfred/skill-prettier'),
+  jest: requireSkill('@alfred/skill-jest'),
+  react: requireSkill('@alfred/skill-react'),
+  rollup: requireSkill('@alfred/skill-rollup'),
+  lodash: requireSkill('@alfred/skill-lodash')
 };
 
 // Examples
