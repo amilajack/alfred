@@ -7,7 +7,8 @@ import {
   InterfaceState,
   ConfigValue,
   SkillInterfaceModule,
-  SkillNode
+  SkillNode,
+  CallFn
 } from '@alfred/types';
 
 export function getInterfaceForSubcommand(
@@ -61,7 +62,10 @@ export function getExecutableWrittenConfigsMethods(
     Array.from(skillMap.values())
       .filter(
         skillNode =>
-          skillNode.hooks && skillNode.interfaces && skillNode.interfaces.length
+          skillNode.hooks &&
+          skillNode.hooks.call &&
+          skillNode.interfaces &&
+          skillNode.interfaces.length
       )
       .flatMap(skillNode => {
         const configFiles = skillNode.configFiles.map(configFile => ({
@@ -75,7 +79,7 @@ export function getExecutableWrittenConfigsMethods(
           ) as ConfigValue;
           return {
             fn: (flags: Array<string> = []): void =>
-              skillNode.hooks.call({
+              (skillNode.hooks.call as CallFn)({
                 skill: skillNode,
                 project,
                 config,

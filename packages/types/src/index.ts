@@ -251,7 +251,7 @@ export interface RawSkill extends PkgWithDeps {
   config?: SkillConfigFile;
   interfaces?: Array<SkillInterface>;
   hooks?: {
-    call: CallFn;
+    call?: CallFn;
   };
   transforms?: Transforms;
 }
@@ -266,7 +266,8 @@ export interface Skill extends PkgWithDeps {
   config: SkillConfigFile;
   interfaces: Array<SkillInterface>;
   hooks: {
-    call: CallFn;
+    call?: CallFn;
+    postTransforms?: Function;
   };
   transforms: Transforms;
 }

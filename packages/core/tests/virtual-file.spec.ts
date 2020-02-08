@@ -1,7 +1,6 @@
 import path from 'path';
 import slash from 'slash';
-import { requireSkill } from '@alfred/helpers';
-import { Skills } from '../src/skill';
+import { Skills, requireSkill } from '../src/skill';
 import VirtualFileSystem from '../src/virtual-file';
 import Project from '../src/project';
 

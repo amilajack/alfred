@@ -349,7 +349,7 @@ describe('Skills', () => {
         await expect(
           skillMapFromConfig(project, state, project.config)
         ).rejects.toThrow(
-          "Cannot find module '@alfred/skill-non-existent-skill' from 'index.js'"
+          "Cannot find module '@alfred/skill-non-existent-skill'"
         );
       });
 
@@ -364,7 +364,7 @@ describe('Skills', () => {
         await expect(
           skillMapFromConfig(project, state, project.config)
         ).rejects.toThrow(
-          "Cannot find module '@alfred/skill-non-existent-skill' from 'index.js'"
+          "Cannot find module '@alfred/skill-non-existent-skill'"
         );
       });
     });
