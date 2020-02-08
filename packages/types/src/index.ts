@@ -178,7 +178,7 @@ export type SkillConfigFile = {
   configType?: ConfigType;
 };
 
-export type HooksCallArgs = {
+export type HooksArgs = {
   project: ProjectInterface;
   configFiles: Array<SkillConfigFile>;
   config: ConfigInterface;
@@ -190,7 +190,7 @@ export type HooksCallArgs = {
   flags: Array<string>;
 };
 
-export type CallFn = (args: HooksCallArgs) => void;
+export type HookFn = (args: HooksArgs) => void;
 
 export type DiffDeps = { diffDevDeps: string[]; diffDeps: string[] };
 
@@ -241,6 +241,12 @@ export type CORE_SKILL =
   | 'rollup'
   | 'lodash';
 
+export type Hooks = {
+  run?: HookFn;
+  beforeTransforms?: HookFn;
+  afterTransforms?: HookFn;
+};
+
 export interface RawSkill extends PkgWithDeps {
   name: string;
   description: string;
@@ -250,9 +256,7 @@ export interface RawSkill extends PkgWithDeps {
   configFiles?: Array<SkillConfigFile>;
   config?: SkillConfigFile;
   interfaces?: Array<SkillInterface>;
-  hooks?: {
-    call?: CallFn;
-  };
+  hooks?: Hooks;
   transforms?: Transforms;
 }
 
@@ -265,10 +269,7 @@ export interface Skill extends PkgWithDeps {
   configFiles: Array<SkillConfigFile>;
   config: SkillConfigFile;
   interfaces: Array<SkillInterface>;
-  hooks: {
-    call?: CallFn;
-    postTransforms?: Function;
-  };
+  hooks: Hooks;
   transforms: Transforms;
 }
 

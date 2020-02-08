@@ -6,4 +6,4 @@ targets
 tmp
 fixtures
 examples
-packages/skill-*/src/*
+packages/skill-*/boilerplate/*

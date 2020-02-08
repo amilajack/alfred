@@ -136,7 +136,7 @@ module.exports = {
     }
   ],
   hooks: {
-    async call({ project, configFiles, interfaceState, subcommand }) {
+    async run({ project, configFiles, interfaceState, subcommand }) {
       const { config: baseConfig } = getConfigByName(
         'webpack.base',
         configFiles

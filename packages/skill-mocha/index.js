@@ -17,7 +17,7 @@ module.exports = {
     projectTypes: ['app', 'lib']
   },
   hooks: {
-    async call({ project, config, skillMap, flags }) {
+    async run({ project, config, skillMap, flags }) {
       const binPath = await getPkgBinPath(project, 'mocha');
       const mochaBabelRegisterPath = path.join(
         project.root,

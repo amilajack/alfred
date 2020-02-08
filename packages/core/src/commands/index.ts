@@ -8,7 +8,7 @@ import {
   ConfigValue,
   SkillInterfaceModule,
   SkillNode,
-  CallFn
+  HookFn
 } from '@alfred/types';
 
 export function getInterfaceForSubcommand(
@@ -63,7 +63,7 @@ export function getExecutableWrittenConfigsMethods(
       .filter(
         skillNode =>
           skillNode.hooks &&
-          skillNode.hooks.call &&
+          skillNode.hooks.run &&
           skillNode.interfaces &&
           skillNode.interfaces.length
       )
@@ -79,7 +79,7 @@ export function getExecutableWrittenConfigsMethods(
           ) as ConfigValue;
           return {
             fn: (flags: Array<string> = []): void =>
-              (skillNode.hooks.call as CallFn)({
+              (skillNode.hooks.run as HookFn)({
                 skill: skillNode,
                 project,
                 config,

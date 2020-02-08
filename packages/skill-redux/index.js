@@ -8,14 +8,16 @@ module.exports = {
       name: 'routes',
       path: 'src/routes.js',
       content: fs
-        .readFileSync(path.join(__dirname, 'src/routes.jsx'))
+        .readFileSync(path.join(__dirname, 'boilerplate/routes.jsx'))
         .toString()
     },
     {
       name: 'configureStore',
       path: 'src/store/configureStore.prod.js',
       content: fs
-        .readFileSync(path.join(__dirname, 'src/store/configureStore.prod.js'))
+        .readFileSync(
+          path.join(__dirname, 'boilerplate/store/configureStore.prod.js')
+        )
         .toString()
     }
   ],
