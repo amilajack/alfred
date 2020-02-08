@@ -1,5 +1,7 @@
 import path from 'path';
 import fs from 'fs';
+import emphasize from 'emphasize/lib/core';
+import diffLang from 'highlight.js/lib/languages/diff';
 import { applyPatch } from 'diff';
 import {
   ProjectInterface,
@@ -50,7 +52,17 @@ export class VirtualFile implements VirtualFileInterface {
   }
 
   applyDiff(patch: string): VirtualFileInterface {
-    this.content = applyPatch(this.content, patch);
+    emphasize.registerLanguage('diff', diffLang);
+    const syntaxHighlightedPatch = emphasize.highlight('diff', patch).value;
+
+    const patchResult = applyPatch(this.content, patch);
+    if (!patchResult) {
+      throw new Error(
+        `The following patch could not be applied to "${this.path}". Check the line numbers of the patch: \n\n ${syntaxHighlightedPatch}`
+      );
+    }
+    this.content = patchResult;
+
     return this;
   }
 }
