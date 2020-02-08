@@ -11,6 +11,12 @@ describe('virtual file system', () => {
 
   const project = new Project(path.join(__dirname, 'fixtures/react-app'));
 
+  const defaultInterfaceState = {
+    projectType: 'app',
+    env: 'development',
+    target: 'browser'
+  };
+
   const file = {
     name: 'routes',
     path: 'src/routes.js'
@@ -58,11 +64,11 @@ describe('virtual file system', () => {
       const typescriptSkill = {
         name: 'typescript'
       };
-      const skillMap = await Skills(project, [reduxSkill, typescriptSkill], {
-        projectType: 'app',
-        env: 'development',
-        target: 'browser'
-      });
+      const skillMap = await Skills(
+        project,
+        [reduxSkill, typescriptSkill],
+        defaultInterfaceState
+      );
       expect(skillMap.get('redux').files.get('configureStore').content).toEqual(
         `import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
@@ -81,6 +87,45 @@ function configureStore(initialState?: counterStateType): Store {
 
 export default { configureStore, history };
 `
+      );
+    });
+
+    it('should apply multiple diffs to file', async () => {
+      const typescriptSkill = {
+        name: 'typescript'
+      };
+      const reactSkill = {
+        name: 'react',
+        files: [
+          {
+            path: 'src/routes',
+            name: 'routes',
+            content: 'route 1'
+          }
+        ],
+        transforms: {
+          typescript(skill) {
+            skill.files.get('routes').applyDiff(
+              `@@ -2 +2 @@
++route 2
+`
+            ).applyDiff(`@@ -3 +3 @@
++route 3`);
+            return skill;
+          }
+        }
+      };
+
+      const skillMap = await Skills(
+        project,
+        [reactSkill, typescriptSkill],
+        defaultInterfaceState
+      );
+
+      expect(skillMap.get('react').files.get('routes').content).toEqual(
+        `route 1
+route 2
+route 3`
       );
     });
   });
