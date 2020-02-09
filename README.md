@@ -233,8 +233,6 @@ export default {
         import { createHashHistory } from 'history';
         import { routerMiddleware } from 'connected-react-router';
         import createRootReducer from '../reducers';
-        import type { counterStateType } from '../reducers/types';
-        import { Store, counterStateType } from '../reducers/types';
 
         const history = createHashHistory();
         const rootReducer = createRootReducer(history);

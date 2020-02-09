@@ -7,33 +7,51 @@ module.exports = {
     {
       src: path.join(__dirname, 'boilerplate/actions'),
       dest: 'src/actions'
+    },
+    {
+      src: path.join(__dirname, 'boilerplate/constants'),
+      dest: 'src/constants'
+    },
+    {
+      src: path.join(__dirname, 'boilerplate/containers'),
+      dest: 'src/containers'
+    },
+    {
+      src: path.join(__dirname, 'boilerplate/components'),
+      dest: 'src/components'
+    },
+    {
+      src: path.join(__dirname, 'boilerplate/reducers'),
+      dest: 'src/reducers'
+    },
+    {
+      src: path.join(__dirname, 'boilerplate/store'),
+      dest: 'src/store'
     }
   ],
   files: [
     {
+      src: path.join(__dirname, 'boilerplate/routes.js'),
+      dest: 'src/routes.js'
+    },
+    {
       alias: 'routes',
-      dest: 'src/routes.js',
-      content: fs
-        .readFileSync(path.join(__dirname, 'boilerplate/routes.jsx'))
-        .toString()
+      src: path.join(__dirname, 'boilerplate/routes.js'),
+      dest: 'src/routes.js'
     },
     {
-      name: 'configureStore.dev',
-      dest: 'src/store/configureStore.dev.js',
-      content: fs
-        .readFileSync(
-          path.join(__dirname, 'boilerplate/store/configureStore.dev.js')
-        )
-        .toString()
+      src: path.join(__dirname, 'boilerplate/index.js'),
+      dest: 'src/app.browser.js'
     },
     {
-      name: 'configureStore.prod',
-      dest: 'src/store/configureStore.prod.js',
-      content: fs
-        .readFileSync(
-          path.join(__dirname, 'boilerplate/store/configureStore.prod.js')
-        )
-        .toString()
+      alias: 'configureStore.dev',
+      src: path.join(__dirname, 'boilerplate/store/configureStore.dev.js'),
+      dest: 'src/store/configureStore.dev.js'
+    },
+    {
+      alias: 'configureStore.prod',
+      src: path.join(__dirname, 'boilerplate/store/configureStore.prod.js'),
+      dest: 'src/store/configureStore.prod.js'
     }
   ],
   transforms: {

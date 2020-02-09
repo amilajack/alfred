@@ -3,15 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './Counter.css';
 import routes from '../constants/routes.json';
 
-type Props = {
-  increment: () => void,
-  incrementIfOdd: () => void,
-  incrementAsync: () => void,
-  decrement: () => void,
-  counter: number
-};
-
-export default function Counter(props: Props) {
+export default function Counter(props) {
   const {
     increment,
     incrementIfOdd,

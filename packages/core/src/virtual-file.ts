@@ -20,11 +20,14 @@ export class VirtualFile implements VirtualFileInterface {
 
   private fs: VirtualFileSystem;
 
-  constructor(fs: VirtualFileSystem, file: SkillFile) {
+  constructor(vfs: VirtualFileSystem, file: SkillFile) {
     this.dest = file.dest;
     this.name = file.alias || file.dest;
-    this.content = file.content || '';
-    this.fs = fs;
+    this.content =
+      typeof file.src === 'string'
+        ? fs.readFileSync(file.src).toString()
+        : (file.content as string);
+    this.fs = vfs;
   }
 
   move(destDir: string): VirtualFileInterface {

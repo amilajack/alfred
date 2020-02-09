@@ -18,7 +18,7 @@ describe('virtual file system', () => {
   };
 
   const file = {
-    name: 'routes',
+    alias: 'routes',
     path: 'src/routes.js'
   };
 

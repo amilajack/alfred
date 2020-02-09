@@ -175,6 +175,7 @@ export function requireSkill(skillName: string): SkillWithHelpers {
       ...normalizeSkill(requiredSkill)
     };
   } catch (e) {
+    console.log(e);
     throw new Error(`Cannot find module '${skillName}'`);
   }
 }

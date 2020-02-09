@@ -160,10 +160,12 @@ export type SkillFile = {
   // The "friendly name" of a file. This is the name that
   // other skills will refer to config file by.
   alias?: string;
+  // The absolute path of the file
+  src?: string;
   // The relative path of the file the config should be written to
   dest: string;
   // The content of the file
-  content: string;
+  content?: string;
 };
 
 export type ConfigType = 'commonjs' | 'module' | 'json';

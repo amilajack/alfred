@@ -1,5 +1,3 @@
-import { GetState, Dispatch } from '../reducers/types';
-
 export const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
 export const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
 
@@ -16,7 +14,7 @@ export function decrement() {
 }
 
 export function incrementIfOdd() {
-  return (dispatch: Dispatch, getState: GetState) => {
+  return (dispatch, getState) => {
     const { counter } = getState();
 
     if (counter % 2 === 0) {
@@ -28,7 +26,7 @@ export function incrementIfOdd() {
 }
 
 export function incrementAsync(delay = 1000) {
-  return (dispatch: Dispatch) => {
+  return (dispatch) => {
     setTimeout(() => {
       dispatch(increment());
     }, delay);
