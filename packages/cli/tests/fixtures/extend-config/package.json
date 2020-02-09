@@ -22,6 +22,7 @@
     "@babel/preset-env": "^7.8.4",
     "@babel/register": "^7.8.3",
     "@examples/alfred-config-example": "^0.0.3",
+    "autoprefixer": "^9.7.4",
     "babel-eslint": "10.0.3",
     "babel-loader": "8.0.6",
     "babel-plugin-lodash": "3.3.4",
@@ -37,12 +38,13 @@
     "lodash-es": "4.17.15",
     "lodash-webpack-plugin": "0.11.5",
     "parcel": "^1.11.0",
+    "postcss-modules": "^1.5.0",
     "prettier": "^1.16.4"
   },
   "alfred": {
-    "extends": "@examples/alfred-config-example",
     "configsDir": ".configs",
-    "showConfigs": true,
-    "npmClient": "yarn"
+    "extends": "@examples/alfred-config-example",
+    "npmClient": "yarn",
+    "showConfigs": true
   }
 }

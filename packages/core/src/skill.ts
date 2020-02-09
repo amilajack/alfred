@@ -67,6 +67,13 @@ export function addSkillHelpers(skill: Skill): SkillWithHelpers {
         configFiles
       };
     },
+    setWrite(configName: string, shouldWrite: boolean): SkillWithHelpers {
+      const newConfig = {
+        ...this.findConfig(configName),
+        write: shouldWrite
+      };
+      return this.replaceConfig(configName, newConfig);
+    },
     addDeps(dependencies: Dependencies): SkillWithHelpers {
       return lodash.merge({}, this, {
         dependencies

@@ -35,6 +35,10 @@ module.exports = {
       dest: 'src/routes.js'
     },
     {
+      src: path.join(__dirname, 'boilerplate/app.global.css'),
+      dest: 'src/app.global.css'
+    },
+    {
       alias: 'routes',
       src: path.join(__dirname, 'boilerplate/routes.js'),
       dest: 'src/routes.js'

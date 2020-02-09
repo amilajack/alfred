@@ -21,7 +21,21 @@ module.exports = {
     ['@alfred/interface-start', interfaceConfig]
   ],
   default: true,
-  configFiles: [],
+  configFiles: [
+    {
+      name: 'postcss',
+      path: '.postcssrc',
+      config: {
+        modules: true,
+        plugins: {
+          autoprefixer: {
+            grid: true
+          }
+        }
+      },
+      write: false
+    }
+  ],
   hooks: {
     async run({ interfaceState, project, subcommand }) {
       const { root } = project;
@@ -79,6 +93,13 @@ module.exports = {
         default:
           throw new Error(`Invalid subcommand: "${subcommand}"`);
       }
+    }
+  },
+  transforms: {
+    react(skill) {
+      return skill
+        .setWrite('postcss', true)
+        .addDepsFromPkg(['postcss-modules', 'autoprefixer']);
     }
   }
 };

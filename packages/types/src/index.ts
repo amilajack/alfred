@@ -296,6 +296,7 @@ export interface Helpers<T> {
   findConfig: (configName: string) => SkillConfigFile;
   extendConfig: (x: string) => T;
   replaceConfig: (x: string, configReplacement: SkillConfigFile) => T;
+  setWrite: (configName: string, shouldWrite: boolean) => T;
   addDeps: (pkg: Dependencies) => T;
   addDevDeps: (pkg: Dependencies) => T;
   addDepsFromPkg: (

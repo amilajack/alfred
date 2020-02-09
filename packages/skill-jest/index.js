@@ -14,12 +14,19 @@ module.exports = {
     {
       name: 'jest',
       path: 'jest.config.js',
-      config: {}
+      config: {
+        moduleNameMapper: {
+          '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+            '<rootDir>/__mocks__/fileMock.js',
+          '\\.(css|less)$': 'identity-obj-proxy'
+        }
+      }
     }
   ],
   hooks: {
     async run({ configFiles, skillMap, config, project, flags }) {
       const configPath = getConfigPathByConfigName('jest', configFiles);
+      const jestConfig = getConfigByName('jest', configFiles);
       const binPath = await getPkgBinPath(project, 'jest');
       const { root } = project;
       const nodeModulesPath = path.join(root, 'node_modules');
@@ -40,16 +47,17 @@ module.exports = {
         'node_modules',
         'jest.config.js'
       );
+      const a = {
+        ...jestConfig,
+        transform: {
+          '^.+.jsx?$': `${JSON.stringify(jestTransformerPath)}`
+        },
+        rootDir: `${JSON.stringify(root)}`
+      };
       await fs.promises.writeFile(
         // @TODO Write to ./node_modules/.alfred
         config.showConfigs ? configPath : hiddenTmpConfigPath,
-        `module.exports = {
-          transform: {
-            '^.+.jsx?$': ${JSON.stringify(jestTransformerPath)}
-          },
-          rootDir: ${JSON.stringify(root)}
-        };
-        `
+        `module.exports = ${JSON.stringify(a)}};`
       );
       if (!config.showConfigs && fs.existsSync(configPath)) {
         await fs.promises.unlink(configPath);

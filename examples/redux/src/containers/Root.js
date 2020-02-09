@@ -2,8 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { hot } from 'react-hot-loader';
-import { History } from 'history';
-import Routes from '../Routes';
+import Routes from '../routes';
 
 const Root = ({ store, history }) => (
   <Provider store={store}>

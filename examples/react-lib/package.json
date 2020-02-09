@@ -29,6 +29,7 @@
     "@babel/preset-react": "7.8.3",
     "@babel/register": "^7.8.3",
     "@examples/alfred-config-example": "^0.0.3",
+    "autoprefixer": "^9.7.4",
     "babel-eslint": "10.0.3",
     "babel-loader": "8.0.6",
     "babel-plugin-dev-expression": "^0.2.1",
@@ -47,6 +48,7 @@
     "lodash-es": "4.17.15",
     "lodash-webpack-plugin": "0.11.5",
     "parcel": "^1.11.0",
+    "postcss-modules": "^1.5.0",
     "prettier": "^1.16.4",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -58,8 +60,8 @@
   },
   "alfred": {
     "extends": "@examples/alfred-config-example",
-    "showConfigs": true,
     "npmClient": "yarn",
+    "showConfigs": true,
     "skills": [
       "@alfred/skill-react",
       [
