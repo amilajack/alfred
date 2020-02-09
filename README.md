@@ -225,8 +225,8 @@ export default {
   name: 'redux',
   files: [
     {
-      name: 'redux-routes',
-      path: 'src/routes.js',
+      alias: 'redux-routes',
+      dest: 'src/routes.js',
       content: `
         import { createStore, applyMiddleware } from 'redux';
         import thunk from 'redux-thunk';

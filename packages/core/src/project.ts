@@ -341,7 +341,18 @@ export default class Project implements ProjectInterface {
    */
   // uninstallDeps() {}
 
-  skillMapFromInterfaceState(
+  /**
+   * @TODO @HACK Allow skill map to be generated without interface state
+   */
+  getSkillMap(): Promise<SkillMap> {
+    return this.getSkillMapFromInterfaceState({
+      env: 'production',
+      target: 'browser',
+      projectType: 'lib'
+    });
+  }
+
+  getSkillMapFromInterfaceState(
     interfaceState: InterfaceState,
     config: ConfigInterface = this.config
   ): Promise<SkillMap> {
@@ -359,11 +370,12 @@ export default class Project implements ProjectInterface {
 
     const skills: SkillNode[] = Array.from(skillMap.values());
 
-    // Write all files
+    // Write all files and dirs
+    // @TODO Remove this to allow users to edit their own boilerplate
     await Promise.all(
-      skills
-        .filter(skill => skill.files && skill.files.size)
-        .map(skill => skill.files.writeAllFiles(this))
+      Array.from(skillMap.values()).map(skill =>
+        skill.files.writeAllFiles(this)
+      )
     );
 
     // Write all configFiles

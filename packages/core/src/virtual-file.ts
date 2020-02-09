@@ -1,17 +1,18 @@
 import path from 'path';
-import fs from 'fs';
 import emphasize from 'emphasize/lib/core';
 import diffLang from 'highlight.js/lib/languages/diff';
+import fs from 'fs-extra';
 import { applyPatch } from 'diff';
 import {
   ProjectInterface,
   VirtualFileInterface,
   VirtualFileSystemInterface,
-  SkillFile
+  SkillFile,
+  Dir
 } from '@alfred/types';
 
 export class VirtualFile implements VirtualFileInterface {
-  public path: string;
+  public dest: string;
 
   public content = '';
 
@@ -20,25 +21,25 @@ export class VirtualFile implements VirtualFileInterface {
   private fs: VirtualFileSystem;
 
   constructor(fs: VirtualFileSystem, file: SkillFile) {
-    this.path = file.path;
-    this.name = file.name;
+    this.dest = file.dest;
+    this.name = file.alias || file.dest;
     this.content = file.content || '';
     this.fs = fs;
   }
 
   move(destDir: string): VirtualFileInterface {
-    this.path = destDir;
+    this.dest = destDir;
     return this;
   }
 
   rename(fileName: string): VirtualFileInterface {
-    const newPath = path.join(path.parse(this.path).dir, fileName);
-    this.path = newPath;
+    const newPath = path.join(path.parse(this.dest).dir, fileName);
+    this.dest = newPath;
     return this;
   }
 
   delete(): void {
-    this.fs.delete(this.path);
+    this.fs.delete(this.dest);
   }
 
   write(content: string): VirtualFileInterface {
@@ -58,7 +59,7 @@ export class VirtualFile implements VirtualFileInterface {
     const patchResult = applyPatch(this.content, patch);
     if (!patchResult) {
       throw new Error(
-        `The following patch could not be applied to "${this.path}". Check the line numbers of the patch: \n\n ${syntaxHighlightedPatch}`
+        `The following patch could not be applied to "${this.dest}". Check the line numbers of the patch: \n\n ${syntaxHighlightedPatch}`
       );
     }
     this.content = patchResult;
@@ -69,25 +70,45 @@ export class VirtualFile implements VirtualFileInterface {
 
 export default class VirtualFileSystem extends Map<string, SkillFile>
   implements VirtualFileSystemInterface {
-  constructor(files: SkillFile[] = []) {
+  private dirs: Dir[] = [];
+  constructor(files: SkillFile[] = [], dirs: Dir[] = []) {
     super();
+    this.dirs = dirs;
     files.forEach(file => {
       this.add(file);
     });
   }
 
+  addDir(dir: Dir): VirtualFileSystem {
+    this.dirs.push(dir);
+    return this;
+  }
+
   add(file: SkillFile): VirtualFileSystem {
-    this.set(file.name, new VirtualFile(this, file));
+    this.set(file.alias || file.dest, new VirtualFile(this, file));
     return this;
   }
 
   async writeAllFiles(project: ProjectInterface): Promise<void> {
-    const writeFiles = Array.from(this.values()).map(file =>
-      fs.promises.writeFile(
-        path.join(project.root, project.config.configsDir, file.path),
-        file.content
-      )
+    // Copy all dirs
+    await Promise.all(
+      this.dirs.map(dir => fs.copy(dir.src, path.join(project.root, dir.dest)))
     );
-    await Promise.all(writeFiles);
+    // Write all files
+    const filesToWrite = Array.from(this.values()).map(async file => {
+      const filePath = path.join(
+        project.root,
+        project.config.configsDir,
+        file.dest
+      );
+      const fileDir = path.dirname(filePath);
+      if (!fs.existsSync(fileDir)) {
+        await fs.promises.mkdir(fileDir, {
+          recursive: true
+        });
+      }
+      return fs.promises.writeFile(filePath, file.content);
+    });
+    await Promise.all(filesToWrite);
   }
 }

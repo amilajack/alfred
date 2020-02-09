@@ -69,7 +69,9 @@ describe('virtual file system', () => {
         [reduxSkill, typescriptSkill],
         defaultInterfaceState
       );
-      expect(skillMap.get('redux').files.get('configureStore').content).toEqual(
+      expect(
+        skillMap.get('redux').files.get('configureStore.prod').content
+      ).toEqual(
         `import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { createHashHistory } from 'history';
@@ -98,8 +100,8 @@ export default { configureStore, history };
         name: 'react',
         files: [
           {
-            path: 'src/routes',
-            name: 'routes',
+            alias: 'routes',
+            dest: 'src/routes',
             content: 'route 1'
           }
         ],

@@ -154,7 +154,7 @@ function normalizeSkill(skill: Skill | RawSkill): SkillWithHelpers {
   return {
     ...addSkillHelpers(skill as Skill),
     interfaces: normalizeInterfacesOfSkill((skill as Skill).interfaces),
-    files: new VirtualFileSystem((skill as RawSkill).files || []),
+    files: new VirtualFileSystem((skill as RawSkill).files, skill.dirs),
     configFiles: (skill.configFiles || []).map(configFile => ({
       ...configFile,
       configType:

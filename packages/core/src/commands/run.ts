@@ -37,7 +37,7 @@ export default async function run(
   await Promise.all(
     interfaceStates.map(interfaceState =>
       project
-        .skillMapFromInterfaceState(interfaceState)
+        .getSkillMapFromInterfaceState(interfaceState)
         .then(skillMap =>
           config.showConfigs
             ? project.writeConfigsFromSkillMap(skillMap)

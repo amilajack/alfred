@@ -60,8 +60,10 @@ export interface ProjectInterface {
   skills: () => Promise<SkillsList>;
   // Config setter method
   setConfig: (config: ConfigInterface) => void;
+  // Get skill map
+  getSkillMap: () => Promise<SkillMap>;
   // Create a skill from a given interface state
-  skillMapFromInterfaceState: (i: InterfaceState) => Promise<SkillMap>;
+  getSkillMapFromInterfaceState: (i: InterfaceState) => Promise<SkillMap>;
   // Write each config in .configFiles of each skill
   writeConfigsFromSkillMap: (skillMap: SkillMap) => Promise<SkillMap>;
   // Install dependencies to a given project
@@ -157,9 +159,9 @@ export type ConfigValue =
 export type SkillFile = {
   // The "friendly name" of a file. This is the name that
   // other skills will refer to config file by.
-  name: string;
+  alias?: string;
   // The relative path of the file the config should be written to
-  path: string;
+  dest: string;
   // The content of the file
   content: string;
 };
@@ -252,7 +254,8 @@ export interface RawSkill extends PkgWithDeps {
   description: string;
   supports: Supports;
   pkg: PkgJson;
-  files: Array<SkillFile>;
+  dirs?: Array<Dir>;
+  files?: Array<SkillFile>;
   configFiles?: Array<SkillConfigFile>;
   config?: SkillConfigFile;
   interfaces?: Array<SkillInterface>;
@@ -260,11 +263,17 @@ export interface RawSkill extends PkgWithDeps {
   transforms?: Transforms;
 }
 
+export type Dir = {
+  src: string;
+  dest: string;
+};
+
 export interface Skill extends PkgWithDeps {
   name: string;
   description: string;
   pkg: PkgJson;
   supports: Supports;
+  dirs: Array<Dir>;
   files: VirtualFileSystemInterface;
   configFiles: Array<SkillConfigFile>;
   config: SkillConfigFile;

@@ -1,0 +1,61 @@
+{
+  "name": "@examples/redux",
+  "version": "0.0.3",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "node ../../packages/cli/lib/commands/alfred.js run build",
+    "clean": "node ../../packages/cli/lib/commands/alfred.js run clean",
+    "format": "node ../../packages/cli/lib/commands/alfred.js run format",
+    "lint": "node ../../packages/cli/lib/commands/alfred.js run lint",
+    "skills": "node ../../packages/cli/lib/commands/alfred.js skills",
+    "start": "node ../../packages/cli/lib/commands/alfred.js run start",
+    "test": "node ../../packages/cli/lib/commands/alfred.js run test",
+    "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
+  },
+  "devDependencies": {
+    "@alfred/cli": "^0.0.3",
+    "@alfred/core": "^0.0.3",
+    "@alfred/skill-react": "^0.0.3",
+    "@alfred/skill-redux": "^0.0.3",
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-react-constant-elements": "^7.8.3",
+    "@babel/plugin-transform-react-inline-elements": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/preset-react": "^7.8.3",
+    "@babel/register": "^7.8.3",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "8.0.6",
+    "babel-plugin-dev-expression": "^0.2.2",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.6.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.15.1",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "jest": "^24.0.0",
+    "lodash-es": "4.17.15",
+    "lodash-webpack-plugin": "0.11.5",
+    "parcel": "^1.11.0",
+    "prettier": "^1.16.4",
+    "react": "16.0.0",
+    "react-dom": "16.0.0",
+    "react-hot-loader": "^4.6.3",
+    "redux": "^4.0.5"
+  },
+  "alfred": {
+    "npmClient": "yarn",
+    "showConfigs": true,
+    "skills": [
+      "@alfred/skill-react",
+      "@alfred/skill-redux"
+    ]
+  }
+}

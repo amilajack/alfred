@@ -3,17 +3,32 @@ const fs = require('fs');
 
 module.exports = {
   name: 'redux',
+  dirs: [
+    {
+      src: path.join(__dirname, 'boilerplate/actions'),
+      dest: 'src/actions'
+    }
+  ],
   files: [
     {
-      name: 'routes',
-      path: 'src/routes.js',
+      alias: 'routes',
+      dest: 'src/routes.js',
       content: fs
         .readFileSync(path.join(__dirname, 'boilerplate/routes.jsx'))
         .toString()
     },
     {
-      name: 'configureStore',
-      path: 'src/store/configureStore.prod.js',
+      name: 'configureStore.dev',
+      dest: 'src/store/configureStore.dev.js',
+      content: fs
+        .readFileSync(
+          path.join(__dirname, 'boilerplate/store/configureStore.dev.js')
+        )
+        .toString()
+    },
+    {
+      name: 'configureStore.prod',
+      dest: 'src/store/configureStore.prod.js',
       content: fs
         .readFileSync(
           path.join(__dirname, 'boilerplate/store/configureStore.prod.js')
@@ -23,7 +38,7 @@ module.exports = {
   ],
   transforms: {
     typescript(skill) {
-      skill.files.get('configureStore').applyDiff(
+      skill.files.get('configureStore.prod').applyDiff(
         `@@ -12 +12 @@
 -function configureStore(initialState) {
 -  return createStore(rootReducer, initialState, enhancer);

@@ -12,7 +12,7 @@ export default async function skills(
   const interfaceStateSkills = await Promise.all(
     getInterfaceStatesFromProject(project).map(interfaceState =>
       project
-        .skillMapFromInterfaceState(interfaceState)
+        .getSkillMapFromInterfaceState(interfaceState)
         .then(skillMap =>
           Array.from(skillMap.values()).filter(
             skillNode =>
