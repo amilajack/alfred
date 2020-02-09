@@ -16,7 +16,7 @@ import {
   DependencyType,
   PkgJson,
   CORE_SKILL,
-  ConfigType,
+  FileType,
   Skill,
   RawSkill
 } from '@alfred/types';
@@ -139,7 +139,7 @@ export async function runTransforms(
   return skillMap;
 }
 
-function getConfigTypeFromFile(file: string): ConfigType {
+function getFileTypeFromFile(file: string): FileType {
   const { ext } = path.parse(file);
   switch (ext) {
     case '.json':
@@ -147,9 +147,7 @@ function getConfigTypeFromFile(file: string): ConfigType {
     case '.js':
       return 'commonjs';
     default:
-      console.warn(
-        `configType could not be inferred for config path "${file}"`
-      );
+      console.warn(`fileType could not be inferred for config path "${file}"`);
       return 'json';
   }
 }
@@ -164,8 +162,7 @@ function normalizeSkill(skill: Skill | RawSkill): SkillWithHelpers {
     files: new VirtualFileSystem((skill as RawSkill).files, skill.dirs),
     configFiles: (skill.configFiles || []).map(configFile => ({
       ...configFile,
-      configType:
-        configFile.configType || getConfigTypeFromFile(configFile.path)
+      fileType: configFile.fileType || getFileTypeFromFile(configFile.path)
     }))
   };
 }
@@ -232,6 +229,17 @@ export function validateSkill(
   interfaceState: InterfaceState
 ): SkillMap {
   skillMap.forEach(skillNode => {
+    // Validate the files of a skill
+    if (skillNode.files) {
+      skillNode.files.forEach(file => {
+        if (file.content && file.src) {
+          throw new Error(
+            'File cannot have both "content" and "src" properties'
+          );
+        }
+      });
+    }
+    // Validate if a skill is supported for a certain interface state
     if (skillNode && skillNode.supports) {
       const supports = {
         env: skillNode.supports.envs.includes(interfaceState.env),
@@ -242,7 +250,6 @@ export function validateSkill(
       };
       const { env, target, projectType } = supports;
       const isSupported = env && target && projectType;
-
       if (!isSupported) {
         throw new Error(
           `The "${skillNode.name}" skill, which supports ${JSON.stringify(

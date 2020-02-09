@@ -12,7 +12,7 @@ module.exports = {
     {
       name: 'prettier',
       path: '.prettierrc',
-      configType: 'json',
+      fileType: 'json',
       config: {
         singleQuote: true
       }

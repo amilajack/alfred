@@ -168,7 +168,7 @@ export type SkillFile = {
   content?: string;
 };
 
-export type ConfigType = 'commonjs' | 'module' | 'json';
+export type FileType = 'commonjs' | 'module' | 'json';
 
 export type SkillConfigFile = {
   // The "friendly name" of a file. This is the name that
@@ -179,7 +179,7 @@ export type SkillConfigFile = {
   // The value of the config
   config: ConfigValue;
   // The type of the config file. This is inferred by alfred by the file extension of .path
-  configType?: ConfigType;
+  fileType?: FileType;
 };
 
 export type HooksArgs = {

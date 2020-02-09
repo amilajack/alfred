@@ -389,7 +389,7 @@ export default class Project implements ProjectInterface {
           let parser: 'babel' | 'json' = 'babel';
 
           const configInConfigFileFormat = ((): string => {
-            switch (configFile.configType) {
+            switch (configFile.fileType) {
               case 'commonjs':
                 parser = 'babel';
                 return `module.exports = ${stringifiedConfig}`;

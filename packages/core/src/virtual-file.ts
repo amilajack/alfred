@@ -26,7 +26,7 @@ export class VirtualFile implements VirtualFileInterface {
     this.content =
       typeof file.src === 'string'
         ? fs.readFileSync(file.src).toString()
-        : (file.content as string);
+        : file.content || '';
     this.fs = vfs;
   }
 

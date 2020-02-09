@@ -25,6 +25,7 @@ module.exports = {
     {
       name: 'postcss',
       path: '.postcssrc',
+      fileType: 'json',
       config: {
         modules: true,
         plugins: {
