@@ -68,7 +68,7 @@ export function getExecutableWrittenConfigsMethods(
           skillNode.interfaces.length
       )
       .flatMap(skillNode => {
-        const configFiles = skillNode.configFiles.map(configFile => ({
+        const configs = skillNode.configs.map(configFile => ({
           ...configFile,
           path: path.join(configsBasePath, configFile.filename)
         }));
@@ -87,7 +87,7 @@ export function getExecutableWrittenConfigsMethods(
                 skill: skillNode,
                 project,
                 config,
-                configFiles,
+                configs,
                 skillMap,
                 interfaceState,
                 skillConfig

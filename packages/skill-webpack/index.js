@@ -37,7 +37,7 @@ module.exports = {
     ['@alfred/interface-build', interfaceConfig],
     ['@alfred/interface-start', interfaceConfig]
   ],
-  configFiles: [
+  configs: [
     {
       alias: 'webpack.base',
       filename: 'webpack.base.js',
@@ -136,15 +136,12 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ project, configFiles, interfaceState, data }) {
-      const { config: baseConfig } = getConfig('webpack.base', configFiles);
-      const { config: prodConfig } = getConfig('webpack.prod', configFiles);
-      const { config: devConfig } = getConfig('webpack.dev', configFiles);
-      const { config: nodeConfig } = getConfig('webpack.node', configFiles);
-      const { config: browserConfig } = getConfig(
-        'webpack.browser',
-        configFiles
-      );
+    async run({ project, configs, interfaceState, data }) {
+      const { config: baseConfig } = getConfig('webpack.base', configs);
+      const { config: prodConfig } = getConfig('webpack.prod', configs);
+      const { config: devConfig } = getConfig('webpack.dev', configs);
+      const { config: nodeConfig } = getConfig('webpack.node', configs);
+      const { config: browserConfig } = getConfig('webpack.browser', configs);
       let mergedConfig = mergeConfigs(
         baseConfig,
         interfaceState.env === 'production' ? prodConfig : devConfig,
@@ -246,7 +243,7 @@ module.exports = {
                 use: {
                   loader: 'babel-loader',
                   options: {
-                    ...getConfig('babel', toSkill.configFiles).config,
+                    ...getConfig('babel', toSkill.configs).config,
                     cacheDirectory: true
                   }
                 }

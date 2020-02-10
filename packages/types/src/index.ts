@@ -73,7 +73,7 @@ export interface ProjectInterface extends EventEmitter {
   getSkillMap: () => Promise<SkillMap>;
   // Create a skill from a given interface state
   getSkillMapFromInterfaceState: (i: InterfaceState) => Promise<SkillMap>;
-  // Write each config in .configFiles of each skill
+  // Write each config in .configs of each skill
   writeConfigsFromSkillMap: (skillMap: SkillMap) => Promise<SkillMap>;
   // Install dependencies to a given project
   installDeps: (
@@ -194,7 +194,7 @@ export type SkillConfigFile = {
 
 export type HooksArgs = {
   project: ProjectInterface;
-  configFiles: Array<SkillConfigFile>;
+  configs: Array<SkillConfigFile>;
   config: ConfigInterface;
   interfaceState?: InterfaceState;
   interfaceStates?: InterfaceState[];
@@ -274,7 +274,7 @@ export interface RawSkill extends PkgWithDeps {
   pkg: PkgJson;
   dirs?: Array<Dir>;
   files?: Array<SkillFile>;
-  configFiles?: Array<SkillConfigFile>;
+  configs?: Array<SkillConfigFile>;
   config?: SkillConfigFile;
   interfaces?: Array<SkillInterface>;
   hooks?: Hooks;
@@ -293,7 +293,7 @@ export interface Skill extends PkgWithDeps {
   supports: Supports;
   dirs: Array<Dir>;
   files: VirtualFileSystemInterface;
-  configFiles: Array<SkillConfigFile>;
+  configs: Array<SkillConfigFile>;
   config: SkillConfigFile;
   interfaces: Array<SkillInterface>;
   hooks: Hooks;

@@ -9,7 +9,7 @@ module.exports = {
   name: 'prettier',
   description: 'Format the source files in your project',
   interfaces: ['@alfred/interface-format'],
-  configFiles: [
+  configs: [
     {
       alias: 'prettier',
       filename: '.prettierrc',
@@ -20,11 +20,11 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ configFiles, project, config, data }) {
+    async run({ configs, project, config, data }) {
       const binPath = await getPkgBinPath(project, 'prettier');
       const configPath = path.join(
         config.configsDir,
-        getConfigPathByConfigName('prettier', configFiles)
+        getConfigPathByConfigName('prettier', configs)
       );
       return execCmdInProject(
         project,

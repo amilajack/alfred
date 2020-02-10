@@ -33,7 +33,7 @@ export function addSkillHelpers(skill: Skill): SkillWithHelpers {
   return {
     ...skill,
     findConfig(configName: string): SkillConfigFile {
-      const config = (this.configFiles || []).find(
+      const config = (this.configs || []).find(
         configFile => configFile.alias === configName
       );
       if (!config) {
@@ -49,23 +49,23 @@ export function addSkillHelpers(skill: Skill): SkillWithHelpers {
       const mergedConfigFile = mergeConfigs({}, foundConfig, {
         config: configExtension
       });
-      const configFiles = (this.configFiles || []).map(configFile =>
+      const configs = (this.configs || []).map(configFile =>
         configFile.alias === configName ? mergedConfigFile : configFile
       );
       return lodash.merge({}, this, {
-        configFiles
+        configs
       });
     },
     replaceConfig(
       configName: string,
       configReplacement: SkillConfigFile
     ): SkillWithHelpers {
-      const configFiles = (this.configFiles || []).map(configFile =>
+      const configs = (this.configs || []).map(configFile =>
         configFile.alias === configName ? configReplacement : configFile
       );
       return {
         ...this,
-        configFiles
+        configs
       };
     },
     setWrite(configName: string, shouldWrite: boolean): SkillWithHelpers {
@@ -164,7 +164,7 @@ function normalizeSkill(skill: Skill | RawSkill): SkillWithHelpers {
       skill.files instanceof VirtualFileSystem
         ? skill.files
         : new VirtualFileSystem((skill.files as SkillFile[]) || [], skill.dirs),
-    configFiles: (skill.configFiles || []).map(configFile => ({
+    configs: (skill.configs || []).map(configFile => ({
       ...configFile,
       fileType: configFile.fileType || getFileTypeFromFile(configFile.filename)
     }))
@@ -407,14 +407,14 @@ export default async function skillMapFromConfig(
     // Add the skill config to the skillNode
     const skillNode: SkillNode = requireSkill(skillPkgName);
     skillNode.config = skillUserConfig;
-    if (skillNode.configFiles) {
-      skillNode.configFiles = skillNode.configFiles.map(configFile => ({
+    if (skillNode.configs) {
+      skillNode.configs = skillNode.configs.map(configFile => ({
         ...configFile,
         config: lodash.merge(
           {},
           configFile.config,
           // Only apply config if skill has only one config file
-          skillNode.configFiles.length === 1 ? skillUserConfig : {}
+          skillNode.configs.length === 1 ? skillUserConfig : {}
         )
       }));
     }

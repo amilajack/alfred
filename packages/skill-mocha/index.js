@@ -10,7 +10,7 @@ module.exports = {
   name: 'mocha',
   description: 'Run tests for your project',
   interfaces: ['@alfred/interface-test'],
-  configFiles: [],
+  configs: [],
   supports: {
     envs: ['production', 'development', 'test'],
     targets: ['node'],
@@ -26,7 +26,7 @@ module.exports = {
       );
       const { config: babelConfig } = getConfig(
         'babel',
-        skillMap.get('babel').configFiles
+        skillMap.get('babel').configs
       );
       await fs.promises.writeFile(
         mochaBabelRegisterPath,

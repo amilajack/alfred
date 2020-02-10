@@ -112,7 +112,7 @@ export default class Project extends EventEmitter implements ProjectInterface {
           return hookFn({
             data,
             project: this,
-            configFiles: [],
+            configs: [],
             config: this.config,
             interfaceStates,
             skill,
@@ -402,11 +402,11 @@ export default class Project extends EventEmitter implements ProjectInterface {
     // @TODO Remove this to allow users to edit their own boilerplate
     await Promise.all(skills.map(skill => skill.files.writeAllFiles(this)));
 
-    // Write all configFiles
+    // Write all configs
     await Promise.all(
       skills
-        .filter(skill => skill.configFiles && skill.configFiles.length)
-        .flatMap(skill => skill.configFiles)
+        .filter(skill => skill.configs && skill.configs.length)
+        .flatMap(skill => skill.configs)
         .map(async configFile => {
           const filePath = path.join(configsBasePath, configFile.filename);
           const stringifiedConfig = JSON.stringify(configFile.config);

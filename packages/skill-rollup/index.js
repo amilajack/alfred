@@ -22,7 +22,7 @@ module.exports = {
     ['@alfred/interface-build', interfaceConfig],
     ['@alfred/interface-start', interfaceConfig]
   ],
-  configFiles: [
+  configs: [
     {
       alias: 'rollup.base',
       filename: 'rollup.base.js',
@@ -65,12 +65,12 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ configFiles, interfaceState, data }) {
+    async run({ configs, interfaceState, data }) {
       const [baseConfig, prodConfig, devConfig] = [
         'rollup.base',
         'rollup.prod',
         'rollup.dev'
-      ].map(configFile => getConfig(configFile, configFiles).config);
+      ].map(configFile => getConfig(configFile, configs).config);
       const inputAndOutputConfigs = {
         input: `./src/lib.${interfaceState.target}.js`,
         output: {
@@ -135,7 +135,7 @@ module.exports = {
         .extendConfig('rollup.base', {
           plugins: [
             babel({
-              ...getConfig('babel', skillMap.get('babel').configFiles).config,
+              ...getConfig('babel', skillMap.get('babel').configs).config,
               exclude: 'node_modules/**'
             })
           ]

@@ -99,7 +99,7 @@ export default {
   },
   description: 'Transpile JS from ESNext to the latest ES version',
   // An array of the configs introduced by the skill
-  configFiles: [
+  configs: [
     {
       // The name of the config. This should never include a filename extension because skills
       // have the ability to change extensions (ex. .js -> .ts) so this should not be fixed

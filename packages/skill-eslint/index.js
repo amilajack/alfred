@@ -11,7 +11,7 @@ module.exports = {
   name: 'eslint',
   description: 'Lint all your JS files',
   interfaces: ['@alfred/interface-lint'],
-  configFiles: [
+  configs: [
     {
       alias: 'eslint',
       filename: '.eslintrc.js',
@@ -29,11 +29,11 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ project, config, configFiles, data }) {
+    async run({ project, config, configs, data }) {
       const { flags } = data;
       const configPath = path.join(
         config.configsDir,
-        getConfigPathByConfigName('eslint', configFiles)
+        getConfigPathByConfigName('eslint', configs)
       );
       const binPath = await getPkgBinPath(project, 'eslint');
       if (config.showConfigs) {
@@ -42,7 +42,7 @@ module.exports = {
           [binPath, `--config ${configPath} src tests`, ...flags].join(' ')
         );
       }
-      const { config: eslintConfig } = getConfig('eslint', configFiles);
+      const { config: eslintConfig } = getConfig('eslint', configs);
       const { CLIEngine } = require('eslint');
       const cli = new CLIEngine({
         cwd: project.root,
@@ -95,7 +95,7 @@ module.exports = {
                   config.configsDir,
                   getConfigPathByConfigName(
                     'webpack.base',
-                    skillMap.get('webpack').configFiles
+                    skillMap.get('webpack').configs
                   )
                 )
               }

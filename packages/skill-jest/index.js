@@ -7,7 +7,7 @@ module.exports = {
   name: 'jest',
   description: 'Test your JS files',
   interfaces: ['@alfred/interface-test'],
-  configFiles: [
+  configs: [
     {
       alias: 'jest',
       filename: 'jest.config.js',
@@ -21,8 +21,8 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ configFiles, skillMap, config, project, data }) {
-      const configPath = getConfigPathByConfigName('jest', configFiles);
+    async run({ configs, skillMap, config, project, data }) {
+      const configPath = getConfigPathByConfigName('jest', configs);
       const { root } = project;
 
       // Create the node_modules dir if it doesn't exist
@@ -37,14 +37,14 @@ module.exports = {
       );
       const { config: babelConfig } = getConfig(
         'babel',
-        skillMap.get('babel').configFiles
+        skillMap.get('babel').configs
       );
       const hiddenTmpConfigPath = path.join(
         root,
         'node_modules',
         'jest.config.js'
       );
-      const { config: jestConfig } = getConfig('jest', configFiles);
+      const { config: jestConfig } = getConfig('jest', configs);
       const fullConfig = {
         ...jestConfig,
         transform: {

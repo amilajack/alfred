@@ -4,7 +4,7 @@ const { getConfig } = require('@alfred/helpers');
 module.exports = {
   name: 'babel',
   description: 'Transpile JS from ESNext to the latest ES version',
-  configFiles: [
+  configs: [
     {
       alias: 'babel',
       filename: '.babelrc.js',

@@ -21,7 +21,7 @@ module.exports = {
     ['@alfred/interface-start', interfaceConfig]
   ],
   default: true,
-  configFiles: [
+  configs: [
     {
       alias: 'postcss',
       filename: '.postcssrc',

@@ -25,7 +25,7 @@ import Project from '../src/project';
 
 function getConfigs(skillMap: SkillMap): Array<ConfigValue> {
   return Array.from(skillMap.values())
-    .flatMap(skill => skill.configFiles || [])
+    .flatMap(skill => skill.configs || [])
     .map(configFile => configFile.config);
 }
 
@@ -87,7 +87,7 @@ describe('Skills', () => {
           'react',
           {
             name: 'react',
-            configFiles: [
+            configs: [
               {
                 alias: 'eslint',
                 filename: '.eslintrc.json',
@@ -98,11 +98,11 @@ describe('Skills', () => {
             ],
             transforms: {
               babel(skill) {
-                skill.configFiles[0].config.plugins.push('a');
+                skill.configs[0].config.plugins.push('a');
                 return skill;
               },
               eslint(skill) {
-                skill.configFiles[0].config.plugins.push('b');
+                skill.configs[0].config.plugins.push('b');
                 return skill;
               }
             }
@@ -122,7 +122,7 @@ describe('Skills', () => {
         ]
       ]);
       const skillMap = await runTransforms(defaultProject, rawSillMap);
-      expect(skillMap.get('react').configFiles[0].config).toEqual({
+      expect(skillMap.get('react').configs[0].config).toEqual({
         plugins: ['a', 'b']
       });
     });
@@ -133,7 +133,7 @@ describe('Skills', () => {
           'react',
           {
             name: 'react',
-            configFiles: [
+            configs: [
               {
                 alias: 'eslint',
                 filename: '.eslintrc.json',
@@ -144,11 +144,11 @@ describe('Skills', () => {
             ],
             transforms: {
               async babel(skill) {
-                skill.configFiles[0].config.plugins.push('a');
+                skill.configs[0].config.plugins.push('a');
                 return skill;
               },
               async eslint(skill) {
-                skill.configFiles[0].config.plugins.push('b');
+                skill.configs[0].config.plugins.push('b');
                 return skill;
               }
             }
@@ -168,7 +168,7 @@ describe('Skills', () => {
         ]
       ]);
       const skillMap = await runTransforms(defaultProject, rawSillMap);
-      expect(skillMap.get('react').configFiles[0].config).toEqual({
+      expect(skillMap.get('react').configs[0].config).toEqual({
         plugins: ['a', 'b']
       });
     });

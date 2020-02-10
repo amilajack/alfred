@@ -34,22 +34,18 @@ export function configToEvalString(serializedConfig: string): string {
 
 export function getConfig(
   configName: string,
-  configFiles: Array<SkillConfigFile>
+  configs: Array<SkillConfigFile>
 ): ConfigValue {
-  const config = configFiles.find(
-    configFile => configFile.alias === configName
-  );
+  const config = configs.find(configFile => configFile.alias === configName);
   if (!config) throw new Error(`Cannot find config by name "${configName}"`);
   return config;
 }
 
 export function getConfigPathByConfigName(
   configName: string,
-  configFiles: Array<SkillConfigFile>
+  configs: Array<SkillConfigFile>
 ): string {
-  const config = configFiles.find(
-    configFile => configFile.alias === configName
-  );
+  const config = configs.find(configFile => configFile.alias === configName);
   if (!config) throw new Error(`Cannot find config by name "${configName}"`);
   return config.filename;
 }
