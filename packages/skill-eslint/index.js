@@ -2,7 +2,7 @@
 const path = require('path');
 const {
   getConfigPathByConfigName,
-  getConfigByName,
+  getConfig,
   getPkgBinPath,
   execCmdInProject
 } = require('@alfred/helpers');
@@ -11,10 +11,10 @@ module.exports = {
   name: 'eslint',
   description: 'Lint all your JS files',
   interfaces: ['@alfred/interface-lint'],
-  configFiles: [
+  configs: [
     {
-      name: 'eslint',
-      path: '.eslintrc.js',
+      alias: 'eslint',
+      filename: '.eslintrc.js',
       config: {
         root: true,
         env: {
@@ -29,8 +29,12 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ project, config, configFiles, flags }) {
-      const configPath = getConfigPathByConfigName('eslint', configFiles);
+    async run({ project, config, configs, data }) {
+      const { flags } = data;
+      const configPath = path.join(
+        config.configsDir,
+        getConfigPathByConfigName('eslint', configs)
+      );
       const binPath = await getPkgBinPath(project, 'eslint');
       if (config.showConfigs) {
         return execCmdInProject(
@@ -38,7 +42,7 @@ module.exports = {
           [binPath, `--config ${configPath} src tests`, ...flags].join(' ')
         );
       }
-      const { config: eslintConfig } = getConfigByName('eslint', configFiles);
+      const { config: eslintConfig } = getConfig('eslint', configs);
       const { CLIEngine } = require('eslint');
       const cli = new CLIEngine({
         cwd: project.root,
@@ -80,7 +84,7 @@ module.exports = {
         })
         .addDepsFromPkg('eslint-plugin-mocha');
     },
-    webpack(skill, { project, config, skillMap, configsDir }) {
+    webpack(skill, { project, config, skillMap }) {
       return skill
         .extendConfig('eslint', {
           settings: {
@@ -91,7 +95,7 @@ module.exports = {
                   config.configsDir,
                   getConfigPathByConfigName(
                     'webpack.base',
-                    skillMap.get('webpack').configFiles
+                    skillMap.get('webpack').configs
                   )
                 )
               }

@@ -1,3 +1,5 @@
+import { EventEmitter } from 'events';
+
 export type Dependencies = {
   [x: string]: string;
 };
@@ -47,7 +49,7 @@ export type SkillsList = {
   subCommandDict: SubCommandDict;
 };
 
-export interface ProjectInterface {
+export interface ProjectInterface extends EventEmitter {
   // The path to the root directory of the project
   root: string;
   // The `Config` that corresponds to the project
@@ -56,13 +58,22 @@ export interface ProjectInterface {
   pkg: PkgJson;
   // The path to the root package.json
   pkgPath: string;
+  // Initialize an alfred project
+  init: () => Promise<ProjectInterface>;
   // Get the list of subcommands which correspond to which skills of a given alfred project
   skills: () => Promise<SkillsList>;
+  learn: (skillPkgNames: string[]) => Promise<void>;
+  run: (
+    subcommand: string,
+    skillFlags?: string[]
+  ) => Promise<void | SkillsList>;
   // Config setter method
   setConfig: (config: ConfigInterface) => void;
+  // Get skill map
+  getSkillMap: () => Promise<SkillMap>;
   // Create a skill from a given interface state
-  skillMapFromInterfaceState: (i: InterfaceState) => Promise<SkillMap>;
-  // Write each config in .configFiles of each skill
+  getSkillMapFromInterfaceState: (i: InterfaceState) => Promise<SkillMap>;
+  // Write each config in .configs of each skill
   writeConfigsFromSkillMap: (skillMap: SkillMap) => Promise<SkillMap>;
   // Install dependencies to a given project
   installDeps: (
@@ -71,6 +82,7 @@ export interface ProjectInterface {
     npmClient?: NpmClients
   ) => Promise<void>;
   findDepsToInstall: (skillNodes?: SkillNode[]) => Promise<PkgWithDeps>;
+  validatePkgJson: () => ValidationResult;
 }
 
 export type InterfaceState = {
@@ -157,37 +169,43 @@ export type ConfigValue =
 export type SkillFile = {
   // The "friendly name" of a file. This is the name that
   // other skills will refer to config file by.
-  name: string;
+  alias?: string;
+  // The absolute path of the file
+  src?: string;
   // The relative path of the file the config should be written to
-  path: string;
+  dest: string;
   // The content of the file
-  content: string;
+  content?: string;
 };
 
-export type ConfigType = 'commonjs' | 'module' | 'json';
+export type FileType = 'commonjs' | 'module' | 'json';
 
 export type SkillConfigFile = {
   // The "friendly name" of a file. This is the name that
   // other skills will refer to config file by.
-  name: string;
+  alias: string;
   // The relative path of the file the config should be written to
-  path: string;
+  filename: string;
   // The value of the config
   config: ConfigValue;
   // The type of the config file. This is inferred by alfred by the file extension of .path
-  configType?: ConfigType;
+  fileType?: FileType;
 };
 
 export type HooksArgs = {
   project: ProjectInterface;
-  configFiles: Array<SkillConfigFile>;
+  configs: Array<SkillConfigFile>;
   config: ConfigInterface;
-  interfaceState: InterfaceState;
-  subcommand: string;
+  interfaceState?: InterfaceState;
+  interfaceStates?: InterfaceState[];
+  data: {
+    skillsPkgNames?: Array<string>;
+    flags?: Array<string>;
+    subcommand?: string;
+  };
   skill: SkillNode;
   skillConfig: ConfigValue;
   skillMap: SkillMap;
-  flags: Array<string>;
 };
 
 export type HookFn = (args: HooksArgs) => void;
@@ -243,6 +261,8 @@ export type CORE_SKILL =
 
 export type Hooks = {
   run?: HookFn;
+  beforeLearn?: HookFn;
+  afterLearn?: HookFn;
   beforeTransforms?: HookFn;
   afterTransforms?: HookFn;
 };
@@ -252,21 +272,28 @@ export interface RawSkill extends PkgWithDeps {
   description: string;
   supports: Supports;
   pkg: PkgJson;
-  files: Array<SkillFile>;
-  configFiles?: Array<SkillConfigFile>;
+  dirs?: Array<Dir>;
+  files?: Array<SkillFile>;
+  configs?: Array<SkillConfigFile>;
   config?: SkillConfigFile;
   interfaces?: Array<SkillInterface>;
   hooks?: Hooks;
   transforms?: Transforms;
 }
 
+export type Dir = {
+  src: string;
+  dest: string;
+};
+
 export interface Skill extends PkgWithDeps {
   name: string;
   description: string;
   pkg: PkgJson;
   supports: Supports;
+  dirs: Array<Dir>;
   files: VirtualFileSystemInterface;
-  configFiles: Array<SkillConfigFile>;
+  configs: Array<SkillConfigFile>;
   config: SkillConfigFile;
   interfaces: Array<SkillInterface>;
   hooks: Hooks;
@@ -285,6 +312,7 @@ export interface Helpers<T> {
   findConfig: (configName: string) => SkillConfigFile;
   extendConfig: (x: string) => T;
   replaceConfig: (x: string, configReplacement: SkillConfigFile) => T;
+  setWrite: (configName: string, shouldWrite: boolean) => T;
   addDeps: (pkg: Dependencies) => T;
   addDevDeps: (pkg: Dependencies) => T;
   addDepsFromPkg: (

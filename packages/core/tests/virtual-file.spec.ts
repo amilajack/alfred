@@ -18,9 +18,13 @@ describe('virtual file system', () => {
   };
 
   const file = {
-    name: 'routes',
-    path: 'src/routes.js'
+    alias: 'routes',
+    dest: 'src/routes.js'
   };
+
+  beforeAll(async () => {
+    await project.init();
+  });
 
   beforeEach(() => {
     fs = new VirtualFileSystem();
@@ -37,14 +41,14 @@ describe('virtual file system', () => {
     fs.add(file)
       .get('routes')
       .rename('routes.ts');
-    expect(slash(fs.get('routes').path)).toEqual('src/routes.ts');
+    expect(slash(fs.get('routes').dest)).toEqual('src/routes.ts');
   });
 
   it('should rename files', () => {
     fs.add(file)
       .get('routes')
       .rename('routes.ts');
-    expect(slash(fs.get('routes').path)).toEqual('src/routes.ts');
+    expect(slash(fs.get('routes').dest)).toEqual('src/routes.ts');
   });
 
   it('should write to file', () => {
@@ -69,7 +73,9 @@ describe('virtual file system', () => {
         [reduxSkill, typescriptSkill],
         defaultInterfaceState
       );
-      expect(skillMap.get('redux').files.get('configureStore').content).toEqual(
+      expect(
+        skillMap.get('redux').files.get('configureStore.prod').content
+      ).toEqual(
         `import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { createHashHistory } from 'history';
@@ -98,8 +104,8 @@ export default { configureStore, history };
         name: 'react',
         files: [
           {
-            path: 'src/routes',
-            name: 'routes',
+            alias: 'routes',
+            dest: 'src/routes',
             content: 'route 1'
           }
         ],

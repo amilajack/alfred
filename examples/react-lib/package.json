@@ -14,7 +14,8 @@
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
   "dependencies": {
-    "prop-types": "^15.6.2"
+    "prop-types": "^15.6.2",
+    "react-hot-loader": "^4.3.12"
   },
   "devDependencies": {
     "@alfred/cli": "^0.0.3",
@@ -29,6 +30,7 @@
     "@babel/preset-react": "7.8.3",
     "@babel/register": "^7.8.3",
     "@examples/alfred-config-example": "^0.0.3",
+    "autoprefixer": "^9.7.4",
     "babel-eslint": "10.0.3",
     "babel-loader": "8.0.6",
     "babel-plugin-dev-expression": "^0.2.1",
@@ -38,7 +40,7 @@
     "eslint-config-airbnb": "18.0.1",
     "eslint-config-prettier": "6.10.0",
     "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-jest": "23.6.0",
+    "eslint-plugin-jest": "23.7.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "3.1.2",
     "eslint-plugin-react": "^7.18.3",
@@ -47,10 +49,11 @@
     "lodash-es": "4.17.15",
     "lodash-webpack-plugin": "0.11.5",
     "parcel": "^1.11.0",
+    "postcss-modules": "^1.5.0",
     "prettier": "^1.16.4",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-hot-loader": "^4.3.12"
+    "react-hot-loader": "^4.6.3"
   },
   "peerDependencies": {
     "react": "^16.7.0",
@@ -58,14 +61,15 @@
   },
   "alfred": {
     "extends": "@examples/alfred-config-example",
-    "showConfigs": true,
     "npmClient": "yarn",
+    "showConfigs": true,
     "skills": [
       "@alfred/skill-react",
       [
         "@alfred/skill-eslint",
         {
           "rules": {
+            "react/jsx-filename-extension": "off",
             "react/state-in-constructor": "off"
           }
         }

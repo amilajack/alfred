@@ -16,9 +16,10 @@ import {
   DependencyType,
   PkgJson,
   CORE_SKILL,
-  ConfigType,
+  FileType,
   Skill,
-  RawSkill
+  RawSkill,
+  SkillFile
 } from '@alfred/types';
 import {
   getDepsFromPkg,
@@ -32,8 +33,8 @@ export function addSkillHelpers(skill: Skill): SkillWithHelpers {
   return {
     ...skill,
     findConfig(configName: string): SkillConfigFile {
-      const config = (this.configFiles || []).find(
-        configFile => configFile.name === configName
+      const config = (this.configs || []).find(
+        configFile => configFile.alias === configName
       );
       if (!config) {
         throw new Error(`Cannot find config with name "${configName}"`);
@@ -48,24 +49,31 @@ export function addSkillHelpers(skill: Skill): SkillWithHelpers {
       const mergedConfigFile = mergeConfigs({}, foundConfig, {
         config: configExtension
       });
-      const configFiles = (this.configFiles || []).map(configFile =>
-        configFile.name === configName ? mergedConfigFile : configFile
+      const configs = (this.configs || []).map(configFile =>
+        configFile.alias === configName ? mergedConfigFile : configFile
       );
       return lodash.merge({}, this, {
-        configFiles
+        configs
       });
     },
     replaceConfig(
       configName: string,
       configReplacement: SkillConfigFile
     ): SkillWithHelpers {
-      const configFiles = (this.configFiles || []).map(configFile =>
-        configFile.name === configName ? configReplacement : configFile
+      const configs = (this.configs || []).map(configFile =>
+        configFile.alias === configName ? configReplacement : configFile
       );
       return {
         ...this,
-        configFiles
+        configs
       };
+    },
+    setWrite(configName: string, shouldWrite: boolean): SkillWithHelpers {
+      const newConfig = {
+        ...this.findConfig(configName),
+        write: shouldWrite
+      };
+      return this.replaceConfig(configName, newConfig);
     },
     addDeps(dependencies: Dependencies): SkillWithHelpers {
       return lodash.merge({}, this, {
@@ -132,7 +140,7 @@ export async function runTransforms(
   return skillMap;
 }
 
-function getConfigTypeFromFile(file: string): ConfigType {
+function getFileTypeFromFile(file: string): FileType {
   const { ext } = path.parse(file);
   switch (ext) {
     case '.json':
@@ -140,9 +148,7 @@ function getConfigTypeFromFile(file: string): ConfigType {
     case '.js':
       return 'commonjs';
     default:
-      console.warn(
-        `configType could not be inferred for config path "${file}"`
-      );
+      console.warn(`fileType could not be inferred for config path "${file}"`);
       return 'json';
   }
 }
@@ -154,11 +160,13 @@ function normalizeSkill(skill: Skill | RawSkill): SkillWithHelpers {
   return {
     ...addSkillHelpers(skill as Skill),
     interfaces: normalizeInterfacesOfSkill((skill as Skill).interfaces),
-    files: new VirtualFileSystem((skill as RawSkill).files || []),
-    configFiles: (skill.configFiles || []).map(configFile => ({
+    files:
+      skill.files instanceof VirtualFileSystem
+        ? skill.files
+        : new VirtualFileSystem((skill.files as SkillFile[]) || [], skill.dirs),
+    configs: (skill.configs || []).map(configFile => ({
       ...configFile,
-      configType:
-        configFile.configType || getConfigTypeFromFile(configFile.path)
+      fileType: configFile.fileType || getFileTypeFromFile(configFile.filename)
     }))
   };
 }
@@ -175,6 +183,7 @@ export function requireSkill(skillName: string): SkillWithHelpers {
       ...normalizeSkill(requiredSkill)
     };
   } catch (e) {
+    console.log(e);
     throw new Error(`Cannot find module '${skillName}'`);
   }
 }
@@ -224,6 +233,17 @@ export function validateSkill(
   interfaceState: InterfaceState
 ): SkillMap {
   skillMap.forEach(skillNode => {
+    // Validate the files of a skill
+    if (skillNode.files) {
+      skillNode.files.forEach(file => {
+        if (file.content && file.src) {
+          throw new Error(
+            'File cannot have both "content" and "src" properties'
+          );
+        }
+      });
+    }
+    // Validate if a skill is supported for a certain interface state
     if (skillNode && skillNode.supports) {
       const supports = {
         env: skillNode.supports.envs.includes(interfaceState.env),
@@ -234,7 +254,6 @@ export function validateSkill(
       };
       const { env, target, projectType } = supports;
       const isSupported = env && target && projectType;
-
       if (!isSupported) {
         throw new Error(
           `The "${skillNode.name}" skill, which supports ${JSON.stringify(
@@ -388,14 +407,14 @@ export default async function skillMapFromConfig(
     // Add the skill config to the skillNode
     const skillNode: SkillNode = requireSkill(skillPkgName);
     skillNode.config = skillUserConfig;
-    if (skillNode.configFiles) {
-      skillNode.configFiles = skillNode.configFiles.map(configFile => ({
+    if (skillNode.configs) {
+      skillNode.configs = skillNode.configs.map(configFile => ({
         ...configFile,
         config: lodash.merge(
           {},
           configFile.config,
           // Only apply config if skill has only one config file
-          skillNode.configFiles.length === 1 ? skillUserConfig : {}
+          skillNode.configs.length === 1 ? skillUserConfig : {}
         )
       }));
     }

@@ -1,7 +1,7 @@
 /* eslint global-require: off */
 const replace = require('@rollup/plugin-replace');
 const commonjs = require('@rollup/plugin-commonjs');
-const { getConfigByName, mapEnvToShortName } = require('@alfred/helpers');
+const { getConfig, mapEnvToShortName } = require('@alfred/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 
 const interfaceConfig = {
@@ -22,10 +22,10 @@ module.exports = {
     ['@alfred/interface-build', interfaceConfig],
     ['@alfred/interface-start', interfaceConfig]
   ],
-  configFiles: [
+  configs: [
     {
-      name: 'rollup.base',
-      path: 'rollup.base.js',
+      alias: 'rollup.base',
+      filename: 'rollup.base.js',
       config: {
         external(id) {
           return id.includes('node_modules');
@@ -33,8 +33,8 @@ module.exports = {
       }
     },
     {
-      name: 'rollup.prod',
-      path: 'rollup.prod.js',
+      alias: 'rollup.prod',
+      filename: 'rollup.prod.js',
       config: {
         output: {
           format: 'es'
@@ -48,8 +48,8 @@ module.exports = {
       }
     },
     {
-      name: 'rollup.dev',
-      path: 'rollup.dev.js',
+      alias: 'rollup.dev',
+      filename: 'rollup.dev.js',
       config: {
         output: {
           format: 'cjs'
@@ -65,12 +65,12 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ configFiles, interfaceState, subcommand }) {
+    async run({ configs, interfaceState, data }) {
       const [baseConfig, prodConfig, devConfig] = [
         'rollup.base',
         'rollup.prod',
         'rollup.dev'
-      ].map(configFile => getConfigByName(configFile, configFiles).config);
+      ].map(configFile => getConfig(configFile, configs).config);
       const inputAndOutputConfigs = {
         input: `./src/lib.${interfaceState.target}.js`,
         output: {
@@ -94,7 +94,7 @@ module.exports = {
 
       const rollup = require('rollup');
 
-      switch (subcommand) {
+      switch (data.subcommand) {
         case 'start': {
           const watchConf = interfaceState.env === 'production' ? prod : dev;
           // @TODO: Mention which port and host the server is running (see webpack skill)
@@ -123,7 +123,7 @@ module.exports = {
           );
         }
         default:
-          throw new Error(`Invalid subcommand: "${subcommand}"`);
+          throw new Error(`Invalid subcommand: "${data.subcommand}"`);
       }
     }
   },
@@ -135,8 +135,7 @@ module.exports = {
         .extendConfig('rollup.base', {
           plugins: [
             babel({
-              ...getConfigByName('babel', skillMap.get('babel').configFiles)
-                .config,
+              ...getConfig('babel', skillMap.get('babel').configs).config,
               exclude: 'node_modules/**'
             })
           ]

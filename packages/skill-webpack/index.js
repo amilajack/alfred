@@ -2,7 +2,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const {
-  getConfigByName,
+  getConfig,
   configStringify,
   configSerialize,
   configDeserialize,
@@ -37,10 +37,10 @@ module.exports = {
     ['@alfred/interface-build', interfaceConfig],
     ['@alfred/interface-start', interfaceConfig]
   ],
-  configFiles: [
+  configs: [
     {
-      name: 'webpack.base',
-      path: 'webpack.base.js',
+      alias: 'webpack.base',
+      filename: 'webpack.base.js',
       config: {
         mode: 'development',
         output: {
@@ -54,8 +54,8 @@ module.exports = {
       }
     },
     {
-      name: 'webpack.prod',
-      path: 'webpack.prod.js',
+      alias: 'webpack.prod',
+      filename: 'webpack.prod.js',
       config: {
         output: {
           path: path.join('<projectRoot>', 'targets', 'prod'),
@@ -66,8 +66,8 @@ module.exports = {
       }
     },
     {
-      name: 'webpack.dev',
-      path: 'webpack.dev.js',
+      alias: 'webpack.dev',
+      filename: 'webpack.dev.js',
       config: {
         // @TODO: wepack-dev-server, HMR, sass, css, etc
         mode: 'development',
@@ -113,8 +113,8 @@ module.exports = {
       }
     },
     {
-      name: 'webpack.node',
-      path: 'webpack.node.js',
+      alias: 'webpack.node',
+      filename: 'webpack.node.js',
       config: {
         entry: [path.join('<projectRoot>', 'src', 'app.node.js')],
         output: {
@@ -124,8 +124,8 @@ module.exports = {
       }
     },
     {
-      name: 'webpack.browser',
-      path: 'webpack.browser.js',
+      alias: 'webpack.browser',
+      filename: 'webpack.browser.js',
       config: {
         entry: [path.join('<projectRoot>', 'src', 'app.browser.js')],
         output: {
@@ -136,24 +136,12 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ project, configFiles, interfaceState, subcommand }) {
-      const { config: baseConfig } = getConfigByName(
-        'webpack.base',
-        configFiles
-      );
-      const { config: prodConfig } = getConfigByName(
-        'webpack.prod',
-        configFiles
-      );
-      const { config: devConfig } = getConfigByName('webpack.dev', configFiles);
-      const { config: nodeConfig } = getConfigByName(
-        'webpack.node',
-        configFiles
-      );
-      const { config: browserConfig } = getConfigByName(
-        'webpack.browser',
-        configFiles
-      );
+    async run({ project, configs, interfaceState, data }) {
+      const { config: baseConfig } = getConfig('webpack.base', configs);
+      const { config: prodConfig } = getConfig('webpack.prod', configs);
+      const { config: devConfig } = getConfig('webpack.dev', configs);
+      const { config: nodeConfig } = getConfig('webpack.node', configs);
+      const { config: browserConfig } = getConfig('webpack.browser', configs);
       let mergedConfig = mergeConfigs(
         baseConfig,
         interfaceState.env === 'production' ? prodConfig : devConfig,
@@ -191,7 +179,7 @@ module.exports = {
         }
       }
 
-      switch (subcommand) {
+      switch (data.subcommand) {
         case 'start': {
           const Webpack = require('webpack');
           const WebpackDevServer = require('webpack-dev-server');
@@ -239,7 +227,7 @@ module.exports = {
           });
         }
         default:
-          throw new Error(`Invalid subcommand: "${subcommand}"`);
+          throw new Error(`Invalid subcommand: "${data.subcommand}"`);
       }
     }
   },
@@ -255,7 +243,7 @@ module.exports = {
                 use: {
                   loader: 'babel-loader',
                   options: {
-                    ...getConfigByName('babel', toSkill.configFiles).config,
+                    ...getConfig('babel', toSkill.configs).config,
                     cacheDirectory: true
                   }
                 }

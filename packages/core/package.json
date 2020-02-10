@@ -31,11 +31,14 @@
     "@alfred/skill-parcel": "^0.0.3",
     "@alfred/skill-prettier": "^0.0.3",
     "@alfred/skill-react": "^0.0.3",
+    "@alfred/skill-redux": "^0.0.3",
     "@alfred/skill-rollup": "^0.0.3",
     "@alfred/skill-webpack": "^0.0.3",
     "@alfred/types": "^0.0.3",
     "@hapi/joi": "^17.1.0",
     "@types/diff": "^4.0.2",
+    "@types/fs-extra": "^8.0.1",
+    "@types/globby": "^9.1.0",
     "@types/joi": "^14.3.4",
     "@types/lodash": "^4.14.149",
     "@types/npm": "^2.0.31",
@@ -45,6 +48,8 @@
     "diff": "^4.0.2",
     "emphasize": "^3.0.0",
     "format-package": "^5.2.0",
+    "fs-extra": "^8.1.0",
+    "globby": "^11.0.0",
     "lodash": "^4.17.11",
     "npm": "^6.13.6",
     "pkg-up": "^3.1.0",
@@ -57,7 +62,7 @@
   "engineStrict": true,
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8",
   "devDependencies": {
-    "@types/jest": "^25.1.1",
+    "@types/jest": "^25.1.2",
     "@types/prettier": "^1.19.0",
     "slash": "^3.0.0"
   }

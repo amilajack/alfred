@@ -1,3 +1,4 @@
+const path = require('path');
 const {
   getConfigPathByConfigName,
   execCmdInProject,
@@ -8,20 +9,23 @@ module.exports = {
   name: 'prettier',
   description: 'Format the source files in your project',
   interfaces: ['@alfred/interface-format'],
-  configFiles: [
+  configs: [
     {
-      name: 'prettier',
-      path: '.prettierrc',
-      configType: 'json',
+      alias: 'prettier',
+      filename: '.prettierrc',
+      fileType: 'json',
       config: {
         singleQuote: true
       }
     }
   ],
   hooks: {
-    async run({ configFiles, project, config, flags }) {
+    async run({ configs, project, config, data }) {
       const binPath = await getPkgBinPath(project, 'prettier');
-      const configPath = getConfigPathByConfigName('prettier', configFiles);
+      const configPath = path.join(
+        config.configsDir,
+        getConfigPathByConfigName('prettier', configs)
+      );
       return execCmdInProject(
         project,
         [
@@ -31,7 +35,7 @@ module.exports = {
           '--single-quote',
           '--write',
           '**/*.js',
-          ...flags,
+          ...data.flags,
           config.showConfigs ? `--config ${configPath}` : ''
         ].join(' ')
       );

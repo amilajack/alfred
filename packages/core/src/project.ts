@@ -33,6 +33,7 @@ import learn from './commands/learn';
 import skills from './commands/skills';
 import clean from './commands/clean';
 import { PKG_SORT_ORDER } from './constants';
+import { EventEmitter } from 'events';
 
 // @TODO Send the information to a crash reporting service (like sentry.io)
 // @TODO Install sourcemaps
@@ -80,7 +81,7 @@ export function formatPkgJson(pkg: Record<string, any>): Promise<string> {
   return formatPkg(pkg, { order: PKG_SORT_ORDER });
 }
 
-export default class Project implements ProjectInterface {
+export default class Project extends EventEmitter implements ProjectInterface {
   config: ConfigInterface;
 
   pkgPath: string;
@@ -90,15 +91,37 @@ export default class Project implements ProjectInterface {
   root: string;
 
   constructor(projectRootOrSubDir: string = process.cwd()) {
+    super();
     const projectRoot = findProjectRoot(projectRootOrSubDir);
 
     this.root = projectRoot;
     this.pkgPath = path.join(projectRoot, 'package.json');
     this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
     this.config = Config.initFromProjectRoot(projectRoot);
+  }
 
+  async init(): Promise<ProjectInterface> {
     const interfaceStates = getInterfaceStatesFromProject(this);
     this.checkIsAlfredProject(interfaceStates);
+
+    const skillMap = await this.getSkillMap();
+    skillMap.forEach(skill => {
+      Object.entries(skill.hooks || {}).forEach(([hookName, hookFn]) => {
+        this.on(hookName, (data = {}): void => {
+          if (!hookFn) return;
+          return hookFn({
+            data,
+            project: this,
+            configs: [],
+            config: this.config,
+            interfaceStates,
+            skill,
+            skillConfig: skill.config,
+            skillMap: skillMap
+          });
+        });
+      });
+    });
 
     return this;
   }
@@ -171,8 +194,8 @@ export default class Project implements ProjectInterface {
     }
   }
 
-  learn(args: string[]): Promise<void> {
-    return learn(this, args);
+  learn(skillPkgNames: string[]): Promise<void> {
+    return learn(this, skillPkgNames);
   }
 
   async clean(): Promise<void> {
@@ -341,7 +364,23 @@ export default class Project implements ProjectInterface {
    */
   // uninstallDeps() {}
 
-  skillMapFromInterfaceState(
+  /**
+   * Get a skillMap that has all the skills used in all interface states
+   */
+  async getSkillMap(): Promise<SkillMap> {
+    const skillMaps = await Promise.all(
+      getInterfaceStatesFromProject(this).map(state =>
+        this.getSkillMapFromInterfaceState(state)
+      )
+    );
+    // Merge the maps
+    return skillMaps.reduce(
+      (prevSkillMap: SkillMap, currSkillMap: SkillMap) =>
+        new Map<string, SkillNode>([...prevSkillMap, ...currSkillMap])
+    );
+  }
+
+  getSkillMapFromInterfaceState(
     interfaceState: InterfaceState,
     config: ConfigInterface = this.config
   ): Promise<SkillMap> {
@@ -359,25 +398,22 @@ export default class Project implements ProjectInterface {
 
     const skills: SkillNode[] = Array.from(skillMap.values());
 
-    // Write all files
-    await Promise.all(
-      skills
-        .filter(skill => skill.files && skill.files.size)
-        .map(skill => skill.files.writeAllFiles(this))
-    );
+    // Write all files and dirs
+    // @TODO Remove this to allow users to edit their own boilerplate
+    await Promise.all(skills.map(skill => skill.files.writeAllFiles(this)));
 
-    // Write all configFiles
+    // Write all configs
     await Promise.all(
       skills
-        .filter(skill => skill.configFiles && skill.configFiles.length)
-        .flatMap(skill => skill.configFiles)
+        .filter(skill => skill.configs && skill.configs.length)
+        .flatMap(skill => skill.configs)
         .map(async configFile => {
-          const filePath = path.join(configsBasePath, configFile.path);
+          const filePath = path.join(configsBasePath, configFile.filename);
           const stringifiedConfig = JSON.stringify(configFile.config);
           let parser: 'babel' | 'json' = 'babel';
 
           const configInConfigFileFormat = ((): string => {
-            switch (configFile.configType) {
+            switch (configFile.fileType) {
               case 'commonjs':
                 parser = 'babel';
                 return `module.exports = ${stringifiedConfig}`;

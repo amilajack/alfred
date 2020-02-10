@@ -1,55 +1,61 @@
 const fs = require('fs');
 const path = require('path');
 const { execCmdInProject, getPkgBinPath } = require('@alfred/helpers');
-const {
-  getConfigPathByConfigName,
-  getConfigByName
-} = require('@alfred/helpers');
+const { getConfigPathByConfigName, getConfig } = require('@alfred/helpers');
 
 module.exports = {
   name: 'jest',
   description: 'Test your JS files',
   interfaces: ['@alfred/interface-test'],
-  configFiles: [
+  configs: [
     {
-      name: 'jest',
-      path: 'jest.config.js',
-      config: {}
+      alias: 'jest',
+      filename: 'jest.config.js',
+      config: {
+        moduleNameMapper: {
+          '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+            '<rootDir>/__mocks__/fileMock.js',
+          '\\.(css|less)$': 'identity-obj-proxy'
+        }
+      }
     }
   ],
   hooks: {
-    async run({ configFiles, skillMap, config, project, flags }) {
-      const configPath = getConfigPathByConfigName('jest', configFiles);
-      const binPath = await getPkgBinPath(project, 'jest');
+    async run({ configs, skillMap, config, project, data }) {
+      const configPath = getConfigPathByConfigName('jest', configs);
       const { root } = project;
+
+      // Create the node_modules dir if it doesn't exist
       const nodeModulesPath = path.join(root, 'node_modules');
       if (!fs.existsSync(nodeModulesPath)) {
         await fs.promises.mkdir(nodeModulesPath);
       }
-      // @TODO Create a hidden `./node_modules/.alfred` directory to put configs in
       const jestTransformerPath = path.join(
         root,
         'node_modules',
         'jest-transformer.js'
       );
-      const babelConfig = JSON.stringify(
-        getConfigByName('babel', skillMap.get('babel').configFiles).config
+      const { config: babelConfig } = getConfig(
+        'babel',
+        skillMap.get('babel').configs
       );
       const hiddenTmpConfigPath = path.join(
         root,
         'node_modules',
         'jest.config.js'
       );
+      const { config: jestConfig } = getConfig('jest', configs);
+      const fullConfig = {
+        ...jestConfig,
+        transform: {
+          '^.+.jsx?$': '<rootDir>/node_modules/jest-transformer.js'
+        },
+        rootDir: `${root}`
+      };
       await fs.promises.writeFile(
         // @TODO Write to ./node_modules/.alfred
         config.showConfigs ? configPath : hiddenTmpConfigPath,
-        `module.exports = {
-          transform: {
-            '^.+.jsx?$': ${JSON.stringify(jestTransformerPath)}
-          },
-          rootDir: ${JSON.stringify(root)}
-        };
-        `
+        `module.exports = ${JSON.stringify(fullConfig)};`
       );
       if (!config.showConfigs && fs.existsSync(configPath)) {
         await fs.promises.unlink(configPath);
@@ -58,8 +64,12 @@ module.exports = {
       await fs.promises.writeFile(
         jestTransformerPath,
         `const babelJestTransform = require(${JSON.stringify(babelJestPath)});
-        module.exports = babelJestTransform.createTransformer(${babelConfig});`
+        module.exports = babelJestTransform.createTransformer(${JSON.stringify(
+          babelConfig
+        )});`
       );
+
+      const binPath = await getPkgBinPath(project, 'jest');
 
       return execCmdInProject(
         project,
@@ -68,7 +78,7 @@ module.exports = {
           config.showConfigs
             ? `--config ${JSON.stringify(configPath)} ${JSON.stringify(root)}`
             : `--config ${hiddenTmpConfigPath} ${JSON.stringify(root)}`,
-          ...flags
+          ...data.flags
         ].join(' ')
       );
     }

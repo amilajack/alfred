@@ -1,7 +1,7 @@
 import { ProjectInterface } from '@alfred/types';
 import {
   getExecutableWrittenConfigsMethods,
-  getInterfaceForSubcommand
+  getSkillInterfaceForSubcommand
 } from '.';
 import { getInterfaceStatesFromProject } from '../interface';
 
@@ -32,25 +32,30 @@ export default async function run(
     }
   }
 
+  project.emit('beforeRun', {
+    subcommand,
+    flags: skillFlags
+  });
+
   let commandWasExceuted = false;
 
   await Promise.all(
     interfaceStates.map(interfaceState =>
       project
-        .skillMapFromInterfaceState(interfaceState)
+        .getSkillMapFromInterfaceState(interfaceState)
         .then(skillMap =>
           config.showConfigs
             ? project.writeConfigsFromSkillMap(skillMap)
             : skillMap
         )
         .then(skillMap => {
-          const subcommandInterface = getInterfaceForSubcommand(
+          const skillInterface = getSkillInterfaceForSubcommand(
             skillMap,
             subcommand
           );
 
-          const filteredSkillFlags = subcommandInterface.handleFlags
-            ? subcommandInterface.handleFlags(skillFlags, {
+          const filteredSkillFlags = skillInterface.handleFlags
+            ? skillInterface.handleFlags(skillFlags, {
                 interfaceState,
                 config
               })
@@ -62,7 +67,7 @@ export default async function run(
             interfaceState
           );
 
-          if (!subcommandInterface.runForAllTargets) {
+          if (!skillInterface.runForAllTargets) {
             if (commandWasExceuted) {
               return;
             }
@@ -79,4 +84,9 @@ export default async function run(
         })
     )
   );
+
+  project.emit('afterRun', {
+    subcommand,
+    flags: skillFlags
+  });
 }

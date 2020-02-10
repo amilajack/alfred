@@ -1,13 +1,13 @@
 /* eslint global-require: off */
-const { getConfigByName } = require('@alfred/helpers');
+const { getConfig } = require('@alfred/helpers');
 
 module.exports = {
   name: 'babel',
   description: 'Transpile JS from ESNext to the latest ES version',
-  configFiles: [
+  configs: [
     {
-      name: 'babel',
-      path: '.babelrc.js',
+      alias: 'babel',
+      filename: '.babelrc.js',
       config: {
         presets: ['@babel/preset-env']
       }

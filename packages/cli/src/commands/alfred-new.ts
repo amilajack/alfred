@@ -8,6 +8,7 @@ import validateName from 'validate-npm-package-name';
 import program from 'commander';
 import git from 'git-config';
 import chalk from 'chalk';
+import alfred from '@alfred/core';
 import { version as ALFRED_CORE_VERSION } from '@alfred/core/package.json';
 import { getSingleSubcommandFromArgs, GitConfig, addBoilerplate } from '..';
 
@@ -214,7 +215,7 @@ async function createNewProject(cwd: string, name: string): Promise<void> {
     });
   }
 
-  return renderLines([
+  renderLines([
     `Awesome! Your Alfred project has been created in: ${style.filePath(
       relativeRoot
     )}`,
@@ -225,6 +226,17 @@ async function createNewProject(cwd: string, name: string): Promise<void> {
     )} from within the ${style.filePath(relativeRoot)} directory.`,
     'Happy hacking!'
   ]);
+
+  const project = await alfred();
+
+  // Get the entire skillMap now that the skills are installed
+  const skillMap = await project.getSkillMap();
+  // Write all files and dirs
+  await Promise.all(
+    Array.from(skillMap.values()).map(skill =>
+      skill.files.writeAllFiles(project)
+    )
+  );
 }
 
 (async (): Promise<void> => {

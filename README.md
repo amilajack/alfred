@@ -99,13 +99,13 @@ export default {
   },
   description: 'Transpile JS from ESNext to the latest ES version',
   // An array of the configs introduced by the skill
-  configFiles: [
+  configs: [
     {
       // The name of the config. This should never include a filename extension because skills
       // have the ability to change extensions (ex. .js -> .ts) so this should not be fixed
-      name: 'babelrc',
+      alias: 'babelrc',
       // The filename and the path which the config should be written to
-      path: '.babelrc.js',
+      filename: '.babelrc.js',
       // The value of the config. Can be an object or a string
       config: {
         presets: ['@babel/preset-env']
@@ -225,16 +225,14 @@ export default {
   name: 'redux',
   files: [
     {
-      name: 'redux-routes',
-      path: 'src/routes.js',
+      alias: 'redux-routes',
+      dest: 'src/routes.js',
       content: `
         import { createStore, applyMiddleware } from 'redux';
         import thunk from 'redux-thunk';
         import { createHashHistory } from 'history';
         import { routerMiddleware } from 'connected-react-router';
         import createRootReducer from '../reducers';
-        import type { counterStateType } from '../reducers/types';
-        import { Store, counterStateType } from '../reducers/types';
 
         const history = createHashHistory();
         const rootReducer = createRootReducer(history);

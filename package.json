@@ -81,7 +81,7 @@
     "babel-loader": "^8.0.6",
     "cross-env": "^7.0.0",
     "eslint": "^6.8.0",
-    "eslint-config-bliss": "^4.6.0",
+    "eslint-config-bliss": "^4.7.0",
     "eslint-formatter-pretty": "^3.0.1",
     "husky": "^4.0.10",
     "isomorphic-fetch": "^2.2.1",
@@ -90,7 +90,7 @@
     "lint-staged": "^10.0.7",
     "shebang-loader": "^0.0.1",
     "typescript": "^3.7.5",
-    "yarn": "^1.21.1"
+    "yarn": "^1.22.0"
   },
   "jest": {
     "testEnvironment": "node",

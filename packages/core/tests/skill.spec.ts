@@ -12,7 +12,7 @@ import {
 } from '@alfred/types';
 import {
   getExecutableWrittenConfigsMethods,
-  getInterfaceForSubcommand
+  getSkillInterfaceForSubcommand
 } from '../src/commands';
 import skillMapFromConfig, {
   CORE_SKILLS,
@@ -25,7 +25,7 @@ import Project from '../src/project';
 
 function getConfigs(skillMap: SkillMap): Array<ConfigValue> {
   return Array.from(skillMap.values())
-    .flatMap(skill => skill.configFiles || [])
+    .flatMap(skill => skill.configs || [])
     .map(configFile => configFile.config);
 }
 
@@ -76,6 +76,10 @@ function removePathsPropertiesFromObject(
 }
 
 describe('Skills', () => {
+  beforeAll(async () => {
+    await defaultProject.init();
+  });
+
   describe('order', () => {
     it('should run transforms in order', async () => {
       const rawSillMap = new Map([
@@ -83,10 +87,10 @@ describe('Skills', () => {
           'react',
           {
             name: 'react',
-            configFiles: [
+            configs: [
               {
-                name: 'eslint',
-                path: '.eslintrc.json',
+                alias: 'eslint',
+                filename: '.eslintrc.json',
                 config: {
                   plugins: []
                 }
@@ -94,11 +98,11 @@ describe('Skills', () => {
             ],
             transforms: {
               babel(skill) {
-                skill.configFiles[0].config.plugins.push('a');
+                skill.configs[0].config.plugins.push('a');
                 return skill;
               },
               eslint(skill) {
-                skill.configFiles[0].config.plugins.push('b');
+                skill.configs[0].config.plugins.push('b');
                 return skill;
               }
             }
@@ -118,7 +122,7 @@ describe('Skills', () => {
         ]
       ]);
       const skillMap = await runTransforms(defaultProject, rawSillMap);
-      expect(skillMap.get('react').configFiles[0].config).toEqual({
+      expect(skillMap.get('react').configs[0].config).toEqual({
         plugins: ['a', 'b']
       });
     });
@@ -129,10 +133,10 @@ describe('Skills', () => {
           'react',
           {
             name: 'react',
-            configFiles: [
+            configs: [
               {
-                name: 'eslint',
-                path: '.eslintrc.json',
+                alias: 'eslint',
+                filename: '.eslintrc.json',
                 config: {
                   plugins: []
                 }
@@ -140,11 +144,11 @@ describe('Skills', () => {
             ],
             transforms: {
               async babel(skill) {
-                skill.configFiles[0].config.plugins.push('a');
+                skill.configs[0].config.plugins.push('a');
                 return skill;
               },
               async eslint(skill) {
-                skill.configFiles[0].config.plugins.push('b');
+                skill.configs[0].config.plugins.push('b');
                 return skill;
               }
             }
@@ -164,7 +168,7 @@ describe('Skills', () => {
         ]
       ]);
       const skillMap = await runTransforms(defaultProject, rawSillMap);
-      expect(skillMap.get('react').configFiles[0].config).toEqual({
+      expect(skillMap.get('react').configs[0].config).toEqual({
         plugins: ['a', 'b']
       });
     });
@@ -211,7 +215,7 @@ describe('Skills', () => {
             interfaceState
           );
           expect(
-            getInterfaceForSubcommand(skillMap, 'build')
+            getSkillInterfaceForSubcommand(skillMap, 'build')
           ).toMatchSnapshot();
         });
       });
@@ -223,7 +227,9 @@ describe('Skills', () => {
             [CORE_SKILLS.babel],
             interfaceState
           );
-          expect(() => getInterfaceForSubcommand(skillMap, 'foo')).toThrow();
+          expect(() =>
+            getSkillInterfaceForSubcommand(skillMap, 'foo')
+          ).toThrow();
         }
       });
     });

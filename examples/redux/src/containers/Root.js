@@ -1,17 +1,10 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import { hot } from 'react-hot-loader/root';
-import { History } from 'history';
-import { Store } from '../reducers/types';
+import { hot } from 'react-hot-loader';
 import Routes from '../routes';
 
-type Props = {
-  store: Store,
-  history: History
-};
-
-const Root = ({ store, history }: Props) => (
+const Root = ({ store, history }) => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Routes />
@@ -19,4 +12,4 @@ const Root = ({ store, history }: Props) => (
   </Provider>
 );
 
-export default hot(Root);
+export default hot(module)(Root);

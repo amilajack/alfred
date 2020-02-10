@@ -1,12 +1,15 @@
 import { ProjectInterface } from '@alfred/types';
 import mergeConfigs from '@alfred/merge-configs';
 import Config from '../config';
+import { requireSkill } from '../skill';
 
 export default async function learn(
   project: ProjectInterface,
   skillsPkgNames: Array<string>
 ): Promise<void> {
   const { config } = project;
+
+  project.emit('beforeLearn', { skillsPkgNames });
 
   // Create a alfred config with the new skills added
   const newConfig = new Config(
@@ -19,8 +22,9 @@ export default async function learn(
   await project.installDeps(skillsPkgNames, 'dev');
 
   // Get dependencies and devDependencies of all skills
+  const skillsToLearn = skillsPkgNames.map(requireSkill);
   const { dependencies, devDependencies } = await project.findDepsToInstall(
-    skillsPkgNames.map(require)
+    skillsToLearn
   );
 
   // @TODO Ideally there would be a way to install both devDeps and deps at the same time
@@ -35,4 +39,16 @@ export default async function learn(
       skills: skillsPkgNames
     })
   );
+
+  // Get the entire skillMap now that the skills are installed
+  const skillMap = await project.getSkillMap();
+  const learnedSkills = new Set(skillsToLearn.map(skill => skill.name));
+  // Write all files and dirs
+  await Promise.all(
+    Array.from(skillMap.values())
+      .filter(skill => learnedSkills.has(skill.name))
+      .map(skill => skill.files.writeAllFiles(project))
+  );
+
+  project.emit('afterLearn', { skillsPkgNames });
 }
