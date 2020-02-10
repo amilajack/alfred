@@ -112,11 +112,10 @@ export default class Project extends EventEmitter implements ProjectInterface {
           return hookFn({
             data,
             project: this,
-            configs: [],
             config: this.config,
             interfaceStates,
             skill,
-            skillConfig: skill.config,
+            skillConfig: skill.userConfig,
             skillMap: skillMap
           });
         });
@@ -405,8 +404,7 @@ export default class Project extends EventEmitter implements ProjectInterface {
     // Write all configs
     await Promise.all(
       skills
-        .filter(skill => skill.configs && skill.configs.length)
-        .flatMap(skill => skill.configs)
+        .flatMap(skill => Array.from(skill.configs.values()))
         .map(async configFile => {
           const filePath = path.join(configsBasePath, configFile.filename);
           const stringifiedConfig = JSON.stringify(configFile.config);

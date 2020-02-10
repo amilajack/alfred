@@ -1,10 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const {
-  getConfig,
-  execCmdInProject,
-  getPkgBinPath
-} = require('@alfred/helpers');
+const { execCmdInProject, getPkgBinPath } = require('@alfred/helpers');
 
 module.exports = {
   name: 'mocha',
@@ -24,10 +20,9 @@ module.exports = {
         config.showConfigs ? config.configsDir : 'node_modules',
         'mocha.js'
       );
-      const { config: babelConfig } = getConfig(
-        'babel',
-        skillMap.get('babel').configs
-      );
+      const { config: babelConfig } = skillMap
+        .get('babel')
+        .configs.get('babel');
       await fs.promises.writeFile(
         mochaBabelRegisterPath,
         `const babelRegister = require('@babel/register');

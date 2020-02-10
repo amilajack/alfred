@@ -1,7 +1,7 @@
 /* eslint global-require: off */
 const replace = require('@rollup/plugin-replace');
 const commonjs = require('@rollup/plugin-commonjs');
-const { getConfig, mapEnvToShortName } = require('@alfred/helpers');
+const { mapEnvToShortName } = require('@alfred/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 
 const interfaceConfig = {
@@ -65,12 +65,12 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ configs, interfaceState, data }) {
+    async run({ skill, interfaceState, data }) {
       const [baseConfig, prodConfig, devConfig] = [
         'rollup.base',
         'rollup.prod',
         'rollup.dev'
-      ].map(configFile => getConfig(configFile, configs).config);
+      ].map(configFile => skill.configs.get(configFile).config);
       const inputAndOutputConfigs = {
         input: `./src/lib.${interfaceState.target}.js`,
         output: {
@@ -128,14 +128,14 @@ module.exports = {
     }
   },
   transforms: {
-    babel(skill, { skillMap }) {
+    babel(skill, { toSkill }) {
       // eslint-disable-next-line import/no-extraneous-dependencies
       const babel = require('rollup-plugin-babel');
       return skill
         .extendConfig('rollup.base', {
           plugins: [
             babel({
-              ...getConfig('babel', skillMap.get('babel').configs).config,
+              ...toSkill.configs.get('babel').config,
               exclude: 'node_modules/**'
             })
           ]

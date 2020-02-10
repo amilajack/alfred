@@ -8,7 +8,7 @@ import {
   SkillNode,
   ProjectInterface,
   InterfaceState,
-  SkillConfigFile,
+  SkillConfig,
   ProjectEnum,
   Target,
   SkillWithHelpers,
@@ -24,7 +24,7 @@ import {
 import {
   getDepsFromPkg,
   fromPkgTypeToFull,
-  getConfigsBasePath
+  EnhancedMap
 } from '@alfred/helpers';
 import VirtualFileSystem from './virtual-file';
 import { normalizeInterfacesOfSkill } from './interface';
@@ -32,10 +32,8 @@ import { normalizeInterfacesOfSkill } from './interface';
 export function addSkillHelpers(skill: Skill): SkillWithHelpers {
   return {
     ...skill,
-    findConfig(configName: string): SkillConfigFile {
-      const config = (this.configs || []).find(
-        configFile => configFile.alias === configName
-      );
+    findConfig(configName: string): SkillConfig {
+      const config = this.configs.get(configName);
       if (!config) {
         throw new Error(`Cannot find config with name "${configName}"`);
       }
@@ -48,7 +46,7 @@ export function addSkillHelpers(skill: Skill): SkillWithHelpers {
       const foundConfig = this.findConfig(configName);
       const mergedConfigFile = mergeConfigs({}, foundConfig, {
         config: configExtension
-      });
+      }) as SkillConfig;
       const configs = (this.configs || []).map(configFile =>
         configFile.alias === configName ? mergedConfigFile : configFile
       );
@@ -58,7 +56,7 @@ export function addSkillHelpers(skill: Skill): SkillWithHelpers {
     },
     replaceConfig(
       configName: string,
-      configReplacement: SkillConfigFile
+      configReplacement: SkillConfig
     ): SkillWithHelpers {
       const configs = (this.configs || []).map(configFile =>
         configFile.alias === configName ? configReplacement : configFile
@@ -128,8 +126,7 @@ export async function runTransforms(
               toSkill: skillMap.get(toSkillName) as SkillNode,
               skillMap: skillMap,
               config: project.config,
-              project,
-              configsPath: getConfigsBasePath(project)
+              project
             }
           );
           if (!transformResult) {
@@ -163,6 +160,15 @@ function getFileTypeFromFile(file: string): FileType {
  * @TODO Change skill param to be RawSkill instead of Skill | RawSkill
  */
 function normalizeSkill(skill: Skill | RawSkill): SkillWithHelpers {
+  const configs = new EnhancedMap<string, SkillConfig>();
+
+  ((skill as RawSkill).configs || []).forEach((configFile: SkillConfig) => {
+    configs.set(configFile.alias || configFile.filename, {
+      ...configFile,
+      fileType: configFile.fileType || getFileTypeFromFile(configFile.filename)
+    });
+  });
+
   return {
     ...addSkillHelpers(skill as Skill),
     interfaces: normalizeInterfacesOfSkill((skill as Skill).interfaces),
@@ -170,10 +176,7 @@ function normalizeSkill(skill: Skill | RawSkill): SkillWithHelpers {
       skill.files instanceof VirtualFileSystem
         ? skill.files
         : new VirtualFileSystem((skill.files as SkillFile[]) || [], skill.dirs),
-    configs: (skill.configs || []).map(configFile => ({
-      ...configFile,
-      fileType: configFile.fileType || getFileTypeFromFile(configFile.filename)
-    }))
+    configs
   };
 }
 
@@ -412,18 +415,16 @@ export default async function skillMapFromConfig(
   config.skills.forEach(([skillPkgName, skillUserConfig = {}]) => {
     // Add the skill config to the skillNode
     const skillNode: SkillNode = requireSkill(skillPkgName);
-    skillNode.config = skillUserConfig;
-    if (skillNode.configs) {
-      skillNode.configs = skillNode.configs.map(configFile => ({
-        ...configFile,
-        config: lodash.merge(
-          {},
-          configFile.config,
-          // Only apply config if skill has only one config file
-          skillNode.configs.length === 1 ? skillUserConfig : {}
-        )
-      }));
+    // skillNode.userConfig = skillUserConfig;
+    if (skillNode.configs && skillNode.configs.size === 1) {
+      // const [key, val] = Array.from(skillNode.configs.entries())[0];
+      // console.log(lodash.merge({}, val, config, skillUserConfig));
+      // skillNode.configs.set(
+      //   key,
+      //   lodash.merge({}, val, { config: skillUserConfig })
+      // );
     }
+    console.log(skillUserConfig);
     skillMapFromConfigSkills.set(skillNode.name, skillNode);
   });
 

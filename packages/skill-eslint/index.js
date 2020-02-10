@@ -1,11 +1,6 @@
 /* eslint global-require: off */
 const path = require('path');
-const {
-  getConfigPathByConfigName,
-  getConfig,
-  getPkgBinPath,
-  execCmdInProject
-} = require('@alfred/helpers');
+const { getPkgBinPath, execCmdInProject } = require('@alfred/helpers');
 
 module.exports = {
   name: 'eslint',
@@ -29,11 +24,11 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ project, config, configs, data }) {
+    async run({ project, skill, config, configs, data }) {
       const { flags } = data;
       const configPath = path.join(
         config.configsDir,
-        getConfigPathByConfigName('eslint', configs)
+        skill.configs.get('eslint').filename
       );
       const binPath = await getPkgBinPath(project, 'eslint');
       if (config.showConfigs) {
@@ -42,7 +37,7 @@ module.exports = {
           [binPath, `--config ${configPath} src tests`, ...flags].join(' ')
         );
       }
-      const { config: eslintConfig } = getConfig('eslint', configs);
+      const { config: eslintConfig } = skill.configs.get('eslint');
       const { CLIEngine } = require('eslint');
       const cli = new CLIEngine({
         cwd: project.root,
@@ -93,10 +88,7 @@ module.exports = {
                 config: path.join(
                   project.root,
                   config.configsDir,
-                  getConfigPathByConfigName(
-                    'webpack.base',
-                    skillMap.get('webpack').configs
-                  )
+                  skill.configs.get('webpack.base').filename
                 )
               }
             }
