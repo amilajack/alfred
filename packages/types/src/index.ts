@@ -173,9 +173,9 @@ export type FileType = 'commonjs' | 'module' | 'json';
 export type SkillConfigFile = {
   // The "friendly name" of a file. This is the name that
   // other skills will refer to config file by.
-  name: string;
+  alias: string;
   // The relative path of the file the config should be written to
-  path: string;
+  filename: string;
   // The value of the config
   config: ConfigValue;
   // The type of the config file. This is inferred by alfred by the file extension of .path

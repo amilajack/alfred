@@ -33,7 +33,7 @@ export function addSkillHelpers(skill: Skill): SkillWithHelpers {
     ...skill,
     findConfig(configName: string): SkillConfigFile {
       const config = (this.configFiles || []).find(
-        configFile => configFile.name === configName
+        configFile => configFile.alias === configName
       );
       if (!config) {
         throw new Error(`Cannot find config with name "${configName}"`);
@@ -49,7 +49,7 @@ export function addSkillHelpers(skill: Skill): SkillWithHelpers {
         config: configExtension
       });
       const configFiles = (this.configFiles || []).map(configFile =>
-        configFile.name === configName ? mergedConfigFile : configFile
+        configFile.alias === configName ? mergedConfigFile : configFile
       );
       return lodash.merge({}, this, {
         configFiles
@@ -60,7 +60,7 @@ export function addSkillHelpers(skill: Skill): SkillWithHelpers {
       configReplacement: SkillConfigFile
     ): SkillWithHelpers {
       const configFiles = (this.configFiles || []).map(configFile =>
-        configFile.name === configName ? configReplacement : configFile
+        configFile.alias === configName ? configReplacement : configFile
       );
       return {
         ...this,
@@ -159,10 +159,12 @@ function normalizeSkill(skill: Skill | RawSkill): SkillWithHelpers {
   return {
     ...addSkillHelpers(skill as Skill),
     interfaces: normalizeInterfacesOfSkill((skill as Skill).interfaces),
-    files: new VirtualFileSystem((skill as RawSkill).files, skill.dirs),
+    files: Array.isArray(skill.files)
+      ? new VirtualFileSystem(skill.files, skill.dirs)
+      : (skill as Skill).files,
     configFiles: (skill.configFiles || []).map(configFile => ({
       ...configFile,
-      fileType: configFile.fileType || getFileTypeFromFile(configFile.path)
+      fileType: configFile.fileType || getFileTypeFromFile(configFile.filename)
     }))
   };
 }

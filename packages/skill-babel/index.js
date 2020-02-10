@@ -6,8 +6,8 @@ module.exports = {
   description: 'Transpile JS from ESNext to the latest ES version',
   configFiles: [
     {
-      name: 'babel',
-      path: '.babelrc.js',
+      alias: 'babel',
+      filename: '.babelrc.js',
       config: {
         presets: ['@babel/preset-env']
       }

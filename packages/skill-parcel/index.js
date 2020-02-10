@@ -23,8 +23,8 @@ module.exports = {
   default: true,
   configFiles: [
     {
-      name: 'postcss',
-      path: '.postcssrc',
+      alias: 'postcss',
+      filename: '.postcssrc',
       fileType: 'json',
       config: {
         modules: true,

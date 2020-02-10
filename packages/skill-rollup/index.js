@@ -24,8 +24,8 @@ module.exports = {
   ],
   configFiles: [
     {
-      name: 'rollup.base',
-      path: 'rollup.base.js',
+      alias: 'rollup.base',
+      filename: 'rollup.base.js',
       config: {
         external(id) {
           return id.includes('node_modules');
@@ -33,8 +33,8 @@ module.exports = {
       }
     },
     {
-      name: 'rollup.prod',
-      path: 'rollup.prod.js',
+      alias: 'rollup.prod',
+      filename: 'rollup.prod.js',
       config: {
         output: {
           format: 'es'
@@ -48,8 +48,8 @@ module.exports = {
       }
     },
     {
-      name: 'rollup.dev',
-      path: 'rollup.dev.js',
+      alias: 'rollup.dev',
+      filename: 'rollup.dev.js',
       config: {
         output: {
           format: 'cjs'

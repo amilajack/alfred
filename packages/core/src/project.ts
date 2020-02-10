@@ -384,7 +384,7 @@ export default class Project implements ProjectInterface {
         .filter(skill => skill.configFiles && skill.configFiles.length)
         .flatMap(skill => skill.configFiles)
         .map(async configFile => {
-          const filePath = path.join(configsBasePath, configFile.path);
+          const filePath = path.join(configsBasePath, configFile.filename);
           const stringifiedConfig = JSON.stringify(configFile.config);
           let parser: 'babel' | 'json' = 'babel';
 

@@ -13,8 +13,8 @@ module.exports = {
   interfaces: ['@alfred/interface-lint'],
   configFiles: [
     {
-      name: 'eslint',
-      path: '.eslintrc.js',
+      alias: 'eslint',
+      filename: '.eslintrc.js',
       config: {
         root: true,
         env: {

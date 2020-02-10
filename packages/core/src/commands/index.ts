@@ -70,7 +70,7 @@ export function getExecutableWrittenConfigsMethods(
       .flatMap(skillNode => {
         const configFiles = skillNode.configFiles.map(configFile => ({
           ...configFile,
-          path: path.join(configsBasePath, configFile.path)
+          path: path.join(configsBasePath, configFile.filename)
         }));
         return skillNode.interfaces.map(skillInterface => {
           const { subcommand } = require(skillInterface.name);

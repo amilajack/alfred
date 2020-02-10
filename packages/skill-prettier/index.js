@@ -10,8 +10,8 @@ module.exports = {
   interfaces: ['@alfred/interface-format'],
   configFiles: [
     {
-      name: 'prettier',
-      path: '.prettierrc',
+      alias: 'prettier',
+      filename: '.prettierrc',
       fileType: 'json',
       config: {
         singleQuote: true

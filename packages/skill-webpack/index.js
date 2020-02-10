@@ -39,8 +39,8 @@ module.exports = {
   ],
   configFiles: [
     {
-      name: 'webpack.base',
-      path: 'webpack.base.js',
+      alias: 'webpack.base',
+      filename: 'webpack.base.js',
       config: {
         mode: 'development',
         output: {
@@ -54,8 +54,8 @@ module.exports = {
       }
     },
     {
-      name: 'webpack.prod',
-      path: 'webpack.prod.js',
+      alias: 'webpack.prod',
+      filename: 'webpack.prod.js',
       config: {
         output: {
           path: path.join('<projectRoot>', 'targets', 'prod'),
@@ -66,8 +66,8 @@ module.exports = {
       }
     },
     {
-      name: 'webpack.dev',
-      path: 'webpack.dev.js',
+      alias: 'webpack.dev',
+      filename: 'webpack.dev.js',
       config: {
         // @TODO: wepack-dev-server, HMR, sass, css, etc
         mode: 'development',
@@ -113,8 +113,8 @@ module.exports = {
       }
     },
     {
-      name: 'webpack.node',
-      path: 'webpack.node.js',
+      alias: 'webpack.node',
+      filename: 'webpack.node.js',
       config: {
         entry: [path.join('<projectRoot>', 'src', 'app.node.js')],
         output: {
@@ -124,8 +124,8 @@ module.exports = {
       }
     },
     {
-      name: 'webpack.browser',
-      path: 'webpack.browser.js',
+      alias: 'webpack.browser',
+      filename: 'webpack.browser.js',
       config: {
         entry: [path.join('<projectRoot>', 'src', 'app.browser.js')],
         output: {

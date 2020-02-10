@@ -36,7 +36,9 @@ export function getConfigByName(
   configName: string,
   configFiles: Array<SkillConfigFile>
 ): ConfigValue {
-  const config = configFiles.find(configFile => configFile.name === configName);
+  const config = configFiles.find(
+    configFile => configFile.alias === configName
+  );
   if (!config) throw new Error(`Cannot find config by name "${configName}"`);
   return config;
 }
@@ -45,9 +47,11 @@ export function getConfigPathByConfigName(
   configName: string,
   configFiles: Array<SkillConfigFile>
 ): string {
-  const config = configFiles.find(configFile => configFile.name === configName);
+  const config = configFiles.find(
+    configFile => configFile.alias === configName
+  );
   if (!config) throw new Error(`Cannot find config by name "${configName}"`);
-  return config.path;
+  return config.filename;
 }
 
 export function fromPkgTypeToFull(

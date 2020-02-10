@@ -19,7 +19,7 @@ describe('virtual file system', () => {
 
   const file = {
     alias: 'routes',
-    path: 'src/routes.js'
+    dest: 'src/routes.js'
   };
 
   beforeEach(() => {
@@ -37,14 +37,14 @@ describe('virtual file system', () => {
     fs.add(file)
       .get('routes')
       .rename('routes.ts');
-    expect(slash(fs.get('routes').path)).toEqual('src/routes.ts');
+    expect(slash(fs.get('routes').dest)).toEqual('src/routes.ts');
   });
 
   it('should rename files', () => {
     fs.add(file)
       .get('routes')
       .rename('routes.ts');
-    expect(slash(fs.get('routes').path)).toEqual('src/routes.ts');
+    expect(slash(fs.get('routes').dest)).toEqual('src/routes.ts');
   });
 
   it('should write to file', () => {
