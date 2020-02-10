@@ -1,7 +1,7 @@
 /* eslint global-require: off */
 const replace = require('@rollup/plugin-replace');
 const commonjs = require('@rollup/plugin-commonjs');
-const { getConfigByName, mapEnvToShortName } = require('@alfred/helpers');
+const { getConfig, mapEnvToShortName } = require('@alfred/helpers');
 const { default: mergeConfigs } = require('@alfred/merge-configs');
 
 const interfaceConfig = {
@@ -65,12 +65,12 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ configFiles, interfaceState, subcommand }) {
+    async run({ configFiles, interfaceState, data }) {
       const [baseConfig, prodConfig, devConfig] = [
         'rollup.base',
         'rollup.prod',
         'rollup.dev'
-      ].map(configFile => getConfigByName(configFile, configFiles).config);
+      ].map(configFile => getConfig(configFile, configFiles).config);
       const inputAndOutputConfigs = {
         input: `./src/lib.${interfaceState.target}.js`,
         output: {
@@ -94,7 +94,7 @@ module.exports = {
 
       const rollup = require('rollup');
 
-      switch (subcommand) {
+      switch (data.subcommand) {
         case 'start': {
           const watchConf = interfaceState.env === 'production' ? prod : dev;
           // @TODO: Mention which port and host the server is running (see webpack skill)
@@ -123,7 +123,7 @@ module.exports = {
           );
         }
         default:
-          throw new Error(`Invalid subcommand: "${subcommand}"`);
+          throw new Error(`Invalid subcommand: "${data.subcommand}"`);
       }
     }
   },
@@ -135,8 +135,7 @@ module.exports = {
         .extendConfig('rollup.base', {
           plugins: [
             babel({
-              ...getConfigByName('babel', skillMap.get('babel').configFiles)
-                .config,
+              ...getConfig('babel', skillMap.get('babel').configFiles).config,
               exclude: 'node_modules/**'
             })
           ]

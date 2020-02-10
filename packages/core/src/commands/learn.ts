@@ -9,6 +9,8 @@ export default async function learn(
 ): Promise<void> {
   const { config } = project;
 
+  project.emit('beforeLearn', { skillsPkgNames });
+
   // Create a alfred config with the new skills added
   const newConfig = new Config(
     mergeConfigs({}, config, { skills: skillsPkgNames })
@@ -47,4 +49,6 @@ export default async function learn(
       .filter(skill => learnedSkills.has(skill.name))
       .map(skill => skill.files.writeAllFiles(project))
   );
+
+  project.emit('afterLearn', { skillsPkgNames });
 }

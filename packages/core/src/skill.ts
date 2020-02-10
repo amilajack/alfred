@@ -18,7 +18,8 @@ import {
   CORE_SKILL,
   FileType,
   Skill,
-  RawSkill
+  RawSkill,
+  SkillFile
 } from '@alfred/types';
 import {
   getDepsFromPkg,
@@ -159,9 +160,10 @@ function normalizeSkill(skill: Skill | RawSkill): SkillWithHelpers {
   return {
     ...addSkillHelpers(skill as Skill),
     interfaces: normalizeInterfacesOfSkill((skill as Skill).interfaces),
-    files: Array.isArray(skill.files)
-      ? new VirtualFileSystem(skill.files, skill.dirs)
-      : (skill as Skill).files,
+    files:
+      skill.files instanceof VirtualFileSystem
+        ? skill.files
+        : new VirtualFileSystem((skill.files as SkillFile[]) || [], skill.dirs),
     configFiles: (skill.configFiles || []).map(configFile => ({
       ...configFile,
       fileType: configFile.fileType || getFileTypeFromFile(configFile.filename)

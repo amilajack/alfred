@@ -32,7 +32,7 @@ export function configToEvalString(serializedConfig: string): string {
     .replace(/\[alfred\]"/g, '');
 }
 
-export function getConfigByName(
+export function getConfig(
   configName: string,
   configFiles: Array<SkillConfigFile>
 ): ConfigValue {

@@ -12,7 +12,7 @@ import {
 } from '@alfred/types';
 import {
   getExecutableWrittenConfigsMethods,
-  getInterfaceForSubcommand
+  getSkillInterfaceForSubcommand
 } from '../src/commands';
 import skillMapFromConfig, {
   CORE_SKILLS,
@@ -76,6 +76,10 @@ function removePathsPropertiesFromObject(
 }
 
 describe('Skills', () => {
+  beforeAll(async () => {
+    await defaultProject.init();
+  });
+
   describe('order', () => {
     it('should run transforms in order', async () => {
       const rawSillMap = new Map([
@@ -211,7 +215,7 @@ describe('Skills', () => {
             interfaceState
           );
           expect(
-            getInterfaceForSubcommand(skillMap, 'build')
+            getSkillInterfaceForSubcommand(skillMap, 'build')
           ).toMatchSnapshot();
         });
       });
@@ -223,7 +227,9 @@ describe('Skills', () => {
             [CORE_SKILLS.babel],
             interfaceState
           );
-          expect(() => getInterfaceForSubcommand(skillMap, 'foo')).toThrow();
+          expect(() =>
+            getSkillInterfaceForSubcommand(skillMap, 'foo')
+          ).toThrow();
         }
       });
     });

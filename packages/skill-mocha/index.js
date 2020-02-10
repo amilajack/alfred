@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const {
-  getConfigByName,
+  getConfig,
   execCmdInProject,
   getPkgBinPath
 } = require('@alfred/helpers');
@@ -17,14 +17,14 @@ module.exports = {
     projectTypes: ['app', 'lib']
   },
   hooks: {
-    async run({ project, config, skillMap, flags }) {
+    async run({ project, config, skillMap, data }) {
       const binPath = await getPkgBinPath(project, 'mocha');
       const mochaBabelRegisterPath = path.join(
         project.root,
         config.showConfigs ? config.configsDir : 'node_modules',
         'mocha.js'
       );
-      const { config: babelConfig } = getConfigByName(
+      const { config: babelConfig } = getConfig(
         'babel',
         skillMap.get('babel').configFiles
       );
@@ -35,9 +35,11 @@ module.exports = {
       );
       return execCmdInProject(
         project,
-        [binPath, `--require ${mochaBabelRegisterPath} tests`, ...flags].join(
-          ' '
-        )
+        [
+          binPath,
+          `--require ${mochaBabelRegisterPath} tests`,
+          ...data.flags
+        ].join(' ')
       );
     }
   }

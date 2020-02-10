@@ -1,3 +1,5 @@
+import { EventEmitter } from 'events';
+
 export type Dependencies = {
   [x: string]: string;
 };
@@ -47,7 +49,7 @@ export type SkillsList = {
   subCommandDict: SubCommandDict;
 };
 
-export interface ProjectInterface {
+export interface ProjectInterface extends EventEmitter {
   // The path to the root directory of the project
   root: string;
   // The `Config` that corresponds to the project
@@ -56,8 +58,15 @@ export interface ProjectInterface {
   pkg: PkgJson;
   // The path to the root package.json
   pkgPath: string;
+  // Initialize an alfred project
+  init: () => Promise<ProjectInterface>;
   // Get the list of subcommands which correspond to which skills of a given alfred project
   skills: () => Promise<SkillsList>;
+  learn: (skillPkgNames: string[]) => Promise<void>;
+  run: (
+    subcommand: string,
+    skillFlags?: string[]
+  ) => Promise<void | SkillsList>;
   // Config setter method
   setConfig: (config: ConfigInterface) => void;
   // Get skill map
@@ -73,6 +82,7 @@ export interface ProjectInterface {
     npmClient?: NpmClients
   ) => Promise<void>;
   findDepsToInstall: (skillNodes?: SkillNode[]) => Promise<PkgWithDeps>;
+  validatePkgJson: () => ValidationResult;
 }
 
 export type InterfaceState = {
@@ -186,12 +196,16 @@ export type HooksArgs = {
   project: ProjectInterface;
   configFiles: Array<SkillConfigFile>;
   config: ConfigInterface;
-  interfaceState: InterfaceState;
-  subcommand: string;
+  interfaceState?: InterfaceState;
+  interfaceStates?: InterfaceState[];
+  data: {
+    skillsPkgNames?: Array<string>;
+    flags?: Array<string>;
+    subcommand?: string;
+  };
   skill: SkillNode;
   skillConfig: ConfigValue;
   skillMap: SkillMap;
-  flags: Array<string>;
 };
 
 export type HookFn = (args: HooksArgs) => void;
@@ -247,6 +261,8 @@ export type CORE_SKILL =
 
 export type Hooks = {
   run?: HookFn;
+  beforeLearn?: HookFn;
+  afterLearn?: HookFn;
   beforeTransforms?: HookFn;
   afterTransforms?: HookFn;
 };

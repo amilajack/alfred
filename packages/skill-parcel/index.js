@@ -38,7 +38,7 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ interfaceState, project, subcommand }) {
+    async run({ interfaceState, project, data }) {
       const { root } = project;
       // eslint-disable-next-line global-require
       const Bundler = require('parcel');
@@ -59,7 +59,7 @@ module.exports = {
         target
       };
 
-      switch (subcommand) {
+      switch (data.subcommand) {
         case 'start': {
           const server = await new Bundler(entryFiles, {
             ...baseOptions,
@@ -92,7 +92,7 @@ module.exports = {
           }).bundle();
         }
         default:
-          throw new Error(`Invalid subcommand: "${subcommand}"`);
+          throw new Error(`Invalid subcommand: "${data.subcommand}"`);
       }
     }
   },

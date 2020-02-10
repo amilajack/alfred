@@ -33,6 +33,7 @@ import learn from './commands/learn';
 import skills from './commands/skills';
 import clean from './commands/clean';
 import { PKG_SORT_ORDER } from './constants';
+import { EventEmitter } from 'events';
 
 // @TODO Send the information to a crash reporting service (like sentry.io)
 // @TODO Install sourcemaps
@@ -80,7 +81,7 @@ export function formatPkgJson(pkg: Record<string, any>): Promise<string> {
   return formatPkg(pkg, { order: PKG_SORT_ORDER });
 }
 
-export default class Project implements ProjectInterface {
+export default class Project extends EventEmitter implements ProjectInterface {
   config: ConfigInterface;
 
   pkgPath: string;
@@ -90,15 +91,37 @@ export default class Project implements ProjectInterface {
   root: string;
 
   constructor(projectRootOrSubDir: string = process.cwd()) {
+    super();
     const projectRoot = findProjectRoot(projectRootOrSubDir);
 
     this.root = projectRoot;
     this.pkgPath = path.join(projectRoot, 'package.json');
     this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
     this.config = Config.initFromProjectRoot(projectRoot);
+  }
 
+  async init(): Promise<ProjectInterface> {
     const interfaceStates = getInterfaceStatesFromProject(this);
     this.checkIsAlfredProject(interfaceStates);
+
+    const skillMap = await this.getSkillMap();
+    skillMap.forEach(skill => {
+      Object.entries(skill.hooks || {}).forEach(([hookName, hookFn]) => {
+        this.on(hookName, (data = {}): void => {
+          if (!hookFn) return;
+          return hookFn({
+            data,
+            project: this,
+            configFiles: [],
+            config: this.config,
+            interfaceStates,
+            skill,
+            skillConfig: skill.config,
+            skillMap: skillMap
+          });
+        });
+      });
+    });
 
     return this;
   }
@@ -171,8 +194,8 @@ export default class Project implements ProjectInterface {
     }
   }
 
-  learn(args: string[]): Promise<void> {
-    return learn(this, args);
+  learn(skillPkgNames: string[]): Promise<void> {
+    return learn(this, skillPkgNames);
   }
 
   async clean(): Promise<void> {
@@ -342,14 +365,19 @@ export default class Project implements ProjectInterface {
   // uninstallDeps() {}
 
   /**
-   * @TODO @HACK Allow skill map to be generated without interface state
+   * Get a skillMap that has all the skills used in all interface states
    */
-  getSkillMap(): Promise<SkillMap> {
-    return this.getSkillMapFromInterfaceState({
-      env: 'production',
-      target: 'browser',
-      projectType: 'lib'
-    });
+  async getSkillMap(): Promise<SkillMap> {
+    const skillMaps = await Promise.all(
+      getInterfaceStatesFromProject(this).map(state =>
+        this.getSkillMapFromInterfaceState(state)
+      )
+    );
+    // Merge the maps
+    return skillMaps.reduce(
+      (prevSkillMap: SkillMap, currSkillMap: SkillMap) =>
+        new Map<string, SkillNode>([...prevSkillMap, ...currSkillMap])
+    );
   }
 
   getSkillMapFromInterfaceState(
@@ -372,11 +400,7 @@ export default class Project implements ProjectInterface {
 
     // Write all files and dirs
     // @TODO Remove this to allow users to edit their own boilerplate
-    await Promise.all(
-      Array.from(skillMap.values()).map(skill =>
-        skill.files.writeAllFiles(this)
-      )
-    );
+    await Promise.all(skills.map(skill => skill.files.writeAllFiles(this)));
 
     // Write all configFiles
     await Promise.all(

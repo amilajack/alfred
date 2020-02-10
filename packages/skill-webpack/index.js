@@ -2,7 +2,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const {
-  getConfigByName,
+  getConfig,
   configStringify,
   configSerialize,
   configDeserialize,
@@ -136,21 +136,12 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ project, configFiles, interfaceState, subcommand }) {
-      const { config: baseConfig } = getConfigByName(
-        'webpack.base',
-        configFiles
-      );
-      const { config: prodConfig } = getConfigByName(
-        'webpack.prod',
-        configFiles
-      );
-      const { config: devConfig } = getConfigByName('webpack.dev', configFiles);
-      const { config: nodeConfig } = getConfigByName(
-        'webpack.node',
-        configFiles
-      );
-      const { config: browserConfig } = getConfigByName(
+    async run({ project, configFiles, interfaceState, data }) {
+      const { config: baseConfig } = getConfig('webpack.base', configFiles);
+      const { config: prodConfig } = getConfig('webpack.prod', configFiles);
+      const { config: devConfig } = getConfig('webpack.dev', configFiles);
+      const { config: nodeConfig } = getConfig('webpack.node', configFiles);
+      const { config: browserConfig } = getConfig(
         'webpack.browser',
         configFiles
       );
@@ -191,7 +182,7 @@ module.exports = {
         }
       }
 
-      switch (subcommand) {
+      switch (data.subcommand) {
         case 'start': {
           const Webpack = require('webpack');
           const WebpackDevServer = require('webpack-dev-server');
@@ -239,7 +230,7 @@ module.exports = {
           });
         }
         default:
-          throw new Error(`Invalid subcommand: "${subcommand}"`);
+          throw new Error(`Invalid subcommand: "${data.subcommand}"`);
       }
     }
   },
@@ -255,7 +246,7 @@ module.exports = {
                 use: {
                   loader: 'babel-loader',
                   options: {
-                    ...getConfigByName('babel', toSkill.configFiles).config,
+                    ...getConfig('babel', toSkill.configFiles).config,
                     cacheDirectory: true
                   }
                 }

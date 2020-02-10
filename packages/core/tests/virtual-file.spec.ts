@@ -22,6 +22,10 @@ describe('virtual file system', () => {
     dest: 'src/routes.js'
   };
 
+  beforeAll(async () => {
+    await project.init();
+  });
+
   beforeEach(() => {
     fs = new VirtualFileSystem();
   });

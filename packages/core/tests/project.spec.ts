@@ -9,6 +9,7 @@ describe('Project', () => {
       const defaultProject = new Project(
         path.join(__dirname, 'fixtures/react-app')
       );
+      await defaultProject.init();
       depsToInstall = await defaultProject.findDepsToInstall();
     });
 

@@ -1,10 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execCmdInProject, getPkgBinPath } = require('@alfred/helpers');
-const {
-  getConfigPathByConfigName,
-  getConfigByName
-} = require('@alfred/helpers');
+const { getConfigPathByConfigName, getConfig } = require('@alfred/helpers');
 
 module.exports = {
   name: 'jest',
@@ -24,40 +21,41 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ configFiles, skillMap, config, project, flags }) {
+    async run({ configFiles, skillMap, config, project, data }) {
       const configPath = getConfigPathByConfigName('jest', configFiles);
-      const jestConfig = getConfigByName('jest', configFiles);
-      const binPath = await getPkgBinPath(project, 'jest');
       const { root } = project;
+
+      // Create the node_modules dir if it doesn't exist
       const nodeModulesPath = path.join(root, 'node_modules');
       if (!fs.existsSync(nodeModulesPath)) {
         await fs.promises.mkdir(nodeModulesPath);
       }
-      // @TODO Create a hidden `./node_modules/.alfred` directory to put configs in
       const jestTransformerPath = path.join(
         root,
         'node_modules',
         'jest-transformer.js'
       );
-      const babelConfig = JSON.stringify(
-        getConfigByName('babel', skillMap.get('babel').configFiles).config
+      const { config: babelConfig } = getConfig(
+        'babel',
+        skillMap.get('babel').configFiles
       );
       const hiddenTmpConfigPath = path.join(
         root,
         'node_modules',
         'jest.config.js'
       );
-      const a = {
+      const { config: jestConfig } = getConfig('jest', configFiles);
+      const fullConfig = {
         ...jestConfig,
         transform: {
-          '^.+.jsx?$': `${JSON.stringify(jestTransformerPath)}`
+          '^.+.jsx?$': '<rootDir>/node_modules/jest-transformer.js'
         },
-        rootDir: `${JSON.stringify(root)}`
+        rootDir: `${root}`
       };
       await fs.promises.writeFile(
         // @TODO Write to ./node_modules/.alfred
         config.showConfigs ? configPath : hiddenTmpConfigPath,
-        `module.exports = ${JSON.stringify(a)}};`
+        `module.exports = ${JSON.stringify(fullConfig)};`
       );
       if (!config.showConfigs && fs.existsSync(configPath)) {
         await fs.promises.unlink(configPath);
@@ -66,8 +64,12 @@ module.exports = {
       await fs.promises.writeFile(
         jestTransformerPath,
         `const babelJestTransform = require(${JSON.stringify(babelJestPath)});
-        module.exports = babelJestTransform.createTransformer(${babelConfig});`
+        module.exports = babelJestTransform.createTransformer(${JSON.stringify(
+          babelConfig
+        )});`
       );
+
+      const binPath = await getPkgBinPath(project, 'jest');
 
       return execCmdInProject(
         project,
@@ -76,7 +78,7 @@ module.exports = {
           config.showConfigs
             ? `--config ${JSON.stringify(configPath)} ${JSON.stringify(root)}`
             : `--config ${hiddenTmpConfigPath} ${JSON.stringify(root)}`,
-          ...flags
+          ...data.flags
         ].join(' ')
       );
     }

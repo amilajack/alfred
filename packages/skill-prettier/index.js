@@ -1,3 +1,4 @@
+const path = require('path');
 const {
   getConfigPathByConfigName,
   execCmdInProject,
@@ -19,9 +20,12 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ configFiles, project, config, flags }) {
+    async run({ configFiles, project, config, data }) {
       const binPath = await getPkgBinPath(project, 'prettier');
-      const configPath = getConfigPathByConfigName('prettier', configFiles);
+      const configPath = path.join(
+        config.configsDir,
+        getConfigPathByConfigName('prettier', configFiles)
+      );
       return execCmdInProject(
         project,
         [
@@ -31,7 +35,7 @@ module.exports = {
           '--single-quote',
           '--write',
           '**/*.js',
-          ...flags,
+          ...data.flags,
           config.showConfigs ? `--config ${configPath}` : ''
         ].join(' ')
       );

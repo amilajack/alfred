@@ -2,7 +2,7 @@
 const path = require('path');
 const {
   getConfigPathByConfigName,
-  getConfigByName,
+  getConfig,
   getPkgBinPath,
   execCmdInProject
 } = require('@alfred/helpers');
@@ -29,8 +29,12 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ project, config, configFiles, flags }) {
-      const configPath = getConfigPathByConfigName('eslint', configFiles);
+    async run({ project, config, configFiles, data }) {
+      const { flags } = data;
+      const configPath = path.join(
+        config.configsDir,
+        getConfigPathByConfigName('eslint', configFiles)
+      );
       const binPath = await getPkgBinPath(project, 'eslint');
       if (config.showConfigs) {
         return execCmdInProject(
@@ -38,7 +42,7 @@ module.exports = {
           [binPath, `--config ${configPath} src tests`, ...flags].join(' ')
         );
       }
-      const { config: eslintConfig } = getConfigByName('eslint', configFiles);
+      const { config: eslintConfig } = getConfig('eslint', configFiles);
       const { CLIEngine } = require('eslint');
       const cli = new CLIEngine({
         cwd: project.root,
@@ -80,7 +84,7 @@ module.exports = {
         })
         .addDepsFromPkg('eslint-plugin-mocha');
     },
-    webpack(skill, { project, config, skillMap, configsDir }) {
+    webpack(skill, { project, config, skillMap }) {
       return skill
         .extendConfig('eslint', {
           settings: {

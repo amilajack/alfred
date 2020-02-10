@@ -11,7 +11,7 @@ import {
   HookFn
 } from '@alfred/types';
 
-export function getInterfaceForSubcommand(
+export function getSkillInterfaceForSubcommand(
   skillMap: SkillMap,
   subcommand: string
 ): SkillInterfaceModule {
@@ -80,14 +80,16 @@ export function getExecutableWrittenConfigsMethods(
           return {
             fn: (flags: Array<string> = []): void =>
               (skillNode.hooks.run as HookFn)({
+                data: {
+                  subcommand,
+                  flags
+                },
                 skill: skillNode,
                 project,
                 config,
                 configFiles,
                 skillMap,
                 interfaceState,
-                subcommand,
-                flags,
                 skillConfig
               }),
             // @HACK: If interfaces were defined, we could import the @alfred/interface-*
