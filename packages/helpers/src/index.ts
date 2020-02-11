@@ -15,10 +15,11 @@ import {
 
 export class EnhancedMap<K, V> extends Map<K, V> {
   map(fn: (item: V, idx: number, items: [K, V][]) => V): EnhancedMap<K, V> {
+    const newMap = new EnhancedMap<K, V>();
     Array.from(this.entries()).forEach(([key, val], idx, items) => {
-      this.set(key, fn(val, idx, items));
+      newMap.set(key, fn(val, idx, items));
     });
-    return this;
+    return newMap;
   }
 }
 

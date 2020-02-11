@@ -23,24 +23,6 @@ import skillMapFromConfig, {
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from '../src/interface';
 import Project from '../src/project';
 
-function getConfigs(skillMap: SkillMap): Array<ConfigValue> {
-  return Array.from(skillMap.values())
-    .flatMap(skill => skill.configs || [])
-    .map(configFile => configFile.config);
-}
-
-function getDependencies(skillMap: SkillMap): Dependencies {
-  return Array.from(skillMap.values())
-    .map(skillNode => skillNode.dependencies || {})
-    .reduce((p, c) => ({ ...p, ...c }), {});
-}
-
-function getDevDependencies(skillMap: SkillMap): Dependencies {
-  return Array.from(skillMap.values())
-    .map(skillNode => skillNode.devDependencies || {})
-    .reduce((p, c) => ({ ...p, ...c }), {});
-}
-
 const parcel = require('@alfred/skill-parcel');
 
 const [defaultInterfaceState] = INTERFACE_STATES;
@@ -73,6 +55,25 @@ function removePathsPropertiesFromObject(
     }
   }
   return obj;
+}
+
+function getConfigs(skillMap: SkillMap): Array<ConfigValue> {
+  const configsFromMap = Array.from(skillMap.values());
+  return configsFromMap
+    .flatMap(skill => Array.from(skill.configs.values()))
+    .map(configFile => removePathsPropertiesFromObject(configFile.config));
+}
+
+function getDependencies(skillMap: SkillMap): Dependencies {
+  return Array.from(skillMap.values())
+    .map(skillNode => skillNode.dependencies || {})
+    .reduce((p, c) => ({ ...p, ...c }), {});
+}
+
+function getDevDependencies(skillMap: SkillMap): Dependencies {
+  return Array.from(skillMap.values())
+    .map(skillNode => skillNode.devDependencies || {})
+    .reduce((p, c) => ({ ...p, ...c }), {});
 }
 
 describe('Skills', () => {
@@ -449,7 +450,6 @@ describe('Skills', () => {
       )} interface state ${JSON.stringify(
         defaultInterfaceState
       )}`, async () => {
-        expect(skillCombination).toMatchSnapshot();
         // Get the skills for each combination
         const skillObjects = skillCombination.map(
           skillName => CORE_SKILLS[skillName]
@@ -459,9 +459,7 @@ describe('Skills', () => {
           skillObjects,
           interfaceState
         );
-        expect(
-          removePathsPropertiesFromObject(getConfigs(skillMap))
-        ).toMatchSnapshot();
+        expect(getConfigs(skillMap)).toMatchSnapshot();
         expect(getDependencies(skillMap)).toMatchSnapshot();
         expect(getDevDependencies(skillMap)).toMatchSnapshot();
       });
