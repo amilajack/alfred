@@ -69,6 +69,14 @@ export class VirtualFile implements VirtualFileInterface {
 
     return this;
   }
+
+  replaceContent(
+    searchValue: string | RegExp,
+    replaceValue: string
+  ): VirtualFileInterface {
+    this.content = this.content.replace(searchValue, replaceValue);
+    return this;
+  }
 }
 
 export default class VirtualFileSystem extends Map<string, SkillFile>

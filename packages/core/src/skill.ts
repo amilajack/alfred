@@ -120,18 +120,24 @@ export async function runTransforms(
 ): Promise<SkillMap> {
   skillMap.forEach(skillNode => {
     Object.entries(skillNode.transforms || {}).forEach(
-      ([toskillName, transform]) => {
-        if (skillMap.has(toskillName)) {
-          skillMap.set(
-            skillNode.name,
-            transform(skillMap.get(skillNode.name) as SkillNode, {
-              toSkill: skillMap.get(toskillName) as SkillNode,
+      ([toSkillName, transform]) => {
+        if (skillMap.has(toSkillName)) {
+          const transformResult = transform(
+            skillMap.get(skillNode.name) as SkillNode,
+            {
+              toSkill: skillMap.get(toSkillName) as SkillNode,
               skillMap: skillMap,
               config: project.config,
               project,
               configsPath: getConfigsBasePath(project)
-            })
+            }
           );
+          if (!transformResult) {
+            throw new Error(
+              `Transform from ${skillNode.name} to ${toSkillName} must return a new skill`
+            );
+          }
+          skillMap.set(skillNode.name, transformResult);
         }
       }
     );

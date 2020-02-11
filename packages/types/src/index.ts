@@ -246,6 +246,10 @@ export interface VirtualFileInterface extends SkillFile {
   rename(filename: string): VirtualFileInterface;
   replace(content: string): VirtualFileInterface;
   applyDiff(diff: string): VirtualFileInterface;
+  replaceContent(
+    searchValue: string | RegExp,
+    replaceValue: string
+  ): VirtualFileInterface;
 }
 
 export type CORE_SKILL =
