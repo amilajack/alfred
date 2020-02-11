@@ -2,7 +2,6 @@
 const webpack = require('webpack');
 const path = require('path');
 const {
-  getConfig,
   configStringify,
   configSerialize,
   configDeserialize,
@@ -136,12 +135,12 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ project, configs, interfaceState, data }) {
-      const { config: baseConfig } = getConfig('webpack.base', configs);
-      const { config: prodConfig } = getConfig('webpack.prod', configs);
-      const { config: devConfig } = getConfig('webpack.dev', configs);
-      const { config: nodeConfig } = getConfig('webpack.node', configs);
-      const { config: browserConfig } = getConfig('webpack.browser', configs);
+    async run({ project, skill, configs, interfaceState, data }) {
+      const { config: baseConfig } = skill.configs.get('webpack.base');
+      const { config: prodConfig } = skill.configs.get('webpack.prod');
+      const { config: devConfig } = skill.configs.get('webpack.dev');
+      const { config: nodeConfig } = skill.configs.get('webpack.node');
+      const { config: browserConfig } = skill.configs.get('webpack.browser');
       let mergedConfig = mergeConfigs(
         baseConfig,
         interfaceState.env === 'production' ? prodConfig : devConfig,
@@ -243,7 +242,7 @@ module.exports = {
                 use: {
                   loader: 'babel-loader',
                   options: {
-                    ...getConfig('babel', toSkill.configs).config,
+                    ...toSkill.configs.get('babel').config,
                     cacheDirectory: true
                   }
                 }
@@ -260,7 +259,7 @@ module.exports = {
             configStringify`(() => {
               const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
               return new LodashModuleReplacementPlugin()
-            })();`
+            })()`
           ]
         })
         .addDepsFromPkg('lodash-webpack-plugin');

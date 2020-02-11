@@ -4,8 +4,6 @@ import open from 'open';
 import childProcess from 'child_process';
 import serialize from 'serialize-javascript';
 import {
-  SkillConfigFile,
-  ConfigValue,
   AlfredConfigWithUnresolvedInterfaces,
   ProjectInterface,
   ConfigInterface,
@@ -14,6 +12,16 @@ import {
   DependencyTypeFull,
   Dependencies
 } from '@alfred/types';
+
+export class EnhancedMap<K, V> extends Map<K, V> {
+  map(fn: (item: V, idx: number, items: [K, V][]) => V): EnhancedMap<K, V> {
+    const newMap = new EnhancedMap<K, V>();
+    Array.from(this.entries()).forEach(([key, val], idx, items) => {
+      newMap.set(key, fn(val, idx, items));
+    });
+    return newMap;
+  }
+}
 
 export function configSerialize(config: string | Record<string, any>): string {
   return serialize(config, { unsafe: true });
@@ -30,24 +38,6 @@ export function configToEvalString(serializedConfig: string): string {
   return serializedConfig
     .replace(/"\[alfred\]/g, '')
     .replace(/\[alfred\]"/g, '');
-}
-
-export function getConfig(
-  configName: string,
-  configs: Array<SkillConfigFile>
-): ConfigValue {
-  const config = configs.find(configFile => configFile.alias === configName);
-  if (!config) throw new Error(`Cannot find config by name "${configName}"`);
-  return config;
-}
-
-export function getConfigPathByConfigName(
-  configName: string,
-  configs: Array<SkillConfigFile>
-): string {
-  const config = configs.find(configFile => configFile.alias === configName);
-  if (!config) throw new Error(`Cannot find config by name "${configName}"`);
-  return config.filename;
 }
 
 export function fromPkgTypeToFull(

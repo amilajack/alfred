@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const { execCmdInProject, getPkgBinPath } = require('@alfred/helpers');
-const { getConfigPathByConfigName, getConfig } = require('@alfred/helpers');
 
 module.exports = {
   name: 'jest',
@@ -21,8 +20,8 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ configs, skillMap, config, project, data }) {
-      const configPath = getConfigPathByConfigName('jest', configs);
+    async run({ skill, skillMap, config, project, data }) {
+      const { filename: configPath } = skill.configs.get('jest');
       const { root } = project;
 
       // Create the node_modules dir if it doesn't exist
@@ -35,16 +34,15 @@ module.exports = {
         'node_modules',
         'jest-transformer.js'
       );
-      const { config: babelConfig } = getConfig(
-        'babel',
-        skillMap.get('babel').configs
-      );
+      const { config: babelConfig } = skillMap
+        .get('babel')
+        .configs.get('babel');
       const hiddenTmpConfigPath = path.join(
         root,
         'node_modules',
         'jest.config.js'
       );
-      const { config: jestConfig } = getConfig('jest', configs);
+      const { config: jestConfig } = skill.configs.get('jest');
       const fullConfig = {
         ...jestConfig,
         transform: {

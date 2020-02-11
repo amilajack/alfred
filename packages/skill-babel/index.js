@@ -1,6 +1,4 @@
 /* eslint global-require: off */
-const { getConfig } = require('@alfred/helpers');
-
 module.exports = {
   name: 'babel',
   description: 'Transpile JS from ESNext to the latest ES version',
@@ -15,25 +13,17 @@ module.exports = {
   ],
   hooks: {},
   transforms: {
-    /**
-     * @TODO Don't perform this transformation for library targets
-     */
-    lodash(skillNode) {
-      return skillNode
-        .addDepsFromPkg('babel-plugin-lodash')
-        .extendConfig('babel', {
-          env: {
-            production: {
-              plugins: ['babel-plugin-lodash']
-            }
+    lodash(skill) {
+      return skill.addDepsFromPkg('babel-plugin-lodash').extendConfig('babel', {
+        env: {
+          production: {
+            plugins: ['babel-plugin-lodash']
           }
-        });
+        }
+      });
     },
-    /**
-     * @TODO Add React HMR support
-     */
-    react(skillNode) {
-      return skillNode
+    react(skill) {
+      return skill
         .extendConfig('babel', {
           presets: ['@babel/preset-react'],
           env: {

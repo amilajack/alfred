@@ -1,6 +1,4 @@
 /* eslint import/no-dynamic-require: off */
-import path from 'path';
-import { getConfigsBasePath } from '@alfred/helpers';
 import {
   ProjectInterface,
   SkillMap,
@@ -50,7 +48,6 @@ export function getExecutableWrittenConfigsMethods(
 ): ExecutableSkillMethods {
   const { config } = project;
   const configWithDefaults = config.getConfigWithDefaults();
-  const configsBasePath = getConfigsBasePath(project);
   const skillsConfigMap: Map<string, ConfigValue> = new Map(
     configWithDefaults.skills.map(([skillPkgName, skillConfig]) => [
       require(skillPkgName).name,
@@ -68,10 +65,6 @@ export function getExecutableWrittenConfigsMethods(
           skillNode.interfaces.length
       )
       .flatMap(skillNode => {
-        const configs = skillNode.configs.map(configFile => ({
-          ...configFile,
-          path: path.join(configsBasePath, configFile.filename)
-        }));
         return skillNode.interfaces.map(skillInterface => {
           const { subcommand } = require(skillInterface.name);
           const skillConfig = skillsConfigMap.get(
@@ -84,12 +77,11 @@ export function getExecutableWrittenConfigsMethods(
                   subcommand,
                   flags
                 },
-                skill: skillNode,
                 project,
                 config,
-                configs,
-                skillMap,
                 interfaceState,
+                skill: skillNode,
+                skillMap,
                 skillConfig
               }),
             // @HACK: If interfaces were defined, we could import the @alfred/interface-*

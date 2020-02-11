@@ -20,9 +20,12 @@ export class VirtualFile implements VirtualFileInterface {
 
   private fs: VirtualFileSystem;
 
+  condition: SkillFile['condition'];
+
   constructor(vfs: VirtualFileSystem, file: SkillFile) {
     this.dest = file.dest;
     this.name = file.alias || file.dest;
+    this.condition = file.condition;
     this.content =
       typeof file.src === 'string'
         ? fs.readFileSync(file.src).toString()
@@ -79,7 +82,7 @@ export class VirtualFile implements VirtualFileInterface {
   }
 }
 
-export default class VirtualFileSystem extends Map<string, SkillFile>
+export default class VirtualFileSystem extends Map<string, VirtualFile>
   implements VirtualFileSystemInterface {
   private dirs: Dir[] = [];
   constructor(files: SkillFile[] = [], dirs: Dir[] = []) {
@@ -107,6 +110,9 @@ export default class VirtualFileSystem extends Map<string, SkillFile>
     );
     // Write all files
     const filesToWrite = Array.from(this.values()).map(async file => {
+      if (typeof file.condition === 'function') {
+        if (!(await file.condition({ project }))) return;
+      }
       const filePath = path.join(
         project.root,
         project.config.configsDir,

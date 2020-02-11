@@ -58,6 +58,8 @@ export interface ProjectInterface extends EventEmitter {
   pkg: PkgJson;
   // The path to the root package.json
   pkgPath: string;
+  // All the interface states of the project
+  interfaceStates: InterfaceState[];
   // Initialize an alfred project
   init: () => Promise<ProjectInterface>;
   // Get the list of subcommands which correspond to which skills of a given alfred project
@@ -166,6 +168,10 @@ export type ConfigValue =
       [x: string]: any;
     };
 
+export type SkillFileConditionArgs = {
+  project: ProjectInterface;
+};
+
 export type SkillFile = {
   // The "friendly name" of a file. This is the name that
   // other skills will refer to config file by.
@@ -176,11 +182,17 @@ export type SkillFile = {
   dest: string;
   // The content of the file
   content?: string;
+  // The content of the file
+  condition?: (args: SkillFileConditionArgs) => boolean | Promise<boolean>;
 };
 
 export type FileType = 'commonjs' | 'module' | 'json';
 
-export type SkillConfigFile = {
+export interface EnhancedMap<K, V> extends Map<K, V> {
+  map(fn: (item: V, idx: number, items: [K, V][]) => V): EnhancedMap<K, V>;
+}
+
+export type SkillConfig = {
   // The "friendly name" of a file. This is the name that
   // other skills will refer to config file by.
   alias: string;
@@ -194,7 +206,6 @@ export type SkillConfigFile = {
 
 export type HooksArgs = {
   project: ProjectInterface;
-  configs: Array<SkillConfigFile>;
   config: ConfigInterface;
   interfaceState?: InterfaceState;
   interfaceStates?: InterfaceState[];
@@ -229,7 +240,6 @@ export type Transforms = {
       skillMap: SkillMap;
       project: ProjectInterface;
       config: ConfigInterface;
-      configsPath: string;
     }
   ) => Skill;
 };
@@ -278,8 +288,8 @@ export interface RawSkill extends PkgWithDeps {
   pkg: PkgJson;
   dirs?: Array<Dir>;
   files?: Array<SkillFile>;
-  configs?: Array<SkillConfigFile>;
-  config?: SkillConfigFile;
+  configs?: Array<SkillConfig>;
+  userConfig?: SkillConfig;
   interfaces?: Array<SkillInterface>;
   hooks?: Hooks;
   transforms?: Transforms;
@@ -297,8 +307,8 @@ export interface Skill extends PkgWithDeps {
   supports: Supports;
   dirs: Array<Dir>;
   files: VirtualFileSystemInterface;
-  configs: Array<SkillConfigFile>;
-  config: SkillConfigFile;
+  configs: EnhancedMap<string, SkillConfig>;
+  userConfig: SkillConfig;
   interfaces: Array<SkillInterface>;
   hooks: Hooks;
   transforms: Transforms;
@@ -313,9 +323,9 @@ export type SkillNode = Skill | SkillUsingInterface;
 export type SkillMap = Map<string, SkillNode>;
 
 export interface Helpers<T> {
-  findConfig: (configName: string) => SkillConfigFile;
+  findConfig: (configName: string) => SkillConfig;
   extendConfig: (x: string) => T;
-  replaceConfig: (x: string, configReplacement: SkillConfigFile) => T;
+  replaceConfig: (x: string, configReplacement: SkillConfig) => T;
   setWrite: (configName: string, shouldWrite: boolean) => T;
   addDeps: (pkg: Dependencies) => T;
   addDevDeps: (pkg: Dependencies) => T;

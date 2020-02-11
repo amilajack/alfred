@@ -1,9 +1,5 @@
 const path = require('path');
-const {
-  getConfigPathByConfigName,
-  execCmdInProject,
-  getPkgBinPath
-} = require('@alfred/helpers');
+const { execCmdInProject, getPkgBinPath } = require('@alfred/helpers');
 
 module.exports = {
   name: 'prettier',
@@ -20,11 +16,11 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ configs, project, config, data }) {
+    async run({ project, skill, config, data }) {
       const binPath = await getPkgBinPath(project, 'prettier');
       const configPath = path.join(
         config.configsDir,
-        getConfigPathByConfigName('prettier', configs)
+        skill.configs.get('prettier').filename
       );
       return execCmdInProject(
         project,

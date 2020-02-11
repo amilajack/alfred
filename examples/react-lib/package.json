@@ -30,6 +30,8 @@
     "@babel/preset-react": "7.8.3",
     "@babel/register": "^7.8.3",
     "@examples/alfred-config-example": "^0.0.3",
+    "@rollup/plugin-commonjs": "^11.0.1",
+    "@rollup/plugin-replace": "^2.3.0",
     "autoprefixer": "^9.7.4",
     "babel-eslint": "10.0.3",
     "babel-loader": "8.0.6",
@@ -53,7 +55,9 @@
     "prettier": "^1.16.4",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-hot-loader": "^4.6.3"
+    "react-hot-loader": "^4.6.3",
+    "rollup": "1.29.0",
+    "rollup-plugin-babel": "^4.3.2"
   },
   "peerDependencies": {
     "react": "^16.7.0",

@@ -64,6 +64,7 @@
   "devDependencies": {
     "@types/jest": "^25.1.2",
     "@types/prettier": "^1.19.0",
+    "mock-fs": "^4.10.4",
     "slash": "^3.0.0"
   }
 }

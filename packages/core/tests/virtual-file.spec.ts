@@ -1,5 +1,7 @@
+import fs from 'fs';
 import path from 'path';
 import slash from 'slash';
+import mockFs from 'mock-fs';
 import { Skills, requireSkill } from '../src/skill';
 import VirtualFileSystem from '../src/virtual-file';
 import Project from '../src/project';
@@ -7,7 +9,7 @@ import Project from '../src/project';
 const reduxSkill = requireSkill('@alfred/skill-redux');
 
 describe('virtual file system', () => {
-  let fs;
+  let defaultVfs: VirtualFileSystem;
 
   const project = new Project(path.join(__dirname, 'fixtures/react-app'));
 
@@ -24,40 +26,55 @@ describe('virtual file system', () => {
 
   beforeAll(async () => {
     await project.init();
+    mockFs({
+      [path.join(__dirname, 'fixtures/react-app')]: {
+        foo: ''
+      }
+    });
+  });
+
+  afterAll(() => {
+    mockFs.restore();
   });
 
   beforeEach(() => {
-    fs = new VirtualFileSystem();
+    defaultVfs = new VirtualFileSystem();
   });
 
   it('should delete files', () => {
-    fs.add(file);
-    expect(fs.values()).not.toEqual([]);
-    fs.delete('routes');
-    expect(Array.from(fs.values())).toEqual([]);
+    defaultVfs.add(file);
+    expect(defaultVfs.values()).not.toEqual([]);
+    defaultVfs.delete('routes');
+    expect(Array.from(defaultVfs.values())).toEqual([]);
   });
 
   it('should rename files', () => {
-    fs.add(file)
+    defaultVfs
+      .add(file)
       .get('routes')
       .rename('routes.ts');
-    expect(slash(fs.get('routes').dest)).toEqual('src/routes.ts');
+    expect(slash(defaultVfs.get('routes').dest)).toEqual('src/routes.ts');
   });
 
   it('should rename files', () => {
-    fs.add(file)
+    defaultVfs
+      .add(file)
       .get('routes')
       .rename('routes.ts');
-    expect(slash(fs.get('routes').dest)).toEqual('src/routes.ts');
+    expect(slash(defaultVfs.get('routes').dest)).toEqual('src/routes.ts');
   });
 
   it('should write to file', () => {
-    fs.add(file)
+    defaultVfs
+      .add(file)
       .get('routes')
       .write('console.log(1);');
-    expect(fs.get('routes')).toHaveProperty('content', 'console.log(1);');
-    fs.get('routes').write('alert(2);');
-    expect(fs.get('routes')).toHaveProperty(
+    expect(defaultVfs.get('routes')).toHaveProperty(
+      'content',
+      'console.log(1);'
+    );
+    defaultVfs.get('routes').write('alert(2);');
+    expect(defaultVfs.get('routes')).toHaveProperty(
       'content',
       'console.log(1);alert(2);'
     );
@@ -165,6 +182,67 @@ route 3`
         'content',
         'route 2'
       );
+    });
+
+    describe('condition', () => {
+      it('should conditionally add files', async () => {
+        const skillWithFileCondition = {
+          content: 'foo',
+          dest: 'foo',
+          condition(): boolean {
+            return true;
+          }
+        };
+        const vfs = new VirtualFileSystem();
+        vfs.add(skillWithFileCondition);
+        expect(vfs.size).toEqual(1);
+        jest.spyOn(fs.promises, 'writeFile');
+        jest.spyOn(fs.promises, 'mkdir');
+        await vfs.writeAllFiles(project);
+        expect(fs.promises.writeFile).toHaveBeenCalled();
+        fs.promises.writeFile.mockRestore();
+        fs.promises.mkdir.mockRestore();
+      });
+
+      it('should take project as arg', async () => {
+        const skillWithFileCondition = {
+          content: 'foo',
+          dest: 'foo',
+          condition({ project }): boolean {
+            return project.interfaceStates.length !== 0;
+          }
+        };
+        const vfs = new VirtualFileSystem();
+        vfs.add(skillWithFileCondition);
+        expect(vfs.size).toEqual(1);
+        jest.spyOn(fs.promises, 'writeFile');
+        jest.spyOn(fs.promises, 'mkdir');
+        await vfs.writeAllFiles(project);
+        expect(fs.promises.writeFile).toHaveBeenCalled();
+        fs.promises.writeFile.mockRestore();
+        fs.promises.mkdir.mockRestore();
+      });
+
+      it('should not write if condition false', async () => {
+        const skillWithFileCondition = {
+          content: 'foo',
+          dest: 'foo',
+          condition({ project }): boolean {
+            return project.interfaceStates.some(
+              state => state.projectType === 'lib'
+            );
+          }
+        };
+        const vfs = new VirtualFileSystem();
+        vfs.add(skillWithFileCondition);
+        expect(vfs.size).toEqual(1);
+        jest.spyOn(fs.promises, 'writeFile');
+        jest.spyOn(fs.promises, 'mkdir');
+        await vfs.writeAllFiles(project);
+        expect(fs.promises.writeFile).not.toHaveBeenCalled();
+        fs.promises.writeFile.mockRestore();
+        fs.promises.mkdir.mockRestore();
+      });
     });
   });
 });
