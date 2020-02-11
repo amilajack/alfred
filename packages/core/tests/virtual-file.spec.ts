@@ -110,7 +110,7 @@ export default { configureStore, history };
           }
         ],
         transforms: {
-          typescript(skill) {
+          typescript(skill): void {
             skill.files.get('routes').applyDiff(
               `@@ -2 +2 @@
 +route 2

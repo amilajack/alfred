@@ -257,8 +257,8 @@ export default {
   transforms: {
     typescript(skill) {
       return skill
-        .applyDiff('redux-routes', `
-            diff --git app/routes.js app/routes.js
+        .applyDiff('redux-routes',
+            `diff --git app/routes.js app/routes.js
             @@ -3,7 +3,7 @@ import { execSync } from 'child_process';
             + function configureStore(initialState?: counterStateType) {
             +  return createStore<*, counterStateType, *>(
@@ -273,8 +273,8 @@ export default {
             -    initialState,
             -    enhancer
             -  );
-            - }
-        `)
+            - }`
+        )
         .rename('redux-routes', 'routes.ts')
     }
   }
@@ -394,7 +394,7 @@ Would you like to install it? (Y/n)
 * `alfred bug`: Generating bug reports on user's behalf
 * `alfred doc`: Generating documentation that will be rendered to `README.md` and html
 
-## Alfred Skills Implementation Status
+## Implemented Skills
 
 ✅ Basic implementation finish
 ❌ Planned but not started
@@ -411,8 +411,18 @@ Would you like to install it? (Y/n)
 | State Managment    |  Redux, Mobx               | ❌           |
 | Routing            |  react-router              | ❌           |
 | Documentation      |  JSDoc, Typedoc            | ❌           |
+| JS Upgrading       |  Lebab                     | ❌           |
 | Type Checkers      |  Flow, TypeScript          | ❌           |
 | End to End Testing |  TestCafe, Cypress         | ❌           |
+
+## Implemented Targets
+
+| Target            | Implemented  |
+| ---               | ---          |
+| Browser           | ✅           |
+| Node              | ✅           |
+| Electron          | ❌           |
+| React Native      | ❌           |
 
 ## Prior Art
 
@@ -427,7 +437,7 @@ Would you like to install it? (Y/n)
 * [parcel](http://parceljs.org)
 * [elm](https://elm-lang.org)
 * [Cargo](https://github.com/rust-lang/cargo)
-* [NPM](https://npmjs.org), [Yarn](https://yarnpkg.com)
+* [Yarn](https://yarnpkg.com)
 * [webpack-merge](https://github.com/survivejs/webpack-merge)
 
 ## Contributing
