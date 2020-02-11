@@ -134,5 +134,37 @@ route 2
 route 3`
       );
     });
+
+    it('should replace content', async () => {
+      const typescriptSkill = {
+        name: 'typescript'
+      };
+      const reactSkill = {
+        name: 'react',
+        files: [
+          {
+            alias: 'routes',
+            dest: 'src/routes',
+            content: 'route 1'
+          }
+        ],
+        transforms: {
+          typescript(skill) {
+            skill.files.get('routes').replaceContent('route 1', 'route 2');
+            return skill;
+          }
+        }
+      };
+
+      const skillMap = await Skills(
+        project,
+        [reactSkill, typescriptSkill],
+        defaultInterfaceState
+      );
+      expect(skillMap.get('react').files.get('routes')).toHaveProperty(
+        'content',
+        'route 2'
+      );
+    });
   });
 });

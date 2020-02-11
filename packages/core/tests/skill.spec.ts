@@ -172,6 +172,38 @@ describe('Skills', () => {
         plugins: ['a', 'b']
       });
     });
+
+    it('should throw when transforms to not return new skill', async () => {
+      const rawSillMap = new Map([
+        [
+          'react',
+          {
+            name: 'react',
+            files: [
+              {
+                alias: 'react',
+                src: 'boilerplate/root.js',
+                dest: 'src/root.js'
+              }
+            ],
+            transforms: {
+              eslint() {
+                1 + 1;
+              }
+            }
+          }
+        ],
+        [
+          'eslint',
+          {
+            name: 'eslint'
+          }
+        ]
+      ]);
+      return expect(runTransforms(defaultProject, rawSillMap)).rejects.toThrow(
+        'Transform from react to eslint must return a new skill'
+      );
+    });
   });
 
   describe('interfaces', () => {
@@ -344,6 +376,7 @@ describe('Skills', () => {
 
     describe('skills', () => {
       it('should throw if skill does not exist', async () => {
+        const spy = jest.spyOn(console, 'log').mockImplementation();
         const [state] = INTERFACE_STATES;
         const project = {
           root: '',
@@ -357,9 +390,11 @@ describe('Skills', () => {
         ).rejects.toThrow(
           "Cannot find module '@alfred/skill-non-existent-skill'"
         );
+        spy.mockRestore();
       });
 
       it('should throw if unsupported skill is used', async () => {
+        const spy = jest.spyOn(console, 'log').mockImplementation();
         const [state] = INTERFACE_STATES;
         const project = {
           config: {
@@ -372,6 +407,7 @@ describe('Skills', () => {
         ).rejects.toThrow(
           "Cannot find module '@alfred/skill-non-existent-skill'"
         );
+        spy.mockRestore();
       });
     });
 
