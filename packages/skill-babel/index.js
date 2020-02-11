@@ -13,9 +13,6 @@ module.exports = {
   ],
   hooks: {},
   transforms: {
-    /**
-     * @TODO Don't perform this transformation for library targets
-     */
     lodash(skill) {
       return skill.addDepsFromPkg('babel-plugin-lodash').extendConfig('babel', {
         env: {
@@ -25,9 +22,6 @@ module.exports = {
         }
       });
     },
-    /**
-     * @TODO Add React HMR support
-     */
     react(skill) {
       return skill
         .extendConfig('babel', {

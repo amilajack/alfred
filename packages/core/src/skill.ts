@@ -43,7 +43,10 @@ export function addSkillHelpers(skill: Skill): SkillWithHelpers {
       configName: string,
       configExtension: { [x: string]: string } = {}
     ): SkillWithHelpers {
-      const foundConfig = this.findConfig(configName);
+      const foundConfig = this.configs.get(configName);
+      if (!foundConfig) {
+        throw new Error(`Cannot find config with name "${configName}"`);
+      }
       const mergedConfigFile = mergeConfigs({}, foundConfig, {
         config: configExtension
       }) as SkillConfig;
@@ -417,14 +420,12 @@ export default async function skillMapFromConfig(
     const skillNode: SkillNode = requireSkill(skillPkgName);
     // skillNode.userConfig = skillUserConfig;
     if (skillNode.configs && skillNode.configs.size === 1) {
-      // const [key, val] = Array.from(skillNode.configs.entries())[0];
-      // console.log(lodash.merge({}, val, config, skillUserConfig));
-      // skillNode.configs.set(
-      //   key,
-      //   lodash.merge({}, val, { config: skillUserConfig })
-      // );
+      const [key, val] = Array.from(skillNode.configs.entries())[0];
+      skillNode.configs.set(
+        key,
+        lodash.merge({}, val, { config: skillUserConfig })
+      );
     }
-    console.log(skillUserConfig);
     skillMapFromConfigSkills.set(skillNode.name, skillNode);
   });
 

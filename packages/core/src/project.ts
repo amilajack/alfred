@@ -215,12 +215,12 @@ export default class Project extends EventEmitter implements ProjectInterface {
     const result = PkgValidation.validate(fs.readFileSync(pkgPath).toString());
 
     if (result.errors.length) {
-      throw new Error(`
-      The following errors were found in the package.json path:
-      ${pkgPath}:
+      console.warn(
+        `The following errors were found in the package.json path:
+${pkgPath}:
 
-      ${JSON.stringify(result.errors)}
-      `);
+${JSON.stringify(result.errors)}`
+      );
     }
 
     return result;
@@ -375,7 +375,8 @@ export default class Project extends EventEmitter implements ProjectInterface {
     // Merge the maps
     return skillMaps.reduce(
       (prevSkillMap: SkillMap, currSkillMap: SkillMap) =>
-        new Map<string, SkillNode>([...prevSkillMap, ...currSkillMap])
+        new Map<string, SkillNode>([...prevSkillMap, ...currSkillMap]),
+      new Map()
     );
   }
 
@@ -445,7 +446,7 @@ export default class Project extends EventEmitter implements ProjectInterface {
   ): Promise<PkgWithDeps> {
     const skillMaps = await Promise.all(
       INTERFACE_STATES.map(interfaceState =>
-        skillMapFromConfig(this, interfaceState, this.config)
+        skillMapFromConfig(this, interfaceState)
       )
     );
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
