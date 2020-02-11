@@ -100,7 +100,7 @@ async function createNewProject(cwd: string, name: string): Promise<void> {
   let answers;
 
   if (process.env.ALFRED_E2E_CLI_TEST) {
-    answers = JSON.parse(process.env.ALFRED_CLI_INPUT_TEST || '{}');
+    answers = JSON.parse(process.env.ALFRED_CLI_E2E_TEST_INPUT || '{}');
   } else {
     answers = await prompt([
       { type: 'input', name: 'description', message: 'description' },
@@ -227,7 +227,7 @@ async function createNewProject(cwd: string, name: string): Promise<void> {
     'Happy hacking!'
   ]);
 
-  const project = await alfred();
+  const project = await alfred(root);
 
   // Get the entire skillMap now that the skills are installed
   const skillMap = await project.getSkillMap();

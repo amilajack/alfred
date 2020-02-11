@@ -27,7 +27,7 @@ import {
 import Config from './config';
 import { PkgValidation } from './validation';
 import skillMapFromConfig, { ENTRYPOINTS } from './skill';
-import { getInterfaceStatesFromProject, INTERFACE_STATES } from './interface';
+import { getInterfaceStatesFromProject } from './interface';
 import run from './commands/run';
 import learn from './commands/learn';
 import skills from './commands/skills';
@@ -90,6 +90,8 @@ export default class Project extends EventEmitter implements ProjectInterface {
 
   root: string;
 
+  private interfaceStates: InterfaceState[];
+
   constructor(projectRootOrSubDir: string = process.cwd()) {
     super();
     const projectRoot = findProjectRoot(projectRootOrSubDir);
@@ -98,11 +100,11 @@ export default class Project extends EventEmitter implements ProjectInterface {
     this.pkgPath = path.join(projectRoot, 'package.json');
     this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
     this.config = Config.initFromProjectRoot(projectRoot);
+    this.interfaceStates = getInterfaceStatesFromProject(this);
   }
 
   async init(): Promise<ProjectInterface> {
-    const interfaceStates = getInterfaceStatesFromProject(this);
-    this.checkIsAlfredProject(interfaceStates);
+    this.checkIsAlfredProject();
 
     const skillMap = await this.getSkillMap();
     skillMap.forEach(skill => {
@@ -113,7 +115,7 @@ export default class Project extends EventEmitter implements ProjectInterface {
             data,
             project: this,
             config: this.config,
-            interfaceStates,
+            interfaceStates: this.interfaceStates,
             skill,
             skillConfig: skill.userConfig,
             skillMap: skillMap
@@ -226,9 +228,7 @@ ${JSON.stringify(result.errors)}`
     return result;
   }
 
-  private checkIsAlfredProject(
-    interfaceStates: Array<InterfaceState>
-  ): ValidationResult {
+  private checkIsAlfredProject(): ValidationResult {
     const srcPath = path.join(this.root, 'src');
     const validationResult = this.validatePkgJson();
 
@@ -251,7 +251,7 @@ ${JSON.stringify(result.errors)}`
     }
 
     // Run validation that is specific to each interface state
-    interfaceStates
+    this.interfaceStates
       .map(interfaceState =>
         [
           interfaceState.projectType,
@@ -368,7 +368,7 @@ ${JSON.stringify(result.errors)}`
    */
   async getSkillMap(): Promise<SkillMap> {
     const skillMaps = await Promise.all(
-      getInterfaceStatesFromProject(this).map(state =>
+      this.interfaceStates.map(state =>
         this.getSkillMapFromInterfaceState(state)
       )
     );
@@ -444,17 +444,10 @@ ${JSON.stringify(result.errors)}`
   async findDepsToInstall(
     additionalSkills: Array<SkillNode> = []
   ): Promise<PkgWithDeps> {
-    const skillMaps = await Promise.all(
-      INTERFACE_STATES.map(interfaceState =>
-        skillMapFromConfig(this, interfaceState)
-      )
-    );
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore
-    const mergedSkillMap: SkillMap = new Map(...skillMaps);
+    const skillMap = await this.getSkillMap();
 
     const pkgDeps: PkgWithDeps = [
-      ...mergedSkillMap.values(),
+      ...skillMap.values(),
       ...additionalSkills
     ].reduce(
       (prev, curr) => ({
