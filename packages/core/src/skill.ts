@@ -183,12 +183,12 @@ function normalizeSkill(skill: Skill | RawSkill): SkillWithHelpers {
   };
 }
 
-export function requireSkill(skillName: string): SkillWithHelpers {
+export function requireSkill(skillPkgName: string): SkillWithHelpers {
   try {
     const requiredSkill = {
-      ...require(skillName),
-      pkg: require(`${skillName}/package.json`),
-      devDependencies: require(`${skillName}/package.json`).peerDependencies
+      ...require(skillPkgName),
+      pkg: require(`${skillPkgName}/package.json`),
+      devDependencies: require(`${skillPkgName}/package.json`).peerDependencies
     };
     return {
       ...requiredSkill,
@@ -196,7 +196,7 @@ export function requireSkill(skillName: string): SkillWithHelpers {
     };
   } catch (e) {
     console.log(e);
-    throw new Error(`Cannot find module '${skillName}'`);
+    throw new Error(`Cannot find module '${skillPkgName}'`);
   }
 }
 

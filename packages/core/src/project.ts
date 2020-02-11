@@ -90,7 +90,7 @@ export default class Project extends EventEmitter implements ProjectInterface {
 
   root: string;
 
-  private interfaceStates: InterfaceState[];
+  interfaceStates: InterfaceState[];
 
   constructor(projectRootOrSubDir: string = process.cwd()) {
     super();

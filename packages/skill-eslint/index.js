@@ -99,7 +99,10 @@ module.exports = {
     react(skill) {
       return skill
         .extendConfig('eslint', {
-          extends: ['airbnb']
+          extends: ['airbnb'],
+          rules: {
+            'react/jsx-filename-extension': 'off'
+          }
         })
         .addDepsFromPkg('eslint-config-airbnb');
     },

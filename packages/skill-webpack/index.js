@@ -259,7 +259,7 @@ module.exports = {
             configStringify`(() => {
               const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
               return new LodashModuleReplacementPlugin()
-            })();`
+            })()`
           ]
         })
         .addDepsFromPkg('lodash-webpack-plugin');

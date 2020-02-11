@@ -58,6 +58,8 @@ export interface ProjectInterface extends EventEmitter {
   pkg: PkgJson;
   // The path to the root package.json
   pkgPath: string;
+  // All the interface states of the project
+  interfaceStates: InterfaceState[];
   // Initialize an alfred project
   init: () => Promise<ProjectInterface>;
   // Get the list of subcommands which correspond to which skills of a given alfred project
@@ -166,6 +168,10 @@ export type ConfigValue =
       [x: string]: any;
     };
 
+export type SkillFileConditionArgs = {
+  project: ProjectInterface;
+};
+
 export type SkillFile = {
   // The "friendly name" of a file. This is the name that
   // other skills will refer to config file by.
@@ -176,6 +182,8 @@ export type SkillFile = {
   dest: string;
   // The content of the file
   content?: string;
+  // The content of the file
+  condition?: (args: SkillFileConditionArgs) => boolean | Promise<boolean>;
 };
 
 export type FileType = 'commonjs' | 'module' | 'json';
