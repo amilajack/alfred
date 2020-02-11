@@ -1,10 +1,10 @@
 {
   "name": "@alfred/skill-redux",
-  "version": "0.0.3",
+  "version": "0.0.4-alpha.0",
   "license": "MIT",
   "dependencies": {
-    "@alfred/helpers": "^0.0.3",
-    "@alfred/types": "^0.0.3"
+    "@alfred/helpers": "^0.0.4-alpha.0",
+    "@alfred/types": "^0.0.4-alpha.0"
   },
   "devDependencies": {
     "connected-react-router": "^6.6.1",

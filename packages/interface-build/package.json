@@ -1,10 +1,10 @@
 {
   "name": "@alfred/interface-build",
-  "version": "0.0.3",
+  "version": "0.0.4-alpha.0",
   "license": "MIT",
   "dependencies": {
-    "@alfred/helpers": "^0.0.3",
-    "@alfred/types": "^0.0.3",
+    "@alfred/helpers": "^0.0.4-alpha.0",
+    "@alfred/types": "^0.0.4-alpha.0",
     "debug": "^4.1.1"
   },
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"

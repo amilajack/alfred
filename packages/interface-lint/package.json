@@ -1,9 +1,9 @@
 {
   "name": "@alfred/interface-lint",
-  "version": "0.0.3",
+  "version": "0.0.4-alpha.0",
   "license": "MIT",
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8",
   "dependencies": {
-    "@alfred/types": "^0.0.3"
+    "@alfred/types": "^0.0.4-alpha.0"
   }
 }
