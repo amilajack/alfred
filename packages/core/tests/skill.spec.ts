@@ -179,9 +179,16 @@ describe('Skills', () => {
           'react',
           {
             name: 'react',
+            files: [
+              {
+                alias: 'react',
+                src: 'boilerplate/root.js',
+                dest: 'src/root.js'
+              }
+            ],
             transforms: {
-              eslint(skill) {
-                skill.get('react');
+              eslint() {
+                1 + 1;
               }
             }
           }
