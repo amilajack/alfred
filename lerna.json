@@ -21,6 +21,6 @@
   },
   "publishConfig": {
     "access": "public",
-    "registry": "http://localhost:4873"
+    "registry": "https://npm.pkg.github.com"
   }
 }
