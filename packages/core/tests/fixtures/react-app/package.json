@@ -1,5 +1,6 @@
 {
   "name": "alfred-test-app",
+  "private": true,
   "version": "0.0.4-alpha.0",
   "main": "index.js",
   "license": "MIT",
