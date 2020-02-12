@@ -7,7 +7,7 @@ const interfaceConfig = {
     envs: ['production', 'development', 'test'],
     // All the supported targets a `build` skill should build
     // @TODO: Add node to targets
-    targets: ['browser'],
+    targets: ['browser', 'node'],
     // Project type
     projectTypes: ['app']
   }

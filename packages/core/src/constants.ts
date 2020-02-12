@@ -95,18 +95,16 @@ export const INTERFACE_STATES: Array<InterfaceState> = [
     target: 'browser',
     env: 'development'
   },
-  // @TODO
-  // {
-  //   projectType: 'app',
-  //   target: 'node',
-  //   env: 'production'
-  // },
-  // @TODO
-  // {
-  //   projectType: 'app',
-  //   target: 'node',
-  //   env: 'development'
-  // },
+  {
+    projectType: 'app',
+    target: 'node',
+    env: 'production'
+  },
+  {
+    projectType: 'app',
+    target: 'node',
+    env: 'development'
+  },
   {
     projectType: 'lib',
     target: 'node',
