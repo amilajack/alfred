@@ -73,8 +73,6 @@ export interface ProjectInterface extends EventEmitter {
   setConfig: (config: ConfigInterface) => void;
   // Get skill map
   getSkillMap: () => Promise<SkillMap>;
-  // Create a skill from a given interface state
-  getSkillMapFromInterfaceState: (i: InterfaceState) => Promise<SkillMap>;
   // Write each config in .configs of each skill
   writeConfigsFromSkillMap: (skillMap: SkillMap) => Promise<SkillMap>;
   // Install dependencies to a given project

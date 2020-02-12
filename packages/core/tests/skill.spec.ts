@@ -11,7 +11,7 @@ import {
   ProjectInterface
 } from '@alfred/types';
 import {
-  getExecutableWrittenConfigsMethods,
+  getProjectSubcommands,
   getSkillInterfaceForSubcommand
 } from '../src/commands';
 import skillMapFromConfig, {
@@ -275,11 +275,7 @@ describe('Skills', () => {
           interfaceState
         );
         expect(
-          getExecutableWrittenConfigsMethods(
-            defaultProject,
-            skill,
-            interfaceState
-          )
+          getProjectSubcommands(defaultProject, skill, interfaceState)
         ).toMatchSnapshot();
       }
     });

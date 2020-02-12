@@ -22,12 +22,14 @@ import {
   NpmClients,
   DependencyType,
   Dependencies,
-  PkgWithDeps
+  PkgWithDeps,
+  Env,
+  ProjectEnum,
+  Target
 } from '@alfred/types';
 import Config from './config';
 import { PkgValidation } from './validation';
 import skillMapFromConfig, { ENTRYPOINTS } from './skill';
-import { getInterfaceStatesFromProject } from './interface';
 import run from './commands/run';
 import learn from './commands/learn';
 import skills from './commands/skills';
@@ -100,11 +102,33 @@ export default class Project extends EventEmitter implements ProjectInterface {
     this.pkgPath = path.join(projectRoot, 'package.json');
     this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
     this.config = Config.initFromProjectRoot(projectRoot);
-    this.interfaceStates = getInterfaceStatesFromProject(this);
+    this.interfaceStates = this.getInterfaceStates();
+  }
+
+  private getInterfaceStates(): Array<InterfaceState> {
+    const envs: Array<string> = ['production', 'development', 'test'];
+    // Default to development env if no config given
+    const env: Env = envs.includes(process.env.NODE_ENV || '')
+      ? (process.env.NODE_ENV as Env)
+      : 'development';
+
+    return ENTRYPOINTS.filter(entryPoint =>
+      fs.existsSync(path.join(this.root, 'src', entryPoint))
+    ).map(validEntryPoints => {
+      const [projectType, target] = validEntryPoints.split('.') as [
+        ProjectEnum,
+        Target
+      ];
+      return {
+        env,
+        target,
+        projectType
+      };
+    });
   }
 
   async init(): Promise<ProjectInterface> {
-    this.checkIsAlfredProject();
+    this.checkProjectIsValid();
 
     const skillMap = await this.getSkillMap();
     skillMap.forEach(skill => {
@@ -228,7 +252,7 @@ ${JSON.stringify(result.errors)}`
     return result;
   }
 
-  private checkIsAlfredProject(): ValidationResult {
+  private checkProjectIsValid(): ValidationResult {
     const srcPath = path.join(this.root, 'src');
     const validationResult = this.validatePkgJson();
 
@@ -368,9 +392,7 @@ ${JSON.stringify(result.errors)}`
    */
   async getSkillMap(): Promise<SkillMap> {
     const skillMaps = await Promise.all(
-      this.interfaceStates.map(state =>
-        this.getSkillMapFromInterfaceState(state)
-      )
+      this.interfaceStates.map(state => skillMapFromConfig(this, state))
     );
     // Merge the maps
     return skillMaps.reduce(
@@ -378,13 +400,6 @@ ${JSON.stringify(result.errors)}`
         new Map<string, SkillNode>([...prevSkillMap, ...currSkillMap]),
       new Map()
     );
-  }
-
-  getSkillMapFromInterfaceState(
-    interfaceState: InterfaceState,
-    config: ConfigInterface = this.config
-  ): Promise<SkillMap> {
-    return skillMapFromConfig(this, interfaceState, config);
   }
 
   async writeConfigsFromSkillMap(skillMap: SkillMap): Promise<SkillMap> {

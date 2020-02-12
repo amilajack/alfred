@@ -41,7 +41,7 @@ export type ExecutableSkillMethods = {
   [subcommand: string]: SubcommandFn;
 };
 
-export function getExecutableWrittenConfigsMethods(
+export function getProjectSubcommands(
   project: ProjectInterface,
   skillMap: SkillMap,
   interfaceState: InterfaceState
@@ -55,52 +55,47 @@ export function getExecutableWrittenConfigsMethods(
     ])
   );
 
-  return (
-    Array.from(skillMap.values())
-      .filter(
-        skillNode =>
-          skillNode.hooks &&
-          skillNode.hooks.run &&
-          skillNode.interfaces &&
-          skillNode.interfaces.length
-      )
-      .flatMap(skillNode => {
-        return skillNode.interfaces.map(skillInterface => {
-          const { subcommand } = require(skillInterface.name);
-          const skillConfig = skillsConfigMap.get(
-            skillNode.name
-          ) as ConfigValue;
-          return {
-            fn: (flags: Array<string> = []): void =>
-              (skillNode.hooks.run as HookFn)({
-                data: {
-                  subcommand,
-                  flags
-                },
-                project,
-                config,
-                interfaceState,
-                skill: skillNode,
-                skillMap,
-                skillConfig
-              }),
-            // @HACK: If interfaces were defined, we could import the @alfred/interface-*
-            //        and use the `subcommand` property. This should be done after we have
-            //        some interfaces to work with
-            subcommand
-          };
-        });
-      })
-      // @TODO @REFACTOR This is messy
-      .reduce(
-        (
-          prevSkill: ExecutableSkillMethods,
-          currSkill: { subcommand: string; fn: SubcommandFn }
-        ): ExecutableSkillMethods => ({
-          ...prevSkill,
-          [currSkill.subcommand]: currSkill.fn
-        }),
-        {}
-      )
-  );
+  return Array.from(skillMap.values())
+    .filter(
+      skillNode =>
+        skillNode.hooks &&
+        skillNode.hooks.run &&
+        skillNode.interfaces &&
+        skillNode.interfaces.length
+    )
+    .flatMap(skillNode => {
+      return skillNode.interfaces.map(skillInterface => {
+        const { subcommand } = require(skillInterface.name);
+        const skillConfig = skillsConfigMap.get(skillNode.name) as ConfigValue;
+        return {
+          fn: (flags: Array<string> = []): void =>
+            (skillNode.hooks.run as HookFn)({
+              data: {
+                subcommand,
+                flags
+              },
+              project,
+              config,
+              interfaceState,
+              skill: skillNode,
+              skillMap,
+              skillConfig
+            }),
+          // @HACK: If interfaces were defined, we could import the @alfred/interface-*
+          //        and use the `subcommand` property. This should be done after we have
+          //        some interfaces to work with
+          subcommand
+        };
+      });
+    })
+    .reduce(
+      (
+        prevSkill: ExecutableSkillMethods,
+        currSkill: { subcommand: string; fn: SubcommandFn }
+      ): ExecutableSkillMethods => ({
+        ...prevSkill,
+        [currSkill.subcommand]: currSkill.fn
+      }),
+      {}
+    );
 }

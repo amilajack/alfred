@@ -1,16 +1,9 @@
 /* eslint import/no-dynamic-require: off */
-import path from 'path';
-import fs from 'fs';
 import {
-  ProjectInterface,
   InterfaceState,
   UnresolvedInterfaces,
-  ResolvedInterfaces,
-  Env,
-  ProjectEnum,
-  Target
+  ResolvedInterfaces
 } from '@alfred/types';
-import { ENTRYPOINTS } from './constants';
 
 // All the possible interface states
 // @TODO Allow .ts, .tsx, .jsx entrypoints
@@ -114,28 +107,4 @@ export function normalizeInterfacesOfSkill(
       interfaces
     )}`
   );
-}
-
-export function getInterfaceStatesFromProject(
-  project: ProjectInterface
-): Array<InterfaceState> {
-  const envs: Array<string> = ['production', 'development', 'test'];
-  // Default to development env if no config given
-  const env: Env = envs.includes(process.env.NODE_ENV || '')
-    ? (process.env.NODE_ENV as Env)
-    : 'development';
-
-  return ENTRYPOINTS.filter(entryPoint =>
-    fs.existsSync(path.join(project.root, 'src', entryPoint))
-  ).map(validEntryPoints => {
-    const [projectType, target] = validEntryPoints.split('.') as [
-      ProjectEnum,
-      Target
-    ];
-    return {
-      env,
-      target,
-      projectType
-    };
-  });
 }
