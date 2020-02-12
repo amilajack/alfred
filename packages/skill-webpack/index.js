@@ -135,12 +135,15 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ project, skill, configs, interfaceState, data }) {
+    async run({ project, skill, configs, data }) {
       const { config: baseConfig } = skill.configs.get('webpack.base');
       const { config: prodConfig } = skill.configs.get('webpack.prod');
       const { config: devConfig } = skill.configs.get('webpack.dev');
       const { config: nodeConfig } = skill.configs.get('webpack.node');
       const { config: browserConfig } = skill.configs.get('webpack.browser');
+
+      const { interfaceState } = data;
+
       let mergedConfig = mergeConfigs(
         baseConfig,
         interfaceState.env === 'production' ? prodConfig : devConfig,

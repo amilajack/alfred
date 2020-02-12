@@ -7,14 +7,14 @@ import Table from 'cli-table3';
 import chalk from 'chalk';
 import powerset from '@amilajack/powerset';
 import childProcess from 'child_process';
-import { INTERFACE_STATES } from '@alfred/core/lib/interface';
+import { INTERFACE_STATES } from '@alfred/core/lib/constants';
 import { formatPkgJson } from '@alfred/core';
 import { entrypointsToInterfaceStates } from '@alfred/core/lib/skill';
 import mergeConfigs from '@alfred/merge-configs';
-import { addEntrypoints } from '../../lib';
 import Config from '@alfred/core/lib/config';
 import { Env, ProjectEnum, Target } from '@alfred/types';
 import { serialPromises } from '@alfred/helpers/lib';
+import { addEntrypoints } from '../../lib';
 
 process.on('unhandledRejection', err => {
   throw err;

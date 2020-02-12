@@ -29,12 +29,12 @@ import {
 } from '@alfred/types';
 import Config from './config';
 import { PkgValidation } from './validation';
-import skillMapFromConfig, { ENTRYPOINTS } from './skill';
+import skillMapFromConfig from './skill';
 import run from './commands/run';
 import learn from './commands/learn';
 import skills from './commands/skills';
 import clean from './commands/clean';
-import { PKG_SORT_ORDER } from './constants';
+import { PKG_SORT_ORDER, ENTRYPOINTS } from './constants';
 import { EventEmitter } from 'events';
 
 // @TODO Send the information to a crash reporting service (like sentry.io)

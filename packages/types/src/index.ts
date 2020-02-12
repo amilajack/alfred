@@ -205,9 +205,9 @@ export type SkillConfig = {
 export type HooksArgs = {
   project: ProjectInterface;
   config: ConfigInterface;
-  interfaceState?: InterfaceState;
-  interfaceStates?: InterfaceState[];
+  interfaceStates: InterfaceState[];
   data: {
+    interfaceState?: InterfaceState;
     skillsPkgNames?: Array<string>;
     flags?: Array<string>;
     subcommand?: string;

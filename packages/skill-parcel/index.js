@@ -38,17 +38,24 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ interfaceState, project, data }) {
+    async run({ project, data }) {
+      const { interfaceState } = data;
       const { root } = project;
       // eslint-disable-next-line global-require
       const Bundler = require('parcel');
       const src = path.join(root, 'src');
+
       const entryFiles = [];
+      entryFiles.push(
+        path.join(
+          src,
+          `${interfaceState.projectType}.${interfaceState.target}.js`
+        )
+      );
       if (interfaceState.target === 'browser') {
         entryFiles.push(path.join(src, 'index.html'));
-      } else if (interfaceState.target === 'node') {
-        entryFiles.push(path.join(src, 'app.node.js'));
       }
+
       const { target } = interfaceState;
       const baseOptions = {
         outDir: path.join(root, 'targets', 'prod'),

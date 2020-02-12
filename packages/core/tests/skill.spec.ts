@@ -20,7 +20,7 @@ import skillMapFromConfig, {
   addSkillHelpers,
   runTransforms
 } from '../src/skill';
-import { normalizeInterfacesOfSkill, INTERFACE_STATES } from '../src/interface';
+import { normalizeInterfacesOfSkill } from '../src/interface';
 import alfred from '../src';
 
 const rawParcelSkill = require('@alfred/skill-parcel');

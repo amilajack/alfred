@@ -72,11 +72,12 @@ export function getProjectSubcommands(
             (skillNode.hooks.run as HookFn)({
               data: {
                 subcommand,
-                flags
+                flags,
+                interfaceState
               },
               project,
               config,
-              interfaceState,
+              interfaceStates: project.interfaceStates,
               skill: skillNode,
               skillMap,
               skillConfig
