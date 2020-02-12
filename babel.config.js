@@ -5,13 +5,8 @@ module.exports = {
       {
         targets: { node: 13 }
       }
-    ]
+    ],
+    '@babel/preset-typescript'
   ],
-  plugins: ['@babel/plugin-proposal-optional-chaining'],
-  overrides: [
-    {
-      presets: ['@babel/preset-typescript'],
-      test: /\.tsx?$/
-    }
-  ]
+  plugins: ['@babel/plugin-proposal-optional-chaining']
 };
