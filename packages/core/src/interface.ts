@@ -13,8 +13,8 @@ import {
 import { ENTRYPOINTS } from './constants';
 
 // All the possible interface states
-// @TODO Also allow .ts entrypoints
-// @TODO Allow the follow entrypoints:
+// @TODO Allow .ts, .tsx, .jsx entrypoints
+// @TODO Implement the follow entrypoints:
 // 'lib.electron.main.js',
 // 'lib.electron.renderer.js',
 // 'app.electron.main.js',

@@ -3,6 +3,11 @@ const path = require('path');
 module.exports = {
   name: 'react',
   description: 'A JavaScript library for building user interfaces',
+  supports: {
+    envs: ['production', 'development', 'test'],
+    targets: ['browser'],
+    projectTypes: ['app', 'lib']
+  },
   files: [
     {
       src: path.join(__dirname, 'boilerplate/index.html'),
