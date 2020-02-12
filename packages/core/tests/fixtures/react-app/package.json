@@ -1,12 +1,12 @@
 {
   "name": "alfred-test-app",
   "private": true,
-  "version": "0.0.4-alpha.0",
+  "version": "0.0.4",
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "@alfred/cli": "^0.0.4-alpha.0",
-    "@alfred/core": "^0.0.4-alpha.0",
+    "@alfred/cli": "^0.0.4",
+    "@alfred/core": "^0.0.4",
     "@alfred/skill-react": "^0.0.4-alpha.0",
     "react-dom": "16.12.0",
     "webpack": "^4.28.3"
