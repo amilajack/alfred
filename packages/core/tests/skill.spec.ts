@@ -21,15 +21,9 @@ import skillMapFromConfig, {
   runTransforms
 } from '../src/skill';
 import { normalizeInterfacesOfSkill, INTERFACE_STATES } from '../src/interface';
-import Project from '../src/project';
+import alfred from '../src';
 
-const parcel = require('@alfred/skill-parcel');
-
-const [defaultInterfaceState] = INTERFACE_STATES;
-
-const defaultProject = new Project(
-  path.join(__dirname, '../../cli/tests/fixtures/app')
-);
+const rawParcelSkill = require('@alfred/skill-parcel');
 
 function removePathsPropertiesFromObject(
   obj:
@@ -77,11 +71,15 @@ function getDevDependencies(skillMap: SkillMap): Dependencies {
 }
 
 describe('Skills', () => {
+  let defaultProject;
+
   beforeAll(async () => {
-    await defaultProject.init();
+    defaultProject = await alfred(
+      path.join(__dirname, '../../cli/tests/fixtures/app')
+    );
   });
 
-  describe('order', () => {
+  describe('transforms', () => {
     it('should run transforms in order', async () => {
       const rawSillMap = new Map([
         [
@@ -287,7 +285,7 @@ describe('Skills', () => {
     });
   });
 
-  describe('skill helpers', () => {
+  describe('helpers', () => {
     describe('adding deps from pkg', () => {
       const defaultPkg = {
         devDependencies: {
@@ -345,7 +343,7 @@ describe('Skills', () => {
     });
   });
 
-  describe('alfred cli helpers', () => {
+  describe('creation', () => {
     it('should add missing std skills to skill', async () => {
       {
         const interfaceState = {
@@ -353,7 +351,11 @@ describe('Skills', () => {
           projectType: 'app',
           target: 'browser'
         } as InterfaceState;
-        const skillMap = await Skills(defaultProject, [parcel], interfaceState);
+        const skillMap = await Skills(
+          defaultProject,
+          [rawParcelSkill],
+          interfaceState
+        );
         const skillNames = Array.from(skillMap.keys());
         expect(skillNames).toMatchSnapshot();
         expect(skillNames).toContain('parcel');
@@ -366,7 +368,11 @@ describe('Skills', () => {
           projectType: 'lib',
           target: 'browser'
         } as InterfaceState;
-        const skillMap = await Skills(defaultProject, [parcel], interfaceState);
+        const skillMap = await Skills(
+          defaultProject,
+          [rawParcelSkill],
+          interfaceState
+        );
         const skillNames = Array.from(skillMap.keys());
         expect(skillNames).toMatchSnapshot();
         expect(skillNames).toContain('rollup');
@@ -375,41 +381,66 @@ describe('Skills', () => {
       }
     });
 
-    describe('skills', () => {
-      it('should throw if skill does not exist', async () => {
-        const spy = jest.spyOn(console, 'log').mockImplementation();
-        const [state] = INTERFACE_STATES;
-        const project = {
-          root: '',
-          config: {
-            ...defaultProject.config,
-            skills: [['@alfred/skill-non-existent-skill', {}]]
-          }
-        } as ProjectInterface;
-        await expect(
-          skillMapFromConfig(project, state, project.config)
-        ).rejects.toThrow(
-          "Cannot find module '@alfred/skill-non-existent-skill'"
-        );
-        spy.mockRestore();
-      });
+    it('should throw if skill does not exist', async () => {
+      const spy = jest.spyOn(console, 'log').mockImplementation();
+      const [state] = INTERFACE_STATES;
+      const project = {
+        root: '',
+        config: {
+          ...defaultProject.config,
+          skills: [['@alfred/skill-non-existent-skill', {}]]
+        }
+      } as ProjectInterface;
+      await expect(
+        skillMapFromConfig(project, state, project.config)
+      ).rejects.toThrow(
+        "Cannot find module '@alfred/skill-non-existent-skill'"
+      );
+      spy.mockRestore();
+    });
 
-      it('should throw if unsupported skill is used', async () => {
-        const spy = jest.spyOn(console, 'log').mockImplementation();
-        const [state] = INTERFACE_STATES;
-        const project = {
-          config: {
-            ...defaultProject.config,
-            skills: [['@alfred/skill-non-existent-skill', {}]]
-          }
-        } as ProjectInterface;
-        await expect(
-          skillMapFromConfig(project, state, project.config)
-        ).rejects.toThrow(
-          "Cannot find module '@alfred/skill-non-existent-skill'"
-        );
-        spy.mockRestore();
-      });
+    it('should not return skill map with unsupported skills', async () => {
+      const nodeAppInterfaceState = {
+        projectType: 'app',
+        target: 'node',
+        env: 'production'
+      };
+      const project = {
+        config: {
+          ...defaultProject.config,
+          skills: [['@alfred/skill-react', {}]]
+        }
+      };
+      const skillMap = await skillMapFromConfig(
+        project,
+        nodeAppInterfaceState,
+        project.config
+      );
+      expect(skillMap.has('react')).toBe(false);
+    });
+
+    it('should return skill map with unsupported skills when at least one target supports skill', async () => {
+      const testProject = await alfred(
+        path.join(__dirname, '../../cli/tests/fixtures/app')
+      );
+      testProject.config = {
+        ...testProject.config,
+        skills: [['@alfred/skill-react', {}]]
+      };
+      testProject.interfaceStates = [
+        {
+          projectType: 'app',
+          target: 'node',
+          env: 'production'
+        },
+        {
+          projectType: 'app',
+          target: 'browser',
+          env: 'production'
+        }
+      ];
+      const skillMap = await testProject.getSkillMap();
+      expect(skillMap.has('react')).toBe(true);
     });
 
     it('should override core skills that support same interface states', async () => {
@@ -418,7 +449,11 @@ describe('Skills', () => {
         projectType: 'app',
         target: 'browser'
       } as InterfaceState;
-      const skillMap = await Skills(defaultProject, [parcel], interfaceState);
+      const skillMap = await Skills(
+        defaultProject,
+        [rawParcelSkill],
+        interfaceState
+      );
       const skillNames = Array.from(skillMap.keys());
       expect(skillNames).toMatchSnapshot();
       expect(skillNames).toContain('parcel');
@@ -432,7 +467,11 @@ describe('Skills', () => {
         projectType: 'lib',
         target: 'browser'
       } as InterfaceState;
-      const skillMap = await Skills(defaultProject, [parcel], interfaceState);
+      const skillMap = await Skills(
+        defaultProject,
+        [rawParcelSkill],
+        interfaceState
+      );
       const skillNames = Array.from(skillMap.keys());
       expect(skillNames).toMatchSnapshot();
       expect(skillNames).not.toContain('parcel');
@@ -441,44 +480,46 @@ describe('Skills', () => {
     });
   });
 
-  // Generate tests for skill combinations
-  const skillNamesCombinations = powerset(Object.keys(CORE_SKILLS)).sort();
-  for (const skillCombination of skillNamesCombinations) {
+  describe('combinations', () => {
+    // Generate all possible combinations of skills
+    const skillNamesCombinations = powerset(Object.keys(CORE_SKILLS)).sort();
+    for (const skillCombination of skillNamesCombinations) {
+      INTERFACE_STATES.forEach(interfaceState => {
+        it(`combination ${skillCombination.join(
+          ','
+        )} interface state ${JSON.stringify(interfaceState)}`, async () => {
+          // Get the skills for each combination
+          const skillObjects = skillCombination.map(
+            skillName => CORE_SKILLS[skillName]
+          );
+          const skillMap = await Skills(
+            defaultProject,
+            skillObjects,
+            interfaceState
+          );
+          expect(getConfigs(skillMap)).toMatchSnapshot();
+          expect(getDependencies(skillMap)).toMatchSnapshot();
+          expect(getDevDependencies(skillMap)).toMatchSnapshot();
+        });
+      });
+    }
+  });
+
+  describe('dependencies', () => {
     INTERFACE_STATES.forEach(interfaceState => {
-      it(`combination ${skillCombination.join(
-        ','
-      )} interface state ${JSON.stringify(
-        defaultInterfaceState
+      it(`should add devDepencencies with interface state ${JSON.stringify(
+        interfaceState
       )}`, async () => {
-        // Get the skills for each combination
-        const skillObjects = skillCombination.map(
-          skillName => CORE_SKILLS[skillName]
-        );
         const skillMap = await Skills(
           defaultProject,
-          skillObjects,
+          Object.values(CORE_SKILLS),
           interfaceState
         );
-        expect(getConfigs(skillMap)).toMatchSnapshot();
-        expect(getDependencies(skillMap)).toMatchSnapshot();
-        expect(getDevDependencies(skillMap)).toMatchSnapshot();
+        const { devDependencies } = skillMap.get('parcel').addDevDeps({
+          foobar: '0.0.0'
+        });
+        expect(devDependencies).toMatchSnapshot();
       });
-    });
-  }
-
-  INTERFACE_STATES.forEach(interfaceState => {
-    it(`should add devDepencencies with interface state ${JSON.stringify(
-      interfaceState
-    )}`, async () => {
-      const skillMap = await Skills(
-        defaultProject,
-        Object.values(CORE_SKILLS),
-        interfaceState
-      );
-      const { devDependencies } = skillMap.get('parcel').addDevDeps({
-        foobar: '0.0.0'
-      });
-      expect(devDependencies).toMatchSnapshot();
     });
   });
 });

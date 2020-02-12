@@ -43,9 +43,5 @@ describe.skip('Helpers', () => {
       ]);
       expect(files.map(stripNonProjectPaths)).toMatchSnapshot();
     });
-
-    // it.skip('should fail on non-existent files', async () => {});
   });
-
-  // describe.skip('Validation', () => {});
 });

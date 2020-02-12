@@ -240,7 +240,7 @@ export function entrypointsToInterfaceStates(
   });
 }
 
-export function validateSkill(
+function validateSkillMap(
   skillMap: SkillMap,
   interfaceState: InterfaceState
 ): SkillMap {
@@ -256,7 +256,7 @@ export function validateSkill(
       });
     }
     // Validate if a skill is supported for a certain interface state
-    if (skillNode && skillNode.supports) {
+    if (skillNode.supports) {
       const supports = {
         env: skillNode.supports.envs.includes(interfaceState.env),
         target: skillNode.supports.targets.includes(interfaceState.target),
@@ -397,7 +397,7 @@ export async function Skills(
 
   await runTransforms(project, skillMap);
 
-  validateSkill(skillMap, interfaceState);
+  validateSkillMap(skillMap, interfaceState);
 
   return skillMap;
 }
