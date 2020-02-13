@@ -30,12 +30,13 @@ export interface PkgWithAllDeps {
 }
 
 export type Env = 'production' | 'development' | 'test';
+export type EnvShortName = 'prod' | 'dev' | 'test';
 
 export type Platform = 'node' | 'browser';
 
 export type ProjectEnum = 'app' | 'lib';
 
-export type ConfigSkill = [string, any];
+export type ConfigSkill = [string, ConfigValue];
 
 export type ConfigSkills = ConfigSkill[];
 
@@ -90,7 +91,7 @@ export type Entrypoint = {
   platform: Platform;
   // Project type
   project: ProjectEnum;
-  meta?: Record<string, any>;
+  meta?: Record<string, string>;
 };
 
 export type Target = Entrypoint & {
@@ -98,7 +99,9 @@ export type Target = Entrypoint & {
   env: Env;
 };
 
-export interface SkillInterfaceModule extends NodeJS.Module {
+export type HandleFlagsArgs = { target: Target; config: ConfigInterface };
+
+export interface SkillInterfaceModule {
   description: string;
   subcommand: string;
   runForAllTargets?: boolean;
@@ -108,13 +111,10 @@ export interface SkillInterfaceModule extends NodeJS.Module {
     skills: Array<SkillWithHelpers>,
     target: Target
   ) => SkillWithHelpers | false;
-  handleFlags?: (
-    flags: Array<string>,
-    misc: { target: Target; config: ConfigInterface }
-  ) => Array<string>;
+  handleFlags?: (flags: Array<string>, args: HandleFlagsArgs) => Array<string>;
 }
 
-export type RawSkillConfigValue = [string, Record<string, any>] | string;
+export type RawSkillConfigValue = [string, ConfigValue];
 
 export type RawExtendsConfigValue = Array<string> | string;
 
@@ -206,22 +206,28 @@ export type SkillConfig = {
   fileType?: FileType;
 };
 
-export type HooksArgs = {
+export type RunEvent = {
+  target: Target;
+  flags: Array<string>;
+  subcommand: string;
+};
+
+export type LearnEvent = {
+  skillsPkgNames: Array<string>;
+  flags: Array<string>;
+};
+
+export type HookArgs = {
   project: ProjectInterface;
   config: ConfigInterface;
   targets: Target[];
   skill: SkillNode;
   skillConfig: ConfigValue;
   skillMap: SkillMap;
-  event: {
-    target?: Target;
-    skillsPkgNames?: Array<string>;
-    flags?: Array<string>;
-    subcommand?: string;
-  };
+  event: RunEvent | LearnEvent;
 };
 
-export type HookFn = (args: HooksArgs) => void;
+export type HookFn = (args: HookArgs) => void;
 
 export type DiffDeps = { diffDevDeps: string[]; diffDeps: string[] };
 
@@ -234,19 +240,22 @@ export type Supports = {
   projects: Array<ProjectEnum>;
 };
 
+export type TransformArgs = {
+  toSkill: Skill;
+  skillMap: SkillMap;
+  project: ProjectInterface;
+  config: ConfigInterface;
+};
+
 export type Transforms = {
   [skillName: string]: (
-    ownSkillNode: Skill,
-    misc: {
-      toSkill: Skill;
-      skillMap: SkillMap;
-      project: ProjectInterface;
-      config: ConfigInterface;
-    }
+    ownSkill: SkillWithHelpers,
+    transformArgs: TransformArgs
   ) => Skill;
 };
 
-export interface VirtualFileSystemInterface extends Map<string, SkillFile> {
+export interface VirtualFileSystemInterface
+  extends Map<string, VirtualFileInterface> {
   add(file: SkillFile): VirtualFileSystemInterface;
   writeAllFiles(project: ProjectInterface): Promise<void>;
 }
@@ -285,16 +294,16 @@ export type Hooks = {
 
 export interface RawSkill extends PkgWithDeps {
   name: string;
-  description: string;
-  supports: Supports;
-  pkg: PkgJson;
+  description?: string;
+  supports?: Supports;
+  pkg?: PkgJson;
   dirs?: Array<Dir>;
   files?: Array<SkillFile>;
   configs?: Array<SkillConfig>;
-  userConfig?: SkillConfig;
-  interfaces?: Array<SkillInterface>;
+  interfaces?: Array<SkillInterface | string>;
   hooks?: Hooks;
   transforms?: Transforms;
+  default?: boolean;
 }
 
 export type Dir = {
@@ -314,6 +323,7 @@ export interface Skill extends PkgWithDeps {
   interfaces: Array<SkillInterface>;
   hooks: Hooks;
   transforms: Transforms;
+  default?: boolean;
 }
 
 export interface SkillUsingInterface extends Skill {
@@ -326,8 +336,8 @@ export type SkillMap = Map<string, SkillNode>;
 
 export interface Helpers<T> {
   findConfig: (configName: string) => SkillConfig;
-  extendConfig: (x: string) => T;
-  replaceConfig: (x: string, configReplacement: SkillConfig) => T;
+  extendConfig: (configName: string, configExtension: ConfigValue) => T;
+  replaceConfig: (configName: string, configReplacement: ConfigValue) => T;
   setWrite: (configName: string, shouldWrite: boolean) => T;
   addDeps: (pkg: Dependencies) => T;
   addDevDeps: (pkg: Dependencies) => T;

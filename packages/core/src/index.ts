@@ -1,5 +1,5 @@
 import Project from './project';
-import { ProjectInterface } from '@alfred/types/src';
+import { ProjectInterface } from '@alfred/types';
 
 export default function alfred(projectDir?: string): Promise<ProjectInterface> {
   const project = new Project(projectDir);

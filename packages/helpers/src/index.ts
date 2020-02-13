@@ -1,7 +1,7 @@
 /* eslint import/prefer-default-export: off, import/no-dynamic-require: off */
 import path from 'path';
 import open from 'open';
-import childProcess from 'child_process';
+import childProcess, { ExecSyncOptions } from 'child_process';
 import serialize from 'serialize-javascript';
 import {
   AlfredConfigWithUnresolvedInterfaces,
@@ -10,7 +10,9 @@ import {
   PkgWithAllDeps,
   DependencyType,
   DependencyTypeFull,
-  Dependencies
+  Dependencies,
+  Env,
+  EnvShortName
 } from '@alfred/types';
 
 export class EnhancedMap<K, V> extends Map<K, V> {
@@ -59,7 +61,7 @@ export function fromPkgTypeToFull(
 /**
  * Map the environment name to a short name, which is one of ['dev', 'prod', 'test']
  */
-export function mapEnvToShortName(envName: string): string {
+export function mapEnvToShortName(envName: string): EnvShortName {
   switch (envName) {
     case 'production': {
       return 'prod';
@@ -76,7 +78,7 @@ export function mapEnvToShortName(envName: string): string {
   }
 }
 
-export function mapShortNameEnvToLongName(envName: string): string {
+export function mapShortNameEnvToLongName(envName: string): Env {
   switch (envName) {
     case 'prod': {
       return 'production';
@@ -116,7 +118,7 @@ export function requireConfig(
 export function execCmdInProject(
   project: ProjectInterface,
   cmd: string,
-  opts: Record<string, any> = {}
+  opts: ExecSyncOptions = {}
 ): Buffer {
   return childProcess.execSync(cmd, {
     stdio: 'inherit',
