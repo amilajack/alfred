@@ -1,19 +1,28 @@
 import path from 'path';
 import { openUrlInBrowser } from '@alfred/helpers';
+import {
+  RawSkill,
+  SkillWithHelpers,
+  HookArgs,
+  RunEvent,
+  Env,
+  Platform,
+  ProjectEnum
+} from '@alfred/types/src';
 
 const interfaceConfig = {
   supports: {
     // Flag name and argument types
-    envs: ['production', 'development', 'test'],
+    envs: ['production', 'development', 'test'] as Env[],
     // All the supported targets a `build` skill should build
     // @TODO: Add node to targets
-    targets: ['browser', 'node'],
+    platforms: ['browser', 'node'] as Platform[],
     // Project type
-    projects: ['app']
+    projects: ['app'] as ProjectEnum[]
   }
 };
 
-export default {
+const skill: RawSkill = {
   name: 'parcel',
   description: 'Build, optimize, and bundle assets in your app',
   interfaces: [
@@ -38,8 +47,8 @@ export default {
     }
   ],
   hooks: {
-    async run({ project, data }) {
-      const { target } = data;
+    async run({ project, event }: HookArgs): Promise<void> {
+      const { target, subcommand } = event as RunEvent;
       const { root } = project;
       // eslint-disable-next-line global-require
       const Bundler = require('parcel');
@@ -49,7 +58,7 @@ export default {
       entryFiles.push(
         path.join(src, `${target.project}.${target.platform}.js`)
       );
-      if (target.target === 'browser') {
+      if (target.platform === 'browser') {
         entryFiles.push(path.join(src, 'index.html'));
       }
 
@@ -62,7 +71,7 @@ export default {
         target: target.platform
       };
 
-      switch (data.subcommand) {
+      switch (subcommand) {
         case 'start': {
           const server = await new Bundler(entryFiles, {
             ...baseOptions,
@@ -95,15 +104,17 @@ export default {
           }).bundle();
         }
         default:
-          throw new Error(`Invalid subcommand: "${data.subcommand}"`);
+          throw new Error(`Invalid subcommand: "${subcommand}"`);
       }
     }
   },
   transforms: {
-    react(skill) {
+    react(skill: SkillWithHelpers): SkillWithHelpers {
       return skill
         .setWrite('postcss', true)
         .addDepsFromPkg(['postcss-modules', 'autoprefixer']);
     }
   }
 };
+
+export default skill;

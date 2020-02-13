@@ -5,18 +5,22 @@ import {
   HookArgs,
   RawSkill,
   SkillWithHelpers,
-  SkillConfig
+  SkillConfig,
+  RunEvent,
+  Env,
+  Platform,
+  ProjectEnum
 } from '@alfred/types';
 import mergeConfigs from '@alfred/merge-configs';
 
 const interfaceConfig = {
   supports: {
     // Flag name and argument types
-    envs: ['production', 'development', 'test'],
+    envs: ['production', 'development', 'test'] as Env[],
     // All the supported targets a `build` skill should build
-    targets: ['browser', 'node'],
+    platforms: ['browser', 'node'] as Platform[],
     // Project type
-    projects: ['lib']
+    projects: ['lib'] as ProjectEnum[]
   }
 };
 
@@ -46,7 +50,6 @@ const skill: RawSkill = {
         },
         plugins: [
           replace({
-            DEBUG: false,
             'process.env.NODE_ENV': JSON.stringify('production')
           })
         ]
@@ -61,7 +64,6 @@ const skill: RawSkill = {
         },
         plugins: [
           replace({
-            DEBUG: true,
             'process.env.NODE_ENV': JSON.stringify('development')
           }),
           commonjs()
@@ -70,13 +72,13 @@ const skill: RawSkill = {
     }
   ],
   hooks: {
-    async run({ skill, data }: HookArgs): Promise<void> {
-      const { target, subcommand } = data;
+    async run({ skill, event }: HookArgs): Promise<void> {
+      const { target, subcommand } = event as RunEvent;
       const [baseConfig, prodConfig, devConfig] = [
         'rollup.base',
         'rollup.prod',
         'rollup.dev'
-      ].map(configFile => skill.configs.get(configFile).config);
+      ].map(configFile => skill.configs.get(configFile)?.config);
       const inputAndOutputConfigs = {
         input: `./src/lib.${target.platform}.js`,
         output: {

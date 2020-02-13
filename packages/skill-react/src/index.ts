@@ -1,12 +1,12 @@
 import path from 'path';
-import { SkillFileConditionArgs } from '@alfred/types';
+import { SkillFileConditionArgs, RawSkill } from '@alfred/types';
 
-export default {
+const skill: RawSkill = {
   name: 'react',
   description: 'A JavaScript library for building user interfaces',
   supports: {
     envs: ['production', 'development', 'test'],
-    targets: ['browser'],
+    platforms: ['browser'],
     projects: ['app', 'lib']
   },
   files: [
@@ -25,3 +25,5 @@ export default {
     }
   ]
 };
+
+export default skill;

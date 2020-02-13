@@ -1,8 +1,8 @@
 import path from 'path';
 import { execCmdInProject, getPkgBinPath } from '@alfred/helpers';
-import { HookArgs, SkillConfig } from '@alfred/types';
+import { HookArgs, SkillConfig, RawSkill } from '@alfred/types';
 
-export default {
+const skill: RawSkill = {
   name: 'prettier',
   description: 'Format the source files in your project',
   interfaces: ['@alfred/interface-format'],
@@ -38,3 +38,5 @@ export default {
   },
   transforms: {}
 };
+
+export default skill;

@@ -155,7 +155,7 @@ export async function getPkgBinPath(
 
 export async function openUrlInBrowser(
   url: string,
-  browser: string
+  browser?: string
 ): Promise<void> {
   // Don't open new tab when running end to end tests. This prevents hundreds
   // of tabs from being opened.

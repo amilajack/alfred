@@ -96,7 +96,7 @@ const skill: RawSkill = {
                 config: path.join(
                   project.root,
                   config.configsDir,
-                  toSkill.configs.get('webpack.base').filename
+                  toSkill.configs.get('webpack.base')?.filename as string
                 )
               }
             }

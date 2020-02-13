@@ -1,7 +1,7 @@
 import path from 'path';
-import { SkillWithHelpers } from '@alfred/types';
+import { SkillWithHelpers, RawSkill } from '@alfred/types';
 
-export default {
+const skill: RawSkill = {
   name: 'redux',
   dirs: [
     {
@@ -71,3 +71,5 @@ export default {
     }
   }
 };
+
+export default skill;

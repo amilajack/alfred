@@ -204,6 +204,8 @@ export type SkillConfig = {
   config: ConfigValue;
   // The type of the config file. This is inferred by alfred by the file extension of .path
   fileType?: FileType;
+  // Determine if the config should be written or not
+  write?: boolean;
 };
 
 export type RunEvent = {
@@ -292,15 +294,17 @@ export type Hooks = {
   afterTransforms?: HookFn;
 };
 
-export interface RawSkill extends PkgWithDeps {
+export interface RawSkill {
   name: string;
   description?: string;
   supports?: Supports;
   pkg?: PkgJson;
+  devDependencies?: Dependencies;
+  dependencies?: Dependencies;
   dirs?: Array<Dir>;
   files?: Array<SkillFile>;
   configs?: Array<SkillConfig>;
-  interfaces?: Array<SkillInterface | string>;
+  interfaces?: Array<[string, { supports: Supports }] | string>;
   hooks?: Hooks;
   transforms?: Transforms;
   default?: boolean;
