@@ -13,10 +13,10 @@ describe('virtual file system', () => {
 
   const project = new Project(path.join(__dirname, 'fixtures/react-app'));
 
-  const defaultInterfaceState = {
-    projectType: 'app',
+  const defaultTarget = {
+    project: 'app',
     env: 'development',
-    target: 'browser'
+    platform: 'browser'
   };
 
   const file = {
@@ -88,7 +88,7 @@ describe('virtual file system', () => {
       const skillMap = await Skills(
         project,
         [reduxSkill, typescriptSkill],
-        defaultInterfaceState
+        defaultTarget
       );
       expect(
         skillMap.get('redux').files.get('configureStore.prod').content
@@ -142,7 +142,7 @@ export default { configureStore, history };
       const skillMap = await Skills(
         project,
         [reactSkill, typescriptSkill],
-        defaultInterfaceState
+        defaultTarget
       );
 
       expect(skillMap.get('react').files.get('routes').content).toEqual(
@@ -176,7 +176,7 @@ route 3`
       const skillMap = await Skills(
         project,
         [reactSkill, typescriptSkill],
-        defaultInterfaceState
+        defaultTarget
       );
       expect(skillMap.get('react').files.get('routes')).toHaveProperty(
         'content',
@@ -209,7 +209,7 @@ route 3`
           content: 'foo',
           dest: 'foo',
           condition({ project }): boolean {
-            return project.interfaceStates.length !== 0;
+            return project.targets.length !== 0;
           }
         };
         const vfs = new VirtualFileSystem();
@@ -228,9 +228,7 @@ route 3`
           content: 'foo',
           dest: 'foo',
           condition({ project }): boolean {
-            return project.interfaceStates.some(
-              state => state.projectType === 'lib'
-            );
+            return project.target.some(state => state.project === 'lib');
           }
         };
         const vfs = new VirtualFileSystem();

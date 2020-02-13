@@ -8,21 +8,21 @@ module.exports = {
 
   runForAllTargets: true,
 
-  handleFlags(flags, { interfaceState }) {
+  handleFlags(flags, { target }) {
     const supportedFlags = new Set(['--production', '--development', '--test']);
     const shortNameSupportedFlags = new Set(['--prod', '--dev']);
     return flags.reduce((prev, curr) => {
       const env = curr.slice('--'.length);
       if (shortNameSupportedFlags.has(curr)) {
         // eslint-disable-next-line no-param-reassign
-        interfaceState.env = mapShortNameEnvToLongName(env);
-        debug(`Setting "process.env.NODE_ENV" to "${interfaceState.env}"`);
+        target.env = mapShortNameEnvToLongName(env);
+        debug(`Setting "process.env.NODE_ENV" to "${target.env}"`);
         return prev;
       }
       if (supportedFlags.has(curr)) {
         // eslint-disable-next-line no-param-reassign
-        interfaceState.env = env;
-        debug(`Setting "process.env.NODE_ENV" to "${interfaceState.env}"`);
+        target.env = env;
+        debug(`Setting "process.env.NODE_ENV" to "${target.env}"`);
         return prev;
       }
       prev.push(curr);
@@ -30,7 +30,7 @@ module.exports = {
     }, []);
   },
 
-  resolveSkill(skillNodes = [], interfaceState) {
+  resolveSkill(skillNodes = [], target) {
     const resolvedSkills = skillNodes
       .filter(skillNode =>
         skillNode.interfaces.find(
@@ -47,16 +47,16 @@ module.exports = {
           );
         }
         return (
-          supports.envs.includes(interfaceState.env) &&
-          supports.targets.includes(interfaceState.target) &&
-          supports.projectTypes.includes(interfaceState.projectType)
+          supports.envs.includes(target.env) &&
+          supports.platforms.includes(target.platform) &&
+          supports.projects.includes(target.project)
         );
       });
 
     if (!resolvedSkills.length) {
       debug(
         `No installed skill for the "build" subcommand could be found that works for the given development environment and target: ${JSON.stringify(
-          interfaceState
+          target
         )}. Defaulting to core Alfred skills`
       );
       return false;

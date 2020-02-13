@@ -1,4 +1,4 @@
-import { InterfaceState } from '@alfred/types';
+import { Target, Entrypoint } from '@alfred/types';
 
 export const PKG_SORT_ORDER = [
   'name',
@@ -68,11 +68,30 @@ export const PKG_SORT_ORDER = [
 // 'lib.browser.js',
 // 'app.browser.js'
 // etc...
-export const ENTRYPOINTS = [
+export const RAW_ENTRYPOINTS = [
   'lib.node.js',
   'app.node.js',
   'lib.browser.js',
   'app.browser.js'
+];
+
+export const ENTRYPOINTS: Array<Entrypoint> = [
+  {
+    project: 'app',
+    platform: 'browser'
+  },
+  {
+    project: 'app',
+    platform: 'node'
+  },
+  {
+    project: 'lib',
+    platform: 'node'
+  },
+  {
+    project: 'lib',
+    platform: 'browser'
+  }
 ];
 
 // All the possible interface states
@@ -84,45 +103,45 @@ export const ENTRYPOINTS = [
 // 'app.electron.renderer.js',
 // 'lib.react-native.js',
 // 'app.react-native.js'
-export const INTERFACE_STATES: Array<InterfaceState> = [
+export const TARGETS: Array<Target> = [
   {
-    projectType: 'app',
-    target: 'browser',
+    project: 'app',
+    platform: 'browser',
     env: 'production'
   },
   {
-    projectType: 'app',
-    target: 'browser',
+    project: 'app',
+    platform: 'browser',
     env: 'development'
   },
   {
-    projectType: 'app',
-    target: 'node',
+    project: 'app',
+    platform: 'node',
     env: 'production'
   },
   {
-    projectType: 'app',
-    target: 'node',
+    project: 'app',
+    platform: 'node',
     env: 'development'
   },
   {
-    projectType: 'lib',
-    target: 'node',
+    project: 'lib',
+    platform: 'node',
     env: 'production'
   },
   {
-    projectType: 'lib',
-    target: 'node',
+    project: 'lib',
+    platform: 'node',
     env: 'development'
   },
   {
-    projectType: 'lib',
-    target: 'browser',
+    project: 'lib',
+    platform: 'browser',
     env: 'production'
   },
   {
-    projectType: 'lib',
-    target: 'browser',
+    project: 'lib',
+    platform: 'browser',
     env: 'development'
   }
 ];

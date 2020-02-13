@@ -10,7 +10,7 @@ module.exports = {
   supports: {
     envs: ['production', 'development', 'test'],
     targets: ['node'],
-    projectTypes: ['app', 'lib']
+    projects: ['app', 'lib']
   },
   hooks: {
     async run({ project, config, skillMap, data }) {

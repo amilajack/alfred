@@ -7,10 +7,10 @@ import {
   SkillMap,
   SkillNode,
   ProjectInterface,
-  InterfaceState,
+  Entrypoint,
   SkillConfig,
   ProjectEnum,
-  Target,
+  Platform,
   SkillWithHelpers,
   Dependencies,
   DependencyType,
@@ -19,7 +19,8 @@ import {
   FileType,
   Skill,
   RawSkill,
-  SkillFile
+  SkillFile,
+  Target
 } from '@alfred/types';
 import {
   getDepsFromPkg,
@@ -228,22 +229,19 @@ export const ENTRYPOINTS = [
 /**
  * Convert entrypoints to interface states
  */
-export function entrypointsToInterfaceStates(
+export function entrypointsToTargets(
   entrypoints: Array<string>
-): Array<InterfaceState> {
+): Array<Target> {
   return entrypoints.map(entrypoint => {
-    const [projectType, target] = entrypoint.split('.') as [
+    const [project, platform] = entrypoint.split('.') as [
       ProjectEnum,
-      Target
+      Platform
     ];
-    return { projectType, target, env: 'production' };
+    return { project, platform, env: 'production' };
   });
 }
 
-function validateSkillMap(
-  skillMap: SkillMap,
-  interfaceState: InterfaceState
-): SkillMap {
+function validateSkillMap(skillMap: SkillMap, target: Target): SkillMap {
   skillMap.forEach(skillNode => {
     // Validate the files of a skill
     if (skillNode.files) {
@@ -258,20 +256,18 @@ function validateSkillMap(
     // Validate if a skill is supported for a certain interface state
     if (skillNode.supports) {
       const supports = {
-        env: skillNode.supports.envs.includes(interfaceState.env),
-        target: skillNode.supports.targets.includes(interfaceState.target),
-        projectType: skillNode.supports.projectTypes.includes(
-          interfaceState.projectType
-        )
+        env: skillNode.supports.envs.includes(target.env),
+        platform: skillNode.supports.platforms.includes(target.platform),
+        project: skillNode.supports.projects.includes(target.project)
       };
-      const { env, target, projectType } = supports;
-      const isSupported = env && target && projectType;
+      const { env, platform, project } = supports;
+      const isSupported = env && platform && project;
       if (!isSupported) {
         throw new Error(
           `The "${skillNode.name}" skill, which supports ${JSON.stringify(
             skillNode.supports
           )}}, does not support the current environment, project type, or target, which are ${JSON.stringify(
-            interfaceState
+            target
           )}`
         );
       }
@@ -283,12 +279,12 @@ function validateSkillMap(
 
 /**
  * Add skills to a given list of skills to ensure that the list has a complete set
- * of standard skills. Also remove skills that do not support the current interfaceState
+ * of standard skills. Also remove skills that do not support the current target
  */
 export async function Skills(
   project: ProjectInterface,
   skills: Array<SkillNode>,
-  interfaceState: InterfaceState
+  target: Target
 ): Promise<Map<string, SkillWithHelpers>> {
   const skillMap: Map<string, SkillWithHelpers> = new Map();
 
@@ -309,7 +305,7 @@ export async function Skills(
               if (
                 skillInterface.module.resolveSkill(
                   skillsWithHelpers,
-                  interfaceState
+                  target
                 ) !== false
               ) {
                 skillMap.set(skillWithHelpers.name, skillWithHelpers);
@@ -324,19 +320,17 @@ export async function Skills(
       }
     );
 
-  // Remove skills that do not support the current interfaceState
+  // Remove skills that do not support the current target
   const skillNodesToBeRemoved: Array<string> = [];
   skillMap.forEach(skillNode => {
     if (skillNode && skillNode.supports) {
       const supports = {
-        env: skillNode.supports.envs.includes(interfaceState.env),
-        target: skillNode.supports.targets.includes(interfaceState.target),
-        projectType: skillNode.supports.projectTypes.includes(
-          interfaceState.projectType
-        )
+        env: skillNode.supports.envs.includes(target.env),
+        platform: skillNode.supports.platforms.includes(target.platform),
+        project: skillNode.supports.projects.includes(target.project)
       };
-      const { env, target, projectType } = supports;
-      const isSupported = env && target && projectType;
+      const { env, platform, project } = supports;
+      const isSupported = env && platform && project;
       if (!isSupported) {
         skillNodesToBeRemoved.push(skillNode.name);
       }
@@ -354,14 +348,14 @@ export async function Skills(
       'build',
       require('@alfred/interface-build').resolveSkill(
         Object.values(CORE_SKILLS),
-        interfaceState
+        target
       )
     ],
     [
       'start',
       require('@alfred/interface-start').resolveSkill(
         Object.values(CORE_SKILLS),
-        interfaceState
+        target
       )
     ],
     ['test', CORE_SKILLS.jest]
@@ -397,7 +391,7 @@ export async function Skills(
 
   await runTransforms(project, skillMap);
 
-  validateSkillMap(skillMap, interfaceState);
+  validateSkillMap(skillMap, target);
 
   return skillMap;
 }
@@ -409,7 +403,7 @@ export async function Skills(
  */
 export default async function skillMapFromConfig(
   project: ProjectInterface,
-  interfaceState: InterfaceState,
+  traget: Target,
   config: ConfigInterface = project.config
 ): Promise<SkillMap> {
   // Generate the skill map
@@ -429,9 +423,5 @@ export default async function skillMapFromConfig(
     skillMapFromConfigSkills.set(skillNode.name, skillNode);
   });
 
-  return Skills(
-    project,
-    Array.from(skillMapFromConfigSkills.values()),
-    interfaceState
-  );
+  return Skills(project, Array.from(skillMapFromConfigSkills.values()), traget);
 }

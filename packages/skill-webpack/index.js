@@ -22,7 +22,7 @@ const interfaceConfig = {
     // @TODO: Add node to targets
     targets: ['browser'],
     // Project type
-    projectTypes: ['app']
+    projects: ['app']
   }
 };
 
@@ -142,12 +142,12 @@ module.exports = {
       const { config: nodeConfig } = skill.configs.get('webpack.node');
       const { config: browserConfig } = skill.configs.get('webpack.browser');
 
-      const { interfaceState } = data;
+      const { target } = data;
 
       let mergedConfig = mergeConfigs(
         baseConfig,
-        interfaceState.env === 'production' ? prodConfig : devConfig,
-        interfaceState.target === 'browser' ? browserConfig : nodeConfig
+        target.env === 'production' ? prodConfig : devConfig,
+        target.platform === 'browser' ? browserConfig : nodeConfig
       );
 
       mergedConfig = eval(
@@ -198,9 +198,7 @@ module.exports = {
             const url = `http://localhost:${port}`;
             console.log(
               `Starting ${
-                interfaceState.env === 'production'
-                  ? 'optimized'
-                  : 'unoptimized'
+                target.env === 'production' ? 'optimized' : 'unoptimized'
               } build on ${url}`
             );
           });
@@ -208,7 +206,7 @@ module.exports = {
         case 'build': {
           console.log(
             `Building ${
-              interfaceState.env === 'production' ? 'optimized' : 'unoptimized'
+              target.env === 'production' ? 'optimized' : 'unoptimized'
             } build`
           );
           return webpack(mergedConfig, (err, stats) => {

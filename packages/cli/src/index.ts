@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import { formatPkgJson } from '@alfred/core';
 import handlebars from 'handlebars';
-import { InterfaceState } from '@alfred/types';
+import { Entrypoint, Target } from '@alfred/types';
 
 const TEMPLATES_DIR = path.resolve(__dirname, '../templates');
 
@@ -14,14 +14,14 @@ export type ValidPkgNameResult = {
 };
 
 export type RawTemplateData = {
-  project?: InterfaceState;
+  entrypoint?: Entrypoint;
   'alfred-pkg'?: {
     semver: string;
   };
 };
 
 export type TemplateData = {
-  project: InterfaceState;
+  entrypoint: Entrypoint;
   'alfred-pkg': {
     semver: string;
   };
@@ -46,7 +46,7 @@ async function compileTemplate(
 export async function addEntrypoints(
   rawTemplateData: RawTemplateData,
   root: string,
-  entrypointInterfaceStates: Array<InterfaceState>
+  targets: Array<Target>
 ): Promise<void> {
   const [
     APP_TEMPLATE,
@@ -60,14 +60,14 @@ export async function addEntrypoints(
   );
 
   await Promise.all(
-    entrypointInterfaceStates.map(interfaceState => {
-      const { projectType, target } = interfaceState;
-      const isApp = projectType === 'app';
-      const isBrowser = target === 'browser';
+    targets.map(target => {
+      const { project, platform } = target;
+      const isApp = project === 'app';
+      const isBrowser = platform === 'browser';
 
       const templateData = {
         ...rawTemplateData,
-        project: { projectType, target, isApp, isBrowser }
+        project: { project, target, isApp, isBrowser }
       };
 
       const writeIndexHtml = (): Promise<void> => {
@@ -84,11 +84,11 @@ export async function addEntrypoints(
       return Promise.all(
         [
           {
-            file: `./src/${projectType}.${target}.js`,
+            file: `./src/${project}.${target}.js`,
             content: (isApp ? APP_TEMPLATE : LIB_TEMPLATE)(templateData)
           },
           {
-            file: `./tests/${projectType}.${target}.spec.js`,
+            file: `./tests/${project}.${target}.spec.js`,
             content: TEST_TEMPLATE(templateData)
           }
         ]
@@ -144,10 +144,10 @@ export async function addBoilerplate(
     JSON.parse(NPM_TEMPLATE(templateData))
   );
   await fs.promises.writeFile(pkgPath, formattedPkg);
-  const { projectType, target } = templateData.project;
+  const { project: project, platform: target } = templateData.entrypoint;
 
   await addEntrypoints(templateData, root, [
-    { projectType, target, env: 'production' }
+    { project: project, platform: target, env: 'production' }
   ]);
 }
 

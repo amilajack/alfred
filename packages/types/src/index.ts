@@ -31,7 +31,7 @@ export interface PkgWithAllDeps {
 
 export type Env = 'production' | 'development' | 'test';
 
-export type Target = 'node' | 'browser';
+export type Platform = 'node' | 'browser';
 
 export type ProjectEnum = 'app' | 'lib';
 
@@ -59,7 +59,7 @@ export interface ProjectInterface extends EventEmitter {
   // The path to the root package.json
   pkgPath: string;
   // All the interface states of the project
-  interfaceStates: InterfaceState[];
+  targets: Target[];
   // Initialize an alfred project
   init: () => Promise<ProjectInterface>;
   // Get the list of subcommands which correspond to which skills of a given alfred project
@@ -85,13 +85,17 @@ export interface ProjectInterface extends EventEmitter {
   validatePkgJson: () => ValidationResult;
 }
 
-export type InterfaceState = {
+export type Entrypoint = {
+  // All the supported targets a `build` skill should build
+  platform: Platform;
+  // Project type
+  project: ProjectEnum;
+  meta?: Record<string, any>;
+};
+
+export type Target = Entrypoint & {
   // Flag name and argument types
   env: Env;
-  // All the supported targets a `build` skill should build
-  target: Target;
-  // Project type
-  projectType: ProjectEnum;
 };
 
 export interface SkillInterfaceModule extends NodeJS.Module {
@@ -99,14 +103,14 @@ export interface SkillInterfaceModule extends NodeJS.Module {
   subcommand: string;
   runForAllTargets?: boolean;
   // @TODO Take config in misc object to allow for future additions to the API
-  // @TODO Swap order of interfaceState and skills
+  // @TODO Swap order of target and skills
   resolveSkill?: (
     skills: Array<SkillWithHelpers>,
-    interfaceState: InterfaceState
+    target: Target
   ) => SkillWithHelpers | false;
   handleFlags?: (
     flags: Array<string>,
-    misc: { interfaceState: InterfaceState; config: ConfigInterface }
+    misc: { target: Target; config: ConfigInterface }
   ) => Array<string>;
 }
 
@@ -205,16 +209,16 @@ export type SkillConfig = {
 export type HooksArgs = {
   project: ProjectInterface;
   config: ConfigInterface;
-  interfaceStates: InterfaceState[];
-  data: {
-    interfaceState?: InterfaceState;
+  targets: Target[];
+  skill: SkillNode;
+  skillConfig: ConfigValue;
+  skillMap: SkillMap;
+  event: {
+    target?: Target;
     skillsPkgNames?: Array<string>;
     flags?: Array<string>;
     subcommand?: string;
   };
-  skill: SkillNode;
-  skillConfig: ConfigValue;
-  skillMap: SkillMap;
 };
 
 export type HookFn = (args: HooksArgs) => void;
@@ -223,11 +227,11 @@ export type DiffDeps = { diffDevDeps: string[]; diffDeps: string[] };
 
 export type Supports = {
   // Flag name and argument types
-  envs: Array<'production' | 'development' | 'test'>;
+  envs: Array<Env>;
   // All the supported targets a `build` skill should build
-  targets: Array<'browser' | 'node' | 'electron' | 'react-native'>;
+  platforms: Array<Platform>;
   // Project type
-  projectTypes: Array<'lib' | 'app'>;
+  projects: Array<ProjectEnum>;
 };
 
 export type Transforms = {

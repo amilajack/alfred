@@ -9,7 +9,7 @@ const interfaceConfig = {
     // @TODO: Add node to targets
     targets: ['browser', 'node'],
     // Project type
-    projectTypes: ['app']
+    projects: ['app']
   }
 };
 
@@ -39,7 +39,7 @@ module.exports = {
   ],
   hooks: {
     async run({ project, data }) {
-      const { interfaceState } = data;
+      const { target } = data;
       const { root } = project;
       // eslint-disable-next-line global-require
       const Bundler = require('parcel');
@@ -47,23 +47,19 @@ module.exports = {
 
       const entryFiles = [];
       entryFiles.push(
-        path.join(
-          src,
-          `${interfaceState.projectType}.${interfaceState.target}.js`
-        )
+        path.join(src, `${target.project}.${target.platform}.js`)
       );
-      if (interfaceState.target === 'browser') {
+      if (target.target === 'browser') {
         entryFiles.push(path.join(src, 'index.html'));
       }
 
-      const { target } = interfaceState;
       const baseOptions = {
         outDir: path.join(root, 'targets', 'prod'),
         outFile: 'index.html',
         cacheDir: path.join(root, 'node_modules', '.cache'),
-        minify: interfaceState.env === 'production',
+        minify: target.env === 'production',
         autoInstall: false,
-        target
+        target: target.platform
       };
 
       switch (data.subcommand) {
@@ -75,7 +71,7 @@ module.exports = {
           const url = `http://localhost:${server.address().port}`;
           console.log(
             `Starting ${
-              interfaceState.env === 'production' ? 'optimized' : 'unoptimized'
+              target.env === 'production' ? 'optimized' : 'unoptimized'
             } build on ${url}`
           );
           // Don't open in browser when running E2E tests
@@ -90,7 +86,7 @@ module.exports = {
         case 'build': {
           console.log(
             `Building ${
-              interfaceState.env === 'production' ? 'optimized' : 'unoptimized'
+              target.env === 'production' ? 'optimized' : 'unoptimized'
             } build`
           );
           return new Bundler(entryFiles, {

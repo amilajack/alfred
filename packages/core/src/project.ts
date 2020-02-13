@@ -13,7 +13,7 @@ import mergeConfigs from '@alfred/merge-configs';
 import {
   PkgJson,
   ConfigInterface,
-  InterfaceState,
+  Entrypoint,
   ProjectInterface,
   ValidationResult,
   SkillsList,
@@ -25,6 +25,7 @@ import {
   PkgWithDeps,
   Env,
   ProjectEnum,
+  Platform,
   Target
 } from '@alfred/types';
 import Config from './config';
@@ -34,7 +35,7 @@ import run from './commands/run';
 import learn from './commands/learn';
 import skills from './commands/skills';
 import clean from './commands/clean';
-import { PKG_SORT_ORDER, ENTRYPOINTS } from './constants';
+import { PKG_SORT_ORDER, RAW_ENTRYPOINTS } from './constants';
 import { EventEmitter } from 'events';
 
 // @TODO Send the information to a crash reporting service (like sentry.io)
@@ -92,7 +93,7 @@ export default class Project extends EventEmitter implements ProjectInterface {
 
   root: string;
 
-  interfaceStates: InterfaceState[];
+  targets: Target[];
 
   constructor(projectRootOrSubDir: string = process.cwd()) {
     super();
@@ -102,27 +103,27 @@ export default class Project extends EventEmitter implements ProjectInterface {
     this.pkgPath = path.join(projectRoot, 'package.json');
     this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
     this.config = Config.initFromProjectRoot(projectRoot);
-    this.interfaceStates = this.getInterfaceStates();
+    this.targets = this.getTargets();
   }
 
-  private getInterfaceStates(): Array<InterfaceState> {
+  private getTargets(): Array<Target> {
     const envs: Array<string> = ['production', 'development', 'test'];
     // Default to development env if no config given
     const env: Env = envs.includes(process.env.NODE_ENV || '')
       ? (process.env.NODE_ENV as Env)
       : 'development';
 
-    return ENTRYPOINTS.filter(entryPoint =>
+    return RAW_ENTRYPOINTS.filter(entryPoint =>
       fs.existsSync(path.join(this.root, 'src', entryPoint))
     ).map(validEntryPoints => {
-      const [projectType, target] = validEntryPoints.split('.') as [
+      const [project, platform] = validEntryPoints.split('.') as [
         ProjectEnum,
-        Target
+        Platform
       ];
       return {
         env,
-        target,
-        projectType
+        platform,
+        project
       };
     });
   }
@@ -133,13 +134,13 @@ export default class Project extends EventEmitter implements ProjectInterface {
     const skillMap = await this.getSkillMap();
     skillMap.forEach(skill => {
       Object.entries(skill.hooks || {}).forEach(([hookName, hookFn]) => {
-        this.on(hookName, (data = {}): void => {
+        this.on(hookName, (event = {}): void => {
           if (!hookFn) return;
           return hookFn({
-            data,
+            event,
             project: this,
             config: this.config,
-            interfaceStates: this.interfaceStates,
+            targets: this.targets,
             skill,
             skillConfig: skill.userConfig,
             skillMap: skillMap
@@ -262,29 +263,23 @@ ${JSON.stringify(result.errors)}`
       );
     }
 
-    const hasEntrypoint = ENTRYPOINTS.some(entryPoint =>
+    const hasEntrypoint = RAW_ENTRYPOINTS.some(entryPoint =>
       fs.existsSync(path.join(srcPath, entryPoint))
     );
 
     if (!hasEntrypoint) {
       throw new Error(
-        `You might be in the wrong directory or this is not an Alfred project. The project must have at least one entrypoint. Here are some examples of entrypoints:\n\n${ENTRYPOINTS.map(
+        `You might be in the wrong directory or this is not an Alfred project. The project must have at least one entrypoint. Here are some examples of entrypoints:\n\n${RAW_ENTRYPOINTS.map(
           e => `"./src/${e}"`
         ).join('\n')}`
       );
     }
 
     // Run validation that is specific to each interface state
-    this.interfaceStates
-      .map(interfaceState =>
-        [
-          interfaceState.projectType,
-          interfaceState.target,
-          interfaceState.env
-        ].join('.')
-      )
-      .forEach(interfaceStateString => {
-        switch (interfaceStateString) {
+    this.targets
+      .map(target => [target.project, target.platform, target.env].join('.'))
+      .forEach(targetString => {
+        switch (targetString) {
           case 'app.browser.production':
           case 'app.browser.development': {
             const indexHtmlPath = path.join(srcPath, 'index.html');
@@ -392,7 +387,7 @@ ${JSON.stringify(result.errors)}`
    */
   async getSkillMap(): Promise<SkillMap> {
     const skillMaps = await Promise.all(
-      this.interfaceStates.map(state => skillMapFromConfig(this, state))
+      this.targets.map(state => skillMapFromConfig(this, state))
     );
     // Merge the maps
     return skillMaps.reduce(

@@ -2,11 +2,12 @@
 import {
   ProjectInterface,
   SkillMap,
-  InterfaceState,
+  Entrypoint,
   ConfigValue,
   SkillInterfaceModule,
   SkillNode,
-  HookFn
+  HookFn,
+  Target
 } from '@alfred/types';
 
 export function getSkillInterfaceForSubcommand(
@@ -44,7 +45,7 @@ export type ExecutableSkillMethods = {
 export function getProjectSubcommands(
   project: ProjectInterface,
   skillMap: SkillMap,
-  interfaceState: InterfaceState
+  target: Target
 ): ExecutableSkillMethods {
   const { config } = project;
   const configWithDefaults = config.getConfigWithDefaults();
@@ -70,14 +71,14 @@ export function getProjectSubcommands(
         return {
           fn: (flags: Array<string> = []): void =>
             (skillNode.hooks.run as HookFn)({
-              data: {
+              event: {
                 subcommand,
                 flags,
-                interfaceState
+                target
               },
               project,
               config,
-              interfaceStates: project.interfaceStates,
+              targets: project.targets,
               skill: skillNode,
               skillMap,
               skillConfig

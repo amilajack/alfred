@@ -11,7 +11,7 @@ const interfaceConfig = {
     // All the supported targets a `build` skill should build
     targets: ['browser', 'node'],
     // Project type
-    projectTypes: ['lib']
+    projects: ['lib']
   }
 };
 
@@ -66,17 +66,17 @@ module.exports = {
   ],
   hooks: {
     async run({ skill, data }) {
-      const { interfaceState, subcommand } = data;
+      const { target, subcommand } = data;
       const [baseConfig, prodConfig, devConfig] = [
         'rollup.base',
         'rollup.prod',
         'rollup.dev'
       ].map(configFile => skill.configs.get(configFile).config);
       const inputAndOutputConfigs = {
-        input: `./src/lib.${interfaceState.target}.js`,
+        input: `./src/lib.${target.platform}.js`,
         output: {
-          file: `./targets/${mapEnvToShortName(interfaceState.env)}/lib.${
-            interfaceState.target
+          file: `./targets/${mapEnvToShortName(target.env)}/lib.${
+            target.platform
           }.js`
         }
       };
@@ -97,11 +97,11 @@ module.exports = {
 
       switch (subcommand) {
         case 'start': {
-          const watchConf = interfaceState.env === 'production' ? prod : dev;
+          const watchConf = target.env === 'production' ? prod : dev;
           // @TODO: Mention which port and host the server is running (see webpack skill)
           console.log(
             `Starting ${
-              interfaceState.env === 'production' ? 'optimized' : 'unoptimized'
+              target.env === 'production' ? 'optimized' : 'unoptimized'
             } build`
           );
           return rollup.watch({
@@ -112,15 +112,15 @@ module.exports = {
         case 'build': {
           console.log(
             `Building ${
-              interfaceState.env === 'production' ? 'optimized' : 'unoptimized'
+              target.env === 'production' ? 'optimized' : 'unoptimized'
             } build`
           );
           const bundle = await rollup.rollup(
-            interfaceState.env === 'production' ? prod : dev
+            target.env === 'production' ? prod : dev
           );
 
           return bundle.write(
-            (interfaceState.env === 'production' ? prod : dev).output
+            (target.env === 'production' ? prod : dev).output
           );
         }
         default:

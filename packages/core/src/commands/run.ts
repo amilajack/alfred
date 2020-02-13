@@ -11,15 +11,13 @@ export default async function run(
   skillFlags: Array<string> = []
 ): Promise<void> {
   const { config } = project;
-  const { interfaceStates } = project;
+  const { targets } = project;
 
   // Validate that “start” subcommand should only work for apps
   // @HACK @REFACTOR This validation logic should be handled by the @alfred/interface-start interface
   if (subcommand === 'start') {
-    const hasAppInterfaceState = interfaceStates.some(
-      interfaceState => interfaceState.projectType === 'app'
-    );
-    if (!hasAppInterfaceState) {
+    const hasAppTarget = targets.some(target => target.project === 'app');
+    if (!hasAppTarget) {
       throw new Error(
         'The “start” subcommand can only be used with app project types'
       );
@@ -35,9 +33,7 @@ export default async function run(
 
   const skillMap = await project.getSkillMap();
 
-  const tasks = project.interfaceStates.map(interfaceState => async (): Promise<
-    void
-  > => {
+  const tasks = project.targets.map(target => async (): Promise<void> => {
     const skillInterface = getSkillInterfaceForSubcommand(skillMap, subcommand);
 
     if (!skillInterface.runForAllTargets) {
@@ -49,7 +45,7 @@ export default async function run(
 
     const filteredSkillFlags = skillInterface.handleFlags
       ? skillInterface.handleFlags(skillFlags, {
-          interfaceState,
+          target,
           config
         })
       : skillFlags;
@@ -58,7 +54,7 @@ export default async function run(
       await project.writeConfigsFromSkillMap(skillMap);
     }
 
-    const commands = getProjectSubcommands(project, skillMap, interfaceState);
+    const commands = getProjectSubcommands(project, skillMap, target);
     if (!(subcommand in commands)) {
       throw new Error(
         `Subcommand "${subcommand}" is not supported by the skills you have installed`
