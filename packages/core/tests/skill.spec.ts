@@ -11,7 +11,7 @@ import {
   ProjectInterface
 } from '@alfred/types';
 import {
-  getExecutableWrittenConfigsMethods,
+  getProjectSubcommands,
   getSkillInterfaceForSubcommand
 } from '../src/commands';
 import skillMapFromConfig, {
@@ -20,8 +20,9 @@ import skillMapFromConfig, {
   addSkillHelpers,
   runTransforms
 } from '../src/skill';
-import { normalizeInterfacesOfSkill, INTERFACE_STATES } from '../src/interface';
+import { normalizeInterfacesOfSkill } from '../src/interface';
 import alfred from '../src';
+import { INTERFACE_STATES } from '../src/constants';
 
 const rawParcelSkill = require('@alfred/skill-parcel');
 
@@ -54,7 +55,7 @@ function removePathsPropertiesFromObject(
 function getConfigs(skillMap: SkillMap): Array<ConfigValue> {
   const configsFromMap = Array.from(skillMap.values());
   return configsFromMap
-    .flatMap(skill => Array.from(skill.configs.values()))
+    .flatMap(skill => Array.from(skill?.configs?.values() || []))
     .map(configFile => removePathsPropertiesFromObject(configFile.config));
 }
 
@@ -275,11 +276,7 @@ describe('Skills', () => {
           interfaceState
         );
         expect(
-          getExecutableWrittenConfigsMethods(
-            defaultProject,
-            skill,
-            interfaceState
-          )
+          getProjectSubcommands(defaultProject, skill, interfaceState)
         ).toMatchSnapshot();
       }
     });

@@ -65,7 +65,8 @@ module.exports = {
     }
   ],
   hooks: {
-    async run({ skill, interfaceState, data }) {
+    async run({ skill, data }) {
+      const { interfaceState, subcommand } = data;
       const [baseConfig, prodConfig, devConfig] = [
         'rollup.base',
         'rollup.prod',
@@ -94,7 +95,7 @@ module.exports = {
 
       const rollup = require('rollup');
 
-      switch (data.subcommand) {
+      switch (subcommand) {
         case 'start': {
           const watchConf = interfaceState.env === 'production' ? prod : dev;
           // @TODO: Mention which port and host the server is running (see webpack skill)
@@ -123,7 +124,7 @@ module.exports = {
           );
         }
         default:
-          throw new Error(`Invalid subcommand: "${data.subcommand}"`);
+          throw new Error(`Invalid subcommand: "${subcommand}"`);
       }
     }
   },

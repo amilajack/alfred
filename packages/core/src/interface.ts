@@ -1,70 +1,5 @@
 /* eslint import/no-dynamic-require: off */
-import path from 'path';
-import fs from 'fs';
-import {
-  ProjectInterface,
-  InterfaceState,
-  UnresolvedInterfaces,
-  ResolvedInterfaces,
-  Env,
-  ProjectEnum,
-  Target
-} from '@alfred/types';
-import { ENTRYPOINTS } from './constants';
-
-// All the possible interface states
-// @TODO Allow .ts, .tsx, .jsx entrypoints
-// @TODO Implement the follow entrypoints:
-// 'lib.electron.main.js',
-// 'lib.electron.renderer.js',
-// 'app.electron.main.js',
-// 'app.electron.renderer.js',
-// 'lib.react-native.js',
-// 'app.react-native.js'
-export const INTERFACE_STATES: Array<InterfaceState> = [
-  {
-    projectType: 'app',
-    target: 'browser',
-    env: 'production'
-  },
-  {
-    projectType: 'app',
-    target: 'browser',
-    env: 'development'
-  },
-  // @TODO
-  // {
-  //   projectType: 'app',
-  //   target: 'node',
-  //   env: 'production'
-  // },
-  // @TODO
-  // {
-  //   projectType: 'app',
-  //   target: 'node',
-  //   env: 'development'
-  // },
-  {
-    projectType: 'lib',
-    target: 'node',
-    env: 'production'
-  },
-  {
-    projectType: 'lib',
-    target: 'node',
-    env: 'development'
-  },
-  {
-    projectType: 'lib',
-    target: 'browser',
-    env: 'production'
-  },
-  {
-    projectType: 'lib',
-    target: 'browser',
-    env: 'development'
-  }
-];
+import { UnresolvedInterfaces, ResolvedInterfaces } from '@alfred/types';
 
 export function normalizeInterfacesOfSkill(
   interfaces: UnresolvedInterfaces | ResolvedInterfaces
@@ -114,28 +49,4 @@ export function normalizeInterfacesOfSkill(
       interfaces
     )}`
   );
-}
-
-export function getInterfaceStatesFromProject(
-  project: ProjectInterface
-): Array<InterfaceState> {
-  const envs: Array<string> = ['production', 'development', 'test'];
-  // Default to development env if no config given
-  const env: Env = envs.includes(process.env.NODE_ENV || '')
-    ? (process.env.NODE_ENV as Env)
-    : 'development';
-
-  return ENTRYPOINTS.filter(entryPoint =>
-    fs.existsSync(path.join(project.root, 'src', entryPoint))
-  ).map(validEntryPoints => {
-    const [projectType, target] = validEntryPoints.split('.') as [
-      ProjectEnum,
-      Target
-    ];
-    return {
-      env,
-      target,
-      projectType
-    };
-  });
 }
