@@ -4,33 +4,34 @@ import { mapEnvToShortName } from '@alfred/helpers';
 import {
   HookArgs,
   RawSkill,
-  SkillWithHelpers,
+  Skill,
   SkillConfig,
   RunEvent,
   Env,
   Platform,
-  ProjectEnum
+  ProjectEnum,
+  ConfigValue
 } from '@alfred/types';
 import mergeConfigs from '@alfred/merge-configs';
 
-const interfaceConfig = {
-  supports: {
-    // Flag name and argument types
-    envs: ['production', 'development', 'test'] as Env[],
-    // All the supported targets a `build` skill should build
-    platforms: ['browser', 'node'] as Platform[],
-    // Project type
-    projects: ['lib'] as ProjectEnum[]
-  }
+const supports = {
+  // Flag name and argument types
+  envs: ['production', 'development', 'test'] as Env[],
+  // All the supported targets a `build` skill should build
+  platforms: ['browser', 'node'] as Platform[],
+  // Project type
+  projects: ['lib'] as ProjectEnum[]
 };
 
 const skill: RawSkill = {
   name: 'rollup',
   description: 'Build, optimize, and bundle assets in your app',
+  supports,
   interfaces: [
-    ['@alfred/interface-build', interfaceConfig],
-    ['@alfred/interface-start', interfaceConfig]
+    ['@alfred/interface-build', { supports }],
+    ['@alfred/interface-start', { supports }]
   ],
+  default: true,
   configs: [
     {
       alias: 'rollup.base',
@@ -78,7 +79,9 @@ const skill: RawSkill = {
         'rollup.base',
         'rollup.prod',
         'rollup.dev'
-      ].map(configFile => skill.configs.get(configFile)?.config);
+      ].map(
+        configFile => skill.configs.get(configFile)?.config
+      ) as ConfigValue[];
       const inputAndOutputConfigs = {
         input: `./src/lib.${target.platform}.js`,
         output: {
@@ -136,7 +139,7 @@ const skill: RawSkill = {
     }
   },
   transforms: {
-    babel(skill: SkillWithHelpers, { toSkill }): SkillWithHelpers {
+    babel(skill: Skill, { toSkill }): Skill {
       // eslint-disable-next-line import/no-extraneous-dependencies
       const babel = require('rollup-plugin-babel');
       const { config } = toSkill.configs.get('babel') as SkillConfig;
@@ -144,7 +147,7 @@ const skill: RawSkill = {
         .extendConfig('rollup.base', {
           plugins: [
             babel({
-              ...(config as Record<string, any>),
+              ...config,
               exclude: 'node_modules/**'
             })
           ]

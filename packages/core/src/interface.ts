@@ -2,7 +2,7 @@
 import { UnresolvedInterfaces, ResolvedInterfaces } from '@alfred/types';
 
 export function normalizeInterfacesOfSkill(
-  interfaces: UnresolvedInterfaces | ResolvedInterfaces
+  interfaces: UnresolvedInterfaces
 ): ResolvedInterfaces {
   if (!interfaces) return [];
   // `interfaces` is an array
@@ -16,11 +16,12 @@ export function normalizeInterfacesOfSkill(
     ) {
       return interfaces as ResolvedInterfaces;
     }
-    return (interfaces as UnresolvedInterfaces).map(skillInterface => {
+    return interfaces.map(skillInterface => {
       if (typeof skillInterface === 'string') {
         return {
           name: skillInterface,
-          module: require(skillInterface)
+          module: require(skillInterface).default || require(skillInterface),
+          config: {}
         };
       }
       if (Array.isArray(skillInterface)) {
@@ -32,7 +33,7 @@ export function normalizeInterfacesOfSkill(
         const [name, config] = skillInterface;
         return {
           name,
-          module: require(name),
+          module: require(name).default || require(name),
           config
         };
       }

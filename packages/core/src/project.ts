@@ -13,12 +13,10 @@ import mergeConfigs from '@alfred/merge-configs';
 import {
   PkgJson,
   ConfigInterface,
-  Entrypoint,
   ProjectInterface,
   ValidationResult,
   SkillsList,
   SkillMap,
-  SkillNode,
   NpmClients,
   DependencyType,
   Dependencies,
@@ -26,7 +24,8 @@ import {
   Env,
   ProjectEnum,
   Platform,
-  Target
+  Target,
+  Skill
 } from '@alfred/types';
 import Config from './config';
 import { PkgValidation } from './validation';
@@ -37,6 +36,7 @@ import skills from './commands/skills';
 import clean from './commands/clean';
 import { PKG_SORT_ORDER, RAW_ENTRYPOINTS } from './constants';
 import { EventEmitter } from 'events';
+// import 'source-map-support/register';
 
 // @TODO Send the information to a crash reporting service (like sentry.io)
 // @TODO Install sourcemaps
@@ -392,7 +392,7 @@ ${JSON.stringify(result.errors)}`
     // Merge the maps
     return skillMaps.reduce(
       (prevSkillMap: SkillMap, currSkillMap: SkillMap) =>
-        new Map<string, SkillNode>([...prevSkillMap, ...currSkillMap]),
+        new Map<string, Skill>([...prevSkillMap, ...currSkillMap]),
       new Map()
     );
   }
@@ -406,7 +406,7 @@ ${JSON.stringify(result.errors)}`
       fs.mkdirSync(configsBasePath);
     }
 
-    const skills: SkillNode[] = Array.from(skillMap.values());
+    const skills: Skill[] = Array.from(skillMap.values());
 
     // Write all files and dirs
     // @TODO Remove this to allow users to edit their own boilerplate
@@ -452,7 +452,7 @@ ${JSON.stringify(result.errors)}`
   }
 
   async findDepsToInstall(
-    additionalSkills: Array<SkillNode> = []
+    additionalSkills: Array<Skill> = []
   ): Promise<PkgWithDeps> {
     const skillMap = await this.getSkillMap();
 

@@ -43,12 +43,11 @@ export default async function run(
       commandWasExceuted = true;
     }
 
-    const filteredSkillFlags = skillInterface.handleFlags
-      ? skillInterface.handleFlags(skillFlags, {
-          target,
-          config
-        })
-      : skillFlags;
+    const filteredSkillFlags =
+      skillInterface.handleFlags?.(skillFlags, {
+        target,
+        config
+      }) || skillFlags;
 
     if (config.showConfigs) {
       await project.writeConfigsFromSkillMap(skillMap);

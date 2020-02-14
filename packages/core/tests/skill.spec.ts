@@ -24,8 +24,6 @@ import { normalizeInterfacesOfSkill } from '../src/interface';
 import alfred from '../src';
 import { TARGETS } from '../src/constants';
 
-const rawParcelSkill = require('@alfred/skill-parcel');
-
 function removePathsPropertiesFromObject(
   obj:
     | Array<any>
@@ -61,13 +59,13 @@ function getConfigs(skillMap: SkillMap): Array<ConfigValue> {
 
 function getDependencies(skillMap: SkillMap): Dependencies {
   return Array.from(skillMap.values())
-    .map(skillNode => skillNode.dependencies || {})
+    .map(skill => skill.dependencies || {})
     .reduce((p, c) => ({ ...p, ...c }), {});
 }
 
 function getDevDependencies(skillMap: SkillMap): Dependencies {
   return Array.from(skillMap.values())
-    .map(skillNode => skillNode.devDependencies || {})
+    .map(skill => skill.devDependencies || {})
     .reduce((p, c) => ({ ...p, ...c }), {});
 }
 
@@ -93,7 +91,8 @@ describe('Skills', () => {
                 filename: '.eslintrc.json',
                 config: {
                   plugins: []
-                }
+                },
+                write: false
               }
             ],
             transforms: {
@@ -139,7 +138,8 @@ describe('Skills', () => {
                 filename: '.eslintrc.json',
                 config: {
                   plugins: []
-                }
+                },
+                write: false
               }
             ],
             transforms: {
@@ -243,8 +243,8 @@ describe('Skills', () => {
         )}`, async () => {
           const skillMap = await Skills(
             defaultProject,
-            Object.values(CORE_SKILLS),
-            target
+            target,
+            Object.values(CORE_SKILLS)
           );
           expect(
             getSkillInterfaceForSubcommand(skillMap, 'build')
@@ -254,11 +254,9 @@ describe('Skills', () => {
 
       it('should error if subcommand does not exist', async () => {
         for (const target of TARGETS) {
-          const skillMap = await Skills(
-            defaultProject,
-            [CORE_SKILLS.babel],
-            target
-          );
+          const skillMap = await Skills(defaultProject, target, [
+            CORE_SKILLS.babel
+          ]);
           expect(() =>
             getSkillInterfaceForSubcommand(skillMap, 'foo')
           ).toThrow();
@@ -270,11 +268,9 @@ describe('Skills', () => {
   describe('executors', () => {
     it('should generate functions for scripts', async () => {
       for (const target of TARGETS) {
-        const skill = await Skills(
-          defaultProject,
-          [CORE_SKILLS.parcel],
-          target
-        );
+        const skill = await Skills(defaultProject, target, [
+          CORE_SKILLS.parcel
+        ]);
         expect(
           getProjectSubcommands(defaultProject, skill, target)
         ).toMatchSnapshot();
@@ -348,7 +344,7 @@ describe('Skills', () => {
           project: 'app',
           platform: 'browser'
         } as Target;
-        const skillMap = await Skills(defaultProject, [rawParcelSkill], target);
+        const skillMap = await Skills(defaultProject, target);
         const skillNames = Array.from(skillMap.keys());
         expect(skillNames).toMatchSnapshot();
         expect(skillNames).toContain('parcel');
@@ -361,7 +357,7 @@ describe('Skills', () => {
           project: 'lib',
           platform: 'browser'
         } as Target;
-        const skillMap = await Skills(defaultProject, [rawParcelSkill], target);
+        const skillMap = await Skills(defaultProject, target);
         const skillNames = Array.from(skillMap.keys());
         expect(skillNames).toMatchSnapshot();
         expect(skillNames).toContain('rollup');
@@ -380,10 +376,8 @@ describe('Skills', () => {
           skills: [['@alfred/skill-non-existent-skill', {}]]
         }
       } as ProjectInterface;
-      await expect(
-        skillMapFromConfig(project, state, project.config)
-      ).rejects.toThrow(
-        "Cannot find module '@alfred/skill-non-existent-skill'"
+      await expect(skillMapFromConfig(project, state)).rejects.toThrow(
+        "Cannot find skill module '@alfred/skill-non-existent-skill'"
       );
       spy.mockRestore();
     });
@@ -400,11 +394,7 @@ describe('Skills', () => {
           skills: [['@alfred/skill-react', {}]]
         }
       };
-      const skillMap = await skillMapFromConfig(
-        project,
-        nodeAppTarget,
-        project.config
-      );
+      const skillMap = await skillMapFromConfig(project, nodeAppTarget);
       expect(skillMap.has('react')).toBe(false);
     });
 
@@ -419,7 +409,7 @@ describe('Skills', () => {
       testProject.targets = [
         {
           project: 'app',
-          platform: 'node',
+          platform: 'browser',
           env: 'production'
         },
         {
@@ -438,7 +428,7 @@ describe('Skills', () => {
         project: 'app',
         platform: 'browser'
       } as Target;
-      const skillMap = await Skills(defaultProject, [rawParcelSkill], target);
+      const skillMap = await Skills(defaultProject, target);
       const skillNames = Array.from(skillMap.keys());
       expect(skillNames).toMatchSnapshot();
       expect(skillNames).toContain('parcel');
@@ -446,17 +436,17 @@ describe('Skills', () => {
       expect(skillNames).not.toContain('webpack');
     });
 
-    it('should not use skills that do not support current interface state', async () => {
+    it('should remove skills that do not support current interface state', async () => {
       const target = {
         env: 'production',
         project: 'lib',
         platform: 'browser'
       } as Target;
-      const skillMap = await Skills(defaultProject, [rawParcelSkill], target);
+      const skillMap = await Skills(defaultProject, target);
       const skillNames = Array.from(skillMap.keys());
       expect(skillNames).toMatchSnapshot();
-      expect(skillNames).not.toContain('parcel');
       expect(skillNames).toContain('rollup');
+      expect(skillNames).not.toContain('parcel');
       expect(skillNames).not.toContain('webpack');
     });
   });
@@ -470,10 +460,10 @@ describe('Skills', () => {
           ','
         )} interface state ${JSON.stringify(target)}`, async () => {
           // Get the skills for each combination
-          const skillObjects = skillCombination.map(
+          const skillsToAdd = skillCombination.map(
             skillName => CORE_SKILLS[skillName]
           );
-          const skillMap = await Skills(defaultProject, skillObjects, target);
+          const skillMap = await Skills(defaultProject, target, skillsToAdd);
           expect(getConfigs(skillMap)).toMatchSnapshot();
           expect(getDependencies(skillMap)).toMatchSnapshot();
           expect(getDevDependencies(skillMap)).toMatchSnapshot();
@@ -489,10 +479,10 @@ describe('Skills', () => {
       )}`, async () => {
         const skillMap = await Skills(
           defaultProject,
-          Object.values(CORE_SKILLS),
-          target
+          target,
+          Object.values(CORE_SKILLS)
         );
-        const { devDependencies } = skillMap.get('parcel').addDevDeps({
+        const { devDependencies } = skillMap.get('prettier').addDevDeps({
           foobar: '0.0.0'
         });
         expect(devDependencies).toMatchSnapshot();

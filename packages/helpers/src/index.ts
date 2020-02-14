@@ -12,7 +12,9 @@ import {
   DependencyTypeFull,
   Dependencies,
   Env,
-  EnvShortName
+  EnvShortName,
+  Skill,
+  Target
 } from '@alfred/types';
 
 export class EnhancedMap<K, V> extends Map<K, V> {
@@ -103,10 +105,12 @@ export function requireConfig(
   configName: string
 ): AlfredConfigWithUnresolvedInterfaces {
   try {
-    return require(`alfred-config-${configName}`);
+    const requiredConfig = require(`alfred-config-${configName}`);
+    return requiredConfig.default || requiredConfig;
   } catch (e) {
     try {
-      return require(configName);
+      const requiredConfig = require(configName);
+      return requiredConfig.default || requiredConfig;
     } catch (_e) {
       throw new Error(
         `Could not resolve "${configName}" module or "eslint-config-${configName}" module`
@@ -202,4 +206,55 @@ export function serialPromises(fns: Array<() => Promise<any>>): Promise<any> {
       promise.then(result => fn().then(Array.prototype.concat.bind(result))),
     Promise.resolve([])
   );
+}
+
+export function interfaceResolvesSkillDefault(
+  subcommand: string,
+  interfacePkgName: string
+): (skills: Skill[], target: Target) => Skill {
+  return (skills: Skill[], target: Target): Skill => {
+    const resolvedSkills = skills
+      .filter(skill =>
+        skill.interfaces.some(
+          skillInterface => skillInterface.module.subcommand === subcommand
+        )
+      )
+      .filter(skill => {
+        const skillInterface = skill.interfaces.find(
+          skillInterface => skillInterface.module.subcommand === subcommand
+        );
+        if (!skillInterface) {
+          throw new Error(
+            `No interface could be found with "${subcommand}" subcommand`
+          );
+        }
+        const { supports } = skillInterface.config;
+        if (!supports) {
+          return true;
+        }
+        return (
+          supports.envs.includes(target.env) &&
+          supports.platforms.includes(target.platform) &&
+          supports.projects.includes(target.project)
+        );
+      });
+
+    if (!resolvedSkills.length) {
+      throw new Error('No skills could be resolved');
+    }
+
+    if (resolvedSkills.length === 1) {
+      return resolvedSkills[0];
+    }
+
+    const defaultSkill = resolvedSkills.find(skill => skill.default);
+
+    if (!defaultSkill) {
+      throw new Error(
+        `Cannot find a default skill for interface ${interfacePkgName}`
+      );
+    }
+
+    return defaultSkill;
+  };
 }

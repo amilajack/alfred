@@ -1,9 +1,5 @@
-import { AlfredConfigWithUnresolvedInterfaces } from '@alfred/types';
-
 declare function mergeConfigs(
-  ...objs: Array<
-    Record<string, any> | AlfredConfigWithUnresolvedInterfaces | {}
-  >
-): Record<string, any> | AlfredConfigWithUnresolvedInterfaces;
+  ...objs: Array<Record<string, any> | {}>
+): Record<string, any>;
 
 export = mergeConfigs;

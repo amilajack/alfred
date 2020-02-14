@@ -1,4 +1,4 @@
-/* eslint import/no-dynamic-require: off, no-console: off, global-require: off */
+/* eslint import/no-dynamic-require: off, no-console: off */
 import fs from 'fs';
 import path from 'path';
 import assert from 'assert';
@@ -7,13 +7,13 @@ import Table from 'cli-table3';
 import chalk from 'chalk';
 import powerset from '@amilajack/powerset';
 import childProcess from 'child_process';
-import { TARGETS } from '@alfred/core/lib/constants';
+import { TARGETS } from '@alfred/core/src/constants';
 import { formatPkgJson } from '@alfred/core';
-import { entrypointsToTargets } from '@alfred/core/lib/skill';
+import { entrypointsToTargets } from '@alfred/core/src/skill';
 import mergeConfigs from '@alfred/merge-configs';
-import Config from '@alfred/core/lib/config';
-import { Env, ProjectEnum, Target } from '@alfred/types';
-import { serialPromises } from '@alfred/helpers/lib';
+import Config from '@alfred/core/src/config';
+import { Env, ProjectEnum, Platform } from '@alfred/types';
+import { serialPromises } from '@alfred/helpers';
 import { addEntrypoints } from '../../lib';
 
 process.on('unhandledRejection', err => {
@@ -91,7 +91,7 @@ async function generateTestsForSkillCombination(
       license: 'MIT',
       npmClient: 'NPM',
       project: 'lib',
-      target: 'browser'
+      platform: 'browser'
     })
   };
   const binPath = require.resolve('../../lib/commands/alfred');
@@ -169,7 +169,7 @@ async function generateTestsForSkillCombination(
       await Promise.all(
         entrypointsCombinations.map(async entrypointCombination => {
           const templateData = {
-            project: {
+            entrypoint: {
               name: {
                 npm: {
                   full: 'foo'
@@ -178,7 +178,7 @@ async function generateTestsForSkillCombination(
               projectDir: './src/',
               env: 'development' as Env,
               project: 'lib' as ProjectEnum,
-              target: 'browser' as Target
+              platform: 'browser' as Platform
             }
           };
 

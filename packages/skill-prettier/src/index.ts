@@ -6,6 +6,7 @@ const skill: RawSkill = {
   name: 'prettier',
   description: 'Format the source files in your project',
   interfaces: ['@alfred/interface-format'],
+  default: true,
   configs: [
     {
       alias: 'prettier',

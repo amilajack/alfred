@@ -1,4 +1,3 @@
-/* eslint global-require: off */
 import webpack from 'webpack';
 import path from 'path';
 import {
@@ -9,28 +8,39 @@ import {
 import mergeConfigs from '@alfred/merge-configs';
 import {
   HookArgs,
-  SkillWithHelpers,
+  Skill,
   TransformArgs,
   RunEvent,
   RawSkill,
-  SkillConfig
+  SkillConfig,
+  Env,
+  Platform,
+  ProjectEnum,
+  ConfigValue
 } from '@alfred/types';
 import getPort from 'get-port';
+
+// @HACK Should use the correct declaration for a webpack config here
+interface Configuration {
+  entry: string | string[];
+  output: {
+    path: string;
+  };
+  devServer: Record<string, string>;
+}
 
 function replaceProjectRoot(pathConfig: string, projectRoot: string): string {
   return pathConfig.replace('<projectRoot>', projectRoot);
 }
 
-const interfaceConfig = {
-  supports: {
-    // Flag name and argument types
-    envs: ['production', 'development', 'test'],
-    // All the supported targets a `build` skill should build
-    // @TODO: Add node to targets
-    targets: ['browser'],
-    // Project type
-    projects: ['app']
-  }
+const supports = {
+  // Flag name and argument types
+  envs: ['production', 'development', 'test'] as Env[],
+  // All the supported targets a `build` skill should build
+  // @TODO: Add node to targets
+  platforms: ['browser'] as Platform[],
+  // Project type
+  projects: ['app'] as ProjectEnum[]
 };
 
 const shouldOpenInBrowser =
@@ -39,9 +49,10 @@ const shouldOpenInBrowser =
 const skill: RawSkill = {
   name: 'webpack',
   description: 'Build, optimize, and bundle assets in your app',
+  supports,
   interfaces: [
-    ['@alfred/interface-build', interfaceConfig],
-    ['@alfred/interface-start', interfaceConfig]
+    ['@alfred/interface-build', { supports }],
+    ['@alfred/interface-start', { supports }]
   ],
   configs: [
     {
@@ -165,7 +176,7 @@ const skill: RawSkill = {
         baseConfig,
         target.env === 'production' ? prodConfig : devConfig,
         target.platform === 'browser' ? browserConfig : nodeConfig
-      );
+      ) as Configuration;
 
       mergedConfig = eval(
         `(${configToEvalString(configSerialize(mergedConfig))})`
@@ -226,12 +237,9 @@ const skill: RawSkill = {
               target.env === 'production' ? 'optimized' : 'unoptimized'
             } build`
           );
-          return webpack(mergedConfig, (err, stats) => {
+          webpack(mergedConfig, (err, stats) => {
             if (err) {
               console.error(err.stack || err);
-              if (err.details) {
-                console.error(err.details);
-              }
               return;
             }
             const info = stats.toJson();
@@ -241,7 +249,9 @@ const skill: RawSkill = {
             if (stats.hasWarnings()) {
               console.warn(info.warnings.toString());
             }
+            return;
           });
+          return;
         }
         default:
           throw new Error(`Invalid subcommand: "${subcommand}"`);
@@ -249,12 +259,8 @@ const skill: RawSkill = {
     }
   },
   transforms: {
-    babel(
-      skill: SkillWithHelpers,
-      { toSkill }: TransformArgs
-    ): SkillWithHelpers {
-      const babelConfig =
-        (toSkill.configs.get('babel')?.config as Record<string, any>) || {};
+    babel(skill: Skill, { toSkill }: TransformArgs): Skill {
+      const babelConfig = toSkill.configs.get('babel')?.config as ConfigValue;
       return skill
         .extendConfig('webpack.base', {
           module: {
@@ -275,7 +281,7 @@ const skill: RawSkill = {
         })
         .addDepsFromPkg('babel-loader');
     },
-    lodash(skill: SkillWithHelpers): SkillWithHelpers {
+    lodash(skill: Skill): Skill {
       return skill
         .extendConfig('webpack.prod', {
           plugins: [
@@ -287,7 +293,7 @@ const skill: RawSkill = {
         })
         .addDepsFromPkg('lodash-webpack-plugin');
     },
-    react(skill: SkillWithHelpers): SkillWithHelpers {
+    react(skill: Skill): Skill {
       // eslint-disable-next-line global-require
       return skill.extendConfig('webpack.base', {
         resolve: {

@@ -1,4 +1,4 @@
-import { SkillWithHelpers } from '@alfred/types';
+import { Skill } from '@alfred/types';
 
 export default {
   name: 'babel',
@@ -14,7 +14,7 @@ export default {
   ],
   hooks: {},
   transforms: {
-    lodash(skill: SkillWithHelpers): SkillWithHelpers {
+    lodash(skill: Skill): Skill {
       return skill.addDepsFromPkg('babel-plugin-lodash').extendConfig('babel', {
         env: {
           production: {
@@ -23,7 +23,7 @@ export default {
         }
       });
     },
-    react(skill: SkillWithHelpers): SkillWithHelpers {
+    react(skill: Skill): Skill {
       return skill
         .extendConfig('babel', {
           presets: ['@babel/preset-react'],

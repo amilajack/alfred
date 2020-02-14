@@ -85,11 +85,10 @@ describe('virtual file system', () => {
       const typescriptSkill = {
         name: 'typescript'
       };
-      const skillMap = await Skills(
-        project,
-        [reduxSkill, typescriptSkill],
-        defaultTarget
-      );
+      const skillMap = await Skills(project, defaultTarget, [
+        reduxSkill,
+        typescriptSkill
+      ]);
       expect(
         skillMap.get('redux').files.get('configureStore.prod').content
       ).toEqual(
@@ -139,11 +138,10 @@ export default { configureStore, history };
         }
       };
 
-      const skillMap = await Skills(
-        project,
-        [reactSkill, typescriptSkill],
-        defaultTarget
-      );
+      const skillMap = await Skills(project, defaultTarget, [
+        reactSkill,
+        typescriptSkill
+      ]);
 
       expect(skillMap.get('react').files.get('routes').content).toEqual(
         `route 1
@@ -173,11 +171,10 @@ route 3`
         }
       };
 
-      const skillMap = await Skills(
-        project,
-        [reactSkill, typescriptSkill],
-        defaultTarget
-      );
+      const skillMap = await Skills(project, defaultTarget, [
+        reactSkill,
+        typescriptSkill
+      ]);
       expect(skillMap.get('react').files.get('routes')).toHaveProperty(
         'content',
         'route 2'
@@ -228,7 +225,7 @@ route 3`
           content: 'foo',
           dest: 'foo',
           condition({ project }): boolean {
-            return project.target.some(state => state.project === 'lib');
+            return project.targets.some(state => state.project === 'lib');
           }
         };
         const vfs = new VirtualFileSystem();

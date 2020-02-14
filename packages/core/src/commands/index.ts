@@ -1,11 +1,10 @@
 /* eslint import/no-dynamic-require: off */
 import {
   ProjectInterface,
+  Skill,
   SkillMap,
-  Entrypoint,
   ConfigValue,
   SkillInterfaceModule,
-  SkillNode,
   HookFn,
   Target
 } from '@alfred/types';
@@ -15,18 +14,13 @@ export function getSkillInterfaceForSubcommand(
   subcommand: string
 ): SkillInterfaceModule {
   const interfaceForSubcommand = Array.from(skillMap.values())
-    .filter(
-      (skillNode: SkillNode) =>
-        skillNode.interfaces && skillNode.interfaces.length
-    )
-    .flatMap((skillNode: SkillNode): SkillInterfaceModule[] =>
-      skillNode.interfaces.map(skillInterface => require(skillInterface.name))
+    .flatMap((skill: Skill): SkillInterfaceModule[] =>
+      skill.interfaces.map(skillInterface => skillInterface.module)
     )
     .find(
       (skillInterface: SkillInterfaceModule) =>
         skillInterface.subcommand === subcommand
     );
-
   if (!interfaceForSubcommand) {
     throw new Error(
       `The subcommand "${subcommand}" does not have an interface or the subcommand does not exist`
@@ -36,7 +30,7 @@ export function getSkillInterfaceForSubcommand(
   return interfaceForSubcommand;
 }
 
-type SubcommandFn = (flags: Array<string>) => void;
+export type SubcommandFn = (flags: Array<string>) => void;
 
 export type ExecutableSkillMethods = {
   [subcommand: string]: SubcommandFn;
@@ -48,29 +42,16 @@ export function getProjectSubcommands(
   target: Target
 ): ExecutableSkillMethods {
   const { config } = project;
-  const configWithDefaults = config.getConfigWithDefaults();
-  const skillsConfigMap: Map<string, ConfigValue> = new Map(
-    configWithDefaults.skills.map(([skillPkgName, skillConfig]) => [
-      require(skillPkgName).name,
-      skillConfig
-    ])
-  );
 
   return Array.from(skillMap.values())
-    .filter(
-      skillNode =>
-        skillNode.hooks &&
-        skillNode.hooks.run &&
-        skillNode.interfaces &&
-        skillNode.interfaces.length
-    )
-    .flatMap(skillNode => {
-      return skillNode.interfaces.map(skillInterface => {
-        const { subcommand } = require(skillInterface.name);
-        const skillConfig = skillsConfigMap.get(skillNode.name) as ConfigValue;
+    .filter(skill => skill.hooks && skill.interfaces.length)
+    .flatMap(skill => {
+      return skill.interfaces.map(skillInterface => {
+        const skillConfig = skillMap.get(skill.name) as ConfigValue;
+        const { subcommand } = skillInterface.module;
         return {
           fn: (flags: Array<string> = []): void =>
-            (skillNode.hooks.run as HookFn)({
+            (skill.hooks.run as HookFn)({
               event: {
                 subcommand,
                 flags,
@@ -79,7 +60,7 @@ export function getProjectSubcommands(
               project,
               config,
               targets: project.targets,
-              skill: skillNode,
+              skill: skill,
               skillMap,
               skillConfig
             }),

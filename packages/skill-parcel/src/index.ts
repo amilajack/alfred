@@ -2,7 +2,7 @@ import path from 'path';
 import { openUrlInBrowser } from '@alfred/helpers';
 import {
   RawSkill,
-  SkillWithHelpers,
+  Skill,
   HookArgs,
   RunEvent,
   Env,
@@ -10,24 +10,22 @@ import {
   ProjectEnum
 } from '@alfred/types/src';
 
-const interfaceConfig = {
-  supports: {
-    // Flag name and argument types
-    envs: ['production', 'development', 'test'] as Env[],
-    // All the supported targets a `build` skill should build
-    // @TODO: Add node to targets
-    platforms: ['browser', 'node'] as Platform[],
-    // Project type
-    projects: ['app'] as ProjectEnum[]
-  }
+const supports = {
+  // Flag name and argument types
+  envs: ['production', 'development', 'test'] as Env[],
+  // All the supported targets a `build` skill should build
+  // @TODO: Add node to targets
+  platforms: ['browser', 'node'] as Platform[],
+  // Project type
+  projects: ['app'] as ProjectEnum[]
 };
 
 const skill: RawSkill = {
   name: 'parcel',
   description: 'Build, optimize, and bundle assets in your app',
   interfaces: [
-    ['@alfred/interface-build', interfaceConfig],
-    ['@alfred/interface-start', interfaceConfig]
+    ['@alfred/interface-build', { supports }],
+    ['@alfred/interface-start', { supports }]
   ],
   default: true,
   configs: [
@@ -62,7 +60,7 @@ const skill: RawSkill = {
         entryFiles.push(path.join(src, 'index.html'));
       }
 
-      const baseOptions = {
+      const parcelOpts = {
         outDir: path.join(root, 'targets', 'prod'),
         outFile: 'index.html',
         cacheDir: path.join(root, 'node_modules', '.cache'),
@@ -74,7 +72,7 @@ const skill: RawSkill = {
       switch (subcommand) {
         case 'start': {
           const server = await new Bundler(entryFiles, {
-            ...baseOptions,
+            ...parcelOpts,
             watch: true
           }).serve();
           const url = `http://localhost:${server.address().port}`;
@@ -84,10 +82,7 @@ const skill: RawSkill = {
             } build on ${url}`
           );
           // Don't open in browser when running E2E tests
-          if (
-            !('ALFRED_E2E_TEST' in process.env) ||
-            process.env.ALFRED_E2E_TEST !== 'true'
-          ) {
+          if (process.env.ALFRED_E2E_TEST !== 'true') {
             await openUrlInBrowser(url);
           }
           return server;
@@ -99,7 +94,7 @@ const skill: RawSkill = {
             } build`
           );
           return new Bundler(entryFiles, {
-            ...baseOptions,
+            ...parcelOpts,
             watch: false
           }).bundle();
         }
@@ -109,7 +104,7 @@ const skill: RawSkill = {
     }
   },
   transforms: {
-    react(skill: SkillWithHelpers): SkillWithHelpers {
+    react(skill: Skill): Skill {
       return skill
         .setWrite('postcss', true)
         .addDepsFromPkg(['postcss-modules', 'autoprefixer']);

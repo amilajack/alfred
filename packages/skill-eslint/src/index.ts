@@ -1,16 +1,12 @@
 import path from 'path';
 import { getPkgBinPath, execCmdInProject } from '@alfred/helpers';
-import {
-  RawSkill,
-  SkillWithHelpers,
-  TransformArgs,
-  SkillConfig
-} from '@alfred/types';
+import { RawSkill, Skill, TransformArgs, SkillConfig } from '@alfred/types';
 
 const skill: RawSkill = {
   name: 'eslint',
   description: 'Lint all your JS files',
   interfaces: ['@alfred/interface-lint'],
+  default: true,
   configs: [
     {
       alias: 'eslint',
@@ -65,29 +61,26 @@ const skill: RawSkill = {
     }
   },
   transforms: {
-    babel(skill: SkillWithHelpers): SkillWithHelpers {
+    babel(skill: Skill): Skill {
       return skill
         .extendConfig('eslint', {
           parser: 'babel-eslint'
         })
         .addDepsFromPkg('babel-eslint');
     },
-    jest(skill: SkillWithHelpers): SkillWithHelpers {
+    jest(skill: Skill): Skill {
       return skill.addDepsFromPkg('eslint-plugin-jest').extendConfig('eslint', {
         plugins: ['jest']
       });
     },
-    mocha(skill: SkillWithHelpers): SkillWithHelpers {
+    mocha(skill: Skill): Skill {
       return skill
         .extendConfig('eslint', {
           plugins: ['mocha']
         })
         .addDepsFromPkg('eslint-plugin-mocha');
     },
-    webpack(
-      skill: SkillWithHelpers,
-      { toSkill, project, config }: TransformArgs
-    ): SkillWithHelpers {
+    webpack(skill: Skill, { toSkill, project, config }: TransformArgs): Skill {
       return skill
         .extendConfig('eslint', {
           settings: {
@@ -104,7 +97,7 @@ const skill: RawSkill = {
         })
         .addDepsFromPkg('eslint-import-resolver-webpack');
     },
-    react(skill: SkillWithHelpers): SkillWithHelpers {
+    react(skill: Skill): Skill {
       return skill
         .extendConfig('eslint', {
           extends: ['airbnb'],
@@ -114,7 +107,7 @@ const skill: RawSkill = {
         })
         .addDepsFromPkg('eslint-config-airbnb');
     },
-    prettier(skill: SkillWithHelpers): SkillWithHelpers {
+    prettier(skill: Skill): Skill {
       return skill
         .extendConfig('eslint', {
           extends: ['prettier'],

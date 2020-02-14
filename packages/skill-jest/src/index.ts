@@ -1,17 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 import { execCmdInProject, getPkgBinPath } from '@alfred/helpers';
-import {
-  SkillWithHelpers,
-  HookArgs,
-  RawSkill,
-  SkillConfig
-} from '@alfred/types';
+import { Skill, HookArgs, RawSkill, SkillConfig } from '@alfred/types';
 
 const skill: RawSkill = {
   name: 'jest',
   description: 'Test your JS files',
   interfaces: ['@alfred/interface-test'],
+  default: true,
   configs: [
     {
       alias: 'jest',
@@ -70,7 +66,7 @@ const skill: RawSkill = {
       if (!config.showConfigs && fs.existsSync(configPath)) {
         await fs.promises.unlink(configPath);
       }
-      const babelJestPath = require.resolve('./babel-jest');
+      const babelJestPath = require.resolve('../babel-jest.js');
       await fs.promises.writeFile(
         jestTransformerPath,
         `const babelJestTransform = require(${JSON.stringify(babelJestPath)});
@@ -94,14 +90,14 @@ const skill: RawSkill = {
     }
   },
   transforms: {
-    babel(skill: SkillWithHelpers): SkillWithHelpers {
+    babel(skill: Skill): Skill {
       return skill.extendConfig('jest', {
         transform: {
           '^.+\\.jsx?$': './node_modules/jest-transformer.js'
         }
       });
     },
-    webpack(skill: SkillWithHelpers, { config }): SkillWithHelpers {
+    webpack(skill: Skill, { config }): Skill {
       return skill
         .extendConfig('jest', {
           moduleNameMapper: {

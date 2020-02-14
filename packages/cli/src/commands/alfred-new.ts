@@ -181,7 +181,7 @@ async function createNewProject(cwd: string, name: string): Promise<void> {
   answers.isBrowser = isBrowser;
 
   const templateData = {
-    project: answers,
+    entrypoint: answers,
     'alfred-pkg': {
       semver: process.env.ALFRED_E2E_CLI_TEST
         ? `file:${alfredDepFilePath}`
