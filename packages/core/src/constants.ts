@@ -94,7 +94,7 @@ export const ENTRYPOINTS: Array<Entrypoint> = [
   }
 ];
 
-// All the possible interface states
+// All the possible targets
 // @TODO Also allow .ts entrypoints
 // @TODO Allow the follow entrypoints:
 // 'lib.electron.main.js',

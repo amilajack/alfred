@@ -275,7 +275,7 @@ ${JSON.stringify(result.errors)}`
       );
     }
 
-    // Run validation that is specific to each interface state
+    // Run validation that is specific to each target
     this.targets
       .map(target => [target.project, target.platform, target.env].join('.'))
       .forEach(targetString => {
@@ -383,17 +383,17 @@ ${JSON.stringify(result.errors)}`
   // uninstallDeps() {}
 
   /**
-   * Get a skillMap that has all the skills used in all interface states
+   * Get a skillMap that has all the skills used in all targets
    */
   async getSkillMap(): Promise<SkillMap> {
     const skillMaps = await Promise.all(
-      this.targets.map(state => skillMapFromConfig(this, state))
+      this.targets.map(target => skillMapFromConfig(this, target))
     );
     // Merge the maps
     return skillMaps.reduce(
       (prevSkillMap: SkillMap, currSkillMap: SkillMap) =>
         new Map<string, Skill>([...prevSkillMap, ...currSkillMap]),
-      new Map()
+      new Map<string, Skill>()
     );
   }
 
@@ -416,13 +416,13 @@ ${JSON.stringify(result.errors)}`
     await Promise.all(
       skills
         .flatMap(skill => Array.from(skill.configs.values()))
-        .map(async configFile => {
-          const filePath = path.join(configsBasePath, configFile.filename);
-          const stringifiedConfig = JSON.stringify(configFile.config);
+        .map(async config => {
+          const filePath = path.join(configsBasePath, config.filename);
+          const stringifiedConfig = JSON.stringify(config.config);
           let parser: 'babel' | 'json' = 'babel';
 
-          const configInConfigFileFormat = ((): string => {
-            switch (configFile.fileType) {
+          const configWithExports = ((): string => {
+            switch (config.fileType) {
               case 'commonjs':
                 parser = 'babel';
                 return `module.exports = ${stringifiedConfig}`;
@@ -438,7 +438,7 @@ ${JSON.stringify(result.errors)}`
             }
           })();
           const formattedConfig = prettier.format(
-            configToEvalString(configInConfigFileFormat),
+            configToEvalString(configWithExports),
             {
               parser
             }

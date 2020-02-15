@@ -54,7 +54,7 @@ function getConfigs(skillMap: SkillMap): Array<ConfigValue> {
   const configsFromMap = Array.from(skillMap.values());
   return configsFromMap
     .flatMap(skill => Array.from(skill?.configs?.values() || []))
-    .map(configFile => removePathsPropertiesFromObject(configFile.config));
+    .map(config => removePathsPropertiesFromObject(config.config));
 }
 
 function getDependencies(skillMap: SkillMap): Dependencies {
@@ -238,7 +238,7 @@ describe('Skills', () => {
 
     describe('subcommand', () => {
       TARGETS.forEach(target => {
-        it(`should get corresponding interface for interface state ${JSON.stringify(
+        it(`should get corresponding interface for target ${JSON.stringify(
           target
         )}`, async () => {
           const skillMap = await Skills(
@@ -368,7 +368,7 @@ describe('Skills', () => {
 
     it('should throw if skill does not exist', async () => {
       const spy = jest.spyOn(console, 'log').mockImplementation();
-      const [state] = TARGETS;
+      const [target] = TARGETS;
       const project = {
         root: '',
         config: {
@@ -376,7 +376,7 @@ describe('Skills', () => {
           skills: [['@alfred/skill-non-existent-skill', {}]]
         }
       } as ProjectInterface;
-      await expect(skillMapFromConfig(project, state)).rejects.toThrow(
+      await expect(skillMapFromConfig(project, target)).rejects.toThrow(
         "Cannot find skill module '@alfred/skill-non-existent-skill'"
       );
       spy.mockRestore();
@@ -420,9 +420,10 @@ describe('Skills', () => {
       ];
       const skillMap = await testProject.getSkillMap();
       expect(skillMap.has('react')).toBe(true);
+      expect(skillMap.has('eslint')).toBe(true);
     });
 
-    it('should override core skills that support same interface states', async () => {
+    it('should override core skills that support same target', async () => {
       const target = {
         env: 'production',
         project: 'app',
@@ -436,7 +437,7 @@ describe('Skills', () => {
       expect(skillNames).not.toContain('webpack');
     });
 
-    it('should remove skills that do not support current interface state', async () => {
+    it('should remove skills that do not support current target', async () => {
       const target = {
         env: 'production',
         project: 'lib',
@@ -456,9 +457,9 @@ describe('Skills', () => {
     const skillNamesCombinations = powerset(Object.keys(CORE_SKILLS)).sort();
     for (const skillCombination of skillNamesCombinations) {
       TARGETS.forEach(target => {
-        it(`combination ${skillCombination.join(
-          ','
-        )} interface state ${JSON.stringify(target)}`, async () => {
+        it(`combination ${skillCombination.join(',')} target ${JSON.stringify(
+          target
+        )}`, async () => {
           // Get the skills for each combination
           const skillsToAdd = skillCombination.map(
             skillName => CORE_SKILLS[skillName]
@@ -474,7 +475,7 @@ describe('Skills', () => {
 
   describe('dependencies', () => {
     TARGETS.forEach(target => {
-      it(`should add devDepencencies with interface state ${JSON.stringify(
+      it(`should add devDepencencies with target ${JSON.stringify(
         target
       )}`, async () => {
         const skillMap = await Skills(

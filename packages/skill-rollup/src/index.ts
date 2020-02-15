@@ -80,7 +80,7 @@ const skill: RawSkill = {
         'rollup.prod',
         'rollup.dev'
       ].map(
-        configFile => skill.configs.get(configFile)?.config
+        configAlias => skill.configs.get(configAlias)?.config
       ) as ConfigValue[];
       const inputAndOutputConfigs = {
         input: `./src/lib.${target.platform}.js`,

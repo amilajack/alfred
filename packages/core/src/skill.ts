@@ -1,4 +1,4 @@
-/* eslint import/no-dynamic-require: off */
+/* eslint import/no-dynamic-require: off, @typescript-eslint/ban-ts-ignore: off */
 import path from 'path';
 import lodash from 'lodash';
 import mergeConfigs from '@alfred/merge-configs';
@@ -40,21 +40,27 @@ import { normalizeInterfacesOfSkill } from './interface';
 export function addSkillHelpers(skill: SkillWithoutHelpers): Skill {
   const helpers: Helpers<Skill> = {
     findConfig(configName: string): SkillConfig {
-      const config = skill.configs.get(configName);
+      // @HACK This should eventually be removed
+      // @ts-ignore
+      const config = this.configs.get(configName);
       if (!config) {
         throw new Error(`Cannot find config with name "${configName}"`);
       }
       return config;
     },
     extendConfig(configName: string, configExtension: ConfigValue): Skill {
-      const foundConfig = skill.configs.get(configName);
+      // @HACK This should eventually be removed
+      // @ts-ignore
+      const foundConfig = this.configs?.get(configName);
       if (!foundConfig) {
         throw new Error(`Cannot find config with name "${configName}"`);
       }
       const mergedConfig = mergeConfigs({}, foundConfig, {
         config: configExtension
       }) as SkillConfig;
-      const configs = (skill.configs || []).map(config =>
+      // @HACK This should eventually be removed
+      // @ts-ignore
+      const configs = this.configs.map(config =>
         config.alias === configName ? mergedConfig : config
       );
       return lodash.merge({}, skill, this, {
@@ -62,7 +68,9 @@ export function addSkillHelpers(skill: SkillWithoutHelpers): Skill {
       });
     },
     replaceConfig(configName: string, configReplacement: ConfigValue): Skill {
-      const configs = (skill.configs || []).map(config =>
+      // @HACK This should eventually be removed
+      // @ts-ignore
+      const configs = this.configs.map(config =>
         config.alias === configName
           ? { ...config, config: configReplacement }
           : config
@@ -90,7 +98,9 @@ export function addSkillHelpers(skill: SkillWithoutHelpers): Skill {
     },
     addDepsFromPkg(
       pkgs: string | string[],
-      pkg: PkgJson | undefined = skill.pkg,
+      // @HACK This should eventually be removed
+      // @ts-ignore
+      pkg: PkgJson | undefined = this.pkg,
       fromPkgType: DependencyType = 'dev',
       toPkgType: DependencyType = 'dev'
     ): Skill {
@@ -264,7 +274,7 @@ export const ENTRYPOINTS = [
 ];
 
 /**
- * Convert entrypoints to interface states
+ * Convert entrypoints to targets
  */
 export function entrypointsToTargets(
   entrypoints: Array<string>
@@ -290,7 +300,7 @@ function validateSkillMap(skillMap: SkillMap, target: Target): SkillMap {
         }
       });
     }
-    // Validate if a skill is supported for a certain interface state
+    // Validate if a skill is supported for a certain target
     if (skill.supports) {
       const supports = {
         env: skill.supports.envs.includes(target.env),
@@ -343,8 +353,8 @@ export async function Skills(
   const skillMap: Map<string, Skill> = new Map();
   const normalizedSkills = skills.map(normalizeSkill);
   const skillsToResolveFrom = [
-    ...Object.values(CORE_SKILLS),
-    ...normalizedSkills
+    ...normalizedSkills,
+    ...Object.values(CORE_SKILLS)
   ];
 
   const subcommandMap = new Map<string, SkillInterfaceModule>(CORE_INTERFACES);
@@ -390,7 +400,7 @@ export async function Skills(
  * 2. Validate skill
  * 3. Run skill transformations
  */
-export default async function skillMapFromConfig(
+export default async function skillMapFromgfig(
   project: ProjectInterface,
   target: Target,
   config: ConfigInterface = project.config
@@ -400,14 +410,11 @@ export default async function skillMapFromConfig(
 
   config.skills.forEach(([skillPkgName, skillUserConfig = {}]) => {
     // Add the skill config to the skill
-    const skill: Skill = requireSkill(skillPkgName);
+    let skill: Skill = requireSkill(skillPkgName);
     skill.userConfig = skillUserConfig;
     if (skill.configs.size === 1) {
-      const [key, val] = Array.from(skill.configs.entries())[0];
-      skill.configs.set(
-        key,
-        lodash.merge({}, val, { config: skillUserConfig })
-      );
+      const [name] = Array.from(skill.configs.keys());
+      skill = skill.extendConfig(name, skillUserConfig);
     }
     skillMapFromConfigSkills.set(skill.name, skill);
   });

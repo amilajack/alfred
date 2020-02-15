@@ -135,7 +135,7 @@ async function generateTestsForSkillCombination(
   const e2eTests = await Promise.all(
     powerset(nonCoreCts)
       .sort((a, b) => a.length - b.length)
-      // @TODO Instead of each interface state, generate tests from entrypointCombinations
+      // @TODO Instead of each target, generate tests from entrypointCombinations
       .map(skillCombination => (): Promise<E2eTest> =>
         generateTestsForSkillCombination(skillCombination, tmpDir)
       )
@@ -164,7 +164,7 @@ async function generateTestsForSkillCombination(
         )
       ).sort((a, b) => a.length - b.length);
 
-      // Create a list of all subsets of the interface states like so:
+      // Create a list of all subsets of the targets like so:
       // [['lib.node'], ['lib.node', 'lib.browser'], etc...]
       await Promise.all(
         entrypointsCombinations.map(async entrypointCombination => {
@@ -182,7 +182,7 @@ async function generateTestsForSkillCombination(
             }
           };
 
-          // Generate interface states from the entrypoints
+          // Generate targets from the entrypoints
           const targets = entrypointsToTargets(entrypointCombination);
           // Remove the existing entrypoints in ./src
           rimraf.sync(path.join(projectDir, 'src/*'));

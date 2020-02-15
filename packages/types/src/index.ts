@@ -59,7 +59,7 @@ export interface ProjectInterface extends EventEmitter {
   pkg: PkgJson;
   // The path to the root package.json
   pkgPath: string;
-  // All the interface states of the project
+  // All the targets of the project
   targets: Target[];
   // Initialize an alfred project
   init: () => Promise<ProjectInterface>;

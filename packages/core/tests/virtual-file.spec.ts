@@ -225,7 +225,7 @@ route 3`
           content: 'foo',
           dest: 'foo',
           condition({ project }): boolean {
-            return project.targets.some(state => state.project === 'lib');
+            return project.targets.some(target => target.project === 'lib');
           }
         };
         const vfs = new VirtualFileSystem();

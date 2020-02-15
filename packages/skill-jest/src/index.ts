@@ -63,9 +63,6 @@ const skill: RawSkill = {
         config.showConfigs ? configPath : hiddenTmpConfigPath,
         `module.exports = ${JSON.stringify(fullConfig)};`
       );
-      if (!config.showConfigs && fs.existsSync(configPath)) {
-        await fs.promises.unlink(configPath);
-      }
       const babelJestPath = require.resolve('../babel-jest.js');
       await fs.promises.writeFile(
         jestTransformerPath,
