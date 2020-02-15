@@ -446,9 +446,6 @@ export default function Validateconfig(config: { [x: string]: any }): void {
     extends: [Joi.string(), Joi.array()],
     autoInstall: Joi.bool(),
     skills,
-    app: Joi.object().keys({
-      targets: [Joi.string(), Joi.object(), Joi.array()]
-    }),
     lib: Joi.object().keys({
       recommendSkills: skills
     })

@@ -1,17 +1,14 @@
-/* eslint import/no-dynamic-require: off */
+/* eslint import/no-dynamic-require: off, @typescript-eslint/ban-ts-ignore: off */
 import path from 'path';
 import lodash from 'lodash';
 import mergeConfigs from '@alfred/merge-configs';
 import {
   ConfigInterface,
   SkillMap,
-  SkillNode,
   ProjectInterface,
-  InterfaceState,
   SkillConfig,
   ProjectEnum,
-  Target,
-  SkillWithHelpers,
+  Platform,
   Dependencies,
   DependencyType,
   PkgJson,
@@ -19,8 +16,19 @@ import {
   FileType,
   Skill,
   RawSkill,
-  SkillFile
+  Env,
+  Target,
+  Helpers,
+  ConfigValue,
+  SkillWithoutHelpers,
+  Supports,
+  SkillInterfaceModule
 } from '@alfred/types';
+import buildInterface from '@alfred/interface-build';
+import startInterface from '@alfred/interface-start';
+import testInterface from '@alfred/interface-test';
+import formatInterface from '@alfred/interface-format';
+import lintInterface from '@alfred/interface-lint';
 import {
   getDepsFromPkg,
   fromPkgTypeToFull,
@@ -29,69 +37,73 @@ import {
 import VirtualFileSystem from './virtual-file';
 import { normalizeInterfacesOfSkill } from './interface';
 
-export function addSkillHelpers(skill: Skill): SkillWithHelpers {
-  return {
-    ...skill,
+export function addSkillHelpers(skill: SkillWithoutHelpers): Skill {
+  const helpers: Helpers<Skill> = {
     findConfig(configName: string): SkillConfig {
+      // @HACK This should eventually be removed
+      // @ts-ignore
       const config = this.configs.get(configName);
       if (!config) {
         throw new Error(`Cannot find config with name "${configName}"`);
       }
       return config;
     },
-    extendConfig(
-      configName: string,
-      configExtension: { [x: string]: string } = {}
-    ): SkillWithHelpers {
-      const foundConfig = this.configs.get(configName);
+    extendConfig(configName: string, configExtension: ConfigValue): Skill {
+      // @HACK This should eventually be removed
+      // @ts-ignore
+      const foundConfig = this.configs?.get(configName);
       if (!foundConfig) {
         throw new Error(`Cannot find config with name "${configName}"`);
       }
-      const mergedConfigFile = mergeConfigs({}, foundConfig, {
+      const mergedConfig = mergeConfigs({}, foundConfig, {
         config: configExtension
       }) as SkillConfig;
-      const configs = (this.configs || []).map(configFile =>
-        configFile.alias === configName ? mergedConfigFile : configFile
+      // @HACK This should eventually be removed
+      // @ts-ignore
+      const configs = this.configs.map(config =>
+        config.alias === configName ? mergedConfig : config
       );
-      return lodash.merge({}, this, {
+      return lodash.merge({}, skill, this, {
         configs
       });
     },
-    replaceConfig(
-      configName: string,
-      configReplacement: SkillConfig
-    ): SkillWithHelpers {
-      const configs = (this.configs || []).map(configFile =>
-        configFile.alias === configName ? configReplacement : configFile
+    replaceConfig(configName: string, configReplacement: ConfigValue): Skill {
+      // @HACK This should eventually be removed
+      // @ts-ignore
+      const configs = this.configs.map(config =>
+        config.alias === configName
+          ? { ...config, config: configReplacement }
+          : config
       );
-      return {
-        ...this,
+      return lodash.merge({}, skill, this, {
         configs
-      };
+      });
     },
-    setWrite(configName: string, shouldWrite: boolean): SkillWithHelpers {
+    setWrite(configName: string, shouldWrite: boolean): Skill {
       const newConfig = {
         ...this.findConfig(configName),
         write: shouldWrite
       };
       return this.replaceConfig(configName, newConfig);
     },
-    addDeps(dependencies: Dependencies): SkillWithHelpers {
-      return lodash.merge({}, this, {
+    addDeps(dependencies: Dependencies): Skill {
+      return lodash.merge({}, skill, this, {
         dependencies
       });
     },
-    addDevDeps(devDependencies: Dependencies): SkillWithHelpers {
-      return lodash.merge({}, this, {
+    addDevDeps(devDependencies: Dependencies): Skill {
+      return lodash.merge({}, skill, this, {
         devDependencies
       });
     },
     addDepsFromPkg(
       pkgs: string | string[],
-      pkg: PkgJson | undefined = skill.pkg,
+      // @HACK This should eventually be removed
+      // @ts-ignore
+      pkg: PkgJson | undefined = this.pkg,
       fromPkgType: DependencyType = 'dev',
       toPkgType: DependencyType = 'dev'
-    ): SkillWithHelpers {
+    ): Skill {
       const mergedPkg = lodash.merge(
         {
           dependencies: {},
@@ -103,10 +115,15 @@ export function addSkillHelpers(skill: Skill): SkillWithHelpers {
       const depsToAdd = getDepsFromPkg(pkgs, mergedPkg, fromPkgType);
       const toPkgTypeFullName = fromPkgTypeToFull(toPkgType);
 
-      return lodash.merge({}, this, {
+      return lodash.merge({}, skill, this, {
         [toPkgTypeFullName]: depsToAdd
       });
     }
+  };
+
+  return {
+    ...skill,
+    ...helpers
   };
 }
 
@@ -119,25 +136,22 @@ export async function runTransforms(
   project: ProjectInterface,
   skillMap: SkillMap
 ): Promise<SkillMap> {
-  skillMap.forEach(skillNode => {
-    Object.entries(skillNode.transforms || {}).forEach(
+  skillMap.forEach(skill => {
+    Object.entries(skill.transforms || {}).forEach(
       ([toSkillName, transform]) => {
         if (skillMap.has(toSkillName)) {
-          const transformResult = transform(
-            skillMap.get(skillNode.name) as SkillNode,
-            {
-              toSkill: skillMap.get(toSkillName) as SkillNode,
-              skillMap: skillMap,
-              config: project.config,
-              project
-            }
-          );
+          const transformResult = transform(skillMap.get(skill.name) as Skill, {
+            toSkill: skillMap.get(toSkillName) as Skill,
+            skillMap: skillMap,
+            config: project.config,
+            project
+          });
           if (!transformResult) {
             throw new Error(
-              `Transform from ${skillNode.name} to ${toSkillName} must return a new skill`
+              `Transform from ${skill.name} to ${toSkillName} must return a new skill`
             );
           }
-          skillMap.set(skillNode.name, transformResult);
+          skillMap.set(skill.name, transformResult);
         }
       }
     );
@@ -159,48 +173,82 @@ function getFileTypeFromFile(file: string): FileType {
   }
 }
 
-/**
- * @TODO Change skill param to be RawSkill instead of Skill | RawSkill
- */
-function normalizeSkill(skill: Skill | RawSkill): SkillWithHelpers {
+function normalizeSkill(skill: RawSkill | Skill): Skill {
   const configs = new EnhancedMap<string, SkillConfig>();
 
-  ((skill as RawSkill).configs || []).forEach((configFile: SkillConfig) => {
-    configs.set(configFile.alias || configFile.filename, {
-      ...configFile,
-      fileType: configFile.fileType || getFileTypeFromFile(configFile.filename)
+  skill.configs?.forEach((config: SkillConfig) => {
+    configs.set(config.alias || config.filename, {
+      ...config,
+      fileType: config.fileType || getFileTypeFromFile(config.filename)
     });
   });
 
+  const skillDefaults = {
+    transforms: {},
+    hooks: {},
+    devDependencies: {},
+    dependencies: {},
+    pkg: {},
+    description: '',
+    default: false,
+    dirs: [],
+    userConfig: {}
+  };
+
+  const supports: Supports = Object.assign(
+    {
+      envs: ['production', 'development', 'test'] as Env[],
+      projects: ['app', 'lib'] as ProjectEnum[],
+      platforms: ['browser', 'node'] as Platform[]
+    },
+    skill.supports
+  );
+
+  const skillWithoutHelpers: SkillWithoutHelpers = lodash.merge(
+    {},
+    skillDefaults,
+    skill,
+    {
+      interfaces: normalizeInterfacesOfSkill(skill.interfaces || []),
+      files: Array.isArray(skill.files)
+        ? new VirtualFileSystem(skill.files || [], skill.dirs)
+        : skill.files || new VirtualFileSystem([]),
+      configs,
+      supports
+    }
+  );
+
   return {
-    ...addSkillHelpers(skill as Skill),
-    interfaces: normalizeInterfacesOfSkill((skill as Skill).interfaces),
-    files:
-      skill.files instanceof VirtualFileSystem
-        ? skill.files
-        : new VirtualFileSystem((skill.files as SkillFile[]) || [], skill.dirs),
-    configs
+    ...skillWithoutHelpers,
+    ...addSkillHelpers(skillWithoutHelpers)
   };
 }
 
-export function requireSkill(skillPkgName: string): SkillWithHelpers {
+export function requireSkill(skillPkgName: string): Skill {
   try {
-    const requiredSkill = {
-      ...require(skillPkgName),
-      pkg: require(`${skillPkgName}/package.json`),
-      devDependencies: require(`${skillPkgName}/package.json`).peerDependencies
-    };
-    return {
-      ...requiredSkill,
-      ...normalizeSkill(requiredSkill)
-    };
-  } catch (e) {
-    console.log(e);
-    throw new Error(`Cannot find module '${skillPkgName}'`);
+    const requiredModule = require(skillPkgName);
+    try {
+      const requiredSkill = {
+        ...(requiredModule.default || requiredModule),
+        pkg: require(`${skillPkgName}/package.json`),
+        devDependencies: require(`${skillPkgName}/package.json`)
+          .peerDependencies
+      };
+      return {
+        ...requiredSkill,
+        ...normalizeSkill(requiredSkill)
+      };
+    } catch (err) {
+      console.log(err);
+      throw new Error(`Cannot load skill module '${skillPkgName}'`);
+    }
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Cannot find skill module '${skillPkgName}'`);
   }
 }
 
-export const CORE_SKILLS: { [skill in CORE_SKILL]: SkillWithHelpers } = {
+export const CORE_SKILLS: { [skill in CORE_SKILL]: Skill } = {
   webpack: requireSkill('@alfred/skill-webpack'),
   babel: requireSkill('@alfred/skill-babel'),
   parcel: requireSkill('@alfred/skill-parcel'),
@@ -226,28 +274,25 @@ export const ENTRYPOINTS = [
 ];
 
 /**
- * Convert entrypoints to interface states
+ * Convert entrypoints to targets
  */
-export function entrypointsToInterfaceStates(
+export function entrypointsToTargets(
   entrypoints: Array<string>
-): Array<InterfaceState> {
+): Array<Target> {
   return entrypoints.map(entrypoint => {
-    const [projectType, target] = entrypoint.split('.') as [
+    const [project, platform] = entrypoint.split('.') as [
       ProjectEnum,
-      Target
+      Platform
     ];
-    return { projectType, target, env: 'production' };
+    return { project, platform, env: 'production' };
   });
 }
 
-function validateSkillMap(
-  skillMap: SkillMap,
-  interfaceState: InterfaceState
-): SkillMap {
-  skillMap.forEach(skillNode => {
+function validateSkillMap(skillMap: SkillMap, target: Target): SkillMap {
+  skillMap.forEach(skill => {
     // Validate the files of a skill
-    if (skillNode.files) {
-      skillNode.files.forEach(file => {
+    if (skill.files) {
+      skill.files.forEach(file => {
         if (file.content && file.src) {
           throw new Error(
             'File cannot have both "content" and "src" properties'
@@ -255,23 +300,21 @@ function validateSkillMap(
         }
       });
     }
-    // Validate if a skill is supported for a certain interface state
-    if (skillNode.supports) {
+    // Validate if a skill is supported for a certain target
+    if (skill.supports) {
       const supports = {
-        env: skillNode.supports.envs.includes(interfaceState.env),
-        target: skillNode.supports.targets.includes(interfaceState.target),
-        projectType: skillNode.supports.projectTypes.includes(
-          interfaceState.projectType
-        )
+        env: skill.supports.envs.includes(target.env),
+        platform: skill.supports.platforms.includes(target.platform),
+        project: skill.supports.projects.includes(target.project)
       };
-      const { env, target, projectType } = supports;
-      const isSupported = env && target && projectType;
+      const { env, platform, project } = supports;
+      const isSupported = env && platform && project;
       if (!isSupported) {
         throw new Error(
-          `The "${skillNode.name}" skill, which supports ${JSON.stringify(
-            skillNode.supports
+          `The "${skill.name}" skill, which supports ${JSON.stringify(
+            skill.supports
           )}}, does not support the current environment, project type, or target, which are ${JSON.stringify(
-            interfaceState
+            target
           )}`
         );
       }
@@ -281,112 +324,62 @@ function validateSkillMap(
   return skillMap;
 }
 
+const CORE_INTERFACES: Array<[string, SkillInterfaceModule]> = [
+  ['build', buildInterface],
+  ['start', startInterface],
+  ['test', testInterface],
+  ['lint', lintInterface],
+  ['format', formatInterface]
+];
+
+export function skillSupportsTarget(skill: Skill, target: Target): boolean {
+  if (!skill.supports) return true;
+  return (
+    skill.supports.envs.includes(target.env) &&
+    skill.supports.platforms.includes(target.platform) &&
+    skill.supports.projects.includes(target.project)
+  );
+}
+
 /**
  * Add skills to a given list of skills to ensure that the list has a complete set
- * of standard skills. Also remove skills that do not support the current interfaceState
+ * of standard skills. Also remove skills that do not support the current target
  */
 export async function Skills(
   project: ProjectInterface,
-  skills: Array<SkillNode>,
-  interfaceState: InterfaceState
-): Promise<Map<string, SkillWithHelpers>> {
-  const skillMap: Map<string, SkillWithHelpers> = new Map();
+  target: Target,
+  skills: Array<Skill | RawSkill> = []
+): Promise<Map<string, Skill>> {
+  const skillMap: Map<string, Skill> = new Map();
+  const normalizedSkills = skills.map(normalizeSkill);
+  const skillsToResolveFrom = [
+    ...normalizedSkills,
+    ...Object.values(CORE_SKILLS)
+  ];
 
-  skills
-    .map(normalizeSkill)
-    .forEach(
-      (
-        skillWithHelpers: SkillWithHelpers,
-        _,
-        skillsWithHelpers: SkillWithHelpers[]
-      ) => {
-        if (skillWithHelpers.interfaces.length) {
-          skillWithHelpers.interfaces.forEach(skillInterface => {
-            if (
-              'resolveSkill' in skillInterface.module &&
-              typeof skillInterface.module.resolveSkill === 'function'
-            ) {
-              if (
-                skillInterface.module.resolveSkill(
-                  skillsWithHelpers,
-                  interfaceState
-                ) !== false
-              ) {
-                skillMap.set(skillWithHelpers.name, skillWithHelpers);
-              }
-            } else {
-              skillMap.set(skillWithHelpers.name, skillWithHelpers);
-            }
-          });
-        } else {
-          skillMap.set(skillWithHelpers.name, skillWithHelpers);
-        }
+  const subcommandMap = new Map<string, SkillInterfaceModule>(CORE_INTERFACES);
+
+  normalizedSkills.forEach((skill: Skill) => {
+    if (skill.interfaces.length) {
+      skill.interfaces.forEach(skillInterface => {
+        subcommandMap.set(
+          skillInterface.module.subcommand,
+          skillInterface.module
+        );
+      });
+    } else {
+      if (skillSupportsTarget(skill, target)) {
+        skillMap.set(skill.name, skill);
       }
+    }
+  });
+
+  subcommandMap.forEach(skillInterface => {
+    const resolvedSkill = skillInterface.resolveSkill(
+      skillsToResolveFrom,
+      target
     );
-
-  // Remove skills that do not support the current interfaceState
-  const skillNodesToBeRemoved: Array<string> = [];
-  skillMap.forEach(skillNode => {
-    if (skillNode && skillNode.supports) {
-      const supports = {
-        env: skillNode.supports.envs.includes(interfaceState.env),
-        target: skillNode.supports.targets.includes(interfaceState.target),
-        projectType: skillNode.supports.projectTypes.includes(
-          interfaceState.projectType
-        )
-      };
-      const { env, target, projectType } = supports;
-      const isSupported = env && target && projectType;
-      if (!isSupported) {
-        skillNodesToBeRemoved.push(skillNode.name);
-      }
-    }
-  });
-  skillNodesToBeRemoved.forEach(skillNodeName => {
-    skillMap.delete(skillNodeName);
-  });
-
-  // Create a set of standard skills
-  const defaultSkillsMap = new Map([
-    ['lint', CORE_SKILLS.eslint],
-    ['format', CORE_SKILLS.prettier],
-    [
-      'build',
-      require('@alfred/interface-build').resolveSkill(
-        Object.values(CORE_SKILLS),
-        interfaceState
-      )
-    ],
-    [
-      'start',
-      require('@alfred/interface-start').resolveSkill(
-        Object.values(CORE_SKILLS),
-        interfaceState
-      )
-    ],
-    ['test', CORE_SKILLS.jest]
-  ]);
-
-  const defaultSubCommands: Set<string> = new Set(defaultSkillsMap.keys());
-  // Create a set of subcommands that the given skill has
-  const skillSubcommands: Set<string> = Array.from(skillMap.values()).reduce(
-    (prev: Set<string>, skillNode: SkillNode) => {
-      if (skillNode.interfaces && skillNode.interfaces.length) {
-        skillNode.interfaces.forEach(_interface => {
-          const { subcommand } = _interface.module;
-          prev.add(subcommand);
-        });
-      }
-      return prev;
-    },
-    new Set()
-  );
-
-  defaultSubCommands.forEach(defaultSubCommand => {
-    if (!skillSubcommands.has(defaultSubCommand)) {
-      const defaultSkillToAdd = defaultSkillsMap.get(defaultSubCommand);
-      skillMap.set(defaultSkillToAdd.name, defaultSkillToAdd);
-    }
+    skillMap.set(resolvedSkill.name, resolvedSkill);
   });
 
   // Add all the CORE_SKILL's without subcommands
@@ -397,7 +390,7 @@ export async function Skills(
 
   await runTransforms(project, skillMap);
 
-  validateSkillMap(skillMap, interfaceState);
+  validateSkillMap(skillMap, target);
 
   return skillMap;
 }
@@ -407,31 +400,24 @@ export async function Skills(
  * 2. Validate skill
  * 3. Run skill transformations
  */
-export default async function skillMapFromConfig(
+export default async function skillMapFromgfig(
   project: ProjectInterface,
-  interfaceState: InterfaceState,
+  target: Target,
   config: ConfigInterface = project.config
 ): Promise<SkillMap> {
   // Generate the skill map
   const skillMapFromConfigSkills: SkillMap = new Map();
 
   config.skills.forEach(([skillPkgName, skillUserConfig = {}]) => {
-    // Add the skill config to the skillNode
-    const skillNode: SkillNode = requireSkill(skillPkgName);
-    // skillNode.userConfig = skillUserConfig;
-    if (skillNode.configs && skillNode.configs.size === 1) {
-      const [key, val] = Array.from(skillNode.configs.entries())[0];
-      skillNode.configs.set(
-        key,
-        lodash.merge({}, val, { config: skillUserConfig })
-      );
+    // Add the skill config to the skill
+    let skill: Skill = requireSkill(skillPkgName);
+    skill.userConfig = skillUserConfig;
+    if (skill.configs.size === 1) {
+      const [name] = Array.from(skill.configs.keys());
+      skill = skill.extendConfig(name, skillUserConfig);
     }
-    skillMapFromConfigSkills.set(skillNode.name, skillNode);
+    skillMapFromConfigSkills.set(skill.name, skill);
   });
 
-  return Skills(
-    project,
-    Array.from(skillMapFromConfigSkills.values()),
-    interfaceState
-  );
+  return Skills(project, target, Array.from(skillMapFromConfigSkills.values()));
 }

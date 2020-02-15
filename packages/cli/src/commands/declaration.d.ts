@@ -7,7 +7,7 @@ declare module 'format-package' {
       transforms?: {
         [fn: string]: Function;
       };
-      formatter: (x: string) => string;
+      formatter: (name: string) => string;
     }
   ): Promise<string>;
 }

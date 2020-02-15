@@ -139,14 +139,14 @@ async function createNewProject(cwd: string, name: string): Promise<void> {
         default: 'npm'
       },
       {
-        name: 'projectType',
+        name: 'project',
         type: 'list',
         choices: ['app', 'lib'],
         message: 'project type',
         default: 'app'
       },
       {
-        name: 'target',
+        name: 'platform',
         type: 'list',
         choices: ['browser', 'node'],
         message: 'project type',
@@ -155,7 +155,7 @@ async function createNewProject(cwd: string, name: string): Promise<void> {
     ]);
   }
 
-  const filename = `${answers.projectType}.${answers.target}.js`;
+  const filename = `${answers.project}.${answers.platform}.js`;
   const entry = `./src/${filename}`;
   const targetFile = `./targets/prod/${filename}`;
 
@@ -165,7 +165,7 @@ async function createNewProject(cwd: string, name: string): Promise<void> {
     }
   };
   answers.npmClient = escapeQuotes(answers.npmClient);
-  answers.projectType = escapeQuotes(answers.projectType);
+  answers.project = escapeQuotes(answers.project);
   answers.description = escapeQuotes(answers.description);
   answers.repository = encodeURI(answers.repository);
   answers.author = escapeQuotes(answers.author);
@@ -174,14 +174,14 @@ async function createNewProject(cwd: string, name: string): Promise<void> {
   answers.module = targetFile;
 
   const alfredDepFilePath = slash(path.join(__dirname, '../../../alfred'));
-  const isApp = answers.projectType === 'app';
-  const isBrowser = answers.target === 'browser';
+  const isApp = answers.project === 'app';
+  const isBrowser = answers.platform === 'browser';
   answers.isApp = isApp;
   answers.isLib = !isApp;
   answers.isBrowser = isBrowser;
 
   const templateData = {
-    project: answers,
+    entrypoint: answers,
     'alfred-pkg': {
       semver: process.env.ALFRED_E2E_CLI_TEST
         ? `file:${alfredDepFilePath}`

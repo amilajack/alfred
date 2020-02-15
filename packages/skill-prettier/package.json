@@ -2,6 +2,13 @@
   "name": "@alfred/skill-prettier",
   "version": "0.0.4-alpha.0",
   "license": "MIT",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "yarn ts",
+    "build-watch": "yarn build --watch",
+    "ts": "tsc",
+    "version": "yarn build"
+  },
   "dependencies": {
     "@alfred/helpers": "^0.0.4-alpha.0",
     "@alfred/types": "^0.0.4-alpha.0"

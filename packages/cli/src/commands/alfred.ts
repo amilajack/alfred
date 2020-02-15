@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import program from 'commander';
 import updateNotifier from 'update-notifier';
+import 'source-map-support/register';
 
 const pkg = require('../../package.json');
 

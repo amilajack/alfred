@@ -1,7 +1,7 @@
 /* eslint import/prefer-default-export: off, import/no-dynamic-require: off */
 import path from 'path';
 import open from 'open';
-import childProcess from 'child_process';
+import childProcess, { ExecSyncOptions } from 'child_process';
 import serialize from 'serialize-javascript';
 import {
   AlfredConfigWithUnresolvedInterfaces,
@@ -10,7 +10,11 @@ import {
   PkgWithAllDeps,
   DependencyType,
   DependencyTypeFull,
-  Dependencies
+  Dependencies,
+  Env,
+  EnvShortName,
+  Skill,
+  Target
 } from '@alfred/types';
 
 export class EnhancedMap<K, V> extends Map<K, V> {
@@ -59,7 +63,7 @@ export function fromPkgTypeToFull(
 /**
  * Map the environment name to a short name, which is one of ['dev', 'prod', 'test']
  */
-export function mapEnvToShortName(envName: string): string {
+export function mapEnvToShortName(envName: string): EnvShortName {
   switch (envName) {
     case 'production': {
       return 'prod';
@@ -76,7 +80,7 @@ export function mapEnvToShortName(envName: string): string {
   }
 }
 
-export function mapShortNameEnvToLongName(envName: string): string {
+export function mapShortNameEnvToLongName(envName: string): Env {
   switch (envName) {
     case 'prod': {
       return 'production';
@@ -101,10 +105,12 @@ export function requireConfig(
   configName: string
 ): AlfredConfigWithUnresolvedInterfaces {
   try {
-    return require(`alfred-config-${configName}`);
+    const requiredConfig = require(`alfred-config-${configName}`);
+    return requiredConfig.default || requiredConfig;
   } catch (e) {
     try {
-      return require(configName);
+      const requiredConfig = require(configName);
+      return requiredConfig.default || requiredConfig;
     } catch (_e) {
       throw new Error(
         `Could not resolve "${configName}" module or "eslint-config-${configName}" module`
@@ -116,7 +122,7 @@ export function requireConfig(
 export function execCmdInProject(
   project: ProjectInterface,
   cmd: string,
-  opts: Record<string, any> = {}
+  opts: ExecSyncOptions = {}
 ): Buffer {
   return childProcess.execSync(cmd, {
     stdio: 'inherit',
@@ -153,7 +159,7 @@ export async function getPkgBinPath(
 
 export async function openUrlInBrowser(
   url: string,
-  browser: string
+  browser?: string
 ): Promise<void> {
   // Don't open new tab when running end to end tests. This prevents hundreds
   // of tabs from being opened.
@@ -200,4 +206,55 @@ export function serialPromises(fns: Array<() => Promise<any>>): Promise<any> {
       promise.then(result => fn().then(Array.prototype.concat.bind(result))),
     Promise.resolve([])
   );
+}
+
+export function interfaceResolvesSkillDefault(
+  subcommand: string,
+  interfacePkgName: string
+): (skills: Skill[], target: Target) => Skill {
+  return (skills: Skill[], target: Target): Skill => {
+    const resolvedSkills = skills
+      .filter(skill =>
+        skill.interfaces.some(
+          skillInterface => skillInterface.module.subcommand === subcommand
+        )
+      )
+      .filter(skill => {
+        const skillInterface = skill.interfaces.find(
+          skillInterface => skillInterface.module.subcommand === subcommand
+        );
+        if (!skillInterface) {
+          throw new Error(
+            `No interface could be found with "${subcommand}" subcommand`
+          );
+        }
+        const { supports } = skillInterface.config;
+        if (!supports) {
+          return true;
+        }
+        return (
+          supports.envs.includes(target.env) &&
+          supports.platforms.includes(target.platform) &&
+          supports.projects.includes(target.project)
+        );
+      });
+
+    if (!resolvedSkills.length) {
+      throw new Error('No skills could be resolved');
+    }
+
+    if (resolvedSkills.length === 1) {
+      return resolvedSkills[0];
+    }
+
+    const defaultSkill = resolvedSkills.find(skill => skill.default);
+
+    if (!defaultSkill) {
+      throw new Error(
+        `Cannot find a default skill for interface ${interfacePkgName}`
+      );
+    }
+
+    return defaultSkill;
+  };
 }

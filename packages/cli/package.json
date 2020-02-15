@@ -48,6 +48,7 @@
     "rndm": "^1.2.0",
     "signale": "^1.4.0",
     "simple-git": "^1.130.0",
+    "source-map-support": "^0.5.16",
     "uniq": "^1.0.1",
     "update-notifier": "^4.0.0",
     "validate-npm-package-license": "^3.0.4",

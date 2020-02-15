@@ -13,10 +13,10 @@ describe('virtual file system', () => {
 
   const project = new Project(path.join(__dirname, 'fixtures/react-app'));
 
-  const defaultInterfaceState = {
-    projectType: 'app',
+  const defaultTarget = {
+    project: 'app',
     env: 'development',
-    target: 'browser'
+    platform: 'browser'
   };
 
   const file = {
@@ -85,11 +85,10 @@ describe('virtual file system', () => {
       const typescriptSkill = {
         name: 'typescript'
       };
-      const skillMap = await Skills(
-        project,
-        [reduxSkill, typescriptSkill],
-        defaultInterfaceState
-      );
+      const skillMap = await Skills(project, defaultTarget, [
+        reduxSkill,
+        typescriptSkill
+      ]);
       expect(
         skillMap.get('redux').files.get('configureStore.prod').content
       ).toEqual(
@@ -139,11 +138,10 @@ export default { configureStore, history };
         }
       };
 
-      const skillMap = await Skills(
-        project,
-        [reactSkill, typescriptSkill],
-        defaultInterfaceState
-      );
+      const skillMap = await Skills(project, defaultTarget, [
+        reactSkill,
+        typescriptSkill
+      ]);
 
       expect(skillMap.get('react').files.get('routes').content).toEqual(
         `route 1
@@ -173,11 +171,10 @@ route 3`
         }
       };
 
-      const skillMap = await Skills(
-        project,
-        [reactSkill, typescriptSkill],
-        defaultInterfaceState
-      );
+      const skillMap = await Skills(project, defaultTarget, [
+        reactSkill,
+        typescriptSkill
+      ]);
       expect(skillMap.get('react').files.get('routes')).toHaveProperty(
         'content',
         'route 2'
@@ -209,7 +206,7 @@ route 3`
           content: 'foo',
           dest: 'foo',
           condition({ project }): boolean {
-            return project.interfaceStates.length !== 0;
+            return project.targets.length !== 0;
           }
         };
         const vfs = new VirtualFileSystem();
@@ -228,9 +225,7 @@ route 3`
           content: 'foo',
           dest: 'foo',
           condition({ project }): boolean {
-            return project.interfaceStates.some(
-              state => state.projectType === 'lib'
-            );
+            return project.targets.some(target => target.project === 'lib');
           }
         };
         const vfs = new VirtualFileSystem();

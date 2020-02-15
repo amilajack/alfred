@@ -13,19 +13,20 @@ import mergeConfigs from '@alfred/merge-configs';
 import {
   PkgJson,
   ConfigInterface,
-  InterfaceState,
   ProjectInterface,
   ValidationResult,
   SkillsList,
   SkillMap,
-  SkillNode,
   NpmClients,
   DependencyType,
   Dependencies,
   PkgWithDeps,
   Env,
   ProjectEnum,
-  Target
+  Platform,
+  Target,
+  Skill,
+  Entrypoint
 } from '@alfred/types';
 import Config from './config';
 import { PkgValidation } from './validation';
@@ -34,8 +35,9 @@ import run from './commands/run';
 import learn from './commands/learn';
 import skills from './commands/skills';
 import clean from './commands/clean';
-import { PKG_SORT_ORDER, ENTRYPOINTS } from './constants';
+import { PKG_SORT_ORDER, RAW_ENTRYPOINTS } from './constants';
 import { EventEmitter } from 'events';
+// import 'source-map-support/register';
 
 // @TODO Send the information to a crash reporting service (like sentry.io)
 // @TODO Install sourcemaps
@@ -92,7 +94,9 @@ export default class Project extends EventEmitter implements ProjectInterface {
 
   root: string;
 
-  interfaceStates: InterfaceState[];
+  entrypoints: Entrypoint[];
+
+  targets: Target[];
 
   constructor(projectRootOrSubDir: string = process.cwd()) {
     super();
@@ -102,29 +106,36 @@ export default class Project extends EventEmitter implements ProjectInterface {
     this.pkgPath = path.join(projectRoot, 'package.json');
     this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
     this.config = Config.initFromProjectRoot(projectRoot);
-    this.interfaceStates = this.getInterfaceStates();
+    this.entrypoints = this.getEntrypoints();
+    this.targets = this.getTargets();
   }
 
-  private getInterfaceStates(): Array<InterfaceState> {
+  private getEntrypoints(): Entrypoint[] {
+    return RAW_ENTRYPOINTS.filter(entryPoint =>
+      fs.existsSync(path.join(this.root, 'src', entryPoint))
+    ).map(validEntryPoints => {
+      const [project, platform] = validEntryPoints.split('.') as [
+        ProjectEnum,
+        Platform
+      ];
+      return {
+        filename: validEntryPoints,
+        platform,
+        project
+      };
+    });
+  }
+
+  private getTargets(): Array<Target> {
     const envs: Array<string> = ['production', 'development', 'test'];
     // Default to development env if no config given
     const env: Env = envs.includes(process.env.NODE_ENV || '')
       ? (process.env.NODE_ENV as Env)
       : 'development';
-
-    return ENTRYPOINTS.filter(entryPoint =>
-      fs.existsSync(path.join(this.root, 'src', entryPoint))
-    ).map(validEntryPoints => {
-      const [projectType, target] = validEntryPoints.split('.') as [
-        ProjectEnum,
-        Target
-      ];
-      return {
-        env,
-        target,
-        projectType
-      };
-    });
+    return this.entrypoints.map(entrypoint => ({
+      env,
+      ...entrypoint
+    }));
   }
 
   async init(): Promise<ProjectInterface> {
@@ -133,13 +144,13 @@ export default class Project extends EventEmitter implements ProjectInterface {
     const skillMap = await this.getSkillMap();
     skillMap.forEach(skill => {
       Object.entries(skill.hooks || {}).forEach(([hookName, hookFn]) => {
-        this.on(hookName, (data = {}): void => {
+        this.on(hookName, (event = {}): void => {
           if (!hookFn) return;
           return hookFn({
-            data,
+            event,
             project: this,
             config: this.config,
-            interfaceStates: this.interfaceStates,
+            targets: this.targets,
             skill,
             skillConfig: skill.userConfig,
             skillMap: skillMap
@@ -262,29 +273,23 @@ ${JSON.stringify(result.errors)}`
       );
     }
 
-    const hasEntrypoint = ENTRYPOINTS.some(entryPoint =>
+    const hasEntrypoint = RAW_ENTRYPOINTS.some(entryPoint =>
       fs.existsSync(path.join(srcPath, entryPoint))
     );
 
     if (!hasEntrypoint) {
       throw new Error(
-        `You might be in the wrong directory or this is not an Alfred project. The project must have at least one entrypoint. Here are some examples of entrypoints:\n\n${ENTRYPOINTS.map(
+        `You might be in the wrong directory or this is not an Alfred project. The project must have at least one entrypoint. Here are some examples of entrypoints:\n\n${RAW_ENTRYPOINTS.map(
           e => `"./src/${e}"`
         ).join('\n')}`
       );
     }
 
-    // Run validation that is specific to each interface state
-    this.interfaceStates
-      .map(interfaceState =>
-        [
-          interfaceState.projectType,
-          interfaceState.target,
-          interfaceState.env
-        ].join('.')
-      )
-      .forEach(interfaceStateString => {
-        switch (interfaceStateString) {
+    // Run validation that is specific to each target
+    this.targets
+      .map(target => [target.project, target.platform, target.env].join('.'))
+      .forEach(targetString => {
+        switch (targetString) {
           case 'app.browser.production':
           case 'app.browser.development': {
             const indexHtmlPath = path.join(srcPath, 'index.html');
@@ -388,17 +393,17 @@ ${JSON.stringify(result.errors)}`
   // uninstallDeps() {}
 
   /**
-   * Get a skillMap that has all the skills used in all interface states
+   * Get a skillMap that has all the skills used in all targets
    */
   async getSkillMap(): Promise<SkillMap> {
     const skillMaps = await Promise.all(
-      this.interfaceStates.map(state => skillMapFromConfig(this, state))
+      this.targets.map(target => skillMapFromConfig(this, target))
     );
     // Merge the maps
     return skillMaps.reduce(
       (prevSkillMap: SkillMap, currSkillMap: SkillMap) =>
-        new Map<string, SkillNode>([...prevSkillMap, ...currSkillMap]),
-      new Map()
+        new Map<string, Skill>([...prevSkillMap, ...currSkillMap]),
+      new Map<string, Skill>()
     );
   }
 
@@ -411,7 +416,7 @@ ${JSON.stringify(result.errors)}`
       fs.mkdirSync(configsBasePath);
     }
 
-    const skills: SkillNode[] = Array.from(skillMap.values());
+    const skills: Skill[] = Array.from(skillMap.values());
 
     // Write all files and dirs
     // @TODO Remove this to allow users to edit their own boilerplate
@@ -421,13 +426,13 @@ ${JSON.stringify(result.errors)}`
     await Promise.all(
       skills
         .flatMap(skill => Array.from(skill.configs.values()))
-        .map(async configFile => {
-          const filePath = path.join(configsBasePath, configFile.filename);
-          const stringifiedConfig = JSON.stringify(configFile.config);
+        .map(async config => {
+          const filePath = path.join(configsBasePath, config.filename);
+          const stringifiedConfig = JSON.stringify(config.config);
           let parser: 'babel' | 'json' = 'babel';
 
-          const configInConfigFileFormat = ((): string => {
-            switch (configFile.fileType) {
+          const configWithExports = ((): string => {
+            switch (config.fileType) {
               case 'commonjs':
                 parser = 'babel';
                 return `module.exports = ${stringifiedConfig}`;
@@ -443,7 +448,7 @@ ${JSON.stringify(result.errors)}`
             }
           })();
           const formattedConfig = prettier.format(
-            configToEvalString(configInConfigFileFormat),
+            configToEvalString(configWithExports),
             {
               parser
             }
@@ -457,7 +462,7 @@ ${JSON.stringify(result.errors)}`
   }
 
   async findDepsToInstall(
-    additionalSkills: Array<SkillNode> = []
+    additionalSkills: Array<Skill> = []
   ): Promise<PkgWithDeps> {
     const skillMap = await this.getSkillMap();
 

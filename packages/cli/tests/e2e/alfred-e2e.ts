@@ -1,4 +1,4 @@
-/* eslint import/no-dynamic-require: off, no-console: off, global-require: off */
+/* eslint import/no-dynamic-require: off, no-console: off */
 import fs from 'fs';
 import path from 'path';
 import assert from 'assert';
@@ -7,13 +7,13 @@ import Table from 'cli-table3';
 import chalk from 'chalk';
 import powerset from '@amilajack/powerset';
 import childProcess from 'child_process';
-import { INTERFACE_STATES } from '@alfred/core/lib/constants';
+import { TARGETS } from '@alfred/core/src/constants';
 import { formatPkgJson } from '@alfred/core';
-import { entrypointsToInterfaceStates } from '@alfred/core/lib/skill';
+import { entrypointsToTargets } from '@alfred/core/src/skill';
 import mergeConfigs from '@alfred/merge-configs';
-import Config from '@alfred/core/lib/config';
-import { Env, ProjectEnum, Target } from '@alfred/types';
-import { serialPromises } from '@alfred/helpers/lib';
+import Config from '@alfred/core/src/config';
+import { Env, ProjectEnum, Platform } from '@alfred/types';
+import { serialPromises } from '@alfred/helpers';
 import { addEntrypoints } from '../../lib';
 
 process.on('unhandledRejection', err => {
@@ -25,7 +25,7 @@ process.on('unhandledRejection', err => {
 // Start by having all the packages for the skills installed
 // For each combination c[] of skills
 //  consider c[] to be the skills. Add c[] to the skill
-//    for each interfaceState in interfaceStates[9] (include all targets)
+//    for each target in targets[9] (include all targets)
 //      Default skills will automatically be added
 //      Install the necessary deps
 //      Run:
@@ -65,9 +65,7 @@ const scripts = [
   'format'
 ];
 
-const prodInterfaceStates = INTERFACE_STATES.filter(
-  e => e.env === 'production'
-);
+const prodTargets = TARGETS.filter(e => e.env === 'production');
 
 type E2eTest = {
   skillCombination: string[];
@@ -92,8 +90,8 @@ async function generateTestsForSkillCombination(
       email: 'johndoe@gmail.com',
       license: 'MIT',
       npmClient: 'NPM',
-      projectType: 'lib',
-      target: 'browser'
+      project: 'lib',
+      platform: 'browser'
     })
   };
   const binPath = require.resolve('../../lib/commands/alfred');
@@ -137,7 +135,7 @@ async function generateTestsForSkillCombination(
   const e2eTests = await Promise.all(
     powerset(nonCoreCts)
       .sort((a, b) => a.length - b.length)
-      // @TODO Instead of each interface state, generate tests from entrypointCombinations
+      // @TODO Instead of each target, generate tests from entrypointCombinations
       .map(skillCombination => (): Promise<E2eTest> =>
         generateTestsForSkillCombination(skillCombination, tmpDir)
       )
@@ -159,19 +157,19 @@ async function generateTestsForSkillCombination(
       const entrypointsCombinations = powerset(
         Array.from(
           new Set(
-            prodInterfaceStates.map(interfaceState =>
-              [interfaceState.projectType, interfaceState.target].join('.')
+            prodTargets.map(target =>
+              [target.project, target.platform].join('.')
             )
           )
         )
       ).sort((a, b) => a.length - b.length);
 
-      // Create a list of all subsets of the interface states like so:
+      // Create a list of all subsets of the targets like so:
       // [['lib.node'], ['lib.node', 'lib.browser'], etc...]
       await Promise.all(
         entrypointsCombinations.map(async entrypointCombination => {
           const templateData = {
-            project: {
+            entrypoint: {
               name: {
                 npm: {
                   full: 'foo'
@@ -179,19 +177,17 @@ async function generateTestsForSkillCombination(
               },
               projectDir: './src/',
               env: 'development' as Env,
-              projectType: 'lib' as ProjectEnum,
-              target: 'browser' as Target
+              project: 'lib' as ProjectEnum,
+              platform: 'browser' as Platform
             }
           };
 
-          // Generate interface states from the entrypoints
-          const interfaceStates = entrypointsToInterfaceStates(
-            entrypointCombination
-          );
+          // Generate targets from the entrypoints
+          const targets = entrypointsToTargets(entrypointCombination);
           // Remove the existing entrypoints in ./src
           rimraf.sync(path.join(projectDir, 'src/*'));
           rimraf.sync(path.join(projectDir, 'tests/*'));
-          await addEntrypoints(templateData, projectDir, interfaceStates);
+          await addEntrypoints(templateData, projectDir, targets);
 
           await serialPromises(
             [true, false].map(showConfigs => async (): Promise<void> => {
@@ -230,8 +226,8 @@ async function generateTestsForSkillCombination(
                   })}`
                 );
 
-                const interfaceStateContainsAppProjectType = interfaceStates.some(
-                  interfaceState => interfaceState.projectType === 'app'
+                const targetContainsAppproject = targets.some(
+                  target => target.project === 'app'
                 );
 
                 await Promise.all(
@@ -239,7 +235,7 @@ async function generateTestsForSkillCombination(
                     command = subcommand;
                     try {
                       if (
-                        interfaceStateContainsAppProjectType &&
+                        targetContainsAppproject &&
                         subcommand.includes('start')
                       ) {
                         const start = childProcess.spawn(
@@ -318,8 +314,8 @@ async function generateTestsForSkillCombination(
   const totalTestsCount =
     // The total # of combinations of skills
     e2eTests.length *
-    // The total # of combinations of interfaceStates
-    (2 ** prodInterfaceStates.length - 1) *
+    // The total # of combinations of targets
+    (2 ** prodTargets.length - 1) *
     // The number of subcommands tested
     scripts.length *
     // Show Configs
