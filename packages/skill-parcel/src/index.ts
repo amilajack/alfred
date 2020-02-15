@@ -8,7 +8,7 @@ import {
   Env,
   Platform,
   ProjectEnum
-} from '@alfred/types/src';
+} from '@alfred/types';
 
 const supports = {
   // Flag name and argument types

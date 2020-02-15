@@ -25,7 +25,8 @@ import {
   ProjectEnum,
   Platform,
   Target,
-  Skill
+  Skill,
+  Entrypoint
 } from '@alfred/types';
 import Config from './config';
 import { PkgValidation } from './validation';
@@ -93,6 +94,8 @@ export default class Project extends EventEmitter implements ProjectInterface {
 
   root: string;
 
+  entrypoints: Entrypoint[];
+
   targets: Target[];
 
   constructor(projectRootOrSubDir: string = process.cwd()) {
@@ -103,16 +106,11 @@ export default class Project extends EventEmitter implements ProjectInterface {
     this.pkgPath = path.join(projectRoot, 'package.json');
     this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
     this.config = Config.initFromProjectRoot(projectRoot);
+    this.entrypoints = this.getEntrypoints();
     this.targets = this.getTargets();
   }
 
-  private getTargets(): Array<Target> {
-    const envs: Array<string> = ['production', 'development', 'test'];
-    // Default to development env if no config given
-    const env: Env = envs.includes(process.env.NODE_ENV || '')
-      ? (process.env.NODE_ENV as Env)
-      : 'development';
-
+  private getEntrypoints(): Entrypoint[] {
     return RAW_ENTRYPOINTS.filter(entryPoint =>
       fs.existsSync(path.join(this.root, 'src', entryPoint))
     ).map(validEntryPoints => {
@@ -121,11 +119,23 @@ export default class Project extends EventEmitter implements ProjectInterface {
         Platform
       ];
       return {
-        env,
+        filename: validEntryPoints,
         platform,
         project
       };
     });
+  }
+
+  private getTargets(): Array<Target> {
+    const envs: Array<string> = ['production', 'development', 'test'];
+    // Default to development env if no config given
+    const env: Env = envs.includes(process.env.NODE_ENV || '')
+      ? (process.env.NODE_ENV as Env)
+      : 'development';
+    return this.entrypoints.map(entrypoint => ({
+      env,
+      ...entrypoint
+    }));
   }
 
   async init(): Promise<ProjectInterface> {

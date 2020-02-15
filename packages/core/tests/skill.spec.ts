@@ -88,7 +88,7 @@ describe('Skills', () => {
             configs: [
               {
                 alias: 'eslint',
-                filename: '.eslintrc.json',
+                filename: '.eslintrc.js',
                 config: {
                   plugins: []
                 },
@@ -135,7 +135,7 @@ describe('Skills', () => {
             configs: [
               {
                 alias: 'eslint',
-                filename: '.eslintrc.json',
+                filename: '.eslintrc.js',
                 config: {
                   plugins: []
                 },

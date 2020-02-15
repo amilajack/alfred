@@ -18,9 +18,10 @@ export function normalizeInterfacesOfSkill(
     }
     return interfaces.map(skillInterface => {
       if (typeof skillInterface === 'string') {
+        const requiredModule = require(skillInterface);
         return {
           name: skillInterface,
-          module: require(skillInterface).default || require(skillInterface),
+          module: requiredModule.default || requiredModule,
           config: {}
         };
       }
@@ -31,9 +32,10 @@ export function normalizeInterfacesOfSkill(
           );
         }
         const [name, config] = skillInterface;
+        const requiredModule = require(name);
         return {
           name,
-          module: require(name).default || require(name),
+          module: requiredModule.default || requiredModule,
           config
         };
       }

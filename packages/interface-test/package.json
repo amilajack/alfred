@@ -11,6 +11,7 @@
     "version": "yarn build"
   },
   "dependencies": {
+    "@alfred/helpers": "^0.0.4-alpha.0",
     "@alfred/types": "^0.0.4-alpha.0"
   }
 }

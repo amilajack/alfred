@@ -78,19 +78,23 @@ export const RAW_ENTRYPOINTS = [
 export const ENTRYPOINTS: Array<Entrypoint> = [
   {
     project: 'app',
-    platform: 'browser'
+    platform: 'browser',
+    filename: 'app.browser.js'
   },
   {
     project: 'app',
-    platform: 'node'
+    platform: 'node',
+    filename: 'app.node.js'
   },
   {
     project: 'lib',
-    platform: 'node'
+    platform: 'node',
+    filename: 'lib.node.js'
   },
   {
     project: 'lib',
-    platform: 'browser'
+    platform: 'browser',
+    filename: 'lib.browser.js'
   }
 ];
 

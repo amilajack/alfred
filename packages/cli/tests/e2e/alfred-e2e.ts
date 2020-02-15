@@ -65,7 +65,7 @@ const scripts = [
   'format'
 ];
 
-const prodtargets = TARGETS.filter(e => e.env === 'production');
+const prodTargets = TARGETS.filter(e => e.env === 'production');
 
 type E2eTest = {
   skillCombination: string[];
@@ -157,7 +157,7 @@ async function generateTestsForSkillCombination(
       const entrypointsCombinations = powerset(
         Array.from(
           new Set(
-            prodtargets.map(target =>
+            prodTargets.map(target =>
               [target.project, target.platform].join('.')
             )
           )
@@ -315,7 +315,7 @@ async function generateTestsForSkillCombination(
     // The total # of combinations of skills
     e2eTests.length *
     // The total # of combinations of targets
-    (2 ** prodtargets.length - 1) *
+    (2 ** prodTargets.length - 1) *
     // The number of subcommands tested
     scripts.length *
     // Show Configs

@@ -59,6 +59,8 @@ export interface ProjectInterface extends EventEmitter {
   pkg: PkgJson;
   // The path to the root package.json
   pkgPath: string;
+  // All the entrypoints of the project
+  entrypoints: Entrypoint[];
   // All the targets of the project
   targets: Target[];
   // Initialize an alfred project
@@ -91,11 +93,16 @@ export type Entrypoint = {
   platform: Platform;
   // Project type
   project: ProjectEnum;
+  // The filename of the entrypoint
+  filename: string;
   meta?: Record<string, string>;
 };
 
-export type Target = Entrypoint & {
-  // Flag name and argument types
+export type Target = {
+  // All the supported targets a `build` skill should build
+  platform: Platform;
+  // Project type
+  project: ProjectEnum;
   env: Env;
 };
 
