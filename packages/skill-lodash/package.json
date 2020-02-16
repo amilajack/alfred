@@ -1,6 +1,6 @@
 {
   "name": "@alfred/skill-lodash",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "version": "yarn build"
   },
   "dependencies": {
-    "@alfred/types": "^0.0.5"
+    "@alfred/types": "^0.0.6"
   },
   "devDependencies": {
     "lodash-es": "4.17.15",

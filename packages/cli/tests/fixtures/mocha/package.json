@@ -1,6 +1,6 @@
 {
   "name": "@fixtures/mocha",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": true,
   "license": "MIT",
   "main": "./targets/lib.node.js",
@@ -16,9 +16,9 @@
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
   "devDependencies": {
-    "@alfred/cli": "^0.0.5",
-    "@alfred/core": "^0.0.5",
-    "@alfred/skill-mocha": "^0.0.5",
+    "@alfred/cli": "^0.0.6",
+    "@alfred/core": "^0.0.6",
+    "@alfred/skill-mocha": "^0.0.6",
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.4",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
