@@ -3,8 +3,7 @@ import { openUrlInBrowser } from '@alfred/helpers';
 import {
   RawSkill,
   Skill,
-  HookArgs,
-  RunEvent,
+  RunForEachEvent,
   Env,
   Platform,
   ProjectEnum
@@ -45,8 +44,8 @@ const skill: RawSkill = {
     }
   ],
   hooks: {
-    async run({ project, event }: HookArgs): Promise<void> {
-      const { target, subcommand } = event as RunEvent;
+    async run({ project, event }): Promise<void> {
+      const { target, subcommand } = event as RunForEachEvent;
       const { root } = project;
       // eslint-disable-next-line global-require
       const Bundler = require('parcel');

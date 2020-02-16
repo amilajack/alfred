@@ -42,6 +42,13 @@ export type ConfigSkills = ConfigSkill[];
 
 export type NpmClients = 'yarn' | 'npm' | 'writeOnly';
 
+export type SubcommandFn = (
+  flags: Array<string>,
+  target?: Target
+) => Promise<void>;
+
+export type ExecutableSkillMethods = Map<string, SubcommandFn>;
+
 export type SkillsForSubCommand = Map<string, Set<string>>;
 export type SubCommandDict = Map<string, SkillInterface>;
 
@@ -111,10 +118,14 @@ export type HandleFlagsArgs = { target: Target; config: ConfigInterface };
 export interface SkillInterfaceModule {
   description: string;
   subcommand: string;
-  runForAllTargets?: boolean;
-  // @TODO Take config in misc object to allow for future additions to the API
-  // @TODO Swap order of target and skills
-  resolveSkill: (skills: Array<Skill>, target: Target) => Skill;
+  // Determine if a skill should run once for each target it supports. This makes sense for build the
+  // subcommand beacuse each target will need to have its own build. But for the lint subcommand,
+  // it makes sense for this to be false because you don't need to run a linter for each target separately.
+  // If this is set to true, the the `target` param of `resolveSkill` must be passed.
+  runForEachTarget: boolean;
+  // @TODO Change args for object to allow for future additions to the API
+  resolveSkill: (skills: Array<Skill>, target?: Target) => Skill;
+  // @TODO Change args for object to allow for future additions to the API
   handleFlags?: (flags: Array<string>, args: HandleFlagsArgs) => Array<string>;
 }
 
@@ -210,6 +221,11 @@ export type SkillConfig = {
 };
 
 export type RunEvent = {
+  flags: Array<string>;
+  subcommand: string;
+};
+
+export type RunForEachEvent = {
   target: Target;
   flags: Array<string>;
   subcommand: string;
@@ -220,17 +236,20 @@ export type LearnEvent = {
   flags: Array<string>;
 };
 
-export type HookArgs = {
+export type TransformsEvent = {};
+
+export type HookArgs<T> = {
   project: ProjectInterface;
   config: ConfigInterface;
   targets: Target[];
   skill: Skill;
-  skillConfig: ConfigValue;
   skillMap: SkillMap;
-  event: RunEvent | LearnEvent;
+  event: T;
 };
 
-export type HookFn = (args: HookArgs) => void;
+export type HookEvent = RunEvent | RunForEachEvent | LearnEvent;
+
+export type HookFn<T> = (args: HookArgs<T>) => void | Promise<void>;
 
 export type DiffDeps = { diffDevDeps: string[]; diffDeps: string[] };
 
@@ -294,11 +313,11 @@ export type CORE_SKILL =
   | 'lodash';
 
 export type Hooks = {
-  run?: HookFn;
-  beforeLearn?: HookFn;
-  afterLearn?: HookFn;
-  beforeTransforms?: HookFn;
-  afterTransforms?: HookFn;
+  run?: HookFn<RunEvent | RunForEachEvent>;
+  beforeLearn?: HookFn<LearnEvent>;
+  afterLearn?: HookFn<LearnEvent>;
+  beforeTransforms?: HookFn<TransformsEvent>;
+  afterTransforms?: HookFn<TransformsEvent>;
 };
 
 export interface RawSkill {

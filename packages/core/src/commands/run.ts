@@ -1,6 +1,7 @@
-import { ProjectInterface } from '@alfred/types';
-import { getProjectSubcommands, getSkillInterfaceForSubcommand } from '.';
+import { ProjectInterface, SkillInterfaceModule } from '@alfred/types';
+import { getSubcommandMap } from '.';
 import { serialPromises } from '@alfred/helpers';
+import { getSubcommandInterfacesMap } from '../interface';
 
 /**
  * Run an alfred subcommand given an alfred config
@@ -29,45 +30,34 @@ export default async function run(
     flags: skillFlags
   });
 
-  let commandWasExceuted = false;
-
   const skillMap = await project.getSkillMap();
 
-  const tasks = project.targets.map(target => async (): Promise<void> => {
-    const skillInterface = getSkillInterfaceForSubcommand(skillMap, subcommand);
+  if (config.showConfigs) {
+    await project.writeConfigsFromSkillMap(skillMap);
+  }
 
-    if (!skillInterface.runForAllTargets) {
-      if (commandWasExceuted) {
-        return;
-      }
-      commandWasExceuted = true;
+  const subcommandMap = getSubcommandMap(project, skillMap);
+  const subcommandRunFn = subcommandMap.get(subcommand);
+  if (!subcommandRunFn) {
+    throw new Error(`subcommand ${subcommand} does not exist in project`);
+  }
+
+  const subcommandInterface = getSubcommandInterfacesMap(skillMap).get(
+    subcommand
+  ) as SkillInterfaceModule;
+
+  if (subcommandInterface.runForEachTarget) {
+    const tasks = project.targets.map(target => (): Promise<void> =>
+      subcommandRunFn(skillFlags, target)
+    );
+    // @HACK Parcel doesn't work with concurrent builds. This is a temporary workaround
+    if (subcommand === 'build') {
+      await serialPromises(tasks);
+    } else {
+      await Promise.all(tasks.map(task => task()));
     }
-
-    const filteredSkillFlags =
-      skillInterface.handleFlags?.(skillFlags, {
-        target,
-        config
-      }) || skillFlags;
-
-    if (config.showConfigs) {
-      await project.writeConfigsFromSkillMap(skillMap);
-    }
-
-    const commands = getProjectSubcommands(project, skillMap, target);
-    if (!(subcommand in commands)) {
-      throw new Error(
-        `Subcommand "${subcommand}" is not supported by the skills you have installed`
-      );
-    }
-
-    return commands[subcommand](filteredSkillFlags);
-  });
-
-  // @HACK Parcel doesn't work with concurrent builds. This is a temporary workaround
-  if (subcommand === 'build') {
-    await serialPromises(tasks);
   } else {
-    await Promise.all(tasks.map(task => task()));
+    await subcommandRunFn(skillFlags);
   }
 
   project.emit('afterRun', {

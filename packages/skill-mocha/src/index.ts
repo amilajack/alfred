@@ -7,7 +7,8 @@ import {
   RawSkill,
   Env,
   Platform,
-  ProjectEnum
+  ProjectEnum,
+  RunEvent
 } from '@alfred/types';
 
 const supports = {
@@ -29,7 +30,12 @@ const skill: RawSkill = {
     ]
   ],
   hooks: {
-    async run({ project, config, skillMap, event }: HookArgs): Promise<void> {
+    async run({
+      project,
+      config,
+      skillMap,
+      event
+    }: HookArgs<RunEvent>): Promise<void> {
       const binPath = await getPkgBinPath(project, 'mocha');
       const mochaBabelRegisterPath = path.join(
         project.root,

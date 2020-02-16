@@ -8,11 +8,8 @@ const debug = require('debug')('@alfred/interface-start');
 
 const skillInterface: SkillInterfaceModule = {
   subcommand: 'test',
-
   description: 'Test your app and library',
-
-  runForAllTargets: true,
-
+  runForEachTarget: false,
   handleFlags(flags: string[], { target }): string[] {
     const supportedFlags = new Set(['--production', '--development', '--test']);
     const shortNameSupportedFlags = new Set(['--prod', '--dev']);
@@ -32,7 +29,6 @@ const skillInterface: SkillInterfaceModule = {
       return prev;
     }, []);
   },
-
   resolveSkill: interfaceResolvesSkillDefault(
     'test',
     require('../package.json').name

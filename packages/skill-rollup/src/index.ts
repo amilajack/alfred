@@ -2,15 +2,14 @@ import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
 import { mapEnvToShortName } from '@alfred/helpers';
 import {
-  HookArgs,
   RawSkill,
   Skill,
   SkillConfig,
-  RunEvent,
   Env,
   Platform,
   ProjectEnum,
-  ConfigValue
+  ConfigValue,
+  RunForEachEvent
 } from '@alfred/types';
 import mergeConfigs from '@alfred/merge-configs';
 
@@ -73,8 +72,8 @@ const skill: RawSkill = {
     }
   ],
   hooks: {
-    async run({ skill, event }: HookArgs): Promise<void> {
-      const { target, subcommand } = event as RunEvent;
+    async run({ skill, event }): Promise<void> {
+      const { target, subcommand } = event as RunForEachEvent;
       const [baseConfig, prodConfig, devConfig] = [
         'rollup.base',
         'rollup.prod',

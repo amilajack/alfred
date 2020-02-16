@@ -1,84 +1,58 @@
 /* eslint import/no-dynamic-require: off */
 import {
   ProjectInterface,
-  Skill,
   SkillMap,
-  ConfigValue,
-  SkillInterfaceModule,
   HookFn,
-  Target
+  Target,
+  ExecutableSkillMethods,
+  RunEvent,
+  SubcommandFn,
+  RunForEachEvent
 } from '@alfred/types';
+import { getSubcommandInterfacesMap } from '../interface';
 
-export function getSkillInterfaceForSubcommand(
-  skillMap: SkillMap,
-  subcommand: string
-): SkillInterfaceModule {
-  const interfaceForSubcommand = Array.from(skillMap.values())
-    .flatMap((skill: Skill): SkillInterfaceModule[] =>
-      skill.interfaces.map(skillInterface => skillInterface.module)
-    )
-    .find(
-      (skillInterface: SkillInterfaceModule) =>
-        skillInterface.subcommand === subcommand
-    );
-  if (!interfaceForSubcommand) {
-    throw new Error(
-      `The subcommand "${subcommand}" does not have an interface or the subcommand does not exist`
-    );
-  }
-
-  return interfaceForSubcommand;
-}
-
-export type SubcommandFn = (flags: Array<string>) => void;
-
-export type ExecutableSkillMethods = {
-  [subcommand: string]: SubcommandFn;
-};
-
-export function getProjectSubcommands(
+export function getSubcommandMap(
   project: ProjectInterface,
-  skillMap: SkillMap,
-  target: Target
+  skillMap: SkillMap
 ): ExecutableSkillMethods {
-  const { config } = project;
+  const skills = Array.from(skillMap.values());
+  const subcommandInterfaceMap = getSubcommandInterfacesMap(skillMap);
+  const subcommandMapEntries = Array.from(subcommandInterfaceMap.entries()).map(
+    ([subcommand, skillInterface]): [string, SubcommandFn] => {
+      return [
+        subcommand,
+        // Keep this function async to normalize all run call fn's to promises
+        async (flags: string[], target?: Target): Promise<void> => {
+          const event = {
+            subcommand,
+            flags
+          } as RunEvent;
+          const skill = skillInterface.resolveSkill(skills, target);
+          if (
+            (skillInterface.runForEachTarget && !target) ||
+            (!skillInterface.runForEachTarget && target)
+          ) {
+            throw new Error(
+              'Target and runForEachTarget must both be defined together'
+            );
+          }
+          if (skillInterface.runForEachTarget && target) {
+            (event as RunForEachEvent).target = target;
+          } else {
+            skill.hooks.run as HookFn<RunEvent>;
+          }
+          return skill.hooks.run?.({
+            event,
+            project,
+            config: project.config,
+            targets: project.targets,
+            skill,
+            skillMap
+          });
+        }
+      ];
+    }
+  );
 
-  return Array.from(skillMap.values())
-    .filter(skill => skill.hooks && skill.interfaces.length)
-    .flatMap(skill => {
-      return skill.interfaces.map(skillInterface => {
-        const skillConfig = skillMap.get(skill.name) as ConfigValue;
-        const { subcommand } = skillInterface.module;
-        return {
-          fn: (flags: Array<string> = []): void =>
-            (skill.hooks.run as HookFn)({
-              event: {
-                subcommand,
-                flags,
-                target
-              },
-              project,
-              config,
-              targets: project.targets,
-              skill: skill,
-              skillMap,
-              skillConfig
-            }),
-          // @HACK: If interfaces were defined, we could import the @alfred/interface-*
-          //        and use the `subcommand` property. This should be done after we have
-          //        some interfaces to work with
-          subcommand
-        };
-      });
-    })
-    .reduce(
-      (
-        prevSkill: ExecutableSkillMethods,
-        currSkill: { subcommand: string; fn: SubcommandFn }
-      ): ExecutableSkillMethods => ({
-        ...prevSkill,
-        [currSkill.subcommand]: currSkill.fn
-      }),
-      {}
-    );
+  return new Map<string, SubcommandFn>(subcommandMapEntries);
 }
