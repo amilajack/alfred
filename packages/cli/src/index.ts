@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import { formatPkgJson } from '@alfred/core';
 import handlebars from 'handlebars';
-import { Entrypoint, Target } from '@alfred/types';
+import { Entrypoint } from '@alfred/types';
 
 const TEMPLATES_DIR = path.resolve(__dirname, '../templates');
 
@@ -46,7 +46,7 @@ async function compileTemplate(
 export async function addEntrypoints(
   rawTemplateData: RawTemplateData,
   root: string,
-  targets: Array<Target>
+  entrypoints: Array<Entrypoint>
 ): Promise<void> {
   const [
     APP_TEMPLATE,
@@ -60,14 +60,14 @@ export async function addEntrypoints(
   );
 
   await Promise.all(
-    targets.map(target => {
+    entrypoints.map(target => {
       const { project, platform } = target;
       const isApp = project === 'app';
       const isBrowser = platform === 'browser';
 
       const templateData = {
         ...rawTemplateData,
-        project: { project, target, isApp, isBrowser }
+        project: { project, platform, isApp, isBrowser }
       };
 
       const writeIndexHtml = (): Promise<void> => {
@@ -84,11 +84,11 @@ export async function addEntrypoints(
       return Promise.all(
         [
           {
-            file: `./src/${project}.${target}.js`,
+            file: `./src/${project}.${platform}.js`,
             content: (isApp ? APP_TEMPLATE : LIB_TEMPLATE)(templateData)
           },
           {
-            file: `./tests/${project}.${target}.spec.js`,
+            file: `./tests/${project}.${platform}.spec.js`,
             content: TEST_TEMPLATE(templateData)
           }
         ]
@@ -144,11 +144,16 @@ export async function addBoilerplate(
     JSON.parse(NPM_TEMPLATE(templateData))
   );
   await fs.promises.writeFile(pkgPath, formattedPkg);
-  const { project: project, platform: target } = templateData.entrypoint;
+  const { project, platform } = templateData.entrypoint;
 
-  await addEntrypoints(templateData, root, [
-    { project: project, platform: target, env: 'production' }
-  ]);
+  const entrypoints = [
+    {
+      project,
+      platform,
+      filename: [project, platform, 'js'].join('.')
+    }
+  ];
+  await addEntrypoints(templateData, root, entrypoints);
 }
 
 export function getSingleSubcommandFromArgs(args: Array<string>): string {

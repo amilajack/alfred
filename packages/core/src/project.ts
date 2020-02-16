@@ -266,7 +266,7 @@ ${JSON.stringify(result.errors)}`
     const srcPath = path.join(this.root, 'src');
     const validationResult = this.validatePkgJson();
 
-    if (!fs.existsSync(srcPath)) {
+    if (!this.entrypoints.length) {
       throw new Error(
         '"./src" directory does not exist. This does not seem to be an Alfred project'
       );
@@ -280,7 +280,7 @@ ${JSON.stringify(result.errors)}`
       throw new Error(
         `You might be in the wrong directory or this is not an Alfred project. The project must have at least one entrypoint. Here are some examples of entrypoints:\n\n${RAW_ENTRYPOINTS.map(
           e => `"./src/${e}"`
-        ).join('\n')}`
+        ).join('\n')} \n\n Searching from ${this.root}`
       );
     }
 
