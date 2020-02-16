@@ -52,11 +52,12 @@ const skill: RawSkill = {
       const src = path.join(root, 'src');
 
       const entryFiles = [];
-      entryFiles.push(
-        path.join(src, `${target.project}.${target.platform}.js`)
-      );
       if (target.platform === 'browser') {
         entryFiles.push(path.join(src, 'index.html'));
+      } else {
+        entryFiles.push(
+          path.join(src, `${target.project}.${target.platform}.js`)
+        );
       }
 
       const parcelOpts = {

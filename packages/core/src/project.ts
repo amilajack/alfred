@@ -287,29 +287,23 @@ ${JSON.stringify(result.errors)}`
       throw new Error(
         `You might be in the wrong directory or this is not an Alfred project. The project must have at least one entrypoint. Here are some examples of entrypoints:\n\n${RAW_ENTRYPOINTS.map(
           e => `"./src/${e}"`
-        ).join('\n')} \n\n Searching from ${this.root}\n`
+        ).join('\n')} \n\n Searching from ${this.root}\n\n`
       );
     }
 
     // Run validation that is specific to each target
-    this.targets
-      .map(target => [target.project, target.platform, target.env].join('.'))
-      .forEach(targetString => {
-        switch (targetString) {
-          case 'app.browser.production':
-          case 'app.browser.development': {
-            const indexHtmlPath = path.join(srcPath, 'index.html');
-            if (!fs.existsSync(indexHtmlPath)) {
-              throw new Error(
-                'An "./src/index.html" file must exist when targeting a browser environment'
-              );
-            }
-            break;
-          }
-          default:
-            break;
-        }
-      });
+    if (
+      this.entrypoints.some(
+        entrypoint => entrypoint.filename === 'app.browser.js'
+      )
+    ) {
+      const indexHtmlPath = path.join(srcPath, 'index.html');
+      if (!fs.existsSync(indexHtmlPath)) {
+        throw new Error(
+          'An "./src/index.html" file must exist when targeting a browser environment'
+        );
+      }
+    }
 
     return validationResult;
   }
