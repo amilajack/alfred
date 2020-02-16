@@ -21,14 +21,15 @@ import {
   ConfigValue,
   SkillWithoutHelpers,
   Supports,
-  SkillInterfaceModule
+  SkillInterfaceModule,
+  CORE_SKILL
 } from '@alfred/types';
 import {
   getDepsFromPkg,
   fromPkgTypeToFull,
   EnhancedMap
 } from '@alfred/helpers';
-import { CORE_INTERFACES, CORE_SKILLS } from './constants';
+import { CORE_INTERFACES } from './constants';
 import VirtualFileSystem from './virtual-file';
 import { normalizeInterfacesOfSkill } from './interface';
 
@@ -246,6 +247,18 @@ export function requireSkill(skillPkgName: string): Skill {
     throw new Error(`Cannot find skill module '${skillPkgName}'`);
   }
 }
+
+export const CORE_SKILLS: { [skill in CORE_SKILL]: Skill } = {
+  webpack: requireSkill('@alfred/skill-webpack'),
+  babel: requireSkill('@alfred/skill-babel'),
+  parcel: requireSkill('@alfred/skill-parcel'),
+  eslint: requireSkill('@alfred/skill-eslint'),
+  prettier: requireSkill('@alfred/skill-prettier'),
+  jest: requireSkill('@alfred/skill-jest'),
+  react: requireSkill('@alfred/skill-react'),
+  rollup: requireSkill('@alfred/skill-rollup'),
+  lodash: requireSkill('@alfred/skill-lodash')
+};
 
 /**
  * Convert entrypoints to targets

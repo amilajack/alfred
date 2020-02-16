@@ -1,16 +1,9 @@
-import {
-  CORE_SKILL,
-  Target,
-  Entrypoint,
-  SkillInterfaceModule,
-  Skill
-} from '@alfred/types';
+import { Target, Entrypoint, SkillInterfaceModule } from '@alfred/types';
 import buildInterface from '@alfred/interface-build';
 import startInterface from '@alfred/interface-start';
 import testInterface from '@alfred/interface-test';
 import formatInterface from '@alfred/interface-format';
 import lintInterface from '@alfred/interface-lint';
-import { requireSkill } from './skill';
 
 export const PKG_SORT_ORDER = [
   'name',
@@ -86,18 +79,6 @@ export const RAW_ENTRYPOINTS = [
   'lib.browser.js',
   'app.browser.js'
 ];
-
-export const CORE_SKILLS: { [skill in CORE_SKILL]: Skill } = {
-  webpack: requireSkill('@alfred/skill-webpack'),
-  babel: requireSkill('@alfred/skill-babel'),
-  parcel: requireSkill('@alfred/skill-parcel'),
-  eslint: requireSkill('@alfred/skill-eslint'),
-  prettier: requireSkill('@alfred/skill-prettier'),
-  jest: requireSkill('@alfred/skill-jest'),
-  react: requireSkill('@alfred/skill-react'),
-  rollup: requireSkill('@alfred/skill-rollup'),
-  lodash: requireSkill('@alfred/skill-lodash')
-};
 
 export const CORE_INTERFACES: Array<[string, SkillInterfaceModule]> = [
   ['build', buildInterface],

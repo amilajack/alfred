@@ -15,14 +15,15 @@ import { getSubcommandMap } from '../src/commands';
 import skillMapFromConfig, {
   Skills,
   addSkillHelpers,
-  runTransforms
+  runTransforms,
+  CORE_SKILLS
 } from '../src/skill';
 import {
   getSubcommandInterfacesMap,
   normalizeInterfacesOfSkill
 } from '../src/interface';
 import alfred from '../src';
-import { TARGETS, CORE_SKILLS } from '../src/constants';
+import { TARGETS } from '../src/constants';
 
 function removePathsPropertiesFromObject(
   obj:
@@ -392,7 +393,9 @@ describe('Skills', () => {
       };
       const project = {
         ...defaultProject,
-        emit: () => {},
+        emit: (): void => {
+          console.log('emitted');
+        },
         config: {
           ...defaultProject.config,
           skills: [['@alfred/skill-react', {}]]

@@ -334,6 +334,7 @@ export interface RawSkill {
   hooks?: Hooks;
   transforms?: Transforms;
   default?: boolean;
+  userConfig?: Record<string, any>;
 }
 
 export type Dir = {
