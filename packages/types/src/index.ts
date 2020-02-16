@@ -43,7 +43,7 @@ export type ConfigSkills = ConfigSkill[];
 export type NpmClients = 'yarn' | 'npm' | 'writeOnly';
 
 export type SubcommandFn = (
-  flags: Array<string>,
+  flags?: Array<string>,
   target?: Target
 ) => Promise<void>;
 

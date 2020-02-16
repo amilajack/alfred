@@ -71,11 +71,19 @@ function getDevDependencies(skillMap: SkillMap): Dependencies {
 }
 
 describe('Skills', () => {
-  let defaultProject;
+  let defaultAppProject;
+  let defaultLibProject;
+  let defaultMultiPlatformsProject;
 
   beforeAll(async () => {
-    defaultProject = await alfred(
+    defaultAppProject = await alfred(
       path.join(__dirname, '../../cli/tests/fixtures/app')
+    );
+    defaultLibProject = await alfred(
+      path.join(__dirname, '../../cli/tests/fixtures/library')
+    );
+    defaultMultiPlatformsProject = await alfred(
+      path.join(__dirname, '../../cli/tests/fixtures/configs-dir')
     );
   });
 
@@ -121,7 +129,7 @@ describe('Skills', () => {
           }
         ]
       ]);
-      const skillMap = await runTransforms(defaultProject, rawSillMap);
+      const skillMap = await runTransforms(defaultAppProject, rawSillMap);
       expect(skillMap.get('react').configs[0].config).toEqual({
         plugins: ['a', 'b']
       });
@@ -168,7 +176,7 @@ describe('Skills', () => {
           }
         ]
       ]);
-      const skillMap = await runTransforms(defaultProject, rawSillMap);
+      const skillMap = await runTransforms(defaultAppProject, rawSillMap);
       expect(skillMap.get('react').configs[0].config).toEqual({
         plugins: ['a', 'b']
       });
@@ -201,7 +209,9 @@ describe('Skills', () => {
           }
         ]
       ]);
-      return expect(runTransforms(defaultProject, rawSillMap)).rejects.toThrow(
+      return expect(
+        runTransforms(defaultAppProject, rawSillMap)
+      ).rejects.toThrow(
         'Transform from react to eslint must return a new skill'
       );
     });
@@ -243,7 +253,7 @@ describe('Skills', () => {
           target
         )}`, async () => {
           const skillMap = await Skills(
-            defaultProject,
+            defaultAppProject,
             Object.values(CORE_SKILLS),
             target
           );
@@ -256,7 +266,7 @@ describe('Skills', () => {
       it('should error if subcommand does not exist', async () => {
         for (const target of TARGETS) {
           const skillMap = await Skills(
-            defaultProject,
+            defaultAppProject,
             [CORE_SKILLS.babel],
             target
           );
@@ -272,11 +282,11 @@ describe('Skills', () => {
     it('should generate functions for scripts', async () => {
       for (const target of TARGETS) {
         const skill = await Skills(
-          defaultProject,
+          defaultAppProject,
           [CORE_SKILLS.parcel],
           target
         );
-        expect(getSubcommandMap(defaultProject, skill)).toMatchSnapshot();
+        expect(getSubcommandMap(defaultAppProject, skill)).toMatchSnapshot();
       }
     });
   });
@@ -347,7 +357,7 @@ describe('Skills', () => {
           project: 'app',
           platform: 'browser'
         } as Target;
-        const skillMap = await Skills(defaultProject, [], target);
+        const skillMap = await Skills(defaultAppProject, [], target);
         const skillNames = Array.from(skillMap.keys());
         expect(skillNames).toMatchSnapshot();
         expect(skillNames).toContain('parcel');
@@ -360,22 +370,95 @@ describe('Skills', () => {
           project: 'lib',
           platform: 'browser'
         } as Target;
-        const skillMap = await Skills(defaultProject, [], target);
+        const skillMap = await Skills(defaultLibProject, [], target);
         const skillNames = Array.from(skillMap.keys());
         expect(skillNames).toMatchSnapshot();
         expect(skillNames).toContain('rollup');
         expect(skillNames).not.toContain('parcel');
         expect(skillNames).not.toContain('webpack');
       }
+      {
+        const skillMap = await Skills(defaultMultiPlatformsProject);
+        const skillNames = Array.from(skillMap.keys());
+        expect(skillNames).toMatchSnapshot();
+        expect(skillNames).toContain('rollup');
+        expect(skillNames).toContain('parcel');
+      }
+    });
+
+    it('should throw if runForEachTarget is set and transforms is not passed', async () => {
+      const run = jest.fn();
+      const skill: RawSkill = {
+        name: 'test-skill',
+        interfaces: [
+          {
+            name: 'some-test-interface',
+            module: {
+              subcommand: 'test-command',
+              runForEachTarget: true,
+              resolveSkill(skills, target) {
+                return skills.find(skill => skill.name === 'test-skill');
+              }
+            },
+            config: {}
+          }
+        ],
+        hooks: {
+          run
+        }
+      };
+      const skillMap = await Skills(defaultMultiPlatformsProject, [skill]);
+      const subcommandMap = getSubcommandMap(
+        defaultMultiPlatformsProject,
+        skillMap
+      );
+      await Promise.all(
+        defaultMultiPlatformsProject.targets.map(target => {
+          return subcommandMap.get('test-command')([], target);
+        })
+      );
+      expect(run).toHaveBeenCalledTimes(3);
+    });
+
+    it('should throw if either runForEachTarget or target are falsy', async () => {
+      const run = jest.fn();
+      const skill: RawSkill = {
+        name: 'test-skill',
+        interfaces: [
+          {
+            name: 'some-test-interface',
+            module: {
+              subcommand: 'test-command',
+              runForEachTarget: true,
+              resolveSkill(skills) {
+                return skills[0];
+              }
+            },
+            config: {}
+          }
+        ],
+        hooks: {
+          run
+        }
+      };
+      const skillMap = await Skills(defaultMultiPlatformsProject, [skill]);
+      const subcommandMap = getSubcommandMap(
+        defaultMultiPlatformsProject,
+        skillMap
+      );
+      const subcommandRunFn = subcommandMap.get('test-command');
+      await expect(subcommandRunFn([])).rejects.toThrow(
+        'Target and runForEachTarget must both be defined together'
+      );
+      expect(run).toHaveBeenCalledTimes(0);
     });
 
     it('should throw if skill does not exist', async () => {
       const spy = jest.spyOn(console, 'log').mockImplementation();
-      const [target] = TARGETS;
       const project = {
         root: '',
         config: {
-          ...defaultProject.config,
+          ...defaultAppProject.config,
           skills: [['@alfred/skill-non-existent-skill', {}]]
         }
       } as ProjectInterface;
@@ -392,12 +475,12 @@ describe('Skills', () => {
         env: 'production'
       };
       const project = {
-        ...defaultProject,
+        ...defaultAppProject,
         emit: (): void => {
-          console.log('emitted');
+          1 + 1;
         },
         config: {
-          ...defaultProject.config,
+          ...defaultAppProject.config,
           skills: [['@alfred/skill-react', {}]]
         },
         targets: [nodeAppTarget]
@@ -437,7 +520,7 @@ describe('Skills', () => {
         project: 'app',
         platform: 'browser'
       } as Target;
-      const skillMap = await Skills(defaultProject, [], target);
+      const skillMap = await Skills(defaultAppProject, [], target);
       const skillNames = Array.from(skillMap.keys());
       expect(skillNames).toMatchSnapshot();
       expect(skillNames).toContain('parcel');
@@ -451,7 +534,7 @@ describe('Skills', () => {
         project: 'lib',
         platform: 'browser'
       } as Target;
-      const skillMap = await Skills(defaultProject, [], target);
+      const skillMap = await Skills(defaultAppProject, [], target);
       const skillNames = Array.from(skillMap.keys());
       expect(skillNames).toMatchSnapshot();
       expect(skillNames).toContain('rollup');
@@ -472,7 +555,7 @@ describe('Skills', () => {
           const skillsToAdd = skillCombination.map(
             skillName => CORE_SKILLS[skillName]
           );
-          const skillMap = await Skills(defaultProject, skillsToAdd, target);
+          const skillMap = await Skills(defaultAppProject, skillsToAdd, target);
           expect(getConfigs(skillMap)).toMatchSnapshot();
           expect(getDependencies(skillMap)).toMatchSnapshot();
           expect(getDevDependencies(skillMap)).toMatchSnapshot();
@@ -487,7 +570,7 @@ describe('Skills', () => {
         target
       )}`, async () => {
         const skillMap = await Skills(
-          defaultProject,
+          defaultAppProject,
           Object.values(CORE_SKILLS),
           target
         );

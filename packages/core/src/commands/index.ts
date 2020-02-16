@@ -2,7 +2,6 @@
 import {
   ProjectInterface,
   SkillMap,
-  HookFn,
   Target,
   ExecutableSkillMethods,
   RunEvent,
@@ -22,7 +21,7 @@ export function getSubcommandMap(
       return [
         subcommand,
         // Keep this function async to normalize all run call fn's to promises
-        async (flags: string[], target?: Target): Promise<void> => {
+        async (flags: string[] = [], target?: Target): Promise<void> => {
           const event = {
             subcommand,
             flags
@@ -38,8 +37,6 @@ export function getSubcommandMap(
           }
           if (skillInterface.runForEachTarget && target) {
             (event as RunForEachEvent).target = target;
-          } else {
-            skill.hooks.run as HookFn<RunEvent>;
           }
           return skill.hooks.run?.({
             event,
