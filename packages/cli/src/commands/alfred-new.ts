@@ -10,6 +10,7 @@ import git from 'git-config';
 import chalk from 'chalk';
 import alfred from '@alfred/core';
 import { version as ALFRED_CORE_VERSION } from '@alfred/core/package.json';
+import { NewEvent } from '@alfred/types';
 import { getSingleSubcommandFromArgs, GitConfig, addBoilerplate } from '..';
 
 function gitConfig(): Promise<GitConfig> {
@@ -53,7 +54,20 @@ function renderLines(lines: Array<string>): void {
   console.log(lines.join('\n\n'));
 }
 
-async function createNewProject(cwd: string, name: string): Promise<void> {
+const defaultOpts = {
+  withSkills: [],
+  flags: []
+};
+
+async function createNewProject(
+  cwd: string,
+  name: string,
+  rawOpts = defaultOpts
+): Promise<void> {
+  const opts = {
+    ...defaultOpts,
+    ...rawOpts
+  };
   const dirBasename = path.basename(cwd);
   const dirnameEqualsName = dirBasename === name;
   const root = dirnameEqualsName ? cwd : path.resolve(cwd, name);
@@ -231,12 +245,12 @@ async function createNewProject(cwd: string, name: string): Promise<void> {
 
   // Get the entire skillMap now that the skills are installed
   const skillMap = await project.getSkillMap();
-  // Write all files and dirs
-  await Promise.all(
-    Array.from(skillMap.values()).map(skill =>
-      skill.files.writeAllFiles(project)
-    )
-  );
+
+  const event: NewEvent = {
+    skills: Array.from(skillMap.values()),
+    flags: opts.flags
+  };
+  project.emit('afterNew', event);
 }
 
 (async (): Promise<void> => {

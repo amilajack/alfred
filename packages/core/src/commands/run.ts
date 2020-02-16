@@ -33,7 +33,7 @@ export default async function run(
   const skillMap = await project.getSkillMap();
 
   if (config.showConfigs) {
-    await project.writeConfigsFromSkillMap(skillMap);
+    await project.writeSkillConfigs(skillMap);
   }
 
   const subcommandMap = getSubcommandMap(project, skillMap);

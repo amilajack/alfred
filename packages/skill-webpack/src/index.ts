@@ -1,4 +1,3 @@
-import webpack from 'webpack';
 import path from 'path';
 import {
   configStringify,
@@ -169,6 +168,8 @@ const skill: RawSkill = {
         'webpack.browser'
       ) as SkillConfig;
 
+      const webpack = require('webpack');
+
       const { target, subcommand } = event as RunForEachEvent;
 
       let mergedConfig = mergeConfigs(
@@ -236,6 +237,8 @@ const skill: RawSkill = {
               target.env === 'production' ? 'optimized' : 'unoptimized'
             } build`
           );
+          // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+          // @ts-ignore
           webpack(mergedConfig, (err, stats) => {
             if (err) {
               console.error(err.stack || err);
