@@ -1,7 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 import { execCmdInProject, getPkgBinPath } from '@alfred/helpers';
-import { Skill, HookArgs, RawSkill, SkillConfig } from '@alfred/types';
+import {
+  Skill,
+  HookArgs,
+  RawSkill,
+  SkillConfig,
+  RunEvent
+} from '@alfred/types';
 
 const skill: RawSkill = {
   name: 'jest',
@@ -28,7 +34,7 @@ const skill: RawSkill = {
       config,
       project,
       event
-    }: HookArgs): Promise<void> {
+    }: HookArgs<RunEvent>): Promise<void> {
       const { filename: configPath } = skill.configs.get('jest') as SkillConfig;
       const { root } = project;
 

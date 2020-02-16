@@ -1,6 +1,6 @@
 import path from 'path';
 import { execCmdInProject, getPkgBinPath } from '@alfred/helpers';
-import { HookArgs, SkillConfig, RawSkill } from '@alfred/types';
+import { HookArgs, SkillConfig, RawSkill, RunEvent } from '@alfred/types';
 
 const skill: RawSkill = {
   name: 'prettier',
@@ -18,7 +18,12 @@ const skill: RawSkill = {
     }
   ],
   hooks: {
-    async run({ project, skill, config, event }: HookArgs): Promise<void> {
+    async run({
+      project,
+      skill,
+      config,
+      event
+    }: HookArgs<RunEvent>): Promise<void> {
       const binPath = await getPkgBinPath(project, 'prettier');
       const { filename } = skill.configs.get('prettier') as SkillConfig;
       const configPath = path.join(config.configsDir, filename);

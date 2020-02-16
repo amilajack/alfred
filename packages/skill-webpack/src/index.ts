@@ -7,16 +7,15 @@ import {
 } from '@alfred/helpers';
 import mergeConfigs from '@alfred/merge-configs';
 import {
-  HookArgs,
   Skill,
   TransformArgs,
-  RunEvent,
   RawSkill,
   SkillConfig,
   Env,
   Platform,
   ProjectEnum,
-  ConfigValue
+  ConfigValue,
+  RunForEachEvent
 } from '@alfred/types';
 import getPort from 'get-port';
 
@@ -153,7 +152,7 @@ const skill: RawSkill = {
     }
   ],
   hooks: {
-    async run({ project, skill, event }: HookArgs): Promise<void> {
+    async run({ project, skill, event }): Promise<void> {
       const { config: baseConfig } = skill.configs.get(
         'webpack.base'
       ) as SkillConfig;
@@ -170,7 +169,7 @@ const skill: RawSkill = {
         'webpack.browser'
       ) as SkillConfig;
 
-      const { target, subcommand } = event as RunEvent;
+      const { target, subcommand } = event as RunForEachEvent;
 
       let mergedConfig = mergeConfigs(
         baseConfig,

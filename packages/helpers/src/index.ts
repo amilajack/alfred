@@ -211,8 +211,8 @@ export function serialPromises(fns: Array<() => Promise<any>>): Promise<any> {
 export function interfaceResolvesSkillDefault(
   subcommand: string,
   interfacePkgName: string
-): (skills: Skill[], target: Target) => Skill {
-  return (skills: Skill[], target: Target): Skill => {
+): (skills: Skill[], target?: Target) => Skill {
+  return (skills: Skill[], target?: Target): Skill => {
     const resolvedSkills = skills
       .filter(skill =>
         skill.interfaces.some(
@@ -229,7 +229,7 @@ export function interfaceResolvesSkillDefault(
           );
         }
         const { supports } = skillInterface.config;
-        if (!supports) {
+        if (!supports || !target) {
           return true;
         }
         return (

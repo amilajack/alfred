@@ -94,6 +94,7 @@
   },
   "jest": {
     "testEnvironment": "node",
+    "setupFiles": ["./packages/core/tests/mock-source-maps-support.ts"],
     "testPathIgnorePatterns": [
       "<rootDir>/examples",
       "<rootDir>/packages/cli/tests/e2e",

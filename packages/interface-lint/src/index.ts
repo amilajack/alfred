@@ -3,11 +3,8 @@ import { interfaceResolvesSkillDefault } from '@alfred/helpers';
 
 const skillInterface: SkillInterfaceModule = {
   subcommand: 'lint',
-
   description: 'Check for lint errors in your app',
-
-  runForAllTargets: true,
-
+  runForEachTarget: false,
   resolveSkill: interfaceResolvesSkillDefault(
     'lint',
     require('../package.json').name

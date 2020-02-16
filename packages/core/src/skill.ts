@@ -12,7 +12,6 @@ import {
   Dependencies,
   DependencyType,
   PkgJson,
-  CORE_SKILL,
   FileType,
   Skill,
   RawSkill,
@@ -22,18 +21,15 @@ import {
   ConfigValue,
   SkillWithoutHelpers,
   Supports,
-  SkillInterfaceModule
+  SkillInterfaceModule,
+  CORE_SKILL
 } from '@alfred/types';
-import buildInterface from '@alfred/interface-build';
-import startInterface from '@alfred/interface-start';
-import testInterface from '@alfred/interface-test';
-import formatInterface from '@alfred/interface-format';
-import lintInterface from '@alfred/interface-lint';
 import {
   getDepsFromPkg,
   fromPkgTypeToFull,
   EnhancedMap
 } from '@alfred/helpers';
+import { CORE_INTERFACES } from './constants';
 import VirtualFileSystem from './virtual-file';
 import { normalizeInterfacesOfSkill } from './interface';
 
@@ -136,6 +132,8 @@ export async function runTransforms(
   project: ProjectInterface,
   skillMap: SkillMap
 ): Promise<SkillMap> {
+  project.emit('beforeTransforms');
+
   skillMap.forEach(skill => {
     Object.entries(skill.transforms || {}).forEach(
       ([toSkillName, transform]) => {
@@ -156,6 +154,8 @@ export async function runTransforms(
       }
     );
   });
+
+  project.emit('afterTransforms');
 
   return skillMap;
 }
@@ -260,19 +260,6 @@ export const CORE_SKILLS: { [skill in CORE_SKILL]: Skill } = {
   lodash: requireSkill('@alfred/skill-lodash')
 };
 
-// Examples
-// 'lib.node.js',
-// 'app.node.js',
-// 'lib.browser.js',
-// 'app.browser.js'
-// etc...
-export const ENTRYPOINTS = [
-  'lib.node.js',
-  'app.node.js',
-  'lib.browser.js',
-  'app.browser.js'
-];
-
 /**
  * Convert entrypoints to targets
  */
@@ -324,14 +311,6 @@ function validateSkillMap(skillMap: SkillMap, target: Target): SkillMap {
   return skillMap;
 }
 
-const CORE_INTERFACES: Array<[string, SkillInterfaceModule]> = [
-  ['build', buildInterface],
-  ['start', startInterface],
-  ['test', testInterface],
-  ['lint', lintInterface],
-  ['format', formatInterface]
-];
-
 export function skillSupportsTarget(skill: Skill, target: Target): boolean {
   if (!skill.supports) return true;
   return (
@@ -347,8 +326,8 @@ export function skillSupportsTarget(skill: Skill, target: Target): boolean {
  */
 export async function Skills(
   project: ProjectInterface,
-  target: Target,
-  skills: Array<Skill | RawSkill> = []
+  skills: Array<Skill | RawSkill> = [],
+  target?: Target
 ): Promise<Map<string, Skill>> {
   const skillMap: Map<string, Skill> = new Map();
   const normalizedSkills = skills.map(normalizeSkill);
@@ -368,19 +347,39 @@ export async function Skills(
         );
       });
     } else {
-      if (skillSupportsTarget(skill, target)) {
+      if (target) {
+        if (skillSupportsTarget(skill, target)) {
+          skillMap.set(skill.name, skill);
+        }
+      } else if (
+        project.targets.some(target => skillSupportsTarget(skill, target))
+      ) {
         skillMap.set(skill.name, skill);
       }
     }
   });
 
   subcommandMap.forEach(skillInterface => {
-    const resolvedSkill = skillInterface.resolveSkill(
-      skillsToResolveFrom,
-      target
-    );
-    skillMap.set(resolvedSkill.name, resolvedSkill);
+    if (target) {
+      const resolvedSkill = skillInterface.resolveSkill(
+        skillsToResolveFrom,
+        target
+      );
+      skillMap.set(resolvedSkill.name, resolvedSkill);
+    } else {
+      project.targets.forEach(target => {
+        const resolvedSkill = skillInterface.resolveSkill(
+          skillsToResolveFrom,
+          target
+        );
+        skillMap.set(resolvedSkill.name, resolvedSkill);
+      });
+    }
   });
+
+  if (target) {
+    validateSkillMap(skillMap, target);
+  }
 
   // Add all the CORE_SKILL's without subcommands
   // @HACK
@@ -390,8 +389,6 @@ export async function Skills(
 
   await runTransforms(project, skillMap);
 
-  validateSkillMap(skillMap, target);
-
   return skillMap;
 }
 
@@ -400,9 +397,8 @@ export async function Skills(
  * 2. Validate skill
  * 3. Run skill transformations
  */
-export default async function skillMapFromgfig(
+export default async function skillMapFromConfig(
   project: ProjectInterface,
-  target: Target,
   config: ConfigInterface = project.config
 ): Promise<SkillMap> {
   // Generate the skill map
@@ -419,5 +415,5 @@ export default async function skillMapFromgfig(
     skillMapFromConfigSkills.set(skill.name, skill);
   });
 
-  return Skills(project, target, Array.from(skillMapFromConfigSkills.values()));
+  return Skills(project, Array.from(skillMapFromConfigSkills.values()));
 }

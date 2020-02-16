@@ -1,5 +1,36 @@
 /* eslint import/no-dynamic-require: off */
-import { UnresolvedInterfaces, ResolvedInterfaces } from '@alfred/types';
+import {
+  UnresolvedInterfaces,
+  ResolvedInterfaces,
+  Skill,
+  SkillInterfaceModule,
+  SkillMap
+} from '@alfred/types';
+import { CORE_INTERFACES } from './constants';
+
+export function getSubcommandInterfacesMap(
+  skillsOrSkillMap: Skill[] | SkillMap
+): Map<string, SkillInterfaceModule> {
+  const skills = Array.isArray(skillsOrSkillMap)
+    ? skillsOrSkillMap
+    : Array.from(skillsOrSkillMap.values());
+  const subcommandInterfaceMap = new Map<string, SkillInterfaceModule>(
+    CORE_INTERFACES
+  );
+
+  skills.forEach((skill: Skill) => {
+    if (skill.interfaces.length) {
+      skill.interfaces.forEach(skillInterface => {
+        subcommandInterfaceMap.set(
+          skillInterface.module.subcommand,
+          skillInterface.module
+        );
+      });
+    }
+  });
+
+  return subcommandInterfaceMap;
+}
 
 export function normalizeInterfacesOfSkill(
   interfaces: UnresolvedInterfaces

@@ -144,15 +144,14 @@ export default class Project extends EventEmitter implements ProjectInterface {
     const skillMap = await this.getSkillMap();
     skillMap.forEach(skill => {
       Object.entries(skill.hooks || {}).forEach(([hookName, hookFn]) => {
-        this.on(hookName, (event = {}): void => {
+        this.on(hookName, (event = {}): Promise<void> | void => {
           if (!hookFn) return;
-          return hookFn({
+          hookFn({
             event,
             project: this,
             config: this.config,
             targets: this.targets,
             skill,
-            skillConfig: skill.userConfig,
             skillMap: skillMap
           });
         });
@@ -396,15 +395,7 @@ ${JSON.stringify(result.errors)}`
    * Get a skillMap that has all the skills used in all targets
    */
   async getSkillMap(): Promise<SkillMap> {
-    const skillMaps = await Promise.all(
-      this.targets.map(target => skillMapFromConfig(this, target))
-    );
-    // Merge the maps
-    return skillMaps.reduce(
-      (prevSkillMap: SkillMap, currSkillMap: SkillMap) =>
-        new Map<string, Skill>([...prevSkillMap, ...currSkillMap]),
-      new Map<string, Skill>()
-    );
+    return skillMapFromConfig(this);
   }
 
   async writeConfigsFromSkillMap(skillMap: SkillMap): Promise<SkillMap> {

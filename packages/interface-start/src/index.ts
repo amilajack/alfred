@@ -7,11 +7,8 @@ import { SkillInterfaceModule, Env } from '@alfred/types';
 
 const skillInterface: SkillInterfaceModule = {
   subcommand: 'start',
-
   description: 'Start your app and library and reload on change',
-
-  runForAllTargets: true,
-
+  runForEachTarget: true,
   handleFlags(flags: string[], { target }): string[] {
     const supportedFlags = new Set(['--production', '--development', '--test']);
     const shortNameSupportedFlags = new Set(['--prod', '--dev']);
@@ -29,7 +26,6 @@ const skillInterface: SkillInterfaceModule = {
       return prev;
     }, []);
   },
-
   resolveSkill: interfaceResolvesSkillDefault(
     'start',
     require('../package.json').name
