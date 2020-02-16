@@ -1,6 +1,6 @@
 {
   "name": "@examples/alfred-config-example",
-  "version": "0.0.4-alpha.0",
+  "version": "0.0.5",
   "main": "index.json",
   "private": true,
   "peerDependencies": {

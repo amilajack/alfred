@@ -1,6 +1,6 @@
 {
   "name": "@alfred/skill-webpack",
-  "version": "0.0.4-alpha.0",
+  "version": "0.0.5",
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
@@ -10,9 +10,9 @@
     "version": "yarn build"
   },
   "dependencies": {
-    "@alfred/helpers": "^0.0.4-alpha.0",
-    "@alfred/merge-configs": "^0.0.4-alpha.0",
-    "@alfred/types": "^0.0.4-alpha.0",
+    "@alfred/helpers": "^0.0.5",
+    "@alfred/merge-configs": "^0.0.5",
+    "@alfred/types": "^0.0.5",
     "get-port": "^5.1.1"
   },
   "devDependencies": {

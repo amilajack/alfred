@@ -1,6 +1,6 @@
 {
   "name": "@fixtures/app",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -14,9 +14,9 @@
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
   "devDependencies": {
-    "@alfred/cli": "^0.0.4",
-    "@alfred/core": "^0.0.4",
-    "@alfred/skill-react": "^0.0.4-alpha.0",
+    "@alfred/cli": "^0.0.5",
+    "@alfred/core": "^0.0.5",
+    "@alfred/skill-react": "^0.0.5",
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.4",
     "@babel/plugin-proposal-class-properties": "^7.8.3",

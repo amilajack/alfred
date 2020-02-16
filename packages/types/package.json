@@ -1,6 +1,6 @@
 {
   "name": "@alfred/types",
-  "version": "0.0.4-alpha.0",
+  "version": "0.0.5",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

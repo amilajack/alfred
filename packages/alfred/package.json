@@ -1,11 +1,11 @@
 {
   "name": "alfred",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "bin": "./node_modules/.bin/alfred",
   "dependencies": {
-    "@alfred/cli": "^0.0.4",
-    "@alfred/core": "^0.0.4"
+    "@alfred/cli": "^0.0.5",
+    "@alfred/core": "^0.0.5"
   },
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"
 }

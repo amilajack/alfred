@@ -1,6 +1,6 @@
 {
   "name": "@alfred/skill-jest",
-  "version": "0.0.4-alpha.0",
+  "version": "0.0.5",
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
@@ -10,8 +10,8 @@
     "version": "yarn build"
   },
   "dependencies": {
-    "@alfred/helpers": "^0.0.4-alpha.0",
-    "@alfred/types": "^0.0.4-alpha.0"
+    "@alfred/helpers": "^0.0.5",
+    "@alfred/types": "^0.0.5"
   },
   "devDependencies": {
     "identity-obj-proxy": "^3.0.0",

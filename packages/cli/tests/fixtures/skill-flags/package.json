@@ -1,6 +1,6 @@
 {
   "name": "@fixtures/skill-flags",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -18,8 +18,8 @@
     "@babel/preset-env": "^7.8.4"
   },
   "devDependencies": {
-    "@alfred/cli": "^0.0.4",
-    "@alfred/core": "^0.0.4",
+    "@alfred/cli": "^0.0.5",
+    "@alfred/core": "^0.0.5",
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.4",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
