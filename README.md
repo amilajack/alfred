@@ -34,6 +34,7 @@ cd my-app
 
 # Built-in Subcommands
 alfred new
+alfred new --with @alfred/skill-react @alfred/skill-redux
 alfred learn
 alfred skills
 alfred start
@@ -73,7 +74,6 @@ See our [examples directory](https://github.com/amilajack/alfred/tree/master/exa
 | 1.|  [hello world](https://github.com/amilajack/alfred/tree/master/examples/hello-world) | A simple hello work app in node |
 | 2.|  [react library](https://github.com/amilajack/alfred/tree/master/examples/react-lib) | A small button library built with React |
 | 3.|  typescript | **HELP WANTED** |
-| 4.|  react | **HELP WANTED** |
 
 ## Passing Flags to Skills
 

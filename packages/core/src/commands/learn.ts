@@ -1,4 +1,4 @@
-import { ProjectInterface } from '@alfred/types';
+import { ProjectInterface, LearnEvent, Skill } from '@alfred/types';
 import mergeConfigs from '@alfred/merge-configs';
 import Config from '../config';
 import { requireSkill } from '../skill';
@@ -42,13 +42,10 @@ export default async function learn(
 
   // Get the entire skillMap now that the skills are installed
   const skillMap = await project.getSkillMap();
-  const learnedSkills = new Set(skillsToLearn.map(skill => skill.name));
-  // Write all files and dirs
-  await Promise.all(
-    Array.from(skillMap.values())
-      .filter(skill => learnedSkills.has(skill.name))
-      .map(skill => skill.files.writeAllFiles(project))
+  const learnedSkills = skillsToLearn.map(
+    skill => skillMap.get(skill.name) as Skill
   );
 
-  project.emit('afterLearn', { skillsPkgNames });
+  const event: LearnEvent = { skillsPkgNames, skills: learnedSkills };
+  project.emit('afterLearn', event);
 }

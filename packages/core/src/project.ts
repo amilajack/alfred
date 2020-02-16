@@ -26,11 +26,13 @@ import {
   Platform,
   Target,
   Skill,
-  Entrypoint
+  Entrypoint,
+  LearnEvent,
+  HookArgs
 } from '@alfred/types';
 import Config from './config';
 import { PkgValidation } from './validation';
-import skillMapFromConfig from './skill';
+import skillMapFromConfig, { requireSkill } from './skill';
 import run from './commands/run';
 import learn from './commands/learn';
 import skills from './commands/skills';
@@ -152,9 +154,16 @@ export default class Project extends EventEmitter implements ProjectInterface {
             config: this.config,
             targets: this.targets,
             skill,
-            skillMap: skillMap
+            skillMap
           });
         });
+      });
+    });
+
+    // Write all files of newly learned skills
+    ['afterNew', 'afterLearn'].forEach(hookName => {
+      this.on(hookName, ({ event }: HookArgs<LearnEvent>) => {
+        this.writeSkillFiles(event.skillsPkgNames.map(requireSkill));
       });
     });
 
@@ -266,21 +275,19 @@ ${JSON.stringify(result.errors)}`
     const srcPath = path.join(this.root, 'src');
     const validationResult = this.validatePkgJson();
 
-    if (!this.entrypoints.length) {
+    if (!fs.existsSync(srcPath)) {
       throw new Error(
         '"./src" directory does not exist. This does not seem to be an Alfred project'
       );
     }
 
-    const hasEntrypoint = RAW_ENTRYPOINTS.some(entryPoint =>
-      fs.existsSync(path.join(srcPath, entryPoint))
-    );
+    const hasEntrypoint = this.entrypoints.length > 0;
 
     if (!hasEntrypoint) {
       throw new Error(
         `You might be in the wrong directory or this is not an Alfred project. The project must have at least one entrypoint. Here are some examples of entrypoints:\n\n${RAW_ENTRYPOINTS.map(
           e => `"./src/${e}"`
-        ).join('\n')} \n\n Searching from ${this.root}`
+        ).join('\n')} \n\n Searching from ${this.root}\n`
       );
     }
 
@@ -398,7 +405,11 @@ ${JSON.stringify(result.errors)}`
     return skillMapFromConfig(this);
   }
 
-  async writeConfigsFromSkillMap(skillMap: SkillMap): Promise<SkillMap> {
+  async writeSkillFiles(skills: Skill[]): Promise<void> {
+    await Promise.all(skills.map(skill => skill.files.writeAllFiles(this)));
+  }
+
+  async writeSkillConfigs(skillMap: SkillMap): Promise<SkillMap> {
     if (!this.config.showConfigs) return skillMap;
 
     // Create a .configs dir if it doesn't exist
@@ -408,10 +419,6 @@ ${JSON.stringify(result.errors)}`
     }
 
     const skills: Skill[] = Array.from(skillMap.values());
-
-    // Write all files and dirs
-    // @TODO Remove this to allow users to edit their own boilerplate
-    await Promise.all(skills.map(skill => skill.files.writeAllFiles(this)));
 
     // Write all configs
     await Promise.all(

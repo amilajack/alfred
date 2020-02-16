@@ -84,7 +84,9 @@ export interface ProjectInterface extends EventEmitter {
   // Get skill map
   getSkillMap: () => Promise<SkillMap>;
   // Write each config in .configs of each skill
-  writeConfigsFromSkillMap: (skillMap: SkillMap) => Promise<SkillMap>;
+  writeSkillConfigs: (skillMap: SkillMap) => Promise<SkillMap>;
+  // Write each config in .configs of each skill
+  writeSkillFiles: (skills: Skill[]) => Promise<void>;
   // Install dependencies to a given project
   installDeps: (
     dependencies: string[] | Dependencies,
@@ -232,7 +234,12 @@ export type RunForEachEvent = {
 };
 
 export type LearnEvent = {
+  skills: Skill[];
   skillsPkgNames: Array<string>;
+};
+
+export type NewEvent = {
+  skills: Skill[];
   flags: Array<string>;
 };
 
@@ -247,7 +254,7 @@ export type HookArgs<T> = {
   event: T;
 };
 
-export type HookEvent = RunEvent | RunForEachEvent | LearnEvent;
+export type HookEvent = RunEvent | RunForEachEvent | LearnEvent | NewEvent;
 
 export type HookFn<T> = (args: HookArgs<T>) => void | Promise<void>;
 
