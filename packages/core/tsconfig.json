@@ -7,6 +7,11 @@
   "references": [
     {"path": "../cli"},
     {"path": "../helpers"},
-    {"path": "../types"}
+    {"path": "../types"},
+    {"path": "../interface-build"},
+    {"path": "../interface-start"},
+    {"path": "../interface-test"},
+    {"path": "../interface-lint"},
+    {"path": "../interface-format"},
   ]
 }
