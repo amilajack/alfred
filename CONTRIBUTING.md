@@ -29,6 +29,7 @@ lerna publish --registry http://localhost:4873
 lerna publish
 
 # Documentation publishing
+yarn workspace website run build
 yarn api-docs
 GIT_USER=your-github-username USE_SSH=true yarn workspace website deploy
 ```
