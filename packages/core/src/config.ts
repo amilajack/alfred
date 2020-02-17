@@ -107,7 +107,7 @@ export default class Config implements ConfigInterface {
     if (!config.skills || !config.skills.length)
       return config as AlfredConfigWithResolvedSkills;
 
-    const skillsMap: ConfigMap = new Map();
+    const skillMap: ConfigMap = new Map();
     const mappedSkills: ConfigMap = config.skills.reduce(
       (map: ConfigMap, skill: RawSkillConfigValue) => {
         if (typeof skill === 'string') {
@@ -128,7 +128,7 @@ export default class Config implements ConfigInterface {
         }
         throw new Error(`Config type not supported: ${JSON.stringify(skill)}`);
       },
-      skillsMap
+      skillMap
     );
 
     return {

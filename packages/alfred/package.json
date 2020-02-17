@@ -7,5 +7,8 @@
     "@alfred/cli": "^0.0.7-alpha.0",
     "@alfred/core": "^0.0.7-alpha.0"
   },
-  "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"
+  "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8",
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.8.3"
+  }
 }

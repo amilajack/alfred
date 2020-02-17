@@ -51,3 +51,4 @@ examples/**/.babel*
 examples/**/.prettierrc
 
 !examples/.eslintrc.json
+.docusaurus
