@@ -17,13 +17,20 @@ yarn build-watch
 # Linking
 yarn workspace alfred link
 
-# Local Publishing
+# Publishing to NPM registry
+lerna publish
+
+# Publishing Locally
 yarn global add verdaccio
 verdaccio
 lerna publish --registry http://localhost:4873
 
-# Production Publishing
+# Publishing to production
 lerna publish
+
+# Documentation publishing
+yarn api-docs
+GIT_USER=your-github-username USE_SSH=true yarn workspace website deploy
 ```
 
 To change verdaccio configs, see `~/.config/verdaccio/config.yaml`

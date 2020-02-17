@@ -1,5 +1,16 @@
 {
   "docs": {
-    "Getting Started": ["getting-started"]
+    "Getting Started": [
+      "getting-started",
+      "configuration"
+    ],
+    "Skills": [
+      "skills",
+      "skill-transforms",
+      "skill-hooks"
+    ],
+    "Interfaces": [
+      "interfaces"
+    ]
   }
 }

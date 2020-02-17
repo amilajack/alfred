@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const docusarusConfig = {
+module.exports = {
   title: 'Alfred',
   tagline: 'A standard workflow for JavaScript projects',
   url: 'https://alfred.js.org',
@@ -30,7 +30,7 @@ const docusarusConfig = {
       title: 'Alfred',
       logo: {
         alt: 'Alfred Logo',
-        src: 'img/logo.svg'
+        src: 'img/alfred-logo.png'
       },
       links: [
         { href: '/api', label: 'API', position: 'left' },
@@ -55,14 +55,9 @@ const docusarusConfig = {
       }
     ],
     footer: {
-      logo: {
-        alt: 'Facebook Open Source Logo',
-        src: 'https://docusaurus.io/img/oss_logo.png',
-        href: 'https://opensource.facebook.com/'
-      },
       copyright: `Copyright © ${new Date().getFullYear()} Alfred`
     },
-    image: 'img/docusaurus.png',
+    image: 'img/alfred-log.png',
     sidebarCollapsible: false,
     algolia: {
       // "Search only api key". Safe to keep this public
@@ -76,10 +71,8 @@ const docusarusConfig = {
   },
 
   /* path to images for header/footer */
-  favicon: 'img/favicon.png',
+  favicon: 'img/alfred-logo.png',
 
   // Add custom scripts here that would be placed in <script> tags.
   scripts: ['https://buttons.github.io/buttons.js']
 };
-
-module.exports = docusarusConfig;
