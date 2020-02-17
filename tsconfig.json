@@ -6,17 +6,16 @@
     "declaration": true,
     "declarationMap": true,
     "composite": true,
-
     // "emitDeclarationOnly": true,
     // "isolatedModules": true,
-
     "strict": true,
     "pretty": true,
-
     "sourceMap": true,
-
-    "noEmit": false,
-
+    "baseUrl": "./packages",
+    "paths": {
+      "@alfred/*": ["./*/src"]
+    },
+    // "noEmit": true,
     /* Additional Checks */
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -31,6 +30,7 @@
     "resolveJsonModule": true
   },
   "exclude": [
+    "examples",
     "targets",
     "**/lib/**/*",
     "**/tests/**"

@@ -14,6 +14,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "spec": "jest",
     "test": "yarn e2e:clean && yarn build && yarn lint && lerna run test --parallel --ignore @fixtures/*,@examples/* && lerna run test-all --parallel",
+    "ts": "yarn tsc --noEmit",
     "version": "yarn e2e:clean & lerna run build:clean && yarn build",
     "website:build": "yarn workspace @alfred/website build",
     "website:clean": "yarn workspace @alfred/website clean",
@@ -89,12 +90,15 @@
     "lerna": "^3.20.2",
     "lint-staged": "^10.0.7",
     "shebang-loader": "^0.0.1",
+    "typedoc": "^0.16.10",
     "typescript": "^3.7.5",
     "yarn": "^1.22.0"
   },
   "jest": {
     "testEnvironment": "node",
-    "setupFiles": ["./packages/core/tests/mock-source-maps-support.ts"],
+    "setupFiles": [
+      "./packages/core/tests/mock-source-maps-support.ts"
+    ],
     "testPathIgnorePatterns": [
       "<rootDir>/examples",
       "<rootDir>/packages/cli/tests/e2e",
