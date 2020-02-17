@@ -26,6 +26,22 @@ const docusarusConfig = {
   ],
 
   themeConfig: {
+    navbar: {
+      title: 'Alfred',
+      logo: {
+        alt: 'Alfred Logo',
+        src: 'img/logo.svg'
+      },
+      links: [
+        { href: '/api', label: 'API', position: 'left' },
+        { to: 'blog', label: 'Blog', position: 'left' },
+        {
+          href: 'https://github.com/amilajack/alfred',
+          label: 'GitHub',
+          position: 'right'
+        }
+      ]
+    },
     header: [
       { doc: 'getting-started', label: 'Docs' },
       {
