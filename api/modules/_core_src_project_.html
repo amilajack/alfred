@@ -79,9 +79,11 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_core_src_project_.html#entrypointtotarget" class="tsd-kind-icon">entrypoint<wbr>ToTarget</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_core_src_project_.html#findprojectroot" class="tsd-kind-icon">find<wbr>Project<wbr>Root</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_core_src_project_.html#formatpkgjson" class="tsd-kind-icon">format<wbr>Pkg<wbr>Json</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_core_src_project_.html#getinstallcommmand" class="tsd-kind-icon">get<wbr>Install<wbr>Commmand</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_core_src_project_.html#parseentrypoint" class="tsd-kind-icon">parse<wbr>Entrypoint</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_core_src_project_.html#pkgdepstolist" class="tsd-kind-icon">pkg<wbr>Deps<wbr>ToList</a></li>
 							</ul>
 						</section>
@@ -90,6 +92,32 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="entrypointtotarget" class="tsd-anchor"></a>
+					<h3>entrypoint<wbr>ToTarget</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">entrypoint<wbr>ToTarget<span class="tsd-signature-symbol">(</span>entrypoint<span class="tsd-signature-symbol">: </span><a href="_types_src_index_.html#entrypoint" class="tsd-signature-type">Entrypoint</a>, env<span class="tsd-signature-symbol">: </span><a href="_types_src_index_.html#env" class="tsd-signature-type">Env</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_types_src_index_.html#target-2" class="tsd-signature-type">Target</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9966679/packages/core/src/project.ts#L83">packages/core/src/project.ts:83</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>entrypoint: <a href="_types_src_index_.html#entrypoint" class="tsd-signature-type">Entrypoint</a></h5>
+								</li>
+								<li>
+									<h5>env: <a href="_types_src_index_.html#env" class="tsd-signature-type">Env</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_types_src_index_.html#target-2" class="tsd-signature-type">Target</a></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
 					<a name="findprojectroot" class="tsd-anchor"></a>
 					<h3>find<wbr>Project<wbr>Root</h3>
@@ -100,7 +128,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/amilajack/alfred/blob/cb977dc/packages/core/src/project.ts#L53">packages/core/src/project.ts:53</a></li>
+									<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9966679/packages/core/src/project.ts#L53">packages/core/src/project.ts:53</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -128,7 +156,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/amilajack/alfred/blob/cb977dc/packages/core/src/project.ts#L86">packages/core/src/project.ts:86</a></li>
+									<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9966679/packages/core/src/project.ts#L102">packages/core/src/project.ts:102</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -151,7 +179,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/amilajack/alfred/blob/cb977dc/packages/core/src/project.ts#L67">packages/core/src/project.ts:67</a></li>
+									<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9966679/packages/core/src/project.ts#L67">packages/core/src/project.ts:67</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -165,6 +193,29 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="parseentrypoint" class="tsd-anchor"></a>
+					<h3>parse<wbr>Entrypoint</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Entrypoint<span class="tsd-signature-symbol">(</span>rawEntrypoint<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_types_src_index_.html#entrypoint" class="tsd-signature-type">Entrypoint</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9966679/packages/core/src/project.ts#L75">packages/core/src/project.ts:75</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>rawEntrypoint: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_types_src_index_.html#entrypoint" class="tsd-signature-type">Entrypoint</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
 					<a name="pkgdepstolist" class="tsd-anchor"></a>
 					<h3>pkg<wbr>Deps<wbr>ToList</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
@@ -174,7 +225,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/amilajack/alfred/blob/cb977dc/packages/core/src/project.ts#L80">packages/core/src/project.ts:80</a></li>
+									<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9966679/packages/core/src/project.ts#L96">packages/core/src/project.ts:96</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -212,6 +263,9 @@
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
 						<a href="../classes/_core_src_project_.project.html" class="tsd-kind-icon">Project</a>
 					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_core_src_project_.html#entrypointtotarget" class="tsd-kind-icon">entrypoint<wbr>ToTarget</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="_core_src_project_.html#findprojectroot" class="tsd-kind-icon">find<wbr>Project<wbr>Root</a>
 					</li>
@@ -220,6 +274,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="_core_src_project_.html#getinstallcommmand" class="tsd-kind-icon">get<wbr>Install<wbr>Commmand</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_core_src_project_.html#parseentrypoint" class="tsd-kind-icon">parse<wbr>Entrypoint</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_core_src_project_.html#pkgdepstolist" class="tsd-kind-icon">pkg<wbr>Deps<wbr>ToList</a>

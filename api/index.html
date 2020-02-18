@@ -96,22 +96,9 @@ yarn global add alfred</code></pre>
 					<h2>Usage</h2>
 				</a>
 				<pre><code class="language-bash"><span class="hljs-comment"># Creating a new project</span>
-alfred new my-lib --lib
-alfred new my-lib --lib --browser
+alfred new my-lib --lib --skills @alfred/skill-react @alfred/skill-redux
 alfred new my-app
 <span class="hljs-built_in">cd</span> my-app
-
-<span class="hljs-comment"># Built-in Subcommands</span>
-alfred new
-alfred new --with @alfred/skill-react @alfred/skill-redux
-alfred learn
-alfred skills
-alfred start
-alfred build
-alfred build --prod
-alfred clean
-alfred format
-alfred <span class="hljs-built_in">test</span>
 
 <span class="hljs-comment"># Planned Built-in Subcommands</span>
 alfred targets
@@ -124,7 +111,7 @@ alfred types
 <span class="hljs-comment"># Learning skills</span>
 alfred learn @alfred/skill-parcel
 <span class="hljs-comment"># Build using the new subcommand</span>
-alfred build
+alfred run build
 <span class="hljs-comment"># Learning multiple skills</span>
 alfred learn @alfred/skill-angular @alfred/skill-redux</code></pre>
 				<a href="#docs" id="docs" style="color: inherit; text-decoration: none;">
@@ -133,6 +120,7 @@ alfred learn @alfred/skill-angular @alfred/skill-redux</code></pre>
 				<ul>
 					<li><strong><a href="https://alfred.js.org">website</a></strong> (<a href="https://alfred.js.org">alfred.js.org</a>)</li>
 					<li><strong><a href="https://alfred.js.org/docs/getting-started">docs</a></strong> (<a href="https://alfred.js.org/docs/getting-started">alfred.js.org/docs/getting-started</a>)</li>
+					<li><strong><a href="https://alfred.js.org/api">api</a></strong> (<a href="https://alfred.js.org/api">alfred.js.org/api</a>)</li>
 				</ul>
 				<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
 					<h2>Examples</h2>
@@ -162,28 +150,12 @@ alfred learn @alfred/skill-angular @alfred/skill-redux</code></pre>
 							<td><strong>HELP WANTED</strong></td>
 						</tr>
 				</tbody></table>
-				<a href="#roadmap" id="roadmap" style="color: inherit; text-decoration: none;">
-					<h2>Roadmap</h2>
-				</a>
-				<a href="#v100" id="v100" style="color: inherit; text-decoration: none;">
-					<h3>v1.0.0</h3>
-				</a>
-				<ul>
-					<li>Implement at least one skill for each type of JS infrastructure</li>
-				</ul>
-				<a href="#post-v100" id="post-v100" style="color: inherit; text-decoration: none;">
-					<h3>Post v1.0.0</h3>
-				</a>
-				<ul>
-					<li><code>alfred migrate</code>: Upgrade codebase to latest codebase to latest ES version</li>
-					<li><code>alfred bug</code>: Generating bug reports on user&#39;s behalf</li>
-					<li><code>alfred doc</code>: Generating documentation that will be rendered to <code>README.md</code> and html</li>
-				</ul>
 				<a href="#implemented-skills" id="implemented-skills" style="color: inherit; text-decoration: none;">
 					<h2>Implemented Skills</h2>
 				</a>
 				<p>✅ Basic implementation finish
-				❌ Planned but not started</p>
+					🔨 Implementation in progress
+				❌ To be implemented</p>
 				<table>
 					<thead>
 						<tr>
