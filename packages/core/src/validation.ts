@@ -528,10 +528,7 @@ export function validateAlfredConfig(
     skills: Joi.array().items(
       Joi.string(),
       Joi.array().items(Joi.string().required(), Joi.object().required())
-    ),
-    lib: Joi.object({
-      recommendSkills: Joi.array().items(Joi.string())
-    })
+    )
   });
 
   if (

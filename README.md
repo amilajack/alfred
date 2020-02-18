@@ -38,7 +38,7 @@ alfred run build
 
 * **[website](https://alfred.js.org)** ([alfred.js.org](https://alfred.js.org))
 * **[docs](https://alfred.js.org/docs/getting-started)** ([alfred.js.org/docs/getting-started](https://alfred.js.org/docs/getting-started))
-* **[api](https://alfred.js.org/api)** ([alfred.js.org/api](https://alfred.js.org/api))
+* **[API](https://alfred.js.org/api)** ([alfred.js.org/api](https://alfred.js.org/api))
 
 ## Examples
 

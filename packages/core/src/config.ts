@@ -8,9 +8,9 @@ import {
   NpmClients,
   AlfredConfigWithResolvedSkills,
   AlfredConfigWithUnresolvedInterfaces,
-  ConfigSkills,
+  AlfredConfigSkill,
   AlfredConfigWithUnresolvedSkills,
-  RawSkillConfigValue,
+  AlfredConfigRawSkill,
   AlfredConfigWithDefaults,
   PkgJson
 } from '@alfred/types';
@@ -29,7 +29,7 @@ export default class Config implements ConfigInterface {
 
   configsDir: string;
 
-  skills: ConfigSkills;
+  skills: AlfredConfigSkill[];
 
   autoInstall: boolean;
 
@@ -111,7 +111,7 @@ export default class Config implements ConfigInterface {
 
     const skillMap: ConfigMap = new Map();
     const mappedSkills: ConfigMap = config.skills.reduce(
-      (map: ConfigMap, skill: RawSkillConfigValue) => {
+      (map: ConfigMap, skill: AlfredConfigRawSkill) => {
         if (typeof skill === 'string') {
           map.set(skill, {});
           return map;

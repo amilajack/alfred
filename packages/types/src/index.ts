@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 
 export type Dependencies = {
-  [x: string]: string;
+  [pkgName: string]: string;
 };
 
 export type DependencyType = 'dev' | 'dep' | 'peer';
@@ -36,9 +36,7 @@ export type Platform = 'node' | 'browser';
 
 export type ProjectEnum = 'app' | 'lib';
 
-export type ConfigSkill = [string, ConfigValue];
-
-export type ConfigSkills = ConfigSkill[];
+export type AlfredConfigSkill = [string, ConfigValue];
 
 export type NpmClients = 'yarn' | 'npm' | 'writeOnly';
 
@@ -131,13 +129,13 @@ export interface SkillInterfaceModule {
   handleFlags?: (flags: Array<string>, args: HandleFlagsArgs) => Array<string>;
 }
 
-export type RawSkillConfigValue = string | [string, ConfigValue];
+export type AlfredConfigRawSkill = string | [string, ConfigValue];
 
 export type RawExtendsConfigValue = Array<string> | string;
 
 // Interface should be resolved before skills are resolved, so extends is not included
 export interface AlfredConfigWithResolvedSkills {
-  skills?: ConfigSkills;
+  skills?: AlfredConfigSkill[];
   npmClient?: NpmClients;
   configsDir?: string;
   showConfigs?: boolean;
@@ -146,7 +144,7 @@ export interface AlfredConfigWithResolvedSkills {
 
 // Interface should be resolved before skills are resolved, so extends is not included
 export interface AlfredConfigWithUnresolvedSkills {
-  skills?: Array<RawSkillConfigValue>;
+  skills?: Array<AlfredConfigRawSkill>;
   npmClient?: NpmClients;
   showConfigs?: boolean;
   configsDir?: string;
@@ -159,7 +157,7 @@ export interface AlfredConfigWithUnresolvedInterfaces
 }
 
 export interface AlfredConfigWithDefaults {
-  skills: ConfigSkills;
+  skills: AlfredConfigSkill[];
   npmClient: NpmClients;
   configsDir: string;
   showConfigs: boolean;

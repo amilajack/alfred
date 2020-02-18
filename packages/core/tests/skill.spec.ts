@@ -29,7 +29,7 @@ function removePathsPropertiesFromObject(
   obj:
     | Array<any>
     | {
-        [x: string]: string | Record<string, any>;
+        [property: string]: string | Record<string, any>;
       }
 ): Record<string, any> {
   for (const key in obj) {

@@ -3,7 +3,7 @@ id: getting-started
 title: Getting Started
 ---
 
-## Installing
+## Usage
 
 ```bash
 # Install alfred
@@ -24,6 +24,4 @@ For migrating to Alfred, see [the migrating guide](docs/migrating-to-alfred)
 ```bash
 # Learning skills
 alfred learn @alfred/skill-react @alfred/skill-redux
-# Build using the new subcommand
-alfred run build
 ```
