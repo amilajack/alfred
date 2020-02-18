@@ -29,9 +29,9 @@ lerna publish --registry http://localhost:4873
 lerna publish
 
 # Documentation publishing
-yarn workspace website run build
-yarn api-docs
-GIT_USER=your-github-username USE_SSH=true yarn workspace website deploy
+yarn docs:build
+GIT_USER=your-github-username USE_SSH=true yarn docs:deploy
+yarn docs:clean
 ```
 
 To change verdaccio configs, see `~/.config/verdaccio/config.yaml`

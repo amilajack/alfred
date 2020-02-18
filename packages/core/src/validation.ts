@@ -1,4 +1,3 @@
-/* eslint import/no-dynamic-require: off */
 // @ts-nocheck
 import Joi from '@hapi/joi';
 import { Pkg, ValidationResult } from '@alfred/types';

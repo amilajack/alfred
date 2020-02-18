@@ -1,4 +1,3 @@
-/* eslint import/no-dynamic-require: off */
 import {
   ProjectInterface,
   SkillMap,

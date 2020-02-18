@@ -1,4 +1,4 @@
-/* eslint import/prefer-default-export: off, import/no-dynamic-require: off */
+/* eslint import/prefer-default-export: off */
 import path from 'path';
 import open from 'open';
 import childProcess, { ExecSyncOptions } from 'child_process';

@@ -27,22 +27,9 @@ yarn global add alfred
 
 ```bash
 # Creating a new project
-alfred new my-lib --lib
-alfred new my-lib --lib --browser
+alfred new my-lib --lib --skills @alfred/skill-react @alfred/skill-redux
 alfred new my-app
 cd my-app
-
-# Built-in Subcommands
-alfred new
-alfred new --with @alfred/skill-react @alfred/skill-redux
-alfred learn
-alfred skills
-alfred start
-alfred build
-alfred build --prod
-alfred clean
-alfred format
-alfred test
 
 # Planned Built-in Subcommands
 alfred targets
@@ -55,7 +42,7 @@ alfred types
 # Learning skills
 alfred learn @alfred/skill-parcel
 # Build using the new subcommand
-alfred build
+alfred run build
 # Learning multiple skills
 alfred learn @alfred/skill-angular @alfred/skill-redux
 ```
@@ -64,6 +51,7 @@ alfred learn @alfred/skill-angular @alfred/skill-redux
 
 * **[website](https://alfred.js.org)** ([alfred.js.org](https://alfred.js.org))
 * **[docs](https://alfred.js.org/docs/getting-started)** ([alfred.js.org/docs/getting-started](https://alfred.js.org/docs/getting-started))
+* **[api](https://alfred.js.org/api)** ([alfred.js.org/api](https://alfred.js.org/api))
 
 ## Examples
 
@@ -75,20 +63,11 @@ See our [examples directory](https://github.com/amilajack/alfred/tree/master/exa
 | 2.|  [react library](https://github.com/amilajack/alfred/tree/master/examples/react-lib) | A small button library built with React |
 | 3.|  typescript | **HELP WANTED** |
 
-## Roadmap
-
-### v1.0.0
-* Implement at least one skill for each type of JS infrastructure
-
-### Post v1.0.0
-* `alfred migrate`: Upgrade codebase to latest codebase to latest ES version
-* `alfred bug`: Generating bug reports on user's behalf
-* `alfred doc`: Generating documentation that will be rendered to `README.md` and html
-
 ## Implemented Skills
 
 ✅ Basic implementation finish
-❌ Planned but not started
+🔨 Implementation in progress
+❌ To be implemented
 
 | Infrastructure     | Skills                     | Implemented  |
 | ---                | ---                        | ---          |

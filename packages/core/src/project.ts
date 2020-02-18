@@ -72,6 +72,22 @@ function getInstallCommmand(project: ProjectInterface): string {
     : 'yarn';
 }
 
+export function parseEntrypoint(rawEntrypoint: string): Entrypoint {
+  const [project, platform] = rawEntrypoint.split('.') as [
+    ProjectEnum,
+    Platform
+  ];
+  return { project, platform, filename: rawEntrypoint };
+}
+
+export function entrypointToTarget(entrypoint: Entrypoint, env: Env): Target {
+  return {
+    platform: entrypoint.platform,
+    project: entrypoint.project,
+    env
+  };
+}
+
 /**
  * Given an object with deps, return the deps as a list
  * Example:
@@ -115,17 +131,7 @@ export default class Project extends EventEmitter implements ProjectInterface {
   private getEntrypoints(): Entrypoint[] {
     return RAW_ENTRYPOINTS.filter(entryPoint =>
       fs.existsSync(path.join(this.root, 'src', entryPoint))
-    ).map(validEntryPoints => {
-      const [project, platform] = validEntryPoints.split('.') as [
-        ProjectEnum,
-        Platform
-      ];
-      return {
-        filename: validEntryPoints,
-        platform,
-        project
-      };
-    });
+    ).map(parseEntrypoint);
   }
 
   private getTargets(): Array<Target> {
@@ -134,10 +140,9 @@ export default class Project extends EventEmitter implements ProjectInterface {
     const env: Env = envs.includes(process.env.NODE_ENV || '')
       ? (process.env.NODE_ENV as Env)
       : 'development';
-    return this.entrypoints.map(entrypoint => ({
-      env,
-      ...entrypoint
-    }));
+    return this.entrypoints.map(entrypoint =>
+      entrypointToTarget(entrypoint, env)
+    );
   }
 
   async init(): Promise<ProjectInterface> {

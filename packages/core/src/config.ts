@@ -1,4 +1,4 @@
-/* eslint import/no-dynamic-require: off, no-param-reassign: off */
+/* eslint no-param-reassign: off */
 import path from 'path';
 import fs from 'fs';
 import mergeConfigs from '@alfred/merge-configs';

@@ -1,4 +1,4 @@
-/* eslint import/no-dynamic-require: off, @typescript-eslint/ban-ts-ignore: off */
+/* eslint @typescript-eslint/ban-ts-ignore: off */
 import path from 'path';
 import lodash from 'lodash';
 import mergeConfigs from '@alfred/merge-configs';
@@ -260,21 +260,6 @@ export const CORE_SKILLS: { [skill in CORE_SKILL]: Skill } = {
   lodash: requireSkill('@alfred/skill-lodash')
 };
 
-/**
- * Convert entrypoints to targets
- */
-export function entrypointsToTargets(
-  entrypoints: Array<string>
-): Array<Target> {
-  return entrypoints.map(entrypoint => {
-    const [project, platform] = entrypoint.split('.') as [
-      ProjectEnum,
-      Platform
-    ];
-    return { project, platform, env: 'production' };
-  });
-}
-
 function validateSkillMap(skillMap: SkillMap, target: Target): SkillMap {
   skillMap.forEach(skill => {
     // Validate the files of a skill
@@ -328,8 +313,8 @@ export async function Skills(
   project: ProjectInterface,
   skills: Array<Skill | RawSkill> = [],
   target?: Target
-): Promise<Map<string, Skill>> {
-  const skillMap: Map<string, Skill> = new Map();
+): Promise<SkillMap> {
+  const skillMap: SkillMap = new Map();
   const normalizedSkills = skills.map(normalizeSkill);
   const skillsToResolveFrom = [
     ...normalizedSkills,

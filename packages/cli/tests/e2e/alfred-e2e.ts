@@ -1,4 +1,4 @@
-/* eslint import/no-dynamic-require: off, no-console: off */
+/* eslint no-console: off */
 import fs from 'fs';
 import path from 'path';
 import assert from 'assert';
@@ -7,9 +7,8 @@ import Table from 'cli-table3';
 import chalk from 'chalk';
 import powerset from '@amilajack/powerset';
 import childProcess from 'child_process';
-import { TARGETS } from '@alfred/core/lib/constants';
+import { ENTRYPOINTS } from '@alfred/core/lib/constants';
 import { formatPkgJson } from '@alfred/core';
-import { entrypointsToTargets } from '@alfred/core/lib/skill';
 import mergeConfigs from '@alfred/merge-configs';
 import Config from '@alfred/core/lib/config';
 import { Env, ProjectEnum, Platform } from '@alfred/types';
@@ -20,12 +19,14 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
+const CLEAN_AFTER_RUN = false;
+
 // Goal: Test subcommands for all combinations of entrypoints and skills
 // Create a ./tmp directory
 // Start by having all the packages for the skills installed
 // For each combination c[] of skills
 //  consider c[] to be the skills. Add c[] to the skill
-//    for each target in targets[9] (include all targets)
+//    for each entrypoint in entrypoints[9] (include all entrypoints)
 //      Default skills will automatically be added
 //      Install the necessary deps
 //      Run:
@@ -64,8 +65,6 @@ const scripts = [
   // Format
   'format'
 ];
-
-const prodTargets = TARGETS.filter(e => e.env === 'production');
 
 type E2eTest = {
   skillCombination: string[];
@@ -122,10 +121,14 @@ async function generateTestsForSkillCombination(
   }
 
   process.on('unhandledRejection', () => {
-    // cleanTmpDir();
+    if (CLEAN_AFTER_RUN) {
+      cleanTmpDir();
+    }
   });
   process.on('exit', () => {
-    // cleanTmpDir();
+    if (CLEAN_AFTER_RUN) {
+      cleanTmpDir();
+    }
   });
 
   cleanTmpDir();
@@ -135,7 +138,6 @@ async function generateTestsForSkillCombination(
   const e2eTests = await Promise.all(
     powerset(nonCoreCts)
       .sort((a, b) => a.length - b.length)
-      // @TODO Instead of each target, generate tests from entrypointCombinations
       .map(skillCombination => (): Promise<E2eTest> =>
         generateTestsForSkillCombination(skillCombination, tmpDir)
       )
@@ -154,20 +156,10 @@ async function generateTestsForSkillCombination(
       let command;
 
       // Generate all possible combinations of entrypoints and test each one
-      const entrypointsCombinations = powerset(
-        Array.from(
-          new Set(
-            prodTargets.map(target =>
-              [target.project, target.platform].join('.')
-            )
-          )
-        )
-      ).sort((a, b) => a.length - b.length);
+      const entrypointCombinations = powerset(ENTRYPOINTS);
 
-      // Create a list of all subsets of the targets like so:
-      // [['lib.node'], ['lib.node', 'lib.browser'], etc...]
       await Promise.all(
-        entrypointsCombinations.map(async entrypointCombination => {
+        entrypointCombinations.map(async entrypoints => {
           const templateData = {
             entrypoint: {
               name: {
@@ -183,12 +175,10 @@ async function generateTestsForSkillCombination(
             }
           };
 
-          // Generate targets from the entrypoints
-          const targets = entrypointsToTargets(entrypointCombination);
           // Remove the existing entrypoints in ./src
           rimraf.sync(path.join(projectDir, 'src/*'));
           rimraf.sync(path.join(projectDir, 'tests/*'));
-          await addEntrypoints(templateData, projectDir, targets);
+          await addEntrypoints(templateData, projectDir, entrypoints);
 
           await serialPromises(
             [true, false].map(showConfigs => async (): Promise<void> => {
@@ -222,13 +212,13 @@ async function generateTestsForSkillCombination(
                 console.log(
                   `Testing ${JSON.stringify({
                     skillCombination,
-                    entrypointCombination,
+                    entrypoints,
                     showConfigs
                   })}`
                 );
 
-                const targetContainsAppproject = targets.some(
-                  target => target.project === 'app'
+                const entrypointIsAppProject = entrypoints.some(
+                  entrypoint => entrypoint.project === 'app'
                 );
 
                 await Promise.all(
@@ -236,7 +226,7 @@ async function generateTestsForSkillCombination(
                     command = subcommand;
                     try {
                       if (
-                        targetContainsAppproject &&
+                        entrypointIsAppProject &&
                         subcommand.includes('start')
                       ) {
                         const start = childProcess.spawn(
@@ -281,7 +271,7 @@ async function generateTestsForSkillCombination(
                     } catch (e) {
                       issues.push([
                         skillCombination.join(', '),
-                        entrypointCombination.join(', '),
+                        entrypoints.join(', '),
                         command,
                         showConfigs
                       ]);
@@ -299,7 +289,7 @@ async function generateTestsForSkillCombination(
               } catch (e) {
                 issues.push([
                   skillCombination.join(', '),
-                  entrypointCombination.join(', '),
+                  entrypoints.join(', '),
                   command,
                   showConfigs
                 ]);
@@ -315,8 +305,8 @@ async function generateTestsForSkillCombination(
   const totalTestsCount =
     // The total # of combinations of skills
     e2eTests.length *
-    // The total # of combinations of targets
-    (2 ** prodTargets.length - 1) *
+    // The total # of combinations of entrypoints
+    (2 ** ENTRYPOINTS.length - 1) *
     // The number of subcommands tested
     scripts.length *
     // Show Configs
