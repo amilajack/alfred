@@ -29,7 +29,7 @@ function removePathsPropertiesFromObject(
   obj:
     | Array<any>
     | {
-        [x: string]: string | Record<string, any>;
+        [property: string]: string | Record<string, any>;
       }
 ): Record<string, any> {
   for (const key in obj) {
@@ -463,7 +463,7 @@ describe('Skills', () => {
         }
       } as ProjectInterface;
       await expect(skillMapFromConfig(project)).rejects.toThrow(
-        "Cannot find skill module '@alfred/skill-non-existent-skill'"
+        "Cannot find module '@alfred/skill-non-existent-skill'"
       );
       spy.mockRestore();
     });

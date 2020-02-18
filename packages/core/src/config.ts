@@ -8,19 +8,20 @@ import {
   NpmClients,
   AlfredConfigWithResolvedSkills,
   AlfredConfigWithUnresolvedInterfaces,
-  ConfigSkills,
+  AlfredConfigSkill,
   AlfredConfigWithUnresolvedSkills,
-  RawSkillConfigValue,
-  AlfredConfigWithDefaults
+  AlfredConfigRawSkill,
+  AlfredConfigWithDefaults,
+  PkgJson
 } from '@alfred/types';
 import loadJsonFile from 'load-json-file';
-import ValidateConfig from './validation';
+import { validateAlfredConfig } from './validation';
 import Project, { formatPkgJson } from './project';
 
 type ConfigMap = Map<string, any>;
 
 export default class Config implements ConfigInterface {
-  extends: string | Array<string> | undefined;
+  extends?: string | Array<string>;
 
   npmClient: NpmClients;
 
@@ -28,7 +29,7 @@ export default class Config implements ConfigInterface {
 
   configsDir: string;
 
-  skills: ConfigSkills;
+  skills: AlfredConfigSkill[];
 
   autoInstall: boolean;
 
@@ -43,7 +44,7 @@ export default class Config implements ConfigInterface {
   };
 
   constructor(rawConfig: AlfredConfigWithUnresolvedInterfaces) {
-    ValidateConfig(rawConfig);
+    validateAlfredConfig(rawConfig);
     const resolvedSkills = {
       ...Config.DEFAULT_CONFIG,
       ...this.normalizeWithResolvedSkills(
@@ -51,7 +52,7 @@ export default class Config implements ConfigInterface {
       )
     };
     // Re-validate because normalized skills may introduce invalid configs
-    ValidateConfig(resolvedSkills);
+    validateAlfredConfig(resolvedSkills);
     this.rawConfig = rawConfig;
     this.skills = resolvedSkills.skills || [];
     this.showConfigs = resolvedSkills.showConfigs;
@@ -91,9 +92,9 @@ export default class Config implements ConfigInterface {
     pkgAlfredConfig: AlfredConfigWithUnresolvedInterfaces
   ): Promise<string> {
     Project.validatePkgPath(pkgPath);
-    ValidateConfig(pkgAlfredConfig);
+    validateAlfredConfig(pkgAlfredConfig);
 
-    const pkg = (await loadJsonFile(pkgPath)) as { alfred?: any };
+    const pkg = (await loadJsonFile(pkgPath)) as PkgJson;
     this.rawConfig = pkg.alfred || {};
 
     return Config.writeObjToPkgJsonConfig(pkgPath, {
@@ -110,7 +111,7 @@ export default class Config implements ConfigInterface {
 
     const skillMap: ConfigMap = new Map();
     const mappedSkills: ConfigMap = config.skills.reduce(
-      (map: ConfigMap, skill: RawSkillConfigValue) => {
+      (map: ConfigMap, skill: AlfredConfigRawSkill) => {
         if (typeof skill === 'string') {
           map.set(skill, {});
           return map;
@@ -146,7 +147,7 @@ export default class Config implements ConfigInterface {
     Project.validatePkgPath(pkgPath);
 
     // Read the package.json and validate the Alfred config
-    const { alfred = {} } = JSON.parse(fs.readFileSync(pkgPath).toString());
+    const { alfred = {} } = loadJsonFile.sync(pkgPath);
 
     return new Config(alfred);
   }
@@ -193,7 +194,7 @@ export default class Config implements ConfigInterface {
   ): Promise<string> {
     Project.validatePkgPath(pkgPath);
     const pkg = {
-      ...JSON.parse((await fs.promises.readFile(pkgPath)).toString()),
+      ...((await loadJsonFile(pkgPath)) as PkgJson),
       ...obj
     };
     const formattedPkg = await formatPkgJson(pkg);

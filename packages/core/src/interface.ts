@@ -6,6 +6,7 @@ import {
   SkillMap
 } from '@alfred/types';
 import { CORE_INTERFACES } from './constants';
+import { requireModule } from './helpers';
 
 export function getSubcommandInterfacesMap(
   skillsOrSkillMap: Skill[] | SkillMap
@@ -48,10 +49,10 @@ export function normalizeInterfacesOfSkill(
     }
     return interfaces.map(skillInterface => {
       if (typeof skillInterface === 'string') {
-        const requiredModule = require(skillInterface);
+        const requiredModule = requireModule(skillInterface);
         return {
           name: skillInterface,
-          module: requiredModule.default || requiredModule,
+          module: requiredModule,
           config: {}
         };
       }
@@ -62,10 +63,10 @@ export function normalizeInterfacesOfSkill(
           );
         }
         const [name, config] = skillInterface;
-        const requiredModule = require(name);
+        const requiredModule = requireModule(name);
         return {
           name,
-          module: requiredModule.default || requiredModule,
+          module: requiredModule,
           config
         };
       }

@@ -70,7 +70,7 @@ Object {
   "critical": true,
   "criticalMessage": "",
   "errors": Array [
-    "Invalid version range for dependency \\"{\\"bad\\":{\\"version\\":\\"3.3.3\\"}}",
+    "Invalid version range for dependency \\"{\\"bad\\":{\\"version\\":\\"3.3.3\\"}} for field dependencies",
   ],
   "messagesCount": 5,
   "recommendations": Array [

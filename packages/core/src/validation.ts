@@ -1,6 +1,11 @@
-// @ts-nocheck
 import Joi from '@hapi/joi';
-import { Pkg, ValidationResult } from '@alfred/types';
+import {
+  ValidationResult,
+  AlfredConfigWithUnresolvedInterfaces,
+  RawSkill,
+  SkillInterfaceModule,
+  PkgJson
+} from '@alfred/types';
 import Config from './config';
 
 type Person = {
@@ -15,6 +20,27 @@ type MailToObj = {
   mail: string;
   url: string;
   web: string;
+};
+
+type Out = {
+  valid: boolean;
+  critical: boolean;
+  criticalMessage: string;
+  warnings: string[];
+  recommendations: string[];
+  errors: string[];
+  messagesCount: number;
+};
+
+type Field = {
+  types?: string[];
+  type?: string;
+  warning?: boolean;
+  required?: boolean;
+  recommended?: boolean;
+  validate?: Function;
+  format?: Function | RegExp;
+  or?: string;
 };
 
 type Errors = string[];
@@ -36,7 +62,9 @@ export class PkgValidation {
   static emailFormat = /\S+@\S+/;
 
   // I know this isn't thorough. it's not supposed to be.
-  static getSpecMap() {
+  static getSpecMap(): {
+    [name: string]: Field;
+  } {
     // https://npmjs.org/doc/json.html
     return {
       name: {
@@ -131,14 +159,14 @@ export class PkgValidation {
   }
 
   static validate(
-    data: string | Pkg,
+    data: string | PkgJson,
     options: { recommendations: boolean; warnings: boolean } = {
       recommendations: true,
       warnings: true
     }
   ): ValidationResult {
     const parsed = PkgValidation.parse(data);
-    const out = {
+    const out: Out = {
       valid: false,
       critical: true,
       criticalMessage: '',
@@ -193,11 +221,11 @@ export class PkgValidation {
       }
 
       // Regexp format check
-      if (field.format && !field.format.test(parsed[name])) {
+      if (field.format instanceof RegExp && !field.format.test(parsed[name])) {
         errors.push(
           `Value for field ${name}, ${
             parsed[name]
-          } does not match format: ${field.format.toString()}`
+          } does not match format: ${field.format?.toString()}`
         );
       }
 
@@ -227,14 +255,10 @@ export class PkgValidation {
     return out;
   }
 
-  static validateType(
-    name: string,
-    a: { types: Array<string>; type: string },
-    value: any
-  ): Errors {
-    const { types, type } = a;
+  static validateType(name: string, field: Field, value: any): Errors {
+    const { types, type } = field;
     const errors = [];
-    const validFieldTypes = types || [type];
+    const validFieldTypes: Array<string | undefined> = types || [type];
     const valueType = value instanceof Array ? 'array' : typeof value;
     if (!validFieldTypes.includes(valueType)) {
       errors.push(
@@ -262,7 +286,7 @@ export class PkgValidation {
         errors.push(
           `Invalid version range for dependency "${JSON.stringify({
             [pkgName]: pkgSemver
-          })}`
+          })} for field ${name}`
         );
       }
     });
@@ -404,7 +428,7 @@ export class PkgValidation {
     }: {
       type: string;
       url: string;
-    }): Errors {
+    }): void {
       if (!type) {
         errors.push(`${name} field should have type`);
       }
@@ -431,55 +455,112 @@ export class PkgValidation {
   }
 }
 
-export default function Validateconfig(config: { [x: string]: any }): void {
-  const skill = [Joi.string(), Joi.array()];
-  const skills = [Joi.string(), Joi.array().items(...skill)];
+export function validateInterface(skillInterface: SkillInterfaceModule): void {
+  const interfaceSchema = Joi.object({
+    description: Joi.string().required(),
+    subcommand: Joi.string().required(),
+    runForEachTarget: Joi.boolean().required(),
+    resolveSkill: Joi.function().required(),
+    handleFlags: Joi.function()
+  });
+  return Joi.assert(skillInterface, interfaceSchema);
+}
 
-  if (!config) throw new Error('Config must be passed an object');
+export function validateSkill(skill: RawSkill): void {
+  const skillSchema = Joi.object({
+    name: Joi.string().required(),
+    description: Joi.string(),
+    supports: Joi.object({
+      envs: Joi.array().items(
+        Joi.string().valid('test', 'production', 'development')
+      ),
+      platforms: Joi.array().items(Joi.string().valid('node', 'browser')),
+      projects: Joi.array().items(Joi.string().valid('app', 'lib'))
+    }),
+    pkg: Joi.object(),
+    dependencies: Joi.object(),
+    devDependencies: Joi.object(),
+    dirs: Joi.array().items(
+      Joi.object({
+        src: Joi.string().required(),
+        dest: Joi.string().required()
+      })
+    ),
+    files: Joi.array().items(
+      Joi.object({
+        alias: Joi.string(),
+        src: Joi.string(),
+        dest: Joi.string().required(),
+        content: Joi.string(),
+        condition: Joi.function()
+      }).xor('src', 'content')
+    ),
+    configs: Joi.array().items(
+      Joi.object({
+        alias: Joi.string(),
+        filename: Joi.string().required(),
+        config: Joi.object().required(),
+        fileType: Joi.string().valid('commonjs', 'module', 'json'),
+        write: Joi.boolean()
+      })
+    ),
+    interfaces: Joi.array().items(
+      Joi.string(),
+      Joi.array().items(Joi.string().required(), Joi.object().required())
+    ),
+    hooks: Joi.object(),
+    transforms: Joi.object(),
+    default: Joi.boolean()
+  });
+  return Joi.assert(skill, skillSchema);
+}
 
-  const schema = Joi.object().keys({
+export function validateAlfredConfig(
+  alfredConfig: AlfredConfigWithUnresolvedInterfaces
+): void {
+  const alfredConfigSchema = Joi.object({
     npmClient: Joi.string().valid('npm', 'yarn'),
     rawConfig: Joi.object(),
     showConfigs: Joi.boolean(),
     configsDir: Joi.string(),
     extends: [Joi.string(), Joi.array()],
     autoInstall: Joi.bool(),
-    skills,
-    lib: Joi.object().keys({
-      recommendSkills: skills
-    })
+    skills: Joi.array().items(
+      Joi.string(),
+      Joi.array().items(Joi.string().required(), Joi.object().required())
+    )
   });
 
   if (
-    config.showConfigs === false &&
-    'configsDir' in config &&
-    config.configsDir !== Config.DEFAULT_CONFIG.configsDir
+    alfredConfig.showConfigs === false &&
+    'configsDir' in alfredConfig &&
+    alfredConfig.configsDir !== Config.DEFAULT_CONFIG.configsDir
   ) {
     throw new Error(
       'showConfigs must be true for configsDir property to be set'
     );
   }
 
-  if ('extends' in config) {
+  if ('extends' in alfredConfig) {
     // Validate if each config in `.extends` is a string
-    if (Array.isArray(config.extends)) {
-      config.extends.forEach(extendConfigs => {
+    if (Array.isArray(alfredConfig.extends)) {
+      alfredConfig.extends.forEach(extendConfigs => {
         if (typeof extendConfigs !== 'string') {
           throw new Error(
             `Values in ".extends" property in Alfred config must be a string. Instead passed ${JSON.stringify(
-              config.extends
-            ) || String(config.extends)}`
+              alfredConfig.extends
+            ) || String(alfredConfig.extends)}`
           );
         }
       });
-    } else if (typeof config.extends !== 'string') {
+    } else if (typeof alfredConfig.extends !== 'string') {
       throw new Error(
         `Values in ".extends" property in Alfred config must be a string. Instead passed ${JSON.stringify(
-          config.extends
-        ) || String(config.extends)}`
+          alfredConfig.extends
+        ) || String(alfredConfig.extends)}`
       );
     }
   }
 
-  return Joi.assert(config, schema);
+  return Joi.assert(alfredConfig, alfredConfigSchema);
 }

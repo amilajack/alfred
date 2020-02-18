@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build": "yarn ts && chmod -R +x lib",
-    "build-watch": "yarn ts --watch",
+    "build:watch": "yarn ts --watch",
     "e2e": "babel-node --extensions .ts ./tests/e2e/alfred-e2e.ts",
     "ts": "tsc",
     "version": "yarn build"

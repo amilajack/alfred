@@ -18,17 +18,14 @@ Alfred
 
 ```bash
 # NPM
-npm install --global alfred
+npm install --global alfred  --registry https://amilajack.com/registry
 # Yarn
-yarn global add alfred
+yarn global add alfred  --registry https://amilajack.com/registry
 ```
 
 ## Usage
 
 ```bash
-# Install Alfred
-npm install alfred --global --registry https://amilajack.com/registry
-
 # Create a new project
 alfred new my-project
 cd my-project
@@ -41,7 +38,7 @@ alfred run build
 
 * **[website](https://alfred.js.org)** ([alfred.js.org](https://alfred.js.org))
 * **[docs](https://alfred.js.org/docs/getting-started)** ([alfred.js.org/docs/getting-started](https://alfred.js.org/docs/getting-started))
-* **[api](https://alfred.js.org/api)** ([alfred.js.org/api](https://alfred.js.org/api))
+* **[API](https://alfred.js.org/api)** ([alfred.js.org/api](https://alfred.js.org/api))
 
 ## Examples
 

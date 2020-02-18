@@ -29,9 +29,11 @@ import {
   fromPkgTypeToFull,
   EnhancedMap
 } from '@alfred/helpers';
+import { requireModule } from './helpers';
 import { CORE_INTERFACES } from './constants';
 import VirtualFileSystem from './virtual-file';
 import { normalizeInterfacesOfSkill } from './interface';
+import { validateSkill, validateInterface } from './validation';
 
 export function addSkillHelpers(skill: SkillWithoutHelpers): Skill {
   const helpers: Helpers<Skill> = {
@@ -225,27 +227,32 @@ function normalizeSkill(skill: RawSkill | Skill): Skill {
 }
 
 export function requireSkill(skillPkgName: string): Skill {
-  try {
-    const requiredModule = require(skillPkgName);
+  const skillModule = requireModule(skillPkgName);
+  validateSkill(skillModule);
+
+  const normalizedSkill = ((): Skill => {
     try {
-      const requiredSkill = {
-        ...(requiredModule.default || requiredModule),
+      const skillWithPkg = {
+        ...skillModule,
         pkg: require(`${skillPkgName}/package.json`),
         devDependencies: require(`${skillPkgName}/package.json`)
           .peerDependencies
       };
       return {
-        ...requiredSkill,
-        ...normalizeSkill(requiredSkill)
+        ...skillWithPkg,
+        ...normalizeSkill(skillWithPkg)
       };
     } catch (err) {
       console.log(err);
       throw new Error(`Cannot load skill module '${skillPkgName}'`);
     }
-  } catch (err) {
-    console.log(err);
-    throw new Error(`Cannot find skill module '${skillPkgName}'`);
-  }
+  })();
+
+  normalizedSkill.interfaces.forEach(skillInterface =>
+    validateInterface(skillInterface.module)
+  );
+
+  return normalizedSkill;
 }
 
 export const CORE_SKILLS: { [skill in CORE_SKILL]: Skill } = {

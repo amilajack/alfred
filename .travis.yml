@@ -13,4 +13,10 @@ os:
 
 cache: yarn
 
-install: yarn --frozen-lockfile
+install:
+  - sudo pip install proselint
+  - yarn --frozen-lockfile
+
+script:
+  - yarn test
+  - yarn lint:prose
