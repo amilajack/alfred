@@ -80,17 +80,21 @@
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="_core_src_validation_.html#errors" class="tsd-kind-icon">Errors</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="_core_src_validation_.html#field" class="tsd-kind-icon">Field</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="_core_src_validation_.html#mailtoobj" class="tsd-kind-icon">Mail<wbr>ToObj</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="_core_src_validation_.html#obj" class="tsd-kind-icon">Obj</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="_core_src_validation_.html#out" class="tsd-kind-icon">Out</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="_core_src_validation_.html#person" class="tsd-kind-icon">Person</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="_core_src_validation_.html#recommendations" class="tsd-kind-icon">Recommendations</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="_core_src_validation_.html#warnings" class="tsd-kind-icon">Warnings</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="_core_src_validation_.html#recommendations-1" class="tsd-kind-icon">Recommendations</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="_core_src_validation_.html#warnings-1" class="tsd-kind-icon">Warnings</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_core_src_validation_.html#validateconfig" class="tsd-kind-icon">Validateconfig</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_core_src_validation_.html#validatealfredconfig" class="tsd-kind-icon">validate<wbr>Alfred<wbr>Config</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_core_src_validation_.html#validateinterface" class="tsd-kind-icon">validate<wbr>Interface</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_core_src_validation_.html#validateskill" class="tsd-kind-icon">validate<wbr>Skill</a></li>
 							</ul>
 						</section>
 					</div>
@@ -104,9 +108,48 @@
 					<div class="tsd-signature tsd-kind-icon">Errors<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9966679/packages/core/src/validation.ts#L20">packages/core/src/validation.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/953595e/packages/core/src/validation.ts#L46">packages/core/src/validation.ts:46</a></li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="field" class="tsd-anchor"></a>
+					<h3>Field</h3>
+					<div class="tsd-signature tsd-kind-icon">Field<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>format<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol">; </span>or<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>recommended<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol">; </span>required<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>types<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>validate<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">; </span>warning<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/953595e/packages/core/src/validation.ts#L35">packages/core/src/validation.ts:35</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> format<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RegExp</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> or<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> recommended<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> required<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> type<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> types<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> validate<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Function</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> warning<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></h5>
+							</li>
+						</ul>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
 					<a name="mailtoobj" class="tsd-anchor"></a>
@@ -114,7 +157,7 @@
 					<div class="tsd-signature tsd-kind-icon">Mail<wbr>ToObj<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>email<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>mail<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>web<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9966679/packages/core/src/validation.ts#L13">packages/core/src/validation.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/953595e/packages/core/src/validation.ts#L18">packages/core/src/validation.ts:18</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -141,7 +184,7 @@
 					<div class="tsd-signature tsd-kind-icon">Obj<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9966679/packages/core/src/validation.ts#L24">packages/core/src/validation.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/953595e/packages/core/src/validation.ts#L50">packages/core/src/validation.ts:50</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -157,12 +200,48 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="out" class="tsd-anchor"></a>
+					<h3>Out</h3>
+					<div class="tsd-signature tsd-kind-icon">Out<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>critical<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>criticalMessage<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>errors<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>messagesCount<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>recommendations<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>valid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>warnings<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/953595e/packages/core/src/validation.ts#L25">packages/core/src/validation.ts:25</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>critical<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>critical<wbr>Message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>errors<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>messages<wbr>Count<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>recommendations<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>valid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>warnings<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
 					<a name="person" class="tsd-anchor"></a>
 					<h3>Person</h3>
 					<div class="tsd-signature tsd-kind-icon">Person<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>email<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>web<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9966679/packages/core/src/validation.ts#L6">packages/core/src/validation.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/953595e/packages/core/src/validation.ts#L11">packages/core/src/validation.ts:11</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -184,22 +263,22 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="recommendations" class="tsd-anchor"></a>
+					<a name="recommendations-1" class="tsd-anchor"></a>
 					<h3>Recommendations</h3>
 					<div class="tsd-signature tsd-kind-icon">Recommendations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9966679/packages/core/src/validation.ts#L21">packages/core/src/validation.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/953595e/packages/core/src/validation.ts#L47">packages/core/src/validation.ts:47</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="warnings" class="tsd-anchor"></a>
+					<a name="warnings-1" class="tsd-anchor"></a>
 					<h3>Warnings</h3>
 					<div class="tsd-signature tsd-kind-icon">Warnings<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9966679/packages/core/src/validation.ts#L22">packages/core/src/validation.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/953595e/packages/core/src/validation.ts#L48">packages/core/src/validation.ts:48</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -207,27 +286,68 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="validateconfig" class="tsd-anchor"></a>
-					<h3>Validateconfig</h3>
+					<a name="validatealfredconfig" class="tsd-anchor"></a>
+					<h3>validate<wbr>Alfred<wbr>Config</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">Validateconfig<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">validate<wbr>Alfred<wbr>Config<span class="tsd-signature-symbol">(</span>alfredConfig<span class="tsd-signature-symbol">: </span><a href="../interfaces/_types_src_index_.alfredconfigwithunresolvedinterfaces.html" class="tsd-signature-type">AlfredConfigWithUnresolvedInterfaces</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9966679/packages/core/src/validation.ts#L434">packages/core/src/validation.ts:434</a></li>
+									<li>Defined in <a href="https://github.com/amilajack/alfred/blob/953595e/packages/core/src/validation.ts#L518">packages/core/src/validation.ts:518</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>config: <span class="tsd-signature-symbol">{}</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-index-signature">
-											<h5><span class="tsd-signature-symbol">[</span>x: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">any</span></h5>
-										</li>
-									</ul>
+									<h5>alfredConfig: <a href="../interfaces/_types_src_index_.alfredconfigwithunresolvedinterfaces.html" class="tsd-signature-type">AlfredConfigWithUnresolvedInterfaces</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="validateinterface" class="tsd-anchor"></a>
+					<h3>validate<wbr>Interface</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">validate<wbr>Interface<span class="tsd-signature-symbol">(</span>skillInterface<span class="tsd-signature-symbol">: </span><a href="../interfaces/_types_src_index_.skillinterfacemodule.html" class="tsd-signature-type">SkillInterfaceModule</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/amilajack/alfred/blob/953595e/packages/core/src/validation.ts#L458">packages/core/src/validation.ts:458</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>skillInterface: <a href="../interfaces/_types_src_index_.skillinterfacemodule.html" class="tsd-signature-type">SkillInterfaceModule</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="validateskill" class="tsd-anchor"></a>
+					<h3>validate<wbr>Skill</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">validate<wbr>Skill<span class="tsd-signature-symbol">(</span>skill<span class="tsd-signature-symbol">: </span><a href="../interfaces/_types_src_index_.rawskill.html" class="tsd-signature-type">RawSkill</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/amilajack/alfred/blob/953595e/packages/core/src/validation.ts#L469">packages/core/src/validation.ts:469</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>skill: <a href="../interfaces/_types_src_index_.rawskill.html" class="tsd-signature-type">RawSkill</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -256,22 +376,34 @@
 						<a href="_core_src_validation_.html#errors" class="tsd-kind-icon">Errors</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_core_src_validation_.html#field" class="tsd-kind-icon">Field</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="_core_src_validation_.html#mailtoobj" class="tsd-kind-icon">Mail<wbr>ToObj</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="_core_src_validation_.html#obj" class="tsd-kind-icon">Obj</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_core_src_validation_.html#out" class="tsd-kind-icon">Out</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="_core_src_validation_.html#person" class="tsd-kind-icon">Person</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_core_src_validation_.html#recommendations" class="tsd-kind-icon">Recommendations</a>
+						<a href="_core_src_validation_.html#recommendations-1" class="tsd-kind-icon">Recommendations</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_core_src_validation_.html#warnings" class="tsd-kind-icon">Warnings</a>
+						<a href="_core_src_validation_.html#warnings-1" class="tsd-kind-icon">Warnings</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_core_src_validation_.html#validateconfig" class="tsd-kind-icon">Validateconfig</a>
+						<a href="_core_src_validation_.html#validatealfredconfig" class="tsd-kind-icon">validate<wbr>Alfred<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_core_src_validation_.html#validateinterface" class="tsd-kind-icon">validate<wbr>Interface</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_core_src_validation_.html#validateskill" class="tsd-kind-icon">validate<wbr>Skill</a>
 					</li>
 				</ul>
 			</nav>

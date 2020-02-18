@@ -89,38 +89,25 @@
 					<h2>Installation</h2>
 				</a>
 				<pre><code class="language-bash"><span class="hljs-comment"># NPM</span>
-npm install --global alfred
+npm install --global alfred  --registry https://amilajack.com/registry
 <span class="hljs-comment"># Yarn</span>
-yarn global add alfred</code></pre>
+yarn global add alfred  --registry https://amilajack.com/registry</code></pre>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h2>Usage</h2>
 				</a>
-				<pre><code class="language-bash"><span class="hljs-comment"># Creating a new project</span>
-alfred new my-lib --lib --skills @alfred/skill-react @alfred/skill-redux
-alfred new my-app
-<span class="hljs-built_in">cd</span> my-app
+				<pre><code class="language-bash"><span class="hljs-comment"># Create a new project</span>
+alfred new my-project
+<span class="hljs-built_in">cd</span> my-project
 
-<span class="hljs-comment"># Planned Built-in Subcommands</span>
-alfred targets
-alfred publish
-alfred search
-alfred docs
-alfred migrate
-alfred types
-
-<span class="hljs-comment"># Learning skills</span>
-alfred learn @alfred/skill-parcel
-<span class="hljs-comment"># Build using the new subcommand</span>
-alfred run build
-<span class="hljs-comment"># Learning multiple skills</span>
-alfred learn @alfred/skill-angular @alfred/skill-redux</code></pre>
+<span class="hljs-comment"># Build your project</span>
+alfred run build</code></pre>
 				<a href="#docs" id="docs" style="color: inherit; text-decoration: none;">
 					<h2>Docs</h2>
 				</a>
 				<ul>
 					<li><strong><a href="https://alfred.js.org">website</a></strong> (<a href="https://alfred.js.org">alfred.js.org</a>)</li>
 					<li><strong><a href="https://alfred.js.org/docs/getting-started">docs</a></strong> (<a href="https://alfred.js.org/docs/getting-started">alfred.js.org/docs/getting-started</a>)</li>
-					<li><strong><a href="https://alfred.js.org/api">api</a></strong> (<a href="https://alfred.js.org/api">alfred.js.org/api</a>)</li>
+					<li><strong><a href="https://alfred.js.org/api">API</a></strong> (<a href="https://alfred.js.org/api">alfred.js.org/api</a>)</li>
 				</ul>
 				<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
 					<h2>Examples</h2>
@@ -357,6 +344,9 @@ alfred learn @alfred/skill-angular @alfred/skill-redux</code></pre>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_core_src_constants_.html">&quot;core/src/constants&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_core_src_helpers_.html">&quot;core/src/helpers&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_core_src_index_.html">&quot;core/src/index&quot;</a>
