@@ -1,10 +1,5 @@
 ## @alfred/cli
 
-`@alfred/cli` has the the following responsibilities
-* CLI Autocompletion
-* CLI coloring
-* Handling CLI arguments and commands
-
 ## Usage
 
 ```bash
@@ -18,12 +13,12 @@ cd my-app
 alfred new
 alfred learn
 alfred skills
-alfred start
-alfred build
-alfred build --prod
 alfred clean
-alfred format
-alfred test
+alfred run start
+alfred run build
+alfred run build --prod
+alfred run format
+alfred run test
 
 # Planned Built-in Subcommands
 alfred targets

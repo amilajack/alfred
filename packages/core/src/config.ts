@@ -13,6 +13,7 @@ import {
   RawSkillConfigValue,
   AlfredConfigWithDefaults
 } from '@alfred/types';
+import loadJsonFile from 'load-json-file';
 import ValidateConfig from './validation';
 import Project, { formatPkgJson } from './project';
 
@@ -92,7 +93,7 @@ export default class Config implements ConfigInterface {
     Project.validatePkgPath(pkgPath);
     ValidateConfig(pkgAlfredConfig);
 
-    const pkg = JSON.parse((await fs.promises.readFile(pkgPath)).toString());
+    const pkg = (await loadJsonFile(pkgPath)) as { alfred?: any };
     this.rawConfig = pkg.alfred || {};
 
     return Config.writeObjToPkgJsonConfig(pkgPath, {

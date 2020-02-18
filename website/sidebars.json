@@ -7,7 +7,8 @@
     "Skills": [
       "skills",
       "skill-transforms",
-      "skill-hooks"
+      "skill-hooks",
+      "files-and-directories"
     ],
     "Interfaces": [
       "interfaces"

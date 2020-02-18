@@ -26,25 +26,15 @@ yarn global add alfred
 ## Usage
 
 ```bash
-# Creating a new project
-alfred new my-lib --lib --skills @alfred/skill-react @alfred/skill-redux
-alfred new my-app
-cd my-app
+# Install Alfred
+npm install alfred --global --registry https://amilajack.com/registry
 
-# Planned Built-in Subcommands
-alfred targets
-alfred publish
-alfred search
-alfred docs
-alfred migrate
-alfred types
+# Create a new project
+alfred new my-project
+cd my-project
 
-# Learning skills
-alfred learn @alfred/skill-parcel
-# Build using the new subcommand
+# Build your project
 alfred run build
-# Learning multiple skills
-alfred learn @alfred/skill-angular @alfred/skill-redux
 ```
 
 ## Docs

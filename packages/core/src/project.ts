@@ -30,6 +30,7 @@ import {
   LearnEvent,
   HookArgs
 } from '@alfred/types';
+import loadJsonFile from 'load-json-file';
 import Config from './config';
 import { PkgValidation } from './validation';
 import skillMapFromConfig, { requireSkill } from './skill';
@@ -122,7 +123,7 @@ export default class Project extends EventEmitter implements ProjectInterface {
 
     this.root = projectRoot;
     this.pkgPath = path.join(projectRoot, 'package.json');
-    this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
+    this.pkg = loadJsonFile.sync(this.pkgPath);
     this.config = Config.initFromProjectRoot(projectRoot);
     this.entrypoints = this.getEntrypoints();
     this.targets = this.getTargets();
@@ -324,7 +325,7 @@ ${JSON.stringify(result.errors)}`
 
     if (!normalizedDeps.length) return;
 
-    this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
+    this.pkg = await loadJsonFile(this.pkgPath);
 
     const npmClientWithOverride =
       process.env.ALFRED_IGNORE_INSTALL === 'true' ? 'writeOnly' : npmClient;
@@ -389,7 +390,7 @@ ${JSON.stringify(result.errors)}`
       }
     }
 
-    this.pkg = JSON.parse(fs.readFileSync(this.pkgPath).toString());
+    this.pkg = await loadJsonFile(this.pkgPath);
   }
 
   /**
