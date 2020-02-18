@@ -131,7 +131,7 @@ export interface SkillInterfaceModule {
   handleFlags?: (flags: Array<string>, args: HandleFlagsArgs) => Array<string>;
 }
 
-export type RawSkillConfigValue = [string, ConfigValue];
+export type RawSkillConfigValue = string | [string, ConfigValue];
 
 export type RawExtendsConfigValue = Array<string> | string;
 
@@ -146,7 +146,7 @@ export interface AlfredConfigWithResolvedSkills {
 
 // Interface should be resolved before skills are resolved, so extends is not included
 export interface AlfredConfigWithUnresolvedSkills {
-  skills?: Array<string | RawSkillConfigValue>;
+  skills?: Array<RawSkillConfigValue>;
   npmClient?: NpmClients;
   showConfigs?: boolean;
   configsDir?: string;

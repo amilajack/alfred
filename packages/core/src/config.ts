@@ -15,7 +15,7 @@ import {
   PkgJson
 } from '@alfred/types';
 import loadJsonFile from 'load-json-file';
-import ValidateConfig from './validation';
+import { validateAlfredConfig } from './validation';
 import Project, { formatPkgJson } from './project';
 
 type ConfigMap = Map<string, any>;
@@ -44,7 +44,7 @@ export default class Config implements ConfigInterface {
   };
 
   constructor(rawConfig: AlfredConfigWithUnresolvedInterfaces) {
-    ValidateConfig(rawConfig);
+    validateAlfredConfig(rawConfig);
     const resolvedSkills = {
       ...Config.DEFAULT_CONFIG,
       ...this.normalizeWithResolvedSkills(
@@ -52,7 +52,7 @@ export default class Config implements ConfigInterface {
       )
     };
     // Re-validate because normalized skills may introduce invalid configs
-    ValidateConfig(resolvedSkills);
+    validateAlfredConfig(resolvedSkills);
     this.rawConfig = rawConfig;
     this.skills = resolvedSkills.skills || [];
     this.showConfigs = resolvedSkills.showConfigs;
@@ -92,7 +92,7 @@ export default class Config implements ConfigInterface {
     pkgAlfredConfig: AlfredConfigWithUnresolvedInterfaces
   ): Promise<string> {
     Project.validatePkgPath(pkgPath);
-    ValidateConfig(pkgAlfredConfig);
+    validateAlfredConfig(pkgAlfredConfig);
 
     const pkg = (await loadJsonFile(pkgPath)) as PkgJson;
     this.rawConfig = pkg.alfred || {};

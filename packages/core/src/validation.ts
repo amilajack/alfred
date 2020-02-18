@@ -1,10 +1,10 @@
 import Joi from '@hapi/joi';
 import {
-  Pkg,
   ValidationResult,
   AlfredConfigWithUnresolvedInterfaces,
   RawSkill,
-  SkillInterfaceModule
+  SkillInterfaceModule,
+  PkgJson
 } from '@alfred/types';
 import Config from './config';
 
@@ -159,7 +159,7 @@ export class PkgValidation {
   }
 
   static validate(
-    data: string | Pkg,
+    data: string | PkgJson,
     options: { recommendations: boolean; warnings: boolean } = {
       recommendations: true,
       warnings: true
@@ -286,7 +286,7 @@ export class PkgValidation {
         errors.push(
           `Invalid version range for dependency "${JSON.stringify({
             [pkgName]: pkgSemver
-          })}`
+          })} for field ${name}`
         );
       }
     });
@@ -515,13 +515,9 @@ export function validateSkill(skill: RawSkill): void {
   return Joi.assert(skill, skillSchema);
 }
 
-export default function validateConfig(
+export function validateAlfredConfig(
   alfredConfig: AlfredConfigWithUnresolvedInterfaces
 ): void {
-  const skills = Joi.array().items(
-    Joi.string(),
-    Joi.array().items(Joi.string().required(), Joi.object().required())
-  );
   const alfredConfigSchema = Joi.object({
     npmClient: Joi.string().valid('npm', 'yarn'),
     rawConfig: Joi.object(),
@@ -529,9 +525,12 @@ export default function validateConfig(
     configsDir: Joi.string(),
     extends: [Joi.string(), Joi.array()],
     autoInstall: Joi.bool(),
-    skills,
+    skills: Joi.array().items(
+      Joi.string(),
+      Joi.array().items(Joi.string().required(), Joi.object().required())
+    ),
     lib: Joi.object({
-      recommendSkills: skills
+      recommendSkills: Joi.array().items(Joi.string())
     })
   });
 
