@@ -146,7 +146,7 @@ export interface AlfredConfigWithResolvedSkills {
 
 // Interface should be resolved before skills are resolved, so extends is not included
 export interface AlfredConfigWithUnresolvedSkills {
-  skills?: RawSkillConfigValue[];
+  skills?: Array<string | RawSkillConfigValue>;
   npmClient?: NpmClients;
   showConfigs?: boolean;
   configsDir?: string;
@@ -211,7 +211,7 @@ export interface EnhancedMap<K, V> extends Map<K, V> {
 export type SkillConfig = {
   // The "friendly name" of a file. This is the name that
   // other skills will refer to config file by.
-  alias: string;
+  alias?: string;
   // The relative path of the file the config should be written to
   filename: string;
   // The value of the config

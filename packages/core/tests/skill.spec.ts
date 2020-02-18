@@ -463,7 +463,7 @@ describe('Skills', () => {
         }
       } as ProjectInterface;
       await expect(skillMapFromConfig(project)).rejects.toThrow(
-        "Cannot find skill module '@alfred/skill-non-existent-skill'"
+        "Cannot find module '@alfred/skill-non-existent-skill'"
       );
       spy.mockRestore();
     });

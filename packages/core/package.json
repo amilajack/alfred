@@ -64,6 +64,7 @@
   "engineStrict": true,
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8",
   "devDependencies": {
+    "@types/hapi__joi": "^16.0.10",
     "@types/jest": "^25.1.2",
     "@types/prettier": "^1.19.0",
     "mock-fs": "^4.10.4",

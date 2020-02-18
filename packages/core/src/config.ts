@@ -11,7 +11,8 @@ import {
   ConfigSkills,
   AlfredConfigWithUnresolvedSkills,
   RawSkillConfigValue,
-  AlfredConfigWithDefaults
+  AlfredConfigWithDefaults,
+  PkgJson
 } from '@alfred/types';
 import loadJsonFile from 'load-json-file';
 import ValidateConfig from './validation';
@@ -20,7 +21,7 @@ import Project, { formatPkgJson } from './project';
 type ConfigMap = Map<string, any>;
 
 export default class Config implements ConfigInterface {
-  extends: string | Array<string> | undefined;
+  extends?: string | Array<string>;
 
   npmClient: NpmClients;
 
@@ -93,7 +94,7 @@ export default class Config implements ConfigInterface {
     Project.validatePkgPath(pkgPath);
     ValidateConfig(pkgAlfredConfig);
 
-    const pkg = (await loadJsonFile(pkgPath)) as { alfred?: any };
+    const pkg = (await loadJsonFile(pkgPath)) as PkgJson;
     this.rawConfig = pkg.alfred || {};
 
     return Config.writeObjToPkgJsonConfig(pkgPath, {
@@ -146,7 +147,7 @@ export default class Config implements ConfigInterface {
     Project.validatePkgPath(pkgPath);
 
     // Read the package.json and validate the Alfred config
-    const { alfred = {} } = JSON.parse(fs.readFileSync(pkgPath).toString());
+    const { alfred = {} } = loadJsonFile.sync(pkgPath);
 
     return new Config(alfred);
   }
@@ -193,7 +194,7 @@ export default class Config implements ConfigInterface {
   ): Promise<string> {
     Project.validatePkgPath(pkgPath);
     const pkg = {
-      ...JSON.parse((await fs.promises.readFile(pkgPath)).toString()),
+      ...((await loadJsonFile(pkgPath)) as PkgJson),
       ...obj
     };
     const formattedPkg = await formatPkgJson(pkg);
