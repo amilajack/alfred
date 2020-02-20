@@ -14,9 +14,9 @@ os:
 cache: yarn
 
 install:
-  - pip install proselint
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then pip install proselint; fi
   - yarn --frozen-lockfile
 
 script:
   - yarn test
-  - yarn lint:prose
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn lint:prose; fi
