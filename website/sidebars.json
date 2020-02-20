@@ -3,13 +3,14 @@
     "Getting Started": [
       "getting-started",
       "cli",
-      "configuration"
+      "configuration",
+      "migrating-to-alfred"
     ],
     "Skills": [
       "skills",
       "skill-transforms",
       "skill-hooks",
-      "files-and-directories"
+      "files-and-dirs"
     ],
     "Interfaces": [
       "interfaces"

@@ -11,8 +11,9 @@ import { ENTRYPOINTS } from '@alfred/core/lib/constants';
 import { formatPkgJson } from '@alfred/core';
 import mergeConfigs from '@alfred/merge-configs';
 import Config from '@alfred/core/lib/config';
-import { Env, ProjectEnum, Platform } from '@alfred/types';
+import { Env, ProjectEnum, Platform, Skill } from '@alfred/types';
 import { serialPromises } from '@alfred/helpers';
+import { CORE_SKILLS } from '@alfred/core/lib/skill';
 import { addEntrypoints } from '../../lib';
 
 process.on('unhandledRejection', err => {
@@ -45,19 +46,16 @@ const CLEAN_AFTER_RUN = false;
 
 // If there are n elmenets in this array, 2^n tests will run since that's the number
 // of total combinations of the elements in the array.
-//
-// @TODO Temporarily removed mocha because it was not compatible with browser env
-const nonCoreCts = ['lodash', 'webpack', 'react'];
 
-const scripts = [
+const tasks = [
   // Build
   'build',
   'build --prod',
   'build --dev',
   // Start
-  // 'start',
-  // 'start --prod',
-  // 'start --dev',
+  'start',
+  'start --prod',
+  'start --dev',
   // Test
   'test',
   // Lint
@@ -67,17 +65,19 @@ const scripts = [
 ];
 
 type E2eTest = {
-  skillCombination: string[];
+  skillCombination: Skill[];
   projectDir: string;
   env: NodeJS.ProcessEnv;
   binPath: string;
+  folderName: string;
 };
 
 async function generateTestsForSkillCombination(
-  skillCombination: string[],
+  skillCombination: Skill[],
   tmpDir: string
 ): Promise<E2eTest> {
-  const folderName = ['e2e', ...skillCombination].join('-');
+  const skillCombinationNames = skillCombination.map(skill => skill.name);
+  const folderName = ['e2e', ...skillCombinationNames].join('-');
   const env = {
     ...process.env,
     ALFRED_E2E_CLI_TEST: 'true',
@@ -102,7 +102,7 @@ async function generateTestsForSkillCombination(
   const projectDir = path.join(tmpDir, folderName);
 
   // Add the skills to the alfred.skills config
-  skillCombination.forEach(skill => {
+  skillCombinationNames.forEach(skill => {
     childProcess.execSync(`node ${binPath} learn @alfred/skill-${skill}`, {
       cwd: projectDir,
       stdio: 'inherit',
@@ -110,39 +110,40 @@ async function generateTestsForSkillCombination(
     });
   });
 
-  return { skillCombination, projectDir, env, binPath };
+  return { skillCombination, projectDir, env, binPath, folderName };
 }
+
+function cleanTmpDir(): void {
+  rimraf.sync(tmpDir);
+}
+
+process.on('unhandledRejection', () => {
+  if (CLEAN_AFTER_RUN) {
+    cleanTmpDir();
+  }
+});
+process.on('exit', () => {
+  if (CLEAN_AFTER_RUN) {
+    cleanTmpDir();
+  }
+});
 
 (async (): Promise<void> => {
   const tmpDir = path.join(__dirname, 'tmp');
-
-  function cleanTmpDir(): void {
-    rimraf.sync(tmpDir);
-  }
-
-  process.on('unhandledRejection', () => {
-    if (CLEAN_AFTER_RUN) {
-      cleanTmpDir();
-    }
-  });
-  process.on('exit', () => {
-    if (CLEAN_AFTER_RUN) {
-      cleanTmpDir();
-    }
-  });
-
   cleanTmpDir();
   await fs.promises.mkdir(tmpDir);
 
+  // Test against every combination of skills. Remove CORE_SKILLS that are defaults
+  // because they are included by default
+  const nonDefaultSkills = Array.from(Object.values(CORE_SKILLS)).filter(
+    skill => !skill.default
+  );
+
   // Generate e2e tests for each combination of skills
   const e2eTests = await Promise.all(
-    powerset(nonCoreCts)
-      .sort((a, b) => a.length - b.length)
-      .map(skillCombination => (): Promise<E2eTest> =>
-        generateTestsForSkillCombination(skillCombination, tmpDir)
-      )
-      .slice(0, parseInt(process.env.E2E_TEST_COUNT || '', 10) || undefined)
-      .map(test => test())
+    powerset(nonDefaultSkills).map(skillCombination =>
+      generateTestsForSkillCombination(skillCombination, tmpDir)
+    )
   );
 
   childProcess.execSync('yarn --frozen-lockfile', {
@@ -152,154 +153,156 @@ async function generateTestsForSkillCombination(
   const issues = [];
 
   await Promise.all(
-    e2eTests.map(async ({ binPath, projectDir, skillCombination, env }) => {
-      let command;
+    e2eTests.map(
+      async ({ binPath, projectDir, skillCombination, env, folderName }) => {
+        let command: string;
 
-      // Generate all possible combinations of entrypoints and test each one
-      const entrypointCombinations = powerset(ENTRYPOINTS);
+        // Generate all possible combinations of entrypoints and test each one
+        const entrypointCombinations = powerset(ENTRYPOINTS);
 
-      await Promise.all(
-        entrypointCombinations.map(async entrypoints => {
-          const templateData = {
-            entrypoint: {
-              name: {
-                npm: {
-                  full: 'foo'
-                }
-              },
-              projectDir: './src/',
-              env: 'development' as Env,
-              filename: 'lib.browser.js',
-              project: 'lib' as ProjectEnum,
-              platform: 'browser' as Platform
-            }
-          };
-
-          // Remove the existing entrypoints in ./src
-          rimraf.sync(path.join(projectDir, 'src/*'));
-          rimraf.sync(path.join(projectDir, 'tests/*'));
-          await addEntrypoints(templateData, projectDir, entrypoints);
-
-          await serialPromises(
-            [true, false].map(showConfigs => async (): Promise<void> => {
-              const pkg = mergeConfigs(
-                {},
-                require(path.join(projectDir, 'package.json')),
-                {
-                  alfred: {
-                    ...Config.DEFAULT_CONFIG,
-                    npmClient: 'yarn',
-                    showConfigs
+        await Promise.all(
+          entrypointCombinations.map(async entrypoints => {
+            const templateData = {
+              entrypoint: {
+                name: {
+                  npm: {
+                    full: folderName
                   }
-                }
-              ) as {
-                alfred: Config;
-              };
-
-              fs.writeFileSync(
-                path.join(projectDir, 'package.json'),
-                await formatPkgJson(pkg)
-              );
-
-              try {
-                command = 'skills';
-                childProcess.execSync(`node ${binPath} skills`, {
-                  cwd: projectDir,
-                  stdio: 'inherit',
-                  env
-                });
-
-                console.log(
-                  `Testing ${JSON.stringify({
-                    skillCombination,
-                    entrypoints,
-                    showConfigs
-                  })}`
-                );
-
-                const entrypointIsAppProject = entrypoints.some(
-                  entrypoint => entrypoint.project === 'app'
-                );
-
-                await Promise.all(
-                  scripts.map(async subcommand => {
-                    command = subcommand;
-                    try {
-                      if (
-                        entrypointIsAppProject &&
-                        subcommand.includes('start')
-                      ) {
-                        const start = childProcess.spawn(
-                          binPath,
-                          ['run', subcommand],
-                          {
-                            cwd: projectDir,
-                            env
-                          }
-                        );
-
-                        start.stdout.once('data', data => {
-                          console.log(data);
-                          start.kill();
-                        });
-                        start.stderr.once('data', data => {
-                          start.kill();
-                          throw new Error(data);
-                        });
-                      } else {
-                        childProcess.execSync(
-                          `node ${binPath} run ${subcommand}`,
-                          {
-                            cwd: projectDir,
-                            stdio: 'inherit',
-                            env
-                          }
-                        );
-                      }
-                      // Assert that the .configs dir should or should not exist
-                      if (
-                        path.join(projectDir, pkg.alfred.configsDir) !==
-                        projectDir
-                      ) {
-                        assert.strictEqual(
-                          fs.existsSync(
-                            path.join(projectDir, pkg.alfred.configsDir)
-                          ),
-                          showConfigs
-                        );
-                      }
-                    } catch (e) {
-                      issues.push([
-                        skillCombination.join(', '),
-                        entrypoints.join(', '),
-                        command,
-                        showConfigs
-                      ]);
-                      console.log(e);
-                    }
-                  })
-                );
-
-                command = 'clean';
-                childProcess.execSync(`node ${binPath} clean`, {
-                  cwd: projectDir,
-                  stdio: 'inherit',
-                  env
-                });
-              } catch (e) {
-                issues.push([
-                  skillCombination.join(', '),
-                  entrypoints.join(', '),
-                  command,
-                  showConfigs
-                ]);
-                console.log(e);
+                },
+                projectDir: './src/',
+                env: 'development' as Env,
+                filename: 'lib.browser.js',
+                project: 'lib' as ProjectEnum,
+                platform: 'browser' as Platform
               }
-            })
-          );
-        })
-      );
-    })
+            };
+
+            // Remove the existing entrypoints in ./src
+            rimraf.sync(path.join(projectDir, 'src/*'));
+            rimraf.sync(path.join(projectDir, 'tests/*'));
+            await addEntrypoints(templateData, projectDir, entrypoints);
+
+            await serialPromises(
+              [true, false].map(showConfigs => async (): Promise<void> => {
+                const pkg = mergeConfigs(
+                  {},
+                  require(path.join(projectDir, 'package.json')),
+                  {
+                    alfred: {
+                      ...Config.DEFAULT_CONFIG,
+                      npmClient: 'yarn',
+                      showConfigs
+                    }
+                  }
+                ) as {
+                  alfred: Config;
+                };
+
+                fs.writeFileSync(
+                  path.join(projectDir, 'package.json'),
+                  await formatPkgJson(pkg)
+                );
+
+                try {
+                  command = 'skills';
+                  childProcess.execSync(`node ${binPath} skills`, {
+                    cwd: projectDir,
+                    stdio: 'inherit',
+                    env
+                  });
+
+                  console.log(
+                    `Testing ${JSON.stringify({
+                      skillCombination,
+                      entrypoints,
+                      showConfigs
+                    })}`
+                  );
+
+                  const entrypointIsAppProject = entrypoints.some(
+                    entrypoint => entrypoint.project === 'app'
+                  );
+
+                  await Promise.all(
+                    tasks.map(async subcommand => {
+                      command = subcommand;
+                      try {
+                        if (
+                          entrypointIsAppProject &&
+                          subcommand.includes('start')
+                        ) {
+                          const start = childProcess.spawn(
+                            binPath,
+                            ['run', subcommand],
+                            {
+                              cwd: projectDir,
+                              env
+                            }
+                          );
+
+                          start.stdout.once('data', data => {
+                            console.log(data);
+                            start.kill();
+                          });
+                          start.stderr.once('data', data => {
+                            start.kill();
+                            throw new Error(data);
+                          });
+                        } else {
+                          childProcess.execSync(
+                            `node ${binPath} run ${subcommand}`,
+                            {
+                              cwd: projectDir,
+                              stdio: 'inherit',
+                              env
+                            }
+                          );
+                        }
+                        // Assert that the .configs dir should or should not exist
+                        if (
+                          path.join(projectDir, pkg.alfred.configsDir) !==
+                          projectDir
+                        ) {
+                          assert.strictEqual(
+                            fs.existsSync(
+                              path.join(projectDir, pkg.alfred.configsDir)
+                            ),
+                            showConfigs
+                          );
+                        }
+                      } catch (e) {
+                        issues.push([
+                          skillCombination.join(', '),
+                          entrypoints.join(', '),
+                          command,
+                          showConfigs
+                        ]);
+                        console.log(e);
+                      }
+                    })
+                  );
+
+                  command = 'clean';
+                  childProcess.execSync(`node ${binPath} clean`, {
+                    cwd: projectDir,
+                    stdio: 'inherit',
+                    env
+                  });
+                } catch (e) {
+                  issues.push([
+                    skillCombination.join(', '),
+                    entrypoints.join(', '),
+                    command,
+                    showConfigs
+                  ]);
+                  console.log(e);
+                }
+              })
+            );
+          })
+        );
+      }
+    )
   );
 
   const totalTestsCount =
@@ -308,7 +311,7 @@ async function generateTestsForSkillCombination(
     // The total # of combinations of entrypoints
     (2 ** ENTRYPOINTS.length - 1) *
     // The number of subcommands tested
-    scripts.length *
+    tasks.length *
     // Show Configs
     2;
   if (issues.length) {

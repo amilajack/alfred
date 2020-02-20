@@ -48,6 +48,10 @@ module.exports = {
         href: 'http://github.com/alfred-js/alfred',
         label: 'GitHub'
       },
+      {
+        href: 'https://github.com/amilajack/alfred/tree/master/examples',
+        label: 'Examples'
+      },
       { blog: true, label: 'Blog' },
       {
         href: 'https://www.patreon.com/join/2181265/checkout',

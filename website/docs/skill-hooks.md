@@ -1,5 +1,6 @@
 ---
 id: skill-hooks
-title: Skill Hooks
+title: Hooks
 ---
 
+*This documentation is a work in progress*

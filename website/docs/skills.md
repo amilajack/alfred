@@ -74,20 +74,3 @@ alfred lint --format pretty
 ```
 
 For now, this **only works when `showConfigs` is set to `true`**.
-
-## Alfred Libraries Suggesting Skills
-
-Assume `react` has the following `package.json`:
-
-```json
-{
-  "name": "react",
-  // ...
-  "alfred": {
-    // ...
-    "lib": {
-      "recommendSkills": ["@alfred/skill-react"]
-    }
-  }
-}
-```

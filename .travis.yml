@@ -14,7 +14,7 @@ os:
 cache: yarn
 
 install:
-  - sudo pip install proselint
+  - pip install proselint
   - yarn --frozen-lockfile
 
 script:

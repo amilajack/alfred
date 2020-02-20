@@ -3,43 +3,67 @@ id: configuration
 title: Configuration
 ---
 
-## Alfred Config Example
+## Example
 
 ```json
 // package.json
 {
   "alfred": {
+    // Extend a shared config
+    "extends": "web-app",
     // Skills that override the default skills
     "skills": [
-      "@alfred/skill-webpack",
-      "@alfred/skill-testcafe",
-      ["@alfred/skill-eslint", {
-        "rules": {
-          "no-console": "off"
-        }
-      }]
+      "@alfred/skill-react"
     ],
     // Determine to install with NPM or Yarn
-    // Default: 'npm'
     "npmClient": "yarn",
     // Where to write configs to
-    // Default: '.' (project root)
     "configsDir": ".configs",
     // Write the configs to the configsDir directory
-    // Default: true
-    "showConfigs": true,
-    // Config for all lib targets
-    "lib": {
-      "recommendSkills": ["@alfred/skill-react"]
-    }
+    "showConfigs": true
   }
 }
 ```
 
+## Reference
+
+### `skills`
+
+Default: `[]`
+
+The skills that the Alfred project is using
+
+### `npmClient`
+
+Default: `yarn`
+
+Determine to install dependencies with NPM or Yarn
+
+### `configsDir`
+
+Default: `.`
+
+The directory, relative to the project directory, which config files should be written to
+
+### `showConfigs`
+
+Default: `true`
+
+Write the configs to the configsDir directory
+
+### `extends`
+
+Default: `undefined`
+
+The name of the config which you want to extend
 
 ## Extending Alfred Configs
 
-Suppose you have the following Alfred config:
+Alfred allows you to create reusable configs. This is useful when you want to share the same config across multiple projects.
+
+Here is an example of how you would ues a sharable config.
+
+Suppose your Alfred project has the following config:
 
 ```json
 // package.json
@@ -47,77 +71,40 @@ Suppose you have the following Alfred config:
   // ...
   "alfred": {
     "skills": [
-      "@alfred/skill-parcel",
-      ["@alfred/skill-babel", {
-        // Config for Babel
-        "presets": [
-          "@babel-preset-env",
-          "@babel-preset-flow",
-          "@babel-preset-react"
-        ],
-        "plugins": [
-          "@babel/plugin-proposal-class-properties"
-        ]
-      }],
-      ["@alfred/skill-eslint", {
-        // Config for ESLint
-        "rules": {
-          "no-console": "off"
-        }
-      }]
+      "@alfred/skill-react",
+      "@alfred/skill-redux"
     ]
   }
 }
 ```
 
-This config can be extracted to an Alfred config like so:
+This config can be extracted to an Alfred config by creating a sharable config. In this case, it makes sense to call the config `alfred-config-web-app`.
 
 ```json
-// alfred-config-my-app/package.json
+// alfred-config-web-app/package.json
 {
-  "name": "alfred-config-my-app",
+  "name": "alfred-config-web-app",
   "version": "0.0.0",
   "main": "index.json"
 }
 ```
 
 ```json
-// alfred-config-my-app/index.json
+// alfred-config-web-app/index.json
 {
   "skills": [
-    "@alfred/skill-parcel",
-    ["@alfred/skill-babel", {
-      "presets": [
-        "@babel-preset-env",
-        "@babel-preset-flow",
-        "@babel-preset-react"
-      ],
-    }],
-    ["@alfred/skill-eslint", {
-      "rules": {
-        "no-console": "off"
-      }
-    }]
+    "@alfred/skill-react",
+    "@alfred/skill-redux"
   ]
 }
 ```
 
-This config can be used like so:
+The original configuration now simplifies to this:
 
 ```json
 {
   "alfred": {
-    "extends": "my-app"
+    "extends": "web-app"
   }
 }
-```
-
-When a author of the app installs `react`, Alfred will recommend the skills `recommendSkills` on `postinstall` of `react`. This translates to users of a library automatically having the infra they need to use an app 😲
-
-```
-$ yarn add react
-
-`react` recommends installing the Alfred skill "@alfred/skill-react".
-
-Would you like to install it? (Y/n)
 ```
