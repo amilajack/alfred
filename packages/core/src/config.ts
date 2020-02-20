@@ -7,7 +7,7 @@ import {
   ConfigInterface,
   NpmClients,
   AlfredConfigWithResolvedSkills,
-  AlfredConfigWithUnresolvedInterfaces,
+  AlfredConfigWithUnresolvedTasks,
   AlfredConfigSkill,
   AlfredConfigWithUnresolvedSkills,
   AlfredConfigRawSkill,
@@ -33,7 +33,7 @@ export default class Config implements ConfigInterface {
 
   autoInstall: boolean;
 
-  private rawConfig: AlfredConfigWithUnresolvedInterfaces;
+  private rawConfig: AlfredConfigWithUnresolvedTasks;
 
   static DEFAULT_CONFIG = {
     skills: [],
@@ -43,7 +43,7 @@ export default class Config implements ConfigInterface {
     npmClient: 'npm' as NpmClients
   };
 
-  constructor(rawConfig: AlfredConfigWithUnresolvedInterfaces) {
+  constructor(rawConfig: AlfredConfigWithUnresolvedTasks) {
     validateAlfredConfig(rawConfig);
     const resolvedSkills = {
       ...Config.DEFAULT_CONFIG,
@@ -78,7 +78,7 @@ export default class Config implements ConfigInterface {
     };
   }
 
-  getRawConfig(): AlfredConfigWithUnresolvedInterfaces {
+  getRawConfig(): AlfredConfigWithUnresolvedTasks {
     return this.rawConfig;
   }
 
@@ -89,7 +89,7 @@ export default class Config implements ConfigInterface {
    */
   async write(
     pkgPath: string,
-    pkgAlfredConfig: AlfredConfigWithUnresolvedInterfaces
+    pkgAlfredConfig: AlfredConfigWithUnresolvedTasks
   ): Promise<string> {
     Project.validatePkgPath(pkgPath);
     validateAlfredConfig(pkgAlfredConfig);
@@ -153,7 +153,7 @@ export default class Config implements ConfigInterface {
   }
 
   private normalizeWithResolvedExtendedConfigs(
-    config: AlfredConfigWithUnresolvedInterfaces
+    config: AlfredConfigWithUnresolvedTasks
   ): AlfredConfigWithUnresolvedSkills {
     if (!config.extends) return config;
     // Convert extends: 'my-config' to extends: ['my-config']

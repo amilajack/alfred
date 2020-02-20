@@ -1,9 +1,9 @@
-import { Target, Entrypoint, SkillInterfaceModule } from '@alfred/types';
-import buildInterface from '@alfred/interface-build';
-import startInterface from '@alfred/interface-start';
-import testInterface from '@alfred/interface-test';
-import formatInterface from '@alfred/interface-format';
-import lintInterface from '@alfred/interface-lint';
+import { Target, Entrypoint, SkillTaskModule } from '@alfred/types';
+import buildTask from '@alfred/task-build';
+import startTask from '@alfred/task-start';
+import testTask from '@alfred/task-test';
+import formatTask from '@alfred/task-format';
+import lintTask from '@alfred/task-lint';
 
 export const PKG_SORT_ORDER = [
   'name',
@@ -80,12 +80,12 @@ export const RAW_ENTRYPOINTS = [
   'app.browser.js'
 ];
 
-export const CORE_INTERFACES: Array<[string, SkillInterfaceModule]> = [
-  ['build', buildInterface],
-  ['start', startInterface],
-  ['test', testInterface],
-  ['lint', lintInterface],
-  ['format', formatInterface]
+export const CORE_TASKS: Array<[string, SkillTaskModule]> = [
+  ['build', buildTask],
+  ['start', startTask],
+  ['test', testTask],
+  ['lint', lintTask],
+  ['format', formatTask]
 ];
 
 export const ENTRYPOINTS: Array<Entrypoint> = [

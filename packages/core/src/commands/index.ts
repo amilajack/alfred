@@ -7,16 +7,16 @@ import {
   SubcommandFn,
   RunForEachEvent
 } from '@alfred/types';
-import { getSubcommandInterfacesMap } from '../interface';
+import { getSubcommandTasksMap } from '../task';
 
 export function getSubcommandMap(
   project: ProjectInterface,
   skillMap: SkillMap
 ): ExecutableSkillMethods {
   const skills = Array.from(skillMap.values());
-  const subcommandInterfaceMap = getSubcommandInterfacesMap(skillMap);
-  const subcommandMapEntries = Array.from(subcommandInterfaceMap.entries()).map(
-    ([subcommand, skillInterface]): [string, SubcommandFn] => {
+  const subcommandTaskMap = getSubcommandTasksMap(skillMap);
+  const subcommandMapEntries = Array.from(subcommandTaskMap.entries()).map(
+    ([subcommand, task]): [string, SubcommandFn] => {
       return [
         subcommand,
         // Keep this function async to normalize all run call fn's to promises
@@ -25,16 +25,16 @@ export function getSubcommandMap(
             subcommand,
             flags
           } as RunEvent;
-          const skill = skillInterface.resolveSkill(skills, target);
+          const skill = task.resolveSkill(skills, target);
           if (
-            (skillInterface.runForEachTarget && !target) ||
-            (!skillInterface.runForEachTarget && target)
+            (task.runForEachTarget && !target) ||
+            (!task.runForEachTarget && target)
           ) {
             throw new Error(
               'Target and runForEachTarget must both be defined together'
             );
           }
-          if (skillInterface.runForEachTarget && target) {
+          if (task.runForEachTarget && target) {
             (event as RunForEachEvent).target = target;
           }
           return skill.hooks.run?.({

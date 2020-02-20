@@ -1,7 +1,7 @@
-import { ProjectInterface, SkillInterfaceModule } from '@alfred/types';
+import { ProjectInterface, SkillTaskModule } from '@alfred/types';
 import { getSubcommandMap } from '.';
 import { serialPromises } from '@alfred/helpers';
-import { getSubcommandInterfacesMap } from '../interface';
+import { getSubcommandTasksMap } from '../task';
 
 /**
  * Run an alfred subcommand given an alfred config
@@ -15,7 +15,7 @@ export default async function run(
   const { targets } = project;
 
   // Validate that “start” subcommand should only work for apps
-  // @HACK @REFACTOR This validation logic should be handled by the @alfred/interface-start interface
+  // @HACK @REFACTOR This validation logic should be handled by the @alfred/task-start task
   if (subcommand === 'start') {
     const hasAppTarget = targets.some(target => target.project === 'app');
     if (!hasAppTarget) {
@@ -42,11 +42,11 @@ export default async function run(
     throw new Error(`subcommand ${subcommand} does not exist in project`);
   }
 
-  const subcommandInterface = getSubcommandInterfacesMap(skillMap).get(
+  const subcommandTask = getSubcommandTasksMap(skillMap).get(
     subcommand
-  ) as SkillInterfaceModule;
+  ) as SkillTaskModule;
 
-  if (subcommandInterface.runForEachTarget) {
+  if (subcommandTask.runForEachTarget) {
     const tasks = project.targets.map(target => (): Promise<void> =>
       subcommandRunFn(skillFlags, target)
     );

@@ -4,7 +4,7 @@ import open from 'open';
 import childProcess, { ExecSyncOptions } from 'child_process';
 import serialize from 'serialize-javascript';
 import {
-  AlfredConfigWithUnresolvedInterfaces,
+  AlfredConfigWithUnresolvedTasks,
   ProjectInterface,
   ConfigInterface,
   PkgWithAllDeps,
@@ -103,7 +103,7 @@ export function getConfigsBasePath(
 
 export function requireConfig(
   configName: string
-): AlfredConfigWithUnresolvedInterfaces {
+): AlfredConfigWithUnresolvedTasks {
   try {
     const requiredConfig = require(`alfred-config-${configName}`);
     return requiredConfig.default || requiredConfig;
@@ -208,27 +208,25 @@ export function serialPromises(fns: Array<() => Promise<any>>): Promise<any> {
   );
 }
 
-export function interfaceResolvesSkillDefault(
+export function taskResolvesSkillDefault(
   subcommand: string,
-  interfacePkgName: string
+  taskPkgName: string
 ): (skills: Skill[], target?: Target) => Skill {
   return (skills: Skill[], target?: Target): Skill => {
     const resolvedSkills = skills
       .filter(skill =>
-        skill.interfaces.some(
-          skillInterface => skillInterface.module.subcommand === subcommand
-        )
+        skill.tasks.some(task => task.module.subcommand === subcommand)
       )
       .filter(skill => {
-        const skillInterface = skill.interfaces.find(
-          skillInterface => skillInterface.module.subcommand === subcommand
+        const task = skill.tasks.find(
+          task => task.module.subcommand === subcommand
         );
-        if (!skillInterface) {
+        if (!task) {
           throw new Error(
-            `No interface could be found with "${subcommand}" subcommand`
+            `No task could be found with "${subcommand}" subcommand`
           );
         }
-        const { supports } = skillInterface.config;
+        const { supports } = task.config;
         if (!supports || !target) {
           return true;
         }
@@ -251,7 +249,7 @@ export function interfaceResolvesSkillDefault(
 
     if (!defaultSkill) {
       throw new Error(
-        `Cannot find a default skill for interface ${interfacePkgName}`
+        `Cannot find a default skill for interface ${taskPkgName}`
       );
     }
 

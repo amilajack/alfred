@@ -12,7 +12,7 @@ import {
 const skill: RawSkill = {
   name: 'jest',
   description: 'Test your JS files',
-  interfaces: ['@alfred/interface-test'],
+  tasks: ['@alfred/task-test'],
   default: true,
   configs: [
     {

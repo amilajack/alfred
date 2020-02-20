@@ -21,7 +21,7 @@ import {
   ConfigValue,
   SkillWithoutHelpers,
   Supports,
-  SkillInterfaceModule,
+  SkillTaskModule,
   CORE_SKILL
 } from '@alfred/types';
 import {
@@ -30,10 +30,10 @@ import {
   EnhancedMap
 } from '@alfred/helpers';
 import { requireModule } from './helpers';
-import { CORE_INTERFACES } from './constants';
+import { CORE_TASKS } from './constants';
 import VirtualFileSystem from './virtual-file';
-import { normalizeInterfacesOfSkill } from './interface';
-import { validateSkill, validateInterface } from './validation';
+import { normalizeTasksOfSkill } from './task';
+import { validateSkill, validateTask } from './validation';
 
 export function addSkillHelpers(skill: SkillWithoutHelpers): Skill {
   const helpers: Helpers<Skill> = {
@@ -211,7 +211,7 @@ function normalizeSkill(skill: RawSkill | Skill): Skill {
     skillDefaults,
     skill,
     {
-      interfaces: normalizeInterfacesOfSkill(skill.interfaces || []),
+      tasks: normalizeTasksOfSkill(skill.tasks || []),
       files: Array.isArray(skill.files)
         ? new VirtualFileSystem(skill.files || [], skill.dirs)
         : skill.files || new VirtualFileSystem([]),
@@ -248,9 +248,7 @@ export function requireSkill(skillPkgName: string): Skill {
     }
   })();
 
-  normalizedSkill.interfaces.forEach(skillInterface =>
-    validateInterface(skillInterface.module)
-  );
+  normalizedSkill.tasks.forEach(task => validateTask(task.module));
 
   return normalizedSkill;
 }
@@ -328,15 +326,12 @@ export async function Skills(
     ...Object.values(CORE_SKILLS)
   ];
 
-  const subcommandMap = new Map<string, SkillInterfaceModule>(CORE_INTERFACES);
+  const subcommandMap = new Map<string, SkillTaskModule>(CORE_TASKS);
 
   normalizedSkills.forEach((skill: Skill) => {
-    if (skill.interfaces.length) {
-      skill.interfaces.forEach(skillInterface => {
-        subcommandMap.set(
-          skillInterface.module.subcommand,
-          skillInterface.module
-        );
+    if (skill.tasks.length) {
+      skill.tasks.forEach(task => {
+        subcommandMap.set(task.module.subcommand, task.module);
       });
     } else {
       if (target) {
@@ -351,19 +346,13 @@ export async function Skills(
     }
   });
 
-  subcommandMap.forEach(skillInterface => {
+  subcommandMap.forEach(task => {
     if (target) {
-      const resolvedSkill = skillInterface.resolveSkill(
-        skillsToResolveFrom,
-        target
-      );
+      const resolvedSkill = task.resolveSkill(skillsToResolveFrom, target);
       skillMap.set(resolvedSkill.name, resolvedSkill);
     } else {
       project.targets.forEach(target => {
-        const resolvedSkill = skillInterface.resolveSkill(
-          skillsToResolveFrom,
-          target
-        );
+        const resolvedSkill = task.resolveSkill(skillsToResolveFrom, target);
         skillMap.set(resolvedSkill.name, resolvedSkill);
       });
     }

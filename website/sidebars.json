@@ -12,8 +12,8 @@
       "skill-hooks",
       "files-and-dirs"
     ],
-    "Interfaces": [
-      "interfaces"
+    "Tasks": [
+      "tasks"
     ]
   }
 }
