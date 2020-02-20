@@ -15,7 +15,7 @@ export interface PkgJson {
   devDependencies?: Dependencies;
   dependencies?: Dependencies;
   peerDependencies?: Dependencies;
-  alfred?: AlfredConfigWithUnresolvedInterfaces;
+  alfred?: AlfredConfigWithUnresolvedTasks;
 }
 
 export interface PkgWithDeps {
@@ -48,7 +48,7 @@ export type SubcommandFn = (
 export type ExecutableSkillMethods = Map<string, SubcommandFn>;
 
 export type SkillsForSubCommand = Map<string, Set<string>>;
-export type SubCommandDict = Map<string, SkillInterface>;
+export type SubCommandDict = Map<string, SkillTask>;
 
 export type SkillsList = {
   subCommandAndSkills: SkillsForSubCommand;
@@ -115,7 +115,7 @@ export type Target = {
 
 export type HandleFlagsArgs = { target: Target; config: ConfigInterface };
 
-export interface SkillInterfaceModule {
+export interface SkillTaskModule {
   description: string;
   subcommand: string;
   // Determine if a skill should run once for each target it supports. This makes sense for build the
@@ -151,7 +151,7 @@ export interface AlfredConfigWithUnresolvedSkills {
   autoInstall?: boolean;
 }
 
-export interface AlfredConfigWithUnresolvedInterfaces
+export interface AlfredConfigWithUnresolvedTasks
   extends AlfredConfigWithUnresolvedSkills {
   extends?: RawExtendsConfigValue;
 }
@@ -169,16 +169,16 @@ export interface ConfigInterface extends AlfredConfigWithDefaults {
   getConfigValues: () => AlfredConfigWithResolvedSkills;
 }
 
-export interface SkillInterface {
+export interface SkillTask {
   name: string;
-  module: SkillInterfaceModule;
+  module: SkillTaskModule;
   config: Record<string, any>;
 }
 
-export type UnresolvedInterfaces = Array<
-  string | [string, Record<string, any>] | SkillInterface
+export type UnresolvedTasks = Array<
+  string | [string, Record<string, any>] | SkillTask
 >;
-export type ResolvedInterfaces = Array<SkillInterface>;
+export type ResolvedTasks = Array<SkillTask>;
 
 export type ConfigValue = Record<string, any>;
 
@@ -335,7 +335,7 @@ export interface RawSkill {
   dirs?: Array<Dir>;
   files?: Array<SkillFile>;
   configs?: Array<SkillConfig>;
-  interfaces?: UnresolvedInterfaces;
+  tasks?: UnresolvedTasks;
   hooks?: Hooks;
   transforms?: Transforms;
   default?: boolean;
@@ -357,7 +357,7 @@ export interface SkillWithoutHelpers extends PkgWithDeps {
   dirs: Array<Dir>;
   files: VirtualFileSystemInterface;
   configs: EnhancedMap<string, SkillConfig>;
-  interfaces: Array<SkillInterface>;
+  tasks: Array<SkillTask>;
   hooks: Hooks;
   transforms: Transforms;
   default: boolean;

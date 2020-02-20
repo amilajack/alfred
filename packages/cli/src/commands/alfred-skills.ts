@@ -17,13 +17,13 @@ import chalk from 'chalk';
   Array.from(subCommandAndSkills.entries()).forEach(([subCommand, skills]) => {
     const description = ((): string => {
       if (subCommandDict.has(subCommand)) {
-        const interfaceForSubCommand = subCommandDict.get(subCommand);
+        const taskForSubCommand = subCommandDict.get(subCommand);
         if (
-          interfaceForSubCommand &&
-          interfaceForSubCommand.module &&
-          interfaceForSubCommand.module.description
+          taskForSubCommand &&
+          taskForSubCommand.module &&
+          taskForSubCommand.module.description
         ) {
-          return interfaceForSubCommand.module.description;
+          return taskForSubCommand.module.description;
         }
       }
       return '';

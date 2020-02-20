@@ -14,17 +14,17 @@ export default async function skills(
   const subCommandDict: SubCommandDict = new Map();
 
   skillMap.forEach(skill => {
-    skill.interfaces.forEach(resultInterface => {
-      subCommandDict.set(resultInterface.module.subcommand, resultInterface);
-      if (subCommandAndSkills.has(resultInterface.module.subcommand)) {
-        const set = subCommandAndSkills.get(resultInterface.module.subcommand);
+    skill.tasks.forEach(resultTask => {
+      subCommandDict.set(resultTask.module.subcommand, resultTask);
+      if (subCommandAndSkills.has(resultTask.module.subcommand)) {
+        const set = subCommandAndSkills.get(resultTask.module.subcommand);
         if (set) {
           set.add(skill.name);
-          subCommandAndSkills.set(resultInterface.module.subcommand, set);
+          subCommandAndSkills.set(resultTask.module.subcommand, set);
         }
       } else {
         subCommandAndSkills.set(
-          resultInterface.module.subcommand,
+          resultTask.module.subcommand,
           new Set([skill.name])
         );
       }

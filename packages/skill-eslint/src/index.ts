@@ -12,7 +12,7 @@ import {
 const skill: RawSkill = {
   name: 'eslint',
   description: 'Lint all your JS files',
-  interfaces: ['@alfred/interface-lint'],
+  tasks: ['@alfred/task-lint'],
   default: true,
   configs: [
     {

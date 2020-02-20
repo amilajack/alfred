@@ -22,9 +22,9 @@ const supports = {
 const skill: RawSkill = {
   name: 'parcel',
   description: 'Build, optimize, and bundle assets in your app',
-  interfaces: [
-    ['@alfred/interface-build', { supports }],
-    ['@alfred/interface-start', { supports }]
+  tasks: [
+    ['@alfred/task-build', { supports }],
+    ['@alfred/task-start', { supports }]
   ],
   default: true,
   configs: [

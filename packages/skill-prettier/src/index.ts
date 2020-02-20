@@ -5,7 +5,7 @@ import { HookArgs, SkillConfig, RawSkill, RunEvent } from '@alfred/types';
 const skill: RawSkill = {
   name: 'prettier',
   description: 'Format the source files in your project',
-  interfaces: ['@alfred/interface-format'],
+  tasks: ['@alfred/task-format'],
   default: true,
   configs: [
     {

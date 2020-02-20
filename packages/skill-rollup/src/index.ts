@@ -26,9 +26,9 @@ const skill: RawSkill = {
   name: 'rollup',
   description: 'Build, optimize, and bundle assets in your app',
   supports,
-  interfaces: [
-    ['@alfred/interface-build', { supports }],
-    ['@alfred/interface-start', { supports }]
+  tasks: [
+    ['@alfred/task-build', { supports }],
+    ['@alfred/task-start', { supports }]
   ],
   default: true,
   configs: [

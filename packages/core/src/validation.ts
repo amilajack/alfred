@@ -1,9 +1,9 @@
 import Joi from '@hapi/joi';
 import {
   ValidationResult,
-  AlfredConfigWithUnresolvedInterfaces,
+  AlfredConfigWithUnresolvedTasks,
   RawSkill,
-  SkillInterfaceModule,
+  SkillTaskModule,
   PkgJson
 } from '@alfred/types';
 import Config from './config';
@@ -455,15 +455,15 @@ export class PkgValidation {
   }
 }
 
-export function validateInterface(skillInterface: SkillInterfaceModule): void {
-  const interfaceSchema = Joi.object({
+export function validateTask(task: SkillTaskModule): void {
+  const taskSchema = Joi.object({
     description: Joi.string().required(),
     subcommand: Joi.string().required(),
     runForEachTarget: Joi.boolean().required(),
     resolveSkill: Joi.function().required(),
     handleFlags: Joi.function()
   });
-  return Joi.assert(skillInterface, interfaceSchema);
+  return Joi.assert(task, taskSchema);
 }
 
 export function validateSkill(skill: RawSkill): void {
@@ -504,7 +504,7 @@ export function validateSkill(skill: RawSkill): void {
         write: Joi.boolean()
       })
     ),
-    interfaces: Joi.array().items(
+    tasks: Joi.array().items(
       Joi.string(),
       Joi.array().items(Joi.string().required(), Joi.object().required())
     ),
@@ -516,7 +516,7 @@ export function validateSkill(skill: RawSkill): void {
 }
 
 export function validateAlfredConfig(
-  alfredConfig: AlfredConfigWithUnresolvedInterfaces
+  alfredConfig: AlfredConfigWithUnresolvedTasks
 ): void {
   const alfredConfigSchema = Joi.object({
     npmClient: Joi.string().valid('npm', 'yarn'),

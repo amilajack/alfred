@@ -1,7 +1,7 @@
 import {
   validateAlfredConfig,
   validateSkill,
-  validateInterface
+  validateTask
 } from '../src/validation';
 
 describe('validation', () => {
@@ -68,9 +68,9 @@ describe('validation', () => {
     });
   });
 
-  describe('interfaces', () => {
+  describe('tasks', () => {
     it('should pass validation with minimal properties', () => {
-      validateInterface({
+      validateTask({
         description: 'build your alfred project',
         subcommand: 'build',
         runForEachTarget: true,
@@ -81,7 +81,7 @@ describe('validation', () => {
     });
 
     it('should fail with invalid input', () => {
-      expect(() => validateInterface({})).toThrow();
+      expect(() => validateTask({})).toThrow();
     });
   });
 });

@@ -18,10 +18,7 @@ import skillMapFromConfig, {
   runTransforms,
   CORE_SKILLS
 } from '../src/skill';
-import {
-  getSubcommandInterfacesMap,
-  normalizeInterfacesOfSkill
-} from '../src/interface';
+import { getSubcommandTasksMap, normalizeTasksOfSkill } from '../src/task';
 import alfred from '../src';
 import { TARGETS } from '../src/constants';
 
@@ -217,39 +214,34 @@ describe('Skills', () => {
     });
   });
 
-  describe('interfaces', () => {
+  describe('tasks', () => {
     it('should allow falsy inputs', () => {
-      expect(normalizeInterfacesOfSkill(undefined)).toEqual([]);
-      expect(normalizeInterfacesOfSkill(undefined)).toEqual([]);
+      expect(normalizeTasksOfSkill(undefined)).toEqual([]);
+      expect(normalizeTasksOfSkill(undefined)).toEqual([]);
     });
 
     it('should allow array of strings input', () => {
+      expect(normalizeTasksOfSkill(['@alfred/task-build'])).toMatchSnapshot();
       expect(
-        normalizeInterfacesOfSkill(['@alfred/interface-build'])
-      ).toMatchSnapshot();
-      expect(
-        normalizeInterfacesOfSkill([
-          '@alfred/interface-build',
-          '@alfred/interface-start'
-        ])
+        normalizeTasksOfSkill(['@alfred/task-build', '@alfred/task-start'])
       ).toMatchSnapshot();
     });
 
     it('should not allow non-array or string inputs', () => {
       expect(() =>
-        normalizeInterfacesOfSkill({
-          '@alfred/interface-build': {},
-          '@alfred/interface-start': {}
+        normalizeTasksOfSkill({
+          '@alfred/task-build': {},
+          '@alfred/task-start': {}
         })
       ).toThrowErrorMatchingSnapshot();
       expect(() =>
-        normalizeInterfacesOfSkill('incorrect-input')
+        normalizeTasksOfSkill('incorrect-input')
       ).toThrowErrorMatchingSnapshot();
     });
 
     describe('subcommand', () => {
       TARGETS.forEach(target => {
-        it(`should get corresponding interface for target ${JSON.stringify(
+        it(`should get corresponding task for target ${JSON.stringify(
           target
         )}`, async () => {
           const skillMap = await Skills(
@@ -258,7 +250,7 @@ describe('Skills', () => {
             target
           );
           expect(
-            getSubcommandInterfacesMap(skillMap).get('build')
+            getSubcommandTasksMap(skillMap).get('build')
           ).toMatchSnapshot();
         });
       });
@@ -270,9 +262,7 @@ describe('Skills', () => {
             [CORE_SKILLS.babel],
             target
           );
-          expect(getSubcommandInterfacesMap(skillMap).get('foo')).toBe(
-            undefined
-          );
+          expect(getSubcommandTasksMap(skillMap).get('foo')).toBe(undefined);
         }
       });
     });
@@ -390,9 +380,9 @@ describe('Skills', () => {
       const run = jest.fn();
       const skill: RawSkill = {
         name: 'test-skill',
-        interfaces: [
+        tasks: [
           {
-            name: 'some-test-interface',
+            name: 'some-test-task',
             module: {
               subcommand: 'test-command',
               runForEachTarget: true,
@@ -424,9 +414,9 @@ describe('Skills', () => {
       const run = jest.fn();
       const skill: RawSkill = {
         name: 'test-skill',
-        interfaces: [
+        tasks: [
           {
-            name: 'some-test-interface',
+            name: 'some-test-task',
             module: {
               subcommand: 'test-command',
               runForEachTarget: true,

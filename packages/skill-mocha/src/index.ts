@@ -21,9 +21,9 @@ const skill: RawSkill = {
   name: 'mocha',
   description: 'Run tests for your project',
   supports,
-  interfaces: [
+  tasks: [
     [
-      '@alfred/interface-test',
+      '@alfred/task-test',
       {
         supports
       }
