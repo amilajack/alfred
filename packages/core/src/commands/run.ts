@@ -1,4 +1,4 @@
-import { ProjectInterface, SkillTaskModule } from '@alfred/types';
+import { ProjectInterface, SkillTaskModule, RunEvent } from '@alfred/types';
 import { getSubcommandMap } from '.';
 import { serialPromises } from '@alfred/helpers';
 import { getSubcommandTasksMap } from '../task';
@@ -25,10 +25,11 @@ export default async function run(
     }
   }
 
-  project.emit('beforeRun', {
+  const beforeRunEvent: RunEvent = {
     subcommand,
     flags: skillFlags
-  });
+  };
+  project.emit('beforeRun', beforeRunEvent);
 
   const skillMap = await project.getSkillMap();
 
@@ -60,8 +61,9 @@ export default async function run(
     await subcommandRunFn(skillFlags);
   }
 
-  project.emit('afterRun', {
+  const afterRunEvent: RunEvent = {
     subcommand,
     flags: skillFlags
-  });
+  };
+  project.emit('afterRun', afterRunEvent);
 }

@@ -17,7 +17,7 @@ cd my-project
 alfred run build
 ```
 
-For migrating to Alfred, see [the migrating guide](docs/migrating-to-alfred)
+For migrating to Alfred, see [the migrating guide](migrating-to-alfred)
 
 ## Learning Skills
 

@@ -29,9 +29,9 @@ alfred migrate
 alfred types
 
 # Learning skills
-alfred learn @alfred/skill-parcel
-# Build using the new subcommand
-alfred build
+alfred learn @alfred/skill-webpack
+# Build using webpack skill
+alfred run build
 # Learning multiple skills
 alfred learn @alfred/skill-angular @alfred/skill-redux
 ```

@@ -28,7 +28,7 @@ import {
   Skill,
   Entrypoint,
   LearnEvent,
-  HookArgs
+  NewEvent
 } from '@alfred/types';
 import loadJsonFile from 'load-json-file';
 import Config from './config';
@@ -40,7 +40,7 @@ import skills from './commands/skills';
 import clean from './commands/clean';
 import { PKG_SORT_ORDER, RAW_ENTRYPOINTS } from './constants';
 import { EventEmitter } from 'events';
-// import 'source-map-support/register';
+import 'source-map-support/register';
 
 // @TODO Send the information to a crash reporting service (like sentry.io)
 // @TODO Install sourcemaps
@@ -168,7 +168,7 @@ export default class Project extends EventEmitter implements ProjectInterface {
 
     // Write all files of newly learned skills
     ['afterNew', 'afterLearn'].forEach(hookName => {
-      this.on(hookName, ({ event }: HookArgs<LearnEvent>) => {
+      this.on(hookName, (event: NewEvent | LearnEvent) => {
         this.writeSkillFiles(event.skillsPkgNames.map(requireSkill));
       });
     });

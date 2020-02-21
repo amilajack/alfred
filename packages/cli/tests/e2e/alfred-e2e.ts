@@ -5,6 +5,7 @@ import assert from 'assert';
 import rimraf from 'rimraf';
 import Table from 'cli-table3';
 import chalk from 'chalk';
+import getPort from 'get-port';
 import powerset from '@amilajack/powerset';
 import childProcess from 'child_process';
 import { ENTRYPOINTS } from '@alfred/core/lib/constants';
@@ -47,20 +48,16 @@ const CLEAN_AFTER_RUN = false;
 // If there are n elmenets in this array, 2^n tests will run since that's the number
 // of total combinations of the elements in the array.
 
-const tasks = [
-  // Build
+const subcommands = [
   'build',
   'build --prod',
   'build --dev',
-  // Start
-  'start',
-  'start --prod',
-  'start --dev',
-  // Test
+  // @TODO Cannot test this because parcel cannot be run concurrently
+  // 'start',
+  // 'start --prod',
+  // 'start --dev',
   'test',
-  // Lint
   'lint',
-  // Format
   'format'
 ];
 
@@ -72,9 +69,10 @@ type E2eTest = {
   folderName: string;
 };
 
+const E2E_TESTS_TMP_DIR = path.join(__dirname, 'tmp');
+
 async function generateTestsForSkillCombination(
-  skillCombination: Skill[],
-  tmpDir: string
+  skillCombination: Skill[]
 ): Promise<E2eTest> {
   const skillCombinationNames = skillCombination.map(skill => skill.name);
   const folderName = ['e2e', ...skillCombinationNames].join('-');
@@ -95,11 +93,11 @@ async function generateTestsForSkillCombination(
   };
   const binPath = require.resolve('../../lib/commands/alfred');
   childProcess.execSync(`node ${binPath} new ${folderName}`, {
-    cwd: tmpDir,
+    cwd: E2E_TESTS_TMP_DIR,
     stdio: 'inherit',
     env
   });
-  const projectDir = path.join(tmpDir, folderName);
+  const projectDir = path.join(E2E_TESTS_TMP_DIR, folderName);
 
   // Add the skills to the alfred.skills config
   skillCombinationNames.forEach(skill => {
@@ -114,7 +112,7 @@ async function generateTestsForSkillCombination(
 }
 
 function cleanTmpDir(): void {
-  rimraf.sync(tmpDir);
+  rimraf.sync(E2E_TESTS_TMP_DIR);
 }
 
 process.on('unhandledRejection', () => {
@@ -129,9 +127,8 @@ process.on('exit', () => {
 });
 
 (async (): Promise<void> => {
-  const tmpDir = path.join(__dirname, 'tmp');
   cleanTmpDir();
-  await fs.promises.mkdir(tmpDir);
+  await fs.promises.mkdir(E2E_TESTS_TMP_DIR);
 
   // Test against every combination of skills. Remove CORE_SKILLS that are defaults
   // because they are included by default
@@ -142,7 +139,7 @@ process.on('exit', () => {
   // Generate e2e tests for each combination of skills
   const e2eTests = await Promise.all(
     powerset(nonDefaultSkills).map(skillCombination =>
-      generateTestsForSkillCombination(skillCombination, tmpDir)
+      generateTestsForSkillCombination(skillCombination)
     )
   );
 
@@ -213,7 +210,7 @@ process.on('exit', () => {
 
                   console.log(
                     `Testing ${JSON.stringify({
-                      skillCombination,
+                      skills: skillCombination.map(skill => skill.name),
                       entrypoints,
                       showConfigs
                     })}`
@@ -224,30 +221,39 @@ process.on('exit', () => {
                   );
 
                   await Promise.all(
-                    tasks.map(async subcommand => {
+                    subcommands.map(async subcommand => {
                       command = subcommand;
                       try {
                         if (
                           entrypointIsAppProject &&
                           subcommand.includes('start')
                         ) {
+                          const port = await getPort();
                           const start = childProcess.spawn(
                             binPath,
-                            ['run', subcommand],
+                            ['run', subcommand, `--port ${port}`],
                             {
                               cwd: projectDir,
                               env
                             }
                           );
 
-                          start.stdout.once('data', data => {
-                            console.log(data);
-                            start.kill();
+                          await new Promise((resolve, reject) => {
+                            start.stdout.once('data', data => {
+                              console.log(data);
+                              resolve(data);
+                            });
+                            start.stderr.once('data', data => {
+                              reject(data);
+                            });
                           });
-                          start.stderr.once('data', data => {
-                            start.kill();
-                            throw new Error(data);
-                          });
+
+                          const page = await fetch(
+                            `http://localhost:${port}`
+                          ).then(res => res.text());
+                          expect(page).toEqual('hello from alfred');
+
+                          start.kill();
                         } else {
                           childProcess.execSync(
                             `node ${binPath} run ${subcommand}`,
@@ -311,7 +317,7 @@ process.on('exit', () => {
     // The total # of combinations of entrypoints
     (2 ** ENTRYPOINTS.length - 1) *
     // The number of subcommands tested
-    tasks.length *
+    subcommands.length *
     // Show Configs
     2;
   if (issues.length) {

@@ -19,8 +19,13 @@ const skill: RawSkill = {
   supports,
   files: [
     {
-      src: path.join(__dirname, '../boilerplate/index.js'),
-      dest: 'src/app.browser.js'
+      src: require.resolve('../boilerplate/app.browser.js'),
+      dest: 'src/app.browser.js',
+      condition: ({ project }): boolean => {
+        return project.targets.some(target => {
+          return target.platform === 'browser' && target.project === 'app';
+        });
+      }
     },
     {
       src: path.join(__dirname, '../boilerplate/index.html'),
@@ -28,6 +33,15 @@ const skill: RawSkill = {
       condition({ project }: SkillFileConditionArgs): boolean {
         return project.targets.some(target => {
           return target.platform === 'browser' && target.project === 'app';
+        });
+      }
+    },
+    {
+      src: require.resolve('../boilerplate/lib.browser.js'),
+      dest: 'src/lib.browser.js',
+      condition: ({ project }): boolean => {
+        return project.targets.some(target => {
+          return target.platform === 'browser' && target.project === 'lib';
         });
       }
     }

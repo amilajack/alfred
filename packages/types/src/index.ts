@@ -237,6 +237,7 @@ export type LearnEvent = {
 };
 
 export type NewEvent = {
+  skillsPkgNames: Array<string>;
   skills: Skill[];
   flags: Array<string>;
 };

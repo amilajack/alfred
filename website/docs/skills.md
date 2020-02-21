@@ -1,76 +1,73 @@
 ---
 id: skills
-title: The Basics
+title: The Basics of Skills
+sidebar_label: The Basics
 ---
 
-## Alfred Skill Example
+## What is a 'Skill'?
 
-The following is an example of an Alfred skill for Babel
+* A 'skill' is an object that wrappers a tool (such as Webpack, ESLint, Babel, and others)
+* It decides how the tool's configuration is changed so it can work with other tools
+* Skills can be run by a subcommand they specify. For example, the `@alfred/skill-webpack` skill is run with the `build` subcommand it registers
+* Alfred has built-in skills that can be overriden
 
-```js
-// index.js
-export default {
-  // The name that other skills will refer to this skill by
-  name: 'babel',
-  description: 'Transpile JS from ESNext to the latest ES version',
-  // An array of the configs introduced by the skill
-  configs: [
-    {
-      // The name of the config. This should never include a filename extension because skills
-      // have the ability to change extensions (ex. .js -> .ts) so this should not be fixed
-      alias: 'babel',
-      // The filename and the path which the config should be written to
-      filename: '.babelrc.js',
-      // The value of the config. Can be an object or a string
-      config: {
-        presets: ['@babel/preset-env']
-      }
-    }
-  ],
-  transforms: {
-    react(babelSkill) {
-      return babelSkill
-        .extendConfig('babel', {
-          presets: ['@babel/preset-react'],
-          env: {
-            production: {
-              plugins: [
-                '@babel/plugin-transform-react-inline-elements',
-              ]
-            },
-            development: {
-              plugins: ['react-hot-loader/babel']
-            }
-          }
-        })
-        .addDevDeps({
-          '@babel/preset-react': '^7.8.3',
-          '@babel/plugin-transform-react-inline-elements': '^7.8.3',
-          'react-hot-loader': '^4.12.19'
-        });
-    }
-  }
-};
+## Adding Skills
+
+To use a skill in your project, use the `alfred learn <skill-pkg-name>` command, where `skill-pkg-name` is the package name of the skill you want to install.
+
+Here are a few other examples of how you might install a skill:
+
+```bash
+# Installing a skill
+alfred learn @alfred/skill-lodash
+# Installing multiple skills
+alfred learn @alfred/skill-react @alfred/skill-redux
 ```
 
-`peerDependencies` are specified in the `package.json` of a skill. They are not `dependencies` because by determining dependencies in skills, they can be extended. Users can write their own skills to customize which dependencies they want installed. Customizing dependencies, however, should be considered an antipattern because they use versions of a dependency that may not be supported by a skill.
+### Skills with Subcomamnds
+
+Alfred comes with skills. Below is a table of how these skills and which subcommands and targets they support.
+
+| Built-in Skills                              | Subcommands       | Targets  |
+|----------------------------------------------|-------------------|----------|
+| [`@alfred/skill-parcel`][skill-parcel]       | `start`, `build`  | app      |
+| [`@alfred/skill-rollup`][skill-rollup]       | `build`           | lib      |
+| [`@alfred/skill-eslint`][skill-eslint]       | `lint`            | lib      |
+| [`@alfred/skill-prettier`][skill-prettier]   | `format`          | app, lib |
+| [`@alfred/skill-test`][skill-jest]           | `test`            | app, lib |
+
+Learning a skill can either replace or add subcommands to a project. For example, if you want to use webpack instead of parcel, you can run `alfred learn @alfred/skill-webpack`. Because Webpack supports the `build` and `start` subcommands, it will be used instead of parcel.
+
+[skill-parcel]: https://github.com/amilajack/alfred/tree/master/packages/skill-parcel
+[skill-rollup]: https://github.com/amilajack/alfred/tree/master/packages/skill-rollup
+[skill-eslint]: https://github.com/amilajack/alfred/tree/master/packages/skill-eslint
+[skill-prettier]: https://github.com/amilajack/alfred/tree/master/packages/skill-prettier
+[skill-jest]: https://github.com/amilajack/alfred/tree/master/packages/skill-jest
+
+## Using Skills
+
+### Extending Skill Configs
 
 ```json
 // package.json
 {
-  "name": "@alfred/skill-parcel",
-  "peerDependencies": {
-    "react": "^16.0.0"
+  // ...
+  "alfred": {
+    "skills": [
+      ["@alfred/skill-eslint", {
+        "no-console": "off"
+      }]
+    ]
   }
 }
 ```
 
-## Passing Flags to Skills
+### Passing Command Line Flags to Skills
 
 The following example passes flags to eslint. The example adds a custom formatter to eslint.
 
 ```bash
-alfred lint --format pretty
+alfred run lint --format pretty
 ```
 
 For now, this **only works when `showConfigs` is set to `true`**.

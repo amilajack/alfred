@@ -170,7 +170,6 @@ async function createNewProject(
   }
 
   const filename = `${answers.project}.${answers.platform}.js`;
-  const entry = `./src/${filename}`;
   const targetFile = `./targets/prod/${filename}`;
 
   answers.name = {
@@ -214,11 +213,12 @@ async function createNewProject(
   await addBoilerplate(templateData, root);
 
   const relativeRoot = path.relative(cwd, root);
-  const relativeEntryPoint = path.relative(cwd, path.resolve(root, entry));
 
   renderLines(['I am now installing the dependencies for your app']);
   const installCommand =
-    answers.npmClient === 'npm' ? `npm install --prefix ${root}` : 'yarn';
+    answers.npmClient === 'npm'
+      ? `npm install --prefix ${root}`
+      : 'yarn install';
   const buildCommand =
     answers.npmClient === 'npm' ? 'npm run build' : 'yarn build';
   // @TODO Install the deps
@@ -233,8 +233,7 @@ async function createNewProject(
     `Awesome! Your Alfred project has been created in: ${style.filePath(
       relativeRoot
     )}`,
-    `The Node entry point is at: ${style.filePath(relativeEntryPoint)}`,
-    // `First install your project with ${style.command(installCommand)}`,
+    `First install your project with ${style.command(installCommand)}`,
     `To build your project, just run ${style.command(
       buildCommand
     )} from within the ${style.filePath(relativeRoot)} directory.`,
@@ -247,6 +246,7 @@ async function createNewProject(
   const skillMap = await project.getSkillMap();
 
   const event: NewEvent = {
+    skillsPkgNames: [],
     skills: Array.from(skillMap.values()),
     flags: opts.flags
   };

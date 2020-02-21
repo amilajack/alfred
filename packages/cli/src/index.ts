@@ -59,30 +59,42 @@ export async function addEntrypoints(
     )
   );
 
-  await Promise.all(
-    entrypoints.map(target => {
-      const { project, platform } = target;
-      const isApp = project === 'app';
-      const isBrowser = platform === 'browser';
-
+  const writeIndexHtml = (): { file: string; content: string }[] => {
+    if (
+      entrypoints.some(entrypoint => entrypoint.filename === 'app.browser.js')
+    ) {
       const templateData = {
         ...rawTemplateData,
-        project: { project, platform, isApp, isBrowser }
-      };
-
-      const writeIndexHtml = (): Promise<void> => {
-        if (isApp && isBrowser) {
-          const content = APP_BROWSER_HTML_TEMPLATE(templateData);
-          return fs.promises.writeFile(
-            path.join(root, './src/index.html'),
-            content
-          );
+        project: {
+          project: 'app',
+          platform: 'browser',
+          isApp: true,
+          isBrowser: true
         }
-        return Promise.resolve();
       };
+      return [
+        {
+          file: './src/index.html',
+          content: APP_BROWSER_HTML_TEMPLATE(templateData)
+        }
+      ];
+    }
+    return [];
+  };
 
-      return Promise.all(
-        [
+  await Promise.all(
+    entrypoints
+      .map(entrypoint => {
+        const { project, platform } = entrypoint;
+        const isApp = project === 'app';
+        const isBrowser = platform === 'browser';
+
+        const templateData = {
+          ...rawTemplateData,
+          project: { project, platform, isApp, isBrowser }
+        };
+
+        return [
           {
             file: `./src/${project}.${platform}.js`,
             content: (isApp ? APP_TEMPLATE : LIB_TEMPLATE)(templateData)
@@ -91,13 +103,13 @@ export async function addEntrypoints(
             file: `./tests/${project}.${platform}.spec.js`,
             content: TEST_TEMPLATE(templateData)
           }
-        ]
-          .map(({ file, content }) =>
-            fs.promises.writeFile(path.join(root, file), content)
-          )
-          .concat([writeIndexHtml()])
-      );
-    })
+        ];
+      })
+      .flat()
+      .concat(writeIndexHtml())
+      .map(({ file, content }) =>
+        fs.promises.writeFile(path.join(root, file), content)
+      )
   );
 }
 

@@ -44,17 +44,22 @@ alfred run build
 
 See our [examples directory](https://github.com/amilajack/alfred/tree/master/examples)
 
-|  | Example | Descrption |
-| --- | --- | --- |
-| 1.|  [hello world](https://github.com/amilajack/alfred/tree/master/examples/hello-world) | A simple hello work app in node |
-| 2.|  [react library](https://github.com/amilajack/alfred/tree/master/examples/react-lib) | A small button library built with React |
-| 3.|  typescript | **HELP WANTED** |
+| Icon | Status                          |
+| ---  | ---                             |
+| ✅   | Basic implementation finish     |
+| 🔨   | Implementation in progress      |
+| ❌   | To be implemented, Help wanted! |
+
+|     | Example                            | Descrption                              |
+|-----|------------------------------------|-----------------------------------------|
+| 1.  | [hello world][hello-world-example] | A simple hello work app in node         |
+| 2.  | [react library][react-lib-example] | A small button library built with React |
+| 3.  | typescript react app               | ❌                                      |
+
+[hello-world-example]: https://github.com/amilajack/alfred/tree/master/examples/hello-world
+[react-lib-example]: https://github.com/amilajack/alfred/tree/master/examples/react-lib
 
 ## Implemented Skills
-
-✅ Basic implementation finish
-🔨 Implementation in progress
-❌ To be implemented
 
 | Infrastructure     | Skills                     | Implemented  |
 | ---                | ---                        | ---          |

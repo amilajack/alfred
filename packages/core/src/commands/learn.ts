@@ -9,7 +9,11 @@ export default async function learn(
 ): Promise<void> {
   const { config } = project;
 
-  project.emit('beforeLearn', { skillsPkgNames });
+  const beforeLearnEvent: LearnEvent = {
+    skillsPkgNames,
+    skills: []
+  };
+  project.emit('beforeLearn', beforeLearnEvent);
 
   // Create a alfred config with the new skills added
   const newConfig = new Config(
