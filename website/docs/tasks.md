@@ -1,8 +1,9 @@
 ---
 id: tasks
-title: The Basics of Tasks
-sidebar_label: The Basics
+title: Tasks
 ---
+
+*This documentation is a work in progress*
 
 ## Example
 

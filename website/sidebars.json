@@ -4,16 +4,14 @@
       "getting-started",
       "cli",
       "configuration",
-      "migrating-to-alfred"
-    ],
-    "Skills": [
+      "migrating-to-alfred",
       "skills",
+      "tasks"
+    ],
+    "Skills - Advanced": [
       "skill-transforms",
       "skill-hooks",
       "files-and-dirs"
-    ],
-    "Tasks": [
-      "tasks"
     ]
   }
 }
