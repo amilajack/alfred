@@ -4,7 +4,9 @@
       "getting-started",
       "cli",
       "configuration",
-      "migrating-to-alfred",
+      "migrating-to-alfred"
+    ],
+    "The Basics": [
       "skills",
       "tasks"
     ],

@@ -19,6 +19,7 @@ Here are a few examples of learning a skill:
 ```bash
 # Installing a skill
 alfred learn @alfred/skill-lodash
+
 # Installing multiple skills
 alfred learn @alfred/skill-react @alfred/skill-redux
 ```
