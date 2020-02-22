@@ -14,12 +14,18 @@ import {
   Env,
   EnvShortName,
   Skill,
-  Target
+  Target,
+  ParsedFlags
 } from '@alfred/types';
 
 import _parseFlags from 'yargs-parser';
 
-export const parseFlags = _parseFlags;
+export const parseFlags = (flags: string | string[]): ParsedFlags =>
+  _parseFlags(flags, {
+    configuration: {
+      'strip-dashed': true
+    }
+  });
 
 export class EnhancedMap<K, V> extends Map<K, V> {
   map(fn: (item: V, idx: number, items: [K, V][]) => V): EnhancedMap<K, V> {

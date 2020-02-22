@@ -220,16 +220,18 @@ export type SkillConfig = {
   write?: boolean;
 };
 
+export type ParsedFlags = Record<string, boolean | string | number>;
+
 export type RunEvent = {
   flags: Array<string>;
-  parsedFlags: Record<string, boolean | string | number>;
+  parsedFlags: ParsedFlags;
   subcommand: string;
 };
 
 export type RunForEachEvent = {
   target: Target;
   flags: Array<string>;
-  parsedFlags: Record<string, boolean | string | number>;
+  parsedFlags: ParsedFlags;
   subcommand: string;
 };
 

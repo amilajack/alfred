@@ -60,8 +60,6 @@ const skill: RawSkill = {
         );
       }
 
-      delete parsedFlags._;
-
       const parcelOpts = {
         outDir: path.join(root, 'targets', 'prod'),
         outFile: 'index.html',

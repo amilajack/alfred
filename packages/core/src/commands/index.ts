@@ -8,6 +8,7 @@ import {
   RunForEachEvent
 } from '@alfred/types';
 import { getSubcommandTasksMap } from '../task';
+import { parseFlags } from '@alfred/helpers';
 
 export function getSubcommandMap(
   project: ProjectInterface,
@@ -21,10 +22,11 @@ export function getSubcommandMap(
         subcommand,
         // Keep this function async to normalize all run call fn's to promises
         async (flags: string[] = [], target?: Target): Promise<void> => {
-          const event = {
+          const event: RunEvent = {
             subcommand,
+            parsedFlags: parseFlags(flags),
             flags
-          } as RunEvent;
+          };
           const skill = task.resolveSkill(skills, target);
           if (
             (task.runForEachTarget && !target) ||
