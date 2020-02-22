@@ -15,7 +15,6 @@
     "paths": {
       "@alfred/*": ["./*/src"]
     },
-    // "noEmit": true,
     /* Additional Checks */
     "noUnusedLocals": true,
     "noUnusedParameters": true,

@@ -89,7 +89,7 @@
     "lint-staged": "^10.0.7",
     "shebang-loader": "^0.0.1",
     "typedoc": "^0.16.10",
-    "typescript": "^3.7.5",
+    "typescript": "^3.8.2",
     "yarn": "^1.22.0"
   },
   "jest": {

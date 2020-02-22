@@ -17,6 +17,8 @@ import {
   Target
 } from '@alfred/types';
 
+export { default as parseFlags } from 'yargs-parser';
+
 export class EnhancedMap<K, V> extends Map<K, V> {
   map(fn: (item: V, idx: number, items: [K, V][]) => V): EnhancedMap<K, V> {
     const newMap = new EnhancedMap<K, V>();

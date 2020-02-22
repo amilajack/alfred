@@ -222,12 +222,14 @@ export type SkillConfig = {
 
 export type RunEvent = {
   flags: Array<string>;
+  parsedFlags: Record<string, boolean | string | number>;
   subcommand: string;
 };
 
 export type RunForEachEvent = {
   target: Target;
   flags: Array<string>;
+  parsedFlags: Record<string, boolean | string | number>;
   subcommand: string;
 };
 
