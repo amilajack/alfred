@@ -12,15 +12,14 @@ Alfred
 * Standardizing and simplifying JS infrastructure and conventions
 * Encourage extensible and reusable infrastructure configuration
 * Provide opinionated configuration out of the box that meets the needs of most users
-* Encourage and implement best practices for JS libraries and applications
 
 ## Installation
 
 ```bash
 # NPM
-npm install --global alfred  --registry https://amilajack.com/registry
+npm install alfred --global --registry https://amilajack.com/registry
 # Yarn
-yarn global add alfred  --registry https://amilajack.com/registry
+yarn global add alfred --registry https://amilajack.com/registry
 ```
 
 ## Usage

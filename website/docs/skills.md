@@ -23,7 +23,7 @@ alfred learn @alfred/skill-lodash
 alfred learn @alfred/skill-react @alfred/skill-redux
 ```
 
-### Skills with Subcomamnds
+### Skills with Subcommands
 
 Alfred comes with default skills. Below is a table of how these skills and which subcommands and targets they support.
 

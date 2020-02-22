@@ -10,9 +10,6 @@ const project = await alfred('/path/to/alfred/project');
 // run a command
 await project.run('start', {
   env: 'production',
-  options: {
-    pkgAutoFormatting: true
-  },
   flags: {
     openInBrowser: true
   }

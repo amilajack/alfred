@@ -1,22 +1,15 @@
 ## alfred
 
-## Installation
-
-```bash
-npm install alfred
-```
-
 ## Usage
+
 ```js
-const { config, run } = await alfred('/path/to/alfred/project');
+import alfred from 'alfred';
 
-console.log(config.skills);
+const project = await alfred('/path/to/alfred/project');
 
-await run('start', {
+// run a command
+await project.run('start', {
   env: 'production',
-  options: {
-    pkgAutoFormatting: true
-  },
   flags: {
     openInBrowser: true
   }
