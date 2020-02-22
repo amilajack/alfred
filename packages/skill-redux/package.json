@@ -1,6 +1,6 @@
 {
   "name": "@alfred/skill-redux",
-  "version": "0.0.7-alpha.0",
+  "version": "0.1.0-alpha.0",
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
@@ -10,8 +10,8 @@
     "version": "yarn build"
   },
   "dependencies": {
-    "@alfred/helpers": "^0.0.7-alpha.0",
-    "@alfred/types": "^0.0.7-alpha.0"
+    "@alfred/helpers": "^0.1.0-alpha.0",
+    "@alfred/types": "^0.1.0-alpha.0"
   },
   "devDependencies": {
     "connected-react-router": "^6.6.1",
