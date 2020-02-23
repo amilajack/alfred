@@ -2,10 +2,18 @@ import {
   getDepsFromPkg,
   configStringify,
   configToEvalString,
-  configSerialize
+  configSerialize,
+  parseFlags
 } from '../src';
 
 describe('Helpers', () => {
+  describe('parse flags', () => {
+    expect(parseFlags('--name jack')).toEqual({
+      _: [],
+      name: 'jack'
+    });
+  });
+
   describe('stringify', () => {
     it('should stringify configs', () => {
       const config = {

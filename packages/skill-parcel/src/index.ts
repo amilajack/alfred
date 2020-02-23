@@ -45,7 +45,7 @@ const skill: RawSkill = {
   ],
   hooks: {
     async run({ project, event }): Promise<void> {
-      const { target, subcommand } = event as RunForEachEvent;
+      const { target, subcommand, parsedFlags } = event as RunForEachEvent;
       const { root } = project;
       // eslint-disable-next-line global-require
       const Bundler = require('parcel');
@@ -66,7 +66,8 @@ const skill: RawSkill = {
         cacheDir: path.join(root, 'node_modules', '.cache'),
         minify: target.env === 'production',
         autoInstall: false,
-        target: target.platform
+        target: target.platform,
+        ...parsedFlags
       };
 
       switch (subcommand) {

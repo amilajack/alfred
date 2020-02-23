@@ -7,13 +7,14 @@
   "module": "./targets/lib.node.js",
   "scripts": {
     "build": "node ../../../../cli/lib/commands/alfred.js run build",
+    "build-with-flags": "node ../../../../cli/lib/commands/alfred.js run build --public-url /github-repo",
     "clean": "node ../../../../cli/lib/commands/alfred.js run clean",
     "format": "node ../../../../cli/lib/commands/alfred.js run format",
     "lint": "node ../../../../cli/lib/commands/alfred.js run lint",
     "skills": "node ../../../../cli/lib/commands/alfred.js skills",
     "start": "node ../../../../cli/lib/commands/alfred.js run start",
     "test": "node ../../../../cli/lib/commands/alfred.js run test",
-    "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
+    "test-all": "yarn clean && yarn build && yarn build-with-flags && yarn lint && yarn format && yarn skills && yarn test"
   },
   "devDependencies": {
     "@alfred/cli": "^0.1.0-alpha.0",
