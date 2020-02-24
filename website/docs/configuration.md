@@ -35,7 +35,7 @@ The skills that the Alfred project is using
 
 ### `npmClient`
 
-Default: `yarn`
+Default: `npm`
 
 Determine to install dependencies with NPM or Yarn
 

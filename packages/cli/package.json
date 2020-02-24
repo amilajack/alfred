@@ -17,6 +17,7 @@
     "build": "yarn ts && chmod -R +x lib",
     "build:watch": "yarn ts --watch",
     "e2e": "babel-node --extensions .ts ./tests/e2e/alfred-e2e.ts",
+    "e2e:start": "babel-node --extensions .ts ./tests/e2e/alfred-e2e-start.ts",
     "ts": "tsc",
     "version": "yarn build"
   },
@@ -57,7 +58,9 @@
   "devDependencies": {
     "@types/jest": "^25.1.2",
     "chai": "^4.2.0",
+    "expect": "^25.1.0",
     "get-port": "^5.1.1",
+    "nightmare": "^3.0.2",
     "node-fetch": "^2.6.0",
     "slash": "^3.0.0"
   },
