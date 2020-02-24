@@ -5,6 +5,7 @@ import assert from 'assert';
 import rimraf from 'rimraf';
 import Table from 'cli-table3';
 import chalk from 'chalk';
+import fetch from 'node-fetch';
 import getPort from 'get-port';
 import powerset from '@amilajack/powerset';
 import childProcess from 'child_process';
@@ -138,9 +139,7 @@ process.on('exit', () => {
 
   // Generate e2e tests for each combination of skills
   const e2eTests = await Promise.all(
-    powerset(nonDefaultSkills).map(skillCombination =>
-      generateTestsForSkillCombination(skillCombination)
-    )
+    powerset<Skill>(nonDefaultSkills).map(generateTestsForSkillCombination)
   );
 
   childProcess.execSync('yarn --frozen-lockfile', {
@@ -251,7 +250,7 @@ process.on('exit', () => {
                           const page = await fetch(
                             `http://localhost:${port}`
                           ).then(res => res.text());
-                          expect(page).toEqual('hello from alfred');
+                          expect(page).toEqual('hello from alfred!');
 
                           start.kill();
                         } else {

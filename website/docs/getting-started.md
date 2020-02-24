@@ -3,8 +3,6 @@ id: getting-started
 title: Getting Started
 ---
 
-## Usage
-
 ```bash
 # Install alfred
 npm install alfred --global --registry https://amilajack.com/registry
