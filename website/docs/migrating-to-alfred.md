@@ -30,7 +30,6 @@ Add the following standard Alfred NPM scripts to your `package.json`:
   "build": "alfred run build",
   "format": "alfred run format",
   "lint": "alfred run lint",
-  "skills": "alfred skills",
   "start": "alfred run start",
   "test": "alfred run test"
 }
