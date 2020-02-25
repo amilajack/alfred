@@ -60,7 +60,7 @@ const skill: RawSkill = {
   ],
   transforms: {
     typescript(skill: Skill): Skill {
-      skill?.files?.get('configureStore.prod')?.applyDiff(
+      skill.files.get('configureStore.prod')?.applyDiff(
         `@@ -12 +12 @@
 -function configureStore(initialState) {
 -  return createStore(rootReducer, initialState, enhancer);

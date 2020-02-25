@@ -5,6 +5,7 @@ import mockFs from 'mock-fs';
 import { Skills, requireSkill } from '../src/skill';
 import VirtualFileSystem from '../src/virtual-file';
 import Project from '../src/project';
+import { ProjectEnum, Env, Platform } from '@alfred/types';
 
 const reduxSkill = requireSkill('@alfred/skill-redux');
 
@@ -14,9 +15,9 @@ describe('virtual file system', () => {
   const project = new Project(path.join(__dirname, 'fixtures/react-app'));
 
   const defaultTarget = {
-    project: 'app',
-    env: 'development',
-    platform: 'browser'
+    project: 'app' as ProjectEnum,
+    env: 'development' as Env,
+    platform: 'browser' as Platform
   };
 
   const file = {
@@ -167,7 +168,7 @@ route 3`
         ],
         transforms: {
           typescript(skill) {
-            skill.files.get('routes').replaceContent('route 1', 'route 2');
+            skill.files.get('routes').replace('route 1', 'route 2');
             return skill;
           }
         }

@@ -53,8 +53,15 @@ export class VirtualFile implements VirtualFileInterface {
     return this;
   }
 
-  replace(content: string): VirtualFileInterface {
-    this.content = content;
+  replace(
+    searchValueOrContent: string,
+    replaceValue?: string
+  ): VirtualFileInterface {
+    if (replaceValue) {
+      this.content = this.content.replace(searchValueOrContent, replaceValue);
+      return this;
+    }
+    this.content = searchValueOrContent;
     return this;
   }
 
@@ -70,14 +77,6 @@ export class VirtualFile implements VirtualFileInterface {
     }
     this.content = patchResult;
 
-    return this;
-  }
-
-  replaceContent(
-    searchValue: string | RegExp,
-    replaceValue: string
-  ): VirtualFileInterface {
-    this.content = this.content.replace(searchValue, replaceValue);
     return this;
   }
 }

@@ -303,12 +303,11 @@ export interface VirtualFileInterface extends SkillFile {
   move(filename: string): VirtualFileInterface;
   delete(): void;
   rename(filename: string): VirtualFileInterface;
-  replace(content: string): VirtualFileInterface;
-  applyDiff(diff: string): VirtualFileInterface;
-  replaceContent(
-    searchValue: string | RegExp,
+  replace(
+    searchValueOrContent: string | RegExp,
     replaceValue: string
   ): VirtualFileInterface;
+  applyDiff(diff: string): VirtualFileInterface;
 }
 
 export type CORE_SKILL =

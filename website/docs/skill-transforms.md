@@ -3,8 +3,6 @@ id: skill-transforms
 title: Transforms
 ---
 
-*This documentation is a work in progress*
-
 The following is a basic example of a skill:
 
 ```js

@@ -12,8 +12,13 @@
     "Creating a Skill": [
       "skill-transforms",
       "skill-hooks",
-      "files-and-dirs",
-      "tasks"
+      "files-and-directories",
+      "tasks",
+      "writing-skills-with-typescript"
+    ],
+    "Concepts": [
+      "entrypoints",
+      "targets"
     ]
   }
 }

@@ -3,4 +3,4 @@ id: skill-hooks
 title: Hooks
 ---
 
-*This documentation is a work in progress*
+To give skill authors more control, Alfred allows skills to hook into certain steps.
