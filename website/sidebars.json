@@ -14,7 +14,8 @@
       "skill-hooks",
       "files-and-directories",
       "tasks",
-      "writing-skills-with-typescript"
+      "writing-skills-with-typescript",
+      "api"
     ],
     "Concepts": [
       "entrypoints",

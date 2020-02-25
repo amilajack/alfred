@@ -9,7 +9,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production lerna run --stream --ignore @examples/* --ignore @fixtures/* --ignore website build",
     "build:watch": "cross-env NODE_ENV=production lerna run build:watch --parallel",
-    "docs:build": "yarn build && yarn workspace website build && typedoc --out website/static/api",
+    "docs:build": "yarn build && yarn workspace website build",
     "docs:clean": "rm -rf website/build & rm -rf website/static/api",
     "docs:deploy": "yarn workspace website deploy",
     "docs:lint": "cp .proselintrc ~/ && proselint website/docs website/blog website/src/pages",
@@ -102,5 +102,43 @@
       "<rootDir>/packages/cli/tests/e2e",
       "<rootDir>/packages/cli/tests/fixtures"
     ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:import/errors",
+      "plugin:import/typescript",
+      "prettier/@typescript-eslint",
+      "plugin:prettier/recommended",
+      "plugin:promise/recommended"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": { "ecmaVersion": 2018, "sourceType": "module" },
+    "overrides": [
+      {
+        "extends": [
+          "plugin:react/recommended",
+          "plugin:import/typescript",
+          "plugin:@typescript-eslint/recommended",
+          "prettier/@typescript-eslint",
+          "plugin:prettier/recommended",
+          "plugin:promise/recommended"
+        ],
+        "files": ["*.ts", "*.tsx"],
+        "parser": "@typescript-eslint/parser",
+        "parserOptions": { "ecmaVersion": 2018, "sourceType": "module" },
+        "rules": {
+          "import/default": "off",
+          "@typescript-eslint/no-var-requires": "off"
+        }
+      },
+      {
+        "files": ["*.spec.ts", "*.spec.tsx"],
+        "rules": { "@typescript-eslint/ban-ts-ignore": "off" }
+      }
+    ],
+    "rules": {
+      "flowtype-errors/show-errors": "off",
+      "prettier/prettier": ["error", { "singleQuote": true }]
+    }
   }
 }

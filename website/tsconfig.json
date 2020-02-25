@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib"
+  },
+  "references": [
+    {"path": "../cli"},
+    {"path": "../helpers"},
+    {"path": "../types"},
+    {"path": "../task-build"},
+    {"path": "../task-start"},
+    {"path": "../task-test"},
+    {"path": "../task-lint"},
+    {"path": "../task-format"},
+  ]
+}

@@ -47,27 +47,29 @@ If `supports` is not passed, Alfred will assume the task supports all platforms,
 
 Certain tasks need to be run once for each [target](migrating-to-alfred#targets). One example of this is the `@alfred/task-build` task, which need to build each [target](migrating-to-alfred#targets) it supports. The `@alfred/task-lint` task only needs to be run once for all targets.
 
+#### Running once for each target
+
 ```js
-// Running once for each target
 module.exports = {
   subcommand: 'build',
   description: 'Build, optimize, and bundle assets in your app',
   runForEachTarget: true,
   resolveSkill(skills, target) {
-    // ...
+    // return whichever skill you want to resolve...
   }
 };
 
 ```
 
+#### Running once for all targets
+
 ```js
-// Running once for all targets
 module.exports = {
   subcommand: 'lint',
   description: 'Lint your app',
   runForEachTarget: false,
   resolveSkill(skills) {
-    // ...
+    // return whichever skill you want to resolve...
   }
 };
 ```
