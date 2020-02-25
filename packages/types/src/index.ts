@@ -322,7 +322,9 @@ export type CORE_SKILL =
   | 'lodash';
 
 export type Hooks = {
+  beforeRun?: HookFn<RunEvent>;
   run?: HookFn<RunEvent | RunForEachEvent>;
+  afterRun?: HookFn<RunEvent>;
   beforeLearn?: HookFn<LearnEvent>;
   afterLearn?: HookFn<LearnEvent>;
   beforeTransforms?: HookFn<TransformsEvent>;
