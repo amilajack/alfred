@@ -39,12 +39,10 @@ const nightmare = Nightmare();
           const dataStr = data.toString();
           if (dataStr.includes('Starting')) {
             const url = dataStr.split(' ').find(str => str.includes('http://'));
-            console.log(url, dataStr);
             resolve(new URL(url).port);
           }
         });
         start.stderr.on('data', data => {
-          console.log(data.toString());
           reject(data.toString());
         });
       });

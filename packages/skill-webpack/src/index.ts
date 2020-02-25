@@ -209,8 +209,6 @@ const skill: RawSkill = {
         }
       }
 
-      console.log(subcommand);
-
       switch (subcommand) {
         case 'start': {
           const Webpack = require('webpack');

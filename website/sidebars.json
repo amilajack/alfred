@@ -7,13 +7,13 @@
       "migrating-to-alfred"
     ],
     "The Basics": [
-      "skills",
-      "tasks"
+      "skills"
     ],
     "Creating a Skill": [
       "skill-transforms",
       "skill-hooks",
-      "files-and-dirs"
+      "files-and-dirs",
+      "tasks"
     ]
   }
 }
