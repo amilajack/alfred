@@ -24,7 +24,7 @@ const skill = {
 
 [Skills](skills) can support different platforms and projects. When adding a task to a skill, the task config takes an optional `supports` property, which is an object containing the projectss, platforms, and environments the skill supports for th given task.
 
-```js
+```js {10,11}
 const supports = {
   envs: ['production', 'development', 'test'],
   platforms: ['browser', 'node'],
@@ -49,7 +49,7 @@ Certain tasks need to be run once for each [target](migrating-to-alfred#targets)
 
 #### Running once for each target
 
-```js
+```js {4,5}
 module.exports = {
   subcommand: 'build',
   description: 'Build, optimize, and bundle assets in your app',
@@ -63,7 +63,7 @@ module.exports = {
 
 #### Running once for all targets
 
-```js
+```js {4,5}
 module.exports = {
   subcommand: 'lint',
   description: 'Lint your app',

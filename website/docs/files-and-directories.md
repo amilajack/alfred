@@ -27,7 +27,7 @@ The `dest` property determines where the file is written to relative to the user
 
 ## Conditionally Adding Files
 
-```js
+```js {7-12}
 const reactSkill = {
   name: 'react',
   files: [
@@ -55,7 +55,7 @@ You may want to write a file only if certain conditions are met. Returning `true
 
 Similar to configs which are transformed by functions in `transforms`, skills can also change their files to be compatible with other skills.
 
-```js
+```js {18-24}
 const reduxSkill = {
   name: 'redux',
   files: [

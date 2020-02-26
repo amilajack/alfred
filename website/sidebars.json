@@ -1,25 +1,25 @@
 {
   "docs": {
-    "Getting Started": [
+    "Introduction": [
       "getting-started",
       "cli",
       "configuration",
       "migrating-to-alfred"
     ],
     "The Basics": [
-      "skills"
+      "skills",
+      "entrypoints",
+      "targets"
     ],
     "Creating a Skill": [
       "skill-transforms",
+      "skill-dependencies",
       "skill-hooks",
+      "project-and-config",
       "files-and-directories",
       "tasks",
       "writing-skills-with-typescript",
       "api"
-    ],
-    "Concepts": [
-      "entrypoints",
-      "targets"
     ]
   }
 }

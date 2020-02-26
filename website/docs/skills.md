@@ -30,11 +30,11 @@ Alfred comes with default skills. Below is a table of how these skills and which
 
 | Default Skills                               | Subcommands       | Targets  |
 |----------------------------------------------|-------------------|----------|
-| [`@alfred/skill-parcel`][skill-parcel]       | `start`, `build`  | app      |
-| [`@alfred/skill-rollup`][skill-rollup]       | `build`           | lib      |
-| [`@alfred/skill-eslint`][skill-eslint]       | `lint`            | lib      |
-| [`@alfred/skill-prettier`][skill-prettier]   | `format`          | app, lib |
-| [`@alfred/skill-test`][skill-jest]           | `test`            | app, lib |
+| [`@alfred/skill-parcel`][skill-parcel]       | start, build      | app      |
+| [`@alfred/skill-rollup`][skill-rollup]       | build             | lib      |
+| [`@alfred/skill-eslint`][skill-eslint]       | lint              | lib      |
+| [`@alfred/skill-prettier`][skill-prettier]   | format            | app, lib |
+| [`@alfred/skill-test`][skill-jest]           | test              | app, lib |
 
 Learning a skill can either replace or add subcommands to a project. For example, if you want to use webpack instead of parcel, you can run `alfred learn @alfred/skill-webpack`. Since both webpack and parcel support the `build` and `start` subcommands and parcel is a default skill, webpack will override parcel. Future calls to `alfred run build` and `alfred run start` will now use webpack instead of parcel.
 

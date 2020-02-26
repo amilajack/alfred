@@ -20,6 +20,9 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.json')
+        },
+        theme: {
+          customCss: require.resolve('./src/css/custom.css')
         }
       }
     ]
@@ -33,31 +36,23 @@ module.exports = {
         src: 'img/alfred-logo.png'
       },
       links: [
-        { href: '/api', label: 'API', position: 'left' },
-        { to: 'blog', label: 'Blog', position: 'left' },
+        { to: 'docs/getting-started', label: 'Docs' },
+        { to: 'docs/api', label: 'API' },
         {
-          href: 'https://github.com/amilajack/alfred',
-          label: 'GitHub',
-          position: 'right'
+          href: 'https://github.com/amilajack/alfred/tree/master/examples',
+          label: 'Examples'
+        },
+        {
+          href: 'http://github.com/amilajack/alfred',
+          label: 'GitHub'
+        },
+        { to: 'blog', label: 'Blog' },
+        {
+          href: 'https://www.patreon.com/join/2181265/checkout',
+          label: 'Donate'
         }
       ]
     },
-    header: [
-      { doc: 'getting-started', label: 'Docs' },
-      {
-        href: 'http://github.com/alfred-js/alfred',
-        label: 'GitHub'
-      },
-      {
-        href: 'https://github.com/amilajack/alfred/tree/master/examples',
-        label: 'Examples'
-      },
-      { blog: true, label: 'Blog' },
-      {
-        href: 'https://www.patreon.com/join/2181265/checkout',
-        label: 'Donate'
-      }
-    ],
     footer: {
       copyright: `Copyright © ${new Date().getFullYear()} Alfred`
     },

@@ -4,11 +4,12 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "docusaurus start",
     "build:api": "babel-node --extensions .ts ./build.ts",
+    "build:clean": "rm -rf build & rm -rf static/api",
     "build": "yarn build:api && docusaurus build",
+    "start": "docusaurus start",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy"
+    "deploy": "docusaurus deploy && yarn build:clean"
   },
   "dependencies": {
     "@docusaurus/core": "^2.0.0-alpha.41",

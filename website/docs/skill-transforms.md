@@ -58,7 +58,7 @@ Alfred skills have helpers functions that make writing skills easy. The `extendC
 
 Serializing configs which cannot be serialized easily. This is done with the `serialize`. Here is an example:
 
-```js
+```js {9-12}
 const webpackSkill = {
   name: 'webpack',
   // ...
