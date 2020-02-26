@@ -3,6 +3,6 @@ id: api
 title: API
 ---
 
-* [@alfred/core](/api/@alfred/core/index.html)
-* [@alfred/helpers](/api/@alfred/helpers/index.html)
-* [@alfred/types](/api/@alfred/types/index.html)
+* [@alfred/core](/api/modules/_packages_core_src_index_.html)
+* [@alfred/helpers](/api/modules/_packages_helpers_src_index_.html)
+* [@alfred/types](/api/modules/_packages_types_src_index_.html)
