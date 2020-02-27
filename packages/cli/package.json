@@ -18,6 +18,7 @@
     "build:watch": "yarn ts --watch",
     "e2e": "babel-node --extensions .ts ./tests/e2e/alfred-e2e.ts",
     "e2e:start": "babel-node --extensions .ts ./tests/e2e/alfred-e2e-start.ts",
+    "test": "yarn e2e:start",
     "ts": "tsc",
     "version": "yarn build"
   },
