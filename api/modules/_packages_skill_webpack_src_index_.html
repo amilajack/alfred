@@ -106,7 +106,7 @@
 					<div class="tsd-signature tsd-kind-icon">should<wbr>Open<wbr>InBrowser<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = !(&#x27;ALFRED_E2E_TEST&#x27; in process.env) || process.env.ALFRED_E2E_TEST !&#x3D;&#x3D; &#x27;true&#x27;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/c972cf6/packages/skill-webpack/src/index.ts#L44">packages/skill-webpack/src/index.ts:44</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9798600/packages/skill-webpack/src/index.ts#L44">packages/skill-webpack/src/index.ts:44</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -123,7 +123,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/amilajack/alfred/blob/c972cf6/packages/skill-webpack/src/index.ts#L30">packages/skill-webpack/src/index.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9798600/packages/skill-webpack/src/index.ts#L30">packages/skill-webpack/src/index.ts:30</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -148,7 +148,7 @@
 					<div class="tsd-signature tsd-kind-icon">skill<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/c972cf6/packages/skill-webpack/src/index.ts#L47">packages/skill-webpack/src/index.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9798600/packages/skill-webpack/src/index.ts#L47">packages/skill-webpack/src/index.ts:47</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
@@ -157,7 +157,7 @@
 						<div class="tsd-signature tsd-kind-icon">configs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">{ </span>alias<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>filename<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>alias<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>filename<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>alias<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>filename<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>alias<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>filename<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [{alias: &#x27;webpack.base&#x27;,filename: &#x27;webpack.base.js&#x27;,config: {mode: &#x27;development&#x27;,output: {path: path.join(&#x27;&lt;projectRoot&gt;&#x27;, &#x27;targets&#x27;, &#x27;dev&#x27;),publicPath: &#x27;./targets/dev&#x27;},resolve: {extensions: [&#x27;.mjs&#x27;, &#x27;.js&#x27;, &#x27;.json&#x27;]},plugins: []}},{alias: &#x27;webpack.prod&#x27;,filename: &#x27;webpack.prod.js&#x27;,config: {output: {path: path.join(&#x27;&lt;projectRoot&gt;&#x27;, &#x27;targets&#x27;, &#x27;prod&#x27;),publicPath: &#x27;./targets/prod&#x27;},// @TODO: optimizations, etcmode: &#x27;production&#x27;}},{alias: &#x27;webpack.dev&#x27;,filename: &#x27;webpack.dev.js&#x27;,config: {// @TODO: wepack-dev-server, HMR, sass, css, etcmode: &#x27;development&#x27;,entry: [// @TODO&#x27;react-hot-loader/patch&#x27;,&#x27;webpack-dev-server/client?http://localhost:1234/&#x27;,&#x27;webpack/hot/only-dev-server&#x27;],output: {path: path.join(&#x27;&lt;projectRoot&gt;&#x27;, &#x27;targets&#x27;, &#x27;dev&#x27;),publicPath: &#x27;http://localhost:1234/&#x27;},devServer: {open: shouldOpenInBrowser,port: 1234,publicPath: &#x27;/&#x27;,compress: true,noInfo: true,stats: &#x27;errors-only&#x27;,inline: true,lazy: false,hot: true,headers: { &#x27;Access-Control-Allow-Origin&#x27;: &#x27;*&#x27; },contentBase: path.join(&#x27;&lt;projectRoot&gt;&#x27;, &#x27;src&#x27;),watchOptions: {aggregateTimeout: 300,ignored: /node_modules/,poll: 100},historyApiFallback: {verbose: true,disableDotRule: false}},plugins: [configStringify&#x60;new webpack.HotModuleReplacementPlugin({multiStep: true})&#x60;]}},{alias: &#x27;webpack.node&#x27;,filename: &#x27;webpack.node.js&#x27;,config: {entry: [path.join(&#x27;&lt;projectRoot&gt;&#x27;, &#x27;src&#x27;, &#x27;app.node.js&#x27;)],output: {filename: &#x27;app.node.js&#x27;},target: &#x27;node&#x27;}},{alias: &#x27;webpack.browser&#x27;,filename: &#x27;webpack.browser.js&#x27;,config: {entry: [path.join(&#x27;&lt;projectRoot&gt;&#x27;, &#x27;src&#x27;, &#x27;app.browser.js&#x27;)],output: {filename: &#x27;app.browser.js&#x27;},target: &#x27;web&#x27;}}]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/c972cf6/packages/skill-webpack/src/index.ts#L55">packages/skill-webpack/src/index.ts:55</a></li>
+								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9798600/packages/skill-webpack/src/index.ts#L55">packages/skill-webpack/src/index.ts:55</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -167,7 +167,7 @@
 						<div class="tsd-signature tsd-kind-icon">description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;Build, optimize, and bundle assets in your app&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/c972cf6/packages/skill-webpack/src/index.ts#L49">packages/skill-webpack/src/index.ts:49</a></li>
+								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9798600/packages/skill-webpack/src/index.ts#L49">packages/skill-webpack/src/index.ts:49</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -177,7 +177,7 @@
 						<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;webpack&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/c972cf6/packages/skill-webpack/src/index.ts#L48">packages/skill-webpack/src/index.ts:48</a></li>
+								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9798600/packages/skill-webpack/src/index.ts#L48">packages/skill-webpack/src/index.ts:48</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -187,7 +187,7 @@
 						<div class="tsd-signature tsd-kind-icon">supports<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>envs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">"production"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"development"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"test"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>platforms<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">"node"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"browser"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>projects<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">"app"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"lib"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/c972cf6/packages/skill-webpack/src/index.ts#L50">packages/skill-webpack/src/index.ts:50</a></li>
+								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9798600/packages/skill-webpack/src/index.ts#L50">packages/skill-webpack/src/index.ts:50</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-type-declaration">
@@ -211,7 +211,7 @@
 						<div class="tsd-signature tsd-kind-icon">tasks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">{ </span>supports<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>envs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">"production"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"development"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"test"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>platforms<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">"node"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"browser"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>projects<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">"app"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"lib"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [[&#x27;@alfred/task-build&#x27;, { supports }],[&#x27;@alfred/task-start&#x27;, { supports }]]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/c972cf6/packages/skill-webpack/src/index.ts#L51">packages/skill-webpack/src/index.ts:51</a></li>
+								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9798600/packages/skill-webpack/src/index.ts#L51">packages/skill-webpack/src/index.ts:51</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -221,7 +221,7 @@
 						<div class="tsd-signature tsd-kind-icon">hooks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/c972cf6/packages/skill-webpack/src/index.ts#L153">packages/skill-webpack/src/index.ts:153</a></li>
+								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9798600/packages/skill-webpack/src/index.ts#L153">packages/skill-webpack/src/index.ts:153</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-object-literal tsd-is-not-exported">
@@ -234,7 +234,7 @@
 								<li class="tsd-description">
 									<aside class="tsd-sources">
 										<ul>
-											<li>Defined in <a href="https://github.com/amilajack/alfred/blob/c972cf6/packages/skill-webpack/src/index.ts#L154">packages/skill-webpack/src/index.ts:154</a></li>
+											<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9798600/packages/skill-webpack/src/index.ts#L154">packages/skill-webpack/src/index.ts:154</a></li>
 										</ul>
 									</aside>
 									<h4 class="tsd-parameters-title">Parameters</h4>
@@ -265,7 +265,7 @@
 						<div class="tsd-signature tsd-kind-icon">transforms<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/c972cf6/packages/skill-webpack/src/index.ts#L263">packages/skill-webpack/src/index.ts:263</a></li>
+								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9798600/packages/skill-webpack/src/index.ts#L263">packages/skill-webpack/src/index.ts:263</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-object-literal tsd-is-not-exported">
@@ -278,7 +278,7 @@
 								<li class="tsd-description">
 									<aside class="tsd-sources">
 										<ul>
-											<li>Defined in <a href="https://github.com/amilajack/alfred/blob/c972cf6/packages/skill-webpack/src/index.ts#L264">packages/skill-webpack/src/index.ts:264</a></li>
+											<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9798600/packages/skill-webpack/src/index.ts#L264">packages/skill-webpack/src/index.ts:264</a></li>
 										</ul>
 									</aside>
 									<h4 class="tsd-parameters-title">Parameters</h4>
@@ -309,7 +309,7 @@
 								<li class="tsd-description">
 									<aside class="tsd-sources">
 										<ul>
-											<li>Defined in <a href="https://github.com/amilajack/alfred/blob/c972cf6/packages/skill-webpack/src/index.ts#L286">packages/skill-webpack/src/index.ts:286</a></li>
+											<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9798600/packages/skill-webpack/src/index.ts#L286">packages/skill-webpack/src/index.ts:286</a></li>
 										</ul>
 									</aside>
 									<h4 class="tsd-parameters-title">Parameters</h4>
@@ -332,7 +332,7 @@
 								<li class="tsd-description">
 									<aside class="tsd-sources">
 										<ul>
-											<li>Defined in <a href="https://github.com/amilajack/alfred/blob/c972cf6/packages/skill-webpack/src/index.ts#L298">packages/skill-webpack/src/index.ts:298</a></li>
+											<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9798600/packages/skill-webpack/src/index.ts#L298">packages/skill-webpack/src/index.ts:298</a></li>
 										</ul>
 									</aside>
 									<h4 class="tsd-parameters-title">Parameters</h4>
@@ -353,7 +353,7 @@
 					<div class="tsd-signature tsd-kind-icon">supports<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/c972cf6/packages/skill-webpack/src/index.ts#L34">packages/skill-webpack/src/index.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9798600/packages/skill-webpack/src/index.ts#L34">packages/skill-webpack/src/index.ts:34</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
@@ -362,7 +362,7 @@
 						<div class="tsd-signature tsd-kind-icon">envs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">"production"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"development"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"test"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [&#x27;production&#x27;, &#x27;development&#x27;, &#x27;test&#x27;] as Env[]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/c972cf6/packages/skill-webpack/src/index.ts#L36">packages/skill-webpack/src/index.ts:36</a></li>
+								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9798600/packages/skill-webpack/src/index.ts#L36">packages/skill-webpack/src/index.ts:36</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -372,7 +372,7 @@
 						<div class="tsd-signature tsd-kind-icon">platforms<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">"node"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"browser"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [&#x27;browser&#x27;] as Platform[]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/c972cf6/packages/skill-webpack/src/index.ts#L39">packages/skill-webpack/src/index.ts:39</a></li>
+								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9798600/packages/skill-webpack/src/index.ts#L39">packages/skill-webpack/src/index.ts:39</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -382,7 +382,7 @@
 						<div class="tsd-signature tsd-kind-icon">projects<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">"app"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"lib"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [&#x27;app&#x27;] as ProjectEnum[]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/c972cf6/packages/skill-webpack/src/index.ts#L41">packages/skill-webpack/src/index.ts:41</a></li>
+								<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9798600/packages/skill-webpack/src/index.ts#L41">packages/skill-webpack/src/index.ts:41</a></li>
 							</ul>
 						</aside>
 					</section>
