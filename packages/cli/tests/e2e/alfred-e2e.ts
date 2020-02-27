@@ -250,7 +250,7 @@ process.on('exit', () => {
                           const page = await fetch(
                             `http://localhost:${port}`
                           ).then(res => res.text());
-                          expect(page).toEqual('hello from alfred!');
+                          expect(page).toEqual('Hello from Alfred!');
 
                           start.kill();
                         } else {

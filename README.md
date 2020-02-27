@@ -9,7 +9,7 @@ Alfred
 > ## 🛠 Status: In Development
 > Alfred is currently in development. It's on the fast track to a 1.0 release, so we encourage you to use it and give us your feedback, but there are things that haven't been finalized yet and you can expect some changes.
 
-### Alfred is a Modular JS Toolchain with the following goals:
+### Alfred is a Modular Toolchain for JavaScript with the following goals:
 
 * Standardizing and simplifying JS infrastructure and conventions
 * Encourage extensible and reusable infrastructure configuration

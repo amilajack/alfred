@@ -72,10 +72,16 @@ const skill: RawSkill = {
 
       switch (subcommand) {
         case 'start': {
-          const server = await new Bundler(entryFiles, {
+          const bundler = new Bundler(entryFiles, {
             ...parcelOpts,
             watch: true
-          }).serve();
+          });
+          const server =
+            'port' in parcelOpts
+              ? // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                // @ts-ignore
+                await bundler.serve(parcelOpts.port)
+              : await bundler.serve();
           const url = `http://localhost:${server.address().port}`;
           console.log(
             `Starting ${

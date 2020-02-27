@@ -8,6 +8,7 @@ import CounterPage from './containers/CounterPage';
 export default function Routes() {
   return (
     <App>
+      <h1>Hello from Alfred!</h1>
       <Switch>
         <Route path={routes.COUNTER} component={CounterPage} />
         <Route path={routes.HOME} component={HomePage} />

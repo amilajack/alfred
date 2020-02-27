@@ -7,7 +7,7 @@
 
 module.exports = {
   title: 'Alfred',
-  tagline: 'A standard workflow for JavaScript projects',
+  tagline: 'A Modular Toolchain for JavaScript',
   url: 'https://alfred.js.org',
   baseUrl: '/',
   projectName: 'alfred',
