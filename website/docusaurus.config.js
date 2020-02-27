@@ -10,10 +10,8 @@ module.exports = {
   tagline: 'A standard workflow for JavaScript projects',
   url: 'https://alfred.js.org',
   baseUrl: '/',
-
   projectName: 'alfred',
   organizationName: 'amilajack',
-
   presets: [
     [
       '@docusaurus/preset-classic',
@@ -27,7 +25,6 @@ module.exports = {
       }
     ]
   ],
-
   themeConfig: {
     navbar: {
       title: 'Alfred',
@@ -68,10 +65,8 @@ module.exports = {
       trackingID: 'UA-132764504-1'
     }
   },
-
-  /* path to images for header/footer */
+  // path to images for header/footer
   favicon: 'img/alfred-logo.png',
-
   // Add custom scripts here that would be placed in <script> tags.
   scripts: ['https://buttons.github.io/buttons.js']
 };

@@ -7,9 +7,8 @@
       "migrating-to-alfred"
     ],
     "The Basics": [
-      "skills",
-      "entrypoints",
-      "targets"
+      "concepts",
+      "skills"
     ],
     "Creating a Skill": [
       "skill-transforms",

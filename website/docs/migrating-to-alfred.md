@@ -11,7 +11,7 @@ Make sure that you have a `src` directory in the root of your project.
 
 ### Entrypoints
 
-Make sure you create the necessary entrypoints in your `./src` directory. Entrypoints follow the following format: `{projectType}.{platform}.js`. Here are some examples of entrypoints: `app.browser.js`, `lib.node.js`, etc.
+Make sure you create the necessary entrypoints in your `./src` directory. Entrypoints follow the following format: `{project}.{platform}.js`. Here are some examples of entrypoints: `app.browser.js`, `lib.node.js`, etc.
 
 ### Tests
 

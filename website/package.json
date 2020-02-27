@@ -7,7 +7,9 @@
     "build:api": "babel-node --extensions .ts ./build.ts",
     "build:clean": "rm -rf build & rm -rf static/api",
     "build": "yarn build:api && docusaurus build",
+    "lint": "cp .proselintrc ~/ && proselint docs blog src/pages",
     "start": "docusaurus start",
+    "test": "yarn lint",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy && yarn build:clean"
   },
