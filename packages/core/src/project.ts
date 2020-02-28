@@ -7,8 +7,7 @@ import pkgUp from 'pkg-up';
 import {
   getConfigsBasePath,
   execCmdInProject,
-  configToEvalString,
-  CONFIG_DELIMITER
+  configToEvalString
 } from '@alfred/helpers';
 import mergeConfigs from '@alfred/merge-configs';
 import {
@@ -433,54 +432,57 @@ ${JSON.stringify(result.errors)}`
         .flatMap(skill => Array.from(skill.configs.values()))
         .map(async config => {
           const filePath = path.join(configsBasePath, config.filename);
-          const stringifiedConfig = JSON.stringify(config.config);
 
-          // If the config has a pkgProperty and the config can be easily serialized, write
-          // it to the pkg json
-          if (
-            typeof config.pkgProperty === 'string' &&
-            !stringifiedConfig.includes(CONFIG_DELIMITER)
-          ) {
-            await this.updatePkg();
-            configEntries.push([config.pkgProperty, config.config]);
-            // If the file happens to exist, delete it. User shouldn't have two configs in
-            // pkg and config file
-            if (fs.existsSync(filePath)) {
-              await fs.promises.unlink(filePath);
+          switch (config.write) {
+            case false:
+              break;
+            case 'pkg': {
+              if (typeof config.pkgProperty === 'string') {
+                configEntries.push([config.pkgProperty, config.config]);
+                // If the file happens to exist, delete it. User shouldn't have two configs in
+                // pkg and config file
+                if (fs.existsSync(filePath)) {
+                  await fs.promises.unlink(filePath);
+                }
+              }
+              break;
             }
-            return;
+            case 'file': {
+              const stringifiedConfig = JSON.stringify(config.config);
+
+              // Otherwises, format the config and write it to its filepath
+              let parser: 'babel' | 'json' = 'babel';
+              const configWithExports = ((): string => {
+                switch (config.fileType) {
+                  case 'commonjs':
+                    parser = 'babel';
+                    return `module.exports = ${stringifiedConfig}`;
+                  case 'module':
+                    parser = 'babel';
+                    return `export default ${stringifiedConfig}`;
+                  case 'json':
+                    parser = 'json';
+                    return stringifiedConfig;
+                  default:
+                    parser = 'babel';
+                    return `module.exports = ${stringifiedConfig}`;
+                }
+              })();
+              const formattedConfig = prettier.format(
+                configToEvalString(configWithExports),
+                {
+                  parser
+                }
+              );
+              await fs.promises.writeFile(filePath, formattedConfig);
+              break;
+            }
           }
-
-          // Otherwises, format the config and write it to its filepath
-          let parser: 'babel' | 'json' = 'babel';
-          const configWithExports = ((): string => {
-            switch (config.fileType) {
-              case 'commonjs':
-                parser = 'babel';
-                return `module.exports = ${stringifiedConfig}`;
-              case 'module':
-                parser = 'babel';
-                return `export default ${stringifiedConfig}`;
-              case 'json':
-                parser = 'json';
-                return stringifiedConfig;
-              default:
-                parser = 'babel';
-                return `module.exports = ${stringifiedConfig}`;
-            }
-          })();
-          const formattedConfig = prettier.format(
-            configToEvalString(configWithExports),
-            {
-              parser
-            }
-          );
-
-          await fs.promises.writeFile(filePath, formattedConfig);
         })
     );
 
     if (configEntries.length) {
+      await this.updatePkg();
       await Config.writeObjToPkgJsonConfig(this.pkgPath, {
         ...this.pkg,
         ...Object.fromEntries(configEntries)

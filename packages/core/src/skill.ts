@@ -27,7 +27,8 @@ import {
 import {
   getDepsFromPkg,
   fromPkgTypeToFull,
-  EnhancedMap
+  EnhancedMap,
+  CONFIG_DELIMITER
 } from '@alfred/helpers';
 import { requireModule } from './helpers';
 import { CORE_TASKS } from './constants';
@@ -179,9 +180,19 @@ function normalizeSkill(skill: RawSkill | Skill): Skill {
   const configs = new EnhancedMap<string, SkillConfig>();
 
   skill.configs?.forEach((config: SkillConfig) => {
+    const stringifiedConfig = JSON.stringify(config.config);
+    // If the config has a pkgProperty and the config can be easily serialized, write
+    // it to the pkg json
+    const writeType =
+      typeof config.pkgProperty === 'string' &&
+      !stringifiedConfig.includes(CONFIG_DELIMITER)
+        ? 'pkg'
+        : 'file';
+
     configs.set(config.alias || config.filename, {
       ...config,
-      fileType: config.fileType || getFileTypeFromFile(config.filename)
+      fileType: config.fileType || getFileTypeFromFile(config.filename),
+      write: config.write || writeType
     });
   });
 

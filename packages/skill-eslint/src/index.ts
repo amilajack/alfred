@@ -50,9 +50,9 @@ const skill: RawSkill = {
           project,
           [
             binPath,
-            skill.configs.get('eslint')?.pkgProperty
-              ? ''
-              : `--config ${configPath}`,
+            skill.configs.get('eslint')?.write === 'file'
+              ? `--config ${configPath}`
+              : '',
             'src tests',
             ...flags
           ].join(' ')

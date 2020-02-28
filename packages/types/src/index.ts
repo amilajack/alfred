@@ -219,7 +219,7 @@ export type SkillConfig = {
   // The name of the property which the object should be added to
   pkgProperty?: string;
   // Determine if the config should be written or not
-  write?: boolean;
+  write?: 'file' | 'pkg' | false;
 };
 
 export type ParsedFlags = Record<string, boolean | string | number>;
