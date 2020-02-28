@@ -376,7 +376,7 @@ ${JSON.stringify(result.errors)}`
           .reduce((p, c) => ({ ...p, ...c }), {});
 
         // @TODO @HACK @BUG This is an incorrect usage of the Config API
-        await Config.writeObjToPkgJsonConfig(
+        await Config.writeObjToPkgJson(
           this.pkgPath,
           mergeConfigs({}, this.pkg, {
             [dependenciesType === 'dev'
@@ -424,7 +424,7 @@ ${JSON.stringify(result.errors)}`
     }
 
     const skills: Skill[] = Array.from(skillMap.values());
-    const configEntries: Array<[string, SkillConfig['config']]> = [];
+    const pkgConfigEntries: Array<[string, SkillConfig['config']]> = [];
 
     // Write all configs
     await Promise.all(
@@ -438,7 +438,7 @@ ${JSON.stringify(result.errors)}`
               break;
             case 'pkg': {
               if (typeof config.pkgProperty === 'string') {
-                configEntries.push([config.pkgProperty, config.config]);
+                pkgConfigEntries.push([config.pkgProperty, config.config]);
                 // If the file happens to exist, delete it. User shouldn't have two configs in
                 // pkg and config file
                 if (fs.existsSync(filePath)) {
@@ -481,12 +481,12 @@ ${JSON.stringify(result.errors)}`
         })
     );
 
-    if (configEntries.length) {
+    if (pkgConfigEntries.length) {
       await this.updatePkg();
-      await Config.writeObjToPkgJsonConfig(this.pkgPath, {
-        ...this.pkg,
-        ...Object.fromEntries(configEntries)
-      });
+      await Config.writeObjToPkgJson(
+        this.pkgPath,
+        Object.fromEntries(pkgConfigEntries)
+      );
     }
 
     return skillMap;
