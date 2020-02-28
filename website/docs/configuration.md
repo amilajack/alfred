@@ -10,22 +10,24 @@ title: Configuration
 {
   "alfred": {
     // Extend a shared config
-    "extends": "web-app",
+    "extends": "alfred-config-web-app",
     // Skills that override the default skills
     "skills": [
       "@alfred/skill-react"
     ],
     // Determine to install with NPM or Yarn
-    "npmClient": "yarn",
-    // Where to write configs to
-    "configsDir": ".configs",
-    // Write the configs to the configsDir directory
-    "showConfigs": true
+    "npmClient": "yarn"
   }
 }
 ```
 
 ## Reference
+
+### `extends`
+
+Default: `undefined`
+
+The name of the config which you want to extend
 
 ### `skills`
 
@@ -50,12 +52,6 @@ The directory, relative to the project directory, which config files should be w
 Default: `true`
 
 Write the configs to the configsDir directory
-
-### `extends`
-
-Default: `undefined`
-
-The name of the config which you want to extend
 
 ## Extending Alfred Configs
 
