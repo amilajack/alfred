@@ -19,4 +19,4 @@ install:
 
 script:
   - yarn test
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn workspace website lint fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn workspace website lint; fi
