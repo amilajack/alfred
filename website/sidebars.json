@@ -17,7 +17,9 @@
       "project-and-config",
       "files-and-directories",
       "tasks",
-      "writing-skills-with-typescript",
+      "writing-skills-with-typescript"
+    ],
+    "Reference": [
       "api"
     ]
   }
