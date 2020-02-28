@@ -11,6 +11,7 @@ const skill: RawSkill = {
     {
       alias: 'prettier',
       filename: '.prettierrc',
+      pkgProperty: 'prettier',
       fileType: 'json',
       config: {
         singleQuote: true

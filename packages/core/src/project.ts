@@ -7,7 +7,8 @@ import pkgUp from 'pkg-up';
 import {
   getConfigsBasePath,
   execCmdInProject,
-  configToEvalString
+  configToEvalString,
+  CONFIG_DELIMITER
 } from '@alfred/helpers';
 import mergeConfigs from '@alfred/merge-configs';
 import {
@@ -28,7 +29,8 @@ import {
   Skill,
   Entrypoint,
   LearnEvent,
-  NewEvent
+  NewEvent,
+  SkillConfig
 } from '@alfred/types';
 import loadJsonFile from 'load-json-file';
 import Config from './config';
@@ -325,7 +327,7 @@ ${JSON.stringify(result.errors)}`
 
     if (!normalizedDeps.length) return;
 
-    this.pkg = await loadJsonFile(this.pkgPath);
+    await this.updatePkg();
 
     const npmClientWithOverride =
       process.env.ALFRED_IGNORE_INSTALL === 'true' ? 'writeOnly' : npmClient;
@@ -390,6 +392,10 @@ ${JSON.stringify(result.errors)}`
       }
     }
 
+    await this.updatePkg();
+  }
+
+  async updatePkg(): Promise<void> {
     this.pkg = await loadJsonFile(this.pkgPath);
   }
 
@@ -419,6 +425,7 @@ ${JSON.stringify(result.errors)}`
     }
 
     const skills: Skill[] = Array.from(skillMap.values());
+    const configEntries: Array<[string, SkillConfig['config']]> = [];
 
     // Write all configs
     await Promise.all(
@@ -427,8 +434,25 @@ ${JSON.stringify(result.errors)}`
         .map(async config => {
           const filePath = path.join(configsBasePath, config.filename);
           const stringifiedConfig = JSON.stringify(config.config);
-          let parser: 'babel' | 'json' = 'babel';
 
+          // If the config has a pkgProperty and the config can be easily serialized, write
+          // it to the pkg json
+          if (
+            typeof config.pkgProperty === 'string' &&
+            !stringifiedConfig.includes(CONFIG_DELIMITER)
+          ) {
+            await this.updatePkg();
+            configEntries.push([config.pkgProperty, config.config]);
+            // If the file happens to exist, delete it. User shouldn't have two configs in
+            // pkg and config file
+            if (fs.existsSync(filePath)) {
+              await fs.promises.unlink(filePath);
+            }
+            return;
+          }
+
+          // Otherwises, format the config and write it to its filepath
+          let parser: 'babel' | 'json' = 'babel';
           const configWithExports = ((): string => {
             switch (config.fileType) {
               case 'commonjs':
@@ -452,9 +476,16 @@ ${JSON.stringify(result.errors)}`
             }
           );
 
-          return fs.promises.writeFile(filePath, formattedConfig);
+          await fs.promises.writeFile(filePath, formattedConfig);
         })
     );
+
+    if (configEntries.length) {
+      await Config.writeObjToPkgJsonConfig(this.pkgPath, {
+        ...this.pkg,
+        ...Object.fromEntries(configEntries)
+      });
+    }
 
     return skillMap;
   }

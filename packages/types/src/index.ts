@@ -216,6 +216,8 @@ export type SkillConfig = {
   config: ConfigValue;
   // The type of the config file. This is inferred by alfred by the file extension of .path
   fileType?: FileType;
+  // The name of the property which the object should be added to
+  pkgProperty?: string;
   // Determine if the config should be written or not
   write?: boolean;
 };

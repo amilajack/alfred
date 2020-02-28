@@ -7,6 +7,7 @@ export default {
     {
       alias: 'babel',
       filename: '.babelrc.js',
+      pkgProperty: 'babel',
       config: {
         presets: ['@babel/preset-env']
       }
