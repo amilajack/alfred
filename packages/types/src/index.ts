@@ -16,6 +16,7 @@ export interface PkgJson {
   dependencies?: Dependencies;
   peerDependencies?: Dependencies;
   alfred?: AlfredConfigWithUnresolvedTasks;
+  [config: string]: any;
 }
 
 export interface PkgWithDeps {
@@ -216,8 +217,10 @@ export type SkillConfig = {
   config: ConfigValue;
   // The type of the config file. This is inferred by alfred by the file extension of .path
   fileType?: FileType;
+  // The name of the property which the object should be added to
+  pkgProperty?: string;
   // Determine if the config should be written or not
-  write?: boolean;
+  write?: 'file' | 'pkg' | false;
 };
 
 export type ParsedFlags = Record<string, boolean | string | number>;

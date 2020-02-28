@@ -41,6 +41,52 @@
     "postcss-modules": "^1.5.0",
     "prettier": "^1.16.4"
   },
+  "babel": {
+    "env": {
+      "production": {
+        "plugins": [
+          "babel-plugin-lodash"
+        ]
+      }
+    },
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ],
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "extends": [
+      "bliss",
+      "prettier"
+    ],
+    "parser": "babel-eslint",
+    "plugins": [
+      "jest",
+      "prettier"
+    ],
+    "root": true,
+    "rules": {
+      "flowtype-errors/show-errors": "off"
+    }
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
+    },
+    "transform": {
+      "^.+\\.jsx?$": "./node_modules/jest-transformer.js"
+    }
+  },
   "alfred": {
     "configsDir": ".configs",
     "extends": "@examples/alfred-config-example",

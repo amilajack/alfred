@@ -499,6 +499,7 @@ export function validateSkill(skill: RawSkill): void {
       Joi.object({
         alias: Joi.string(),
         filename: Joi.string().required(),
+        pkgProperty: Joi.string(),
         config: Joi.object().required(),
         fileType: Joi.string().valid('commonjs', 'module', 'json'),
         write: Joi.boolean()

@@ -97,8 +97,7 @@ export default class Config implements ConfigInterface {
     const pkg = (await loadJsonFile(pkgPath)) as PkgJson;
     this.rawConfig = pkg.alfred || {};
 
-    return Config.writeObjToPkgJsonConfig(pkgPath, {
-      ...pkg,
+    return Config.writeObjToPkgJson(pkgPath, {
       alfred: pkgAlfredConfig
     });
   }
@@ -186,18 +185,19 @@ export default class Config implements ConfigInterface {
   }
 
   /**
-   * Merge an object to the existing Alfred package.json config and write the merged config
+   * Take a given object and append it to an Alfred project's package.json
    */
-  static async writeObjToPkgJsonConfig(
+  static async writeObjToPkgJson(
     pkgPath: string,
-    obj: Record<string, any>
+    obj: Record<string, any>,
+    pkg?: PkgJson
   ): Promise<string> {
     Project.validatePkgPath(pkgPath);
-    const pkg = {
-      ...((await loadJsonFile(pkgPath)) as PkgJson),
+    const pkgToWrite = {
+      ...(pkg || ((await loadJsonFile(pkgPath)) as PkgJson)),
       ...obj
     };
-    const formattedPkg = await formatPkgJson(pkg);
+    const formattedPkg = await formatPkgJson(pkgToWrite);
     await fs.promises.writeFile(pkgPath, formattedPkg);
     return formattedPkg;
   }

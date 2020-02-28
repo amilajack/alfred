@@ -59,6 +59,7 @@
   "devDependencies": {
     "@types/jest": "^25.1.2",
     "@types/nightmare": "^2.10.4",
+    "@types/node-fetch": "^2.5.5",
     "chai": "^4.2.0",
     "expect": "^25.1.0",
     "get-port": "^5.1.1",

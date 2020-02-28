@@ -48,6 +48,8 @@ export function configStringify(configStr: TemplateStringsArray): string {
     .replace(/\n/g, ' ');
 }
 
+export const CONFIG_DELIMITER = '[alfred]';
+
 export function configToEvalString(serializedConfig: string): string {
   return serializedConfig
     .replace(/"\[alfred\]/g, '')

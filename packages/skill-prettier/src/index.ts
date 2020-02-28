@@ -11,6 +11,7 @@ const skill: RawSkill = {
     {
       alias: 'prettier',
       filename: '.prettierrc',
+      pkgProperty: 'prettier',
       fileType: 'json',
       config: {
         singleQuote: true
@@ -25,7 +26,7 @@ const skill: RawSkill = {
       event
     }: HookArgs<RunEvent>): Promise<void> {
       const binPath = await getPkgBinPath(project, 'prettier');
-      const { filename } = skill.configs.get('prettier') as SkillConfig;
+      const { filename, write } = skill.configs.get('prettier') as SkillConfig;
       const configPath = path.join(config.configsDir, filename);
       execCmdInProject(
         project,
@@ -37,7 +38,7 @@ const skill: RawSkill = {
           '--write',
           '**/*.js',
           ...(event.flags || []),
-          config.showConfigs ? `--config ${configPath}` : ''
+          config.showConfigs && write === 'file' ? `--config ${configPath}` : ''
         ].join(' ')
       );
     }

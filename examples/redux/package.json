@@ -60,6 +60,62 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"
   },
+  "babel": {
+    "env": {
+      "development": {
+        "plugins": [
+          "react-hot-loader/babel"
+        ]
+      },
+      "production": {
+        "plugins": [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types"
+        ]
+      }
+    },
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "extends": [
+      "bliss",
+      "airbnb",
+      "prettier"
+    ],
+    "parser": "babel-eslint",
+    "plugins": [
+      "jest",
+      "prettier"
+    ],
+    "root": true,
+    "rules": {
+      "flowtype-errors/show-errors": "off",
+      "import/no-extraneous-dependencies": "off",
+      "react/jsx-filename-extension": "off",
+      "react/prop-types": "off"
+    }
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
+    },
+    "transform": {
+      "^.+\\.jsx?$": "./node_modules/jest-transformer.js"
+    }
+  },
   "alfred": {
     "npmClient": "yarn",
     "showConfigs": true,

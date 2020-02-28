@@ -12,6 +12,11 @@ process.on('unhandledRejection', err => {
 
 function testFixturDir(fixtureDir: string) {
   return async (): Promise<void> => {
+    // @TODO @HACK Only test on macOS for now
+    if (process.platform !== 'darwin') {
+      return;
+    }
+
     console.info(`Testing ${fixtureDir}`);
 
     const nightmare = new Nightmare();

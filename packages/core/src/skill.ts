@@ -27,7 +27,8 @@ import {
 import {
   getDepsFromPkg,
   fromPkgTypeToFull,
-  EnhancedMap
+  EnhancedMap,
+  CONFIG_DELIMITER
 } from '@alfred/helpers';
 import { requireModule } from './helpers';
 import { CORE_TASKS } from './constants';
@@ -38,7 +39,7 @@ import { validateSkill, validateTask } from './validation';
 export function addSkillHelpers(skill: SkillWithoutHelpers): Skill {
   const helpers: Helpers<Skill> = {
     findConfig(configName: string): SkillConfig {
-      // @HACK This should eventually be removed
+      // @TODO @HACK remove ts-ignore
       // @ts-ignore
       const config = this.configs.get(configName);
       if (!config) {
@@ -47,7 +48,7 @@ export function addSkillHelpers(skill: SkillWithoutHelpers): Skill {
       return config;
     },
     extendConfig(configName: string, configExtension: ConfigValue): Skill {
-      // @HACK This should eventually be removed
+      // @TODO @HACK remove ts-ignore
       // @ts-ignore
       const foundConfig = this.configs?.get(configName);
       if (!foundConfig) {
@@ -56,7 +57,7 @@ export function addSkillHelpers(skill: SkillWithoutHelpers): Skill {
       const mergedConfig = mergeConfigs({}, foundConfig, {
         config: configExtension
       }) as SkillConfig;
-      // @HACK This should eventually be removed
+      // @TODO @HACK remove ts-ignore
       // @ts-ignore
       const configs = this.configs.map(config =>
         config.alias === configName ? mergedConfig : config
@@ -66,7 +67,7 @@ export function addSkillHelpers(skill: SkillWithoutHelpers): Skill {
       });
     },
     replaceConfig(configName: string, configReplacement: ConfigValue): Skill {
-      // @HACK This should eventually be removed
+      // @TODO @HACK remove ts-ignore
       // @ts-ignore
       const configs = this.configs.map(config =>
         config.alias === configName
@@ -96,7 +97,7 @@ export function addSkillHelpers(skill: SkillWithoutHelpers): Skill {
     },
     addDepsFromPkg(
       pkgs: string | string[],
-      // @HACK This should eventually be removed
+      // @TODO @HACK remove ts-ignore
       // @ts-ignore
       pkg: PkgJson | undefined = this.pkg,
       fromPkgType: DependencyType = 'dev',
@@ -179,9 +180,19 @@ function normalizeSkill(skill: RawSkill | Skill): Skill {
   const configs = new EnhancedMap<string, SkillConfig>();
 
   skill.configs?.forEach((config: SkillConfig) => {
+    const stringifiedConfig = JSON.stringify(config.config);
+    // If the config has a pkgProperty and the config can be easily serialized, write
+    // it to the pkg json
+    const writeType =
+      typeof config.pkgProperty === 'string' &&
+      !stringifiedConfig.includes(CONFIG_DELIMITER)
+        ? 'pkg'
+        : 'file';
+
     configs.set(config.alias || config.filename, {
       ...config,
-      fileType: config.fileType || getFileTypeFromFile(config.filename)
+      fileType: config.fileType || getFileTypeFromFile(config.filename),
+      write: config.write || writeType
     });
   });
 

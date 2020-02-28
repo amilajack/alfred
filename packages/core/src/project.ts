@@ -28,7 +28,8 @@ import {
   Skill,
   Entrypoint,
   LearnEvent,
-  NewEvent
+  NewEvent,
+  SkillConfig
 } from '@alfred/types';
 import loadJsonFile from 'load-json-file';
 import Config from './config';
@@ -325,7 +326,7 @@ ${JSON.stringify(result.errors)}`
 
     if (!normalizedDeps.length) return;
 
-    this.pkg = await loadJsonFile(this.pkgPath);
+    await this.updatePkg();
 
     const npmClientWithOverride =
       process.env.ALFRED_IGNORE_INSTALL === 'true' ? 'writeOnly' : npmClient;
@@ -375,7 +376,7 @@ ${JSON.stringify(result.errors)}`
           .reduce((p, c) => ({ ...p, ...c }), {});
 
         // @TODO @HACK @BUG This is an incorrect usage of the Config API
-        await Config.writeObjToPkgJsonConfig(
+        await Config.writeObjToPkgJson(
           this.pkgPath,
           mergeConfigs({}, this.pkg, {
             [dependenciesType === 'dev'
@@ -390,6 +391,10 @@ ${JSON.stringify(result.errors)}`
       }
     }
 
+    await this.updatePkg();
+  }
+
+  async updatePkg(): Promise<void> {
     this.pkg = await loadJsonFile(this.pkgPath);
   }
 
@@ -419,6 +424,7 @@ ${JSON.stringify(result.errors)}`
     }
 
     const skills: Skill[] = Array.from(skillMap.values());
+    const pkgConfigEntries: Array<[string, SkillConfig['config']]> = [];
 
     // Write all configs
     await Promise.all(
@@ -426,35 +432,70 @@ ${JSON.stringify(result.errors)}`
         .flatMap(skill => Array.from(skill.configs.values()))
         .map(async config => {
           const filePath = path.join(configsBasePath, config.filename);
-          const stringifiedConfig = JSON.stringify(config.config);
-          let parser: 'babel' | 'json' = 'babel';
 
-          const configWithExports = ((): string => {
-            switch (config.fileType) {
-              case 'commonjs':
-                parser = 'babel';
-                return `module.exports = ${stringifiedConfig}`;
-              case 'module':
-                parser = 'babel';
-                return `export default ${stringifiedConfig}`;
-              case 'json':
-                parser = 'json';
-                return stringifiedConfig;
-              default:
-                parser = 'babel';
-                return `module.exports = ${stringifiedConfig}`;
+          switch (config.write) {
+            case false:
+              break;
+            case 'pkg': {
+              if (typeof config.pkgProperty === 'string') {
+                pkgConfigEntries.push([config.pkgProperty, config.config]);
+                // If the file happens to exist, delete it. User shouldn't have two configs in
+                // pkg and config file
+                if (fs.existsSync(filePath)) {
+                  await fs.promises.unlink(filePath);
+                }
+              }
+              break;
             }
-          })();
-          const formattedConfig = prettier.format(
-            configToEvalString(configWithExports),
-            {
-              parser
-            }
-          );
+            case 'file': {
+              if (
+                typeof config.pkgProperty === 'string' &&
+                config.pkgProperty in this.pkg
+              ) {
+                delete this.pkg[config.pkgProperty];
+              }
 
-          return fs.promises.writeFile(filePath, formattedConfig);
+              const stringifiedConfig = JSON.stringify(config.config);
+
+              // Otherwises, format the config and write it to its filepath
+              let parser: 'babel' | 'json' = 'babel';
+              const configWithExports = ((): string => {
+                switch (config.fileType) {
+                  case 'commonjs':
+                    parser = 'babel';
+                    return `module.exports = ${stringifiedConfig}`;
+                  case 'module':
+                    parser = 'babel';
+                    return `export default ${stringifiedConfig}`;
+                  case 'json':
+                    parser = 'json';
+                    return stringifiedConfig;
+                  default:
+                    parser = 'babel';
+                    return `module.exports = ${stringifiedConfig}`;
+                }
+              })();
+              const formattedConfig = prettier.format(
+                configToEvalString(configWithExports),
+                {
+                  parser
+                }
+              );
+              await fs.promises.writeFile(filePath, formattedConfig);
+              break;
+            }
+          }
         })
     );
+
+    if (pkgConfigEntries.length) {
+      await this.updatePkg();
+      await Config.writeObjToPkgJson(
+        this.pkgPath,
+        Object.fromEntries(pkgConfigEntries),
+        this.pkg
+      );
+    }
 
     return skillMap;
   }

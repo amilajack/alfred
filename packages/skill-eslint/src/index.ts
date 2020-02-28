@@ -18,6 +18,7 @@ const skill: RawSkill = {
     {
       alias: 'eslint',
       filename: '.eslintrc.js',
+      pkgProperty: 'eslintConfig',
       config: {
         root: true,
         env: {
@@ -47,7 +48,14 @@ const skill: RawSkill = {
       if (config.showConfigs) {
         execCmdInProject(
           project,
-          [binPath, `--config ${configPath} src tests`, ...flags].join(' ')
+          [
+            binPath,
+            skill.configs.get('eslint')?.write === 'file'
+              ? `--config ${configPath}`
+              : '',
+            'src tests',
+            ...flags
+          ].join(' ')
         );
       }
       const { config: eslintConfig } = skill.configs.get(
