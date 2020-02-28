@@ -448,6 +448,13 @@ ${JSON.stringify(result.errors)}`
               break;
             }
             case 'file': {
+              if (
+                typeof config.pkgProperty === 'string' &&
+                config.pkgProperty in this.pkg
+              ) {
+                delete this.pkg[config.pkgProperty];
+              }
+
               const stringifiedConfig = JSON.stringify(config.config);
 
               // Otherwises, format the config and write it to its filepath
@@ -485,7 +492,8 @@ ${JSON.stringify(result.errors)}`
       await this.updatePkg();
       await Config.writeObjToPkgJson(
         this.pkgPath,
-        Object.fromEntries(pkgConfigEntries)
+        Object.fromEntries(pkgConfigEntries),
+        this.pkg
       );
     }
 

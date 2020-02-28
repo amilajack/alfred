@@ -189,14 +189,15 @@ export default class Config implements ConfigInterface {
    */
   static async writeObjToPkgJson(
     pkgPath: string,
-    obj: Record<string, any>
+    obj: Record<string, any>,
+    pkg?: PkgJson
   ): Promise<string> {
     Project.validatePkgPath(pkgPath);
-    const pkg = {
-      ...((await loadJsonFile(pkgPath)) as PkgJson),
+    const pkgToWrite = {
+      ...(pkg || ((await loadJsonFile(pkgPath)) as PkgJson)),
       ...obj
     };
-    const formattedPkg = await formatPkgJson(pkg);
+    const formattedPkg = await formatPkgJson(pkgToWrite);
     await fs.promises.writeFile(pkgPath, formattedPkg);
     return formattedPkg;
   }

@@ -16,6 +16,7 @@ export interface PkgJson {
   dependencies?: Dependencies;
   peerDependencies?: Dependencies;
   alfred?: AlfredConfigWithUnresolvedTasks;
+  [config: string]: any;
 }
 
 export interface PkgWithDeps {

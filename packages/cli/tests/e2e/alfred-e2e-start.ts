@@ -12,7 +12,7 @@ process.on('unhandledRejection', err => {
 
 function testFixturDir(fixtureDir: string) {
   return async (): Promise<void> => {
-    // Only test on macOS for now
+    // @TODO @HACK Only test on macOS for now
     if (process.platform !== 'darwin') {
       return;
     }
