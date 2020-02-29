@@ -321,6 +321,7 @@ export type CORE_SKILL =
   | 'prettier'
   | 'jest'
   | 'react'
+  | 'redux'
   | 'rollup'
   | 'lodash';
 
