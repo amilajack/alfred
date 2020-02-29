@@ -272,6 +272,7 @@ export const CORE_SKILLS: { [skill in CORE_SKILL]: Skill } = {
   prettier: requireSkill('@alfred/skill-prettier'),
   jest: requireSkill('@alfred/skill-jest'),
   react: requireSkill('@alfred/skill-react'),
+  redux: requireSkill('@alfred/skill-redux'),
   rollup: requireSkill('@alfred/skill-rollup'),
   lodash: requireSkill('@alfred/skill-lodash')
 };

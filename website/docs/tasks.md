@@ -18,6 +18,8 @@ const skill = {
   ],
   // ...
 };
+
+export default skill;
 ```
 
 ## Skill with Tasks and Configs
