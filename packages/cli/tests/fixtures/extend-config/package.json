@@ -1,6 +1,6 @@
 {
   "name": "@fixtures/extend-config",
-  "version": "0.1.0",
+  "version": "0.2.0-alpha.0",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -14,14 +14,14 @@
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
   "devDependencies": {
-    "@alfred/cli": "^0.1.0",
-    "@alfred/core": "^0.1.0",
+    "@alfred/cli": "^0.2.0-alpha.0",
+    "@alfred/core": "^0.2.0-alpha.0",
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.6",
     "@babel/register": "^7.8.6",
-    "@examples/alfred-config-example": "^0.0.7-alpha.0",
+    "@examples/alfred-config-example": "^0.2.0-alpha.0",
     "autoprefixer": "^9.7.4",
     "babel-eslint": "10.1.0",
     "babel-loader": "8.0.6",

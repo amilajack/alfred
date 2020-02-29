@@ -1,6 +1,6 @@
 {
   "name": "@alfred/skill-babel",
-  "version": "0.1.0",
+  "version": "0.2.0-alpha.0",
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
@@ -10,8 +10,8 @@
     "version": "yarn build"
   },
   "dependencies": {
-    "@alfred/helpers": "^0.1.0",
-    "@alfred/types": "^0.1.0"
+    "@alfred/helpers": "^0.2.0-alpha.0",
+    "@alfred/types": "^0.2.0-alpha.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
