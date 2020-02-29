@@ -18,15 +18,15 @@ yarn build:watch
 yarn workspace alfred link
 
 # Publishing to NPM registry
-lerna publish
+yarn lerna publish
 
 # Publishing Locally
 yarn global add verdaccio
 verdaccio
-lerna publish --registry http://localhost:4873
+yarn lerna publish --registry http://localhost:4873
 
 # Publishing to production
-lerna publish
+yarn lerna publish
 
 # Documentation publishing
 yarn docs:build
