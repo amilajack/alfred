@@ -1,11 +1,11 @@
 {
   "name": "@alfred/task-build",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0",
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "@alfred/helpers": "^0.1.0-alpha.0",
-    "@alfred/types": "^0.1.0-alpha.0",
+    "@alfred/helpers": "^0.1.0",
+    "@alfred/types": "^0.1.0",
     "debug": "^4.1.1"
   },
   "scripts": {
