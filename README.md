@@ -37,9 +37,9 @@ alfred run build
 
 ## Docs
 
-* **[website](https://alfred.js.org)** ([alfred.js.org](https://alfred.js.org))
 * **[docs](https://alfred.js.org/docs/getting-started)** ([alfred.js.org/docs/getting-started](https://alfred.js.org/docs/getting-started))
-* **[API](https://alfred.js.org/api)** ([alfred.js.org/api](https://alfred.js.org/api))
+* **[website](https://alfred.js.org)** ([alfred.js.org](https://alfred.js.org))
+* **[API](https://alfred.js.org/docs/api)** ([alfred.js.org/docs/api](https://alfred.js.org/docs/api))
 
 ## Examples
 
