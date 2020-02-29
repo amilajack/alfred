@@ -20,16 +20,28 @@
   "devDependencies": {
     "alfred": "{{alfred-pkg.semver}}"
   },
-{{#if project.isApp}}
-  "alfred": {
-    "npmClient": "{{project.npmClient}}"
-  },
-{{/if}}
   "scripts": {
     "build": "alfred run build --prod",
     "format": "alfred run format",
     "lint": "alfred run lint",
     "start": "alfred run start",
     "test": "alfred run test"
+  },
+{{#if project.isApp}}
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+{{/if}}
+  "alfred": {
+    "npmClient": "{{project.npmClient}}"
   }
 }
