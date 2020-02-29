@@ -15,24 +15,15 @@ Alfred
 * Encourage extensible and reusable infrastructure configuration
 * Provide opinionated configuration out of the box that meets the needs of most users
 
-## Installation
-
-```bash
-# NPM
-npm install alfred --global --registry https://amilajack.com/registry
-# Yarn
-yarn global add alfred --registry https://amilajack.com/registry
-```
-
-## Usage
+## Getting Started
 
 ```bash
 # Create a new project
-alfred new my-project
+NPM_CONFIG_REGISTRY=https://amilajack.com/registry npx alfred new project
 cd my-project
 
 # Build your project
-alfred run build
+NPM_CONFIG_REGISTRY=https://amilajack.com/registry npx alfred run build
 ```
 
 ## Docs

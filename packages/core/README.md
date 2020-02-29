@@ -1,6 +1,6 @@
 ## @alfred/core
 
-## Usage
+### Usage
 
 ```js
 import alfred from '@alfred/core';
@@ -15,3 +15,6 @@ await project.run('start', {
   }
 });
 ```
+
+### Docs
+See the [full API docs](https://alfred.js.org/docs/api/)

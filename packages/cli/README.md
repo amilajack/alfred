@@ -1,6 +1,6 @@
 ## @alfred/cli
 
-## Usage
+### Usage
 
 ```bash
 # Creating a new project
@@ -34,4 +34,7 @@ alfred learn @alfred/skill-webpack
 alfred run build
 # Learning multiple skills
 alfred learn @alfred/skill-angular @alfred/skill-redux
+
+# See docs for more commands
+# https://alfred.js.org/docs/cli
 ```
