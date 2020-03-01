@@ -7,7 +7,8 @@ import pkgUp from 'pkg-up';
 import {
   getConfigsBasePath,
   execCmdInProject,
-  configToEvalString
+  configToEvalString,
+  serialPromises
 } from '@alfred/helpers';
 import mergeConfigs from '@alfred/merge-configs';
 import {
@@ -29,7 +30,9 @@ import {
   Entrypoint,
   LearnEvent,
   NewEvent,
-  SkillConfig
+  SkillConfig,
+  RunEvent,
+  HookEvent
 } from '@alfred/types';
 import loadJsonFile from 'load-json-file';
 import Config from './config';
@@ -101,7 +104,7 @@ export function pkgDepsToList(deps: Dependencies): string[] {
   );
 }
 
-export function formatPkgJson(pkg: Record<string, any>): Promise<string> {
+export function formatPkgJson(pkg: PkgJson): Promise<string> {
   return formatPkg(pkg, { order: PKG_SORT_ORDER });
 }
 
@@ -147,6 +150,19 @@ export default class Project extends EventEmitter implements ProjectInterface {
     );
   }
 
+  async emitAsync(eventName: string, eventData?: HookEvent): Promise<void> {
+    const tasks = this.listeners(eventName).map(event => {
+      return async (): Promise<void> => {
+        if (eventData) {
+          await event(eventData);
+        } else {
+          await event();
+        }
+      };
+    });
+    await serialPromises(tasks);
+  }
+
   async init(): Promise<ProjectInterface> {
     this.checkProjectIsValid();
 
@@ -168,9 +184,14 @@ export default class Project extends EventEmitter implements ProjectInterface {
     });
 
     // Write all files of newly learned skills
-    ['afterNew', 'afterLearn'].forEach(hookName => {
-      this.on(hookName, (event: NewEvent | LearnEvent) => {
-        this.writeSkillFiles(event.skillsPkgNames.map(requireSkill));
+    ['afterNew', 'afterLearn', 'beforeRun'].forEach(hookName => {
+      this.on(hookName, async (event: NewEvent | LearnEvent | RunEvent) => {
+        if (this.config.showConfigs) {
+          await this.writeSkillConfigs(skillMap);
+        }
+        if ('skillsPkgNames' in event) {
+          await this.writeSkillFiles(event.skillsPkgNames.map(requireSkill));
+        }
       });
     });
 
@@ -414,8 +435,8 @@ ${JSON.stringify(result.errors)}`
     await Promise.all(skills.map(skill => skill.files.writeAllFiles(this)));
   }
 
-  async writeSkillConfigs(skillMap: SkillMap): Promise<SkillMap> {
-    if (!this.config.showConfigs) return skillMap;
+  async writeSkillConfigs(skillMap: SkillMap): Promise<void> {
+    if (!this.config.showConfigs) return;
 
     // Create a .configs dir if it doesn't exist
     const configsBasePath = getConfigsBasePath(this);
@@ -496,8 +517,6 @@ ${JSON.stringify(result.errors)}`
         this.pkg
       );
     }
-
-    return skillMap;
   }
 
   async findDepsToInstall(

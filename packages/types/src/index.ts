@@ -78,12 +78,14 @@ export interface ProjectInterface extends EventEmitter {
     subcommand: string,
     skillFlags?: string[]
   ) => Promise<void | SkillsList>;
+  // Execute events serially and wait for all events to finish
+  emitAsync: (eventName: string, eventData?: HookEvent) => Promise<void>;
   // Config setter method
   setConfig: (config: ConfigInterface) => void;
   // Get skill map
   getSkillMap: () => Promise<SkillMap>;
   // Write each config in .configs of each skill
-  writeSkillConfigs: (skillMap: SkillMap) => Promise<SkillMap>;
+  writeSkillConfigs: (skillMap: SkillMap) => Promise<void>;
   // Write each config in .configs of each skill
   writeSkillFiles: (skills: Skill[]) => Promise<void>;
   // Install dependencies to a given project
@@ -330,6 +332,8 @@ export type Hooks = {
   run?: HookFn<RunEvent | RunForEachEvent>;
   afterRun?: HookFn<RunEvent>;
   beforeLearn?: HookFn<LearnEvent>;
+  afterNew?: HookFn<NewEvent>;
+  beforeNew?: HookFn<NewEvent>;
   afterLearn?: HookFn<LearnEvent>;
   beforeTransforms?: HookFn<TransformsEvent>;
   afterTransforms?: HookFn<TransformsEvent>;

@@ -11,7 +11,6 @@ export default async function run(
   subcommand: string,
   skillFlags: Array<string> = []
 ): Promise<void> {
-  const { config } = project;
   const { targets } = project;
 
   // Validate that “start” subcommand should only work for apps
@@ -31,13 +30,9 @@ export default async function run(
     flags: skillFlags,
     parsedFlags
   };
-  project.emit('beforeRun', beforeRunEvent);
+  await project.emitAsync('beforeRun', beforeRunEvent);
 
   const skillMap = await project.getSkillMap();
-
-  if (config.showConfigs) {
-    await project.writeSkillConfigs(skillMap);
-  }
 
   const subcommandMap = getSubcommandMap(project, skillMap);
   const subcommandRunFn = subcommandMap.get(subcommand);
@@ -68,5 +63,5 @@ export default async function run(
     flags: skillFlags,
     parsedFlags
   };
-  project.emit('afterRun', afterRunEvent);
+  await project.emitAsync('afterRun', afterRunEvent);
 }

@@ -63,7 +63,9 @@ export const PKG_SORT_ORDER = [
   'eslintIgnore',
   'stylelint',
   'jest',
-  '...rest'
+  'postcss',
+  '...rest',
+  'alfred'
 ];
 
 /* eslint import/prefer-default-export: off */

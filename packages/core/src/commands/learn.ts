@@ -13,7 +13,7 @@ export default async function learn(
     skillsPkgNames,
     skills: []
   };
-  project.emit('beforeLearn', beforeLearnEvent);
+  await project.emitAsync('beforeLearn', beforeLearnEvent);
 
   // Create a alfred config with the new skills added
   const newConfig = new Config(
@@ -51,5 +51,5 @@ export default async function learn(
   );
 
   const event: LearnEvent = { skillsPkgNames, skills: learnedSkills };
-  project.emit('afterLearn', event);
+  await project.emitAsync('afterLearn', event);
 }

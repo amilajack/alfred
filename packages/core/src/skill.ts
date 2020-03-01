@@ -135,7 +135,7 @@ export async function runTransforms(
   project: ProjectInterface,
   skillMap: SkillMap
 ): Promise<SkillMap> {
-  project.emit('beforeTransforms');
+  await project.emitAsync('beforeTransforms');
 
   skillMap.forEach(skill => {
     Object.entries(skill.transforms || {}).forEach(
@@ -158,7 +158,7 @@ export async function runTransforms(
     );
   });
 
-  project.emit('afterTransforms');
+  await project.emitAsync('afterTransforms');
 
   return skillMap;
 }
