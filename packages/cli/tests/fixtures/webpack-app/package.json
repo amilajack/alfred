@@ -66,10 +66,7 @@
       "jest",
       "prettier"
     ],
-    "root": true,
-    "rules": {
-      "flowtype-errors/show-errors": "off"
-    }
+    "root": true
   },
   "jest": {
     "moduleNameMapper": {
@@ -87,5 +84,13 @@
     "skills": [
       "@alfred/skill-webpack"
     ]
+  },
+  "postcss": {
+    "modules": true,
+    "plugins": {
+      "autoprefixer": {
+        "grid": true
+      }
+    }
   }
 }

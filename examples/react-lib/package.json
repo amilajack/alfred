@@ -108,7 +108,6 @@
     ],
     "root": true,
     "rules": {
-      "flowtype-errors/show-errors": "off",
       "react/jsx-filename-extension": "off",
       "react/state-in-constructor": "off"
     }
@@ -138,5 +137,20 @@
         }
       ]
     ]
+  },
+  "postcss": {
+    "alias": "postcss",
+    "config": {
+      "modules": true,
+      "plugins": {
+        "autoprefixer": {
+          "grid": true
+        }
+      }
+    },
+    "fileType": "json",
+    "filename": ".postcssrc",
+    "pkgProperty": "postcss",
+    "write": true
   }
 }

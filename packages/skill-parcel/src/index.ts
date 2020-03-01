@@ -31,6 +31,7 @@ const skill: RawSkill = {
     {
       alias: 'postcss',
       filename: '.postcssrc',
+      pkgProperty: 'postcss',
       fileType: 'json',
       config: {
         modules: true,

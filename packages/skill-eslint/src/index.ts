@@ -25,10 +25,7 @@ const skill: RawSkill = {
           browser: true,
           node: true
         },
-        extends: ['bliss'],
-        rules: {
-          'flowtype-errors/show-errors': 'off'
-        }
+        extends: ['bliss']
       }
     }
   ],

@@ -12,13 +12,14 @@ import {
   AlfredConfigWithUnresolvedSkills,
   AlfredConfigRawSkill,
   AlfredConfigWithDefaults,
-  PkgJson
+  PkgJson,
+  ConfigValue
 } from '@alfred/types';
 import loadJsonFile from 'load-json-file';
 import { validateAlfredConfig } from './validation';
 import Project, { formatPkgJson } from './project';
 
-type ConfigMap = Map<string, any>;
+type SkillConfigMap = Map<string, ConfigValue>;
 
 export default class Config implements ConfigInterface {
   extends?: string | Array<string>;
@@ -108,33 +109,32 @@ export default class Config implements ConfigInterface {
     if (!config.skills || !config.skills.length)
       return config as AlfredConfigWithResolvedSkills;
 
-    const skillMap: ConfigMap = new Map();
-    const mappedSkills: ConfigMap = config.skills.reduce(
-      (map: ConfigMap, skill: AlfredConfigRawSkill) => {
+    const skillsWithConfigs: SkillConfigMap = config.skills.reduce(
+      (skillConfigMap: SkillConfigMap, skill: AlfredConfigRawSkill) => {
         if (typeof skill === 'string') {
-          map.set(skill, {});
-          return map;
+          skillConfigMap.set(skill, {});
+          return skillConfigMap;
         }
         if (Array.isArray(skill)) {
           const [skillName, skillConfig] = skill;
-          if (map.has(skillName)) {
-            map.set(
+          if (skillConfigMap.has(skillName)) {
+            skillConfigMap.set(
               skillName,
-              mergeConfigs({}, map.get(skillName), skillConfig)
+              mergeConfigs({}, skillConfigMap.get(skillName) || {}, skillConfig)
             );
           } else {
-            map.set(skillName, skillConfig);
+            skillConfigMap.set(skillName, skillConfig);
           }
-          return map;
+          return skillConfigMap;
         }
         throw new Error(`Config type not supported: ${JSON.stringify(skill)}`);
       },
-      skillMap
+      new Map<string, ConfigValue>()
     );
 
     return {
       ...config,
-      skills: Array.from(mappedSkills.entries())
+      skills: Array.from(skillsWithConfigs.entries())
     };
   }
 

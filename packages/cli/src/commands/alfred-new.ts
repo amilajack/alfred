@@ -245,11 +245,20 @@ async function createNewProject(
   // Get the entire skillMap now that the skills are installed
   const skillMap = await project.getSkillMap();
 
+  // Install the newly installed skills
+  if (process.env.ALFRED_IGNORE_INSTALL !== 'true') {
+    childProcess.execSync(installCommand, {
+      cwd: root,
+      stdio: 'inherit'
+    });
+  }
+
   const event: NewEvent = {
     skillsPkgNames: [],
     skills: Array.from(skillMap.values()),
     flags: opts.flags
   };
+  project.emit('beforeNew', event);
   project.emit('afterNew', event);
 }
 

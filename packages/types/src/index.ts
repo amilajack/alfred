@@ -83,7 +83,7 @@ export interface ProjectInterface extends EventEmitter {
   // Get skill map
   getSkillMap: () => Promise<SkillMap>;
   // Write each config in .configs of each skill
-  writeSkillConfigs: (skillMap: SkillMap) => Promise<SkillMap>;
+  writeSkillConfigs: (skillMap: SkillMap) => Promise<void>;
   // Write each config in .configs of each skill
   writeSkillFiles: (skills: Skill[]) => Promise<void>;
   // Install dependencies to a given project
@@ -330,6 +330,8 @@ export type Hooks = {
   run?: HookFn<RunEvent | RunForEachEvent>;
   afterRun?: HookFn<RunEvent>;
   beforeLearn?: HookFn<LearnEvent>;
+  afterNew?: HookFn<NewEvent>;
+  beforeNew?: HookFn<NewEvent>;
   afterLearn?: HookFn<LearnEvent>;
   beforeTransforms?: HookFn<TransformsEvent>;
   afterTransforms?: HookFn<TransformsEvent>;

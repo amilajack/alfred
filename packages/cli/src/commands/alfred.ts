@@ -21,6 +21,5 @@ program
   .command('new <project-name>', 'Create a new Alfred project')
   .command('learn <skill>', 'Add an Alfred skill to your project')
   .command('skills', 'List all the subcommands and skills')
-  .command('run <skill>', 'Run an Alfred skill')
-  .command('migrate [glob]', 'Migrate to the latest version of ES')
+  .command('run <task>', 'Run an Alfred skill')
   .parse(process.argv);
