@@ -13,7 +13,7 @@
     "deploy": "docusaurus deploy && yarn build:clean"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-alpha.40",
+    "@docusaurus/core": "^2.0.0-alpha.43",
     "@docusaurus/preset-classic": "^2.0.0-alpha.40",
     "@docusaurus/utils": "^2.0.0-alpha.37",
     "classnames": "^2.2.6",
