@@ -51,6 +51,7 @@ const skill: RawSkill = {
         'node_modules',
         'jest.config.js'
       );
+
       if (write !== 'pkg') {
         const { config: jestConfig } = skill.configs.get('jest') as SkillConfig;
         const fullConfig = {
@@ -65,23 +66,23 @@ const skill: RawSkill = {
           config.showConfigs ? configPath : hiddenTmpConfigPath,
           `module.exports = ${JSON.stringify(fullConfig)};`
         );
-      }
-      const babelJestPath = require.resolve('../babel-jest.js');
-      const jestTransformerPath = path.join(
-        root,
-        'node_modules',
-        'jest-transformer.js'
-      );
-      const { config: babelConfig } = skillMap
-        .get('babel')
-        ?.configs.get('babel') as SkillConfig;
-      await fs.promises.writeFile(
-        jestTransformerPath,
-        `const babelJestTransform = require(${JSON.stringify(babelJestPath)});
+        const babelJestPath = require.resolve('../babel-jest.js');
+        const jestTransformerPath = path.join(
+          root,
+          'node_modules',
+          'jest-transformer.js'
+        );
+        const { config: babelConfig } = skillMap
+          .get('babel')
+          ?.configs.get('babel') as SkillConfig;
+        await fs.promises.writeFile(
+          jestTransformerPath,
+          `const babelJestTransform = require(${JSON.stringify(babelJestPath)});
         module.exports = babelJestTransform.createTransformer(${JSON.stringify(
           babelConfig
         )});`
-      );
+        );
+      }
 
       const binPath = await getPkgBinPath(project, 'jest');
 
@@ -102,11 +103,14 @@ const skill: RawSkill = {
   },
   transforms: {
     babel(skill: Skill): Skill {
-      return skill.extendConfig('jest', {
-        transform: {
-          '^.+\\.jsx?$': './node_modules/jest-transformer.js'
-        }
-      });
+      const { write } = skill.configs.get('jest') as SkillConfig;
+      return write === 'pkg'
+        ? skill
+        : skill.extendConfig('jest', {
+            transform: {
+              '^.+\\.jsx?$': './node_modules/jest-transformer.js'
+            }
+          });
     },
     webpack(skill: Skill, { config }): Skill {
       return skill

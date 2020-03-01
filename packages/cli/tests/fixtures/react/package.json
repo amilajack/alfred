@@ -100,18 +100,7 @@
     "moduleNameMapper": {
       "\\.(css|less)$": "identity-obj-proxy",
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
-    },
-    "transform": {
-      "^.+\\.jsx?$": "./node_modules/jest-transformer.js"
     }
-  },
-  "alfred": {
-    "configsDir": ".configs",
-    "npmClient": "yarn",
-    "showConfigs": true,
-    "skills": [
-      "@alfred/skill-react"
-    ]
   },
   "postcss": {
     "alias": "postcss",
@@ -127,5 +116,13 @@
     "filename": ".postcssrc",
     "pkgProperty": "postcss",
     "write": true
+  },
+  "alfred": {
+    "configsDir": ".configs",
+    "npmClient": "yarn",
+    "showConfigs": true,
+    "skills": [
+      "@alfred/skill-react"
+    ]
   }
 }
