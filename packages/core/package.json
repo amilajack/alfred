@@ -59,7 +59,7 @@
     "source-map-support": "^0.5.16"
   },
   "engines": {
-    "node": ">=13"
+    "node": ">=v13.9.0"
   },
   "engineStrict": true,
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8",
