@@ -258,8 +258,8 @@ async function createNewProject(
     skills: Array.from(skillMap.values()),
     flags: opts.flags
   };
-  project.emit('beforeNew', event);
-  project.emit('afterNew', event);
+  await project.emitAsync('beforeNew', event);
+  await project.emitAsync('afterNew', event);
 }
 
 (async (): Promise<void> => {

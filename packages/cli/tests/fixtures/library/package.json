@@ -65,10 +65,7 @@
       "jest",
       "prettier"
     ],
-    "root": true,
-    "rules": {
-      "flowtype-errors/show-errors": "off"
-    }
+    "root": true
   },
   "jest": {
     "moduleNameMapper": {
@@ -82,5 +79,13 @@
   "alfred": {
     "configsDir": ".configs",
     "npmClient": "yarn"
+  },
+  "postcss": {
+    "modules": true,
+    "plugins": {
+      "autoprefixer": {
+        "grid": true
+      }
+    }
   }
 }

@@ -78,6 +78,8 @@ export interface ProjectInterface extends EventEmitter {
     subcommand: string,
     skillFlags?: string[]
   ) => Promise<void | SkillsList>;
+  // Execute events serially and wait for all events to finish
+  emitAsync: (eventName: string, eventData?: HookEvent) => Promise<void>;
   // Config setter method
   setConfig: (config: ConfigInterface) => void;
   // Get skill map

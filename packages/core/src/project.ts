@@ -7,7 +7,8 @@ import pkgUp from 'pkg-up';
 import {
   getConfigsBasePath,
   execCmdInProject,
-  configToEvalString
+  configToEvalString,
+  serialPromises
 } from '@alfred/helpers';
 import mergeConfigs from '@alfred/merge-configs';
 import {
@@ -30,7 +31,8 @@ import {
   LearnEvent,
   NewEvent,
   SkillConfig,
-  RunEvent
+  RunEvent,
+  HookEvent
 } from '@alfred/types';
 import loadJsonFile from 'load-json-file';
 import Config from './config';
@@ -148,6 +150,19 @@ export default class Project extends EventEmitter implements ProjectInterface {
     );
   }
 
+  async emitAsync(eventName: string, eventData?: HookEvent): Promise<void> {
+    const tasks = this.listeners(eventName).map(event => {
+      return async (): Promise<void> => {
+        if (eventData) {
+          await event(eventData);
+        } else {
+          await event();
+        }
+      };
+    });
+    await serialPromises(tasks);
+  }
+
   async init(): Promise<ProjectInterface> {
     this.checkProjectIsValid();
 
@@ -169,7 +184,7 @@ export default class Project extends EventEmitter implements ProjectInterface {
     });
 
     // Write all files of newly learned skills
-    ['afterNew', 'afterLearn'].forEach(hookName => {
+    ['afterNew', 'afterLearn', 'beforeRun'].forEach(hookName => {
       this.on(hookName, async (event: NewEvent | LearnEvent | RunEvent) => {
         if (this.config.showConfigs) {
           await this.writeSkillConfigs(skillMap);

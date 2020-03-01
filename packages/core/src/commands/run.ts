@@ -30,7 +30,7 @@ export default async function run(
     flags: skillFlags,
     parsedFlags
   };
-  project.emit('beforeRun', beforeRunEvent);
+  await project.emitAsync('beforeRun', beforeRunEvent);
 
   const skillMap = await project.getSkillMap();
 
@@ -63,5 +63,5 @@ export default async function run(
     flags: skillFlags,
     parsedFlags
   };
-  project.emit('afterRun', afterRunEvent);
+  await project.emitAsync('afterRun', afterRunEvent);
 }

@@ -466,9 +466,8 @@ describe('Skills', () => {
       };
       const project = {
         ...defaultAppProject,
-        emit: (): void => {
-          1 + 1;
-        },
+        emitAsync: jest.fn(),
+        emit: jest.fn(),
         config: {
           ...defaultAppProject.config,
           skills: [['@alfred/skill-react', {}]]
