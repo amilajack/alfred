@@ -40,6 +40,10 @@ module.exports = {
           label: 'Examples'
         },
         {
+          href: 'https://spectrum.chat/alfred',
+          label: 'Help'
+        },
+        {
           href: 'http://github.com/amilajack/alfred',
           label: 'GitHub'
         },
@@ -51,6 +55,45 @@ module.exports = {
       ]
     },
     footer: {
+      links: [
+        {
+          title: 'Docs',
+          items: [
+            {
+              label: 'Get Started',
+              to: 'docs/getting-started'
+            }
+          ]
+        },
+        {
+          title: 'Community',
+          items: [
+            // @TODO Add stackoverflow
+            {
+              label: 'Spectrum',
+              href: 'https://spectrum.chat/alfred'
+            },
+            {
+              label: 'Twitter',
+              href: 'https://twitter.com/alfredpkg'
+            },
+            {
+              label: 'Contributor Covenant',
+              href:
+                'https://www.contributor-covenant.org/version/1/4/code-of-conduct'
+            }
+          ]
+        },
+        {
+          title: 'Social',
+          items: [
+            {
+              label: 'GitHub',
+              href: 'https://www.github.com/amilajack/alfred'
+            }
+          ]
+        }
+      ],
       copyright: `Copyright © ${new Date().getFullYear()} Alfred`
     },
     image: 'img/alfred-log.png',
@@ -66,7 +109,7 @@ module.exports = {
     }
   },
   // path to images for header/footer
-  favicon: 'img/alfred-logo.png',
+  favicon: 'img/alfred-logo-small.png',
   // Add custom scripts here that would be placed in <script> tags.
   scripts: ['https://buttons.github.io/buttons.js']
 };
