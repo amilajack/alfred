@@ -1,5 +1,6 @@
 {
   "name": "@alfred/core",
+  "description": "A Modular Toolchain",
   "version": "0.2.0-alpha.0",
   "license": "MIT",
   "main": "./lib/index.js",

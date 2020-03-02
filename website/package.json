@@ -32,8 +32,7 @@
       "import/no-unresolved": "off",
       "react/jsx-filename-extension": "off",
       "react/prop-types": "off",
-      "react/jsx-props-no-spreading": "off",
-      "flowtype-errors/show-errors": "off"
+      "react/jsx-props-no-spreading": "off"
     }
   }
 }

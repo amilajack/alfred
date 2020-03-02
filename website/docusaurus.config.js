@@ -30,7 +30,7 @@ module.exports = {
       title: 'Alfred',
       logo: {
         alt: 'Alfred Logo',
-        src: 'img/alfred-logo.png'
+        src: 'img/alfred-logo-small.png'
       },
       links: [
         { to: 'docs/getting-started', label: 'Docs' },
