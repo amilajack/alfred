@@ -102,6 +102,7 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_packages_types_src_index_.projectinterface.html#config" class="tsd-kind-icon">config</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_packages_types_src_index_.projectinterface.html#emitasync" class="tsd-kind-icon">emit<wbr>Async</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_packages_types_src_index_.projectinterface.html#entrypoints" class="tsd-kind-icon">entrypoints</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_packages_types_src_index_.projectinterface.html#finddepstoinstall" class="tsd-kind-icon">find<wbr>Deps<wbr>ToInstall</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_packages_types_src_index_.projectinterface.html#getskillmap" class="tsd-kind-icon">get<wbr>Skill<wbr>Map</a></li>
@@ -180,9 +181,43 @@
 					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="_packages_types_src_index_.configinterface.html" class="tsd-signature-type">ConfigInterface</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/7d07dc2/packages/types/src/index.ts#L62">packages/types/src/index.ts:62</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9bf8056/packages/types/src/index.ts#L63">packages/types/src/index.ts:63</a></li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="emitasync" class="tsd-anchor"></a>
+					<h3>emit<wbr>Async</h3>
+					<div class="tsd-signature tsd-kind-icon">emit<wbr>Async<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, eventData<span class="tsd-signature-symbol">?: </span><a href="../modules/_packages_types_src_index_.html#hookevent" class="tsd-signature-type">HookEvent</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9bf8056/packages/types/src/index.ts#L82">packages/types/src/index.ts:82</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, eventData<span class="tsd-signature-symbol">?: </span><a href="../modules/_packages_types_src_index_.html#hookevent" class="tsd-signature-type">HookEvent</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>eventName: <span class="tsd-signature-type">string</span></h5>
+											</li>
+											<li>
+												<h5><span class="tsd-flag ts-flagOptional">Optional</span> eventData: <a href="../modules/_packages_types_src_index_.html#hookevent" class="tsd-signature-type">HookEvent</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="entrypoints" class="tsd-anchor"></a>
@@ -190,7 +225,7 @@
 					<div class="tsd-signature tsd-kind-icon">entrypoints<span class="tsd-signature-symbol">:</span> <a href="../modules/_packages_types_src_index_.html#entrypoint" class="tsd-signature-type">Entrypoint</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/7d07dc2/packages/types/src/index.ts#L68">packages/types/src/index.ts:68</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9bf8056/packages/types/src/index.ts#L69">packages/types/src/index.ts:69</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -200,7 +235,7 @@
 					<div class="tsd-signature tsd-kind-icon">find<wbr>Deps<wbr>ToInstall<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>skills<span class="tsd-signature-symbol">?: </span><a href="../modules/_packages_types_src_index_.html#skill-1" class="tsd-signature-type">Skill</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_packages_types_src_index_.pkgwithdeps.html" class="tsd-signature-type">PkgWithDeps</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/7d07dc2/packages/types/src/index.ts#L94">packages/types/src/index.ts:94</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9bf8056/packages/types/src/index.ts#L97">packages/types/src/index.ts:97</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -231,7 +266,7 @@
 					<div class="tsd-signature tsd-kind-icon">get<wbr>Skill<wbr>Map<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_packages_types_src_index_.html#skillmap-1" class="tsd-signature-type">SkillMap</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/7d07dc2/packages/types/src/index.ts#L83">packages/types/src/index.ts:83</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9bf8056/packages/types/src/index.ts#L86">packages/types/src/index.ts:86</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -256,7 +291,7 @@
 					<div class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_packages_types_src_index_.projectinterface.html" class="tsd-signature-type">ProjectInterface</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/7d07dc2/packages/types/src/index.ts#L72">packages/types/src/index.ts:72</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9bf8056/packages/types/src/index.ts#L73">packages/types/src/index.ts:73</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -281,7 +316,7 @@
 					<div class="tsd-signature tsd-kind-icon">install<wbr>Deps<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>dependencies<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="../modules/_packages_types_src_index_.html#dependencies" class="tsd-signature-type">Dependencies</a>, type<span class="tsd-signature-symbol">: </span><a href="../modules/_packages_types_src_index_.html#dependencytype" class="tsd-signature-type">DependencyType</a>, npmClient<span class="tsd-signature-symbol">?: </span><a href="../modules/_packages_types_src_index_.html#npmclients" class="tsd-signature-type">NpmClients</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/7d07dc2/packages/types/src/index.ts#L89">packages/types/src/index.ts:89</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9bf8056/packages/types/src/index.ts#L92">packages/types/src/index.ts:92</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -318,7 +353,7 @@
 					<div class="tsd-signature tsd-kind-icon">learn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>skillPkgNames<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/7d07dc2/packages/types/src/index.ts#L75">packages/types/src/index.ts:75</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9bf8056/packages/types/src/index.ts#L76">packages/types/src/index.ts:76</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -349,7 +384,7 @@
 					<div class="tsd-signature tsd-kind-icon">pkg<span class="tsd-signature-symbol">:</span> <a href="_packages_types_src_index_.pkgjson.html" class="tsd-signature-type">PkgJson</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/7d07dc2/packages/types/src/index.ts#L64">packages/types/src/index.ts:64</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9bf8056/packages/types/src/index.ts#L65">packages/types/src/index.ts:65</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -359,7 +394,7 @@
 					<div class="tsd-signature tsd-kind-icon">pkg<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/7d07dc2/packages/types/src/index.ts#L66">packages/types/src/index.ts:66</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9bf8056/packages/types/src/index.ts#L67">packages/types/src/index.ts:67</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -369,7 +404,7 @@
 					<div class="tsd-signature tsd-kind-icon">root<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/7d07dc2/packages/types/src/index.ts#L60">packages/types/src/index.ts:60</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9bf8056/packages/types/src/index.ts#L61">packages/types/src/index.ts:61</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -379,7 +414,7 @@
 					<div class="tsd-signature tsd-kind-icon">run<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>subcommand<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, skillFlags<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><a href="../modules/_packages_types_src_index_.html#skillslist" class="tsd-signature-type">SkillsList</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/7d07dc2/packages/types/src/index.ts#L76">packages/types/src/index.ts:76</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9bf8056/packages/types/src/index.ts#L77">packages/types/src/index.ts:77</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -413,7 +448,7 @@
 					<div class="tsd-signature tsd-kind-icon">set<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="_packages_types_src_index_.configinterface.html" class="tsd-signature-type">ConfigInterface</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/7d07dc2/packages/types/src/index.ts#L81">packages/types/src/index.ts:81</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9bf8056/packages/types/src/index.ts#L84">packages/types/src/index.ts:84</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -444,7 +479,7 @@
 					<div class="tsd-signature tsd-kind-icon">skills<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_packages_types_src_index_.html#skillslist" class="tsd-signature-type">SkillsList</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/7d07dc2/packages/types/src/index.ts#L74">packages/types/src/index.ts:74</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9bf8056/packages/types/src/index.ts#L75">packages/types/src/index.ts:75</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -469,7 +504,7 @@
 					<div class="tsd-signature tsd-kind-icon">targets<span class="tsd-signature-symbol">:</span> <a href="../modules/_packages_types_src_index_.html#target-2" class="tsd-signature-type">Target</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/7d07dc2/packages/types/src/index.ts#L70">packages/types/src/index.ts:70</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9bf8056/packages/types/src/index.ts#L71">packages/types/src/index.ts:71</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -479,7 +514,7 @@
 					<div class="tsd-signature tsd-kind-icon">validate<wbr>Pkg<wbr>Json<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../modules/_packages_types_src_index_.html#validationresult" class="tsd-signature-type">ValidationResult</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/7d07dc2/packages/types/src/index.ts#L95">packages/types/src/index.ts:95</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9bf8056/packages/types/src/index.ts#L98">packages/types/src/index.ts:98</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -501,10 +536,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="writeskillconfigs" class="tsd-anchor"></a>
 					<h3>write<wbr>Skill<wbr>Configs</h3>
-					<div class="tsd-signature tsd-kind-icon">write<wbr>Skill<wbr>Configs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>skillMap<span class="tsd-signature-symbol">: </span><a href="../modules/_packages_types_src_index_.html#skillmap-1" class="tsd-signature-type">SkillMap</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_packages_types_src_index_.html#skillmap-1" class="tsd-signature-type">SkillMap</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">write<wbr>Skill<wbr>Configs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>skillMap<span class="tsd-signature-symbol">: </span><a href="../modules/_packages_types_src_index_.html#skillmap-1" class="tsd-signature-type">SkillMap</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/7d07dc2/packages/types/src/index.ts#L85">packages/types/src/index.ts:85</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9bf8056/packages/types/src/index.ts#L88">packages/types/src/index.ts:88</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -512,7 +547,7 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>skillMap<span class="tsd-signature-symbol">: </span><a href="../modules/_packages_types_src_index_.html#skillmap-1" class="tsd-signature-type">SkillMap</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_packages_types_src_index_.html#skillmap-1" class="tsd-signature-type">SkillMap</a><span class="tsd-signature-symbol">&gt;</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>skillMap<span class="tsd-signature-symbol">: </span><a href="../modules/_packages_types_src_index_.html#skillmap-1" class="tsd-signature-type">SkillMap</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
@@ -522,7 +557,7 @@
 												<h5>skillMap: <a href="../modules/_packages_types_src_index_.html#skillmap-1" class="tsd-signature-type">SkillMap</a></h5>
 											</li>
 										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_packages_types_src_index_.html#skillmap-1" class="tsd-signature-type">SkillMap</a><span class="tsd-signature-symbol">&gt;</span></h4>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 									</li>
 								</ul>
 							</li>
@@ -535,7 +570,7 @@
 					<div class="tsd-signature tsd-kind-icon">write<wbr>Skill<wbr>Files<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>skills<span class="tsd-signature-symbol">: </span><a href="../modules/_packages_types_src_index_.html#skill-1" class="tsd-signature-type">Skill</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/7d07dc2/packages/types/src/index.ts#L87">packages/types/src/index.ts:87</a></li>
+							<li>Defined in <a href="https://github.com/amilajack/alfred/blob/9bf8056/packages/types/src/index.ts#L90">packages/types/src/index.ts:90</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -1131,6 +1166,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_packages_types_src_index_.projectinterface.html#config" class="tsd-kind-icon">config</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_packages_types_src_index_.projectinterface.html#emitasync" class="tsd-kind-icon">emit<wbr>Async</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_packages_types_src_index_.projectinterface.html#entrypoints" class="tsd-kind-icon">entrypoints</a>
