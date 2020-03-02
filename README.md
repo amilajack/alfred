@@ -42,11 +42,11 @@ See our [examples directory](https://github.com/amilajack/alfred/tree/master/exa
 | 🔨   | Implementation in progress      |
 | ❌   | To be implemented, Help wanted! |
 
-|     | Example                            | Descrption                              |
-|-----|------------------------------------|-----------------------------------------|
-| 1.  | [hello world][hello-world-example] | A simple hello work app in node         |
-| 2.  | [react library][react-lib-example] | A small button library built with React |
-| 3.  | typescript react app               | ❌                                      |
+|     | Example                                 | Descrption                              |
+|-----|-----------------------------------------|-----------------------------------------|
+| 1.  | [hello world node][hello-world-example] | A simple hello work app in node         |
+| 2.  | [react library][react-lib-example]      | A small button library built with React |
+| 3.  | typescript react app                    | ❌                                      |
 
 [hello-world-example]: https://github.com/amilajack/alfred/tree/master/examples/hello-world
 [react-lib-example]: https://github.com/amilajack/alfred/tree/master/examples/react-lib
@@ -55,19 +55,19 @@ See our [examples directory](https://github.com/amilajack/alfred/tree/master/exa
 
 | Infrastructure     | Skills                     | Implemented  |
 | ---                | ---                        | ---          |
-| Bundlers           |  Webpack, Rollup, Parcel   | ✅           |
+| Bundlers           |  Webpack, Rollup, Parcel   | ✅ ✅ ✅    |
 | Transpilers        |  Babel                     | ✅           |
 | Test Frameworks    |  Jest, Mocha, Jasmine, Ava | ✅ ✅ ❌ ❌ |
 | Formatters         |  Prettier                  | ✅           |
-| Libraries          |  Lodash, Moment            | ✅           |
+| Libraries          |  Lodash, Moment            | ✅ ❌        |
 | Linters            |  ESLint                    | ✅           |
-| Front End          |  React, Angular, Vue       | ✅ ❌        |
-| State Managment    |  Redux, Mobx               | ❌           |
+| Front End          |  React, Angular, Vue       | ✅ ❌ ❌    |
+| State Managment    |  Redux, Mobx               | ✅ ❌        |
 | Routing            |  react-router              | ❌           |
-| Documentation      |  JSDoc, Typedoc            | ❌           |
+| Documentation      |  JSDoc, Typedoc            | ❌ ❌        |
 | Migration          |  Lebab                     | ❌           |
-| Type Checkers      |  Flow, TypeScript          | ❌           |
-| End to End Testing |  TestCafe, Cypress         | ❌           |
+| Type Checkers      |  Flow, TypeScript          | ❌ ❌        |
+| End to End Testing |  TestCafe, Cypress         | ❌ ❌        |
 
 ## Implemented Targets
 
