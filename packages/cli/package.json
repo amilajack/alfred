@@ -1,7 +1,7 @@
 {
   "name": "@alfred/cli",
+  "description": "A Modular Toolchain",
   "version": "0.2.0-alpha.0",
-  "description": "A framework for upgrading JavaScript codebases",
   "repository": "git@github.com:amilajack/alfred.git",
   "license": "MIT",
   "author": "Amila Welihinda <amilajack@gmail.com>",

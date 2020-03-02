@@ -10,7 +10,10 @@
       "concepts",
       "skills"
     ],
-    "Creating a Skill": [
+    "Guides": [
+      "creating-a-skill"
+    ],
+    "Advanced": [
       "skill-transforms",
       "skill-dependencies",
       "skill-hooks",

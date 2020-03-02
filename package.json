@@ -1,5 +1,5 @@
 {
-  "description": "A framework for upgrading JavaScript codebases",
+  "description": "A Modular Toolchain",
   "license": "MIT",
   "private": true,
   "repository": "https://github.com/amilajack/alfred.git",
@@ -147,7 +147,6 @@
       }
     ],
     "rules": {
-      "flowtype-errors/show-errors": "off",
       "prettier/prettier": [
         "error",
         {

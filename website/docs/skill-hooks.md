@@ -31,6 +31,8 @@ The following are all the hooks that are supported at the moment:
 * `beforeRun`
 * `run`
 * `afterRun`
+* `before{Task}`
+* `after{Task}`
 * `beforeLearn`
 * `afterLearn`
 * `beforeTransforms`
