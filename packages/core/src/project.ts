@@ -44,7 +44,6 @@ import skills from './commands/skills';
 import clean from './commands/clean';
 import { PKG_SORT_ORDER, RAW_ENTRYPOINTS } from './constants';
 import { EventEmitter } from 'events';
-import 'source-map-support/register';
 
 // @TODO Send the information to a crash reporting service (like sentry.io)
 // @TODO Install sourcemaps
@@ -249,21 +248,30 @@ export default class Project extends EventEmitter implements ProjectInterface {
     // Built in, non-overridable skills are added here
     // 'start' subcommand is handled by run()
     // @TODO: Make all skills overridable but warn before overriding them
+    const capitalizedCmd = `${subcommand[0].toUpperCase()}${subcommand.slice(
+      1
+    )}`;
+    await this.emitAsync(`before${capitalizedCmd}`);
     switch (subcommand) {
       case 'clean': {
-        return this.clean();
+        await this.clean();
+        break;
       }
       case 'skills': {
-        return this.skills();
+        await this.skills();
+        break;
       }
       case 'learn': {
-        return this.learn(args);
+        await this.learn(args);
+        break;
       }
       default: {
         await this.beforeCommand();
-        return run(this, subcommand, args);
+        await run(this, subcommand, args);
+        break;
       }
     }
+    await this.emitAsync(`after${capitalizedCmd}`);
   }
 
   learn(skillPkgNames: string[]): Promise<void> {

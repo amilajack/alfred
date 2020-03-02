@@ -1,19 +1,112 @@
 {
   "name": "alfred-test-app",
-  "private": true,
   "version": "0.2.0-alpha.0",
-  "main": "index.js",
+  "private": true,
   "license": "MIT",
+  "main": "index.js",
   "devDependencies": {
     "@alfred/cli": "^0.2.0-alpha.0",
     "@alfred/core": "^0.2.0-alpha.0",
     "@alfred/skill-react": "^0.2.0-alpha.0",
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-react-constant-elements": "^7.8.3",
+    "@babel/plugin-transform-react-inline-elements": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/preset-react": "^7.8.3",
+    "@babel/register": "^7.8.3",
+    "autoprefixer": "^9.7.4",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "8.0.6",
+    "babel-plugin-dev-expression": "^0.2.2",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.8.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.15.1",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "jest": "^24.0.0",
+    "parcel": "^1.11.0",
+    "postcss-modules": "^1.5.0",
+    "prettier": "^1.16.4",
+    "react": "16.0.0",
     "react-dom": "16.13.0",
+    "react-hot-loader": "^4.12.19",
     "webpack": "^4.28.3"
   },
+  "babel": {
+    "env": {
+      "development": {
+        "plugins": [
+          "react-hot-loader/babel"
+        ]
+      },
+      "production": {
+        "plugins": [
+          "babel-plugin-dev-expression",
+          "@babel/plugin-transform-react-constant-elements",
+          "@babel/plugin-transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types"
+        ]
+      }
+    },
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "extends": [
+      "bliss",
+      "airbnb",
+      "prettier"
+    ],
+    "parser": "babel-eslint",
+    "plugins": [
+      "jest",
+      "prettier"
+    ],
+    "root": true,
+    "rules": {
+      "react/jsx-filename-extension": "off"
+    }
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
+    }
+  },
+  "postcss": {
+    "alias": "postcss",
+    "config": {
+      "modules": true,
+      "plugins": {
+        "autoprefixer": {
+          "grid": true
+        }
+      }
+    },
+    "fileType": "json",
+    "filename": ".postcssrc",
+    "pkgProperty": "postcss",
+    "write": true
+  },
   "alfred": {
-    "showConfigs": true,
     "npmClient": "yarn",
+    "showConfigs": true,
     "skills": [
       "@alfred/skill-react"
     ]
