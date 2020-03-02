@@ -32,6 +32,10 @@ yarn lerna publish
 yarn docs:build
 GIT_USER=your-github-username USE_SSH=true yarn docs:deploy
 yarn docs:clean
+
+# Publishing Website
+yarn workspace website build
+GIT_USER=your-github-username USE_SSH=true yarn workspace website deploy
 ```
 
 To change verdaccio configs, see `~/.config/verdaccio/config.yaml`
