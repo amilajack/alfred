@@ -42,7 +42,7 @@ describe('Project', () => {
     });
 
     it('should run before and after hooks for each subcommand', async () => {
-      jest.setTimeout(10 ** 4);
+      jest.setTimeout(10 ** 5);
       const beforeBuildFn = jest.fn();
       const afterBuildFn = jest.fn();
       project.on('beforeBuild', async () => {

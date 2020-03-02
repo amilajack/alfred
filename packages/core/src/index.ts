@@ -1,7 +1,7 @@
 import Project from './project';
 import { ProjectInterface } from '@alfred/types';
 
-if (typeof jest !== 'undefined') {
+if (typeof jest === 'undefined') {
   require('source-map-support/register');
 }
 

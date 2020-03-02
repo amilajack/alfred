@@ -2,7 +2,7 @@
 import program from 'commander';
 import updateNotifier from 'update-notifier';
 
-if (typeof jest !== 'undefined') {
+if (typeof jest === 'undefined') {
   require('source-map-support/register');
 }
 
