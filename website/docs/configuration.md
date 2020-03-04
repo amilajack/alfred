@@ -47,12 +47,6 @@ Default: `.`
 
 The directory, relative to the project directory, which config files should be written to
 
-### `showConfigs`
-
-Default: `true`
-
-Write the configs to the configsDir directory
-
 ## Extending Alfred Configs
 
 Alfred allows you to create reusable configs. This is useful when you want to share the same config across multiple projects.

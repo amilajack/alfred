@@ -86,7 +86,6 @@
   },
   "alfred": {
     "configsDir": ".configs",
-    "npmClient": "yarn",
-    "showConfigs": true
+    "npmClient": "yarn"
   }
 }

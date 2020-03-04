@@ -136,7 +136,6 @@
   "alfred": {
     "extends": "@examples/alfred-config-example",
     "npmClient": "yarn",
-    "showConfigs": true,
     "skills": [
       "@alfred/skill-react",
       [

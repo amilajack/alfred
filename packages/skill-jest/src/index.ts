@@ -32,7 +32,6 @@ const skill: RawSkill = {
     async run({
       skill,
       skillMap,
-      config,
       project,
       event
     }: HookArgs<RunEvent>): Promise<void> {
@@ -46,11 +45,6 @@ const skill: RawSkill = {
       if (!fs.existsSync(nodeModulesPath)) {
         await fs.promises.mkdir(nodeModulesPath);
       }
-      const hiddenTmpConfigPath = path.join(
-        root,
-        'node_modules',
-        'jest.config.js'
-      );
 
       if (write !== 'pkg') {
         const { config: jestConfig } = skill.configs.get('jest') as SkillConfig;
@@ -62,8 +56,7 @@ const skill: RawSkill = {
           rootDir: `${root}`
         };
         await fs.promises.writeFile(
-          // @TODO Write to ./node_modules/.alfred
-          config.showConfigs ? configPath : hiddenTmpConfigPath,
+          configPath,
           `module.exports = ${JSON.stringify(fullConfig)};`
         );
         const babelJestPath = require.resolve('../babel-jest.js');
@@ -90,11 +83,7 @@ const skill: RawSkill = {
         project,
         [
           binPath,
-          write === 'pkg'
-            ? ''
-            : config.showConfigs
-            ? `--config ${configPath}`
-            : `--config ${hiddenTmpConfigPath}`,
+          write === 'pkg' ? '' : `--config ${configPath}`,
           JSON.stringify(root),
           ...event.flags
         ].join(' ')

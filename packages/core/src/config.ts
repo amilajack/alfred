@@ -26,8 +26,6 @@ export default class Config implements ConfigInterface {
 
   npmClient: NpmClients;
 
-  showConfigs: boolean;
-
   configsDir: string;
 
   skills: AlfredConfigSkill[];
@@ -38,7 +36,6 @@ export default class Config implements ConfigInterface {
 
   static DEFAULT_CONFIG = {
     skills: [],
-    showConfigs: true,
     autoInstall: false,
     configsDir: '.',
     npmClient: 'npm' as NpmClients
@@ -56,7 +53,6 @@ export default class Config implements ConfigInterface {
     validateAlfredConfig(resolvedSkills);
     this.rawConfig = rawConfig;
     this.skills = resolvedSkills.skills || [];
-    this.showConfigs = resolvedSkills.showConfigs;
     this.configsDir = resolvedSkills.configsDir;
     this.autoInstall = resolvedSkills.autoInstall;
     this.npmClient = resolvedSkills.npmClient;
@@ -72,7 +68,6 @@ export default class Config implements ConfigInterface {
   getConfigValues(): AlfredConfigWithDefaults {
     return {
       skills: this.skills,
-      showConfigs: this.showConfigs,
       configsDir: this.configsDir,
       npmClient: this.npmClient,
       autoInstall: this.autoInstall

@@ -9,7 +9,6 @@ describe('validation', () => {
     it('should validate types of basic properties', () => {
       expect(() =>
         validateAlfredConfig({
-          showConfigs: 'false',
           configsDir: false
         })
       ).toThrow();
@@ -17,15 +16,6 @@ describe('validation', () => {
 
     it('should require config to be an object', () => {
       expect(() => validateAlfredConfig(true)).toThrow();
-    });
-
-    it('should not allow mutually exclusive configsDir and showConfigs', () => {
-      expect(() =>
-        validateAlfredConfig({
-          showConfigs: false,
-          configsDir: '/'
-        })
-      ).toThrow('showConfigs must be true for configsDir property to be set');
     });
 
     it('should take multiple extends values', () => {

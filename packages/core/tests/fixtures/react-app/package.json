@@ -106,7 +106,6 @@
   },
   "alfred": {
     "npmClient": "yarn",
-    "showConfigs": true,
     "skills": [
       "@alfred/skill-react"
     ]

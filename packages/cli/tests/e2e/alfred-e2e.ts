@@ -43,8 +43,6 @@ const CLEAN_AFTER_RUN = false;
 //       * start --dev
 //       * test
 //       * skills
-//      test with showConfigs: true
-//      test with showConfigs: false
 
 // If there are n elmenets in this array, 2^n tests will run since that's the number
 // of total combinations of the elements in the array.
@@ -177,133 +175,123 @@ process.on('exit', () => {
             rimraf.sync(path.join(projectDir, 'src/*'));
             rimraf.sync(path.join(projectDir, 'tests/*'));
             await addEntrypoints(templateData, projectDir, entrypoints);
-
-            await serialPromises(
-              [true, false].map(showConfigs => async (): Promise<void> => {
-                const pkg = mergeConfigs(
-                  {},
-                  require(path.join(projectDir, 'package.json')),
-                  {
-                    alfred: {
-                      ...Config.DEFAULT_CONFIG,
-                      npmClient: 'yarn',
-                      showConfigs
-                    }
-                  }
-                ) as {
-                  alfred: Config;
-                };
-
-                fs.writeFileSync(
-                  path.join(projectDir, 'package.json'),
-                  await formatPkgJson(pkg)
-                );
-
-                try {
-                  command = 'skills';
-                  childProcess.execSync(`node ${binPath} skills`, {
-                    cwd: projectDir,
-                    stdio: 'inherit',
-                    env
-                  });
-
-                  console.log(
-                    `Testing ${JSON.stringify({
-                      skills: skillCombination.map(skill => skill.name),
-                      entrypoints,
-                      showConfigs
-                    })}`
-                  );
-
-                  const entrypointIsAppProject = entrypoints.some(
-                    entrypoint => entrypoint.project === 'app'
-                  );
-
-                  await Promise.all(
-                    subcommands.map(async subcommand => {
-                      command = subcommand;
-                      try {
-                        if (
-                          entrypointIsAppProject &&
-                          subcommand.includes('start')
-                        ) {
-                          const port = await getPort();
-                          const start = childProcess.spawn(
-                            binPath,
-                            ['run', subcommand, `--port ${port}`],
-                            {
-                              cwd: projectDir,
-                              env
-                            }
-                          );
-
-                          await new Promise((resolve, reject) => {
-                            start.stdout.once('data', data => {
-                              console.log(data);
-                              resolve(data);
-                            });
-                            start.stderr.once('data', data => {
-                              reject(data);
-                            });
-                          });
-
-                          const page = await fetch(
-                            `http://localhost:${port}`
-                          ).then(res => res.text());
-                          expect(page).toEqual('Hello from Alfred!');
-
-                          start.kill();
-                        } else {
-                          childProcess.execSync(
-                            `node ${binPath} run ${subcommand}`,
-                            {
-                              cwd: projectDir,
-                              stdio: 'inherit',
-                              env
-                            }
-                          );
-                        }
-                        // Assert that the .configs dir should or should not exist
-                        if (
-                          path.join(projectDir, pkg.alfred.configsDir) !==
-                          projectDir
-                        ) {
-                          assert.strictEqual(
-                            fs.existsSync(
-                              path.join(projectDir, pkg.alfred.configsDir)
-                            ),
-                            showConfigs
-                          );
-                        }
-                      } catch (e) {
-                        issues.push([
-                          skillCombination.join(', '),
-                          entrypoints.join(', '),
-                          command,
-                          showConfigs
-                        ]);
-                        console.log(e);
-                      }
-                    })
-                  );
-
-                  command = 'clean';
-                  childProcess.execSync(`node ${binPath} clean`, {
-                    cwd: projectDir,
-                    stdio: 'inherit',
-                    env
-                  });
-                } catch (e) {
-                  issues.push([
-                    skillCombination.join(', '),
-                    entrypoints.join(', '),
-                    command,
-                    showConfigs
-                  ]);
-                  console.log(e);
+            const pkg = mergeConfigs(
+              {},
+              require(path.join(projectDir, 'package.json')),
+              {
+                alfred: {
+                  ...Config.DEFAULT_CONFIG,
+                  npmClient: 'yarn'
                 }
-              })
+              }
+            ) as {
+              alfred: Config;
+            };
+
+            fs.writeFileSync(
+              path.join(projectDir, 'package.json'),
+              await formatPkgJson(pkg)
             );
+
+            try {
+              command = 'skills';
+              childProcess.execSync(`node ${binPath} skills`, {
+                cwd: projectDir,
+                stdio: 'inherit',
+                env
+              });
+
+              console.log(
+                `Testing ${JSON.stringify({
+                  skills: skillCombination.map(skill => skill.name),
+                  entrypoints
+                })}`
+              );
+
+              const entrypointIsAppProject = entrypoints.some(
+                entrypoint => entrypoint.project === 'app'
+              );
+
+              await Promise.all(
+                subcommands.map(async subcommand => {
+                  command = subcommand;
+                  try {
+                    if (
+                      entrypointIsAppProject &&
+                      subcommand.includes('start')
+                    ) {
+                      const port = await getPort();
+                      const start = childProcess.spawn(
+                        binPath,
+                        ['run', subcommand, `--port ${port}`],
+                        {
+                          cwd: projectDir,
+                          env
+                        }
+                      );
+
+                      await new Promise((resolve, reject) => {
+                        start.stdout.once('data', data => {
+                          console.log(data);
+                          resolve(data);
+                        });
+                        start.stderr.once('data', data => {
+                          reject(data);
+                        });
+                      });
+
+                      const page = await fetch(
+                        `http://localhost:${port}`
+                      ).then(res => res.text());
+                      expect(page).toEqual('Hello from Alfred!');
+
+                      start.kill();
+                    } else {
+                      childProcess.execSync(
+                        `node ${binPath} run ${subcommand}`,
+                        {
+                          cwd: projectDir,
+                          stdio: 'inherit',
+                          env
+                        }
+                      );
+                    }
+                    // Assert that the .configs dir should or should not exist
+                    if (
+                      path.join(projectDir, pkg.alfred.configsDir) !==
+                      projectDir
+                    ) {
+                      assert.strictEqual(
+                        fs.existsSync(
+                          path.join(projectDir, pkg.alfred.configsDir)
+                        )
+                      );
+                    }
+                  } catch (e) {
+                    issues.push([
+                      skillCombination.join(', '),
+                      entrypoints.join(', '),
+                      command
+                    ]);
+                    console.log(e);
+                  }
+                })
+              );
+
+              command = 'clean';
+              childProcess.execSync(`node ${binPath} clean`, {
+                cwd: projectDir,
+                stdio: 'inherit',
+                env
+              });
+            } catch (e) {
+              issues.push([
+                skillCombination.join(', '),
+                entrypoints.join(', '),
+                command
+              ]);
+              console.log(e);
+            }
           })
         );
       }
