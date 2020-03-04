@@ -64,6 +64,7 @@ See our [examples directory](https://github.com/amilajack/alfred/tree/master/exa
 | Front End          |  React, Angular, Vue       | ✅ ❌ ❌    |
 | State Managment    |  Redux, Mobx               | ✅ ❌        |
 | Routing            |  react-router              | ❌           |
+| Query Languages    |  graphql, apollo           | ❌ ❌        |
 | Documentation      |  JSDoc, Typedoc            | ❌ ❌        |
 | Migration          |  Lebab                     | ❌           |
 | Type Checkers      |  Flow, TypeScript          | ❌ ❌        |
