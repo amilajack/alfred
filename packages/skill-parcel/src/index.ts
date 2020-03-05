@@ -3,7 +3,7 @@ import { openUrlInBrowser } from '@alfred/helpers';
 import {
   RawSkill,
   Skill,
-  RunForEachEvent,
+  RunForEachTargetEvent,
   Env,
   Platform,
   ProjectEnum
@@ -46,7 +46,12 @@ const skill: RawSkill = {
   ],
   hooks: {
     async run({ project, event }): Promise<void> {
-      const { target, subcommand, parsedFlags } = event as RunForEachEvent;
+      const {
+        target,
+        subcommand,
+        parsedFlags,
+        output
+      } = event as RunForEachTargetEvent;
       const { root } = project;
       // eslint-disable-next-line global-require
       const Bundler = require('parcel');
@@ -62,7 +67,7 @@ const skill: RawSkill = {
       }
 
       const parcelOpts = {
-        outDir: path.join(root, 'targets', 'prod'),
+        outDir: output,
         outFile: 'index.html',
         cacheDir: path.join(root, 'node_modules', '.cache'),
         minify: target.env === 'production',

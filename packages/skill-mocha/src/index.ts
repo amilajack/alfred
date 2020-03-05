@@ -2,13 +2,11 @@ import fs from 'fs';
 import path from 'path';
 import { execCmdInProject, getPkgBinPath } from '@alfred/helpers';
 import {
-  HookArgs,
   SkillConfig,
   RawSkill,
   Env,
   Platform,
-  ProjectEnum,
-  RunEvent
+  ProjectEnum
 } from '@alfred/types';
 
 const supports = {
@@ -30,12 +28,7 @@ const skill: RawSkill = {
     ]
   ],
   hooks: {
-    async run({
-      project,
-      config,
-      skillMap,
-      event
-    }: HookArgs<RunEvent>): Promise<void> {
+    async run({ project, config, skillMap, event }): Promise<void> {
       const binPath = await getPkgBinPath(project, 'mocha');
       const mochaBabelRegisterPath = path.join(
         project.root,
