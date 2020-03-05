@@ -42,19 +42,17 @@ const skill: RawSkill = {
         skill.configs.get('eslint')?.filename as string
       );
       const binPath = await getPkgBinPath(project, 'eslint');
-      if (config.showConfigs) {
-        execCmdInProject(
-          project,
-          [
-            binPath,
-            skill.configs.get('eslint')?.write === 'file'
-              ? `--config ${configPath}`
-              : '',
-            'src tests',
-            ...flags
-          ].join(' ')
-        );
-      }
+      execCmdInProject(
+        project,
+        [
+          binPath,
+          skill.configs.get('eslint')?.write === 'file'
+            ? `--config ${configPath}`
+            : '',
+          'src tests',
+          ...flags
+        ].join(' ')
+      );
       const { config: eslintConfig } = skill.configs.get(
         'eslint'
       ) as SkillConfig;

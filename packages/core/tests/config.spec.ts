@@ -26,14 +26,14 @@ describe('config', () => {
       jest.mock(
         'module-1',
         () => ({
-          showConfigs: true
+          configsDir: '.configs-dir-test-1'
         }),
         { virtual: true }
       );
       jest.mock(
         'module-2',
         () => ({
-          showConfigs: false
+          configsDir: '.configs-dir-test-2'
         }),
         { virtual: true }
       );
@@ -43,16 +43,16 @@ describe('config', () => {
         }).getConfigValues()
       ).toEqual({
         ...Config.DEFAULT_CONFIG,
-        showConfigs: true
+        configsDir: '.configs-dir-test-1'
       });
       expect(
         new Config({
           extends: ['module-2'],
-          showConfigs: true
+          configsDir: '.configs-dir-test-3'
         }).getConfigValues()
       ).toEqual({
         ...Config.DEFAULT_CONFIG,
-        showConfigs: true
+        configsDir: '.configs-dir-test-3'
       });
     });
 
@@ -110,7 +110,7 @@ describe('config', () => {
       jest.mock(
         'alfred-config-test',
         () => ({
-          showConfigs: true,
+          configsDir: '.configs-dir-test',
           skills: [
             [
               '@alfred/skill-lodash',
@@ -129,7 +129,7 @@ describe('config', () => {
         }).getConfigValues()
       ).toEqual({
         ...Config.DEFAULT_CONFIG,
-        showConfigs: true,
+        configsDir: '.configs-dir-test',
         skills: [
           [
             '@alfred/skill-lodash',
@@ -161,7 +161,7 @@ describe('config', () => {
         }).getConfigValues()
       ).toEqual({
         ...Config.DEFAULT_CONFIG,
-        showConfigs: true,
+        configsDir: '.configs-dir-test',
         skills: [
           [
             '@alfred/skill-lodash',

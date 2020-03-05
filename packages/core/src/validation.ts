@@ -6,7 +6,6 @@ import {
   SkillTaskModule,
   PkgJson
 } from '@alfred/types';
-import Config from './config';
 
 type Person = {
   name: string;
@@ -522,7 +521,6 @@ export function validateAlfredConfig(
   const alfredConfigSchema = Joi.object({
     npmClient: Joi.string().valid('npm', 'yarn'),
     rawConfig: Joi.object(),
-    showConfigs: Joi.boolean(),
     configsDir: Joi.string(),
     extends: [Joi.string(), Joi.array()],
     autoInstall: Joi.bool(),
@@ -531,16 +529,6 @@ export function validateAlfredConfig(
       Joi.array().items(Joi.string().required(), Joi.object().required())
     )
   });
-
-  if (
-    alfredConfig.showConfigs === false &&
-    'configsDir' in alfredConfig &&
-    alfredConfig.configsDir !== Config.DEFAULT_CONFIG.configsDir
-  ) {
-    throw new Error(
-      'showConfigs must be true for configsDir property to be set'
-    );
-  }
 
   if ('extends' in alfredConfig) {
     // Validate if each config in `.extends` is a string

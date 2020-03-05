@@ -92,7 +92,6 @@
   "alfred": {
     "configsDir": ".configs",
     "extends": "@examples/alfred-config-example",
-    "npmClient": "yarn",
-    "showConfigs": true
+    "npmClient": "yarn"
   }
 }

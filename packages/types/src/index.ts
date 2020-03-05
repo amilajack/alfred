@@ -141,7 +141,6 @@ export interface AlfredConfigWithResolvedSkills {
   skills?: AlfredConfigSkill[];
   npmClient?: NpmClients;
   configsDir?: string;
-  showConfigs?: boolean;
   autoInstall?: boolean;
 }
 
@@ -149,7 +148,6 @@ export interface AlfredConfigWithResolvedSkills {
 export interface AlfredConfigWithUnresolvedSkills {
   skills?: Array<AlfredConfigRawSkill>;
   npmClient?: NpmClients;
-  showConfigs?: boolean;
   configsDir?: string;
   autoInstall?: boolean;
 }
@@ -163,7 +161,6 @@ export interface AlfredConfigWithDefaults {
   skills: AlfredConfigSkill[];
   npmClient: NpmClients;
   configsDir: string;
-  showConfigs: boolean;
   autoInstall: boolean;
 }
 

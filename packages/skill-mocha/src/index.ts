@@ -39,7 +39,7 @@ const skill: RawSkill = {
       const binPath = await getPkgBinPath(project, 'mocha');
       const mochaBabelRegisterPath = path.join(
         project.root,
-        config.showConfigs ? config.configsDir : 'node_modules',
+        config.configsDir,
         'mocha.js'
       );
       const { config: babelConfig } = skillMap

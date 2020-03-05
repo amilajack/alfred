@@ -72,5 +72,3 @@ The following example passes flags to eslint. The example adds a custom formatte
 ```bash
 alfred run lint --format pretty
 ```
-
-For now, this **only works when `showConfigs` is set to `true`**.

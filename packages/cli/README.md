@@ -21,8 +21,17 @@ alfred run format
 alfred run test
 
 # Planned Built-in Subcommands
+
+# List all targets
 alfred targets
+# Run command for specific entrypoints
+alfred entrypoint app.lib run build
+# Publish all entrypoints
 alfred publish
+# Publish app to GitHub pages
+alfred entrypoint app.browser publish --method github-pages
+# Publish browser library to NPM
+alfred entrypoint lib.browser publish
 alfred search
 alfred docs
 alfred migrate

@@ -38,7 +38,7 @@ const skill: RawSkill = {
           '--write',
           '**/*.js',
           ...(event.flags || []),
-          config.showConfigs && write === 'file' ? `--config ${configPath}` : ''
+          write === 'file' ? `--config ${configPath}` : ''
         ].join(' ')
       );
     }

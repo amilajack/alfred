@@ -185,9 +185,7 @@ export default class Project extends EventEmitter implements ProjectInterface {
     // Write all files of newly learned skills
     ['afterNew', 'afterLearn', 'beforeRun'].forEach(hookName => {
       this.on(hookName, async (event: NewEvent | LearnEvent | RunEvent) => {
-        if (this.config.showConfigs) {
-          await this.writeSkillConfigs(skillMap);
-        }
+        await this.writeSkillConfigs(skillMap);
         if ('skillsPkgNames' in event) {
           await this.writeSkillFiles(event.skillsPkgNames.map(requireSkill));
         }
@@ -444,8 +442,6 @@ ${JSON.stringify(result.errors)}`
   }
 
   async writeSkillConfigs(skillMap: SkillMap): Promise<void> {
-    if (!this.config.showConfigs) return;
-
     // Create a .configs dir if it doesn't exist
     const configsBasePath = getConfigsBasePath(this);
     if (!fs.existsSync(configsBasePath)) {
