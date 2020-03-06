@@ -228,13 +228,15 @@ export type RunEvent = {
   flags: Array<string>;
   parsedFlags: ParsedFlags;
   subcommand: string;
+  output: string[];
 };
 
-export type RunForEachEvent = {
+export type RunForEachTargetEvent = {
   target: Target;
   flags: Array<string>;
   parsedFlags: ParsedFlags;
   subcommand: string;
+  output: string;
 };
 
 export type LearnEvent = {
@@ -259,7 +261,11 @@ export type HookArgs<T> = {
   event: T;
 };
 
-export type HookEvent = RunEvent | RunForEachEvent | LearnEvent | NewEvent;
+export type HookEvent =
+  | RunEvent
+  | RunForEachTargetEvent
+  | LearnEvent
+  | NewEvent;
 
 export type HookFn<T> = (args: HookArgs<T>) => void | Promise<void>;
 
@@ -326,7 +332,7 @@ export type CORE_SKILL =
 
 export type Hooks = {
   beforeRun?: HookFn<RunEvent>;
-  run?: HookFn<RunEvent | RunForEachEvent>;
+  run?: HookFn<RunEvent | RunForEachTargetEvent>;
   afterRun?: HookFn<RunEvent>;
   beforeLearn?: HookFn<LearnEvent>;
   afterNew?: HookFn<NewEvent>;

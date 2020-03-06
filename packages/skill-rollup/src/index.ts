@@ -9,7 +9,7 @@ import {
   Platform,
   ProjectEnum,
   ConfigValue,
-  RunForEachEvent
+  RunForEachTargetEvent
 } from '@alfred/types';
 import mergeConfigs from '@alfred/merge-configs';
 
@@ -73,7 +73,7 @@ const skill: RawSkill = {
   ],
   hooks: {
     async run({ skill, event }): Promise<void> {
-      const { target, subcommand } = event as RunForEachEvent;
+      const { target, subcommand } = event as RunForEachTargetEvent;
       const [baseConfig, prodConfig, devConfig] = [
         'rollup.base',
         'rollup.prod',

@@ -1,13 +1,6 @@
 import path from 'path';
 import { getPkgBinPath, execCmdInProject } from '@alfred/helpers';
-import {
-  RawSkill,
-  Skill,
-  TransformArgs,
-  SkillConfig,
-  HookArgs,
-  RunEvent
-} from '@alfred/types';
+import { RawSkill, Skill, TransformArgs, SkillConfig } from '@alfred/types';
 
 const skill: RawSkill = {
   name: 'eslint',
@@ -30,12 +23,7 @@ const skill: RawSkill = {
     }
   ],
   hooks: {
-    async run({
-      project,
-      skill,
-      config,
-      event
-    }: HookArgs<RunEvent>): Promise<void> {
+    async run({ project, skill, config, event }): Promise<void> {
       const { flags } = event;
       const configPath = path.join(
         config.configsDir,

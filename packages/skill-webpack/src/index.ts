@@ -14,7 +14,7 @@ import {
   Platform,
   ProjectEnum,
   ConfigValue,
-  RunForEachEvent
+  RunForEachTargetEvent
 } from '@alfred/types';
 import getPort from 'get-port';
 
@@ -170,7 +170,7 @@ const skill: RawSkill = {
 
       const webpack = require('webpack');
 
-      const { target, subcommand } = event as RunForEachEvent;
+      const { target, subcommand, output } = event as RunForEachTargetEvent;
 
       let mergedConfig = mergeConfigs(
         baseConfig,
@@ -185,10 +185,7 @@ const skill: RawSkill = {
       // @HACK: The following lines should be replaced with an algorithm that
       //        recursively traverses and object and replaces each project root
       if (mergedConfig.output && mergedConfig.output.path) {
-        mergedConfig.output.path = replaceProjectRoot(
-          mergedConfig.output.path,
-          project.root
-        );
+        mergedConfig.output.path = output;
       }
       if (mergedConfig.devServer && mergedConfig.devServer.contentBase) {
         mergedConfig.devServer.contentBase = replaceProjectRoot(

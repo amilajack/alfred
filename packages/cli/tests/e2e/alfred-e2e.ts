@@ -1,7 +1,6 @@
 /* eslint no-console: off */
 import fs from 'fs';
 import path from 'path';
-import assert from 'assert';
 import rimraf from 'rimraf';
 import Table from 'cli-table3';
 import chalk from 'chalk';
@@ -14,7 +13,6 @@ import { formatPkgJson } from '@alfred/core';
 import mergeConfigs from '@alfred/merge-configs';
 import Config from '@alfred/core/lib/config';
 import { Env, ProjectEnum, Platform, Skill } from '@alfred/types';
-import { serialPromises } from '@alfred/helpers';
 import { CORE_SKILLS } from '@alfred/core/lib/skill';
 import { addEntrypoints } from '../../lib';
 
@@ -254,17 +252,6 @@ process.on('exit', () => {
                           stdio: 'inherit',
                           env
                         }
-                      );
-                    }
-                    // Assert that the .configs dir should or should not exist
-                    if (
-                      path.join(projectDir, pkg.alfred.configsDir) !==
-                      projectDir
-                    ) {
-                      assert.strictEqual(
-                        fs.existsSync(
-                          path.join(projectDir, pkg.alfred.configsDir)
-                        )
                       );
                     }
                   } catch (e) {
