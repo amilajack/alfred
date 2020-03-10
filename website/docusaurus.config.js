@@ -10,7 +10,8 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          sidebarPath: require.resolve('./sidebars.json')
+          sidebarPath: require.resolve('./sidebars.json'),
+          editUrl: 'https://github.com/amilajack/alfred/edit/master/website'
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css')
