@@ -4,15 +4,12 @@ title: Getting Started
 ---
 
 ```bash
-# Install alfred
-npm install alfred --global --registry https://amilajack.com/registry
-
 # Create a new project
-alfred new my-project
+NPM_CONFIG_REGISTRY=https://amilajack.com/registry npx alfred new project
 cd my-project
 
 # Build your project
-alfred run build
+NPM_CONFIG_REGISTRY=https://amilajack.com/registry npx alfred run build
 ```
 
 For migrating to Alfred, see [the migrating guide](migrating-to-alfred)

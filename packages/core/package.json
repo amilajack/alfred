@@ -62,6 +62,9 @@
   "engines": {
     "node": ">=v13.0.0"
   },
+  "funding": {
+    "url": "https://paypal.me/amilajack"
+  },
   "engineStrict": true,
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8",
   "devDependencies": {

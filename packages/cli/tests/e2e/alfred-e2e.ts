@@ -83,7 +83,7 @@ async function generateTestsForSkillCombination(
       author: 'Self',
       email: 'johndoe@gmail.com',
       license: 'MIT',
-      npmClient: 'NPM',
+      npmClient: 'npm',
       project: 'lib',
       platform: 'browser'
     })
