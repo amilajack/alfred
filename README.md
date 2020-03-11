@@ -28,9 +28,9 @@ NPM_CONFIG_REGISTRY=https://amilajack.com/registry npx alfred run build
 
 ## Docs
 
-* **[docs](https://alfred.js.org/docs/getting-started)** ([alfred.js.org/docs/getting-started](https://alfred.js.org/docs/getting-started))
-* **[website](https://alfred.js.org)** ([alfred.js.org](https://alfred.js.org))
-* **[API](https://alfred.js.org/docs/api)** ([alfred.js.org/docs/api](https://alfred.js.org/docs/api))
+* **[docs](https://alfred.js.org/docs/getting-started)**
+* **[website](https://alfred.js.org)**
+* **[API](https://alfred.js.org/docs/api)**
 
 ## Examples
 
@@ -61,7 +61,7 @@ See our [examples directory](https://github.com/amilajack/alfred/tree/master/exa
 | Formatters         |  Prettier                  | ✅           |
 | Libraries          |  Lodash, Moment            | ✅ ❌        |
 | Linters            |  ESLint                    | ✅           |
-| Front End          |  React, Angular, Vue       | ✅ ❌ ❌    |
+| Front End          |  React, Vue, Angular       | ✅ ❌ ❌     |
 | State Managment    |  Redux, Mobx               | ✅ ❌        |
 | Routing            |  react-router              | ❌           |
 | Query Languages    |  graphql, apollo           | ❌ ❌        |

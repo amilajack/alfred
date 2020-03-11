@@ -1,10 +1,3 @@
-/**
- * Copyright (c) 2017-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 module.exports = {
   title: 'Alfred',
   tagline: 'A Modular Toolchain for JavaScript',
@@ -17,11 +10,24 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          sidebarPath: require.resolve('./sidebars.json')
+          sidebarPath: require.resolve('./sidebars.json'),
+          editUrl: 'https://github.com/amilajack/alfred/edit/master/website'
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css')
         }
+      }
+    ]
+  ],
+  plugins: [
+    '@docusaurus/plugin-google-analytics',
+    '@docusaurus/plugin-google-gtag',
+    [
+      '@docusaurus/plugin-sitemap',
+      {
+        cacheTime: 600 * 1000, // 600 sec - cache purge period
+        changefreq: 'weekly',
+        priority: 0.5
       }
     ]
   ],
@@ -103,13 +109,13 @@ module.exports = {
       apiKey: 'd848c252109da356e9768ba9749c1b59',
       indexName: 'alfred_js'
     },
+    googleAnalytics: {
+      trackingID: 'UA-132764504-1'
+    },
     gtag: {
-      // Google analytics
       trackingID: 'UA-132764504-1'
     }
   },
-  // path to images for header/footer
   favicon: 'img/alfred-logo-small.png',
-  // Add custom scripts here that would be placed in <script> tags.
   scripts: ['https://buttons.github.io/buttons.js']
 };

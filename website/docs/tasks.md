@@ -60,7 +60,6 @@ module.exports = {
     // return whichever skill you want to resolve...
   }
 };
-
 ```
 
 #### Running once for all targets
