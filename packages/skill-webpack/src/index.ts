@@ -46,7 +46,6 @@ const shouldOpenInBrowser =
 
 const skill: RawSkill = {
   name: 'webpack',
-  description: 'Build, optimize, and bundle assets in your app',
   supports,
   tasks: [
     ['@alfred/task-build', { supports }],

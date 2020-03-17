@@ -22,25 +22,41 @@ alfred run test
 
 # Planned Built-in Subcommands
 
+# Run CI tasks (lint, build, test)
+alfred run ci
+
 # List all targets
 alfred targets
+
 # Run command for specific entrypoints
 alfred entrypoint app.lib run build
+
 # Publish all entrypoints
-alfred publish
-# Publish app to GitHub pages
-alfred entrypoint app.browser publish --method github-pages
+alfred run publish
+
 # Publish browser library to NPM
 alfred entrypoint lib.browser publish
-alfred search
-alfred docs
-alfred migrate
-alfred types
 
-# Learning skills
-alfred learn @alfred/skill-webpack
+# Publish app to GitHub pages
+alfred learn @alfred/skill-github-pages
+alfred entrypoint app.browser publish
+
+# Other commandss
+alfred search
+
+# Generate documentation for your project
+alfred run docs
+
+# Upgrade your code to latest es version
+alfred run migrate
+
+# Type check your code
+alfred run types
+
 # Build using webpack skill
+alfred learn @alfred/skill-webpack
 alfred run build
+
 # Learning multiple skills
 alfred learn @alfred/skill-angular @alfred/skill-redux
 

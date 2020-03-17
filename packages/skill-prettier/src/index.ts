@@ -4,7 +4,6 @@ import { SkillConfig, RawSkill } from '@alfred/types';
 
 const skill: RawSkill = {
   name: 'prettier',
-  description: 'Format the source files in your project',
   tasks: ['@alfred/task-format'],
   default: true,
   configs: [

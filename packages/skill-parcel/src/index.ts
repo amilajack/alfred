@@ -21,7 +21,6 @@ const supports = {
 
 const skill: RawSkill = {
   name: 'parcel',
-  description: 'Build, optimize, and bundle assets in your app',
   tasks: [
     ['@alfred/task-build', { supports }],
     ['@alfred/task-start', { supports }]

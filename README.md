@@ -65,7 +65,7 @@ See our [examples directory](https://github.com/amilajack/alfred/tree/master/exa
 | State Managment    |  Redux, Mobx               | ✅ ❌        |
 | Routing            |  react-router              | ❌           |
 | Query Languages    |  graphql, apollo           | ❌ ❌        |
-| Documentation      |  JSDoc, Typedoc            | ❌ ❌        |
+| Documentation      |  ESDoc, Typedoc            | ❌ ❌        |
 | Migration          |  Lebab                     | ❌           |
 | Type Checkers      |  Flow, TypeScript          | ❌ ❌        |
 | End to End Testing |  TestCafe, Cypress         | ❌ ❌        |

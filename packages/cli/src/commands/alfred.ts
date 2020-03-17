@@ -20,7 +20,7 @@ if (process.env.ALFRED_E2E_CLI_TEST !== 'true') {
 
 program
   .version(pkg.version, '-v, --version')
-  .description('A Modular JS Toolchain')
+  .description('A Modular Toolchain')
   .command('new <project-name>', 'Create a new Alfred project')
   .command('learn <skill>', 'Add an Alfred skill to your project')
   .command('skills', 'List all the subcommands and skills')

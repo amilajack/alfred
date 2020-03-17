@@ -17,7 +17,6 @@ const supports = {
 
 const skill: RawSkill = {
   name: 'mocha',
-  description: 'Run tests for your project',
   supports,
   tasks: [
     [

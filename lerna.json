@@ -11,7 +11,7 @@
   "npmClient": "yarn",
   "useWorkspaces": true,
   "scripts": {
-    "lint": "eslint --cache --format=eslint-formatter-pretty .",
+    "lint": "eslint --cache .",
     "lint-fix": "yarn --silent lint --fix"
   },
   "command": {

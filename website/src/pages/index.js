@@ -8,23 +8,30 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Simplicity</>,
-    description: (
-      <>Standardizing and simplifying JS infrastructure and conventions</>
-    )
+    title: <>Zero Config</>,
+    description: <>Choose your tools and Alfred will configure them for you</>
   },
   {
-    title: <>Extensibility</>,
+    title: <>Built In Tooling</>,
     description: (
-      <>Encourage extensible and reusable infrastructure configuration</>
+      <>
+        Alfred knows how to build, lint, format, and test your project out of
+        the box
+      </>
     )
   },
   {
     title: <>Best Practices</>,
+    description: <>Alfred implements best practices for libraries and apps</>
+  },
+  {
+    title: <>Unified Workflow</>,
+    description: <>Different projects, different tools, same workflow</>
+  },
+  {
+    title: <>Extensibility</>,
     description: (
-      <>
-        Encourage and implement best practices for JS libraries and applications
-      </>
+      <>Customize and override configs that are configured by Alfred</>
     )
   }
 ];

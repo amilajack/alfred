@@ -4,7 +4,6 @@ import { RawSkill, Skill, TransformArgs, SkillConfig } from '@alfred/types';
 
 const skill: RawSkill = {
   name: 'eslint',
-  description: 'Lint all your JS files',
   tasks: ['@alfred/task-lint'],
   default: true,
   configs: [

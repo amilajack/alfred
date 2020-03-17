@@ -1,7 +1,7 @@
 /* eslint no-restricted-syntax: off */
 const path = require('path');
 const fs = require('fs');
-const fetch = require('isomorphic-fetch');
+const fetch = require('node-fetch');
 const { spawn } = require('child_process');
 
 jest.setTimeout(10 ** 4);

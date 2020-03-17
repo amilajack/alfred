@@ -24,7 +24,6 @@ const supports = {
 
 const skill: RawSkill = {
   name: 'rollup',
-  description: 'Build, optimize, and bundle assets in your app',
   supports,
   tasks: [
     ['@alfred/task-build', { supports }],

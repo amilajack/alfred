@@ -5,7 +5,6 @@ import { Skill, RawSkill, SkillConfig } from '@alfred/types';
 
 const skill: RawSkill = {
   name: 'jest',
-  description: 'Test your JS files',
   tasks: ['@alfred/task-test'],
   default: true,
   configs: [

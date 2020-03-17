@@ -216,9 +216,7 @@ async function createNewProject(
 
   renderLines(['I am now installing the dependencies for your app']);
   const installCommand =
-    answers.npmClient === 'npm'
-      ? `npm install --prefix ${root}`
-      : 'yarn install';
+    answers.npmClient === 'npm' ? `npm install` : 'yarn install';
   const buildCommand =
     answers.npmClient === 'npm' ? 'npm run build' : 'yarn build';
   // @TODO Install the deps
@@ -233,7 +231,6 @@ async function createNewProject(
     `Awesome! Your Alfred project has been created in: ${style.filePath(
       relativeRoot
     )}`,
-    `First install your project with ${style.command(installCommand)}`,
     `To build your project, just run ${style.command(
       buildCommand
     )} from within the ${style.filePath(relativeRoot)} directory.`,
