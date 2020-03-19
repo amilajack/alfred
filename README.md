@@ -9,17 +9,17 @@ Alfred
 > ## 🛠 Status: In Development
 > Alfred is currently in development. It's on the fast track to a 1.0 release, so we encourage you to use it and give us your feedback, but there are things that haven't been finalized yet and you can expect some changes.
 
-### Alfred is a Modular Toolchain for JavaScript with the following goals:
+## What is Alfred?
 
-* Standardizing and simplifying JS infrastructure and conventions
-* Encourage extensible and reusable infrastructure configuration
-* Provide opinionated configuration out of the box that meets the needs of most users
+- An alternative to boilerplates / starter kits
+- Better tooling, out of the box
+- A solution to brittle and complex JS infrastructure
 
 ## Getting Started
 
 ```bash
 # Create a new project
-NPM_CONFIG_REGISTRY=https://amilajack.com/registry npx alfred new project
+NPM_CONFIG_REGISTRY=https://amilajack.com/registry npx alfred new my-project
 cd my-project
 
 # Build your project
@@ -28,9 +28,9 @@ npx alfred run build
 
 ## Docs
 
-* **[docs](https://alfred.js.org/docs/getting-started)**
-* **[website](https://alfred.js.org)**
-* **[API](https://alfred.js.org/docs/api)**
+- **[docs](https://alfred.js.org/docs/getting-started)**
+- **[website](https://alfred.js.org)**
+- **[API](https://alfred.js.org/docs/api)**
 
 ## Examples
 
@@ -81,19 +81,19 @@ See our [examples directory](https://github.com/amilajack/alfred/tree/master/exa
 
 ## Prior Art
 
-* [Cargo](https://github.com/rust-lang/cargo)
-* [NPM](https://npmjs.org), [Yarn](https://yarnpkg.com)
-* [Yeoman](http://yeoman.io)
-* [create-react-app](https://github.com/facebook/create-react-app)
-* [react-boilerplate](https://www.github.com/react-boilerplate/react-boilerplate), [electron-react-boilerplate](https://www.github.com/electron-react-boilerplate/electron-react-boilerplate), and [many many other boilerplates](https://github.com/search?q=boilerplate)
+- [Cargo](https://github.com/rust-lang/cargo)
+- [NPM](https://npmjs.org), [Yarn](https://yarnpkg.com)
+- [Yeoman](http://yeoman.io)
+- [create-react-app](https://github.com/facebook/create-react-app)
+- [react-boilerplate](https://www.github.com/react-boilerplate/react-boilerplate), [electron-react-boilerplate](https://www.github.com/electron-react-boilerplate/electron-react-boilerplate), and [many many other boilerplates](https://github.com/search?q=boilerplate)
 
 ## Inspiration
 
-* [parcel](http://parceljs.org)
-* [elm](https://elm-lang.org)
-* [Cargo](https://github.com/rust-lang/cargo)
-* [Yarn](https://yarnpkg.com)
-* [webpack-merge](https://github.com/survivejs/webpack-merge)
+- [parcel](http://parceljs.org)
+- [elm](https://elm-lang.org)
+- [Cargo](https://github.com/rust-lang/cargo)
+- [Yarn](https://yarnpkg.com)
+- [webpack-merge](https://github.com/survivejs/webpack-merge)
 
 ## Contributing
 
@@ -123,3 +123,9 @@ All feedback and suggestions are welcome!
 
 - 💬 Join the community on [Spectrum](https://spectrum.chat/alfred)
 - 📣 Stay up to date on new features and announcements on [@alfredpkg](https://twitter.com/alfredpkg).
+
+## Goals
+
+- Standardize and simplify JS infrastructure and conventions
+- Encourage extensible and reusable infrastructure configuration
+- Provide opinionated configuration out of the box that meets the needs of most users

@@ -18,7 +18,7 @@ import {
   ValidationResult,
   SkillsList,
   SkillMap,
-  NpmClients,
+  NpmClient,
   DependencyType,
   Dependencies,
   PkgWithDeps,
@@ -345,7 +345,7 @@ ${JSON.stringify(result.errors)}`
   async installDeps(
     dependencies: string[] | Dependencies,
     dependenciesType: DependencyType,
-    npmClient: NpmClients = this.config.npmClient
+    npmClient: NpmClient = this.config.npmClient
   ): Promise<void> {
     const normalizedDeps = Array.isArray(dependencies)
       ? dependencies

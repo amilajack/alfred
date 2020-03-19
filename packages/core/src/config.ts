@@ -5,7 +5,7 @@ import mergeConfigs from '@alfred/merge-configs';
 import { requireConfig } from '@alfred/helpers';
 import {
   ConfigInterface,
-  NpmClients,
+  NpmClient,
   AlfredConfigWithResolvedSkills,
   AlfredConfigWithUnresolvedTasks,
   AlfredConfigSkill,
@@ -24,7 +24,7 @@ type SkillConfigMap = Map<string, ConfigValue>;
 export default class Config implements ConfigInterface {
   extends?: string | Array<string>;
 
-  npmClient: NpmClients;
+  npmClient: NpmClient;
 
   configsDir: string;
 
@@ -38,7 +38,7 @@ export default class Config implements ConfigInterface {
     skills: [],
     autoInstall: false,
     configsDir: '.',
-    npmClient: 'npm' as NpmClients
+    npmClient: 'npm' as NpmClient
   };
 
   constructor(rawConfig: AlfredConfigWithUnresolvedTasks) {

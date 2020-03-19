@@ -39,7 +39,7 @@ export type ProjectEnum = 'app' | 'lib';
 
 export type AlfredConfigSkill = [string, ConfigValue];
 
-export type NpmClients = 'yarn' | 'npm' | 'writeOnly';
+export type NpmClient = 'yarn' | 'npm' | 'writeOnly';
 
 export type SubcommandFn = (
   flags?: Array<string>,
@@ -92,7 +92,7 @@ export interface ProjectInterface extends EventEmitter {
   installDeps: (
     dependencies: string[] | Dependencies,
     type: DependencyType,
-    npmClient?: NpmClients
+    npmClient?: NpmClient
   ) => Promise<void>;
   findDepsToInstall: (skills?: Skill[]) => Promise<PkgWithDeps>;
   validatePkgJson: () => ValidationResult;
@@ -139,7 +139,7 @@ export type RawExtendsConfigValue = Array<string> | string;
 // Interface should be resolved before skills are resolved, so extends is not included
 export interface AlfredConfigWithResolvedSkills {
   skills?: AlfredConfigSkill[];
-  npmClient?: NpmClients;
+  npmClient?: NpmClient;
   configsDir?: string;
   autoInstall?: boolean;
 }
@@ -147,7 +147,7 @@ export interface AlfredConfigWithResolvedSkills {
 // Interface should be resolved before skills are resolved, so extends is not included
 export interface AlfredConfigWithUnresolvedSkills {
   skills?: Array<AlfredConfigRawSkill>;
-  npmClient?: NpmClients;
+  npmClient?: NpmClient;
   configsDir?: string;
   autoInstall?: boolean;
 }
@@ -159,7 +159,7 @@ export interface AlfredConfigWithUnresolvedTasks
 
 export interface AlfredConfigWithDefaults {
   skills: AlfredConfigSkill[];
-  npmClient: NpmClients;
+  npmClient: NpmClient;
   configsDir: string;
   autoInstall: boolean;
 }

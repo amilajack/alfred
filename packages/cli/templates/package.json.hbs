@@ -1,24 +1,24 @@
 {
-  "name": "{{project.name.npm.full}}",
+  "name": "{{name.npm.full}}",
   "version": "0.0.0",
-  "description": "{{project.description}}",
-{{#if project.isLib}}
-  "main": "{{project.module}}",
+  "description": "{{description}}",
+{{#if isLib}}
+  "main": "{{module}}",
 {{/if}}
-{{#if project.author}}
-  "author": "{{project.author}}{{#if project.email}} <{{project.email}}>{{/if}}",
+{{#if author}}
+  "author": "{{author}}{{#if email}} <{{email}}>{{/if}}",
 {{/if}}
-{{#if project.license}}
-  "license": "{{project.license}}",
+{{#if license}}
+  "license": "{{license}}",
 {{/if}}
-{{#if project.repository}}
-  "repository": "{{project.repository}}",
+{{#if repository}}
+  "repository": "{{repository}}",
 {{/if}}
-{{#if project.bugs}}
-  "bugs": "{{project.bugs}}",
+{{#if bugs}}
+  "bugs": "{{bugs}}",
 {{/if}}
   "devDependencies": {
-    "alfred": "{{alfred-pkg.semver}}"
+    "alfred": "{{alfredPkgSemver}}"
   },
   "scripts": {
     "build": "alfred run build --prod",
@@ -27,7 +27,7 @@
     "start": "alfred run start",
     "test": "alfred run test"
   },
-{{#if project.isApp}}
+{{#if isApp}}
   "browserslist": {
     "production": [
       ">0.2%",
@@ -39,9 +39,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
 {{/if}}
-  "alfred": {
-    "npmClient": "{{project.npmClient}}"
+{{#if isDefaultNpmClient}}
   }
+{{else}}
+  },
+  "alfred": {
+    "npmClient": "{{npmClient}}"
+  }
+{{/if}}
 }

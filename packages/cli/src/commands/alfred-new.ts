@@ -9,9 +9,16 @@ import program from 'commander';
 import git from 'git-config';
 import chalk from 'chalk';
 import alfred from '@alfred/core';
+import Config from '@alfred/core/lib/config';
 import { version as ALFRED_CORE_VERSION } from '@alfred/core/package.json';
 import { NewEvent } from '@alfred/types';
-import { getSingleSubcommandFromArgs, GitConfig, addBoilerplate } from '..';
+import {
+  getSingleSubcommandFromArgs,
+  GitConfig,
+  addBoilerplate,
+  TemplateData,
+  TEMPLATE_DATA_DEFAULTS
+} from '..';
 
 function gitConfig(): Promise<GitConfig> {
   return new Promise((resolve, reject) => {
@@ -150,7 +157,7 @@ async function createNewProject(
         type: 'list',
         choices: ['npm', 'yarn'],
         message: 'npm client',
-        default: 'npm'
+        default: Config.DEFAULT_CONFIG.npmClient
       },
       {
         name: 'project',
@@ -193,13 +200,13 @@ async function createNewProject(
   answers.isLib = !isApp;
   answers.isBrowser = isBrowser;
 
-  const templateData = {
-    entrypoint: answers,
-    'alfred-pkg': {
-      semver: process.env.ALFRED_E2E_CLI_TEST
-        ? `file:${alfredDepFilePath}`
-        : `^${ALFRED_CORE_VERSION}`
-    }
+  const templateData: TemplateData = {
+    ...TEMPLATE_DATA_DEFAULTS,
+    ...answers,
+    isDefaultNpmClient: answers.npmClient === Config.DEFAULT_CONFIG.npmClient,
+    alfredPkgSemver: process.env.ALFRED_E2E_CLI_TEST
+      ? `file:${alfredDepFilePath}`
+      : `^${ALFRED_CORE_VERSION}`
   };
 
   if (!dirnameEqualsName) {
@@ -214,12 +221,12 @@ async function createNewProject(
 
   const relativeRoot = path.relative(cwd, root);
 
+  // Install user's dependencies
   renderLines(['I am now installing the dependencies for your app']);
   const installCommand =
-    answers.npmClient === 'npm' ? `npm install` : 'yarn install';
+    answers.npmClient === 'npm' ? 'npm install' : 'yarn install';
   const buildCommand =
     answers.npmClient === 'npm' ? 'npm run build' : 'yarn build';
-  // @TODO Install the deps
   if (process.env.ALFRED_IGNORE_INSTALL !== 'true') {
     childProcess.execSync(installCommand, {
       cwd: root,

@@ -2,7 +2,8 @@ import path from 'path';
 import fs from 'fs';
 import { formatPkgJson } from '@alfred/core';
 import handlebars from 'handlebars';
-import { Entrypoint } from '@alfred/types';
+import { Entrypoint, ProjectEnum, Platform, NpmClient } from '@alfred/types';
+import Config from '@alfred/core/lib/config';
 
 const TEMPLATES_DIR = path.resolve(__dirname, '../templates');
 
@@ -14,17 +15,55 @@ export type ValidPkgNameResult = {
 };
 
 export type RawTemplateData = {
-  entrypoint?: Entrypoint;
-  'alfred-pkg'?: {
-    semver: string;
-  };
+  description?: string;
+  repository?: string;
+  author?: string;
+  email?: string;
+  license?: string;
+  npmClient?: NpmClient;
+  project?: ProjectEnum;
+  platform?: Platform;
+  name?: { npm: { full: string } };
+  main?: string;
+  targetFile?: string;
+  module?: string;
+  alfredPkgSemver?: string;
+  isApp?: boolean;
+  isLib?: boolean;
+  isBrowser?: boolean;
 };
 
 export type TemplateData = {
-  entrypoint: Entrypoint;
-  'alfred-pkg': {
-    semver: string;
-  };
+  description: string;
+  repository: string;
+  author: string;
+  email: string;
+  license: string;
+  npmClient: NpmClient;
+  project: ProjectEnum;
+  platform: Platform;
+  name: { npm: { full: string } };
+  main: string;
+  targetFile: string;
+  module: string;
+  alfredPkgSemver: string;
+  isApp: boolean;
+  isLib: boolean;
+  isBrowser: boolean;
+};
+
+export const TEMPLATE_DATA_DEFAULTS = {
+  description: '',
+  repository: '',
+  author: '',
+  email: '',
+  license: '',
+  npmClient: Config.DEFAULT_CONFIG.npmClient,
+  name: { npm: { full: '' } },
+  main: '',
+  targetFile: '',
+  module: '',
+  alfredPkgSemver: ''
 };
 
 export type GitConfig = {
@@ -63,14 +102,14 @@ export async function addEntrypoints(
     if (
       entrypoints.some(entrypoint => entrypoint.filename === 'app.browser.js')
     ) {
-      const templateData = {
+      const templateData: TemplateData = {
+        ...TEMPLATE_DATA_DEFAULTS,
         ...rawTemplateData,
-        project: {
-          project: 'app',
-          platform: 'browser',
-          isApp: true,
-          isBrowser: true
-        }
+        project: 'app',
+        platform: 'browser',
+        isApp: true,
+        isBrowser: true,
+        isLib: false
       };
       return [
         {
@@ -89,9 +128,14 @@ export async function addEntrypoints(
         const isApp = project === 'app';
         const isBrowser = platform === 'browser';
 
-        const templateData = {
+        const templateData: TemplateData = {
+          ...TEMPLATE_DATA_DEFAULTS,
           ...rawTemplateData,
-          project: { project, platform, isApp, isBrowser }
+          project,
+          platform,
+          isApp,
+          isLib: !isApp,
+          isBrowser
         };
 
         return [
@@ -120,7 +164,7 @@ export async function addBoilerplate(
 ): Promise<void> {
   const [
     GITIGNORE_TEMPLATE,
-    NPM_TEMPLATE,
+    PACKAGE_JSON_TEMPLATE,
     README_TEMPLATE,
     EDITORCONFIG_TEMPLATE
   ] = await Promise.all(
@@ -153,12 +197,12 @@ export async function addBoilerplate(
 
   const pkgPath = path.join(root, 'package.json');
   const formattedPkg = await formatPkgJson(
-    JSON.parse(NPM_TEMPLATE(templateData))
+    JSON.parse(PACKAGE_JSON_TEMPLATE(templateData))
   );
   await fs.promises.writeFile(pkgPath, formattedPkg);
-  const { project, platform } = templateData.entrypoint;
+  const { project, platform } = templateData;
 
-  const entrypoints = [
+  const entrypoints: Entrypoint[] = [
     {
       project,
       platform,
