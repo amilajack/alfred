@@ -83,7 +83,6 @@ async function compileTemplate(
 }
 
 export async function addEntrypoints(
-  rawTemplateData: RawTemplateData,
   root: string,
   entrypoints: Array<Entrypoint>
 ): Promise<void> {
@@ -104,7 +103,6 @@ export async function addEntrypoints(
     ) {
       const templateData: TemplateData = {
         ...TEMPLATE_DATA_DEFAULTS,
-        ...rawTemplateData,
         project: 'app',
         platform: 'browser',
         isApp: true,
@@ -130,7 +128,6 @@ export async function addEntrypoints(
 
         const templateData: TemplateData = {
           ...TEMPLATE_DATA_DEFAULTS,
-          ...rawTemplateData,
           project,
           platform,
           isApp,
@@ -209,7 +206,7 @@ export async function addBoilerplate(
       filename: [project, platform, 'js'].join('.')
     }
   ];
-  await addEntrypoints(templateData, root, entrypoints);
+  await addEntrypoints(root, entrypoints);
 }
 
 export function getSingleSubcommandFromArgs(args: Array<string>): string {

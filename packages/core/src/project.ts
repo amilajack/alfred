@@ -37,7 +37,7 @@ import {
 import loadJsonFile from 'load-json-file';
 import Config from './config';
 import { PkgValidation } from './validation';
-import skillMapFromConfig, { requireSkill } from './skill';
+import skillMapFromConfig, { requireSkill, skillSupportsTarget } from './skill';
 import run from './commands/run';
 import learn from './commands/learn';
 import skills from './commands/skills';
@@ -334,7 +334,7 @@ ${JSON.stringify(result.errors)}`
       const indexHtmlPath = path.join(srcPath, 'index.html');
       if (!fs.existsSync(indexHtmlPath)) {
         throw new Error(
-          'An "./src/index.html" file must exist when targeting a browser environment'
+          'An "./src/index.html" file must exist when using an "app.browser" entrypoint'
         );
       }
     }
@@ -435,7 +435,13 @@ ${JSON.stringify(result.errors)}`
   }
 
   async writeSkillFiles(skills: Skill[]): Promise<void> {
-    await Promise.all(skills.map(skill => skill.files.writeAllFiles(this)));
+    await Promise.all(
+      skills
+        .filter(skill =>
+          this.targets.some(target => skillSupportsTarget(skill, target))
+        )
+        .map(skill => skill.files.writeAllFiles(this))
+    );
   }
 
   async writeSkillConfigs(skillMap: SkillMap): Promise<void> {

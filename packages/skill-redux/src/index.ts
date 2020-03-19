@@ -1,8 +1,12 @@
 import path from 'path';
-import { Skill, RawSkill } from '@alfred/types';
+import { Skill, RawSkill, Platform, ProjectEnum } from '@alfred/types';
 
 const skill: RawSkill = {
   name: 'redux',
+  supports: {
+    platforms: ['browser'] as Platform[],
+    projects: ['app'] as ProjectEnum[]
+  },
   dirs: [
     {
       src: path.join(__dirname, '../boilerplate/actions'),

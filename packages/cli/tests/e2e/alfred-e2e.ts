@@ -12,7 +12,7 @@ import { ENTRYPOINTS } from '@alfred/core/lib/constants';
 import { formatPkgJson } from '@alfred/core';
 import mergeConfigs from '@alfred/merge-configs';
 import Config from '@alfred/core/lib/config';
-import { Env, ProjectEnum, Platform, Skill } from '@alfred/types';
+import { Skill } from '@alfred/types';
 import { CORE_SKILLS } from '@alfred/core/lib/skill';
 import { addEntrypoints } from '../../lib';
 
@@ -145,144 +145,121 @@ process.on('exit', () => {
   const issues = [];
 
   await Promise.all(
-    e2eTests.map(
-      async ({ binPath, projectDir, skillCombination, env, folderName }) => {
-        let command: string;
+    e2eTests.map(async ({ binPath, projectDir, skillCombination, env }) => {
+      let command: string;
 
-        // Generate all possible combinations of entrypoints and test each one
-        const entrypointCombinations = powerset(ENTRYPOINTS);
+      // Generate all possible combinations of entrypoints and test each one
+      const entrypointCombinations = powerset(ENTRYPOINTS);
 
-        await Promise.all(
-          entrypointCombinations.map(async entrypoints => {
-            const templateData = {
-              entrypoint: {
-                name: {
-                  npm: {
-                    full: folderName
-                  }
-                },
-                projectDir: './src/',
-                env: 'development' as Env,
-                filename: 'lib.browser.js',
-                project: 'lib' as ProjectEnum,
-                platform: 'browser' as Platform
+      await Promise.all(
+        entrypointCombinations.map(async entrypoints => {
+          // Remove the existing entrypoints in ./src
+          rimraf.sync(path.join(projectDir, 'src/*'));
+          rimraf.sync(path.join(projectDir, 'tests/*'));
+          await addEntrypoints(projectDir, entrypoints);
+          const pkg = mergeConfigs(
+            {},
+            require(path.join(projectDir, 'package.json')),
+            {
+              alfred: {
+                ...Config.DEFAULT_CONFIG,
+                npmClient: 'yarn'
               }
-            };
+            }
+          ) as {
+            alfred: Config;
+          };
 
-            // Remove the existing entrypoints in ./src
-            rimraf.sync(path.join(projectDir, 'src/*'));
-            rimraf.sync(path.join(projectDir, 'tests/*'));
-            await addEntrypoints(templateData, projectDir, entrypoints);
-            const pkg = mergeConfigs(
-              {},
-              require(path.join(projectDir, 'package.json')),
-              {
-                alfred: {
-                  ...Config.DEFAULT_CONFIG,
-                  npmClient: 'yarn'
-                }
-              }
-            ) as {
-              alfred: Config;
-            };
+          fs.writeFileSync(
+            path.join(projectDir, 'package.json'),
+            await formatPkgJson(pkg)
+          );
 
-            fs.writeFileSync(
-              path.join(projectDir, 'package.json'),
-              await formatPkgJson(pkg)
+          try {
+            command = 'skills';
+            childProcess.execSync(`node ${binPath} skills`, {
+              cwd: projectDir,
+              stdio: 'inherit',
+              env
+            });
+
+            console.log(
+              `Testing ${JSON.stringify({
+                skills: skillCombination.map(skill => skill.name),
+                entrypoints
+              })}`
             );
 
-            try {
-              command = 'skills';
-              childProcess.execSync(`node ${binPath} skills`, {
-                cwd: projectDir,
-                stdio: 'inherit',
-                env
-              });
+            const entrypointIsAppProject = entrypoints.some(
+              entrypoint => entrypoint.project === 'app'
+            );
 
-              console.log(
-                `Testing ${JSON.stringify({
-                  skills: skillCombination.map(skill => skill.name),
-                  entrypoints
-                })}`
-              );
+            await Promise.all(
+              subcommands.map(async subcommand => {
+                command = subcommand;
+                try {
+                  if (entrypointIsAppProject && subcommand.includes('start')) {
+                    const port = await getPort();
+                    const start = childProcess.spawn(
+                      binPath,
+                      ['run', subcommand, `--port ${port}`],
+                      {
+                        cwd: projectDir,
+                        env
+                      }
+                    );
 
-              const entrypointIsAppProject = entrypoints.some(
-                entrypoint => entrypoint.project === 'app'
-              );
-
-              await Promise.all(
-                subcommands.map(async subcommand => {
-                  command = subcommand;
-                  try {
-                    if (
-                      entrypointIsAppProject &&
-                      subcommand.includes('start')
-                    ) {
-                      const port = await getPort();
-                      const start = childProcess.spawn(
-                        binPath,
-                        ['run', subcommand, `--port ${port}`],
-                        {
-                          cwd: projectDir,
-                          env
-                        }
-                      );
-
-                      await new Promise((resolve, reject) => {
-                        start.stdout.once('data', data => {
-                          console.log(data);
-                          resolve(data);
-                        });
-                        start.stderr.once('data', data => {
-                          reject(data);
-                        });
+                    await new Promise((resolve, reject) => {
+                      start.stdout.once('data', data => {
+                        console.log(data);
+                        resolve(data);
                       });
+                      start.stderr.once('data', data => {
+                        reject(data);
+                      });
+                    });
 
-                      const page = await fetch(
-                        `http://localhost:${port}`
-                      ).then(res => res.text());
-                      expect(page).toEqual('Hello from Alfred!');
+                    const page = await fetch(
+                      `http://localhost:${port}`
+                    ).then(res => res.text());
+                    expect(page).toEqual('Hello from Alfred!');
 
-                      start.kill();
-                    } else {
-                      childProcess.execSync(
-                        `node ${binPath} run ${subcommand}`,
-                        {
-                          cwd: projectDir,
-                          stdio: 'inherit',
-                          env
-                        }
-                      );
-                    }
-                  } catch (e) {
-                    issues.push([
-                      skillCombination.join(', '),
-                      entrypoints.join(', '),
-                      command
-                    ]);
-                    console.log(e);
+                    start.kill();
+                  } else {
+                    childProcess.execSync(`node ${binPath} run ${subcommand}`, {
+                      cwd: projectDir,
+                      stdio: 'inherit',
+                      env
+                    });
                   }
-                })
-              );
+                } catch (e) {
+                  issues.push([
+                    skillCombination.join(', '),
+                    entrypoints.join(', '),
+                    command
+                  ]);
+                  console.log(e);
+                }
+              })
+            );
 
-              command = 'clean';
-              childProcess.execSync(`node ${binPath} clean`, {
-                cwd: projectDir,
-                stdio: 'inherit',
-                env
-              });
-            } catch (e) {
-              issues.push([
-                skillCombination.join(', '),
-                entrypoints.join(', '),
-                command
-              ]);
-              console.log(e);
-            }
-          })
-        );
-      }
-    )
+            command = 'clean';
+            childProcess.execSync(`node ${binPath} clean`, {
+              cwd: projectDir,
+              stdio: 'inherit',
+              env
+            });
+          } catch (e) {
+            issues.push([
+              skillCombination.join(', '),
+              entrypoints.join(', '),
+              command
+            ]);
+            console.log(e);
+          }
+        })
+      );
+    })
   );
 
   const totalTestsCount =

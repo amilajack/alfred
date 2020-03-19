@@ -39,13 +39,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-{{/if}}
-{{#if isDefaultNpmClient}}
-  }
-{{else}}
   },
-  "alfred": {
-    "npmClient": "{{npmClient}}"
-  }
 {{/if}}
+  "alfred": {
+{{#if isDefaultNpmClient}}
+    "npmClient": "{{npmClient}}"
+{{/if}}
+  }
 }
