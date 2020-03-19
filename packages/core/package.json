@@ -1,7 +1,7 @@
 {
   "name": "@alfred/core",
   "description": "A Modular Toolchain",
-  "version": "0.2.0-alpha.2",
+  "version": "0.2.0-alpha.3",
   "license": "MIT",
   "main": "./lib/index.js",
   "scripts": {
@@ -27,7 +27,7 @@
     "@alfred/skill-parcel": "^0.2.0-alpha.2",
     "@alfred/skill-prettier": "^0.2.0-alpha.2",
     "@alfred/skill-react": "^0.2.0-alpha.2",
-    "@alfred/skill-redux": "^0.2.0-alpha.2",
+    "@alfred/skill-redux": "^0.2.0-alpha.3",
     "@alfred/skill-rollup": "^0.2.0-alpha.2",
     "@alfred/skill-webpack": "^0.2.0-alpha.2",
     "@alfred/task-build": "^0.2.0-alpha.2",

@@ -1,7 +1,7 @@
 {
   "name": "@alfred/cli",
   "description": "A Modular Toolchain",
-  "version": "0.2.0-alpha.2",
+  "version": "0.2.0-alpha.3",
   "repository": "git@github.com:amilajack/alfred.git",
   "license": "MIT",
   "author": "Amila Welihinda <amilajack@gmail.com>",
@@ -23,7 +23,7 @@
     "version": "yarn build"
   },
   "dependencies": {
-    "@alfred/core": "^0.2.0-alpha.2",
+    "@alfred/core": "^0.2.0-alpha.3",
     "@alfred/merge-configs": "^0.2.0-alpha.0",
     "@alfred/migrate": "^0.2.0-alpha.2",
     "@alfred/types": "^0.2.0-alpha.2",

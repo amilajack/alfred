@@ -1,6 +1,6 @@
 {
   "name": "@fixtures/react",
-  "version": "0.2.0-alpha.2",
+  "version": "0.2.0-alpha.3",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -19,8 +19,8 @@
     "react-hot-loader": "^4.6.3"
   },
   "devDependencies": {
-    "@alfred/cli": "^0.2.0-alpha.2",
-    "@alfred/core": "^0.2.0-alpha.2",
+    "@alfred/cli": "^0.2.0-alpha.3",
+    "@alfred/core": "^0.2.0-alpha.3",
     "@alfred/skill-react": "^0.2.0-alpha.2",
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.6",
