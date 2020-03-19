@@ -21,19 +21,16 @@ const skill: RawSkill = {
     async run({ project, skill, config, event }): Promise<void> {
       const { filename, write } = skill.configs.get('prettier') as SkillConfig;
       const configPath = path.join(config.configsDir, filename);
-      execBinInProject(
-        project,
-        [
-          'prettier',
-          '--ignore-path',
-          '.gitignore',
-          '--single-quote',
-          '--write',
-          '**/*.js',
-          ...(event.flags || []),
-          write === 'file' ? `--config ${configPath}` : ''
-        ].join(' ')
-      );
+      execBinInProject(project, [
+        'prettier',
+        '--ignore-path',
+        '.gitignore',
+        '--single-quote',
+        '--write',
+        '**/*.js',
+        ...(event.flags || []),
+        write === 'file' ? `--config ${configPath}` : ''
+      ]);
     }
   },
   transforms: {}

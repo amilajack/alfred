@@ -28,17 +28,14 @@ const skill: RawSkill = {
         config.configsDir,
         skill.configs.get('eslint')?.filename as string
       );
-      execBinInProject(
-        project,
-        [
-          'eslint',
-          skill.configs.get('eslint')?.write === 'file'
-            ? `--config ${configPath}`
-            : '',
-          'src tests',
-          ...flags
-        ].join(' ')
-      );
+      execBinInProject(project, [
+        'eslint',
+        skill.configs.get('eslint')?.write === 'file'
+          ? `--config ${configPath}`
+          : '',
+        'src tests',
+        ...flags
+      ]);
       const { config: eslintConfig } = skill.configs.get(
         'eslint'
       ) as SkillConfig;

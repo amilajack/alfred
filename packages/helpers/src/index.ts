@@ -133,9 +133,10 @@ export function requireConfig(
 
 export function execCmdInProject(
   project: ProjectInterface,
-  cmd: string,
+  rawCmd: string | string[],
   opts: ExecSyncOptions = {}
 ): Buffer {
+  const cmd = Array.isArray(rawCmd) ? rawCmd.join(' ') : rawCmd;
   return childProcess.execSync(cmd, {
     stdio: 'inherit',
     cwd: project.root,
@@ -145,7 +146,7 @@ export function execCmdInProject(
 
 export function execBinInProject(
   project: ProjectInterface,
-  cmd: string,
+  rawCmd: string | string[],
   opts: ExecSyncOptions = {}
 ): Buffer {
   const cmdPrefix = ((): string => {
@@ -159,7 +160,10 @@ export function execBinInProject(
         throw new Error(`Unsupported npm client ${npmClient}`);
     }
   })();
-  return execCmdInProject(project, `${cmdPrefix} ${cmd}`, opts);
+  const cmd = Array.isArray(rawCmd)
+    ? [cmdPrefix, ...rawCmd]
+    : `${cmdPrefix} ${rawCmd}`;
+  return execCmdInProject(project, cmd, opts);
 }
 
 export async function openUrlInBrowser(

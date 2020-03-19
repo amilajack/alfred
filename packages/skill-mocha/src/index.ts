@@ -41,14 +41,11 @@ const skill: RawSkill = {
         `const babelRegister = require('@babel/register');
         require("@babel/register")(${JSON.stringify(babelConfig)});`
       );
-      execBinInProject(
-        project,
-        [
-          'mocha',
-          `--require ${mochaBabelRegisterPath} tests`,
-          ...event.flags
-        ].join(' ')
-      );
+      execBinInProject(project, [
+        'mocha',
+        `--require ${mochaBabelRegisterPath} tests`,
+        ...event.flags
+      ]);
     }
   }
 };

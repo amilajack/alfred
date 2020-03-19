@@ -65,15 +65,12 @@ const skill: RawSkill = {
         );
       }
 
-      execBinInProject(
-        project,
-        [
-          'jest',
-          write === 'pkg' ? '' : `--config ${configPath}`,
-          JSON.stringify(root),
-          ...event.flags
-        ].join(' ')
-      );
+      execBinInProject(project, [
+        'jest',
+        write === 'pkg' ? '' : `--config ${configPath}`,
+        JSON.stringify(root),
+        ...event.flags
+      ]);
     }
   },
   transforms: {
