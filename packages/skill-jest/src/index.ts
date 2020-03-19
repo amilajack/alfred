@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { execCmdInProject, getPkgBinPath } from '@alfred/helpers';
+import { execBinInProject } from '@alfred/helpers';
 import { Skill, RawSkill, SkillConfig } from '@alfred/types';
 
 const skill: RawSkill = {
@@ -41,7 +41,7 @@ const skill: RawSkill = {
           transform: {
             '^.+.jsx?$': '<rootDir>/node_modules/jest-transformer.js'
           },
-          rootDir: `${root}`
+          rootDir: root
         };
         await fs.promises.writeFile(
           configPath,
@@ -65,12 +65,10 @@ const skill: RawSkill = {
         );
       }
 
-      const binPath = await getPkgBinPath(project, 'jest');
-
-      execCmdInProject(
+      execBinInProject(
         project,
         [
-          binPath,
+          'jest',
           write === 'pkg' ? '' : `--config ${configPath}`,
           JSON.stringify(root),
           ...event.flags

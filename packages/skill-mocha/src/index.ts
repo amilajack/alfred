@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { execCmdInProject, getPkgBinPath } from '@alfred/helpers';
+import { execBinInProject } from '@alfred/helpers';
 import {
   SkillConfig,
   RawSkill,
@@ -28,7 +28,6 @@ const skill: RawSkill = {
   ],
   hooks: {
     async run({ project, config, skillMap, event }): Promise<void> {
-      const binPath = await getPkgBinPath(project, 'mocha');
       const mochaBabelRegisterPath = path.join(
         project.root,
         config.configsDir,
@@ -42,10 +41,10 @@ const skill: RawSkill = {
         `const babelRegister = require('@babel/register');
         require("@babel/register")(${JSON.stringify(babelConfig)});`
       );
-      execCmdInProject(
+      execBinInProject(
         project,
         [
-          binPath,
+          'mocha',
           `--require ${mochaBabelRegisterPath} tests`,
           ...event.flags
         ].join(' ')

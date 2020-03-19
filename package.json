@@ -38,11 +38,17 @@
     }
   },
   "keywords": [
-    "browser",
-    "javascript",
     "modular",
+    "toolchain",
+    "browser",
     "node",
-    "toolchain"
+    "react",
+    "eslint",
+    "webpack",
+    "parcel",
+    "jest",
+    "boilerplate",
+    "starter-kit"
   ],
   "preferGlobal": true,
   "renovate": {

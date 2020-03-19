@@ -1,5 +1,5 @@
 import path from 'path';
-import { getPkgBinPath, execCmdInProject } from '@alfred/helpers';
+import { execBinInProject } from '@alfred/helpers';
 import { RawSkill, Skill, TransformArgs, SkillConfig } from '@alfred/types';
 
 const skill: RawSkill = {
@@ -28,11 +28,10 @@ const skill: RawSkill = {
         config.configsDir,
         skill.configs.get('eslint')?.filename as string
       );
-      const binPath = await getPkgBinPath(project, 'eslint');
-      execCmdInProject(
+      execBinInProject(
         project,
         [
-          binPath,
+          'eslint',
           skill.configs.get('eslint')?.write === 'file'
             ? `--config ${configPath}`
             : '',
