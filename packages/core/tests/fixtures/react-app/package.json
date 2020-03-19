@@ -1,13 +1,13 @@
 {
   "name": "alfred-test-app",
-  "version": "0.2.0-alpha.0",
+  "version": "0.2.0-alpha.1",
   "private": true,
   "license": "MIT",
   "main": "index.js",
   "devDependencies": {
-    "@alfred/cli": "^0.2.0-alpha.0",
-    "@alfred/core": "^0.2.0-alpha.0",
-    "@alfred/skill-react": "^0.2.0-alpha.0",
+    "@alfred/cli": "^0.2.0-alpha.1",
+    "@alfred/core": "^0.2.0-alpha.1",
+    "@alfred/skill-react": "^0.2.0-alpha.1",
     "@babel/cli": "^7.8.3",
     "@babel/core": "^7.8.3",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
