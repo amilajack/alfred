@@ -1,6 +1,6 @@
 {
   "name": "@fixtures/webpack-app",
-  "version": "0.2.0-alpha.1",
+  "version": "0.2.0-alpha.2",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -14,10 +14,10 @@
     "test-all": "yarn clean && yarn build && yarn lint && yarn format && yarn skills && yarn test"
   },
   "devDependencies": {
-    "@alfred/cli": "^0.2.0-alpha.1",
-    "@alfred/core": "^0.2.0-alpha.1",
-    "@alfred/skill-react": "^0.2.0-alpha.1",
-    "@alfred/skill-webpack": "^0.2.0-alpha.1",
+    "@alfred/cli": "^0.2.0-alpha.2",
+    "@alfred/core": "^0.2.0-alpha.2",
+    "@alfred/skill-react": "^0.2.0-alpha.2",
+    "@alfred/skill-webpack": "^0.2.0-alpha.2",
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
