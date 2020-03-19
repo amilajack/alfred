@@ -106,6 +106,26 @@ describe('config', () => {
       });
     });
 
+    it('should require namespaced modules', () => {
+      jest.mock(
+        '@jane-doe/alfred-config-bliss',
+        () => ({
+          autoInstall: true,
+          skills: ['@alfred/skill-react']
+        }),
+        { virtual: true }
+      );
+      expect(
+        new Config({
+          extends: ['@jane-doe/alfred-config-bliss']
+        }).getConfigValues()
+      ).toEqual({
+        ...Config.DEFAULT_CONFIG,
+        autoInstall: true,
+        skills: [['@alfred/skill-react', {}]]
+      });
+    });
+
     it('should accept options that can be overriden', () => {
       jest.mock(
         'alfred-config-test',

@@ -67,6 +67,19 @@
     "node-fetch": "^2.6.0",
     "slash": "^3.0.0"
   },
+  "keywords": [
+    "modular",
+    "toolchain",
+    "browser",
+    "node",
+    "react",
+    "eslint",
+    "webpack",
+    "parcel",
+    "jest",
+    "boilerplate",
+    "starter-kit"
+  ],
   "engines": {
     "node": ">=v13.0.0"
   },

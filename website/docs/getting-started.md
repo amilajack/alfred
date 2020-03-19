@@ -9,7 +9,7 @@ NPM_CONFIG_REGISTRY=https://amilajack.com/registry npx alfred new project
 cd my-project
 
 # Build your project
-NPM_CONFIG_REGISTRY=https://amilajack.com/registry npx alfred run build
+npx alfred run build
 ```
 
 For migrating to Alfred, see [the migrating guide](migrating-to-alfred)

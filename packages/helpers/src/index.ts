@@ -133,9 +133,10 @@ export function requireConfig(
 
 export function execCmdInProject(
   project: ProjectInterface,
-  cmd: string,
+  rawCmd: string | string[],
   opts: ExecSyncOptions = {}
 ): Buffer {
+  const cmd = Array.isArray(rawCmd) ? rawCmd.join(' ') : rawCmd;
   return childProcess.execSync(cmd, {
     stdio: 'inherit',
     cwd: project.root,
@@ -143,30 +144,26 @@ export function execCmdInProject(
   });
 }
 
-/**
- * Get the name of the package JSON
- * @param pkgName - The name of the package
- * @param binName - The property of the bin object that we want
- */
-export async function getPkgBinPath(
+export function execBinInProject(
   project: ProjectInterface,
-  pkgName: string
-): Promise<string> {
-  switch (project.config.npmClient) {
-    case 'npm': {
-      return execCmdInProject(project, `npm bin ${pkgName}`, { stdio: 'pipe' })
-        .toString()
-        .trim();
+  rawCmd: string | string[],
+  opts: ExecSyncOptions = {}
+): Buffer {
+  const cmdPrefix = ((): string => {
+    const { npmClient } = project.config;
+    switch (project.config.npmClient) {
+      case 'npm':
+        return 'npx';
+      case 'yarn':
+        return 'yarn';
+      default:
+        throw new Error(`Unsupported npm client ${npmClient}`);
     }
-    case 'yarn': {
-      return execCmdInProject(project, `yarn bin ${pkgName}`, { stdio: 'pipe' })
-        .toString()
-        .trim();
-    }
-    default: {
-      throw new Error(`Unsupported npmClient "${project.config.npmClient}"`);
-    }
-  }
+  })();
+  const cmd = Array.isArray(rawCmd)
+    ? [cmdPrefix, ...rawCmd]
+    : `${cmdPrefix} ${rawCmd}`;
+  return execCmdInProject(project, cmd, opts);
 }
 
 export async function openUrlInBrowser(

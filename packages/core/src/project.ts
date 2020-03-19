@@ -378,10 +378,7 @@ ${JSON.stringify(result.errors)}`
       // Install dependencies with Yarn
       case 'yarn': {
         const devFlag = dependenciesType === 'dev' ? '--dev' : '';
-        execCmdInProject(
-          this,
-          ['yarn', 'add', devFlag, ...normalizedDeps].join(' ')
-        );
+        execCmdInProject(this, ['yarn', 'add', devFlag, ...normalizedDeps]);
         break;
       }
       // Write the package to the package.json but do not install them. This is intended
