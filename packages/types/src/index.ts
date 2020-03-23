@@ -220,6 +220,8 @@ export type SkillConfig = {
   pkgProperty?: string;
   // Determine if the config should be written or not
   write?: 'file' | 'pkg' | false;
+  // Imports to add to the file
+  imports?: string[];
 };
 
 export type ParsedFlags = Record<string, boolean | string | number>;
@@ -390,6 +392,7 @@ export type Skill = SkillWithoutHelpers & {
   setWrite: (configName: string, shouldWrite: boolean) => Skill;
   addDeps: (pkg: Dependencies) => Skill;
   addDevDeps: (pkg: Dependencies) => Skill;
+  addImports(configName: string, imports: string[]): Skill;
   addDepsFromPkg: (
     pkgs: string | string[],
     pkg?: PkgJson,
@@ -403,6 +406,7 @@ export interface Helpers<T> {
   extendConfig: (configName: string, configExtension: ConfigValue) => T;
   replaceConfig: (configName: string, configReplacement: ConfigValue) => T;
   setWrite: (configName: string, shouldWrite: boolean) => T;
+  addImports(configName: string, imports: string[]): Skill;
   addDeps: (pkg: Dependencies) => T;
   addDevDeps: (pkg: Dependencies) => T;
   addDepsFromPkg: (

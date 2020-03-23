@@ -504,7 +504,11 @@ ${JSON.stringify(result.errors)}`
                 }
               })();
               const formattedConfig = prettier.format(
-                configToEvalString(configWithExports),
+                [
+                  ...(config.imports || []),
+                  '',
+                  configToEvalString(configWithExports)
+                ].join('\n'),
                 {
                   parser
                 }

@@ -41,7 +41,9 @@ export function configSerialize(config: string | Record<string, any>): string {
   return serialize(config, { unsafe: true });
 }
 
-export function configStringify(configStr: TemplateStringsArray): string {
+export function configStringify(
+  configStr: TemplateStringsArray | string
+): string {
   return ['[alfred]', configStr, '[alfred]']
     .join('')
     .trim()
