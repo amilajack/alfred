@@ -47,13 +47,28 @@
         "plugins": [
           "babel-plugin-lodash"
         ]
+      },
+      "test": {
+        "presets": [
+          [
+            "@babel/preset-env",
+            {
+              "modules": "auto"
+            }
+          ]
+        ]
       }
     },
     "plugins": [
       "@babel/plugin-proposal-class-properties"
     ],
     "presets": [
-      "@babel/preset-env"
+      [
+        "@babel/preset-env",
+        {
+          "modules": false
+        }
+      ]
     ]
   },
   "prettier": {

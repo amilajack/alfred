@@ -45,8 +45,25 @@
     "webpack-dev-server": "^3.10.3"
   },
   "babel": {
+    "env": {
+      "test": {
+        "presets": [
+          [
+            "@babel/preset-env",
+            {
+              "modules": "auto"
+            }
+          ]
+        ]
+      }
+    },
     "presets": [
-      "@babel/preset-env"
+      [
+        "@babel/preset-env",
+        {
+          "modules": false
+        }
+      ]
     ]
   },
   "prettier": {

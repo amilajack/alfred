@@ -37,9 +37,9 @@ const skill: RawSkill = {
       alias: 'rollup.prod',
       filename: 'rollup.prod.js',
       config: {
-        external(id: string): boolean {
+        external: configStringify`(id) => {
           return id.includes('node_modules');
-        },
+        }`,
         output: {
           format: 'es'
         },
@@ -55,23 +55,19 @@ const skill: RawSkill = {
       alias: 'rollup.dev',
       filename: 'rollup.dev.js',
       config: {
-        external(id: string): boolean {
+        external: configStringify`(id) => {
           return id.includes('node_modules');
-        },
+        }`,
         output: {
-          format: 'cjs'
+          format: 'es'
         },
         plugins: [
           configStringify`replace({
             'process.env.NODE_ENV': JSON.stringify('development')
-          })`,
-          configStringify`commonjs()`
+          })`
         ]
       },
-      imports: [
-        `const replace = require('@rollup/plugin-replace');`,
-        `const commonjs = require('@rollup/plugin-commonjs');`
-      ]
+      imports: [`const replace = require('@rollup/plugin-replace');`]
     }
   ],
   hooks: {

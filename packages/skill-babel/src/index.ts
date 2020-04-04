@@ -9,7 +9,26 @@ export default {
       filename: '.babelrc.js',
       pkgProperty: 'babel',
       config: {
-        presets: ['@babel/preset-env']
+        presets: [
+          [
+            '@babel/preset-env',
+            {
+              modules: false
+            }
+          ]
+        ],
+        env: {
+          test: {
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  modules: 'auto'
+                }
+              ]
+            ]
+          }
+        }
       }
     }
   ],

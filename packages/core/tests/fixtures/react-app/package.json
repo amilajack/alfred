@@ -53,10 +53,25 @@
           "@babel/plugin-transform-react-inline-elements",
           "babel-plugin-transform-react-remove-prop-types"
         ]
+      },
+      "test": {
+        "presets": [
+          [
+            "@babel/preset-env",
+            {
+              "modules": "auto"
+            }
+          ]
+        ]
       }
     },
     "presets": [
-      "@babel/preset-env",
+      [
+        "@babel/preset-env",
+        {
+          "modules": false
+        }
+      ],
       "@babel/preset-react"
     ]
   },

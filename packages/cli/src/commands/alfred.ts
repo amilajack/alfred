@@ -1,4 +1,4 @@
-#!/usr/bin/env node --trace-uncaught
+#!/usr/bin/env node
 import program from 'commander';
 import updateNotifier from 'update-notifier';
 
