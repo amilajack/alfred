@@ -47,13 +47,22 @@ export function addSkillHelpers(skill: SkillWithoutHelpers): Skill {
       }
       return config;
     },
-    extendConfig(configName: string, configExtension: ConfigValue): Skill {
-      // @TODO @HACK remove ts-ignore
+    addImports(configName: string, imports: string[]): Skill {
+      const foundConfig = this.findConfig(configName);
+      const configWithImports = {
+        ...foundConfig,
+        imports: [...(foundConfig.imports || []), imports]
+      };
       // @ts-ignore
-      const foundConfig = this.configs?.get(configName);
-      if (!foundConfig) {
-        throw new Error(`Cannot find config with name "${configName}"`);
-      }
+      const configs = this.configs.map(config =>
+        config.alias === configName ? configWithImports : config
+      );
+      return lodash.merge({}, skill, this, {
+        configs
+      });
+    },
+    extendConfig(configName: string, configExtension: ConfigValue): Skill {
+      const foundConfig = this.findConfig(configName);
       const mergedConfig = mergeConfigs({}, foundConfig, {
         config: configExtension
       }) as SkillConfig;

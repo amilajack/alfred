@@ -1,6 +1,10 @@
-import replace from '@rollup/plugin-replace';
-import commonjs from '@rollup/plugin-commonjs';
-import { mapEnvToShortName } from '@alfred/helpers';
+import path from 'path';
+import {
+  configStringify,
+  execBinInProject,
+  mapEnvToShortName,
+  getConfigsBasePath
+} from '@alfred/helpers';
 import {
   RawSkill,
   Skill,
@@ -8,10 +12,8 @@ import {
   Env,
   Platform,
   ProjectEnum,
-  ConfigValue,
   RunForEachTargetEvent
 } from '@alfred/types';
-import mergeConfigs from '@alfred/merge-configs';
 
 const supports = {
   // Flag name and argument types
@@ -32,90 +34,69 @@ const skill: RawSkill = {
   default: true,
   configs: [
     {
-      alias: 'rollup.base',
-      filename: 'rollup.base.js',
-      config: {
-        external(id: string): boolean {
-          return id.includes('node_modules');
-        }
-      }
-    },
-    {
       alias: 'rollup.prod',
       filename: 'rollup.prod.js',
       config: {
+        external: configStringify`(id) => {
+          return id.includes('node_modules');
+        }`,
         output: {
           format: 'es'
         },
         plugins: [
-          replace({
+          configStringify`replace({
             'process.env.NODE_ENV': JSON.stringify('production')
-          })
+          })`
         ]
-      }
+      },
+      imports: [`const replace = require('@rollup/plugin-replace');`]
     },
     {
       alias: 'rollup.dev',
       filename: 'rollup.dev.js',
       config: {
+        external: configStringify`(id) => {
+          return id.includes('node_modules');
+        }`,
         output: {
-          format: 'cjs'
+          format: 'es'
         },
         plugins: [
-          replace({
+          configStringify`replace({
             'process.env.NODE_ENV': JSON.stringify('development')
-          }),
-          commonjs()
+          })`
         ]
-      }
+      },
+      imports: [`const replace = require('@rollup/plugin-replace');`]
     }
   ],
   hooks: {
-    async run({ skill, event }): Promise<void> {
+    async run({ skill, project, event }): Promise<void> {
       const { target, subcommand } = event as RunForEachTargetEvent;
-      const [baseConfig, prodConfig, devConfig] = [
-        'rollup.base',
-        'rollup.prod',
-        'rollup.dev'
-      ].map(
-        configAlias => skill.configs.get(configAlias)?.config
-      ) as ConfigValue[];
-      const inputAndOutputConfigs = {
-        input: `./src/lib.${target.platform}.js`,
-        output: {
-          file: `./targets/${mapEnvToShortName(target.env)}/lib.${
-            target.platform
-          }.js`
-        }
-      };
-      const prod = mergeConfigs(
-        {},
-        baseConfig,
-        prodConfig,
-        inputAndOutputConfigs
-      );
-      const dev = mergeConfigs(
-        {},
-        baseConfig,
-        devConfig,
-        inputAndOutputConfigs
+      const input = `./src/lib.${target.platform}.js`;
+      const outFile = `./targets/lib.${target.platform}.${mapEnvToShortName(
+        target.env
+      )}/index.js`;
+
+      const configPath = path.join(
+        getConfigsBasePath(project),
+        skill.configs.get(
+          target.env === 'production' ? 'rollup.prod' : 'rollup.dev'
+        )?.filename as string
       );
 
-      const rollup = require('rollup');
+      const cmd = `rollup --input ${input} --file ${outFile} --config ${configPath}`;
 
       switch (subcommand) {
         case 'start': {
-          const watchConf = target.env === 'production' ? prod : dev;
           // @TODO: Mention which port and host the server is running (see webpack skill)
           console.log(
             `Starting ${
               target.env === 'production' ? 'optimized' : 'unoptimized'
             } build`
           );
-          return rollup.watch({
-            ...watchConf.input,
-            ...watchConf
-          });
+          execBinInProject(project, `${cmd} --watch`);
+          break;
         }
         case 'build': {
           console.log(
@@ -123,13 +104,8 @@ const skill: RawSkill = {
               target.env === 'production' ? 'optimized' : 'unoptimized'
             } build`
           );
-          const bundle = await rollup.rollup(
-            target.env === 'production' ? prod : dev
-          );
-
-          return bundle.write(
-            (target.env === 'production' ? prod : dev).output
-          );
+          execBinInProject(project, cmd);
+          break;
         }
         default:
           throw new Error(`Invalid subcommand: "${subcommand}"`);
@@ -139,17 +115,25 @@ const skill: RawSkill = {
   transforms: {
     babel(skill: Skill, { toSkill }): Skill {
       // eslint-disable-next-line import/no-extraneous-dependencies
-      const babel = require('rollup-plugin-babel');
       const { config } = toSkill.configs.get('babel') as SkillConfig;
+      const babelConfig = JSON.stringify({
+        ...config,
+        exclude: 'node_modules/**'
+      }).replace(/"/g, `'`);
+
       return skill
-        .extendConfig('rollup.base', {
-          plugins: [
-            babel({
-              ...config,
-              exclude: 'node_modules/**'
-            })
-          ]
+        .extendConfig('rollup.dev', {
+          plugins: [configStringify(`babel(${babelConfig})`)]
         })
+        .addImports('rollup.dev', [
+          'const babel = require("rollup-plugin-babel");'
+        ])
+        .extendConfig('rollup.prod', {
+          plugins: [configStringify(`babel(${babelConfig})`)]
+        })
+        .addImports('rollup.prod', [
+          'const babel = require("rollup-plugin-babel");'
+        ])
         .addDepsFromPkg('rollup-plugin-babel');
     }
   }

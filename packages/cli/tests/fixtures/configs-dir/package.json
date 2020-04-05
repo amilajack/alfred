@@ -42,8 +42,25 @@
     "rollup-plugin-babel": "^4.3.2"
   },
   "babel": {
+    "env": {
+      "test": {
+        "presets": [
+          [
+            "@babel/preset-env",
+            {
+              "modules": "auto"
+            }
+          ]
+        ]
+      }
+    },
     "presets": [
-      "@babel/preset-env"
+      [
+        "@babel/preset-env",
+        {
+          "modules": false
+        }
+      ]
     ]
   },
   "prettier": {

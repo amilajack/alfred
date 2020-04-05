@@ -23,7 +23,9 @@ function testFixturDir(fixtureDir: string) {
 
     const project = await alfred(fixtureDir);
 
-    if (!project.entrypoints.some(entrypoint => entrypoint.project === 'app')) {
+    if (
+      !project.entrypoints.every(entrypoint => entrypoint.project === 'app')
+    ) {
       return;
     }
 

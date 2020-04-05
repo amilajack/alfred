@@ -501,7 +501,8 @@ export function validateSkill(skill: RawSkill): void {
         pkgProperty: Joi.string(),
         config: Joi.object().required(),
         fileType: Joi.string().valid('commonjs', 'module', 'json'),
-        write: Joi.boolean()
+        write: Joi.boolean(),
+        imports: Joi.array().items(Joi.string())
       })
     ),
     tasks: Joi.array().items(

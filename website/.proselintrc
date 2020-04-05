@@ -79,6 +79,6 @@
     "typography.symbols"            : false,
     "uncomparables.misc"            : true,
     "weasel_words.misc"             : true,
-    "weasel_words.very"             : true
+    "weasel_words.very"             : false
   }
 }
