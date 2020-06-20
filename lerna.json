@@ -20,7 +20,6 @@
     }
   },
   "publishConfig": {
-    "access": "public",
-    "registry": "http://localhost:4873"
+    "access": "public"
   }
 }
