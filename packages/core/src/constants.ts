@@ -65,7 +65,7 @@ export const PKG_SORT_ORDER = [
   'jest',
   'postcss',
   '...rest',
-  'alfred'
+  'alfred',
 ];
 
 /* eslint import/prefer-default-export: off */
@@ -79,7 +79,7 @@ export const RAW_ENTRYPOINTS = [
   'lib.node.js',
   'app.node.js',
   'lib.browser.js',
-  'app.browser.js'
+  'app.browser.js',
 ];
 
 export const CORE_TASKS: Array<[string, SkillTaskModule]> = [
@@ -87,30 +87,30 @@ export const CORE_TASKS: Array<[string, SkillTaskModule]> = [
   ['start', startTask],
   ['test', testTask],
   ['lint', lintTask],
-  ['format', formatTask]
+  ['format', formatTask],
 ];
 
 export const ENTRYPOINTS: Array<Entrypoint> = [
   {
     project: 'app',
     platform: 'browser',
-    filename: 'app.browser.js'
+    filename: 'app.browser.js',
   },
   {
     project: 'app',
     platform: 'node',
-    filename: 'app.node.js'
+    filename: 'app.node.js',
   },
   {
     project: 'lib',
     platform: 'node',
-    filename: 'lib.node.js'
+    filename: 'lib.node.js',
   },
   {
     project: 'lib',
     platform: 'browser',
-    filename: 'lib.browser.js'
-  }
+    filename: 'lib.browser.js',
+  },
 ];
 
 // All the possible targets
@@ -126,41 +126,41 @@ export const TARGETS: Array<Target> = [
   {
     project: 'app',
     platform: 'browser',
-    env: 'production'
+    env: 'production',
   },
   {
     project: 'app',
     platform: 'browser',
-    env: 'development'
+    env: 'development',
   },
   {
     project: 'app',
     platform: 'node',
-    env: 'production'
+    env: 'production',
   },
   {
     project: 'app',
     platform: 'node',
-    env: 'development'
+    env: 'development',
   },
   {
     project: 'lib',
     platform: 'node',
-    env: 'production'
+    env: 'production',
   },
   {
     project: 'lib',
     platform: 'node',
-    env: 'development'
+    env: 'development',
   },
   {
     project: 'lib',
     platform: 'browser',
-    env: 'production'
+    env: 'production',
   },
   {
     project: 'lib',
     platform: 'browser',
-    env: 'development'
-  }
+    env: 'development',
+  },
 ];

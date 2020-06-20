@@ -13,7 +13,7 @@ import {
   AlfredConfigRawSkill,
   AlfredConfigWithDefaults,
   PkgJson,
-  ConfigValue
+  ConfigValue,
 } from '@alfred/types';
 import loadJsonFile from 'load-json-file';
 import { validateAlfredConfig } from './validation';
@@ -38,7 +38,7 @@ export default class Config implements ConfigInterface {
     skills: [],
     autoInstall: false,
     configsDir: '.',
-    npmClient: 'npm' as NpmClient
+    npmClient: 'npm' as NpmClient,
   };
 
   constructor(rawConfig: AlfredConfigWithUnresolvedTasks) {
@@ -47,7 +47,7 @@ export default class Config implements ConfigInterface {
       ...Config.DEFAULT_CONFIG,
       ...this.normalizeWithResolvedSkills(
         this.normalizeWithResolvedExtendedConfigs(rawConfig)
-      )
+      ),
     };
     // Re-validate because normalized skills may introduce invalid configs
     validateAlfredConfig(resolvedSkills);
@@ -61,7 +61,7 @@ export default class Config implements ConfigInterface {
   getConfigWithDefaults(): AlfredConfigWithDefaults {
     return {
       ...Config.DEFAULT_CONFIG,
-      ...this.getConfigValues()
+      ...this.getConfigValues(),
     };
   }
 
@@ -70,7 +70,7 @@ export default class Config implements ConfigInterface {
       skills: this.skills,
       configsDir: this.configsDir,
       npmClient: this.npmClient,
-      autoInstall: this.autoInstall
+      autoInstall: this.autoInstall,
     };
   }
 
@@ -94,7 +94,7 @@ export default class Config implements ConfigInterface {
     this.rawConfig = pkg.alfred || {};
 
     return Config.writeObjToPkgJson(pkgPath, {
-      alfred: pkgAlfredConfig
+      alfred: pkgAlfredConfig,
     });
   }
 
@@ -129,7 +129,7 @@ export default class Config implements ConfigInterface {
 
     return {
       ...config,
-      skills: Array.from(skillsWithConfigs.entries())
+      skills: Array.from(skillsWithConfigs.entries()),
     };
   }
 
@@ -155,7 +155,7 @@ export default class Config implements ConfigInterface {
       config.extends = [config.extends];
     }
     // If a config is a string, require it
-    const normalizedConfigs = config.extends.map(_config =>
+    const normalizedConfigs = config.extends.map((_config) =>
       typeof _config === 'string' ? requireConfig(_config) : _config
     );
     // If nothing to extend then return the config itself without the extends
@@ -190,7 +190,7 @@ export default class Config implements ConfigInterface {
     Project.validatePkgPath(pkgPath);
     const pkgToWrite = {
       ...(pkg || ((await loadJsonFile(pkgPath)) as PkgJson)),
-      ...obj
+      ...obj,
     };
     const formattedPkg = await formatPkgJson(pkgToWrite);
     await fs.promises.writeFile(pkgPath, formattedPkg);

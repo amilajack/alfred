@@ -5,7 +5,7 @@ const { isArray } = Array;
 export default function joinArrays({
   customizeArray,
   customizeObject,
-  key
+  key,
 } = {}) {
   return function _joinArrays(a, b, k) {
     const newKey = key ? `${key}.${k}` : k;
@@ -31,7 +31,7 @@ export default function joinArrays({
           joinArrays({
             customizeArray,
             customizeObject,
-            key: newKey
+            key: newKey,
           })
         )
       );

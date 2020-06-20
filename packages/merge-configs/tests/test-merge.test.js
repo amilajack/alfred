@@ -7,51 +7,51 @@ const loadersKeys = require('./loaders-keys');
 function normalMergeTest(merge, loadersKey) {
   test(`should append recursive structures with ${loadersKey}`, () => {
     const a = {
-      module: {}
+      module: {},
     };
     a.module[loadersKey] = [
       {
         test: /\.js$/,
-        loader: 'a'
+        loader: 'a',
       },
       {
         test: /\.jade$/,
-        loader: 'a'
-      }
+        loader: 'a',
+      },
     ];
     const b = {
-      module: {}
+      module: {},
     };
     b.module[loadersKey] = [
       {
         test: /\.css$/,
-        loader: 'b'
+        loader: 'b',
       },
       {
         test: /\.sass$/,
-        loader: 'b'
-      }
+        loader: 'b',
+      },
     ];
     const result = {
-      module: {}
+      module: {},
     };
     result.module[loadersKey] = [
       {
         test: /\.js$/,
-        loader: 'a'
+        loader: 'a',
       },
       {
         test: /\.jade$/,
-        loader: 'a'
+        loader: 'a',
       },
       {
         test: /\.css$/,
-        loader: 'b'
+        loader: 'b',
       },
       {
         test: /\.sass$/,
-        loader: 'b'
-      }
+        loader: 'b',
+      },
     ];
 
     expect(merge(a, b)).toEqual(result);
@@ -62,34 +62,34 @@ function normalMergeTest(merge, loadersKey) {
     a[loadersKey] = [
       {
         test: /\.js$/,
-        loader: 'a'
-      }
+        loader: 'a',
+      },
     ];
     const b = {};
     b[loadersKey] = [
       {
         test: /\.js$/,
-        loader: 'b'
+        loader: 'b',
       },
       {
         test: /\.css$/,
-        loader: 'b'
-      }
+        loader: 'b',
+      },
     ];
     const result = {};
     result[loadersKey] = [
       {
         test: /\.js$/,
-        loader: 'a'
+        loader: 'a',
       },
       {
         test: /\.js$/,
-        loader: 'b'
+        loader: 'b',
       },
       {
         test: /\.css$/,
-        loader: 'b'
-      }
+        loader: 'b',
+      },
     ];
 
     expect(merge(a, b)).toEqual(result);
@@ -100,34 +100,34 @@ function normalMergeTest(merge, loadersKey) {
     a[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['a']
-      }
+        loaders: ['a'],
+      },
     ];
     const b = {};
     b[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['b']
+        loaders: ['b'],
       },
       {
         test: /\.css$/,
-        loader: 'b'
-      }
+        loader: 'b',
+      },
     ];
     const result = {};
     result[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['a']
+        loaders: ['a'],
       },
       {
         test: /\.js$/,
-        loaders: ['b']
+        loaders: ['b'],
       },
       {
         test: /\.css$/,
-        loader: 'b'
-      }
+        loader: 'b',
+      },
     ];
 
     expect(merge(a, b)).toEqual(result);
@@ -138,26 +138,26 @@ function normalMergeTest(merge, loadersKey) {
     a[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['a']
-      }
+        loaders: ['a'],
+      },
     ];
     const b = {};
     b[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['a', 'b']
-      }
+        loaders: ['a', 'b'],
+      },
     ];
     const result = {};
     result[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['a']
+        loaders: ['a'],
       },
       {
         test: /\.js$/,
-        loaders: ['a', 'b']
-      }
+        loaders: ['a', 'b'],
+      },
     ];
 
     expect(merge(a, b)).toEqual(result);
@@ -168,37 +168,37 @@ function normalMergeTest(merge, loadersKey) {
     a[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['a?1']
-      }
+        loaders: ['a?1'],
+      },
     ];
     const b = {};
     b[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['a?2', 'b']
-      }
+        loaders: ['a?2', 'b'],
+      },
     ];
     const c = {};
     c[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['a', 'b?3']
-      }
+        loaders: ['a', 'b?3'],
+      },
     ];
     const result = {};
     result[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['a?1']
+        loaders: ['a?1'],
       },
       {
         test: /\.js$/,
-        loaders: ['a?2', 'b']
+        loaders: ['a?2', 'b'],
       },
       {
         test: /\.js$/,
-        loaders: ['a', 'b?3']
-      }
+        loaders: ['a', 'b?3'],
+      },
     ];
 
     expect(merge(a, b, c)).toEqual(result);
@@ -209,8 +209,8 @@ function normalMergeTest(merge, loadersKey) {
     a[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['a?1']
-      }
+        loaders: ['a?1'],
+      },
     ];
     const b = {};
     b[loadersKey] = [];
@@ -220,7 +220,7 @@ function normalMergeTest(merge, loadersKey) {
 }
 
 function normalMergeTests(merge) {
-  loadersKeys.forEach(loadersKey => {
+  loadersKeys.forEach((loadersKey) => {
     normalMergeTest(merge, loadersKey);
   });
 }
@@ -228,17 +228,17 @@ function normalMergeTests(merge) {
 function customizeMergeTests(merge) {
   test('should allow overriding array behavior', () => {
     const first = {
-      entry: ['a']
+      entry: ['a'],
     };
     const second = {
-      entry: ['b']
+      entry: ['b'],
     };
 
     expect(
       merge({
         customizeArray(a) {
           return a;
-        }
+        },
       })(first, second)
     ).toEqual(first);
   });
@@ -246,17 +246,17 @@ function customizeMergeTests(merge) {
   test('should pass key to array customizer', () => {
     let receivedKey;
     const first = {
-      entry: ['a']
+      entry: ['a'],
     };
     const second = {
-      entry: ['b']
+      entry: ['b'],
     };
     const result = merge({
       customizeArray(a, b, key) {
         receivedKey = key;
 
         return a;
-      }
+      },
     })(first, second);
 
     expect(receivedKey).toEqual('entry');
@@ -266,20 +266,20 @@ function customizeMergeTests(merge) {
   test('should allow overriding object behavior', () => {
     const first = {
       entry: {
-        a: 'foo'
-      }
+        a: 'foo',
+      },
     };
     const second = {
       entry: {
-        a: 'bar'
-      }
+        a: 'bar',
+      },
     };
 
     expect(
       merge({
         customizeObject(a) {
           return a;
-        }
+        },
       })(first, second)
     ).toEqual(first);
   });
@@ -288,20 +288,20 @@ function customizeMergeTests(merge) {
     let receivedKey;
     const first = {
       entry: {
-        a: 'foo'
-      }
+        a: 'foo',
+      },
     };
     const second = {
       entry: {
-        a: 'bar'
-      }
+        a: 'bar',
+      },
     };
     const result = merge({
       customizeObject(a, b, key) {
         receivedKey = key;
 
         return a;
-      }
+      },
     })(first, second);
 
     expect(receivedKey).toEqual('entry');
@@ -314,26 +314,26 @@ function customizeMergeTests(merge) {
       plugins: [
         new webpack.DefinePlugin({
           'process.env': {
-            NODE_ENV: JSON.stringify('development')
-          }
+            NODE_ENV: JSON.stringify('development'),
+          },
         }),
-        new webpack.HotModuleReplacementPlugin()
-      ]
+        new webpack.HotModuleReplacementPlugin(),
+      ],
     };
     const config2 = {
       plugins: [
         new webpack.DefinePlugin({
-          __CLIENT__: true
+          __CLIENT__: true,
         }),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-        new webpack.HotModuleReplacementPlugin()
-      ]
+        new webpack.HotModuleReplacementPlugin(),
+      ],
     };
 
     merge({
       customizeArray(a, b, key) {
         receivedKey = key;
-      }
+      },
     })(config1, config2);
 
     expect(receivedKey).toEqual('plugins');
@@ -343,25 +343,25 @@ function customizeMergeTests(merge) {
     const config1 = {
       entry: {
         page1: 'src/page1',
-        page2: 'src/page2'
+        page2: 'src/page2',
       },
       output: {
         path: 'dist',
-        publicPath: '/'
-      }
+        publicPath: '/',
+      },
     };
     const config2 = {
       entry: {
         page3: 'src/page3',
-        page4: 'src/page4'
+        page4: 'src/page4',
       },
       output: {
         path: 'dist',
-        publicPath: '/'
-      }
+        publicPath: '/',
+      },
     };
     const enhance = {
-      plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)]
+      plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
     };
 
     const result1 = merge(config1, enhance);

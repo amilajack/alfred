@@ -7,10 +7,10 @@ jest.setTimeout(20000);
 
 function parseCodeSnippets(codeSnippets: Array<string> | void): void {
   if (codeSnippets) {
-    codeSnippets.map(code =>
+    codeSnippets.map((code) =>
       espree.parse(code, {
         sourceType: 'module',
-        ecmaVersion: 2018
+        ecmaVersion: 2018,
       })
     );
   }
@@ -24,14 +24,14 @@ describe.skip('Migrate', () => {
     root: path.join(__dirname, './fixtures/express-hello-world'),
     write: false,
     unsafe: false,
-    verbose: false
+    verbose: false,
   };
 
   it('should migrate basic file', async () => {
     const tmpFile = path.join(__dirname, 'fixtures', 'basic-test.ts');
     const result = await Providers({
       ...migrateOpts,
-      files: [tmpFile]
+      files: [tmpFile],
     });
     expect(result).toMatchSnapshot();
     parseCodeSnippets(result);
@@ -41,7 +41,7 @@ describe.skip('Migrate', () => {
     const tmpFile = path.join(__dirname, 'fixtures', 'comma-test.ts');
     const result = await Providers({
       ...migrateOpts,
-      files: [tmpFile]
+      files: [tmpFile],
     });
     expect(result).toMatchSnapshot();
     parseCodeSnippets(result);
@@ -53,8 +53,8 @@ describe.skip('Migrate', () => {
       unsafe: true,
       files: [
         path.join(__dirname, 'fixtures', 'unsafe-transformation-test.ts'),
-        path.join(__dirname, 'fixtures', 'class-test.ts')
-      ]
+        path.join(__dirname, 'fixtures', 'class-test.ts'),
+      ],
     });
     expect(result1).toMatchSnapshot();
     parseCodeSnippets(result1);
@@ -64,8 +64,8 @@ describe.skip('Migrate', () => {
       unsafe: true,
       files: [
         path.join(__dirname, 'fixtures', 'unsafe-transformation-test.ts'),
-        path.join(__dirname, 'fixtures', 'class-test.ts')
-      ]
+        path.join(__dirname, 'fixtures', 'class-test.ts'),
+      ],
     });
     expect(result2).toMatchSnapshot();
     parseCodeSnippets(result2);
@@ -77,9 +77,9 @@ describe.skip('Migrate', () => {
         ...migrateOpts,
         files: [
           path.join(__dirname, 'fixtures', 'foo-test.ts'),
-          path.join(__dirname, 'fixtures', 'class-test.ts')
-        ]
-      }).then(providerResult => ({ ...providerResult, path: '' }))
+          path.join(__dirname, 'fixtures', 'class-test.ts'),
+        ],
+      }).then((providerResult) => ({ ...providerResult, path: '' }))
     ).rejects.toThrowError();
   });
 
@@ -88,8 +88,8 @@ describe.skip('Migrate', () => {
       ...migrateOpts,
       files: [
         path.join(__dirname, 'fixtures', 'express-hello-world', 'foobar.js'),
-        path.join(__dirname, 'fixtures', 'express-hello-world', 'index.js')
-      ]
+        path.join(__dirname, 'fixtures', 'express-hello-world', 'index.js'),
+      ],
     });
     expect(result).toMatchSnapshot();
     parseCodeSnippets(result);
@@ -98,10 +98,10 @@ describe.skip('Migrate', () => {
   it("should not parse .gitignore'd files", async () => {
     const files = await handleInput({
       ...migrateOpts,
-      files: [path.join(__dirname, './fixtures/express-hello-world')]
+      files: [path.join(__dirname, './fixtures/express-hello-world')],
     });
 
-    files.forEach(file => {
+    files.forEach((file) => {
       chaiExpect(file).to.not.include('node_modules');
     });
   });

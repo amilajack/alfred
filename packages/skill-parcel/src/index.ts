@@ -6,7 +6,7 @@ import {
   RunForEachTargetEvent,
   Env,
   Platform,
-  ProjectEnum
+  ProjectEnum,
 } from '@alfred/types';
 
 const supports = {
@@ -16,14 +16,14 @@ const supports = {
   // @TODO: Add node to targets
   platforms: ['browser', 'node'] as Platform[],
   // Project type
-  projects: ['app'] as ProjectEnum[]
+  projects: ['app'] as ProjectEnum[],
 };
 
 const skill: RawSkill = {
   name: 'parcel',
   tasks: [
     ['@alfred/task-build', { supports }],
-    ['@alfred/task-start', { supports }]
+    ['@alfred/task-start', { supports }],
   ],
   default: true,
   configs: [
@@ -36,12 +36,12 @@ const skill: RawSkill = {
         modules: true,
         plugins: {
           autoprefixer: {
-            grid: true
-          }
-        }
+            grid: true,
+          },
+        },
       },
-      write: false
-    }
+      write: false,
+    },
   ],
   hooks: {
     async run({ project, event }): Promise<void> {
@@ -49,7 +49,7 @@ const skill: RawSkill = {
         target,
         subcommand,
         parsedFlags,
-        output
+        output,
       } = event as RunForEachTargetEvent;
       const { root } = project;
       // eslint-disable-next-line global-require
@@ -72,18 +72,18 @@ const skill: RawSkill = {
         minify: target.env === 'production',
         autoInstall: false,
         target: target.platform,
-        ...parsedFlags
+        ...parsedFlags,
       };
 
       switch (subcommand) {
         case 'start': {
           const bundler = new Bundler(entryFiles, {
             ...parcelOpts,
-            watch: true
+            watch: true,
           });
           const server =
             'port' in parcelOpts
-              ? // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+              ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 await bundler.serve(parcelOpts.port)
               : await bundler.serve();
@@ -107,21 +107,21 @@ const skill: RawSkill = {
           );
           return new Bundler(entryFiles, {
             ...parcelOpts,
-            watch: false
+            watch: false,
           }).bundle();
         }
         default:
           throw new Error(`Invalid subcommand: "${subcommand}"`);
       }
-    }
+    },
   },
   transforms: {
     react(skill: Skill): Skill {
       return skill
         .setWrite('postcss', true)
         .addDepsFromPkg(['postcss-modules', 'autoprefixer']);
-    }
-  }
+    },
+  },
 };
 
 export default skill;

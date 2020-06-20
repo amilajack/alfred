@@ -71,7 +71,7 @@ export const smart = merge({
     }
 
     return null;
-  }
+  },
 });
 
 export const multiple = (...sources) => values(merge(sources));
@@ -81,7 +81,7 @@ export const multiple = (...sources) => values(merge(sources));
 export const strategy = (rules = {}) =>
   merge({
     customizeArray: customizeArray(rules),
-    customizeObject: customizeObject(rules)
+    customizeObject: customizeObject(rules),
   });
 export const smartStrategy = (rules = {}) =>
   merge({
@@ -95,7 +95,7 @@ export const smartStrategy = (rules = {}) =>
               ...differenceWith(b, a, (newRule, seenRule) =>
                 uniteRules(rules, key, newRule, seenRule, 'prepend')
               ),
-              ...a
+              ...a,
             ];
           case 'replace':
             return b;
@@ -107,5 +107,5 @@ export const smartStrategy = (rules = {}) =>
 
       return customizeArray(rules)(a, b, key);
     },
-    customizeObject: customizeObject(rules)
+    customizeObject: customizeObject(rules),
   });

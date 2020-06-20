@@ -12,20 +12,20 @@ function commonTests(merge) {
             test: /\.vue$/,
             loader: 'eslint-loader',
             enforce: 'pre',
-            exclude: /node_modules/
-          }
-        ]
-      }
+            exclude: /node_modules/,
+          },
+        ],
+      },
     };
     const b = {
       module: {
         rules: [
           {
             test: /\.vue$/,
-            loader: 'vue-loader'
-          }
-        ]
-      }
+            loader: 'vue-loader',
+          },
+        ],
+      },
     };
     const result = {
       module: {
@@ -34,14 +34,14 @@ function commonTests(merge) {
             test: /\.vue$/,
             loader: 'eslint-loader',
             enforce: 'pre',
-            exclude: /node_modules/
+            exclude: /node_modules/,
           },
           {
             test: /\.vue$/,
-            loader: 'vue-loader'
-          }
-        ]
-      }
+            loader: 'vue-loader',
+          },
+        ],
+      },
     };
 
     expect(merge(a, b)).toEqual(result);
@@ -53,10 +53,10 @@ function commonTests(merge) {
         rules: [
           {
             test: /\.vue$/,
-            loader: 'vue-loader'
-          }
-        ]
-      }
+            loader: 'vue-loader',
+          },
+        ],
+      },
     };
     const b = {
       module: {
@@ -65,26 +65,26 @@ function commonTests(merge) {
             test: /\.vue$/,
             loader: 'eslint-loader',
             enforce: 'pre',
-            exclude: /node_modules/
-          }
-        ]
-      }
+            exclude: /node_modules/,
+          },
+        ],
+      },
     };
     const result = {
       module: {
         rules: [
           {
             test: /\.vue$/,
-            loader: 'vue-loader'
+            loader: 'vue-loader',
           },
           {
             test: /\.vue$/,
             loader: 'eslint-loader',
             enforce: 'pre',
-            exclude: /node_modules/
-          }
-        ]
-      }
+            exclude: /node_modules/,
+          },
+        ],
+      },
     };
 
     expect(merge(a, b)).toEqual(result);
@@ -97,10 +97,10 @@ function commonTests(merge) {
           {
             test: /\.js$/,
             exclude: /node_modules/,
-            loaders: ['babel']
-          }
-        ]
-      }
+            loaders: ['babel'],
+          },
+        ],
+      },
     };
     const b = {
       module: {
@@ -108,10 +108,10 @@ function commonTests(merge) {
           {
             test: /\.js$/,
             exclude: /node_modules/,
-            loaders: ['coffee', 'foo']
-          }
-        ]
-      }
+            loaders: ['coffee', 'foo'],
+          },
+        ],
+      },
     };
     const result = {
       module: {
@@ -119,10 +119,10 @@ function commonTests(merge) {
           {
             test: /\.js$/,
             exclude: /node_modules/,
-            loaders: ['babel', 'coffee', 'foo']
-          }
-        ]
-      }
+            loaders: ['babel', 'coffee', 'foo'],
+          },
+        ],
+      },
     };
 
     expect(merge(a, b)).toEqual(result);
@@ -135,15 +135,15 @@ function commonTests(merge) {
           {
             test: /\.js$/,
             include: './src',
-            loaders: ['babel']
+            loaders: ['babel'],
           },
           {
             test: /\.js$/,
             exclude: /node_modules/,
-            loaders: ['babel']
-          }
-        ]
-      }
+            loaders: ['babel'],
+          },
+        ],
+      },
     };
     const b = {
       module: {
@@ -151,10 +151,10 @@ function commonTests(merge) {
           {
             test: /\.js$/,
             exclude: /node_modules/,
-            loaders: ['coffee', 'foo']
-          }
-        ]
-      }
+            loaders: ['coffee', 'foo'],
+          },
+        ],
+      },
     };
     const result = {
       module: {
@@ -162,15 +162,15 @@ function commonTests(merge) {
           {
             test: /\.js$/,
             include: './src',
-            loaders: ['babel']
+            loaders: ['babel'],
           },
           {
             test: /\.js$/,
             exclude: /node_modules/,
-            loaders: ['babel', 'coffee', 'foo']
-          }
-        ]
-      }
+            loaders: ['babel', 'coffee', 'foo'],
+          },
+        ],
+      },
     };
 
     expect(merge(a, b)).toEqual(result);
@@ -178,10 +178,17 @@ function commonTests(merge) {
 
   test('should not lose CopyWebpackPlugin (#56)', () => {
     const a = {
-      plugins: [new CopyWebpackPlugin()]
+      plugins: [
+        new CopyWebpackPlugin({
+          patterns: [
+            { from: 'source', to: 'dest' },
+            { from: 'other', to: 'public' },
+          ],
+        }),
+      ],
     };
     const b = {
-      plugins: [new TerserWebpackPlugin()]
+      plugins: [new TerserWebpackPlugin()],
     };
     const merged = merge(a, b);
 
@@ -198,19 +205,19 @@ function mergeSmartTest(merge, loadersKey) {
     a[loadersKey] = [
       {
         test: /\.js$/,
-        loader: 'a'
-      }
+        loader: 'a',
+      },
     ];
     const result = {};
     result[loadersKey] = [
       {
         test: /\.js$/,
-        loader: 'b'
+        loader: 'b',
       },
       {
         test: /\.css$/,
-        loader: 'b'
-      }
+        loader: 'b',
+      },
     ];
 
     expect(merge(a, result)).toEqual(result);
@@ -218,37 +225,37 @@ function mergeSmartTest(merge, loadersKey) {
 
   test(`should not merge to parent if there is no include for ${loadersKey} #68`, () => {
     const common = {
-      module: {}
+      module: {},
     };
     common.module[loadersKey] = [
       {
         test: /\.js$/,
         loaders: ['babel'],
-        include: 'apps'
-      }
+        include: 'apps',
+      },
     ];
     const strip = {
-      module: {}
+      module: {},
     };
     strip.module[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['strip?strip[]=debug']
-      }
+        loaders: ['strip?strip[]=debug'],
+      },
     ];
     const result = {
-      module: {}
+      module: {},
     };
     result.module[loadersKey] = [
       {
         test: /\.js$/,
         loaders: ['babel'],
-        include: 'apps'
+        include: 'apps',
       },
       {
         test: /\.js$/,
-        loaders: ['strip?strip[]=debug']
-      }
+        loaders: ['strip?strip[]=debug'],
+      },
     ];
 
     expect(merge(common, strip)).toEqual(result);
@@ -256,37 +263,37 @@ function mergeSmartTest(merge, loadersKey) {
 
   test(`should not merge to parent if there is no exclude for ${loadersKey} #68`, () => {
     const common = {
-      module: {}
+      module: {},
     };
     common.module[loadersKey] = [
       {
         test: /\.js$/,
         loaders: ['babel'],
-        exclude: 'apps'
-      }
+        exclude: 'apps',
+      },
     ];
     const strip = {
-      module: {}
+      module: {},
     };
     strip.module[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['strip?strip[]=debug']
-      }
+        loaders: ['strip?strip[]=debug'],
+      },
     ];
     const result = {
-      module: {}
+      module: {},
     };
     result.module[loadersKey] = [
       {
         test: /\.js$/,
         loaders: ['babel'],
-        exclude: 'apps'
+        exclude: 'apps',
       },
       {
         test: /\.js$/,
-        loaders: ['strip?strip[]=debug']
-      }
+        loaders: ['strip?strip[]=debug'],
+      },
     ];
 
     expect(merge(common, strip)).toEqual(result);
@@ -297,19 +304,19 @@ function mergeSmartTest(merge, loadersKey) {
     a[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['a']
-      }
+        loaders: ['a'],
+      },
     ];
     const b = {};
     b[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['b']
+        loaders: ['b'],
       },
       {
         test: /\.css$/,
-        loader: 'b'
-      }
+        loader: 'b',
+      },
     ];
     const result = {};
     result[loadersKey] = [
@@ -319,12 +326,12 @@ function mergeSmartTest(merge, loadersKey) {
         // prepend here!!! this is an exception given normally we want to
         // append instead. without this the loader order doesn't make
         // any sense in this case
-        loaders: ['a', 'b']
+        loaders: ['a', 'b'],
       },
       {
         test: /\.css$/,
-        loader: 'b'
-      }
+        loader: 'b',
+      },
     ];
 
     expect(merge(a, b)).toEqual(result);
@@ -335,22 +342,22 @@ function mergeSmartTest(merge, loadersKey) {
     a[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['aa']
-      }
+        loaders: ['aa'],
+      },
     ];
     const b = {};
     b[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['ab']
-      }
+        loaders: ['ab'],
+      },
     ];
     const result = {};
     result[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['aa', 'ab']
-      }
+        loaders: ['aa', 'ab'],
+      },
     ];
 
     expect(merge(a, b)).toEqual(result);
@@ -361,15 +368,15 @@ function mergeSmartTest(merge, loadersKey) {
     a[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['/foo/bar-a.js?a=b']
-      }
+        loaders: ['/foo/bar-a.js?a=b'],
+      },
     ];
     const b = {};
     b[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['/foo/bar-b.js?c=d']
-      }
+        loaders: ['/foo/bar-b.js?c=d'],
+      },
     ];
     const result = {};
     result[loadersKey] = [
@@ -377,8 +384,8 @@ function mergeSmartTest(merge, loadersKey) {
         test: /\.js$/,
         // loaders are evaluated from right to left so it makes sense to
         // append here
-        loaders: ['/foo/bar-a.js?a=b', '/foo/bar-b.js?c=d']
-      }
+        loaders: ['/foo/bar-a.js?a=b', '/foo/bar-b.js?c=d'],
+      },
     ];
 
     expect(merge(a, b)).toEqual(result);
@@ -389,19 +396,19 @@ function mergeSmartTest(merge, loadersKey) {
     a[loadersKey] = [
       {
         test: /\.js$/,
-        loader: 'a'
-      }
+        loader: 'a',
+      },
     ];
     const b = {};
     b[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['b']
+        loaders: ['b'],
       },
       {
         test: /\.css$/,
-        loader: 'b'
-      }
+        loader: 'b',
+      },
     ];
     const result = {};
     result[loadersKey] = [
@@ -409,12 +416,12 @@ function mergeSmartTest(merge, loadersKey) {
         test: /\.js$/,
         // loaders are evaluated from right to left so it makes sense to
         // append here so that last one added wins
-        loaders: ['a', 'b']
+        loaders: ['a', 'b'],
       },
       {
         test: /\.css$/,
-        loader: 'b'
-      }
+        loader: 'b',
+      },
     ];
 
     expect(merge(a, b)).toEqual(result);
@@ -425,22 +432,22 @@ function mergeSmartTest(merge, loadersKey) {
     a[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['a']
-      }
+        loaders: ['a'],
+      },
     ];
     const b = {};
     b[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['a', 'b']
-      }
+        loaders: ['a', 'b'],
+      },
     ];
     const result = {};
     result[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['a', 'b']
-      }
+        loaders: ['a', 'b'],
+      },
     ];
 
     expect(merge(a, b)).toEqual(result);
@@ -452,27 +459,27 @@ function mergeSmartTest(merge, loadersKey) {
       {
         test: /\.js$/,
         loaders: ['a'],
-        include: './path'
-      }
+        include: './path',
+      },
     ];
     const b = {};
     b[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['a', 'b']
-      }
+        loaders: ['a', 'b'],
+      },
     ];
     const result = {};
     result[loadersKey] = [
       {
         test: /\.js$/,
         loaders: ['a'],
-        include: './path'
+        include: './path',
       },
       {
         test: /\.js$/,
-        loaders: ['a', 'b']
-      }
+        loaders: ['a', 'b'],
+      },
     ];
 
     expect(merge(a, b)).toEqual(result);
@@ -483,29 +490,29 @@ function mergeSmartTest(merge, loadersKey) {
     a[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['a?1']
-      }
+        loaders: ['a?1'],
+      },
     ];
     const b = {};
     b[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['a?2', 'b']
-      }
+        loaders: ['a?2', 'b'],
+      },
     ];
     const c = {};
     c[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['a', 'b?3']
-      }
+        loaders: ['a', 'b?3'],
+      },
     ];
     const result = {};
     result[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['a', 'b?3']
-      }
+        loaders: ['a', 'b?3'],
+      },
     ];
 
     expect(merge(a, b, c)).toEqual(result);
@@ -513,31 +520,31 @@ function mergeSmartTest(merge, loadersKey) {
 
   test(`should merge module.loaders for ${loadersKey}`, () => {
     const common = {
-      module: {}
+      module: {},
     };
     common.module[loadersKey] = [
       {
         test: /\.jsx?$/,
-        loaders: ['eslint']
-      }
+        loaders: ['eslint'],
+      },
     ];
     const isparta = {
-      module: {}
+      module: {},
     };
     isparta.module[loadersKey] = [
       {
         test: /\.jsx?$/,
-        loaders: ['isparta-instrumenter']
-      }
+        loaders: ['isparta-instrumenter'],
+      },
     ];
     const result = {
-      module: {}
+      module: {},
     };
     result.module[loadersKey] = [
       {
         test: /\.jsx?$/,
-        loaders: ['eslint', 'isparta-instrumenter']
-      }
+        loaders: ['eslint', 'isparta-instrumenter'],
+      },
     ];
 
     expect(merge(common, isparta)).toEqual(result);
@@ -547,39 +554,39 @@ function mergeSmartTest(merge, loadersKey) {
     // these shouldn't be merged because `include` is defined.
     // instead, it should prepend to guarantee sane evaluation order
     const common = {
-      module: {}
+      module: {},
     };
     common.module[loadersKey] = [
       {
         test: /\.jsx?$/,
         loaders: ['eslint'],
-        include: ['foo', 'bar']
-      }
+        include: ['foo', 'bar'],
+      },
     ];
     const isparta = {
-      module: {}
+      module: {},
     };
     isparta.module[loadersKey] = [
       {
         test: /\.jsx?$/,
         loaders: ['isparta-instrumenter'],
-        include: 'baz'
-      }
+        include: 'baz',
+      },
     ];
     const result = {
-      module: {}
+      module: {},
     };
     result.module[loadersKey] = [
       {
         test: /\.jsx?$/,
         loaders: ['eslint'],
-        include: ['foo', 'bar']
+        include: ['foo', 'bar'],
       },
       {
         test: /\.jsx?$/,
         loaders: ['isparta-instrumenter'],
-        include: 'baz'
-      }
+        include: 'baz',
+      },
     ];
 
     expect(merge(common, isparta)).toEqual(result);
@@ -589,39 +596,39 @@ function mergeSmartTest(merge, loadersKey) {
     // these shouldn't be merged because `include` is defined.
     // instead, it should prepend to guarantee sane evaluation order
     const common = {
-      module: {}
+      module: {},
     };
     common.module[loadersKey] = [
       {
         test: /\.jsx?$/,
         loaders: ['eslint'],
-        include: ['foo', 'bar']
-      }
+        include: ['foo', 'bar'],
+      },
     ];
     const isparta = {
-      module: {}
+      module: {},
     };
     isparta.module[loadersKey] = [
       {
         test: /\.jsx?$/,
         loader: 'isparta-instrumenter',
-        include: 'baz'
-      }
+        include: 'baz',
+      },
     ];
     const result = {
-      module: {}
+      module: {},
     };
     result.module[loadersKey] = [
       {
         test: /\.jsx?$/,
         loaders: ['eslint'],
-        include: ['foo', 'bar']
+        include: ['foo', 'bar'],
       },
       {
         test: /\.jsx?$/,
         loader: 'isparta-instrumenter',
-        include: 'baz'
-      }
+        include: 'baz',
+      },
     ];
 
     expect(merge(common, isparta)).toEqual(result);
@@ -631,39 +638,39 @@ function mergeSmartTest(merge, loadersKey) {
     // these shouldn't be merged because `exclude` is defined.
     // instead, it should prepend to guarantee sane evaluation order
     const common = {
-      module: {}
+      module: {},
     };
     common.module[loadersKey] = [
       {
         test: /\.jsx?$/,
         loaders: ['eslint'],
-        exclude: ['foo', 'bar']
-      }
+        exclude: ['foo', 'bar'],
+      },
     ];
     const isparta = {
-      module: {}
+      module: {},
     };
     isparta.module[loadersKey] = [
       {
         test: /\.jsx?$/,
         loaders: ['isparta-instrumenter'],
-        exclude: 'baz'
-      }
+        exclude: 'baz',
+      },
     ];
     const result = {
-      module: {}
+      module: {},
     };
     result.module[loadersKey] = [
       {
         test: /\.jsx?$/,
         loaders: ['eslint'],
-        exclude: ['foo', 'bar']
+        exclude: ['foo', 'bar'],
       },
       {
         test: /\.jsx?$/,
         loaders: ['isparta-instrumenter'],
-        exclude: 'baz'
-      }
+        exclude: 'baz',
+      },
     ];
 
     expect(merge(common, isparta)).toEqual(result);
@@ -673,39 +680,39 @@ function mergeSmartTest(merge, loadersKey) {
     // these shouldn't be merged because `exclude` is defined.
     // instead, it should prepend to guarantee sane evaluation order
     const common = {
-      module: {}
+      module: {},
     };
     common.module[loadersKey] = [
       {
         test: /\.jsx?$/,
         loaders: ['eslint'],
-        exclude: ['foo', 'bar']
-      }
+        exclude: ['foo', 'bar'],
+      },
     ];
     const isparta = {
-      module: {}
+      module: {},
     };
     isparta.module[loadersKey] = [
       {
         test: /\.jsx?$/,
         loader: 'isparta-instrumenter',
-        exclude: 'baz'
-      }
+        exclude: 'baz',
+      },
     ];
     const result = {
-      module: {}
+      module: {},
     };
     result.module[loadersKey] = [
       {
         test: /\.jsx?$/,
         loaders: ['eslint'],
-        exclude: ['foo', 'bar']
+        exclude: ['foo', 'bar'],
       },
       {
         test: /\.jsx?$/,
         loader: 'isparta-instrumenter',
-        exclude: 'baz'
-      }
+        exclude: 'baz',
+      },
     ];
 
     expect(merge(common, isparta)).toEqual(result);
@@ -713,39 +720,39 @@ function mergeSmartTest(merge, loadersKey) {
 
   test(`should not use parent include/exclude for ${loadersKey}`, () => {
     const common = {
-      module: {}
+      module: {},
     };
     common.module[loadersKey] = [
       {
         test: /\.js$/,
         include: ['apps', 'lib', 'thirdparty'],
         exclude: /node_modules/,
-        loaders: ['babel']
-      }
+        loaders: ['babel'],
+      },
     ];
     const strip = {
-      module: {}
+      module: {},
     };
     strip.module[loadersKey] = [
       {
         test: /\.js$/,
-        loaders: ['strip?strip[]=debug']
-      }
+        loaders: ['strip?strip[]=debug'],
+      },
     ];
     const result = {
-      module: {}
+      module: {},
     };
     result.module[loadersKey] = [
       {
         test: /\.js$/,
         include: ['apps', 'lib', 'thirdparty'],
         exclude: /node_modules/,
-        loaders: ['babel']
+        loaders: ['babel'],
       },
       {
         test: /\.js$/,
-        loaders: ['strip?strip[]=debug']
-      }
+        loaders: ['strip?strip[]=debug'],
+      },
     ];
 
     expect(merge(common, strip)).toEqual(result);
@@ -753,18 +760,18 @@ function mergeSmartTest(merge, loadersKey) {
 
   test(`should not use parent include/exclude even if only loader string is specified for ${loadersKey}`, () => {
     const common = {
-      module: {}
+      module: {},
     };
     common.module[loadersKey] = [
       {
         test: /\.js$/,
         include: ['apps', 'lib', 'thirdparty'],
         exclude: /node_modules/,
-        loaders: 'eslint'
-      }
+        loaders: 'eslint',
+      },
     ];
     const eslint = {
-      module: {}
+      module: {},
     };
     eslint.module[loadersKey] = [
       {
@@ -772,30 +779,30 @@ function mergeSmartTest(merge, loadersKey) {
         loader: 'eslint',
         query: {
           rules: {
-            'no-debugger': 0
-          }
-        }
-      }
+            'no-debugger': 0,
+          },
+        },
+      },
     ];
     const result = {
-      module: {}
+      module: {},
     };
     result.module[loadersKey] = [
       {
         test: /\.js$/,
         include: ['apps', 'lib', 'thirdparty'],
         exclude: /node_modules/,
-        loaders: 'eslint'
+        loaders: 'eslint',
       },
       {
         test: /\.js$/,
         loader: 'eslint',
         query: {
           rules: {
-            'no-debugger': 0
-          }
-        }
-      }
+            'no-debugger': 0,
+          },
+        },
+      },
     ];
 
     expect(merge(common, eslint)).toEqual(result);
@@ -803,31 +810,31 @@ function mergeSmartTest(merge, loadersKey) {
 
   test(`should respect a new order for ${loadersKey}`, () => {
     const common = {
-      module: {}
+      module: {},
     };
     common.module[loadersKey] = [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      }
+        use: ['style-loader', 'css-loader'],
+      },
     ];
     const extractText = {
-      module: {}
+      module: {},
     };
     extractText.module[loadersKey] = [
       {
         test: /\.css$/,
-        use: ['extract-text', 'style-loader', 'css-loader']
-      }
+        use: ['extract-text', 'style-loader', 'css-loader'],
+      },
     ];
     const result = {
-      module: {}
+      module: {},
     };
     result.module[loadersKey] = [
       {
         test: /\.css$/,
-        use: ['extract-text', 'style-loader', 'css-loader']
-      }
+        use: ['extract-text', 'style-loader', 'css-loader'],
+      },
     ];
 
     expect(merge(common, extractText)).toEqual(result);
@@ -835,37 +842,37 @@ function mergeSmartTest(merge, loadersKey) {
 
   test(`should respect the existing order for ${loadersKey}`, () => {
     const common = {
-      module: {}
+      module: {},
     };
     common.module[loadersKey] = [
       {
         test: /\.css$/,
         use: [
           { loader: 'css-loader', options: { myOptions: true } },
-          { loader: 'style-loader' }
-        ]
-      }
+          { loader: 'style-loader' },
+        ],
+      },
     ];
     const extractText = {
-      module: {}
+      module: {},
     };
     extractText.module[loadersKey] = [
       {
         test: /\.css$/,
-        use: [{ loader: 'style-loader', options: { someSetting: true } }]
-      }
+        use: [{ loader: 'style-loader', options: { someSetting: true } }],
+      },
     ];
     const result = {
-      module: {}
+      module: {},
     };
     result.module[loadersKey] = [
       {
         test: /\.css$/,
         use: [
           { loader: 'css-loader', options: { myOptions: true } },
-          { loader: 'style-loader', options: { someSetting: true } }
-        ]
-      }
+          { loader: 'style-loader', options: { someSetting: true } },
+        ],
+      },
     ];
 
     expect(merge(common, extractText)).toEqual(result);
@@ -873,7 +880,7 @@ function mergeSmartTest(merge, loadersKey) {
 
   test(`should respect second order when existing/new have conflicting orders for ${loadersKey}`, () => {
     const common = {
-      module: {}
+      module: {},
     };
     common.module[loadersKey] = [
       {
@@ -881,28 +888,28 @@ function mergeSmartTest(merge, loadersKey) {
         use: [
           { loader: 'css-loader' },
           { loader: 'style-loader' },
-          { loader: 'other-loader' }
-        ]
-      }
+          { loader: 'other-loader' },
+        ],
+      },
     ];
 
     const extractText = {
-      module: {}
+      module: {},
     };
     extractText.module[loadersKey] = [
       {
         test: /\.css$/,
-        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
-      }
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+      },
     ];
     const result = {
-      module: {}
+      module: {},
     };
     result.module[loadersKey] = [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'other-loader']
-      }
+        use: ['style-loader', 'css-loader', 'other-loader'],
+      },
     ];
 
     expect(merge(common, extractText)).toEqual(result);
@@ -915,11 +922,11 @@ function mergeSmartTest(merge, loadersKey) {
           oneOf: [
             {
               test: /\.js$/,
-              loader: 'a'
-            }
-          ]
-        }
-      ]
+              loader: 'a',
+            },
+          ],
+        },
+      ],
     };
 
     const result = {
@@ -928,15 +935,15 @@ function mergeSmartTest(merge, loadersKey) {
           oneOf: [
             {
               test: /\.js$/,
-              loader: 'b'
+              loader: 'b',
             },
             {
               test: /\.css$/,
-              loader: 'b'
-            }
-          ]
-        }
-      ]
+              loader: 'b',
+            },
+          ],
+        },
+      ],
     };
 
     expect(merge(a, result)).toEqual(result);
@@ -947,9 +954,9 @@ function mergeSmartTest(merge, loadersKey) {
       [loadersKey]: [
         {
           test: /\.js$/,
-          loader: 'a'
-        }
-      ]
+          loader: 'a',
+        },
+      ],
     };
     const b = {
       [loadersKey]: [
@@ -958,15 +965,15 @@ function mergeSmartTest(merge, loadersKey) {
           oneOf: [
             {
               resourceQuery: /inline/, // foo.css?inline
-              use: 'url-loader'
+              use: 'url-loader',
             },
             {
               resourceQuery: /external/, // foo.css?external
-              use: 'file-loader'
-            }
-          ]
-        }
-      ]
+              use: 'file-loader',
+            },
+          ],
+        },
+      ],
     };
 
     expect(merge(a, b)).toEqual(b);
@@ -976,7 +983,7 @@ function mergeSmartTest(merge, loadersKey) {
 function mergeSmartTests(merge) {
   commonTests(merge);
 
-  loadersKeys.forEach(loadersKey => {
+  loadersKeys.forEach((loadersKey) => {
     mergeSmartTest(merge, loadersKey);
   });
 }

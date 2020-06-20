@@ -6,7 +6,7 @@ import alfred from '@alfred/core';
 import { serialPromises } from '@alfred/helpers';
 import Nightmare from 'nightmare';
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   throw err;
 });
 
@@ -24,7 +24,7 @@ function testFixturDir(fixtureDir: string) {
     const project = await alfred(fixtureDir);
 
     if (
-      !project.entrypoints.every(entrypoint => entrypoint.project === 'app')
+      !project.entrypoints.every((entrypoint) => entrypoint.project === 'app')
     ) {
       return;
     }
@@ -35,12 +35,12 @@ function testFixturDir(fixtureDir: string) {
       cwd: fixtureDir,
       env: {
         ...process.env,
-        ALFRED_E2E_TEST: 'true'
-      }
+        ALFRED_E2E_TEST: 'true',
+      },
     });
 
     const port = await new Promise((resolve, reject) => {
-      start.stdout.on('data', data => {
+      start.stdout.on('data', (data) => {
         const dataStr = data.toString();
         console.log(dataStr);
         if (dataStr.includes('http://')) {
@@ -51,7 +51,7 @@ function testFixturDir(fixtureDir: string) {
           resolve(new URL(url).port);
         }
       });
-      start.stderr.on('data', data => {
+      start.stderr.on('data', (data) => {
         reject(data.toString());
       });
     });
@@ -74,12 +74,12 @@ function testFixturDir(fixtureDir: string) {
   const fixturesDirs = [
     ...fs
       .readdirSync(cliFixturesDir)
-      .map(fixtureDir => path.join(cliFixturesDir, fixtureDir)),
+      .map((fixtureDir) => path.join(cliFixturesDir, fixtureDir)),
     ...fs
       .readdirSync(examplesDir)
-      .map(exampleDir => path.join(examplesDir, exampleDir))
-      .filter(dir => !dir.includes('alfred-config-example'))
-  ].filter(dir => fs.statSync(dir).isDirectory());
+      .map((exampleDir) => path.join(examplesDir, exampleDir))
+      .filter((dir) => !dir.includes('alfred-config-example')),
+  ].filter((dir) => fs.statSync(dir).isDirectory());
 
   await serialPromises(fixturesDirs.map(testFixturDir));
 })();

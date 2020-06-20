@@ -22,14 +22,14 @@ describe.skip('Helpers', () => {
       const files2 = await ParseInput([
         testBasePath,
         path.join(__dirname, '..', 'test'),
-        path.join(__dirname, '..', 'src', 'alfred.js')
+        path.join(__dirname, '..', 'src', 'alfred.js'),
       ]);
       expect(files2.map(stripNonProjectPaths)).toMatchSnapshot();
     });
 
     it('should fail on non-js files', async () => {
       const files = await ParseInput([
-        path.join(testBasePath, 'basic-test.ts')
+        path.join(testBasePath, 'basic-test.ts'),
       ]);
       expect(files.map(stripNonProjectPaths)).toMatchSnapshot();
     });
@@ -39,7 +39,7 @@ describe.skip('Helpers', () => {
         path.join(testBasePath, 'basic-test.ts'),
         path.join(testBasePath, 'basic-test.ts'),
         path.join(testBasePath, 'class-test.ts'),
-        path.join(testBasePath, 'class-test.ts')
+        path.join(testBasePath, 'class-test.ts'),
       ]);
       expect(files.map(stripNonProjectPaths)).toMatchSnapshot();
     });

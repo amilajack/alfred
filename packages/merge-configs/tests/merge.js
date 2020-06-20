@@ -2,13 +2,13 @@ function mergeTests(merge) {
   test('should return the same config', () => {
     const config = {
       entry: {
-        app: 'app'
+        app: 'app',
       },
       output: {
         path: 'build',
-        filename: '[name].js'
+        filename: '[name].js',
       },
-      plugins: []
+      plugins: [],
     };
 
     expect(merge(config)).toEqual(config);
@@ -16,16 +16,16 @@ function mergeTests(merge) {
 
   test('should append arrays of multiple objects by default', () => {
     const a = {
-      foo: ['a']
+      foo: ['a'],
     };
     const b = {
-      foo: ['b']
+      foo: ['b'],
     };
     const c = {
-      foo: ['c']
+      foo: ['c'],
     };
     const result = {
-      foo: ['a', 'b', 'c']
+      foo: ['a', 'b', 'c'],
     };
 
     expect(merge(a, b, c)).toEqual(result);
@@ -33,16 +33,16 @@ function mergeTests(merge) {
 
   test('should work with an array of objects', () => {
     const a = {
-      foo: ['a']
+      foo: ['a'],
     };
     const b = {
-      foo: ['b']
+      foo: ['b'],
     };
     const c = {
-      foo: ['c']
+      foo: ['c'],
     };
     const result = {
-      foo: ['a', 'b', 'c']
+      foo: ['a', 'b', 'c'],
     };
 
     expect(merge([a, b, c])).toEqual(result);
@@ -50,10 +50,10 @@ function mergeTests(merge) {
 
   test('should override objects', () => {
     const a = {
-      foo: 'a'
+      foo: 'a',
     };
     const result = {
-      foo: 'b'
+      foo: 'b',
     };
 
     expect(merge(a, result)).toEqual(result);
@@ -61,13 +61,13 @@ function mergeTests(merge) {
 
   test('should append arrays by default', () => {
     const a = {
-      foo: ['a']
+      foo: ['a'],
     };
     const b = {
-      foo: ['b']
+      foo: ['b'],
     };
     const result = {
-      foo: ['a', 'b']
+      foo: ['a', 'b'],
     };
 
     expect(merge(a, b)).toEqual(result);
@@ -75,13 +75,13 @@ function mergeTests(merge) {
 
   test('should append arrays without mutating', () => {
     const a = {
-      foo: ['a']
+      foo: ['a'],
     };
     const b = {
-      foo: ['b']
+      foo: ['b'],
     };
     const result = {
-      foo: ['a', 'b']
+      foo: ['a', 'b'],
     };
 
     // this should not mutate
@@ -92,13 +92,13 @@ function mergeTests(merge) {
 
   test('should override objects of multiple objects', () => {
     const a = {
-      foo: 'a'
+      foo: 'a',
     };
     const b = {
-      foo: 'b'
+      foo: 'b',
     };
     const result = {
-      foo: 'c'
+      foo: 'c',
     };
 
     expect(merge(a, b, result)).toEqual(result);
@@ -106,16 +106,16 @@ function mergeTests(merge) {
 
   test('should deeply merge objects', () => {
     const a = {
-      foo: { bar: 'a' }
+      foo: { bar: 'a' },
     };
     const b = {
-      foo: { baz: 'b' }
+      foo: { baz: 'b' },
     };
     const result = {
       foo: {
         bar: 'a',
-        baz: 'b'
-      }
+        baz: 'b',
+      },
     };
 
     expect(merge(a, b)).toEqual(result);
@@ -126,29 +126,29 @@ function mergeTests(merge) {
       loaders: [
         {
           test: /\.js$/,
-          loader: 'a'
-        }
-      ]
+          loader: 'a',
+        },
+      ],
     };
     const b = {
       loaders: [
         {
           test: /\.css$/,
-          loader: 'b'
-        }
-      ]
+          loader: 'b',
+        },
+      ],
     };
     const result = {
       loaders: [
         {
           test: /\.js$/,
-          loader: 'a'
+          loader: 'a',
         },
         {
           test: /\.css$/,
-          loader: 'b'
-        }
-      ]
+          loader: 'b',
+        },
+      ],
     };
 
     expect(merge(a, b)).toEqual(result);
@@ -157,13 +157,13 @@ function mergeTests(merge) {
   test('should not mutate inputs', () => {
     const a = {
       output: {
-        filename: 'bundle.js'
-      }
+        filename: 'bundle.js',
+      },
     };
     const b = {
       output: {
-        path: 'path/b'
-      }
+        path: 'path/b',
+      },
     };
 
     const aClone = JSON.parse(JSON.stringify(a));
@@ -174,10 +174,10 @@ function mergeTests(merge) {
 
   test('should not allow overriding with an empty array', () => {
     const a = {
-      entry: ['foo']
+      entry: ['foo'],
     };
     const b = {
-      entry: []
+      entry: [],
     };
 
     expect(merge(a, b)).toEqual(a);
@@ -186,11 +186,11 @@ function mergeTests(merge) {
   test('should not allow overriding with an empty object', () => {
     const a = {
       entry: {
-        a: 'foo'
-      }
+        a: 'foo',
+      },
     };
     const b = {
-      entry: {}
+      entry: {},
     };
 
     expect(merge(a, b)).toEqual(a);
@@ -200,12 +200,12 @@ function mergeTests(merge) {
     const a = {
       postcss() {
         return ['a'];
-      }
+      },
     };
     const b = {
       postcss() {
         return ['b'];
-      }
+      },
     };
     const expected = ['a', 'b'];
 
@@ -216,20 +216,20 @@ function mergeTests(merge) {
     const a = {
       postcss() {
         return {
-          a: 'foo'
+          a: 'foo',
         };
-      }
+      },
     };
     const b = {
       postcss() {
         return {
-          b: 'bar'
+          b: 'bar',
         };
-      }
+      },
     };
     const expected = {
       a: 'foo',
-      b: 'bar'
+      b: 'bar',
     };
 
     expect(merge(a, b).postcss()).toEqual(expected);
@@ -239,12 +239,12 @@ function mergeTests(merge) {
     const a = {
       postcss(arg) {
         return [arg];
-      }
+      },
     };
     const b = {
       postcss(arg) {
         return [arg + 1, arg + 2];
-      }
+      },
     };
     const expected = ['a', 'a1', 'a2'];
 
@@ -253,7 +253,7 @@ function mergeTests(merge) {
 
   test('should not mutate inputs with mismatched keys', () => {
     const a = {
-      entry: {}
+      entry: {},
     };
 
     const b = {};

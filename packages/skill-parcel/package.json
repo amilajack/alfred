@@ -16,7 +16,7 @@
   "devDependencies": {
     "autoprefixer": "^9.7.4",
     "parcel": "^1.11.0",
-    "postcss-modules": "^1.5.0"
+    "postcss-modules": "^2.0.0"
   },
   "peerDependencies": {
     "autoprefixer": "^9.7.4",

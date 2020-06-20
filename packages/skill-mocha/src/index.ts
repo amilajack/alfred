@@ -6,13 +6,13 @@ import {
   RawSkill,
   Env,
   Platform,
-  ProjectEnum
+  ProjectEnum,
 } from '@alfred/types';
 
 const supports = {
   envs: ['production', 'development', 'test'] as Env[],
   platforms: ['node'] as Platform[],
-  projects: ['app', 'lib'] as ProjectEnum[]
+  projects: ['app', 'lib'] as ProjectEnum[],
 };
 
 const skill: RawSkill = {
@@ -22,9 +22,9 @@ const skill: RawSkill = {
     [
       '@alfred/task-test',
       {
-        supports
-      }
-    ]
+        supports,
+      },
+    ],
   ],
   hooks: {
     async run({ project, config, skillMap, event }): Promise<void> {
@@ -44,10 +44,10 @@ const skill: RawSkill = {
       execBinInProject(project, [
         'mocha',
         `--require ${mochaBabelRegisterPath} tests`,
-        ...event.flags
+        ...event.flags,
       ]);
-    }
-  }
+    },
+  },
 };
 
 export default skill;

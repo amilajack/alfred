@@ -11,7 +11,7 @@ export default async function learn(
 
   const beforeLearnEvent: LearnEvent = {
     skillsPkgNames,
-    skills: []
+    skills: [],
   };
   await project.emitAsync('beforeLearn', beforeLearnEvent);
 
@@ -40,14 +40,14 @@ export default async function learn(
   await newConfig.write(
     project.pkgPath,
     mergeConfigs({}, project.pkg.alfred || {}, {
-      skills: skillsPkgNames
+      skills: skillsPkgNames,
     })
   );
 
   // Get the entire skillMap now that the skills are installed
   const skillMap = await project.getSkillMap();
   const learnedSkills = skillsToLearn.map(
-    skill => skillMap.get(skill.name) as Skill
+    (skill) => skillMap.get(skill.name) as Skill
   );
 
   const event: LearnEvent = { skillsPkgNames, skills: learnedSkills };

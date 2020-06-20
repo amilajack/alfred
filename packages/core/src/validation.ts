@@ -4,7 +4,7 @@ import {
   AlfredConfigWithUnresolvedTasks,
   RawSkill,
   SkillTaskModule,
-  PkgJson
+  PkgJson,
 } from '@alfred/types';
 
 type Person = {
@@ -69,26 +69,26 @@ export class PkgValidation {
       name: {
         type: 'string',
         required: true,
-        format: PkgValidation.packageFormat
+        format: PkgValidation.packageFormat,
       },
       version: {
         type: 'string',
         required: true,
-        format: PkgValidation.versionFormat
+        format: PkgValidation.versionFormat,
       },
       description: { type: 'string', warning: true },
       keywords: { type: 'array', warning: true },
       homepage: {
         type: 'string',
         recommended: true,
-        format: PkgValidation.urlFormat
+        format: PkgValidation.urlFormat,
       },
       bugs: { warning: true, validate: PkgValidation.validateUrlOrMailto },
       licenses: {
         type: 'array',
         warning: true,
         validate: PkgValidation.validateUrlTypes,
-        or: 'license'
+        or: 'license',
       },
       license: { type: 'string' },
       // @TODO author and contributors should be validated to check if they are mutually
@@ -104,23 +104,23 @@ export class PkgValidation {
         types: ['string', 'object'],
         warning: true,
         validate: PkgValidation.validateUrlTypes,
-        or: 'repositories'
+        or: 'repositories',
       },
       scripts: { type: 'object' },
       config: { type: 'object' },
       dependencies: {
         type: 'object',
-        validate: PkgValidation.validateDependencies
+        validate: PkgValidation.validateDependencies,
       },
       devDependencies: {
         type: 'object',
-        validate: PkgValidation.validateDependencies
+        validate: PkgValidation.validateDependencies,
       },
       bundledDependencies: { type: 'array' },
       bundleDependencies: { type: 'array' },
       optionalDependencies: {
         type: 'object',
-        validate: PkgValidation.validateDependencies
+        validate: PkgValidation.validateDependencies,
       },
       engines: { type: 'object', recommended: true },
       engineStrict: { type: 'boolean' },
@@ -128,7 +128,7 @@ export class PkgValidation {
       cpu: { type: 'array' },
       preferGlobal: { type: 'boolean' },
       private: { type: 'boolean' },
-      publishConfig: { type: 'object' }
+      publishConfig: { type: 'object' },
     };
   }
 
@@ -161,7 +161,7 @@ export class PkgValidation {
     data: string | PkgJson,
     options: { recommendations: boolean; warnings: boolean } = {
       recommendations: true,
-      warnings: true
+      warnings: true,
     }
   ): ValidationResult {
     const parsed = PkgValidation.parse(data);
@@ -172,7 +172,7 @@ export class PkgValidation {
       warnings: [],
       recommendations: [],
       errors: [],
-      messagesCount: 0
+      messagesCount: 0,
     };
 
     if (typeof parsed === 'string') {
@@ -284,7 +284,7 @@ export class PkgValidation {
       if (!PkgValidation.isValidVersionRange(pkgSemver)) {
         errors.push(
           `Invalid version range for dependency "${JSON.stringify({
-            [pkgName]: pkgSemver
+            [pkgName]: pkgSemver,
           })} for field ${name}`
         );
       }
@@ -366,7 +366,7 @@ export class PkgValidation {
       PkgValidation.validatePerson({
         name: authorName,
         email: authorEmail,
-        url: authorUrl
+        url: authorUrl,
       });
     } else if (typeof person === 'object' && name && errors) {
       if (!person.name) {
@@ -423,7 +423,7 @@ export class PkgValidation {
 
     function validateUrlType({
       type,
-      url
+      url,
     }: {
       type: string;
       url: string;
@@ -460,7 +460,7 @@ export function validateTask(task: SkillTaskModule): void {
     subcommand: Joi.string().required(),
     runForEachTarget: Joi.boolean().required(),
     resolveSkill: Joi.function().required(),
-    handleFlags: Joi.function()
+    handleFlags: Joi.function(),
   });
   return Joi.assert(task, taskSchema);
 }
@@ -474,7 +474,7 @@ export function validateSkill(skill: RawSkill): void {
         Joi.string().valid('test', 'production', 'development')
       ),
       platforms: Joi.array().items(Joi.string().valid('node', 'browser')),
-      projects: Joi.array().items(Joi.string().valid('app', 'lib'))
+      projects: Joi.array().items(Joi.string().valid('app', 'lib')),
     }),
     pkg: Joi.object(),
     dependencies: Joi.object(),
@@ -482,7 +482,7 @@ export function validateSkill(skill: RawSkill): void {
     dirs: Joi.array().items(
       Joi.object({
         src: Joi.string().required(),
-        dest: Joi.string().required()
+        dest: Joi.string().required(),
       })
     ),
     files: Joi.array().items(
@@ -491,7 +491,7 @@ export function validateSkill(skill: RawSkill): void {
         src: Joi.string(),
         dest: Joi.string().required(),
         content: Joi.string(),
-        condition: Joi.function()
+        condition: Joi.function(),
       }).xor('src', 'content')
     ),
     configs: Joi.array().items(
@@ -502,7 +502,7 @@ export function validateSkill(skill: RawSkill): void {
         config: Joi.object().required(),
         fileType: Joi.string().valid('commonjs', 'module', 'json'),
         write: Joi.boolean(),
-        imports: Joi.array().items(Joi.string())
+        imports: Joi.array().items(Joi.string()),
       })
     ),
     tasks: Joi.array().items(
@@ -511,7 +511,7 @@ export function validateSkill(skill: RawSkill): void {
     ),
     hooks: Joi.object(),
     transforms: Joi.object(),
-    default: Joi.boolean()
+    default: Joi.boolean(),
   });
   return Joi.assert(skill, skillSchema);
 }
@@ -528,26 +528,27 @@ export function validateAlfredConfig(
     skills: Joi.array().items(
       Joi.string(),
       Joi.array().items(Joi.string().required(), Joi.object().required())
-    )
+    ),
   });
 
   if ('extends' in alfredConfig) {
     // Validate if each config in `.extends` is a string
     if (Array.isArray(alfredConfig.extends)) {
-      alfredConfig.extends.forEach(extendConfigs => {
+      alfredConfig.extends.forEach((extendConfigs) => {
         if (typeof extendConfigs !== 'string') {
           throw new Error(
-            `Values in ".extends" property in Alfred config must be a string. Instead passed ${JSON.stringify(
-              alfredConfig.extends
-            ) || String(alfredConfig.extends)}`
+            `Values in ".extends" property in Alfred config must be a string. Instead passed ${
+              JSON.stringify(alfredConfig.extends) ||
+              String(alfredConfig.extends)
+            }`
           );
         }
       });
     } else if (typeof alfredConfig.extends !== 'string') {
       throw new Error(
-        `Values in ".extends" property in Alfred config must be a string. Instead passed ${JSON.stringify(
-          alfredConfig.extends
-        ) || String(alfredConfig.extends)}`
+        `Values in ".extends" property in Alfred config must be a string. Instead passed ${
+          JSON.stringify(alfredConfig.extends) || String(alfredConfig.extends)
+        }`
       );
     }
   }

@@ -4,11 +4,6 @@
     ["@alfred/skill-lodash", {
       "collections": true,
       "paths": true
-    }],
-    ["@alfred/skill-babel", {
-      "plugins": [
-        "@babel/plugin-proposal-class-properties"
-      ]
     }]
   ],
   "npmClient": "yarn"

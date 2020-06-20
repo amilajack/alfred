@@ -24,7 +24,7 @@ describe('Project', () => {
     it('should match snapshot', () => {
       expect(depsToInstall).toEqual({
         devDependencies: {},
-        dependencies: {}
+        dependencies: {},
       });
     });
 

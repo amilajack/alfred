@@ -1,7 +1,7 @@
 /* eslint no-param-reassign: off */
 import {
   mapShortNameEnvToLongName,
-  taskResolvesSkillDefault
+  taskResolvesSkillDefault,
 } from '@alfred/helpers';
 import { SkillTaskModule, Env } from '@alfred/types';
 const debug = require('debug')('@alfred/task-start');
@@ -32,7 +32,7 @@ const task: SkillTaskModule = {
   resolveSkill: taskResolvesSkillDefault(
     'test',
     require('../package.json').name
-  )
+  ),
 };
 
 export default task;

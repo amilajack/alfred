@@ -9,14 +9,14 @@ import {
   ConfigValue,
   ProjectInterface,
   Target,
-  RawSkill
+  RawSkill,
 } from '@alfred/types';
 import { getSubcommandMap } from '../src/commands';
 import skillMapFromConfig, {
   Skills,
   addSkillHelpers,
   runTransforms,
-  CORE_SKILLS
+  CORE_SKILLS,
 } from '../src/skill';
 import { getSubcommandTasksMap, normalizeTasksOfSkill } from '../src/task';
 import alfred from '../src';
@@ -51,19 +51,19 @@ function removePathsPropertiesFromObject(
 function getConfigs(skillMap: SkillMap): Array<ConfigValue> {
   const configsFromMap = Array.from(skillMap.values());
   return configsFromMap
-    .flatMap(skill => Array.from(skill?.configs?.values() || []))
-    .map(config => removePathsPropertiesFromObject(config.config));
+    .flatMap((skill) => Array.from(skill?.configs?.values() || []))
+    .map((config) => removePathsPropertiesFromObject(config.config));
 }
 
 function getDependencies(skillMap: SkillMap): Dependencies {
   return Array.from(skillMap.values())
-    .map(skill => skill.dependencies || {})
+    .map((skill) => skill.dependencies || {})
     .reduce((p, c) => ({ ...p, ...c }), {});
 }
 
 function getDevDependencies(skillMap: SkillMap): Dependencies {
   return Array.from(skillMap.values())
-    .map(skill => skill.devDependencies || {})
+    .map((skill) => skill.devDependencies || {})
     .reduce((p, c) => ({ ...p, ...c }), {});
 }
 
@@ -96,10 +96,10 @@ describe('Skills', () => {
                 alias: 'eslint',
                 filename: '.eslintrc.js',
                 config: {
-                  plugins: []
+                  plugins: [],
                 },
-                write: false
-              }
+                write: false,
+              },
             ],
             transforms: {
               babel(skill) {
@@ -109,26 +109,26 @@ describe('Skills', () => {
               eslint(skill) {
                 skill.configs[0].config.plugins.push('b');
                 return skill;
-              }
-            }
-          }
+              },
+            },
+          },
         ],
         [
           'eslint',
           {
-            name: 'eslint'
-          }
+            name: 'eslint',
+          },
         ],
         [
           'babel',
           {
-            name: 'babel'
-          }
-        ]
+            name: 'babel',
+          },
+        ],
       ]);
       const skillMap = await runTransforms(defaultAppProject, rawSillMap);
       expect(skillMap.get('react').configs[0].config).toEqual({
-        plugins: ['a', 'b']
+        plugins: ['a', 'b'],
       });
     });
 
@@ -143,10 +143,10 @@ describe('Skills', () => {
                 alias: 'eslint',
                 filename: '.eslintrc.js',
                 config: {
-                  plugins: []
+                  plugins: [],
                 },
-                write: false
-              }
+                write: false,
+              },
             ],
             transforms: {
               async babel(skill) {
@@ -156,26 +156,26 @@ describe('Skills', () => {
               async eslint(skill) {
                 skill.configs[0].config.plugins.push('b');
                 return skill;
-              }
-            }
-          }
+              },
+            },
+          },
         ],
         [
           'eslint',
           {
-            name: 'eslint'
-          }
+            name: 'eslint',
+          },
         ],
         [
           'babel',
           {
-            name: 'babel'
-          }
-        ]
+            name: 'babel',
+          },
+        ],
       ]);
       const skillMap = await runTransforms(defaultAppProject, rawSillMap);
       expect(skillMap.get('react').configs[0].config).toEqual({
-        plugins: ['a', 'b']
+        plugins: ['a', 'b'],
       });
     });
 
@@ -189,22 +189,22 @@ describe('Skills', () => {
               {
                 alias: 'react',
                 src: 'boilerplate/root.js',
-                dest: 'src/root.js'
-              }
+                dest: 'src/root.js',
+              },
             ],
             transforms: {
               eslint() {
                 1 + 1;
-              }
-            }
-          }
+              },
+            },
+          },
         ],
         [
           'eslint',
           {
-            name: 'eslint'
-          }
-        ]
+            name: 'eslint',
+          },
+        ],
       ]);
       return expect(
         runTransforms(defaultAppProject, rawSillMap)
@@ -231,7 +231,7 @@ describe('Skills', () => {
       expect(() =>
         normalizeTasksOfSkill({
           '@alfred/task-build': {},
-          '@alfred/task-start': {}
+          '@alfred/task-start': {},
         })
       ).toThrowErrorMatchingSnapshot();
       expect(() =>
@@ -240,7 +240,7 @@ describe('Skills', () => {
     });
 
     describe('subcommand', () => {
-      TARGETS.forEach(target => {
+      TARGETS.forEach((target) => {
         it(`should get corresponding task for target ${JSON.stringify(
           target
         )}`, async () => {
@@ -285,8 +285,8 @@ describe('Skills', () => {
     describe('adding deps from pkg', () => {
       const defaultPkg = {
         devDependencies: {
-          foo: '1.1.1'
-        }
+          foo: '1.1.1',
+        },
       };
       it('should add deps from pkg', () => {
         expect(
@@ -301,8 +301,8 @@ describe('Skills', () => {
       it('should support different deps types', () => {
         const pkg = {
           peerDependencies: {
-            foo: '1.1.1'
-          }
+            foo: '1.1.1',
+          },
         };
         expect(
           addSkillHelpers(CORE_SKILLS.babel).addDepsFromPkg('foo', pkg, 'peer')
@@ -345,7 +345,7 @@ describe('Skills', () => {
         const target = {
           env: 'production',
           project: 'app',
-          platform: 'browser'
+          platform: 'browser',
         } as Target;
         const skillMap = await Skills(defaultAppProject, [], target);
         const skillNames = Array.from(skillMap.keys());
@@ -358,7 +358,7 @@ describe('Skills', () => {
         const target = {
           env: 'production',
           project: 'lib',
-          platform: 'browser'
+          platform: 'browser',
         } as Target;
         const skillMap = await Skills(defaultLibProject, [], target);
         const skillNames = Array.from(skillMap.keys());
@@ -387,15 +387,15 @@ describe('Skills', () => {
               subcommand: 'test-command',
               runForEachTarget: true,
               resolveSkill(skills, target) {
-                return skills.find(skill => skill.name === 'test-skill');
-              }
+                return skills.find((skill) => skill.name === 'test-skill');
+              },
             },
-            config: {}
-          }
+            config: {},
+          },
         ],
         hooks: {
-          run
-        }
+          run,
+        },
       };
       const skillMap = await Skills(defaultMultiPlatformsProject, [skill]);
       const subcommandMap = getSubcommandMap(
@@ -403,7 +403,7 @@ describe('Skills', () => {
         skillMap
       );
       await Promise.all(
-        defaultMultiPlatformsProject.targets.map(target => {
+        defaultMultiPlatformsProject.targets.map((target) => {
           return subcommandMap.get('test-command')([], target);
         })
       );
@@ -422,14 +422,14 @@ describe('Skills', () => {
               runForEachTarget: true,
               resolveSkill(skills) {
                 return skills[0];
-              }
+              },
             },
-            config: {}
-          }
+            config: {},
+          },
         ],
         hooks: {
-          run
-        }
+          run,
+        },
       };
       const skillMap = await Skills(defaultMultiPlatformsProject, [skill]);
       const subcommandMap = getSubcommandMap(
@@ -449,8 +449,8 @@ describe('Skills', () => {
         root: '',
         config: {
           ...defaultAppProject.config,
-          skills: [['@alfred/skill-non-existent-skill', {}]]
-        }
+          skills: [['@alfred/skill-non-existent-skill', {}]],
+        },
       } as ProjectInterface;
       await expect(skillMapFromConfig(project)).rejects.toThrow(
         "Cannot find module '@alfred/skill-non-existent-skill'"
@@ -462,7 +462,7 @@ describe('Skills', () => {
       const nodeAppTarget = {
         project: 'app',
         platform: 'node',
-        env: 'production'
+        env: 'production',
       };
       const project = {
         ...defaultAppProject,
@@ -470,9 +470,9 @@ describe('Skills', () => {
         emit: jest.fn(),
         config: {
           ...defaultAppProject.config,
-          skills: [['@alfred/skill-react', {}]]
+          skills: [['@alfred/skill-react', {}]],
         },
-        targets: [nodeAppTarget]
+        targets: [nodeAppTarget],
       };
       const skillMap = await skillMapFromConfig(project);
       expect(skillMap.has('react')).toBe(false);
@@ -484,19 +484,19 @@ describe('Skills', () => {
       );
       testProject.config = {
         ...testProject.config,
-        skills: [['@alfred/skill-react', {}]]
+        skills: [['@alfred/skill-react', {}]],
       };
       testProject.targets = [
         {
           project: 'app',
           platform: 'browser',
-          env: 'production'
+          env: 'production',
         },
         {
           project: 'app',
           platform: 'browser',
-          env: 'production'
-        }
+          env: 'production',
+        },
       ];
       const skillMap = await testProject.getSkillMap();
       expect(skillMap.has('react')).toBe(true);
@@ -507,7 +507,7 @@ describe('Skills', () => {
       const target = {
         env: 'production',
         project: 'app',
-        platform: 'browser'
+        platform: 'browser',
       } as Target;
       const skillMap = await Skills(defaultAppProject, [], target);
       const skillNames = Array.from(skillMap.keys());
@@ -521,7 +521,7 @@ describe('Skills', () => {
       const target = {
         env: 'production',
         project: 'lib',
-        platform: 'browser'
+        platform: 'browser',
       } as Target;
       const skillMap = await Skills(defaultAppProject, [], target);
       const skillNames = Array.from(skillMap.keys());
@@ -536,13 +536,13 @@ describe('Skills', () => {
     // Generate all possible combinations of skills
     const skillNamesCombinations = powerset(Object.keys(CORE_SKILLS)).sort();
     for (const skillCombination of skillNamesCombinations) {
-      TARGETS.forEach(target => {
+      TARGETS.forEach((target) => {
         it(`combination ${skillCombination.join(',')} target ${JSON.stringify(
           target
         )}`, async () => {
           // Get the skills for each combination
           const skillsToAdd = skillCombination.map(
-            skillName => CORE_SKILLS[skillName]
+            (skillName) => CORE_SKILLS[skillName]
           );
           const skillMap = await Skills(defaultAppProject, skillsToAdd, target);
           expect(getConfigs(skillMap)).toMatchSnapshot();
@@ -554,7 +554,7 @@ describe('Skills', () => {
   });
 
   describe('dependencies', () => {
-    TARGETS.forEach(target => {
+    TARGETS.forEach((target) => {
       it(`should add devDepencencies with target ${JSON.stringify(
         target
       )}`, async () => {
@@ -564,7 +564,7 @@ describe('Skills', () => {
           target
         );
         const { devDependencies } = skillMap.get('prettier').addDevDeps({
-          foobar: '0.0.0'
+          foobar: '0.0.0',
         });
         expect(devDependencies).toMatchSnapshot();
       });

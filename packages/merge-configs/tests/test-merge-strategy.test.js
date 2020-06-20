@@ -11,10 +11,10 @@ function mergeStrategySpecificTests(merge) {
           {
             test: /.jsx?$/,
             loaders: ['babel'],
-            exclude: /node_modules/
-          }
-        ]
-      }
+            exclude: /node_modules/,
+          },
+        ],
+      },
     };
     const b = {
       module: {
@@ -22,10 +22,10 @@ function mergeStrategySpecificTests(merge) {
           {
             test: /.jsx?$/,
             loaders: ['react-hot'],
-            exclude: /node_modules/
-          }
-        ]
-      }
+            exclude: /node_modules/,
+          },
+        ],
+      },
     };
     const result = {
       module: {
@@ -33,20 +33,20 @@ function mergeStrategySpecificTests(merge) {
           {
             test: /.jsx?$/,
             loaders: ['react-hot'],
-            exclude: /node_modules/
+            exclude: /node_modules/,
           },
           {
             test: /.jsx?$/,
             loaders: ['babel'],
-            exclude: /node_modules/
-          }
-        ]
-      }
+            exclude: /node_modules/,
+          },
+        ],
+      },
     };
 
     expect(
       merge({
-        'module.loaders': 'prepend'
+        'module.loaders': 'prepend',
       })(a, b)
     ).toEqual(result);
   });

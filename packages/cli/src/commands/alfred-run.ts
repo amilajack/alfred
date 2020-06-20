@@ -13,13 +13,13 @@ import { getSingleSubcommandFromArgs } from '..';
   if (validation.messagesCount) {
     const signale = new Signale();
     signale.note(project.pkgPath);
-    validation.recommendations.forEach(warning => {
+    validation.recommendations.forEach((warning) => {
       signale.warn(warning);
     });
-    validation.warnings.forEach(warning => {
+    validation.warnings.forEach((warning) => {
       signale.warn(warning);
     });
-    validation.errors.forEach(warning => {
+    validation.errors.forEach((warning) => {
       signale.error(warning);
     });
   }

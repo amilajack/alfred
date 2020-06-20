@@ -16,9 +16,9 @@
     "lodash": "^4.17.11"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "^5.1.1",
-    "mocha": "^7.1.0",
-    "terser-webpack-plugin": "^2.3.4",
+    "copy-webpack-plugin": "^6.0.2",
+    "mocha": "^8.0.1",
+    "terser-webpack-plugin": "^3.0.6",
     "webpack": "^4.41.5"
   },
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8",

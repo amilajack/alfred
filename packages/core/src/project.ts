@@ -8,7 +8,7 @@ import {
   getConfigsBasePath,
   execCmdInProject,
   configToEvalString,
-  serialPromises
+  serialPromises,
 } from '@alfred/helpers';
 import mergeConfigs from '@alfred/merge-configs';
 import {
@@ -32,7 +32,7 @@ import {
   NewEvent,
   SkillConfig,
   RunEvent,
-  HookEvent
+  HookEvent,
 } from '@alfred/types';
 import loadJsonFile from 'load-json-file';
 import Config from './config';
@@ -47,7 +47,7 @@ import { EventEmitter } from 'events';
 
 // @TODO Send the information to a crash reporting service (like sentry.io)
 // @TODO Install sourcemaps
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   throw err;
 });
 
@@ -56,7 +56,7 @@ process.on('unhandledRejection', err => {
  */
 function findProjectRoot(startingSearchDir: string = process.cwd()): string {
   const pkgPath = pkgUp.sync({
-    cwd: startingSearchDir
+    cwd: startingSearchDir,
   });
   if (!pkgPath) {
     throw new Error(
@@ -88,7 +88,7 @@ export function entrypointToTarget(entrypoint: Entrypoint, env: Env): Target {
   return {
     platform: entrypoint.platform,
     project: entrypoint.project,
-    env
+    env,
   };
 }
 
@@ -133,7 +133,7 @@ export default class Project extends EventEmitter implements ProjectInterface {
   }
 
   private getEntrypoints(): Entrypoint[] {
-    return RAW_ENTRYPOINTS.filter(entryPoint =>
+    return RAW_ENTRYPOINTS.filter((entryPoint) =>
       fs.existsSync(path.join(this.root, 'src', entryPoint))
     ).map(parseEntrypoint);
   }
@@ -144,13 +144,13 @@ export default class Project extends EventEmitter implements ProjectInterface {
     const env: Env = envs.includes(process.env.NODE_ENV || '')
       ? (process.env.NODE_ENV as Env)
       : 'development';
-    return this.entrypoints.map(entrypoint =>
+    return this.entrypoints.map((entrypoint) =>
       entrypointToTarget(entrypoint, env)
     );
   }
 
   async emitAsync(eventName: string, eventData?: HookEvent): Promise<void> {
-    const tasks = this.listeners(eventName).map(event => {
+    const tasks = this.listeners(eventName).map((event) => {
       return async (): Promise<void> => {
         if (eventData) {
           await event(eventData);
@@ -166,7 +166,7 @@ export default class Project extends EventEmitter implements ProjectInterface {
     this.checkProjectIsValid();
 
     const skillMap = await this.getSkillMap();
-    skillMap.forEach(skill => {
+    skillMap.forEach((skill) => {
       Object.entries(skill.hooks || {}).forEach(([hookName, hookFn]) => {
         this.on(hookName, (event = {}): Promise<void> | void => {
           if (!hookFn) return;
@@ -176,14 +176,14 @@ export default class Project extends EventEmitter implements ProjectInterface {
             config: this.config,
             targets: this.targets,
             skill,
-            skillMap
+            skillMap,
           });
         });
       });
     });
 
     // Write all files of newly learned skills
-    ['afterNew', 'afterLearn', 'beforeRun'].forEach(hookName => {
+    ['afterNew', 'afterLearn', 'beforeRun'].forEach((hookName) => {
       this.on(hookName, async (event: NewEvent | LearnEvent | RunEvent) => {
         await this.writeSkillConfigs(skillMap);
         if ('skillsPkgNames' in event) {
@@ -320,7 +320,7 @@ ${JSON.stringify(result.errors)}`
     if (!hasEntrypoint) {
       throw new Error(
         `You might be in the wrong directory or this is not an Alfred project. The project must have at least one entrypoint. Here are some examples of entrypoints:\n\n${RAW_ENTRYPOINTS.map(
-          e => `"./src/${e}"`
+          (e) => `"./src/${e}"`
         ).join('\n')} \n\n Searching from ${this.root}\n\n`
       );
     }
@@ -328,7 +328,7 @@ ${JSON.stringify(result.errors)}`
     // Run validation that is specific to each target
     if (
       this.entrypoints.some(
-        entrypoint => entrypoint.filename === 'app.browser.js'
+        (entrypoint) => entrypoint.filename === 'app.browser.js'
       )
     ) {
       const indexHtmlPath = path.join(srcPath, 'index.html');
@@ -362,7 +362,7 @@ ${JSON.stringify(result.errors)}`
       // Install dependencies with NPM, which is the default
       case 'npm': {
         await new Promise((resolve, reject) => {
-          npm.load({ save: true, dev: dependenciesType === 'dev' }, err => {
+          npm.load({ save: true, dev: dependenciesType === 'dev' }, (err) => {
             if (err) reject(err);
 
             npm.commands.install(normalizedDeps, (_err, data) => {
@@ -385,7 +385,7 @@ ${JSON.stringify(result.errors)}`
       // to be used for end to end testing
       case 'writeOnly': {
         const newDependencies = normalizedDeps
-          .map(dependency => {
+          .map((dependency) => {
             if (dependency[0] !== '@') {
               return dependency.split('@');
             }
@@ -405,7 +405,7 @@ ${JSON.stringify(result.errors)}`
           mergeConfigs({}, this.pkg, {
             [dependenciesType === 'dev'
               ? 'devDependencies'
-              : 'dependencies']: newDependencies
+              : 'dependencies']: newDependencies,
           })
         );
         break;
@@ -437,10 +437,10 @@ ${JSON.stringify(result.errors)}`
   async writeSkillFiles(skills: Skill[]): Promise<void> {
     await Promise.all(
       skills
-        .filter(skill =>
-          this.targets.some(target => skillSupportsTarget(skill, target))
+        .filter((skill) =>
+          this.targets.some((target) => skillSupportsTarget(skill, target))
         )
-        .map(skill => skill.files.writeAllFiles(this))
+        .map((skill) => skill.files.writeAllFiles(this))
     );
   }
 
@@ -457,8 +457,8 @@ ${JSON.stringify(result.errors)}`
     // Write all configs
     await Promise.all(
       skills
-        .flatMap(skill => Array.from(skill.configs.values()))
-        .map(async config => {
+        .flatMap((skill) => Array.from(skill.configs.values()))
+        .map(async (config) => {
           const filePath = path.join(configsBasePath, config.filename);
 
           switch (config.write) {
@@ -507,10 +507,10 @@ ${JSON.stringify(result.errors)}`
                 [
                   ...(config.imports || []),
                   '',
-                  configToEvalString(configWithExports)
+                  configToEvalString(configWithExports),
                 ].join('\n'),
                 {
-                  parser
+                  parser,
                 }
               );
               await fs.promises.writeFile(filePath, formattedConfig);
@@ -537,11 +537,11 @@ ${JSON.stringify(result.errors)}`
 
     const pkgDeps: PkgWithDeps = [
       ...skillMap.values(),
-      ...additionalSkills
+      ...additionalSkills,
     ].reduce(
       (prev, curr) => ({
         dependencies: { ...prev.dependencies, ...curr.dependencies },
-        devDependencies: { ...prev.devDependencies, ...curr.devDependencies }
+        devDependencies: { ...prev.devDependencies, ...curr.devDependencies },
       }),
       { dependencies: {}, devDependencies: {} }
     );
@@ -559,7 +559,7 @@ ${JSON.stringify(result.errors)}`
 
     return {
       dependencies,
-      devDependencies
+      devDependencies,
     };
   }
 }

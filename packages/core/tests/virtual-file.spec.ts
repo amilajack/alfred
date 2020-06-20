@@ -17,20 +17,20 @@ describe('virtual file system', () => {
   const defaultTarget = {
     project: 'app' as ProjectEnum,
     env: 'development' as Env,
-    platform: 'browser' as Platform
+    platform: 'browser' as Platform,
   };
 
   const file = {
     alias: 'routes',
-    dest: 'src/routes.js'
+    dest: 'src/routes.js',
   };
 
   beforeAll(async () => {
     await project.init();
     mockFs({
       [path.join(__dirname, 'fixtures/react-app')]: {
-        foo: ''
-      }
+        foo: '',
+      },
     });
   });
 
@@ -50,26 +50,17 @@ describe('virtual file system', () => {
   });
 
   it('should rename files', () => {
-    defaultVfs
-      .add(file)
-      .get('routes')
-      .rename('routes.ts');
+    defaultVfs.add(file).get('routes').rename('routes.ts');
     expect(slash(defaultVfs.get('routes').dest)).toEqual('src/routes.ts');
   });
 
   it('should rename files', () => {
-    defaultVfs
-      .add(file)
-      .get('routes')
-      .rename('routes.ts');
+    defaultVfs.add(file).get('routes').rename('routes.ts');
     expect(slash(defaultVfs.get('routes').dest)).toEqual('src/routes.ts');
   });
 
   it('should write to file', () => {
-    defaultVfs
-      .add(file)
-      .get('routes')
-      .write('console.log(1);');
+    defaultVfs.add(file).get('routes').write('console.log(1);');
     expect(defaultVfs.get('routes')).toHaveProperty(
       'content',
       'console.log(1);'
@@ -84,7 +75,7 @@ describe('virtual file system', () => {
   describe('diffs', () => {
     it('should apply diffs', async () => {
       const typescriptSkill = {
-        name: 'typescript'
+        name: 'typescript',
       };
       const skillMap = await Skills(
         project,
@@ -116,7 +107,7 @@ export default { configureStore, history };
 
     it('should apply multiple diffs to file', async () => {
       const typescriptSkill = {
-        name: 'typescript'
+        name: 'typescript',
       };
       const reactSkill = {
         name: 'react',
@@ -124,8 +115,8 @@ export default { configureStore, history };
           {
             alias: 'routes',
             dest: 'src/routes',
-            content: 'route 1'
-          }
+            content: 'route 1',
+          },
         ],
         transforms: {
           typescript(skill): void {
@@ -136,8 +127,8 @@ export default { configureStore, history };
             ).applyDiff(`@@ -3 +3 @@
 +route 3`);
             return skill;
-          }
-        }
+          },
+        },
       };
 
       const skillMap = await Skills(
@@ -155,7 +146,7 @@ route 3`
 
     it('should replace content', async () => {
       const typescriptSkill = {
-        name: 'typescript'
+        name: 'typescript',
       };
       const reactSkill = {
         name: 'react',
@@ -163,15 +154,15 @@ route 3`
           {
             alias: 'routes',
             dest: 'src/routes',
-            content: 'route 1'
-          }
+            content: 'route 1',
+          },
         ],
         transforms: {
           typescript(skill) {
             skill.files.get('routes').replace('route 1', 'route 2');
             return skill;
-          }
-        }
+          },
+        },
       };
 
       const skillMap = await Skills(
@@ -192,7 +183,7 @@ route 3`
           dest: 'foo',
           condition(): boolean {
             return true;
-          }
+          },
         };
         const vfs = new VirtualFileSystem();
         vfs.add(skillWithFileCondition);
@@ -211,7 +202,7 @@ route 3`
           dest: 'foo',
           condition({ project }): boolean {
             return project.targets.length !== 0;
-          }
+          },
         };
         const vfs = new VirtualFileSystem();
         vfs.add(skillWithFileCondition);
@@ -229,8 +220,8 @@ route 3`
           content: 'foo',
           dest: 'foo',
           condition({ project }): boolean {
-            return project.targets.some(target => target.project === 'lib');
-          }
+            return project.targets.some((target) => target.project === 'lib');
+          },
         };
         const vfs = new VirtualFileSystem();
         vfs.add(skillWithFileCondition);

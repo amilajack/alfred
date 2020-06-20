@@ -6,18 +6,18 @@ describe('config', () => {
     it('should take plain object', () => {
       expect(
         new Config({
-          autoInstall: false
+          autoInstall: false,
         }).getConfigValues()
       ).toEqual({
         ...Config.DEFAULT_CONFIG,
-        autoInstall: false
+        autoInstall: false,
       });
     });
 
     it('should take an object with empty extends', () => {
       expect(
         new Config({
-          extends: []
+          extends: [],
         }).getConfigValues()
       ).toEqual({ ...Config.DEFAULT_CONFIG });
     });
@@ -26,33 +26,33 @@ describe('config', () => {
       jest.mock(
         'module-1',
         () => ({
-          configsDir: '.configs-dir-test-1'
+          configsDir: '.configs-dir-test-1',
         }),
         { virtual: true }
       );
       jest.mock(
         'module-2',
         () => ({
-          configsDir: '.configs-dir-test-2'
+          configsDir: '.configs-dir-test-2',
         }),
         { virtual: true }
       );
       expect(
         new Config({
-          extends: 'module-1'
+          extends: 'module-1',
         }).getConfigValues()
       ).toEqual({
         ...Config.DEFAULT_CONFIG,
-        configsDir: '.configs-dir-test-1'
+        configsDir: '.configs-dir-test-1',
       });
       expect(
         new Config({
           extends: ['module-2'],
-          configsDir: '.configs-dir-test-3'
+          configsDir: '.configs-dir-test-3',
         }).getConfigValues()
       ).toEqual({
         ...Config.DEFAULT_CONFIG,
-        configsDir: '.configs-dir-test-3'
+        configsDir: '.configs-dir-test-3',
       });
     });
 
@@ -62,7 +62,7 @@ describe('config', () => {
           new Config({
             // @ts-ignore
             // eslint-disable-next-line @typescript-eslint/no-empty-function
-            extends: (): void => {}
+            extends: (): void => {},
           })
       ).toThrowErrorMatchingSnapshot();
     });
@@ -72,7 +72,7 @@ describe('config', () => {
         () =>
           new Config({
             // @ts-ignore
-            extends: [{ extends: {} }]
+            extends: [{ extends: {} }],
           })
       ).toThrow();
     });
@@ -82,27 +82,27 @@ describe('config', () => {
         'alfred-config-bliss',
         () => ({
           autoInstall: true,
-          skills: ['@alfred/skill-react']
+          skills: ['@alfred/skill-react'],
         }),
         { virtual: true }
       );
       expect(
         new Config({
-          extends: ['bliss']
+          extends: ['bliss'],
         }).getConfigValues()
       ).toEqual({
         ...Config.DEFAULT_CONFIG,
         autoInstall: true,
-        skills: [['@alfred/skill-react', {}]]
+        skills: [['@alfred/skill-react', {}]],
       });
       expect(
         new Config({
-          extends: 'alfred-config-bliss'
+          extends: 'alfred-config-bliss',
         }).getConfigValues()
       ).toEqual({
         ...Config.DEFAULT_CONFIG,
         autoInstall: true,
-        skills: [['@alfred/skill-react', {}]]
+        skills: [['@alfred/skill-react', {}]],
       });
     });
 
@@ -111,18 +111,18 @@ describe('config', () => {
         '@jane-doe/alfred-config-bliss',
         () => ({
           autoInstall: true,
-          skills: ['@alfred/skill-react']
+          skills: ['@alfred/skill-react'],
         }),
         { virtual: true }
       );
       expect(
         new Config({
-          extends: ['@jane-doe/alfred-config-bliss']
+          extends: ['@jane-doe/alfred-config-bliss'],
         }).getConfigValues()
       ).toEqual({
         ...Config.DEFAULT_CONFIG,
         autoInstall: true,
-        skills: [['@alfred/skill-react', {}]]
+        skills: [['@alfred/skill-react', {}]],
       });
     });
 
@@ -136,16 +136,16 @@ describe('config', () => {
               '@alfred/skill-lodash',
               {
                 collections: true,
-                paths: true
-              }
-            ]
-          ]
+                paths: true,
+              },
+            ],
+          ],
         }),
         { virtual: true }
       );
       expect(
         new Config({
-          extends: 'alfred-config-test'
+          extends: 'alfred-config-test',
         }).getConfigValues()
       ).toEqual({
         ...Config.DEFAULT_CONFIG,
@@ -155,10 +155,10 @@ describe('config', () => {
             '@alfred/skill-lodash',
             {
               collections: true,
-              paths: true
-            }
-          ]
-        ]
+              paths: true,
+            },
+          ],
+        ],
       });
       expect(
         new Config({
@@ -168,16 +168,16 @@ describe('config', () => {
             [
               '@alfred/skill-babel',
               {
-                plugins: ['@babel/preset-flow']
-              }
+                plugins: ['@babel/preset-flow'],
+              },
             ],
             [
               '@alfred/skill-babel',
               {
-                plugins: ['@babel/preset-react']
-              }
-            ]
-          ]
+                plugins: ['@babel/preset-react'],
+              },
+            ],
+          ],
         }).getConfigValues()
       ).toEqual({
         ...Config.DEFAULT_CONFIG,
@@ -187,17 +187,17 @@ describe('config', () => {
             '@alfred/skill-lodash',
             {
               collections: true,
-              paths: true
-            }
+              paths: true,
+            },
           ],
           ['@alfred/skill-parcel', {}],
           [
             '@alfred/skill-babel',
             {
-              plugins: ['@babel/preset-flow', '@babel/preset-react']
-            }
-          ]
-        ]
+              plugins: ['@babel/preset-flow', '@babel/preset-react'],
+            },
+          ],
+        ],
       });
     });
 

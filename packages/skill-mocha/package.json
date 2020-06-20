@@ -14,7 +14,7 @@
     "@alfred/types": "^0.2.0"
   },
   "devDependencies": {
-    "mocha": "^7.1.0"
+    "mocha": "^8.0.1"
   },
   "peerDependencies": {
     "mocha": "^7.0.1"

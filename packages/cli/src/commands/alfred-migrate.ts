@@ -12,7 +12,7 @@ import Providers from '@alfred/migrate';
 
   const project = await alfred();
 
-  const filesPattern: Array<string> = parsedArguments.args.map(arg =>
+  const filesPattern: Array<string> = parsedArguments.args.map((arg) =>
     path.join(project.root, arg)
   );
 
@@ -28,6 +28,6 @@ import Providers from '@alfred/migrate';
     packageJsonPath: project.pkgPath,
     unsafe: parsedArguments.unsafe,
     verbose: parsedArguments.verbose,
-    write: parsedArguments.write
+    write: parsedArguments.write,
   });
 })();

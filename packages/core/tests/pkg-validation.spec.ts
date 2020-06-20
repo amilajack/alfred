@@ -6,7 +6,7 @@ function getPackageJson(
   return {
     name: 'test-package',
     version: '0.5.0',
-    ...extra
+    ...extra,
   };
 }
 
@@ -17,9 +17,9 @@ const npmWarningFields = {
   bugs: 'http://example.com/bugs',
   repository: {
     type: 'git',
-    url: 'git@github.com:gorillamania/package.json-validator.git'
+    url: 'git@github.com:gorillamania/package.json-validator.git',
   },
-  licenses: [{ type: 'MIT', url: 'http://example.com/license' }]
+  licenses: [{ type: 'MIT', url: 'http://example.com/license' }],
 };
 
 describe('Basic', () => {
@@ -111,7 +111,7 @@ describe('misc', () => {
         'x-version': '1.2.x',
         'tilde-top': '~1',
         'caret-top': '^1',
-        file: 'file:./'
+        file: 'file:./',
       },
       devDependencies: {
         range: '1.2.3 - 2.3.4',
@@ -119,12 +119,12 @@ describe('misc', () => {
         gteq: '>=1.2.3',
         'verion-build': '1.2.3+build2012',
         lt: '<1.2.3',
-        gt: '>1.2.3'
-      }
+        gt: '>1.2.3',
+      },
     });
     const result = PkgValidation.validate(JSON.stringify(json), {
       warnings: false,
-      recommendations: false
+      recommendations: false,
     });
     expect(result).toEqual({
       critical: true,
@@ -133,7 +133,7 @@ describe('misc', () => {
       errors: [],
       recommendations: [],
       valid: true,
-      warnings: []
+      warnings: [],
     });
   });
 
@@ -144,12 +144,12 @@ describe('misc', () => {
         star: '*',
         empty: '',
         url: 'https://github.com/gorillamania/package.json-validator',
-        '@reactivex/rxjs': '^5.0.0-alpha.7'
-      }
+        '@reactivex/rxjs': '^5.0.0-alpha.7',
+      },
     });
     const result = PkgValidation.validate(JSON.stringify(json), {
       warnings: false,
-      recommendations: false
+      recommendations: false,
     });
     expect(result).toEqual({
       critical: true,
@@ -158,7 +158,7 @@ describe('misc', () => {
       errors: [],
       recommendations: [],
       valid: true,
-      warnings: []
+      warnings: [],
     });
   });
 
@@ -166,7 +166,7 @@ describe('misc', () => {
     let json = getPackageJson();
     let result = PkgValidation.validate(JSON.stringify(json), {
       warnings: false,
-      recommendations: false
+      recommendations: false,
     });
     expect(result).toEqual({
       critical: true,
@@ -176,15 +176,15 @@ describe('misc', () => {
       errors: [],
       recommendations: [],
       valid: true,
-      warnings: []
+      warnings: [],
     });
 
-    ['name', 'version'].forEach(field => {
+    ['name', 'version'].forEach((field) => {
       json = getPackageJson();
       delete json[field];
       result = PkgValidation.validate(JSON.stringify(json), {
         warnings: false,
-        recommendations: false
+        recommendations: false,
       });
 
       expect(result).toEqual({
@@ -194,7 +194,7 @@ describe('misc', () => {
         errors: [`Missing required field: ${field}`],
         recommendations: [],
         valid: false,
-        warnings: []
+        warnings: [],
       });
     });
   });
@@ -203,7 +203,7 @@ describe('misc', () => {
     let json = getPackageJson(npmWarningFields);
     let result = PkgValidation.validate(JSON.stringify(json), {
       warnings: true,
-      recommendations: false
+      recommendations: false,
     });
     expect(result).toEqual({
       critical: true,
@@ -212,15 +212,15 @@ describe('misc', () => {
       errors: [],
       recommendations: [],
       valid: true,
-      warnings: []
+      warnings: [],
     });
 
-    Object.keys(npmWarningFields).forEach(npmWarningField => {
+    Object.keys(npmWarningFields).forEach((npmWarningField) => {
       json = getPackageJson(npmWarningFields);
       delete json[npmWarningField];
       result = PkgValidation.validate(JSON.stringify(json), {
         warnings: true,
-        recommendations: false
+        recommendations: false,
       });
       expect(result).toEqual({
         critical: true,
@@ -229,7 +229,7 @@ describe('misc', () => {
         errors: [],
         recommendations: [],
         valid: true,
-        warnings: [`Missing recommended field: ${npmWarningField}`]
+        warnings: [`Missing recommended field: ${npmWarningField}`],
       });
     });
   });
@@ -237,12 +237,12 @@ describe('misc', () => {
   it('Recommended fields', () => {
     const recommendedFields = {
       homepage: 'http://example.com',
-      engines: { node: '>=0.10.3 <0.12' }
+      engines: { node: '>=0.10.3 <0.12' },
     };
     let json = getPackageJson(recommendedFields);
     let result = PkgValidation.validate(JSON.stringify(json), {
       warnings: false,
-      recommendations: true
+      recommendations: true,
     });
     expect(result).toEqual({
       critical: true,
@@ -251,7 +251,7 @@ describe('misc', () => {
       errors: [],
       recommendations: [],
       valid: true,
-      warnings: []
+      warnings: [],
     });
 
     Object.entries(recommendedFields).forEach(([recommendedField]) => {
@@ -259,7 +259,7 @@ describe('misc', () => {
       delete json[recommendedField];
       result = PkgValidation.validate(JSON.stringify(json), {
         warnings: false,
-        recommendations: true
+        recommendations: true,
       });
       expect(result).toEqual({
         critical: true,
@@ -268,7 +268,7 @@ describe('misc', () => {
         errors: [],
         recommendations: [`Missing optional field: ${recommendedField}`],
         valid: true,
-        warnings: []
+        warnings: [],
       });
     });
   });
@@ -280,7 +280,7 @@ describe('misc', () => {
     let json = getPackageJson(npmWarningFields);
     let result = PkgValidation.validate(JSON.stringify(json), {
       warnings: true,
-      recommendations: false
+      recommendations: false,
     });
     expect(result).toEqual({
       critical: true,
@@ -289,7 +289,7 @@ describe('misc', () => {
       errors: [],
       recommendations: [],
       valid: true,
-      warnings: []
+      warnings: [],
     });
 
     // licenses as a single type
@@ -298,7 +298,7 @@ describe('misc', () => {
     json.license = 'MIT';
     result = PkgValidation.validate(JSON.stringify(json), {
       warnings: true,
-      recommendations: false
+      recommendations: false,
     });
     expect(result).toEqual({
       critical: true,
@@ -307,7 +307,7 @@ describe('misc', () => {
       errors: [],
       recommendations: [],
       valid: true,
-      warnings: []
+      warnings: [],
     });
 
     // neither
@@ -315,7 +315,7 @@ describe('misc', () => {
     delete json.licenses;
     result = PkgValidation.validate(JSON.stringify(json), {
       warnings: true,
-      recommendations: false
+      recommendations: false,
     });
     expect(result).toEqual({
       critical: true,
@@ -324,7 +324,7 @@ describe('misc', () => {
       errors: [],
       recommendations: [],
       valid: true,
-      warnings: ['Missing recommended field: licenses']
+      warnings: ['Missing recommended field: licenses'],
     });
   });
 });
