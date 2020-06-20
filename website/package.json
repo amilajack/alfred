@@ -26,5 +26,17 @@
     "eslint-plugin-react": "^7.18.3",
     "react": "^16.13.0",
     "react-dom": "^16.13.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "airbnb",
+      "bliss"
+    ],
+    "rules": {
+      "import/no-unresolved": "off",
+      "react/jsx-filename-extension": "off",
+      "react/prop-types": "off",
+      "react/jsx-props-no-spreading": "off"
+    }
   }
 }
