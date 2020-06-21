@@ -1,6 +1,6 @@
 {
   "name": "@alfred/task-lint",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "main": "lib/index.js",
   "gitHead": "45f5c45f7922f74538a55f6d5c84d34517a195a2",

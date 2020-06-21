@@ -1,7 +1,7 @@
 {
   "name": "@alfred/core",
   "description": "A Modular Toolchain",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "main": "./lib/index.js",
   "scripts": {
@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@alfred/helpers": "^0.2.0",
-    "@alfred/merge-configs": "^0.0.1",
+    "@alfred/merge-configs": "^0.0.2",
     "@alfred/skill-babel": "^0.2.0",
     "@alfred/skill-eslint": "^0.2.0",
     "@alfred/skill-jest": "^0.2.0",

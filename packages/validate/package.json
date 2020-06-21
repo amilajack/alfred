@@ -1,6 +1,6 @@
 {
   "name": "@alfred/validate",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "dependencies": {
     "json-to-ast": "^2.1.0"
