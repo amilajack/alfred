@@ -2,7 +2,7 @@ import path from 'path';
 import {
   configStringify,
   configSerialize,
-  configToEvalString
+  configToEvalString,
 } from '@alfred/helpers';
 import mergeConfigs from '@alfred/merge-configs';
 import {
@@ -14,7 +14,7 @@ import {
   Platform,
   ProjectEnum,
   ConfigValue,
-  RunForEachTargetEvent
+  RunForEachTargetEvent,
 } from '@alfred/types';
 import getPort from 'get-port';
 
@@ -38,7 +38,7 @@ const supports = {
   // @TODO: Add node to targets
   platforms: ['browser'] as Platform[],
   // Project type
-  projects: ['app'] as ProjectEnum[]
+  projects: ['app'] as ProjectEnum[],
 };
 
 const shouldOpenInBrowser =
@@ -49,7 +49,7 @@ const skill: RawSkill = {
   supports,
   tasks: [
     ['@alfred/task-build', { supports }],
-    ['@alfred/task-start', { supports }]
+    ['@alfred/task-start', { supports }],
   ],
   configs: [
     {
@@ -59,13 +59,13 @@ const skill: RawSkill = {
         mode: 'development',
         output: {
           path: path.join('<projectRoot>', 'targets', 'dev'),
-          publicPath: './targets/dev'
+          publicPath: './targets/dev',
         },
         resolve: {
-          extensions: ['.mjs', '.js', '.json']
+          extensions: ['.mjs', '.js', '.json'],
         },
-        plugins: []
-      }
+        plugins: [],
+      },
     },
     {
       alias: 'webpack.prod',
@@ -73,11 +73,11 @@ const skill: RawSkill = {
       config: {
         output: {
           path: path.join('<projectRoot>', 'targets', 'prod'),
-          publicPath: './targets/prod'
+          publicPath: './targets/prod',
         },
         // @TODO: optimizations, etc
-        mode: 'production'
-      }
+        mode: 'production',
+      },
     },
     {
       alias: 'webpack.dev',
@@ -89,11 +89,11 @@ const skill: RawSkill = {
           // @TODO
           'react-hot-loader/patch',
           'webpack-dev-server/client?http://localhost:1234/',
-          'webpack/hot/only-dev-server'
+          'webpack/hot/only-dev-server',
         ],
         output: {
           path: path.join('<projectRoot>', 'targets', 'dev'),
-          publicPath: 'http://localhost:1234/'
+          publicPath: 'http://localhost:1234/',
         },
         devServer: {
           open: shouldOpenInBrowser,
@@ -110,21 +110,21 @@ const skill: RawSkill = {
           watchOptions: {
             aggregateTimeout: 300,
             ignored: /node_modules/,
-            poll: 100
+            poll: 100,
           },
           historyApiFallback: {
             verbose: true,
-            disableDotRule: false
-          }
+            disableDotRule: false,
+          },
         },
         plugins: [
           configStringify`
             new webpack.HotModuleReplacementPlugin({
               multiStep: true
             })
-          `
-        ]
-      }
+          `,
+        ],
+      },
     },
     {
       alias: 'webpack.node',
@@ -132,10 +132,10 @@ const skill: RawSkill = {
       config: {
         entry: [path.join('<projectRoot>', 'src', 'app.node.js')],
         output: {
-          filename: 'app.node.js'
+          filename: 'app.node.js',
         },
-        target: 'node'
-      }
+        target: 'node',
+      },
     },
     {
       alias: 'webpack.browser',
@@ -143,11 +143,11 @@ const skill: RawSkill = {
       config: {
         entry: [path.join('<projectRoot>', 'src', 'app.browser.js')],
         output: {
-          filename: 'app.browser.js'
+          filename: 'app.browser.js',
         },
-        target: 'web'
-      }
-    }
+        target: 'web',
+      },
+    },
   ],
   hooks: {
     async run({ project, skill, event }): Promise<void> {
@@ -194,7 +194,7 @@ const skill: RawSkill = {
       }
       if (mergedConfig.entry) {
         if (Array.isArray(mergedConfig.entry)) {
-          mergedConfig.entry = mergedConfig.entry.map(entry =>
+          mergedConfig.entry = mergedConfig.entry.map((entry) =>
             replaceProjectRoot(entry, project.root)
           );
         } else {
@@ -212,7 +212,7 @@ const skill: RawSkill = {
           WebpackDevServer.addDevServerEntrypoints(mergedConfig, {
             contentBase: path.join(project.root, 'src'),
             hot: true,
-            host: 'localhost'
+            host: 'localhost',
           });
           const compiler = Webpack(mergedConfig);
           const { devServer } = mergedConfig;
@@ -233,7 +233,7 @@ const skill: RawSkill = {
               target.env === 'production' ? 'optimized' : 'unoptimized'
             } build`
           );
-          // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           webpack(mergedConfig, (err, stats) => {
             if (err) {
@@ -254,7 +254,7 @@ const skill: RawSkill = {
         default:
           throw new Error(`Invalid subcommand: "${subcommand}"`);
       }
-    }
+    },
   },
   transforms: {
     babel(skill: Skill, { toSkill }: TransformArgs): Skill {
@@ -270,12 +270,12 @@ const skill: RawSkill = {
                   loader: 'babel-loader',
                   options: {
                     ...babelConfig,
-                    cacheDirectory: true
-                  }
-                }
-              }
-            ]
-          }
+                    cacheDirectory: true,
+                  },
+                },
+              },
+            ],
+          },
         })
         .addDepsFromPkg('babel-loader');
     },
@@ -286,8 +286,8 @@ const skill: RawSkill = {
             configStringify`(() => {
               const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
               return new LodashModuleReplacementPlugin()
-            })()`
-          ]
+            })()`,
+          ],
         })
         .addDepsFromPkg('lodash-webpack-plugin');
     },
@@ -295,14 +295,14 @@ const skill: RawSkill = {
       // eslint-disable-next-line global-require
       return skill.extendConfig('webpack.base', {
         resolve: {
-          extensions: ['.jsx']
+          extensions: ['.jsx'],
         },
         devServer: {
-          hot: true
+          hot: true,
         },
-        plugins: [configStringify`new webpack.HotModuleReplacementPlugin()`]
+        plugins: [configStringify`new webpack.HotModuleReplacementPlugin()`],
       });
-    }
-  }
+    },
+  },
 };
 export default skill;

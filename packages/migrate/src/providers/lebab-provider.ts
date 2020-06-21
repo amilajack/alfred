@@ -18,9 +18,9 @@ export default class LebabProvider implements ProviderInterface {
       'no-strict',
       'commonjs',
       'exponent',
-      'multi-var'
+      'multi-var',
     ],
-    unsafe: ['let', 'class', 'template', 'default-param', 'includes']
+    unsafe: ['let', 'class', 'template', 'default-param', 'includes'],
   };
 
   providerName = 'lebab';
@@ -47,8 +47,8 @@ export default class LebabProvider implements ProviderInterface {
    */
   async transform(files: Array<string>, input: ProviderInput) {
     await Promise.all(
-      files.map(file =>
-        readFileAsync(file).then(buffer => {
+      files.map((file) =>
+        readFileAsync(file).then((buffer) => {
           const result = lebab.transform(
             buffer.toString(),
             this.getTransforms(input)

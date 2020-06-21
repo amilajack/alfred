@@ -4,7 +4,7 @@ const skill: RawSkill = {
   name: 'lodash',
   description: 'lodash optimizations for your app',
   configs: [],
-  transforms: {}
+  transforms: {},
 };
 
 export default skill;

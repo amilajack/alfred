@@ -14,7 +14,7 @@ const typeToPath = {
 
 export function classNames(classSet) {
   return Object.keys(classSet)
-    .filter(key => classSet[key])
+    .filter((key) => classSet[key])
     .join(' ');
 }
 
@@ -28,8 +28,8 @@ export default class GitHubButton extends React.Component {
 
   componentDidMount() {
     return fetch(this.getRequestUrl())
-      .then(res => res.json())
-      .then(res => this.setCount(res));
+      .then((res) => res.json())
+      .then((res) => this.setCount(res));
   }
 
   setCount(data) {

@@ -10,12 +10,12 @@ import ParseInput from './helpers/parse-input';
 import { copyFileAsync, readFileAsync, writeFileAsync } from './helpers/fs';
 import {
   UserProviderInput,
-  ProviderInput
+  ProviderInput,
 } from './providers/provider-interface';
 
 function checkFileExists(filepath: string): Promise<boolean> {
-  return new Promise(resolve => {
-    fs.access(filepath, fs.constants.F_OK, error => {
+  return new Promise((resolve) => {
+    fs.access(filepath, fs.constants.F_OK, (error) => {
       resolve(!error);
     });
   });
@@ -28,7 +28,7 @@ async function createBackupFiles(
   const randomNumber = random();
 
   await Promise.all(
-    files.map(file => {
+    files.map((file) => {
       const tmpFilePath = path.join(
         os.tmpdir(),
         `${path.parse(file).name}-${randomNumber}`
@@ -75,7 +75,7 @@ export function handleInput(userInput: UserProviderInput): Promise<string[]> {
         const files = await ParseInput(userInput.files);
 
         return files.filter(
-          file =>
+          (file) =>
             gitignore.accepts(file.substring(root.length)) &&
             !file.includes('node_modules') &&
             !file.includes('bower_components')
@@ -88,7 +88,7 @@ export default async function Providers(
   userInput: UserProviderInput
 ): Promise<Array<string> | void | Array<string>> {
   const providers = [LebabProvider, EslintProvider]
-    .map(Provider => new Provider())
+    .map((Provider) => new Provider())
     // Sort the providers by priority.
     // @TODO Temporarily sort by priority number. Eventually we'll implement an listener pattern
     //        to hook into when each provider has finished. Providers will listen for when other
@@ -107,7 +107,7 @@ export default async function Providers(
 
   const parsedUserInput = {
     ...userInput,
-    files: await handleInput(userInput)
+    files: await handleInput(userInput),
   };
 
   // Validate files
@@ -136,13 +136,13 @@ export default async function Providers(
     write: true,
     // User provided config
     ...parsedUserInput,
-    files: Array.from(mappings.values())
+    files: Array.from(mappings.values()),
   };
 
   // Invoke each provider
   const transformations = providers
     // Filter any unsafe plugins by default. Allow user override
-    .filter(provider => (input.unsafe ? true : provider.safe))
+    .filter((provider) => (input.unsafe ? true : provider.safe))
     // Chain async transformations
     .reduce(
       (promise: Promise<ProviderInput>, provider) =>
@@ -157,11 +157,11 @@ export default async function Providers(
   // If we dont want to write to the original file, return the code in text form.
   // This is ideal for testing
   if (!input.write) {
-    const filePromises = Array.from(mappings.values()).map(file =>
+    const filePromises = Array.from(mappings.values()).map((file) =>
       readFileAsync(file)
     );
     const fileBuffers = await Promise.all(filePromises);
-    return fileBuffers.map(fileBuffer => fileBuffer.toString()).sort();
+    return fileBuffers.map((fileBuffer) => fileBuffer.toString()).sort();
   }
 
   // Write the temporary files to the original files
@@ -171,7 +171,7 @@ export default async function Providers(
 
   // Clear the backups
   return Promise.all(
-    Array.from(mappings.values()).map(file => {
+    Array.from(mappings.values()).map((file) => {
       fs.unlinkSync(file);
       return file;
     })

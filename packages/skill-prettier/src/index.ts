@@ -13,9 +13,10 @@ const skill: RawSkill = {
       pkgProperty: 'prettier',
       fileType: 'json',
       config: {
-        singleQuote: true
-      }
-    }
+        singleQuote: true,
+        trailingComma: 'none',
+      },
+    },
   ],
   hooks: {
     async run({ project, skill, config, event }): Promise<void> {
@@ -29,11 +30,11 @@ const skill: RawSkill = {
         '--write',
         '**/*.js',
         ...(event.flags || []),
-        write === 'file' ? `--config ${configPath}` : ''
+        write === 'file' ? `--config ${configPath}` : '',
       ]);
-    }
+    },
   },
-  transforms: {}
+  transforms: {},
 };
 
 export default skill;

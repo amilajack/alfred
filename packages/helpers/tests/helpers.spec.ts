@@ -3,14 +3,14 @@ import {
   configStringify,
   configToEvalString,
   configSerialize,
-  parseFlags
+  parseFlags,
 } from '../src';
 
 describe('Helpers', () => {
   describe('parse flags', () => {
     expect(parseFlags('--name jack')).toEqual({
       _: [],
-      name: 'jack'
+      name: 'jack',
     });
   });
 
@@ -19,8 +19,8 @@ describe('Helpers', () => {
       const config = {
         plugins: [
           configStringify`new webpack.Plugin()`,
-          configStringify`new webpack.Plugin()`
-        ]
+          configStringify`new webpack.Plugin()`,
+        ],
       };
       expect(configToEvalString(configSerialize(config))).toEqual(
         '{"plugins":[new webpack.Plugin(),new webpack.Plugin()]}'
@@ -32,8 +32,8 @@ describe('Helpers', () => {
         plugins: [
           configStringify`
             new webpack.Plugin()
-          `
-        ]
+          `,
+        ],
       };
       expect(configToEvalString(configSerialize(config))).toEqual(
         '{"plugins":[             new webpack.Plugin()           ]}'
@@ -47,10 +47,10 @@ describe('Helpers', () => {
         getDepsFromPkg(['react'], {
           peerDependencies: {},
           dependencies: {},
-          devDependencies: { react: '16.0.0' }
+          devDependencies: { react: '16.0.0' },
         })
       ).toEqual({
-        react: '16.0.0'
+        react: '16.0.0',
       });
     });
 
@@ -61,12 +61,12 @@ describe('Helpers', () => {
           {
             peerDependencies: {},
             dependencies: { react: '16.0.0' },
-            devDependencies: {}
+            devDependencies: {},
           },
           'dep'
         )
       ).toEqual({
-        react: '16.0.0'
+        react: '16.0.0',
       });
     });
 
@@ -75,7 +75,7 @@ describe('Helpers', () => {
         getDepsFromPkg([], {
           peerDependencies: {},
           dependencies: {},
-          devDependencies: {}
+          devDependencies: {},
         })
       ).toEqual({});
     });
@@ -85,7 +85,7 @@ describe('Helpers', () => {
         getDepsFromPkg(['react'], {
           peerDependencies: {},
           dependencies: {},
-          devDependencies: {}
+          devDependencies: {},
         })
       ).toThrow(
         'Package "react" does not exist in devDependencies of skill package.json'
@@ -97,10 +97,10 @@ describe('Helpers', () => {
         getDepsFromPkg('react', {
           peerDependencies: {},
           dependencies: {},
-          devDependencies: { react: '16.0.0' }
+          devDependencies: { react: '16.0.0' },
         })
       ).toEqual({
-        react: '16.0.0'
+        react: '16.0.0',
       });
     });
   });

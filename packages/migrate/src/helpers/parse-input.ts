@@ -25,13 +25,13 @@ export default function parseInput(
   files: Array<string> = []
 ): Promise<Array<string>> {
   return Promise.all(
-    files.map(file =>
-      statAsync(file).then(stat =>
+    files.map((file) =>
+      statAsync(file).then((stat) =>
         stat.isDirectory() ? findJsFiles(file) : [file]
       )
     )
   )
     .then(flatten)
     .then(uniq)
-    .then(filteredFiles => filteredFiles.sort());
+    .then((filteredFiles) => filteredFiles.sort());
 }

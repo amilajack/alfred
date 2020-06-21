@@ -63,7 +63,7 @@ export const TEMPLATE_DATA_DEFAULTS = {
   main: '',
   targetFile: '',
   module: '',
-  alfredPkgSemver: ''
+  alfredPkgSemver: '',
 };
 
 export type GitConfig = {
@@ -90,7 +90,7 @@ export async function addEntrypoints(
     APP_TEMPLATE,
     LIB_TEMPLATE,
     APP_BROWSER_HTML_TEMPLATE,
-    TEST_TEMPLATE
+    TEST_TEMPLATE,
   ] = await Promise.all(
     ['app.js.hbs', 'lib.js.hbs', 'index.html.hbs', 'test.js.hbs'].map(
       compileTemplate
@@ -99,7 +99,7 @@ export async function addEntrypoints(
 
   const writeIndexHtml = (): { file: string; content: string }[] => {
     if (
-      entrypoints.some(entrypoint => entrypoint.filename === 'app.browser.js')
+      entrypoints.some((entrypoint) => entrypoint.filename === 'app.browser.js')
     ) {
       const templateData: TemplateData = {
         ...TEMPLATE_DATA_DEFAULTS,
@@ -107,13 +107,13 @@ export async function addEntrypoints(
         platform: 'browser',
         isApp: true,
         isBrowser: true,
-        isLib: false
+        isLib: false,
       };
       return [
         {
           file: './src/index.html',
-          content: APP_BROWSER_HTML_TEMPLATE(templateData)
-        }
+          content: APP_BROWSER_HTML_TEMPLATE(templateData),
+        },
       ];
     }
     return [];
@@ -121,7 +121,7 @@ export async function addEntrypoints(
 
   await Promise.all(
     entrypoints
-      .map(entrypoint => {
+      .map((entrypoint) => {
         const { project, platform } = entrypoint;
         const isApp = project === 'app';
         const isBrowser = platform === 'browser';
@@ -132,18 +132,18 @@ export async function addEntrypoints(
           platform,
           isApp,
           isLib: !isApp,
-          isBrowser
+          isBrowser,
         };
 
         return [
           {
             file: `./src/${project}.${platform}.js`,
-            content: (isApp ? APP_TEMPLATE : LIB_TEMPLATE)(templateData)
+            content: (isApp ? APP_TEMPLATE : LIB_TEMPLATE)(templateData),
           },
           {
             file: `./tests/${project}.${platform}.spec.js`,
-            content: TEST_TEMPLATE(templateData)
-          }
+            content: TEST_TEMPLATE(templateData),
+          },
         ];
       })
       .flat()
@@ -163,13 +163,13 @@ export async function addBoilerplate(
     GITIGNORE_TEMPLATE,
     PACKAGE_JSON_TEMPLATE,
     README_TEMPLATE,
-    EDITORCONFIG_TEMPLATE
+    EDITORCONFIG_TEMPLATE,
   ] = await Promise.all(
     [
       '.gitignore.hbs',
       'package.json.hbs',
       'README.md.hbs',
-      '.editorconfig.hbs'
+      '.editorconfig.hbs',
     ].map(compileTemplate)
   );
 
@@ -177,16 +177,16 @@ export async function addBoilerplate(
     [
       {
         file: '.gitignore',
-        content: GITIGNORE_TEMPLATE(templateData)
+        content: GITIGNORE_TEMPLATE(templateData),
       },
       {
         file: '.editorconfig',
-        content: EDITORCONFIG_TEMPLATE(templateData)
+        content: EDITORCONFIG_TEMPLATE(templateData),
       },
       {
         file: 'README.md',
-        content: README_TEMPLATE(templateData)
-      }
+        content: README_TEMPLATE(templateData),
+      },
     ].map(({ file, content }) =>
       fs.promises.writeFile(path.join(root, file), content)
     )
@@ -203,8 +203,8 @@ export async function addBoilerplate(
     {
       project,
       platform,
-      filename: [project, platform, 'js'].join('.')
-    }
+      filename: [project, platform, 'js'].join('.'),
+    },
   ];
   await addEntrypoints(root, entrypoints);
 }

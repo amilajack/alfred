@@ -1,36 +1,36 @@
 function mergeStrategyTests(merge) {
   test('should allow setting to array append', () => {
     const a = {
-      entry: ['foo', 'bar', 'baz']
+      entry: ['foo', 'bar', 'baz'],
     };
     const b = {
-      entry: ['zoo']
+      entry: ['zoo'],
     };
     const result = {
-      entry: ['foo', 'bar', 'baz', 'zoo']
+      entry: ['foo', 'bar', 'baz', 'zoo'],
     };
 
     expect(
       merge({
-        entry: 'append'
+        entry: 'append',
       })(a, b)
     ).toEqual(result);
   });
 
   test('should allow setting to array prepend', () => {
     const a = {
-      entry: ['foo', 'bar', 'baz']
+      entry: ['foo', 'bar', 'baz'],
     };
     const b = {
-      entry: ['zoo']
+      entry: ['zoo'],
     };
     const result = {
-      entry: ['zoo', 'foo', 'bar', 'baz']
+      entry: ['zoo', 'foo', 'bar', 'baz'],
     };
 
     expect(
       merge({
-        entry: 'prepend'
+        entry: 'prepend',
       })(a, b)
     ).toEqual(result);
   });
@@ -38,25 +38,25 @@ function mergeStrategyTests(merge) {
   test('should allow setting to object append', () => {
     const a = {
       entry: {
-        foo: 'bar'
-      }
+        foo: 'bar',
+      },
     };
     const b = {
       entry: {
-        bar: 'baz'
-      }
+        bar: 'baz',
+      },
     };
     const result = {
       entry: {
         foo: 'bar',
-        bar: 'baz'
-      }
+        bar: 'baz',
+      },
     };
 
     expect(
       Object.keys(
         merge({
-          entry: 'append'
+          entry: 'append',
         })(a, b).entry
       )
     ).toEqual(Object.keys(result.entry));
@@ -65,25 +65,25 @@ function mergeStrategyTests(merge) {
   test('should allow setting to object prepend', () => {
     const a = {
       entry: {
-        foo: 'bar'
-      }
+        foo: 'bar',
+      },
     };
     const b = {
       entry: {
-        bar: 'baz'
-      }
+        bar: 'baz',
+      },
     };
     const result = {
       entry: {
         bar: 'baz',
-        foo: 'bar'
-      }
+        foo: 'bar',
+      },
     };
 
     expect(
       Object.keys(
         merge({
-          entry: 'prepend'
+          entry: 'prepend',
         })(a, b).entry
       )
     ).toEqual(Object.keys(result.entry));
@@ -91,19 +91,19 @@ function mergeStrategyTests(merge) {
 
   test('should allow replace strategy for arrays', () => {
     const a = {
-      entry: ['foo']
+      entry: ['foo'],
     };
     const b = {
-      entry: ['bar']
+      entry: ['bar'],
     };
     const result = {
-      entry: ['bar']
+      entry: ['bar'],
     };
 
     expect(
       Object.keys(
         merge({
-          entry: 'replace'
+          entry: 'replace',
         })(a, b).entry
       )
     ).toEqual(Object.keys(result.entry));
@@ -112,24 +112,24 @@ function mergeStrategyTests(merge) {
   test('should allow replace strategy for objects', () => {
     const a = {
       entry: {
-        foo: 'bar'
-      }
+        foo: 'bar',
+      },
     };
     const b = {
       entry: {
-        bar: 'baz'
-      }
+        bar: 'baz',
+      },
     };
     const result = {
       entry: {
-        bar: 'baz'
-      }
+        bar: 'baz',
+      },
     };
 
     expect(
       Object.keys(
         merge({
-          entry: 'replace'
+          entry: 'replace',
         })(a, b).entry
       )
     ).toEqual(Object.keys(result.entry));
@@ -139,18 +139,18 @@ function mergeStrategyTests(merge) {
     const a = {
       postcss() {
         return ['a'];
-      }
+      },
     };
     const b = {
       postcss() {
         return ['b'];
-      }
+      },
     };
     const expected = ['b', 'a'];
 
     expect(
       merge({
-        postcss: 'prepend'
+        postcss: 'prepend',
       })(a, b).postcss()
     ).toEqual(expected);
   });
@@ -159,30 +159,30 @@ function mergeStrategyTests(merge) {
     const a = {
       postcss() {
         return {
-          a: 'foo'
+          a: 'foo',
         };
-      }
+      },
     };
     const b = {
       postcss() {
         return {
-          b: 'bar'
+          b: 'bar',
         };
-      }
+      },
     };
     const result = {
       postcss() {
         return {
           b: 'bar',
-          a: 'foo'
+          a: 'foo',
         };
-      }
+      },
     };
 
     expect(
       Object.keys(
         merge({
-          postcss: 'prepend'
+          postcss: 'prepend',
         })(a, b).postcss()
       )
     ).toEqual(Object.keys(result.postcss()));
@@ -192,18 +192,18 @@ function mergeStrategyTests(merge) {
     const a = {
       postcss() {
         return ['a'];
-      }
+      },
     };
     const b = {
       postcss() {
         return ['b'];
-      }
+      },
     };
     const expected = ['b'];
 
     expect(
       merge({
-        postcss: 'replace'
+        postcss: 'replace',
       })(a, b).postcss()
     ).toEqual(expected);
   });
@@ -212,18 +212,18 @@ function mergeStrategyTests(merge) {
     const a = {
       postcss() {
         return ['a'];
-      }
+      },
     };
     const b = {
       postcss() {
         return ['b'];
-      }
+      },
     };
     const expected = ['b'];
 
     expect(
       merge({
-        postcss: 'replace'
+        postcss: 'replace',
       })(a, b).postcss()
     ).toEqual(expected);
   });

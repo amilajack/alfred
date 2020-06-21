@@ -15,7 +15,7 @@ import {
   EnvShortName,
   Skill,
   Target,
-  ParsedFlags
+  ParsedFlags,
 } from '@alfred/types';
 
 import _parseFlags from 'yargs-parser';
@@ -23,8 +23,8 @@ import _parseFlags from 'yargs-parser';
 export const parseFlags = (flags: string | string[]): ParsedFlags =>
   _parseFlags(flags, {
     configuration: {
-      'strip-dashed': true
-    }
+      'strip-dashed': true,
+    },
   });
 
 export class EnhancedMap<K, V> extends Map<K, V> {
@@ -142,7 +142,7 @@ export function execCmdInProject(
   return childProcess.execSync(cmd, {
     stdio: 'inherit',
     cwd: project.root,
-    ...opts
+    ...opts,
   });
 }
 
@@ -197,7 +197,7 @@ export function getDepsFromPkg(
     throw new Error(`Given package.json does not have ${fromPkgTypeFull}`);
   }
 
-  normalizedPkgNames.forEach(pkgName => {
+  normalizedPkgNames.forEach((pkgName) => {
     if (!(pkgName in pkg[fromPkgTypeFull])) {
       throw new Error(
         `Package "${pkgName}" does not exist in ${fromPkgTypeFull} of skill package.json`
@@ -206,7 +206,10 @@ export function getDepsFromPkg(
   });
 
   return Object.fromEntries(
-    normalizedPkgNames.map(pkgName => [pkgName, pkg[fromPkgTypeFull][pkgName]])
+    normalizedPkgNames.map((pkgName) => [
+      pkgName,
+      pkg[fromPkgTypeFull][pkgName],
+    ])
   );
 }
 
@@ -214,7 +217,7 @@ export function serialPromises(fns: Array<() => Promise<any>>): Promise<any> {
   return fns.reduce(
     (promise: Promise<any>, fn) =>
       // eslint-disable-next-line promise/no-nesting
-      promise.then(result => fn().then(Array.prototype.concat.bind(result))),
+      promise.then((result) => fn().then(Array.prototype.concat.bind(result))),
     Promise.resolve([])
   );
 }
@@ -225,12 +228,12 @@ export function taskResolvesSkillDefault(
 ): (skills: Skill[], target?: Target) => Skill {
   return (skills: Skill[], target?: Target): Skill => {
     const resolvedSkills = skills
-      .filter(skill =>
-        skill.tasks.some(task => task.module.subcommand === subcommand)
+      .filter((skill) =>
+        skill.tasks.some((task) => task.module.subcommand === subcommand)
       )
-      .filter(skill => {
+      .filter((skill) => {
         const task = skill.tasks.find(
-          task => task.module.subcommand === subcommand
+          (task) => task.module.subcommand === subcommand
         );
         if (!task) {
           throw new Error(
@@ -256,7 +259,7 @@ export function taskResolvesSkillDefault(
       return resolvedSkills[0];
     }
 
-    const defaultSkill = resolvedSkills.find(skill => skill.default);
+    const defaultSkill = resolvedSkills.find((skill) => skill.default);
 
     if (!defaultSkill) {
       throw new Error(

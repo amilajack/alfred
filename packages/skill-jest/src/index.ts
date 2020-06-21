@@ -16,10 +16,10 @@ const skill: RawSkill = {
         moduleNameMapper: {
           '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
             '<rootDir>/__mocks__/fileMock.js',
-          '\\.(css|less)$': 'identity-obj-proxy'
-        }
-      }
-    }
+          '\\.(css|less)$': 'identity-obj-proxy',
+        },
+      },
+    },
   ],
   hooks: {
     async run({ skill, skillMap, project, event }): Promise<void> {
@@ -39,9 +39,9 @@ const skill: RawSkill = {
         const fullConfig = {
           ...jestConfig,
           transform: {
-            '^.+.jsx?$': '<rootDir>/node_modules/jest-transformer.js'
+            '^.+.jsx?$': '<rootDir>/node_modules/jest-transformer.js',
           },
-          rootDir: root
+          rootDir: root,
         };
         await fs.promises.writeFile(
           configPath,
@@ -69,9 +69,9 @@ const skill: RawSkill = {
         'jest',
         write === 'pkg' ? '' : `--config ${configPath}`,
         JSON.stringify(root),
-        ...event.flags
+        ...event.flags,
       ]);
-    }
+    },
   },
   transforms: {
     babel(skill: Skill): Skill {
@@ -80,8 +80,8 @@ const skill: RawSkill = {
         ? skill
         : skill.extendConfig('jest', {
             transform: {
-              '^.+\\.jsx?$': './node_modules/jest-transformer.js'
-            }
+              '^.+\\.jsx?$': './node_modules/jest-transformer.js',
+            },
           });
     },
     webpack(skill: Skill, { config }): Skill {
@@ -89,12 +89,12 @@ const skill: RawSkill = {
         .extendConfig('jest', {
           moduleNameMapper: {
             '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': `<rootDir>/${config.configsDir}/mocks/fileMock.js`,
-            '\\.(css|less|sass|scss)$': 'identity-obj-proxy'
-          }
+            '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
+          },
         })
         .addDepsFromPkg('identity-obj-proxy');
-    }
-  }
+    },
+  },
 };
 
 export default skill;

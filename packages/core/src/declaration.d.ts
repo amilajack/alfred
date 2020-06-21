@@ -1,5 +1,5 @@
 declare module 'highlight.js/lib/languages/diff' {
-  export default function(
+  export default function (
     lang: string,
     code: string
   ): {

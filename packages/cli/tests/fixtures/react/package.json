@@ -28,26 +28,26 @@
     "@babel/plugin-transform-react-constant-elements": "^7.0.0",
     "@babel/plugin-transform-react-inline-elements": "^7.0.0",
     "@babel/preset-env": "^7.8.6",
-    "@babel/preset-react": "7.8.3",
+    "@babel/preset-react": "7.10.1",
     "@babel/register": "^7.8.6",
     "autoprefixer": "^9.7.4",
     "babel-eslint": "10.1.0",
-    "babel-loader": "8.0.6",
+    "babel-loader": "8.1.0",
     "babel-plugin-dev-expression": "^0.2.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb": "18.0.1",
-    "eslint-config-prettier": "6.10.0",
+    "eslint": "~7.2.0",
+    "eslint-config-airbnb": "18.2.0",
+    "eslint-config-prettier": "6.11.0",
     "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-jest": "23.8.0",
+    "eslint-plugin-jest": "23.13.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "3.1.2",
+    "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-react": "^7.18.3",
-    "eslint-plugin-react-hooks": "^2.5.0",
-    "jest": "^25.1.0",
+    "eslint-plugin-react-hooks": "^4.0.4",
+    "jest": "^26.0.1",
     "parcel": "^1.11.0",
-    "postcss-modules": "^1.5.0",
-    "prettier": "^1.16.4",
+    "postcss-modules": "^2.0.0",
+    "prettier": "^2.0.5",
     "react": "16.0.0",
     "react-dom": "16.0.0",
     "react-hot-loader": "^4.3.12"
@@ -89,7 +89,8 @@
     ]
   },
   "prettier": {
-    "singleQuote": true
+    "singleQuote": true,
+    "trailingComma": "none"
   },
   "eslintConfig": {
     "env": {

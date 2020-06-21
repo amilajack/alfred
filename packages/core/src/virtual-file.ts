@@ -8,7 +8,7 @@ import {
   VirtualFileInterface,
   VirtualFileSystemInterface,
   SkillFile,
-  Dir
+  Dir,
 } from '@alfred/types';
 
 export class VirtualFile implements VirtualFileInterface {
@@ -87,7 +87,7 @@ export default class VirtualFileSystem extends Map<string, VirtualFile>
   constructor(files: SkillFile[] = [], dirs: Dir[] = []) {
     super();
     this.dirs = dirs;
-    files.forEach(file => {
+    files.forEach((file) => {
       this.add(file);
     });
   }
@@ -105,10 +105,12 @@ export default class VirtualFileSystem extends Map<string, VirtualFile>
   async writeAllFiles(project: ProjectInterface): Promise<void> {
     // Copy all dirs
     await Promise.all(
-      this.dirs.map(dir => fs.copy(dir.src, path.join(project.root, dir.dest)))
+      this.dirs.map((dir) =>
+        fs.copy(dir.src, path.join(project.root, dir.dest))
+      )
     );
     // Write all files
-    const filesToWrite = Array.from(this.values()).map(async file => {
+    const filesToWrite = Array.from(this.values()).map(async (file) => {
       if (typeof file.condition === 'function') {
         if (!(await file.condition({ project }))) return;
       }
@@ -120,7 +122,7 @@ export default class VirtualFileSystem extends Map<string, VirtualFile>
       const fileDir = path.dirname(filePath);
       if (!fs.existsSync(fileDir)) {
         await fs.promises.mkdir(fileDir, {
-          recursive: true
+          recursive: true,
         });
       }
       return fs.promises.writeFile(filePath, file.content);

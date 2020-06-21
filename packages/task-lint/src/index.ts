@@ -8,7 +8,7 @@ const task: SkillTaskModule = {
   resolveSkill: taskResolvesSkillDefault(
     'lint',
     require('../package.json').name
-  )
+  ),
 };
 
 export default task;

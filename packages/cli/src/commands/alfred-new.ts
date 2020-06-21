@@ -17,7 +17,7 @@ import {
   GitConfig,
   addBoilerplate,
   TemplateData,
-  TEMPLATE_DATA_DEFAULTS
+  TEMPLATE_DATA_DEFAULTS,
 } from '..';
 
 function gitConfig(): Promise<GitConfig> {
@@ -41,7 +41,7 @@ type Author = {
 async function guessAuthor(): Promise<Author> {
   const author: Author = {
     name: process.env.USER || process.env.USERNAME,
-    email: undefined
+    email: undefined,
   };
   try {
     const config = await gitConfig();
@@ -63,7 +63,7 @@ function renderLines(lines: Array<string>): void {
 
 const defaultOpts = {
   withSkills: [],
-  flags: []
+  flags: [],
 };
 
 async function createNewProject(
@@ -73,7 +73,7 @@ async function createNewProject(
 ): Promise<void> {
   const opts = {
     ...defaultOpts,
-    ...rawOpts
+    ...rawOpts,
   };
   const dirBasename = path.basename(cwd);
   const dirnameEqualsName = dirBasename === name;
@@ -100,7 +100,7 @@ async function createNewProject(
       return `${chalk.bgBlack.cyan('Alfred')} ${chalk.bgBlack.gray(
         'info'
       )} ${chalk.gray(msg)}`;
-    }
+    },
   };
 
   const its = validateName(name);
@@ -113,7 +113,7 @@ async function createNewProject(
     `I'm your assistant Alfred. I'll walk you through creating your new Alfred project "${style.project(
       name
     )}"`,
-    'Press "ctrl + C" at any time to quit.'
+    'Press "ctrl + C" at any time to quit.',
   ]);
 
   const guess = await guessAuthor();
@@ -130,13 +130,13 @@ async function createNewProject(
         name: 'author',
         type: 'input',
         message: 'author',
-        default: guess.name
+        default: guess.name,
       },
       {
         name: 'email',
         type: 'input',
         message: 'email',
-        default: guess.email
+        default: guess.email,
       },
       {
         name: 'license',
@@ -150,29 +150,29 @@ async function createNewProject(
           }
           const errors = self.warnings || [];
           return `Sorry, ${errors.join(' and ')}.`;
-        }
+        },
       },
       {
         name: 'npmClient',
         type: 'list',
         choices: ['npm', 'yarn'],
         message: 'npm client',
-        default: Config.DEFAULT_CONFIG.npmClient
+        default: Config.DEFAULT_CONFIG.npmClient,
       },
       {
         name: 'project',
         type: 'list',
         choices: ['app', 'lib'],
         message: 'project type',
-        default: 'app'
+        default: 'app',
       },
       {
         name: 'platform',
         type: 'list',
         choices: ['browser', 'node'],
         message: 'project type',
-        default: 'browser'
-      }
+        default: 'browser',
+      },
     ]);
   }
 
@@ -181,8 +181,8 @@ async function createNewProject(
 
   answers.name = {
     npm: {
-      full: name
-    }
+      full: name,
+    },
   };
   answers.npmClient = escapeQuotes(answers.npmClient);
   answers.project = escapeQuotes(answers.project);
@@ -206,7 +206,7 @@ async function createNewProject(
     isDefaultNpmClient: answers.npmClient === Config.DEFAULT_CONFIG.npmClient,
     alfredPkgSemver: process.env.ALFRED_E2E_CLI_TEST
       ? `file:${alfredDepFilePath}`
-      : `^${ALFRED_CORE_VERSION}`
+      : `^${ALFRED_CORE_VERSION}`,
   };
 
   if (!dirnameEqualsName) {
@@ -230,7 +230,7 @@ async function createNewProject(
   if (process.env.ALFRED_IGNORE_INSTALL !== 'true') {
     childProcess.execSync(installCommand, {
       cwd: root,
-      stdio: 'inherit'
+      stdio: 'inherit',
     });
   }
 
@@ -241,7 +241,7 @@ async function createNewProject(
     `To build your project, just run ${style.command(
       buildCommand
     )} from within the ${style.filePath(relativeRoot)} directory.`,
-    'Happy hacking!'
+    'Happy hacking!',
   ]);
 
   const project = await alfred(root);
@@ -253,14 +253,14 @@ async function createNewProject(
   if (process.env.ALFRED_IGNORE_INSTALL !== 'true') {
     childProcess.execSync(installCommand, {
       cwd: root,
-      stdio: 'inherit'
+      stdio: 'inherit',
     });
   }
 
   const event: NewEvent = {
     skillsPkgNames: [],
     skills: Array.from(skillMap.values()),
-    flags: opts.flags
+    flags: opts.flags,
   };
   await project.emitAsync('beforeNew', event);
   await project.emitAsync('afterNew', event);

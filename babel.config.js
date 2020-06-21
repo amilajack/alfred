@@ -3,10 +3,10 @@ module.exports = {
     [
       '@babel/preset-env',
       {
-        targets: { node: 13 }
-      }
+        targets: { node: 13 },
+      },
     ],
-    '@babel/preset-typescript'
+    '@babel/preset-typescript',
   ],
-  plugins: ['@babel/plugin-proposal-optional-chaining']
+  plugins: ['@babel/plugin-proposal-optional-chaining'],
 };

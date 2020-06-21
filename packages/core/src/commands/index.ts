@@ -6,7 +6,7 @@ import {
   ExecutableSkillMethods,
   RunEvent,
   SubcommandFn,
-  RunForEachTargetEvent
+  RunForEachTargetEvent,
 } from '@alfred/types';
 import { getSubcommandTasksMap } from '../task';
 import { parseFlags, mapEnvToShortName } from '@alfred/helpers';
@@ -44,20 +44,20 @@ export function getSubcommandMap(
           const baseEvent = {
             subcommand,
             parsedFlags: parseFlags(flags),
-            flags
+            flags,
           };
           const event: RunEvent | RunForEachTargetEvent =
             task.runForEachTarget && target
               ? {
                   ...baseEvent,
                   target,
-                  output: getOutputForTarget(target, project.root)
+                  output: getOutputForTarget(target, project.root),
                 }
               : {
                   ...baseEvent,
-                  output: project.targets.map(target =>
+                  output: project.targets.map((target) =>
                     getOutputForTarget(target, project.root)
-                  )
+                  ),
                 };
           const skill = task.resolveSkill(skills, target);
           return skill.hooks.run?.({
@@ -66,9 +66,9 @@ export function getSubcommandMap(
             config: project.config,
             targets: project.targets,
             skill,
-            skillMap
+            skillMap,
           });
-        }
+        },
       ];
     }
   );

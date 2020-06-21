@@ -8,7 +8,7 @@ const tasks: SkillTaskModule = {
   resolveSkill: taskResolvesSkillDefault(
     'format',
     require('../package.json').name
-  )
+  ),
 };
 
 export default tasks;

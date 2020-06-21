@@ -12,7 +12,7 @@ export default class EslintProvider implements ProviderInterface {
   transform(files: Array<string>): Promise<void> {
     const cli = new CLIEngine({
       configFile: path.join(__dirname, '../../resources/alfred-eslintrc'),
-      fix: true
+      fix: true,
     });
 
     // Sometimes it takes multiple passes for all the ESLint errors to be autofixed

@@ -16,7 +16,7 @@ import { Skill } from '@alfred/types';
 import { CORE_SKILLS } from '@alfred/core/lib/skill';
 import { addEntrypoints } from '../../lib';
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   throw err;
 });
 
@@ -55,7 +55,7 @@ const subcommands = [
   // 'start --dev',
   'test',
   'lint',
-  'format'
+  'format',
 ];
 
 type E2eTest = {
@@ -71,7 +71,7 @@ const E2E_TESTS_TMP_DIR = path.join(__dirname, 'tmp');
 async function generateTestsForSkillCombination(
   skillCombination: Skill[]
 ): Promise<E2eTest> {
-  const skillCombinationNames = skillCombination.map(skill => skill.name);
+  const skillCombinationNames = skillCombination.map((skill) => skill.name);
   const folderName = ['e2e', ...skillCombinationNames].join('-');
   const env = {
     ...process.env,
@@ -85,23 +85,23 @@ async function generateTestsForSkillCombination(
       license: 'MIT',
       npmClient: 'npm',
       project: 'lib',
-      platform: 'browser'
-    })
+      platform: 'browser',
+    }),
   };
   const binPath = require.resolve('../../lib/commands/alfred');
   childProcess.execSync(`node ${binPath} new ${folderName}`, {
     cwd: E2E_TESTS_TMP_DIR,
     stdio: 'inherit',
-    env
+    env,
   });
   const projectDir = path.join(E2E_TESTS_TMP_DIR, folderName);
 
   // Add the skills to the alfred.skills config
-  skillCombinationNames.forEach(skill => {
+  skillCombinationNames.forEach((skill) => {
     childProcess.execSync(`node ${binPath} learn @alfred/skill-${skill}`, {
       cwd: projectDir,
       stdio: 'inherit',
-      env
+      env,
     });
   });
 
@@ -130,7 +130,7 @@ process.on('exit', () => {
   // Test against every combination of skills. Remove CORE_SKILLS that are defaults
   // because they are included by default
   const nonDefaultSkills = Array.from(Object.values(CORE_SKILLS)).filter(
-    skill => !skill.default
+    (skill) => !skill.default
   );
 
   // Generate e2e tests for each combination of skills
@@ -139,7 +139,7 @@ process.on('exit', () => {
   );
 
   childProcess.execSync('yarn --frozen-lockfile', {
-    stdio: 'inherit'
+    stdio: 'inherit',
   });
 
   const issues = [];
@@ -152,7 +152,7 @@ process.on('exit', () => {
       const entrypointCombinations = powerset(ENTRYPOINTS);
 
       await Promise.all(
-        entrypointCombinations.map(async entrypoints => {
+        entrypointCombinations.map(async (entrypoints) => {
           // Remove the existing entrypoints in ./src
           rimraf.sync(path.join(projectDir, 'src/*'));
           rimraf.sync(path.join(projectDir, 'tests/*'));
@@ -163,8 +163,8 @@ process.on('exit', () => {
             {
               alfred: {
                 ...Config.DEFAULT_CONFIG,
-                npmClient: 'yarn'
-              }
+                npmClient: 'yarn',
+              },
             }
           ) as {
             alfred: Config;
@@ -180,22 +180,22 @@ process.on('exit', () => {
             childProcess.execSync(`node ${binPath} skills`, {
               cwd: projectDir,
               stdio: 'inherit',
-              env
+              env,
             });
 
             console.log(
               `Testing ${JSON.stringify({
-                skills: skillCombination.map(skill => skill.name),
-                entrypoints
+                skills: skillCombination.map((skill) => skill.name),
+                entrypoints,
               })}`
             );
 
             const entrypointIsAppProject = entrypoints.some(
-              entrypoint => entrypoint.project === 'app'
+              (entrypoint) => entrypoint.project === 'app'
             );
 
             await Promise.all(
-              subcommands.map(async subcommand => {
+              subcommands.map(async (subcommand) => {
                 command = subcommand;
                 try {
                   if (entrypointIsAppProject && subcommand.includes('start')) {
@@ -205,23 +205,23 @@ process.on('exit', () => {
                       ['run', subcommand, `--port ${port}`],
                       {
                         cwd: projectDir,
-                        env
+                        env,
                       }
                     );
 
                     await new Promise((resolve, reject) => {
-                      start.stdout.once('data', data => {
+                      start.stdout.once('data', (data) => {
                         console.log(data);
                         resolve(data);
                       });
-                      start.stderr.once('data', data => {
+                      start.stderr.once('data', (data) => {
                         reject(data);
                       });
                     });
 
                     const page = await fetch(
                       `http://localhost:${port}`
-                    ).then(res => res.text());
+                    ).then((res) => res.text());
                     expect(page).toEqual('Hello from Alfred!');
 
                     start.kill();
@@ -229,14 +229,14 @@ process.on('exit', () => {
                     childProcess.execSync(`node ${binPath} run ${subcommand}`, {
                       cwd: projectDir,
                       stdio: 'inherit',
-                      env
+                      env,
                     });
                   }
                 } catch (e) {
                   issues.push([
                     skillCombination.join(', '),
                     entrypoints.join(', '),
-                    command
+                    command,
                   ]);
                   console.log(e);
                 }
@@ -247,13 +247,13 @@ process.on('exit', () => {
             childProcess.execSync(`node ${binPath} clean`, {
               cwd: projectDir,
               stdio: 'inherit',
-              env
+              env,
             });
           } catch (e) {
             issues.push([
               skillCombination.join(', '),
               entrypoints.join(', '),
-              command
+              command,
             ]);
             console.log(e);
           }
@@ -277,10 +277,10 @@ process.on('exit', () => {
         chalk.bold('Failing Skill Combinations'),
         chalk.bold('Entrypoints'),
         chalk.bold('Command'),
-        chalk.bold('Show Configs')
-      ]
+        chalk.bold('Show Configs'),
+      ],
     });
-    issues.forEach(issue => {
+    issues.forEach((issue) => {
       table.push(issue);
     });
     // Throw error and don't remove tmpDir so that it can be inspected after the tests
@@ -289,7 +289,7 @@ process.on('exit', () => {
         '',
         table.toString(),
         `❗️ ${issues.length} e2e tests failed`,
-        `✅ ${totalTestsCount - issues.length} e2e tests passed`
+        `✅ ${totalTestsCount - issues.length} e2e tests passed`,
       ].join('\n')
     );
   } else {

@@ -3,7 +3,7 @@ import {
   ResolvedTasks,
   Skill,
   SkillTaskModule,
-  SkillMap
+  SkillMap,
 } from '@alfred/types';
 import { CORE_TASKS } from './constants';
 import { requireModule } from './helpers';
@@ -18,7 +18,7 @@ export function getSubcommandTasksMap(
 
   skills.forEach((skill: Skill) => {
     if (skill.tasks.length) {
-      skill.tasks.forEach(task => {
+      skill.tasks.forEach((task) => {
         subcommandTaskMap.set(task.module.subcommand, task.module);
       });
     }
@@ -36,13 +36,13 @@ export function normalizeTasksOfSkill(tasks: UnresolvedTasks): ResolvedTasks {
     if (tasks[0] && Array.isArray(tasks[0]) && 'name' in tasks[0]) {
       return tasks as ResolvedTasks;
     }
-    return tasks.map(task => {
+    return tasks.map((task) => {
       if (typeof task === 'string') {
         const requiredModule = requireModule(task);
         return {
           name: task,
           module: requiredModule,
-          config: {}
+          config: {},
         };
       }
       if (Array.isArray(task)) {
@@ -54,7 +54,7 @@ export function normalizeTasksOfSkill(tasks: UnresolvedTasks): ResolvedTasks {
         return {
           name,
           module: requiredModule,
-          config
+          config,
         };
       }
       if (typeof task === 'object') {

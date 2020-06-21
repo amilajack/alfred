@@ -9,9 +9,9 @@ export type ProviderInput = {
 export type UserProviderInput = {
   packageJsonPath: string;
   files: Array<string>;
-  unsafe: boolean;
-  verbose: boolean;
-  write: boolean;
+  unsafe?: boolean;
+  verbose?: boolean;
+  write?: boolean;
   root: string;
 };
 

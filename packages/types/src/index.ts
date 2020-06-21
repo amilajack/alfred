@@ -252,7 +252,7 @@ export type NewEvent = {
   flags: Array<string>;
 };
 
-export type TransformsEvent = {};
+export type TransformsEvent = Record<string, any>;
 
 export type HookArgs<T> = {
   project: ProjectInterface;

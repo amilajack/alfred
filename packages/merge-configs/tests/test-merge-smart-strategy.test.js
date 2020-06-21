@@ -11,10 +11,10 @@ function mergeStrategySpecificTests(merge) {
           {
             test: /.jsx?$/,
             loaders: ['babel'],
-            exclude: /node_modules/
-          }
-        ]
-      }
+            exclude: /node_modules/,
+          },
+        ],
+      },
     };
     const b = {
       module: {
@@ -22,10 +22,10 @@ function mergeStrategySpecificTests(merge) {
           {
             test: /.jsx?$/,
             loaders: ['react-hot'],
-            exclude: /node_modules/
-          }
-        ]
-      }
+            exclude: /node_modules/,
+          },
+        ],
+      },
     };
     const result = {
       module: {
@@ -33,15 +33,15 @@ function mergeStrategySpecificTests(merge) {
           {
             test: /.jsx?$/,
             loaders: ['react-hot', 'babel'],
-            exclude: /node_modules/
-          }
-        ]
-      }
+            exclude: /node_modules/,
+          },
+        ],
+      },
     };
 
     expect(
       merge({
-        'module.loaders.loaders': 'prepend'
+        'module.loaders.loaders': 'prepend',
       })(a, b)
     ).toEqual(result);
   });
@@ -53,10 +53,10 @@ function mergeStrategySpecificTests(merge) {
           {
             test: /.jsx?$/,
             loaders: ['babel'],
-            exclude: /node_modules/
-          }
-        ]
-      }
+            exclude: /node_modules/,
+          },
+        ],
+      },
     };
     const b = {
       module: {
@@ -64,10 +64,10 @@ function mergeStrategySpecificTests(merge) {
           {
             test: /.jsx?$/,
             loaders: ['react-hot'],
-            exclude: /node_modules/
-          }
-        ]
-      }
+            exclude: /node_modules/,
+          },
+        ],
+      },
     };
     const result = {
       module: {
@@ -75,15 +75,15 @@ function mergeStrategySpecificTests(merge) {
           {
             test: /.jsx?$/,
             loaders: ['react-hot'],
-            exclude: /node_modules/
-          }
-        ]
-      }
+            exclude: /node_modules/,
+          },
+        ],
+      },
     };
 
     expect(
       merge({
-        'module.loaders.loaders': 'replace'
+        'module.loaders.loaders': 'replace',
       })(a, b)
     ).toEqual(result);
   });
@@ -95,10 +95,10 @@ function mergeStrategySpecificTests(merge) {
           {
             test: /.jsx?$/,
             loaders: ['babel'],
-            exclude: /node_modules/
-          }
-        ]
-      }
+            exclude: /node_modules/,
+          },
+        ],
+      },
     };
     const b = {
       module: {
@@ -106,10 +106,10 @@ function mergeStrategySpecificTests(merge) {
           {
             test: /.jsx?$/,
             loaders: ['react-hot'],
-            exclude: /node_modules/
-          }
-        ]
-      }
+            exclude: /node_modules/,
+          },
+        ],
+      },
     };
     const result = {
       module: {
@@ -117,15 +117,15 @@ function mergeStrategySpecificTests(merge) {
           {
             test: /.jsx?$/,
             loaders: ['react-hot'],
-            exclude: /node_modules/
-          }
-        ]
-      }
+            exclude: /node_modules/,
+          },
+        ],
+      },
     };
 
     expect(
       merge({
-        'module.rules.loaders': 'replace'
+        'module.rules.loaders': 'replace',
       })(a, b)
     ).toEqual(result);
   });
@@ -136,35 +136,35 @@ function mergeStrategySpecificTests(merge) {
         rules: [
           {
             test: /\.js$/,
-            use: 'babel'
-          }
-        ]
-      }
+            use: 'babel',
+          },
+        ],
+      },
     };
     const b = {
       module: {
         rules: [
           {
             test: /\.js$/,
-            use: 'coffee'
-          }
-        ]
-      }
+            use: 'coffee',
+          },
+        ],
+      },
     };
     const result = {
       module: {
         rules: [
           {
             test: /\.js$/,
-            use: 'coffee'
-          }
-        ]
-      }
+            use: 'coffee',
+          },
+        ],
+      },
     };
 
     expect(
       merge({
-        'module.rules.use': 'replace'
+        'module.rules.use': 'replace',
       })(a, b)
     ).toEqual(result);
   });
@@ -180,13 +180,13 @@ function mergeStrategySpecificTests(merge) {
               {
                 loader: 'babel-loader',
                 options: {
-                  cacheDirectory: true
-                }
-              }
-            ]
-          }
-        ]
-      }
+                  cacheDirectory: true,
+                },
+              },
+            ],
+          },
+        ],
+      },
     };
     const prod = {
       module: {
@@ -202,16 +202,16 @@ function mergeStrategySpecificTests(merge) {
                     {
                       search: /["']ngInject["'];*/,
                       replace: '',
-                      flags: 'g'
-                    }
-                  ]
-                }
+                      flags: 'g',
+                    },
+                  ],
+                },
               },
-              'ng-annotate-loader'
-            ]
-          }
-        ]
-      }
+              'ng-annotate-loader',
+            ],
+          },
+        ],
+      },
     };
     const expected = {
       module: {
@@ -227,27 +227,27 @@ function mergeStrategySpecificTests(merge) {
                     {
                       search: /["']ngInject["'];*/,
                       replace: '',
-                      flags: 'g'
-                    }
-                  ]
-                }
+                      flags: 'g',
+                    },
+                  ],
+                },
               },
               'ng-annotate-loader',
               {
                 loader: 'babel-loader',
                 options: {
-                  cacheDirectory: true
-                }
-              }
-            ]
-          }
-        ]
-      }
+                  cacheDirectory: true,
+                },
+              },
+            ],
+          },
+        ],
+      },
     };
 
     expect(
       merge({
-        'module.rules.use': 'prepend'
+        'module.rules.use': 'prepend',
       })(common, prod)
     ).toEqual(expected);
   });
@@ -259,10 +259,10 @@ function mergeStrategySpecificTests(merge) {
           {
             test: /.jsx?$/,
             loaders: ['babel'],
-            exclude: /node_modules/
-          }
-        ]
-      }
+            exclude: /node_modules/,
+          },
+        ],
+      },
     };
     const b = {
       module: {
@@ -270,10 +270,10 @@ function mergeStrategySpecificTests(merge) {
           {
             test: /.jsx?$/,
             loaders: ['react-hot'],
-            exclude: /node_modules/
-          }
-        ]
-      }
+            exclude: /node_modules/,
+          },
+        ],
+      },
     };
     const result = {
       module: {
@@ -281,15 +281,15 @@ function mergeStrategySpecificTests(merge) {
           {
             test: /.jsx?$/,
             loaders: ['react-hot'],
-            exclude: /node_modules/
-          }
-        ]
-      }
+            exclude: /node_modules/,
+          },
+        ],
+      },
     };
 
     expect(
       merge({
-        'module.loaders': 'replace'
+        'module.loaders': 'replace',
       })(a, b)
     ).toEqual(result);
   });

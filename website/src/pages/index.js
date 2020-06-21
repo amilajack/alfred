@@ -1,3 +1,4 @@
+/* eslint import/no-unresolved: off */
 import React from 'react';
 import classnames from 'classnames';
 import Layout from '@theme/Layout';
@@ -9,7 +10,7 @@ import styles from './styles.module.css';
 const features = [
   {
     title: <>Zero Config</>,
-    description: <>Choose your tools and Alfred will configure them for you</>
+    description: <>Choose your tools and Alfred will configure them for you</>,
   },
   {
     title: <>Built In Tooling</>,
@@ -18,22 +19,22 @@ const features = [
         Alfred knows how to build, lint, format, and test your project out of
         the box
       </>
-    )
+    ),
   },
   {
     title: <>Best Practices</>,
-    description: <>Alfred implements best practices for libraries and apps</>
+    description: <>Alfred implements best practices for libraries and apps</>,
   },
   {
     title: <>Unified Workflow</>,
-    description: <>Different projects, different tools, same workflow</>
+    description: <>Different projects, different tools, same workflow</>,
   },
   {
     title: <>Extensibility</>,
     description: (
       <>Customize and override configs that are configured by Alfred</>
-    )
-  }
+    ),
+  },
 ];
 
 function Feature({ imageUrl, title, description }) {
@@ -82,7 +83,7 @@ function Home() {
           <section className={styles.features}>
             <div className="container">
               <div className="row">
-                {features.map(props => (
+                {features.map((props) => (
                   <Feature key={props.title} {...props} />
                 ))}
               </div>

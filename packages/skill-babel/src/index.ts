@@ -13,9 +13,9 @@ export default {
           [
             '@babel/preset-env',
             {
-              modules: false
-            }
-          ]
+              modules: false,
+            },
+          ],
         ],
         env: {
           test: {
@@ -23,14 +23,14 @@ export default {
               [
                 '@babel/preset-env',
                 {
-                  modules: 'auto'
-                }
-              ]
-            ]
-          }
-        }
-      }
-    }
+                  modules: 'auto',
+                },
+              ],
+            ],
+          },
+        },
+      },
+    },
   ],
   hooks: {},
   transforms: {
@@ -38,9 +38,9 @@ export default {
       return skill.addDepsFromPkg('babel-plugin-lodash').extendConfig('babel', {
         env: {
           production: {
-            plugins: ['babel-plugin-lodash']
-          }
-        }
+            plugins: ['babel-plugin-lodash'],
+          },
+        },
       });
     },
     react(skill: Skill): Skill {
@@ -54,13 +54,13 @@ export default {
                 // babel-preset-react-optimize plugins extracted here
                 '@babel/plugin-transform-react-constant-elements',
                 '@babel/plugin-transform-react-inline-elements',
-                'babel-plugin-transform-react-remove-prop-types'
-              ]
+                'babel-plugin-transform-react-remove-prop-types',
+              ],
             },
             development: {
-              plugins: ['react-hot-loader/babel']
-            }
-          }
+              plugins: ['react-hot-loader/babel'],
+            },
+          },
         })
         .addDepsFromPkg([
           '@babel/preset-react',
@@ -68,8 +68,8 @@ export default {
           'babel-plugin-transform-react-remove-prop-types',
           '@babel/plugin-transform-react-constant-elements',
           '@babel/plugin-transform-react-inline-elements',
-          'react-hot-loader'
+          'react-hot-loader',
         ]);
-    }
-  }
+    },
+  },
 };

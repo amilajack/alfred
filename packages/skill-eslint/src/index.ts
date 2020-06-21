@@ -15,11 +15,11 @@ const skill: RawSkill = {
         root: true,
         env: {
           browser: true,
-          node: true
+          node: true,
         },
-        extends: ['bliss']
-      }
-    }
+        extends: ['bliss'],
+      },
+    },
   ],
   hooks: {
     async run({ project, skill, config, event }): Promise<void> {
@@ -34,7 +34,7 @@ const skill: RawSkill = {
           ? `--config ${configPath}`
           : '',
         'src tests',
-        ...flags
+        ...flags,
       ]);
       const { config: eslintConfig } = skill.configs.get(
         'eslint'
@@ -44,11 +44,11 @@ const skill: RawSkill = {
         cwd: project.root,
         useEslintrc: false,
         root: true,
-        baseConfig: eslintConfig
+        baseConfig: eslintConfig,
       });
       const report = cli.executeOnFiles([
         path.join(project.root, 'src'),
-        path.join(project.root, 'tests')
+        path.join(project.root, 'tests'),
       ]);
       const formatter = cli.getFormatter();
       if (report.errorCount) {
@@ -56,25 +56,25 @@ const skill: RawSkill = {
       } else {
         console.log(formatter(report.results));
       }
-    }
+    },
   },
   transforms: {
     babel(skill: Skill): Skill {
       return skill
         .extendConfig('eslint', {
-          parser: 'babel-eslint'
+          parser: 'babel-eslint',
         })
         .addDepsFromPkg('babel-eslint');
     },
     jest(skill: Skill): Skill {
       return skill.addDepsFromPkg('eslint-plugin-jest').extendConfig('eslint', {
-        plugins: ['jest']
+        plugins: ['jest'],
       });
     },
     mocha(skill: Skill): Skill {
       return skill
         .extendConfig('eslint', {
-          plugins: ['mocha']
+          plugins: ['mocha'],
         })
         .addDepsFromPkg('eslint-plugin-mocha');
     },
@@ -88,10 +88,10 @@ const skill: RawSkill = {
                   project.root,
                   config.configsDir,
                   toSkill.configs.get('webpack.base')?.filename as string
-                )
-              }
-            }
-          }
+                ),
+              },
+            },
+          },
         })
         .addDepsFromPkg('eslint-import-resolver-webpack');
     },
@@ -100,8 +100,8 @@ const skill: RawSkill = {
         .extendConfig('eslint', {
           extends: ['airbnb'],
           rules: {
-            'react/jsx-filename-extension': 'off'
-          }
+            'react/jsx-filename-extension': 'off',
+          },
         })
         .addDepsFromPkg('eslint-config-airbnb');
     },
@@ -109,11 +109,11 @@ const skill: RawSkill = {
       return skill
         .extendConfig('eslint', {
           extends: ['prettier'],
-          plugins: ['prettier']
+          plugins: ['prettier'],
         })
         .addDepsFromPkg(['eslint-config-prettier', 'eslint-plugin-prettier']);
-    }
-  }
+    },
+  },
 };
 
 export default skill;

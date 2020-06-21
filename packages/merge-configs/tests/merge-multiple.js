@@ -2,18 +2,18 @@ function multipleTests(merge) {
   test('should override objects', () => {
     const a = {
       client: {
-        entry: './client.js'
-      }
+        entry: './client.js',
+      },
     };
     const b = {
       client: {
-        entry: './replaced.js'
-      }
+        entry: './replaced.js',
+      },
     };
     const result = [
       {
-        entry: './replaced.js'
-      }
+        entry: './replaced.js',
+      },
     ];
 
     expect(merge(a, b)).toEqual(result);
@@ -22,24 +22,24 @@ function multipleTests(merge) {
   test('should add new objects if not existing', () => {
     const a = {
       client: {
-        entry: './client.js'
+        entry: './client.js',
       },
       server: {
-        entry: './server.js'
-      }
+        entry: './server.js',
+      },
     };
     const b = {
       client: {
-        entry: './replaced.js'
-      }
+        entry: './replaced.js',
+      },
     };
     const result = [
       {
-        entry: './replaced.js'
+        entry: './replaced.js',
       },
       {
-        entry: './server.js'
-      }
+        entry: './server.js',
+      },
     ];
 
     expect(merge(a, b)).toEqual(result);
@@ -48,21 +48,21 @@ function multipleTests(merge) {
   test('should add different configurations without merging', () => {
     const a = {
       client: {
-        entry: './client.js'
-      }
+        entry: './client.js',
+      },
     };
     const b = {
       server: {
-        entry: './server.js'
-      }
+        entry: './server.js',
+      },
     };
     const result = [
       {
-        entry: './client.js'
+        entry: './client.js',
       },
       {
-        entry: './server.js'
-      }
+        entry: './server.js',
+      },
     ];
 
     expect(merge(a, b)).toEqual(result);
@@ -71,16 +71,16 @@ function multipleTests(merge) {
   test('should work with an array of objects', () => {
     const a = {
       client: {
-        entry: ['./client.js', './client2.js']
+        entry: ['./client.js', './client2.js'],
       },
       server: {
-        entry: ['./server.js', './server2.js']
-      }
+        entry: ['./server.js', './server2.js'],
+      },
     };
     const b = {
       client: {
-        entry: ['./replaced.js', './replaced2.js']
-      }
+        entry: ['./replaced.js', './replaced2.js'],
+      },
     };
     const result = [
       {
@@ -88,12 +88,12 @@ function multipleTests(merge) {
           './client.js',
           './client2.js',
           './replaced.js',
-          './replaced2.js'
-        ]
+          './replaced2.js',
+        ],
       },
       {
-        entry: ['./server.js', './server2.js']
-      }
+        entry: ['./server.js', './server2.js'],
+      },
     ];
 
     expect(merge(a, b)).toEqual(result);
@@ -103,33 +103,33 @@ function multipleTests(merge) {
     const a = {
       client: {
         entry: {
-          main: './client.js'
-        }
+          main: './client.js',
+        },
       },
       server: {
         entry: {
-          main: './server.js'
-        }
-      }
+          main: './server.js',
+        },
+      },
     };
     const b = {
       client: {
         entry: {
-          main: './replaced.js'
-        }
-      }
+          main: './replaced.js',
+        },
+      },
     };
     const result = [
       {
         entry: {
-          main: './replaced.js'
-        }
+          main: './replaced.js',
+        },
       },
       {
         entry: {
-          main: './server.js'
-        }
-      }
+          main: './server.js',
+        },
+      },
     ];
 
     expect(merge(a, b)).toEqual(result);
@@ -138,30 +138,30 @@ function multipleTests(merge) {
   test('should merge where keys exist and add where not', () => {
     const a = {
       client: {
-        entry: './client.js'
+        entry: './client.js',
       },
       server: {
-        entry: './server.js'
-      }
+        entry: './server.js',
+      },
     };
     const b = {
       server: {
-        entry: './replaced.js'
+        entry: './replaced.js',
       },
       test: {
-        entry: './test.js'
-      }
+        entry: './test.js',
+      },
     };
     const result = [
       {
-        entry: './client.js'
+        entry: './client.js',
       },
       {
-        entry: './replaced.js'
+        entry: './replaced.js',
       },
       {
-        entry: './test.js'
-      }
+        entry: './test.js',
+      },
     ];
 
     expect(merge(a, b)).toEqual(result);

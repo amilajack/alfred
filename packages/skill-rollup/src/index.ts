@@ -3,7 +3,7 @@ import {
   configStringify,
   execBinInProject,
   mapEnvToShortName,
-  getConfigsBasePath
+  getConfigsBasePath,
 } from '@alfred/helpers';
 import {
   RawSkill,
@@ -12,7 +12,7 @@ import {
   Env,
   Platform,
   ProjectEnum,
-  RunForEachTargetEvent
+  RunForEachTargetEvent,
 } from '@alfred/types';
 
 const supports = {
@@ -21,7 +21,7 @@ const supports = {
   // All the supported targets a `build` skill should build
   platforms: ['browser', 'node'] as Platform[],
   // Project type
-  projects: ['lib'] as ProjectEnum[]
+  projects: ['lib'] as ProjectEnum[],
 };
 
 const skill: RawSkill = {
@@ -29,7 +29,7 @@ const skill: RawSkill = {
   supports,
   tasks: [
     ['@alfred/task-build', { supports }],
-    ['@alfred/task-start', { supports }]
+    ['@alfred/task-start', { supports }],
   ],
   default: true,
   configs: [
@@ -41,15 +41,15 @@ const skill: RawSkill = {
           return id.includes('node_modules');
         }`,
         output: {
-          format: 'es'
+          format: 'es',
         },
         plugins: [
           configStringify`replace({
             'process.env.NODE_ENV': JSON.stringify('production')
-          })`
-        ]
+          })`,
+        ],
       },
-      imports: [`const replace = require('@rollup/plugin-replace');`]
+      imports: [`const replace = require('@rollup/plugin-replace');`],
     },
     {
       alias: 'rollup.dev',
@@ -59,16 +59,16 @@ const skill: RawSkill = {
           return id.includes('node_modules');
         }`,
         output: {
-          format: 'es'
+          format: 'es',
         },
         plugins: [
           configStringify`replace({
             'process.env.NODE_ENV': JSON.stringify('development')
-          })`
-        ]
+          })`,
+        ],
       },
-      imports: [`const replace = require('@rollup/plugin-replace');`]
-    }
+      imports: [`const replace = require('@rollup/plugin-replace');`],
+    },
   ],
   hooks: {
     async run({ skill, project, event }): Promise<void> {
@@ -110,7 +110,7 @@ const skill: RawSkill = {
         default:
           throw new Error(`Invalid subcommand: "${subcommand}"`);
       }
-    }
+    },
   },
   transforms: {
     babel(skill: Skill, { toSkill }): Skill {
@@ -118,25 +118,25 @@ const skill: RawSkill = {
       const { config } = toSkill.configs.get('babel') as SkillConfig;
       const babelConfig = JSON.stringify({
         ...config,
-        exclude: 'node_modules/**'
+        exclude: 'node_modules/**',
       }).replace(/"/g, `'`);
 
       return skill
         .extendConfig('rollup.dev', {
-          plugins: [configStringify(`babel(${babelConfig})`)]
+          plugins: [configStringify(`babel(${babelConfig})`)],
         })
         .addImports('rollup.dev', [
-          'const babel = require("rollup-plugin-babel");'
+          'const babel = require("rollup-plugin-babel");',
         ])
         .extendConfig('rollup.prod', {
-          plugins: [configStringify(`babel(${babelConfig})`)]
+          plugins: [configStringify(`babel(${babelConfig})`)],
         })
         .addImports('rollup.prod', [
-          'const babel = require("rollup-plugin-babel");'
+          'const babel = require("rollup-plugin-babel");',
         ])
         .addDepsFromPkg('rollup-plugin-babel');
-    }
-  }
+    },
+  },
 };
 
 export default skill;

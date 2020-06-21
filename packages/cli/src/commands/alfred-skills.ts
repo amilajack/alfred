@@ -1,5 +1,5 @@
 import alfred from '@alfred/core';
-import Table, { HorizontalTable } from 'cli-table3';
+import Table from 'cli-table3';
 import chalk from 'chalk';
 
 (async (): Promise<void> => {
@@ -10,9 +10,9 @@ import chalk from 'chalk';
     head: [
       chalk.bold('SubCommand'),
       chalk.bold('Skills'),
-      chalk.bold('Description')
-    ]
-  }) as HorizontalTable;
+      chalk.bold('Description'),
+    ],
+  });
 
   Array.from(subCommandAndSkills.entries()).forEach(([subCommand, skills]) => {
     const description = ((): string => {

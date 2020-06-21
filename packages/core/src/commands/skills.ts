@@ -2,7 +2,7 @@ import {
   ProjectInterface,
   SkillsList,
   SkillsForSubCommand,
-  SubCommandDict
+  SubCommandDict,
 } from '@alfred/types';
 
 export default async function skills(
@@ -13,8 +13,8 @@ export default async function skills(
   const subCommandAndSkills: SkillsForSubCommand = new Map();
   const subCommandDict: SubCommandDict = new Map();
 
-  skillMap.forEach(skill => {
-    skill.tasks.forEach(resultTask => {
+  skillMap.forEach((skill) => {
+    skill.tasks.forEach((resultTask) => {
       subCommandDict.set(resultTask.module.subcommand, resultTask);
       if (subCommandAndSkills.has(resultTask.module.subcommand)) {
         const set = subCommandAndSkills.get(resultTask.module.subcommand);
