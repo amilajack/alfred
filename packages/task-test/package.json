@@ -1,6 +1,6 @@
 {
   "name": "@alfred/task-test",
-  "version": "0.2.0",
+  "version": "0.0.0",
   "license": "MIT",
   "main": "lib/index.js",
   "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8",
