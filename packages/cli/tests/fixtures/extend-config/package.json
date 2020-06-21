@@ -1,6 +1,6 @@
 {
   "name": "@fixtures/extend-config",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -21,7 +21,7 @@
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.6",
     "@babel/register": "^7.8.6",
-    "@examples/alfred-config-example": "^0.2.0-alpha.0",
+    "@examples/alfred-config-example": "^0.0.1",
     "autoprefixer": "^9.7.4",
     "babel-eslint": "10.1.0",
     "babel-loader": "8.1.0",

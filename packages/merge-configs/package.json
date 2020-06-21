@@ -1,6 +1,6 @@
 {
   "name": "@alfred/merge-configs",
-  "version": "0.2.0-alpha.0",
+  "version": "0.0.1",
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
@@ -21,7 +21,7 @@
     "terser-webpack-plugin": "^3.0.6",
     "webpack": "^4.41.5"
   },
-  "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8",
+  "gitHead": "45f5c45f7922f74538a55f6d5c84d34517a195a2",
   "eslintConfig": {
     "rules": {
       "jest/no-export": "off"

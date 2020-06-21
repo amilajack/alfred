@@ -1,6 +1,6 @@
 {
   "name": "@alfred/task-build",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
@@ -14,5 +14,5 @@
     "ts": "tsc",
     "version": "yarn build"
   },
-  "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"
+  "gitHead": "45f5c45f7922f74538a55f6d5c84d34517a195a2"
 }

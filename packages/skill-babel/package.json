@@ -1,6 +1,6 @@
 {
   "name": "@alfred/skill-babel",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
@@ -36,5 +36,5 @@
     "@babel/register": "^7.8.3",
     "babel-loader": "8.0.6"
   },
-  "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"
+  "gitHead": "45f5c45f7922f74538a55f6d5c84d34517a195a2"
 }

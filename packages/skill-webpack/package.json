@@ -1,6 +1,6 @@
 {
   "name": "@alfred/skill-webpack",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@alfred/helpers": "^0.2.0",
-    "@alfred/merge-configs": "^0.2.0-alpha.0",
+    "@alfred/merge-configs": "^0.0.1",
     "@alfred/types": "^0.2.0",
     "get-port": "^5.1.1"
   },
@@ -28,5 +28,5 @@
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14"
   },
-  "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8"
+  "gitHead": "45f5c45f7922f74538a55f6d5c84d34517a195a2"
 }

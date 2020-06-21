@@ -1,6 +1,6 @@
 {
   "name": "@alfred/types",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -11,5 +11,6 @@
     "build": "tsc",
     "ts": "tsc",
     "version": "yarn build"
-  }
+  },
+  "gitHead": "45f5c45f7922f74538a55f6d5c84d34517a195a2"
 }

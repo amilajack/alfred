@@ -1,8 +1,9 @@
 {
   "name": "@alfred/validate",
-  "version": "0.1.0-alpha.0",
+  "version": "0.0.1",
   "license": "MIT",
   "dependencies": {
     "json-to-ast": "^2.1.0"
-  }
+  },
+  "gitHead": "45f5c45f7922f74538a55f6d5c84d34517a195a2"
 }

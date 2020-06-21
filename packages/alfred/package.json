@@ -1,6 +1,6 @@
 {
   "name": "alfred",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "bin": "./node_modules/.bin/alfred",
   "dependencies": {
@@ -20,7 +20,7 @@
     "boilerplate",
     "starter-kit"
   ],
-  "gitHead": "0a25532b8bcb79e5418c366f31dabb8055bb58a8",
+  "gitHead": "45f5c45f7922f74538a55f6d5c84d34517a195a2",
   "funding": {
     "url": "https://paypal.me/amilajack"
   }
