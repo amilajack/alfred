@@ -1,6 +1,6 @@
 {
   "name": "@alfred/skill-rollup",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
@@ -10,9 +10,9 @@
     "version": "yarn build"
   },
   "dependencies": {
-    "@alfred/helpers": "^0.0.2",
-    "@alfred/merge-configs": "^0.0.2",
-    "@alfred/types": "^0.0.2",
+    "@alfred/helpers": "^0.0.3",
+    "@alfred/merge-configs": "^0.0.3",
+    "@alfred/types": "^0.0.3",
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-replace": "^2.3.1"
   },

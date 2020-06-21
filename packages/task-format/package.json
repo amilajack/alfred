@@ -1,6 +1,6 @@
 {
   "name": "@alfred/task-format",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "main": "lib/index.js",
   "gitHead": "45f5c45f7922f74538a55f6d5c84d34517a195a2",
@@ -11,7 +11,7 @@
     "version": "yarn build"
   },
   "dependencies": {
-    "@alfred/helpers": "^0.0.2",
-    "@alfred/types": "^0.0.2"
+    "@alfred/helpers": "^0.0.3",
+    "@alfred/types": "^0.0.3"
   }
 }

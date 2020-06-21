@@ -1,11 +1,11 @@
 {
   "name": "alfred",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "bin": "./node_modules/.bin/alfred",
   "dependencies": {
-    "@alfred/cli": "^0.0.2",
-    "@alfred/core": "^0.0.2"
+    "@alfred/cli": "^0.0.3",
+    "@alfred/core": "^0.0.3"
   },
   "keywords": [
     "modular",
