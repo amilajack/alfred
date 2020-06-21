@@ -19,7 +19,7 @@ Alfred
 
 ```bash
 # Create a new project
-NPM_CONFIG_REGISTRY=https://amilajack.com/registry npx alfred new my-project
+npx alfred new my-project
 cd my-project
 
 # Build your project
