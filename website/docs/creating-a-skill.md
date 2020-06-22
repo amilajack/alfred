@@ -3,4 +3,6 @@ id: creating-a-skill
 title: Creating a Skill
 ---
 
-*This doc is a work in progress. Contributions welcome!*
+:::caution
+This doc is a work in progress. Contributions welcome!
+:::
