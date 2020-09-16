@@ -57,7 +57,7 @@
     "validate-npm-package-name": "^3.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.3",
+    "@types/jest": "^26.0.14",
     "@types/nightmare": "^2.10.4",
     "@types/node-fetch": "^2.5.5",
     "chai": "^4.2.0",
