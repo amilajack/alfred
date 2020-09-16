@@ -81,7 +81,7 @@
   "engineStrict": true,
   "gitHead": "45f5c45f7922f74538a55f6d5c84d34517a195a2",
   "devDependencies": {
-    "@types/hapi__joi": "^17.1.2",
+    "@types/hapi__joi": "^17.1.4",
     "@types/jest": "^26.0.14",
     "@types/prettier": "^2.0.1",
     "@types/source-map-support": "^0.5.1",
