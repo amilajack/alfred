@@ -41,7 +41,7 @@
     "@types/fs-extra": "^9.0.1",
     "@types/globby": "^9.1.0",
     "@types/joi": "^14.3.4",
-    "@types/lodash": "^4.14.149",
+    "@types/lodash": "^4.14.162",
     "@types/npm": "^2.0.31",
     "@types/rimraf": "^3.0.0",
     "chalk": "^4.1.0",
