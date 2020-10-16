@@ -21,7 +21,7 @@
     "lebab": "^3.0.3"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.8",
+    "@types/chai": "^4.2.14",
     "chai": "^4.2.0"
   },
   "gitHead": "45f5c45f7922f74538a55f6d5c84d34517a195a2"
