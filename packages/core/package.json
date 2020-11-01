@@ -82,7 +82,7 @@
   "gitHead": "45f5c45f7922f74538a55f6d5c84d34517a195a2",
   "devDependencies": {
     "@types/hapi__joi": "^17.1.6",
-    "@types/jest": "^26.0.14",
+    "@types/jest": "^26.0.15",
     "@types/prettier": "^2.0.1",
     "@types/source-map-support": "^0.5.1",
     "mock-fs": "^4.11.0",
