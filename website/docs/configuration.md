@@ -5,7 +5,7 @@ title: Configuration
 
 ## Example
 
-```json
+```jsonc
 // package.json
 {
   "alfred": {
@@ -55,7 +55,7 @@ Here is an example of how you would ues a sharable config.
 
 Suppose your Alfred project has the following config:
 
-```json
+```jsonc
 // package.json
 {
   // ...
@@ -70,7 +70,7 @@ Suppose your Alfred project has the following config:
 
 This config can be extracted to an Alfred config by creating a sharable config. In this case, it makes sense to call the config `alfred-config-web-app`.
 
-```json
+```jsonc
 // alfred-config-web-app/package.json
 {
   "name": "alfred-config-web-app",
@@ -79,7 +79,7 @@ This config can be extracted to an Alfred config by creating a sharable config. 
 }
 ```
 
-```json
+```jsonc
 // alfred-config-web-app/index.json
 {
   "skills": [
@@ -91,7 +91,7 @@ This config can be extracted to an Alfred config by creating a sharable config. 
 
 The original configuration now simplifies to this:
 
-```json
+```jsonc
 {
   "alfred": {
     "extends": "web-app"
