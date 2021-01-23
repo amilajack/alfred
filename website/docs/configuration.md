@@ -68,7 +68,7 @@ Suppose your Alfred project has the following config:
 }
 ```
 
-Creating a shareable config will extract this config to an Alfred config. In this case, it makes sense to call the config `alfred-config-web-app`.
+Creating a shareable config will extract this config into an Alfred config. In this case, it makes sense to call the config `alfred-config-web-app`.
 
 ```jsonc
 // alfred-config-web-app/package.json
