@@ -45,7 +45,7 @@ Decide whether to install dependencies with NPM or Yarn
 
 Default: `.`
 
-The directory, relative to the project directory, to write config files
+The path (relative to project directory) that config files are written to
 
 ## Extending Alfred Configs
 
