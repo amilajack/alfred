@@ -15,7 +15,7 @@ title: Configuration
     "skills": [
       "@alfred/skill-react"
     ],
-    // Determine to install with NPM or Yarn
+    // Determine npm client (NPM or Yarn)
     "npmClient": "yarn"
   }
 }
@@ -27,7 +27,7 @@ title: Configuration
 
 Default: `undefined`
 
-The name of the config which you want to extend
+The name of the config that you want to extend
 
 ### `skills`
 
@@ -39,19 +39,19 @@ The skills that the Alfred project is using
 
 Default: `npm`
 
-Determine to install dependencies with NPM or Yarn
+Decide whether to install dependencies with NPM or Yarn
 
 ### `configsDir`
 
 Default: `.`
 
-The directory, relative to the project directory, which config files should be written to
+The path (relative to project directory) that config files are written to
 
 ## Extending Alfred Configs
 
 Alfred allows you to create reusable configs. This is useful when you want to share the same config across multiple projects.
 
-Here is an example of how you would ues a sharable config.
+Here is an example of how you would use a shareable config.
 
 Suppose your Alfred project has the following config:
 
@@ -68,7 +68,7 @@ Suppose your Alfred project has the following config:
 }
 ```
 
-This config can be extracted to an Alfred config by creating a sharable config. In this case, it makes sense to call the config `alfred-config-web-app`.
+Creating a shareable config will extract this config into an Alfred config. In this case, it makes sense to call the config `alfred-config-web-app`.
 
 ```jsonc
 // alfred-config-web-app/package.json

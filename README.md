@@ -44,7 +44,7 @@ See our [examples directory](https://github.com/amilajack/alfred/tree/master/exa
 
 |     | Example                                 | Descrption                              |
 |-----|-----------------------------------------|-----------------------------------------|
-| 1.  | [hello world node][hello-world-example] | A simple hello work app in node         |
+| 1.  | [hello world node][hello-world-example] | A simple hello world app in node         |
 | 2.  | [react library][react-lib-example]      | A small button library built with React |
 | 3.  | typescript react app                    | ❌                                      |
 
