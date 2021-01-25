@@ -14,7 +14,7 @@
     "@alfred/types": "^0.0.3"
   },
   "devDependencies": {
-    "autoprefixer": "^9.7.4",
+    "autoprefixer": "^9.8.6",
     "parcel": "^1.11.0",
     "postcss-modules": "^2.0.0"
   },
